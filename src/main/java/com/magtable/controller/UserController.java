@@ -15,21 +15,28 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     /**
-     * GET MAPPINGS
-     **/
-
-
-    //get all users
-    @GetMapping("/users")
+     * route           GET /user/all
+     * description     Get all users
+     * access          Private @TODO
+     * @return java.util.List<User> list of all users
+     */
+    @GetMapping("/all")
     public List<User> getAllUsers() {
         // @TODO remove password field from query
         return userRepository.findAll();
     }
 
-    @GetMapping("/users/{id}")
+    /**
+     * route            GET /user/{id}
+     * description     Get user by ID
+     * access          Private @TODO
+     * @param userId id of user to query
+     * @return User user with matching ID
+     */
+    @GetMapping("/{id}")
     public User getUserById(@PathVariable(value = "id") Long userId) {
         //this whole orElseThrow thing looks fancy but it isn't
         //If JPA can't find the repository we throw an exception
@@ -38,20 +45,27 @@ public class UserController {
 
 
     /**
-     * POST MAPPINGS
-     **/
-
-    @PostMapping("/adduser")
+     * route            POST /user/insert
+     * description     Insert user
+     * access          Private @TODO
+     * @param user User to insert
+     * @return User created user
+     */
+    @PostMapping("/insert")
     public User createUser(@RequestBody User user) {
+        System.out.println(user);
         // @TODO field validation (password minimum length)
         return userRepository.save(user);
     }
 
-
     /**
-     * DELETE MAPPINGS
-     **/
-    @DeleteMapping("/users/{id}")
+     * route            DELETE /user/{id}
+     * description     Delete user by ID
+     * access          Private @TODO
+     * @param userId id of user to delete
+     * @return
+     */
+    @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteUser(@PathVariable(value = "id") Long userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User", "id", userId));
         userRepository.delete(user);
