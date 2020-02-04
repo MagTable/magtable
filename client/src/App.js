@@ -13,6 +13,7 @@ function App() {
                 <li><Link to="/user/all">/user/all</Link></li>
                 <li><Link to="/user/insert">/user/insert</Link></li>
             </ul>
+            // GIT
             <Switch>
                 <Route exact path="/"><AssignmentTable/></Route>
                 <Route exact path="/user/all"><UserList/></Route>
