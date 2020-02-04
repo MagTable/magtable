@@ -1,4 +1,4 @@
-import CoolTitleExample from "../styledComponents/coolTitleExample";
+import CoolTitleExample from "../styled/coolTitleExample";
 import React from "react";
 
 function Title(props){
