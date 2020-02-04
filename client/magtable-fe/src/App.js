@@ -1,11 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Title from "./reactComponents/ExampleTitle";
 
 function App() {
   return (
     <div className="App">
-        <p>Lets get programming, boys</p>
+        <Title/>
     </div>
   );
 }
