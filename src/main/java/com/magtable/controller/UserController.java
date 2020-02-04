@@ -1,12 +1,12 @@
 package com.magtable.controller;
 
-import com.magtable.exception.UserNotFoundException;
 import com.magtable.model.User;
 import com.magtable.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -43,7 +43,9 @@ public class UserController {
     public User getUserById(@PathVariable(value = "id") Long userId) {
         //this whole orElseThrow thing looks fancy but it isn't
         //If JPA can't find the repository we throw an exception
-        return userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User", "id", userId));
+
+        return userRepository.findById(userId).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User #%d not found.", userId)));
     }
 
 
@@ -57,7 +59,9 @@ public class UserController {
      */
     @PostMapping("/insert")
     public User createUser(@RequestBody User user) {
-        // @TODO field validation (password minimum length)
+        if (user.getPassword().length() < 8) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password minimum length is 8 characters.");
+        }
         return userRepository.save(user);
     }
 
@@ -68,14 +72,14 @@ public class UserController {
      *
      * @param userId id of user to delete
      */
-    @DeleteMapping("/delete/{userId}")
-    public String deleteUser(@PathVariable final Long userId) {
+    @DeleteMapping("/delete/{id}")
+    public void deleteUser(@PathVariable(value = "id") final Long userId) {
         try {
             userRepository.deleteById(userId);
-            return String.format("User #%d deleted.", userId);
+            // @ TODO Should we add a success message?
         } catch (EmptyResultDataAccessException e) {
-            System.out.println("DELETE@/user/delete/{userId} - User Not Found: \n" + e.getMessage());
-            return String.format("User #%d not found.", userId);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    String.format("Deletion failed: User #%d not found.", userId));
         }
     }
 

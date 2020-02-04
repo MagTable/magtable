@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 //Generics are the Model and the type of its primary key
 public interface UserRepository extends JpaRepository<User, Long> {
+
 }
 
