@@ -12,7 +12,7 @@ import styled from "styled-components";
 const NavBtnGroup = styled.div`
     position: absolute;
     top: 0;
-    right: -7px;
+    right: 3px;
     `;
 
 export default NavBtnGroup;
