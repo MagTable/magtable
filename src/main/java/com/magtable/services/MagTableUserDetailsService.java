@@ -19,6 +19,6 @@ public class MagTableUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user =userRepository.findUserByUsername(username);
-
+    return null;
     }
 }
