@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 /*
     Date: 2020-02-04
@@ -10,7 +10,7 @@ import styled from "styled-components";
  * @module Styled
  **/
 const HelloComponent = styled.h1`
-    width: 100px
-    `;
+	width: 100px;
+`;
 
 export default HelloComponent;

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 /*
     Date: 2020-02-05
@@ -13,9 +13,7 @@ import React from "react";
  * @module Component
  */
 function Sample(props) {
-    return (
-        <p>Hello</p>
-    )
+	return <p>Hello</p>;
 }
 
 export default Sample;
