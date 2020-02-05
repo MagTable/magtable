@@ -1,3 +1,9 @@
+/*
+    Program Name: MagTableDev
+    Author: Mustafa Al Khaldi
+    Created: February 4, 2020
+    Description: Use Case one database scheme for MagTable
+ */
 DROP DATABASE IF EXISTS magtabledev;
 CREATE DATABASE magtabledev;
 
