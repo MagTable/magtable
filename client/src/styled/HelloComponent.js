@@ -1,16 +1,17 @@
 import styled from "styled-components";
 
-/*
-    Date: 2020-02-04
-    Author: mjjmk 
-*/
+/**
+ * @date 2020-02-05
+ * @author MJ Kochuk
+ * @module Styled
+ */
 
 /**
- * HelloComponent - Test to see if the code template works!
- * @module Styled
+ * A div containing information about all the intricacies of life.
  **/
-const HelloComponent = styled.h1`
-    width: 100px
+const HelloComponent = styled.div`
+    width: 100px;
+    height: 200px;
     `;
 
 export default HelloComponent;
