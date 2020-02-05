@@ -28,7 +28,7 @@ public class SafeUser implements Serializable {
     public SafeUser(User user){
     this.id = user.getId();
     this.username = user.getUsername();
-    this.userLevelID = user.getUserLevelID();
+    this.userLevelID = user.getLevelId();
     }
 
     /**

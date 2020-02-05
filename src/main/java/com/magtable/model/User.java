@@ -1,63 +1,28 @@
 package com.magtable.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
-
-
-/**
- * Model class for user
- * @author David
- *
- */
-
-//@TODO Class may change when we implement mustafas database.
+import java.util.Objects;
 
 @Entity
-//@Table annotation is used to provide the details of the table that this entity will be mapped to
-@Table(name = "users")
-// ALL JAVA BEANS ARE SERIALIZABLE!
-public class User implements Serializable {
-
-    /**
-     * ATTRIBUTES
-     **/
-
-    //@Id annotation is used to define the primary key.
-    @Id
-    //@GeneratedValue annotation is used to define the primary key generation strategy. In the above case, we have declared the primary key to be an Auto Increment field.
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private int userLevelID;
-
+@Table(name = "user", schema = "magtabledev", catalog = "")
+public class User {
+    private Long userId;
+    private byte levelId;
     private String username;
-
     private String password;
 
-    //Emtpy Constructor that JPA uses
-    protected User() {
-    }
-
-    /**
-     * GETTERS AND SETTERS
-     **/
-
+    @Id
+    @Column(name = "userID")
     public Long getId() {
-        return id;
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long userId) {
+        this.userId = userId;
     }
 
-    public int getUserLevelID() {
-        return userLevelID;
-    }
-
-    public void setUserLevelID(int userLevelID) {
-        this.userLevelID = userLevelID;
-    }
-
+    @Basic
+    @Column(name = "username")
     public String getUsername() {
         return username;
     }
@@ -66,6 +31,8 @@ public class User implements Serializable {
         this.username = username;
     }
 
+    @Basic
+    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -74,4 +41,31 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    @Basic
+    @Column(name = "levelID")
+    public byte getLevelId(){
+        return levelId;
+    }
+
+    public void setLevelId(byte levelId){
+        this.levelId = levelId;
+    }
+
+
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User that = (User) o;
+        return Objects.equals(userId, that.userId) &&
+                Objects.equals(username, that.username) &&
+                Objects.equals(password, that.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, username, password);
+    }
 }
