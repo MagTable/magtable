@@ -1,3 +1,4 @@
+use magtabledev;
 /*
     Program Name: MagTableInsert
     Author: Mustafa Al Khaldi

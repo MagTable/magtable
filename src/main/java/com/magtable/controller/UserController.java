@@ -1,5 +1,6 @@
 package com.magtable.controller;
 
+import com.magtable.model.SafeUser;
 import com.magtable.model.User;
 import com.magtable.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,12 +25,19 @@ public class UserController {
      * description     Get all users
      * access          Private @TODO
      *
-     * @return java.util.List<User> list of all users
+     * @return  safe list of all users (password removed)
      */
     @GetMapping("/all")
-    public List<User> getAllUsers() {
-        // @TODO remove password field from query
-        return userRepository.findAll();
+    public List<SafeUser> getAllUsers() {
+        List<SafeUser> safeList = new ArrayList<>();
+        List<User> userList = userRepository.findAll();
+
+        //Iterating through the userList, converting each User to a SafeUser, then adding to the safeList
+        for(User user : userList){
+            safeList.add(new SafeUser(user));
+        }
+
+        return safeList;
     }
 
     /**
@@ -40,12 +49,14 @@ public class UserController {
      * @return User user with matching ID
      */
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable(value = "id") Long userId) {
+    public SafeUser getUserById(@PathVariable(value = "id") Long userId) {
         //this whole orElseThrow thing looks fancy but it isn't
         //If JPA can't find the repository we throw an exception
 
-        return userRepository.findById(userId).orElseThrow(() ->
+        User user = userRepository.findById(userId).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User #%d not found.", userId)));
+
+        return new SafeUser(user);
     }
 
 
@@ -57,12 +68,24 @@ public class UserController {
      * @param user User to insert
      * @return User created user
      */
-    @PostMapping("/insert")
-    public User createUser(@RequestBody User user) {
+
+    @PostMapping("/add")
+    public SafeUser createUser(@RequestBody User user) {
+        //Checking password length
         if (user.getPassword().length() < 8) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password minimum length is 8 characters.");
         }
-        return userRepository.save(user);
+
+
+        try {
+            userRepository.save(user);
+            return new SafeUser(user);
+        }
+        //TODO update the exception so its not generic when we know what gets thrown
+        catch(Exception e ){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists");
+        }
+
     }
 
     /**
