@@ -29,7 +29,6 @@ public class UserController {
      */
     @GetMapping("/all")
     public List<SafeUser> getAllUsers() {
-
         List<SafeUser> safeList = new ArrayList<>();
         List<User> userList = userRepository.findAll();
 
@@ -70,7 +69,7 @@ public class UserController {
      * @return User created user
      */
 
-    @PostMapping("/insert")
+    @PostMapping("/add")
     public SafeUser createUser(@RequestBody User user) {
         //Checking password length
         if (user.getPassword().length() < 8) {
