@@ -7,11 +7,14 @@ import AssignmentTable from "./components/magtable/AssignmentTable";
 import {Provider} from "react-redux";
 import store from "./store";
 import Alert from "./components/layout/Alert";
+import NavBar from "./components/common/NavBar"
 
 function App() {
     return (
         <Provider store={store}>
             <Router>
+
+                <NavBar/>
                 <Alert/>
                 <ul>
                     <li>
