@@ -1,3 +1,9 @@
+/*
+    Program Name: magtabledev.sql
+    Author: Mustafa Al Khaldi
+    Created: February 4, 2020
+    Description: Use Case one database scheme for MagTable
+ */
 DROP DATABASE IF EXISTS magtabledev;
 CREATE DATABASE magtabledev;
 
@@ -18,4 +24,6 @@ CREATE TABLE `User` (
     KEY `FK_levelID` (levelID),
     CONSTRAINT `FK_levelID` FOREIGN KEY (levelID) REFERENCES `UserLevel` (levelID) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
+
+COMMIT;
 
