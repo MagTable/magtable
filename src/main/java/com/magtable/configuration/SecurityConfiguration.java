@@ -29,7 +29,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         //UserDetailsService gets user information based on the users name
         //WE create the userDetailsService as it is used to validate and find users
 
-        auth.userDetailsService(userDetailsService)
+        auth.userDetailsService(userDetailsService);
 
     }
 
