@@ -1,3 +1,5 @@
+use magtabledev;
+
 INSERT INTO `UserLevel` VALUES (1, 'System Manager');
 INSERT INTO `UserLevel` VALUES (2, 'Personnel Manager');
 INSERT INTO `UserLevel` VALUES (3, 'Mechanic');
