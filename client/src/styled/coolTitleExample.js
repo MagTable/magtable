@@ -1,8 +1,10 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 /**
+ * @date 2020-02-05
+ * @author MJ Kochuk
  * @module Styled
- **/
+ */
 
 /**
  * A styled component meant for acting as the main title for a page.

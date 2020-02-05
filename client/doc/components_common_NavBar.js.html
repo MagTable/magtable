@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>
-      styled/HelloComponent.js - Documentation
+      components/common/NavBar.js - Documentation
   </title>
 
   <link href="https://www.braintreepayments.com/images/favicon-ccda0b14.png" rel="icon" type="image/png">
@@ -81,7 +81,7 @@
   <div id="main">
     
       <h1 class="page-title">
-        styled/HelloComponent.js
+        components/common/NavBar.js
       </h1>
     
 
@@ -90,23 +90,33 @@
 
 <section>
   <article>
-    <pre class="prettyprint source linenums"><code>import styled from "styled-components";
+    <pre class="prettyprint source linenums"><code>import React from "react";
+import NavButton from "../../styled/NavButton";
 
 /**
  * @date 2020-02-05
  * @author MJ Kochuk
- * @module Styled
+ * @module Component
  */
 
 /**
- * A div containing information about all the intricacies of life.
- **/
-const HelloComponent = styled.div`
-    width: 100px;
-    height: 200px;
-    `;
+ * The main navigation for the website.
+ * @constructor
+ * @param props See React Documentation
+ * @returns {*} The NavBar component
+ */
+function NavBar(props) {
+    return (
+        &lt;div>
+            &lt;NavButton>MagTable&lt;/NavButton>
+            &lt;NavButton>Quick View&lt;/NavButton>
+            &lt;NavButton>Login&lt;/NavButton>
+        &lt;/div>
 
-export default HelloComponent;</code></pre>
+    )
+}
+
+export default NavBar;</code></pre>
   </article>
 </section>
 
