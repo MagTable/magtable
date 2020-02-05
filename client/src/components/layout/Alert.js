@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { AlertDiv as StyledAlertDiv, Alert as StyledAlert } from "../../styled/Alert";
+import { AlertDiv as StyledAlertDiv, Alert as StyledAlert } from "../../styled/common/Alert";
 
 const Alert = ({ alerts }) => {
   if (alerts !== null && alerts.length > 0) {

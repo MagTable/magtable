@@ -1,9 +1,9 @@
 import React from "react";
-import NavButton from "../../styled/NavButton";
+import NavButton from "../../styled/common/NavButton";
 import logo from '../../res/Images/aeromag-logo.png';
-import NavDiv from "../../styled/NavDiv";
-import AeroLogo from "../../styled/AeroLogo";
-import NavBtnGroup from "../../styled/NavBtnGroup";
+import NavDiv from "../../styled/common/NavDiv";
+import AeroLogo from "../../styled/common/AeroLogo";
+import NavBtnGroup from "../../styled/common/NavBtnGroup";
 
 /**
  * @date 2020-02-05

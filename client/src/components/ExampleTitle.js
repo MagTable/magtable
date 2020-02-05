@@ -1,4 +1,4 @@
-import CoolTitleExample from '../styled/coolTitleExample';
+import CoolTitleExample from '../styled/samples/coolTitleExample';
 import React from 'react';
 
 /**
