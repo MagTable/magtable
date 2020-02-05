@@ -3,6 +3,12 @@ CREATE DATABASE magtabledev;
 
 USE magtabledev;
 
+CREATE TABLE `UserLevel` (
+    levelID TINYINT(1) NOT NULL,
+    description VARCHAR(20),
+    PRIMARY KEY (levelID)
+);
+
 CREATE TABLE `User` (
     userID VARCHAR(32) NOT NULL,
     levelID TINYINT(1) NOT NULL,
@@ -13,8 +19,3 @@ CREATE TABLE `User` (
     CONSTRAINT `FK_levelID` FOREIGN KEY (levelID) REFERENCES `UserLevel` (levelID) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
-CREATE TABLE `UserLevel` (
-    levelID TINYINT(1) NOT NULL,
-    description VARCHAR(20),
-    PRIMARY KEY (levelID)
-);
