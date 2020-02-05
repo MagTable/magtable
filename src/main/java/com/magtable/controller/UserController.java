@@ -8,7 +8,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.security.crypto.bcrypt.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,20 +25,15 @@ public class UserController {
      * description     Get all users
      * access          Private @TODO
      *
-     * @return safe list of all users (password removed)
+     * @return  safe list of all users (password removed)
      */
     @GetMapping("/all")
     public List<SafeUser> getAllUsers() {
-
-        List<User> userList = userRepository.findAll();
-        if (userList.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No Users Found");
-        }
-
         List<SafeUser> safeList = new ArrayList<>();
+        List<User> userList = userRepository.findAll();
 
         //Iterating through the userList, converting each User to a SafeUser, then adding to the safeList
-        for (User user : userList) {
+        for(User user : userList){
             safeList.add(new SafeUser(user));
         }
 
@@ -75,7 +69,7 @@ public class UserController {
      * @return User created user
      */
 
-    @PostMapping("/insert")
+    @PostMapping("/add")
     public SafeUser createUser(@RequestBody User user) {
         //Checking password length
         if (user.getPassword().length() < 8) {
@@ -88,7 +82,7 @@ public class UserController {
             return new SafeUser(user);
         }
         //TODO update the exception so its not generic when we know what gets thrown
-        catch (Exception e) {
+        catch(Exception e ){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists");
         }
 
