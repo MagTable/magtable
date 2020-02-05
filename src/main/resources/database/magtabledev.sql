@@ -10,11 +10,11 @@ CREATE TABLE `User` (
     password VARCHAR(60) NULL NULL,
     PRIMARY KEY (userID),
     KEY `FK_levelID` (levelID),
-    CONSTRAINT `FK_levelID` FOREGIN KEY (levelID) REFERENCES `UserLevel` (levelID) ON DELETE RESTRICT ON UPDATE RESTRICT
+    CONSTRAINT `FK_levelID` FOREIGN KEY (levelID) REFERENCES `UserLevel` (levelID) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
 CREATE TABLE `UserLevel` (
     levelID TINYINT(1) NOT NULL,
-    description VARCHAR2(20),
+    description VARCHAR(20),
     PRIMARY KEY (levelID)
 );

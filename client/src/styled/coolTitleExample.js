@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+/**
+ * @module Styled
+ **/
+
+/**
+ * A styled component meant for acting as the main title for a page.
+ */
 const CoolTitleExample = styled.h1`
   font-size: 72px;
   background: -webkit-linear-gradient(#81FF33, #FF33F8);
