@@ -13,17 +13,13 @@ import React from 'react';
  * @module Component
  */
 function Sample(props) {
-    return (
-        <p onClick={() => clicked(5)}>Hello</p>
-    )
+	return <p onClick={() => clicked(5)}>Hello</p>;
 }
 
 /**
  * Sends the ID somewhere important.
  * @param {number} id The identification number
  */
-function clicked(id){
-
-}
+function clicked(id) {}
 
 export default Sample;

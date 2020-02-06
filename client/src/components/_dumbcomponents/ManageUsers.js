@@ -1,8 +1,8 @@
-import React from "react";
-import NavBar from "./NavBar";
-import {UserDiv} from "../../styled/client/User";
-import {Provider} from "react-redux";
-import {Title} from "../../styled/common/BasicContent";
+import React from 'react';
+import NavBar from './NavBar';
+import { UserDiv } from '../../styled/client/User';
+import { Provider } from 'react-redux';
+import { Title } from '../../styled/common/BasicContent';
 
 /**
  * @date 2020-02-06
@@ -16,13 +16,12 @@ import {Title} from "../../styled/common/BasicContent";
  * @returns {*} The ManageUsers component
  */
 function ManageUsers() {
-    return (
-        <div>
-            <Title>Manage Users</Title>
-            <UserDiv>Howdy</UserDiv>
-        </div>
-
-    )
+	return (
+		<div>
+			<Title>Manage Users</Title>
+			<UserDiv>Howdy</UserDiv>
+		</div>
+	);
 }
 
 export default ManageUsers;

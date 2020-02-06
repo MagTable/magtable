@@ -29,15 +29,19 @@ const UserList = ({ getUsers, deleteUser, editUser, users }) => {
 				<th>Username</th>
 				<th>Edit User</th>
 				<th>Remove User</th>
-				{users.map((user) => (
+				{users.map(user => (
 					<tr>
 						<td key={user.userID}>{user.userID}</td>
 						<td>{user.levelID}</td>
 						<td>{user.username}</td>
-						<td><button onClick={editUser}>EDIT</button></td>
-						<td><button onClick={deleteUser}>DELETE</button></td>
+						<td>
+							<button onClick={editUser}>EDIT</button>
+						</td>
+						<td>
+							<button onClick={deleteUser}>DELETE</button>
+						</td>
 					</tr>
-					))}
+				))}
 			</table>
 		</div>
 	);
@@ -60,5 +64,7 @@ const mapStateToProps = state => {
 	};
 };
 
-export default connect(mapStateToProps, { getUsers, deleteUser, editUser })(UserList);
+export default connect(mapStateToProps, { getUsers, deleteUser, editUser })(
+	UserList
+);
 // export default UserList;
