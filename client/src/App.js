@@ -7,40 +7,36 @@ import AssignmentTable from "./components/magtable/AssignmentTable";
 import {Provider} from "react-redux";
 import store from "./store";
 import Alert from "./components/layout/Alert";
-import NavBar from "./components/_dumbcomponents/NavBar"
-import {UserDiv} from "./styled/client/User";
-import ManageUsers from "./components/_dumbcomponents/ManageUsers";
+import NavBar from "./components/common/NavBar"
 
 function App() {
     return (
         <Provider store={store}>
-            <NavBar/>
-            <ManageUsers/>
             <Router>
-
-                <Alert/>
-            {/*    <ul>*/}
-            {/*        <li>*/}
-            {/*            <Link to="/">/</Link>*/}
-            {/*        </li>*/}
-            {/*        <li>*/}
-            {/*            <Link to="/user/all">/user/all</Link>*/}
-            {/*        </li>*/}
-            {/*        <li>*/}
-            {/*            <Link to="/user/insert">/user/insert</Link>*/}
-            {/*        </li>*/}
-            {/*    </ul>*/}
-                <Switch>
-                    <Route exact path="/">
-                        <AssignmentTable/>
-                    </Route>
-            {/*        <Route exact path="/user/all">*/}
-            {/*            <UserList/>*/}
-            {/*        </Route>*/}
-            {/*        <Route exact path="/user/insert">*/}
-            {/*            <AddUser/>*/}
-            {/*        </Route>*/}
-                </Switch>
+                <NavBar/>
+                {/*<Alert/>*/}
+                {/*<ul>*/}
+                {/*    <li>*/}
+                {/*        <Link to="/">/</Link>*/}
+                {/*    </li>*/}
+                {/*    <li>*/}
+                {/*        <Link to="/user/all">/user/all</Link>*/}
+                {/*    </li>*/}
+                {/*    <li>*/}
+                {/*        <Link to="/user/insert">/user/insert</Link>*/}
+                {/*    </li>*/}
+                {/*</ul>*/}
+                {/*<Switch>*/}
+                {/*    <Route exact path="/">*/}
+                {/*        <AssignmentTable/>*/}
+                {/*    </Route>*/}
+                {/*    <Route exact path="/user/all">*/}
+                        <UserList/>
+                {/*    </Route>*/}
+                {/*    <Route exact path="/user/insert">*/}
+                {/*        <AddUser/>*/}
+                {/*    </Route>*/}
+                {/*</Switch>*/}
             </Router>
         </Provider>
     );
