@@ -1,4 +1,4 @@
-import { ADD_USER, USER_ERROR, GET_USERS, GET_USER, DELETE_USER } from "../actions/constants";
+import { ADD_USER, USER_ERROR, GET_USERS, GET_USER, DELETE_USER, EDIT_USER } from "../actions/constants";
 
 const initialState = {
   users: [],
@@ -35,6 +35,12 @@ export default function(state = initialState, action) {
         users: state.users.filter(user => user.id !== payload), // remove user from state with same id as payload
         loading: false
       };
+    case EDIT_USER:
+      return {
+        ...state,
+        users: state.users.filter(user => user.id !== payload),
+        loading: false
+      }
     case USER_ERROR:
       return {
         ...state,
