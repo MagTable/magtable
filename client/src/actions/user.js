@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_USER, DELETE_USER, GET_USERS, GET_USER } from "./constants";
+import { ADD_USER, DELETE_USER, GET_USERS, GET_USER, SET_SELECTED_USER } from "./constants";
 import { setAlert } from "./alert";
 
 const config = {
@@ -66,6 +66,11 @@ export const getUsers = () => dispatch => {
      */
   }
 };
+
+export const editUser = user => dispatch => {
+  // add alert to store
+  dispatch({ type: SET_SELECTED_USER, payload: {  } });
+}
 
 export const addUser = user => dispatch => {
   try {

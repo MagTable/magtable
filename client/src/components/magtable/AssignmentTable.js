@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { setAlert } from "../../actions/alert";
 // import { connect } from 'react-redux'
 
-const AddUser = props => {
+const AssignmentTable = props => {
   const location = useLocation();
   const dispatch = useDispatch();
   dispatch(setAlert("Test", "success"));
@@ -16,11 +16,11 @@ const AddUser = props => {
   );
 };
 
-AddUser.propTypes = {};
+AssignmentTable.propTypes = {};
 
 const mapStateToProps = state => ({});
 
 const mapDispatchToProps = {};
 
 // export default connect()(AddUser);
-export default AddUser;
+export default AssignmentTable;
