@@ -17,7 +17,7 @@ public class SafeUser implements Serializable {
 
     private String username;
 
-    private int userLevelID;
+    private int levelId;
 
     /** CONSTRUCTORS **/
 
@@ -28,7 +28,7 @@ public class SafeUser implements Serializable {
     public SafeUser(User user){
     this.id = user.getId();
     this.username = user.getUsername();
-    this.userLevelID = user.getLevelId();
+    this.levelId = user.getLevelId();
     }
 
     /**
@@ -44,6 +44,6 @@ public class SafeUser implements Serializable {
     }
 
     public int getUserLevelID() {
-        return userLevelID;
+        return levelId;
     }
 }
