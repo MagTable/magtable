@@ -7,7 +7,7 @@ import AssignmentTable from "./components/magtable/AssignmentTable";
 import {Provider} from "react-redux";
 import store from "./store";
 import Alert from "./components/layout/Alert";
-import NavBar from "./components/common/NavBar"
+import NavBar from "./components/_dumbcomponents/NavBar"
 
 function App() {
     return (
