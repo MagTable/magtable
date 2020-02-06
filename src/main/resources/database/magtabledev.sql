@@ -24,3 +24,6 @@ CREATE TABLE `User` (
     KEY `FK_levelID` (levelID),
     CONSTRAINT `FK_levelID` FOREIGN KEY (levelID) REFERENCES `UserLevel` (levelID) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
+
+COMMIT;
+

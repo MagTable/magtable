@@ -1,13 +1,10 @@
-use magtabledev;
 /*
     Program Name: MagTableInsert
     Author: Mustafa Al Khaldi
     Created: February 4, 2020
     Description: Use Case one database inserts for the UserLevel and User tables.
  */
-
-DELETE FROM `UserLevel`;
-DELETE FROM `User`;
+USE magtabledev;
 
 INSERT INTO `UserLevel` VALUES (1, 'System Manager');
 INSERT INTO `UserLevel` VALUES (2, 'Personnel Manager');
