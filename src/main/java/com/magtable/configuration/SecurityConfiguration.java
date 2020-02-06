@@ -1,10 +1,16 @@
 package com.magtable.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 /**
@@ -14,8 +20,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  * <p>
  * Most of this code is from https://www.youtube.com/watch?v=TNt3GHuayXs
  */
+@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    //@Qualifier("magTableUserDetailsService")
+    //I know it throws an error but we need this
+    @Qualifier("magTableUserDetailsService")
     @Autowired
     UserDetailsService userDetailsService;
 
@@ -43,5 +53,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/user").hasRole("ADMIN")
                 .and().formLogin();
+    }
+
+    @Bean
+    public PasswordEncoder getPasswordEncoder(){
+        //NoOp Password Encoder is a placeholder for password hashing -> does nothing makes development easier
+        return NoOpPasswordEncoder.getInstance();
     }
 }

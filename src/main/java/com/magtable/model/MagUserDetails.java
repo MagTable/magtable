@@ -16,11 +16,11 @@ public class MagUserDetails implements UserDetails {
     private String username;
     private List<GrantedAuthority> authorities;
 
+    public MagUserDetails(String username){
+        this.username = username;
+    }
+
     public MagUserDetails(User user){
-        this.username = user.getUsername();
-        this.password = user.getPassword();
-        //todo this is kinda strange -> We're expecting a Role string
-        //this.authorities = Arrays.stream(user.getUserLevelID())
 
     }
 
@@ -31,12 +31,13 @@ public class MagUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+        //1 for system admin
+        return Arrays.asList(new SimpleGrantedAuthority("1"));
     }
 
     @Override
     public String getPassword() {
-        return password;
+        return "pass";
     }
 
     @Override
@@ -46,21 +47,21 @@ public class MagUserDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        throw new NotImplementedException();
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        throw new NotImplementedException();
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        throw new NotImplementedException();
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        throw new NotImplementedException();
+        return true;
     }
 }
