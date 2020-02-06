@@ -16,7 +16,7 @@ CREATE TABLE `UserLevel` (
 );
 
 CREATE TABLE `User` (
-    userID VARCHAR(32) NOT NULL,
+    userID INT(32) NOT NULL AUTO_INCREMENT,
     levelID TINYINT(1) NOT NULL,
     username VARCHAR(32) UNIQUE,
     password VARCHAR(60) NULL NULL,
@@ -24,6 +24,3 @@ CREATE TABLE `User` (
     KEY `FK_levelID` (levelID),
     CONSTRAINT `FK_levelID` FOREIGN KEY (levelID) REFERENCES `UserLevel` (levelID) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
-
-COMMIT;
-
