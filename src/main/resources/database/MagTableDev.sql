@@ -16,7 +16,7 @@ CREATE TABLE `UserLevel` (
 );
 
 CREATE TABLE `User` (
-    userID VARCHAR(32) NOT NULL,
+    userID INT(32) NOT NULL AUTO_INCREMENT,
     levelID TINYINT(1) NOT NULL,
     username VARCHAR(32) UNIQUE,
     password VARCHAR(60) NULL NULL,
