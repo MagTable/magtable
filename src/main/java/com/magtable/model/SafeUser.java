@@ -43,7 +43,7 @@ public class SafeUser implements Serializable {
         return username;
     }
 
-    public int getUserLevelID() {
+    public int getLevelId() {
         return levelId;
     }
 }
