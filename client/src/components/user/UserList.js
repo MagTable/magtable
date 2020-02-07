@@ -6,6 +6,15 @@ import { getUsers, deleteUser, editUser } from '../../actions/user';
 import { GET_USERS } from '../../actions/constants';
 import { connect } from 'react-redux';
 import user from '../../reducers/user';
+import {Title} from "../../styled/common/BasicContent";
+import {
+	UserListRow,
+	UserListItem,
+	UserListHeader,
+	UserListHeaderRow,
+	DelUserImg,
+	UserManipulateBlock, ManipImg
+} from "../../styled/client/User";
 
 const UserList = ({ getUsers, deleteUser, editUser, users }) => {
 	useEffect(() => {
@@ -21,28 +30,29 @@ const UserList = ({ getUsers, deleteUser, editUser, users }) => {
 
 	return (
 		<div>
-			<h1>url: {location.pathname}</h1>
-			<h2>View Users Working</h2>
-			<table>
-				<th>User ID</th>
-				<th>Level ID</th>
-				<th>Username</th>
-				<th>Edit User</th>
-				<th>Remove User</th>
-				{users.map(user => (
-					<tr>
-						<td key={user.userID}>{user.userID}</td>
-						<td>{user.levelID}</td>
-						<td>{user.username}</td>
-						<td>
-							<button onClick={editUser}>EDIT</button>
-						</td>
-						<td>
-							<button onClick={deleteUser}>DELETE</button>
-						</td>
-					</tr>
-				))}
-			</table>
+			<Title>User Management</Title>
+			{users.map(user => (
+			<UserListRow>
+				<UserListItem>
+					{user.levelId}
+				</UserListItem>
+				<UserListItem>
+					{user.username}
+				</UserListItem>
+					{/*<i className="fas fa-trash-alt"></i>*/}
+					{/*<i className="fas fa-edit"></i>*/}
+					<UserManipulateBlock>
+						<ManipImg className="fas fa-edit" onClick={editUser}/>
+						<ManipImg className="fas fa-trash-alt" onClick={deleteUser}/>
+					</UserManipulateBlock>
+				{/*<UserListItem>*/}
+				{/*	<button >EDIT</button>*/}
+				{/*</UserListItem>*/}
+				{/*<UserListItem>*/}
+				{/*	<button >DELETE</button>*/}
+				{/*</UserListItem>*/}
+			</UserListRow>
+			))}
 		</div>
 	);
 };
