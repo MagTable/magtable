@@ -5,6 +5,7 @@ import {
 	GET_USERS,
 	GET_USER,
 	EDIT_USER,
+	GET_LEVELS
 } from './constants';
 import { setAlert } from './alert';
 
@@ -30,6 +31,21 @@ const testUsers = [
 		username: 'steven',
 		levelId: 3,
 	},
+];
+
+const testLevels = [
+	{
+		levelId: 1,
+		description: 'mechanic',
+	},
+	{
+		levelId: 2,
+		description: 'personnel manager',
+	},
+	{
+		levelId: 3,
+		description: 'system administrator'
+	}
 ];
 
 const testUser = {
@@ -73,6 +89,20 @@ export const getUsers = () => dispatch => {
          */
 	}
 };
+
+export const getLevelDescriptions = () => dispatch => {
+	try {
+		// const data = axios.get("/user/levels");
+
+		dispatch({
+			type: GET_LEVELS,
+			payload: testLevels,
+		});
+	}
+	catch(err){
+		// todo implement based on error return object
+	}
+}
 
 export const addUser = user => dispatch => {
 	try {
