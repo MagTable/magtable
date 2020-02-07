@@ -6,6 +6,9 @@ import styled from "styled-components";
  * @module Styled
  */
 
+/**
+ * Holds all of the rows / information in the user list.
+ */
 export const UserListDiv = styled.div`
     padding-top: 60px;
     `;

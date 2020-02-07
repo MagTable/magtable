@@ -6,7 +6,7 @@ import { getUsers, deleteUser, editUser, getLevelDescriptions } from '../../acti
 import { GET_USERS, GET_LEVELS } from '../../actions/constants';
 import { connect } from 'react-redux';
 import user from '../../reducers/user';
-import {Title, TitleDiv} from "../../styled/common/BasicContent";
+import {Title, TitleDiv, TitleDummy} from "../../styled/common/BasicContent";
 import {
 	UserListRow,
 	UserListItem,
@@ -32,7 +32,7 @@ const UserList = ({ getUsers, deleteUser, editUser, users, getLevelDescriptions,
 	console.log(levels)
 	return (
 		<UserListDiv>
-			<TitleDiv><Title>User Management</Title></TitleDiv>
+            <TitleDummy><TitleDiv><Title>User Management</Title></TitleDiv></TitleDummy>
 			{users.map(user => (
 			<UserListRow>
 				<UserListItem>
