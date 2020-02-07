@@ -1,3 +1,5 @@
 #test{
-    display: table-header-group;
+    position: relative;
+    z-index: 2;
+
 }

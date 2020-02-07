@@ -6,14 +6,14 @@ import { getUsers, deleteUser, editUser, getLevelDescriptions } from '../../acti
 import { GET_USERS, GET_LEVELS } from '../../actions/constants';
 import { connect } from 'react-redux';
 import user from '../../reducers/user';
-import {Title} from "../../styled/common/BasicContent";
+import {Title, TitleDiv} from "../../styled/common/BasicContent";
 import {
 	UserListRow,
 	UserListItem,
 	UserListHeader,
 	UserListHeaderRow,
 	DelUserImg,
-	UserManipulateBlock, ManipImg
+	UserManipulateBlock, ManipImg, UserListDiv
 } from "../../styled/client/User";
 
 const UserList = ({ getUsers, deleteUser, editUser, users, getLevelDescriptions, levels, }) => {
@@ -29,14 +29,14 @@ const UserList = ({ getUsers, deleteUser, editUser, users, getLevelDescriptions,
 
 	// todo this should probably throw an error?
 	if (users === null) return <h1>No Users in the System!</h1>;
-
+	console.log(levels)
 	return (
-		<div>
-			<Title>User Management</Title>
+		<UserListDiv>
+			<TitleDiv><Title>User Management</Title></TitleDiv>
 			{users.map(user => (
 			<UserListRow>
 				<UserListItem>
-					{user.levelId}
+					<b>{levels.map(level => level.levelId === user.levelId ? level.description : null)}</b>
 				</UserListItem>
 				<UserListItem>
 					{user.username}
@@ -45,15 +45,9 @@ const UserList = ({ getUsers, deleteUser, editUser, users, getLevelDescriptions,
 						<ManipImg className="fas fa-edit" onClick={editUser}/>
 						<ManipImg className="fas fa-trash-alt" onClick={deleteUser}/>
 					</UserManipulateBlock>
-				{/*<UserListItem>*/}
-				{/*	<button >EDIT</button>*/}
-				{/*</UserListItem>*/}
-				{/*<UserListItem>*/}
-				{/*	<button >DELETE</button>*/}
-				{/*</UserListItem>*/}
 			</UserListRow>
 			))}
-		</div>
+		</UserListDiv>
 	);
 };
 
@@ -78,6 +72,7 @@ UserList.propTypes = {
 const mapStateToProps = state => {
 	return {
 		users: state.user.users,
+		levels: state.user.levels,
 	};
 };
 

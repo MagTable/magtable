@@ -12,6 +12,15 @@ import styled from 'styled-components';
 export const Title = styled.h1`
 	width: fit-content;
 	margin: auto;
-	padding-top: 10px;
-	padding-bottom: 15px;
+	padding-top: 20px;
 `;
+
+export const TitleDiv = styled.div`
+    width: fit-content;
+	margin: auto;
+	position: absolute;
+	top: 0;
+	align-content: center;
+	width: 100vw;
+    z-index: 2;
+    `;

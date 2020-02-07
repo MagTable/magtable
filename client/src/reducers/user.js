@@ -12,6 +12,7 @@ const initialState = {
 	user: null,
 	loading: true,
 	error: null,
+	levels: [],
 };
 
 export default function(state = initialState, action) {
