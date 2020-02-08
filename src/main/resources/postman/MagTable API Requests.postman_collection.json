@@ -1,0 +1,412 @@
+{
+	"info": {
+		"_postman_id": "2b24c229-c509-4a1a-9ca5-82a34d998bf9",
+		"name": "MagTable API Requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User API Requests",
+			"item": [
+				{
+					"name": "User GET Requests",
+					"item": [
+						{
+							"name": "GET All Users ",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Basic bWFndGFibGU6cGFzc3dvcmQ=",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "localhost:8080/user/all",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET User By ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/user/2",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET User By ID No User Found",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/user/100",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"100"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET User By ID Odd ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/user/Green",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"Green"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET All Roles",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "1defabd5-5724-4556-ac6d-deec24347dfe",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "04d68790-c916-42f9-b0f1-7a70fbcd213c",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "User POST Requests",
+					"item": [
+						{
+							"name": "Add User Expected",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "JSESSIONID=6B5EDB08D10D0F595F956783802F8747",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"username\": \"arran\",\r\n    \"password\": \"password\",\r\n    \"role\": 2\r\n}\r\n"
+								},
+								"url": {
+									"raw": "localhost:8080/user/add",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"add"
+									]
+								},
+								"description": "Post Request to add a user to the users table"
+							},
+							"response": []
+						},
+						{
+							"name": "Add User Odd Data",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"username\": 42069,\r\n    \"password\": \"password\",\r\n    \"role\": \"David\"\r\n}"
+								},
+								"url": {
+									"raw": "localhost:8080/user/add",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add User Password Less than 8 Characters",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"username\": \"aeromag4550@gmail.com\",\r\n    \"password\": \"word\",\r\n    \"role\": 2\r\n}"
+								},
+								"url": {
+									"raw": "localhost:8080/user/add",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add User List",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"username\": \"aeromag300@gmail.com\",\n        \"password\": \"password\",\n        \"role\": 1\n    },\n    {\n        \"username\": \"aeromag300@gmail.com\",\n        \"password\": \"password\",\n        \"role\": 1\n    }\n]"
+								},
+								"url": {
+									"raw": "localhost:8080/user/add",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add User Duplicate",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\n    {\n        \"username\": \"SendRequestTwice@gmail.com\",\n        \"password\": \"password\",\n        \"role\": 1\n    }\n"
+								},
+								"url": {
+									"raw": "localhost:8080/user/add",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"add"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "User Delete Requests",
+					"item": [
+						{
+							"name": "Delete User By ID",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/user/delete/4",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"delete",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE User Odd ID",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/user/delete/H",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"delete",
+										"H"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete User Doesn't Exsist",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/user/delete/100",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"delete",
+										"100"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -16,6 +16,10 @@ public class Role {
         this.roleId = roleId;
     }
 
+    public Role(String rolename){
+        this.rolename = rolename;
+    }
+
     @Id
     @Column(name = "roleID", nullable = false)
     public Integer getRoleId() {
