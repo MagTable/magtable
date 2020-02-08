@@ -42,8 +42,7 @@ const UserList = ({ getUsers, deleteUser, editUser, users, getLevelDescriptions,
 					{user.username}
 				</UserListItem>
 					<UserManipulateBlock>
-						<ManipImg className="fas fa-undo" onClick={editUser}/>
-						<ManipImg className="fas fa-trash-alt" onClick={deleteUser}/>
+						<ManipImg className="fas fa-trash-alt" onClick={() => deleteUser(user.id)}/>
 					</UserManipulateBlock>
 			</UserListRow>
 			))}
