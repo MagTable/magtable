@@ -13,11 +13,11 @@ public class SafeUser implements Serializable {
 
     /** PARAMETERS **/
 
-    private Long id;
+    private int id;
 
     private String username;
 
-    private int levelId;
+    private Role role;
 
     /** CONSTRUCTORS **/
 
@@ -26,16 +26,16 @@ public class SafeUser implements Serializable {
      * @param user - the user to copy
      */
     public SafeUser(User user){
-    this.id = user.getId();
+    this.id = user.getUserId();
     this.username = user.getUsername();
-    this.levelId = user.getLevelId();
+    this.role = user.getRole();
     }
 
     /**
      * GETTERS
      */
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
@@ -43,7 +43,7 @@ public class SafeUser implements Serializable {
         return username;
     }
 
-    public int getLevelId() {
-        return levelId;
+    public Role getRole() {
+        return role;
     }
 }
