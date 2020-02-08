@@ -13,6 +13,6 @@ INSERT INTO Role VALUES (1, 'System Manager');
 INSERT INTO Role VALUES (2, 'Personnel Manager');
 INSERT INTO Role VALUES (3, 'Mechanic');
 
-INSERT INTO `User` (roleID, username, password) VALUES (1, 'mustafa', 'password');
-INSERT INTO `User` (roleID, username, password) VALUES (2, 'david', 'password');
-INSERT INTO `User` (roleID, username, password) VALUES (3, 'steven', 'password');
+INSERT INTO `User` (`role`, username, password) VALUES (1, 'mustafa', 'password');
+INSERT INTO `User` (role, username, password) VALUES (2, 'david', 'password');
+INSERT INTO `User` (role, username, password) VALUES (3, 'steven', 'password');
