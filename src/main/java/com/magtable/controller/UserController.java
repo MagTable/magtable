@@ -13,6 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -66,7 +67,7 @@ public class UserController {
 
 
     /**
-     * route            POST /user/insert
+     * route            POST /user/add
      * description     Insert user
      * access          Private @TODO
      *
@@ -81,8 +82,8 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password minimum length is 8 characters.");
         }
 
-        Role role = roleRepository.findById(user.getRole().getRoleId()).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User #%d not found.", user.getRole().getRoleId())));
+        Role role = roleRepository.findByRolename(user.getRole().getRolename()).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User #%d not found.", user.getRole().getRolename())));
 
         try {
 
@@ -114,4 +115,18 @@ public class UserController {
         }
     }
 
+
+    /**
+     * route            POST /user/roles
+     * description     provides a list of all user roles
+     * access          Private @TODO
+     *
+     * @return List of roles
+     */
+    @GetMapping("/roles")
+    public List getAllRoles(){
+        return roleRepository.findAll();
+    }
+
 }
+

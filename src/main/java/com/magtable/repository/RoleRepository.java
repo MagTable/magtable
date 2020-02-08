@@ -10,4 +10,6 @@ import java.util.Optional;
 //Generics are the Model and the type of its primary key
 public interface RoleRepository extends JpaRepository<Role, Integer> {
 
+    Optional<Role> findByRolename(String rolename);
+
 }
