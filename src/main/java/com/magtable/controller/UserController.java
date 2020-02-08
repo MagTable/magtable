@@ -89,9 +89,7 @@ public class UserController {
             user.setRole(role);
             userRepository.save(user);
             return new SafeUser(user);
-        }
-        //TODO update the exception so its not generic when we know what gets thrown
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists");
         }
@@ -106,10 +104,10 @@ public class UserController {
      * @param userId id of user to delete
      */
     @DeleteMapping("/delete/{id}")
-    public void deleteUser(@PathVariable(value = "id") final int userId) {
+    public String deleteUser(@PathVariable(value = "id") final int userId) {
         try {
             userRepository.deleteById(userId);
-            // @ TODO Should we add a success message?
+            return String.format("Deletion Success: User #%d Deleted.", userId);
         } catch (EmptyResultDataAccessException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     String.format("Deletion failed: User #%d not found.", userId));

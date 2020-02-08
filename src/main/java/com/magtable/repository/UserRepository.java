@@ -3,7 +3,6 @@ package com.magtable.repository;
         import com.magtable.model.User;
         import org.springframework.data.jpa.repository.JpaRepository;
         import org.springframework.stereotype.Repository;
-
         import java.util.Optional;
 
 //@Repository annotation. This tells Spring to bootstrap the repository during component scan.
