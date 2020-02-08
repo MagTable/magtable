@@ -17,7 +17,7 @@ export const UserListDiv = styled.div`
  * Holds the individual data for each user, ie. user level description, name.
  **/
 export const UserListItem = styled.div`
-    min-width: 20vw;
+    min-width: 230px;
     height: 40px;
     background-color: #F0F0F0;
     border-top: 2px solid #DADADA;

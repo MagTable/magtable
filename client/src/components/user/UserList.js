@@ -32,7 +32,7 @@ const UserList = ({ getUsers, deleteUser, editUser, users, getLevelDescriptions,
 	console.log(levels)
 	return (
 		<UserListDiv>
-            <TitleDummy><TitleDiv><Title>User Management</Title></TitleDiv></TitleDummy>
+            <TitleDiv><TitleDummy/><Title>User Management</Title><TitleDummy/></TitleDiv>
 			{users.map(user => (
 			<UserListRow>
 				<UserListItem>
@@ -42,7 +42,7 @@ const UserList = ({ getUsers, deleteUser, editUser, users, getLevelDescriptions,
 					{user.username}
 				</UserListItem>
 					<UserManipulateBlock>
-						<ManipImg className="fas fa-edit" onClick={editUser}/>
+						<ManipImg className="fas fa-undo" onClick={editUser}/>
 						<ManipImg className="fas fa-trash-alt" onClick={deleteUser}/>
 					</UserManipulateBlock>
 			</UserListRow>
