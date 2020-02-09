@@ -3,24 +3,17 @@ package com.magtable.controller;
 import com.magtable.model.*;
 import com.magtable.repository.RoleRepository;
 import com.magtable.repository.UserRepository;
-import com.magtable.services.JwtUtil;
-import com.magtable.services.MagUserDetailsService;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController
@@ -64,8 +57,6 @@ public class UserController {
      */
     @GetMapping("/{id}")
     public SafeUser getUserById(@PathVariable(value = "id") int userId) {
-        //this whole orElseThrow thing looks fancy but it isn't
-        //If JPA can't find the repository we throw an exception
 
         User user = userRepository.findById(userId).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User #%d not found.", userId)));
@@ -86,8 +77,18 @@ public class UserController {
     @PostMapping("/add")
     public SafeUser createUser(@RequestBody User user) {
         //Checking password length
-        if (user.getPassword().length() < 8) {
+        if (user.getPassword() == null || user.getPassword().length() < 8 ) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password minimum length is 8 characters.");
+        }
+        //TODO discuss username minimum length as a team
+        if(  user.getUsername() == null || user.getUsername().length() < 5 ){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username minimum length is 5 characters");
+        }
+        if(user.getRole() == null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No Role in request");
+        }
+        if(user.getUserId() != 0){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "UserId Generation Error - Request should not provide a UserId");
         }
 
         Role role = roleRepository.findById(user.getRole().getRoleId()).orElseThrow(() ->
@@ -98,9 +99,8 @@ public class UserController {
             user.setRole(role);
             userRepository.save(user);
             return new SafeUser(user);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists");
+        }  catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Username already exists");
         }
 
     }
@@ -132,7 +132,7 @@ public class UserController {
      * @return List of roles
      */
     @GetMapping("/roles")
-    public List getAllRoles(){
+    public List getAllRoles() {
         return roleRepository.findAll();
     }
 

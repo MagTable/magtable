@@ -42,7 +42,7 @@ public class AuthenticationController {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
         } catch (BadCredentialsException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Authentication failed: User #%d not found.", request.getUsername()));
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Authentication failed: User #%s not found.", request.getUsername()));
         }
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());

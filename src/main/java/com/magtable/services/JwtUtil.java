@@ -21,7 +21,7 @@ public class JwtUtil {
 
     //My secret key
     //TODO Change in production to a more secure key
-    private String SECRET_KEY = "secret";
+    private final String SECRET_KEY = "secret";
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
