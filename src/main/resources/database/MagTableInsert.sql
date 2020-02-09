@@ -9,7 +9,7 @@ use magtabledev;
 DELETE FROM Role;
 DELETE FROM `User`;
 
-INSERT INTO Role VALUES (1, 'System Manager');
+INSERT INTO Role VALUES (1, 'System Administrator');
 INSERT INTO Role VALUES (2, 'Personnel Manager');
 INSERT INTO Role VALUES (3, 'Mechanic');
 

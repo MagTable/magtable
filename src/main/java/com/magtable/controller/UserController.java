@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,29 +77,42 @@ public class UserController {
 
     @PostMapping("/add")
     public SafeUser createUser(@RequestBody User user) {
+
+        if(user == null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No user found in request");
+        }
+
         //Checking password length
         if (user.getPassword() == null || user.getPassword().length() < 8 ) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password minimum length is 8 characters.");
         }
-        //TODO discuss username minimum length as a team
+        //TODO discuss username minimum length as a team / if we even need this
         if(  user.getUsername() == null || user.getUsername().length() < 5 ){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username minimum length is 5 characters");
         }
-        if(user.getRole() == null){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No Role in request");
+
+        //roleList to check if the role exists so a foreign key exception isn't raised
+        ArrayList<Role> roleList = (ArrayList<Role>) roleRepository.findAll();
+
+        if(user.getRole() == null || !(roleList.contains(user.getRole()))){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No valid Role in request");
         }
-        if(user.getUserId() != 0){
+
+        //AND needs to be here to short circuit -> user.getUserId that returns a null raises a null pointer exception
+        if(user.getUserId() != null && user.getUserId() != 0){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "UserId Generation Error - Request should not provide a UserId");
         }
 
         Role role = roleRepository.findById(user.getRole().getRoleId()).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User #%d not found.", user.getRole().getRoleId())));
 
+
         try {
 
             user.setRole(role);
             userRepository.save(user);
             return new SafeUser(user);
+
         }  catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Username already exists");
         }
@@ -114,6 +128,7 @@ public class UserController {
      */
     @DeleteMapping("/delete/{id}")
     public ResponseEntity deleteUser(@PathVariable(value = "id") final int userId) {
+        //TODO make sure user isn't deleteing themselves
         try {
             userRepository.deleteById(userId);
             return ResponseEntity.ok(HttpStatus.OK);
@@ -135,6 +150,16 @@ public class UserController {
     public List getAllRoles() {
         return roleRepository.findAll();
     }
+
+
+    /**
+     * route           GET /user/roles
+     * description     provides a list of all user roles
+     * access          Private - System Managers
+     *
+     * @return
+     */
+   // @PostMapping("/reset")
 
 }
 
