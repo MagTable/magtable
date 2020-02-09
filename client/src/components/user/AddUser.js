@@ -1,21 +1,26 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
+import {addUser} from '../../actions/user'
 
-const AddUser = props => {
-	const location = useLocation();
+const dumbUser = {
+	id: 5,
+	username: "david",
+	levelId: 3
+}
+
+const AddUser = ({addUser}) => {
+	function handleSubmit(e) {
+		e.preventDefault();
+		addUser(dumbUser);
+	}
+
 	return (
-		<div>
-			<h1>url: {location.pathname}</h1>
-		</div>
+		<form onSubmit={ (e) => handleSubmit(e) }>
+			<input type="submit"/>
+		</form>
 	);
 };
 
 AddUser.propTypes = {};
 
-const mapStateToProps = state => ({});
-
-const mapDispatchToProps = {};
-
-// export default connect()(AddUser);
-export default AddUser;
+export default connect(null, {addUser})(AddUser);
