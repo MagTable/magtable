@@ -44,7 +44,7 @@ PasswordReset.propTypes = {};
 
 const mapStateToProps = state => {
 	return {
-		user: state.user.users,
+		user: state.user.users
 	};
 };
 

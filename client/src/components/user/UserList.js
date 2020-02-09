@@ -12,7 +12,7 @@ import {
 	DelUserImg,
 	UserManipulateBlock,
 	ManipImg,
-	UserListDiv,
+	UserListDiv
 } from '../../styled/client/User';
 import PasswordReset from './PasswordReset';
 import AddUser from './AddUser';
@@ -58,21 +58,21 @@ UserList.propTypes = {
 		PropTypes.shape({
 			id: PropTypes.number.isRequired,
 			username: PropTypes.string.isRequired,
-			tempPassword: PropTypes.string.isRequired,
+			tempPassword: PropTypes.string.isRequired
 		}).isRequired
-	).isRequired,
+	).isRequired
 };
 
 const mapStateToProps = state => {
 	return {
-		users: state.user.users,
+		users: state.user.users
 	};
 };
 
 export default connect(mapStateToProps, {
 	getUsers,
 	deleteUser,
-	resetPassword,
+	resetPassword
 })(UserList);
 
 function getLevelDesc(levelId) {

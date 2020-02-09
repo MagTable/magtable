@@ -14,7 +14,7 @@ const AddUser = ({ addUser }) => {
 		const user = {
 			roleID: role,
 			username: username,
-			password: tempPassword,
+			password: tempPassword
 		};
 		addUser(user);
 		setRole('2');

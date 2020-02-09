@@ -6,14 +6,14 @@ import {
 	GET_USER,
 	EDIT_USER,
 	GET_LEVELS,
-	RESET_PASSWORD,
+	RESET_PASSWORD
 } from './constants';
 import { setAlert } from './alert';
 
 const config = {
 	headers: {
-		'Content-Type': 'application/json',
-	},
+		'Content-Type': 'application/json'
+	}
 };
 
 const testUsers = [
@@ -23,8 +23,8 @@ const testUsers = [
 		tempPassword: '',
 		role: {
 			roleID: 1,
-			roleName: 'System Manager',
-		},
+			roleName: 'System Manager'
+		}
 	},
 	{
 		id: 2,
@@ -32,8 +32,8 @@ const testUsers = [
 		tempPassword: '',
 		role: {
 			roleID: 2,
-			roleName: 'Personal Manager',
-		},
+			roleName: 'Personal Manager'
+		}
 	},
 	{
 		id: 3,
@@ -41,30 +41,30 @@ const testUsers = [
 		tempPassword: '',
 		role: {
 			roleID: 3,
-			roleName: 'Mechanic',
-		},
-	},
+			roleName: 'Mechanic'
+		}
+	}
 ];
 
 const testLevels = [
 	{
 		levelID: 1,
-		description: 'mechanic',
+		description: 'mechanic'
 	},
 	{
 		levelID: 2,
-		description: 'personnel manager',
+		description: 'personnel manager'
 	},
 	{
 		levelID: 3,
-		description: 'system administrator',
-	},
+		description: 'system administrator'
+	}
 ];
 
 const testUser = {
 	id: 3,
 	username: 'steven',
-	levelID: 3,
+	levelID: 3
 };
 
 export const getUser = id => dispatch => {
@@ -73,7 +73,7 @@ export const getUser = id => dispatch => {
 
 		dispatch({
 			type: GET_USER,
-			payload: testUser, // will be res.data once API request is implemented
+			payload: testUser // will be res.data once API request is implemented
 		});
 	} catch (err) {
 		/*
@@ -91,7 +91,7 @@ export const getUsers = () => dispatch => {
 
 		dispatch({
 			type: GET_USERS,
-			payload: testUsers, // will be res.data once API request is implemented
+			payload: testUsers // will be res.data once API request is implemented
 		});
 	} catch (err) {
 		/*
@@ -109,7 +109,7 @@ export const getLevelDescriptions = () => dispatch => {
 
 		dispatch({
 			type: GET_LEVELS,
-			payload: testLevels,
+			payload: testLevels
 		});
 	} catch (err) {
 		// todo implement based on error return object
@@ -122,7 +122,7 @@ export const addUser = user => dispatch => {
 
 		dispatch({
 			type: ADD_USER,
-			payload: user, // will be res.data once API request is implemented
+			payload: user // will be res.data once API request is implemented
 		});
 
 		dispatch(setAlert('User Added Successfully.', 'success'));
@@ -142,7 +142,7 @@ export const deleteUser = id => dispatch => {
 
 		dispatch({
 			type: DELETE_USER,
-			payload: id,
+			payload: id
 		});
 
 		dispatch(setAlert('User Deleted Successfully', 'sucess'));
@@ -160,7 +160,7 @@ export const editUser = id => dispatch => {
 	try {
 		dispatch({
 			type: EDIT_USER,
-			payload: id,
+			payload: id
 		});
 	} catch (err) {
 		// todo implement based on error return object.
@@ -171,7 +171,7 @@ export const resetPassword = (id, tempPassword) => dispatch => {
 	try {
 		dispatch({
 			type: RESET_PASSWORD,
-			payload: { id, tempPassword },
+			payload: { id, tempPassword }
 		});
 	} catch (err) {
 		//todo implement based on error
