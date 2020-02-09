@@ -23,7 +23,7 @@ public class User implements Serializable {
     }
 
     @Basic
-    @Column(name = "username", nullable = true, length = 32)
+    @Column(name = "username", length = 32)
     public String getUsername() {
         return username;
     }
@@ -33,7 +33,7 @@ public class User implements Serializable {
     }
 
     @Basic
-    @Column(name = "password", nullable = true, length = 60)
+    @Column(name = "password", length = 60)
     public String getPassword() {
         return password;
     }

@@ -8,9 +8,9 @@ public class UserNotFoundException extends RuntimeException {
      * I ripped this from the internet.
      * https://www.callicoder.com/spring-boot-rest-api-tutorial-with-mysql-jpa-hibernate/
      */
-    private String resourceName;
-    private String fieldName;
-    private Object fieldValue;
+    private final String resourceName;
+    private final String fieldName;
+    private final Object fieldValue;
 
     public UserNotFoundException(String resourceName, String fieldName, Object fieldValue) {
         super(String.format("%s not found with %s : '%s'", resourceName, fieldName, fieldValue));

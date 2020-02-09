@@ -13,11 +13,11 @@ public class SafeUser implements Serializable {
 
     /** PARAMETERS **/
 
-    private int id;
+    private final int id;
 
-    private String username;
+    private final String username;
 
-    private Role role;
+    private final Role role;
 
     /** CONSTRUCTORS **/
 
