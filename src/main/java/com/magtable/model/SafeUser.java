@@ -5,13 +5,14 @@ import java.io.Serializable;
 /**
  * Class for User objects with no password for safety
  * @author David
- *
  */
 
 public class SafeUser implements Serializable {
 
 
-    /** PARAMETERS **/
+    /**
+     * PARAMETERS
+     **/
 
     private final int id;
 
@@ -25,10 +26,10 @@ public class SafeUser implements Serializable {
      * Copy Constructor to sanitize the password from User model
      * @param user - the user to copy
      */
-    public SafeUser(User user){
-    this.id = user.getUserId();
-    this.username = user.getUsername();
-    this.role = user.getRole();
+    public SafeUser(User user) {
+        this.id = user.getUserId();
+        this.username = user.getUsername();
+        this.role = user.getRole();
     }
 
     /**

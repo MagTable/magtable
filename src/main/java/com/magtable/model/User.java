@@ -10,9 +10,11 @@ public class User implements Serializable {
     private String username;
     private String password;
     private Role role;
+    private String resetPassword;
+    private boolean reset;
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userID", nullable = false)
     public Integer getUserId() {
         return userId;
@@ -42,6 +44,37 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    @Basic
+    @Column(name = "resetpassword", length = 60)
+    public String getResetPassword() {
+        return resetPassword;
+    }
+
+    public void setResetPassword(String resetPassword) {
+        this.resetPassword = resetPassword;
+    }
+
+    @Basic
+    @Column(name = "resetflag")
+    public boolean isReset() {
+        return reset;
+    }
+
+    public void setReset(boolean reset) {
+        this.reset = reset;
+    }
+
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @JoinColumn(name = "role", referencedColumnName = "roleId")
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -57,15 +90,6 @@ public class User implements Serializable {
         return Objects.hash(userId, username, password);
     }
 
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    @JoinColumn(name = "role", referencedColumnName = "roleId")
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 
     @Override
     public String toString() {
@@ -74,6 +98,8 @@ public class User implements Serializable {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +
+                ", resetPassword='" + resetPassword + '\'' +
+                ", reset=" + reset +
                 '}';
     }
 }
