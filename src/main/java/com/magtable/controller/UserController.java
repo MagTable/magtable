@@ -1,13 +1,20 @@
 package com.magtable.controller;
 
-import com.magtable.model.Role;
-import com.magtable.model.SafeUser;
-import com.magtable.model.User;
+import com.magtable.model.*;
 import com.magtable.repository.RoleRepository;
 import com.magtable.repository.UserRepository;
+import com.magtable.services.JwtUtil;
+import com.magtable.services.MagUserDetailsService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -25,6 +32,7 @@ public class UserController {
 
     @Autowired
     private RoleRepository roleRepository;
+
 
     /**
      * route           GET /user/all
@@ -82,8 +90,8 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password minimum length is 8 characters.");
         }
 
-        Role role = roleRepository.findByRolename(user.getRole().getRolename()).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User #%d not found.", user.getRole().getRolename())));
+        Role role = roleRepository.findById(user.getRole().getRoleId()).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User #%d not found.", user.getRole().getRoleId())));
 
         try {
 
@@ -105,10 +113,10 @@ public class UserController {
      * @param userId id of user to delete
      */
     @DeleteMapping("/delete/{id}")
-    public String deleteUser(@PathVariable(value = "id") final int userId) {
+    public ResponseEntity deleteUser(@PathVariable(value = "id") final int userId) {
         try {
             userRepository.deleteById(userId);
-            return String.format("Deletion Success: User #%d Deleted.", userId);
+            return ResponseEntity.ok(HttpStatus.OK);
         } catch (EmptyResultDataAccessException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     String.format("Deletion failed: User #%d not found.", userId));
@@ -117,7 +125,7 @@ public class UserController {
 
 
     /**
-     * route            POST /user/roles
+     * route           GET /user/roles
      * description     provides a list of all user roles
      * access          Private @TODO
      *

@@ -18,16 +18,11 @@
 							},
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
+									"type": "bearer",
+									"bearer": [
 										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
+											"key": "token",
+											"value": "{{jwt}}",
 											"type": "string"
 										}
 									]
@@ -36,13 +31,25 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Basic bWFndGFibGU6cGFzc3dvcmQ=",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtdXN0YWZhIiwiZXhwIjoxNTgxMjQwNDU4LCJpYXQiOjE1ODEyMDQ0NTh9.axRkKXs0lH8lzvSmxYypQxjArzOXICf2lDgyPR0TgyU",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
 										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": ""
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "localhost:8080/user/all",
@@ -61,8 +68,24 @@
 						{
 							"name": "GET User By ID",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtdXN0YWZhIiwiZXhwIjoxNTgxMjQwNDU4LCJpYXQiOjE1ODEyMDQ0NTh9.axRkKXs0lH8lzvSmxYypQxjArzOXICf2lDgyPR0TgyU",
+										"type": "text"
+									}
+								],
 								"url": {
 									"raw": "localhost:8080/user/2",
 									"host": [
@@ -80,6 +103,16 @@
 						{
 							"name": "GET User By ID No User Found",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "GET",
 								"header": [],
 								"url": {
@@ -99,6 +132,16 @@
 						{
 							"name": "GET User By ID Odd ID",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "GET",
 								"header": [],
 								"url": {
@@ -117,11 +160,48 @@
 						},
 						{
 							"name": "GET All Roles",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
-									"raw": ""
+									"raw": "localhost:8080/user/roles",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"roles"
+									]
 								}
 							},
 							"response": []
@@ -159,16 +239,11 @@
 							"name": "Add User Expected",
 							"request": {
 								"auth": {
-									"type": "basic",
-									"basic": [
+									"type": "bearer",
+									"bearer": [
 										{
-											"key": "password",
-											"value": "",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "",
+											"key": "token",
+											"value": "{{jwt}}",
 											"type": "string"
 										}
 									]
@@ -196,7 +271,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"username\": \"arran\",\r\n    \"password\": \"password\",\r\n    \"role\": 2\r\n}\r\n"
+									"raw": "{\r\n\t\"username\": \"new12_user\",\r\n    \"password\": \"password\",\r\n    \"role\": 2\r\n}\r\n"
 								},
 								"url": {
 									"raw": "localhost:8080/user/add",
@@ -216,6 +291,16 @@
 						{
 							"name": "Add User Odd Data",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -246,6 +331,16 @@
 						{
 							"name": "Add User Password Less than 8 Characters",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -257,7 +352,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"username\": \"aeromag4550@gmail.com\",\r\n    \"password\": \"word\",\r\n    \"role\": 2\r\n}"
+									"raw": "{\r\n\t\"username\": \"aeromag4550@gmail.com\",\r\n    \"password\": \"word\",\r\n    \"role\": 3\r\n}"
 								},
 								"url": {
 									"raw": "localhost:8080/user/add",
@@ -276,6 +371,16 @@
 						{
 							"name": "Add User List",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -287,7 +392,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "[\n    {\n        \"username\": \"aeromag300@gmail.com\",\n        \"password\": \"password\",\n        \"role\": 1\n    },\n    {\n        \"username\": \"aeromag300@gmail.com\",\n        \"password\": \"password\",\n        \"role\": 1\n    }\n]"
+									"raw": "[\n    {\n        \"username\": \"aeromag300@gmail.com\",\n        \"password\": \"password\",\n        \"role\": 2\n    },\n    {\n        \"username\": \"aeromag300@gmail.com\",\n        \"password\": \"password\",\n        \"role\": 2\n    }\n]"
 								},
 								"url": {
 									"raw": "localhost:8080/user/add",
@@ -306,6 +411,16 @@
 						{
 							"name": "Add User Duplicate",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -317,7 +432,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "\n    {\n        \"username\": \"SendRequestTwice@gmail.com\",\n        \"password\": \"password\",\n        \"role\": 1\n    }\n"
+									"raw": "\n    {\n        \"username\": \"SendRequestTwice@gmail.com\",\n        \"password\": \"password\",\n        \"role\": 2\n    }\n"
 								},
 								"url": {
 									"raw": "localhost:8080/user/add",
@@ -328,6 +443,40 @@
 									"path": [
 										"user",
 										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Authenticate User",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"mustafa\",\n\t\"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/authenticate",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"authenticate"
 									]
 								}
 							},
@@ -343,10 +492,20 @@
 						{
 							"name": "Delete User By ID",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/user/delete/4",
+									"raw": "localhost:8080/user/delete/3",
 									"host": [
 										"localhost"
 									],
@@ -354,7 +513,7 @@
 									"path": [
 										"user",
 										"delete",
-										"4"
+										"3"
 									]
 								}
 							},
