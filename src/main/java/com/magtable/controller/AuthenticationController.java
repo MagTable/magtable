@@ -39,6 +39,8 @@ public class AuthenticationController {
      */
     @PostMapping("/authenticate")
     public ResponseEntity createAuthenticationToken(@RequestBody AuthenticationRequest request) {
+
+        //TODO @ARRAN Add logic for chceking is a user is a reset user
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
         } catch (BadCredentialsException e) {
@@ -50,6 +52,9 @@ public class AuthenticationController {
         String jwt = jwtTokenUtil.generateToken(userDetails);
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
+
+
+
 
     }
 

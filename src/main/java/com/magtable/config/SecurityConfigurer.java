@@ -28,6 +28,8 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtRequestFilter JwtRequestFilter;
 
+    private final String SYSTEM_ADMIN = "System Administrator";
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -39,9 +41,9 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/user/*/*").hasAuthority("System Manager")
-                .antMatchers("/user/*").hasAuthority("System Manager")
-                .antMatchers("/user*").hasAuthority("System Manager")
+                .antMatchers("/user/*/*").hasAuthority(SYSTEM_ADMIN)
+                .antMatchers("/user/*").hasAuthority(SYSTEM_ADMIN)
+                .antMatchers("/user*").hasAuthority(SYSTEM_ADMIN)
                 .antMatchers("/authenticate").permitAll()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

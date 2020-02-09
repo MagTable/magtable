@@ -76,7 +76,7 @@ public class UserController {
      */
 
     @PostMapping("/add")
-    public SafeUser createUser(@RequestBody User user) {
+    public ResetUser createUser(@RequestBody User user) {
 
         if(user == null){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No user found in request");
@@ -91,29 +91,33 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username minimum length is 5 characters");
         }
 
-        //roleList to check if the role exists so a foreign key exception isn't raised
-        ArrayList<Role> roleList = (ArrayList<Role>) roleRepository.findAll();
-
-        if(user.getRole() == null || !(roleList.contains(user.getRole()))){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No valid Role in request");
-        }
-
         //AND needs to be here to short circuit -> user.getUserId that returns a null raises a null pointer exception
         if(user.getUserId() != null && user.getUserId() != 0){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "UserId Generation Error - Request should not provide a UserId");
         }
 
         Role role = roleRepository.findById(user.getRole().getRoleId()).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User #%d not found.", user.getRole().getRoleId())));
+                new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Role #%d not found.", user.getRole().getRoleId())));
 
 
         try {
 
+
+            //Any User we make the reset will be true
+            user.setReset(true);
             user.setRole(role);
+            //Creating a new ResetUser to generate a random password
+            ResetUser resetUser = new ResetUser(user);
+            //Setting the resetpassword of our user to be created to the randomly generated password
+            user.setResetPassword(resetUser.getResetPassword());
+            //This is just a safety set to null;
+            user.setPassword(null);
+            //Storing our new user in the database
             userRepository.save(user);
-            return new SafeUser(user);
+            return resetUser;
 
         }  catch (Exception e) {
+            e.printStackTrace();
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Username already exists");
         }
 
