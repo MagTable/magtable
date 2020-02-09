@@ -36,18 +36,19 @@ const UserList = ({ getUsers, deleteUser, users }) => {
 			{users.map(user => (
 				<UserListRow key={user.id}>
 					<UserListItem>
-						<b>{user.role.roleName}</b>
+						<b>{user.role ? user.role.roleName : 'No Role'}</b>
 					</UserListItem>
 					<UserListItem>{user.username}</UserListItem>
 					<UserManipulateBlock>
-						<PasswordReset userID={user.id} />
 						<ManipImg
 							className="fas fa-trash-alt"
 							onClick={() => deleteUser(user.id)}
 						/>
+						<PasswordReset userID={user.id} />
 					</UserManipulateBlock>
 				</UserListRow>
 			))}
+			<AddUser />
 		</UserListDiv>
 	);
 };
