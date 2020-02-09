@@ -5,7 +5,8 @@ import {
 	GET_USERS,
 	GET_USER,
 	EDIT_USER,
-	GET_LEVELS
+	GET_LEVELS,
+	RESET_PASSWORD,
 } from './constants';
 import { setAlert } from './alert';
 
@@ -19,39 +20,51 @@ const testUsers = [
 	{
 		id: 1,
 		username: 'mustafa',
-		levelId: 1,
+		tempPassword: '',
+		role: {
+			roleID: 1,
+			roleName: 'System Manager',
+		},
 	},
 	{
 		id: 2,
 		username: 'david',
-		levelId: 2,
+		tempPassword: '',
+		role: {
+			roleID: 2,
+			roleName: 'Personal Manager',
+		},
 	},
 	{
 		id: 3,
 		username: 'steven',
-		levelId: 3,
+		tempPassword: '',
+		role: {
+			roleID: 3,
+			roleName: 'Mechanic',
+		},
 	},
 ];
 
 const testLevels = [
 	{
-		levelId: 1,
+		levelID: 1,
 		description: 'mechanic',
 	},
 	{
-		levelId: 2,
+		levelID: 2,
 		description: 'personnel manager',
 	},
 	{
-		levelId: 3,
-		description: 'system administrator'
-	}
+		levelID: 3,
+		description: 'system administrator',
+	},
 ];
 
 const testUser = {
 	id: 3,
 	username: 'steven',
-	levelId: 3,
+	levelID: 3,
 };
 
 export const getUser = id => dispatch => {
@@ -98,11 +111,10 @@ export const getLevelDescriptions = () => dispatch => {
 			type: GET_LEVELS,
 			payload: testLevels,
 		});
-	}
-	catch(err){
+	} catch (err) {
 		// todo implement based on error return object
 	}
-}
+};
 
 export const addUser = user => dispatch => {
 	try {
@@ -152,5 +164,16 @@ export const editUser = id => dispatch => {
 		});
 	} catch (err) {
 		// todo implement based on error return object.
+	}
+};
+
+export const resetPassword = (id, tempPassword) => dispatch => {
+	try {
+		dispatch({
+			type: RESET_PASSWORD,
+			payload: { id, tempPassword },
+		});
+	} catch (err) {
+		//todo implement based on error
 	}
 };

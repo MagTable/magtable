@@ -4,7 +4,9 @@ import {
 	GET_USERS,
 	GET_USER,
 	DELETE_USER,
-	EDIT_USER, GET_LEVELS,
+	EDIT_USER,
+	GET_LEVELS,
+	RESET_PASSWORD,
 } from '../actions/constants';
 
 const initialState = {
@@ -59,6 +61,19 @@ export default function(state = initialState, action) {
 			return {
 				...state,
 				error: payload, // update error state with payload
+				loading: false,
+			};
+		case RESET_PASSWORD:
+			let users = state.users.map(user => {
+				if (user.id === payload.id) {
+					return { ...user, ...payload };
+				}
+				return user;
+			});
+
+			return {
+				...state,
+				users,
 				loading: false,
 			};
 		default:

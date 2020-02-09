@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import Alert from './components/layout/Alert';
 import NavBar from './components/_dumbcomponents/NavBar';
+import PasswordReset from './components/user/PasswordReset';
 
 function App() {
 	return (
