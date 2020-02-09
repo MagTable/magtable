@@ -33,7 +33,7 @@ public class AuthenticationController {
     /**
      * route           GET /authenticate
      * description     method to verify a username/password combo and return a JWT
-     * access          Private @TODO
+     * access          Public - Anyone can make a login request
      *
      * @return a JWT response object
      */

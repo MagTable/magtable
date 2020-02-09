@@ -37,7 +37,7 @@ public class UserController {
     /**
      * route           GET /user/all
      * description     Get all users
-     * access          Private @TODO
+     * access          Private - System Managers
      *
      * @return safe list of all users (password removed)
      */
@@ -57,7 +57,7 @@ public class UserController {
     /**
      * route            GET /user/{id}
      * description     Get user by ID
-     * access          Private @TODO
+     * access          Private - System Managers
      *
      * @param userId id of user to query
      * @return User user with matching ID
@@ -77,7 +77,7 @@ public class UserController {
     /**
      * route            POST /user/add
      * description     Insert user
-     * access          Private @TODO
+     * access          Private - System Managers
      *
      * @param user User to insert
      * @return User created user
@@ -108,7 +108,7 @@ public class UserController {
     /**
      * route           DELETE /user/{id}
      * description     Delete user by ID
-     * access          Private @TODO
+     * access          Private - System Managers
      *
      * @param userId id of user to delete
      */
@@ -127,7 +127,7 @@ public class UserController {
     /**
      * route           GET /user/roles
      * description     provides a list of all user roles
-     * access          Private @TODO
+     * access          Private - System Managers
      *
      * @return List of roles
      */
