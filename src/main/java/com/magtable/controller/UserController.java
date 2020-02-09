@@ -86,7 +86,7 @@ public class UserController {
     @PostMapping("/add")
     public SafeUser createUser(@RequestBody User user) {
         //Checking password length
-        if (user.getPassword().length() < 8) {
+        if (user.getPassword().length() < 8 || user.getPassword() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password minimum length is 8 characters.");
         }
 
