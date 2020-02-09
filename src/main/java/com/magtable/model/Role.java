@@ -1,11 +1,12 @@
 package com.magtable.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Role {
+public class Role implements Serializable {
     private Integer roleId;
     private String rolename;
 

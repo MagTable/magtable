@@ -1,10 +1,11 @@
 package com.magtable.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class User {
+public class User implements Serializable {
     private Integer userId;
     private String username;
     private String password;
