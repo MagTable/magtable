@@ -3,31 +3,25 @@ package com.magtable.model;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class MagUserDetails implements UserDetails {
 
+    private final String username;
+    private final String password;
+    private final boolean active;
+    private final List<GrantedAuthority> authorities;
 
-    private String password;
-    private String username;
-    private List<GrantedAuthority> authorities;
-
-    public MagUserDetails(User user){
+    public MagUserDetails(User user) {
         this.username = user.getUsername();
         this.password = user.getPassword();
-        //todo this is kinda strange -> We're expecting a Role string
-        //this.authorities = Arrays.stream(user.getUserLevelID())
-
+        this.active = true;
+        this.authorities = new ArrayList<>();
+        this.authorities.add(new SimpleGrantedAuthority(user.getRole().getRolename()));
     }
-
-    public MagUserDetails(){
-
-    }
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -46,21 +40,21 @@ public class MagUserDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        throw new NotImplementedException();
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        throw new NotImplementedException();
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        throw new NotImplementedException();
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        throw new NotImplementedException();
+        return active;
     }
 }

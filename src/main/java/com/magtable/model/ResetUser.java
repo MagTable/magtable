@@ -8,7 +8,7 @@ import java.util.Random;
  * @author David
  */
 
-public class SafeUser implements Serializable {
+public class ResetUser implements Serializable {
 
 
     /**
@@ -25,29 +25,22 @@ public class SafeUser implements Serializable {
 
     private String resetPassword;
 
-    private boolean reset;
-
     /* CONSTRUCTORS */
 
     /**
      * Copy Constructor to sanitize the password from User model
      * @param user - the user to copy
      */
-    public SafeUser(User user) {
-        this.id = user.getUserId();
+    public ResetUser(User user) {
         this.username = user.getUsername();
         this.role = user.getRole();
-        this.resetPassword = user.getResetPassword();
-        this.reset = user.isReset();
+//        this.resetPassword = generateResetPassword(TEMPORARY_PASSWORD_LENGTH);
+        this.id = user.getUserId();
     }
 
     /**
      * GETTERS
      */
-
-    public int getId() {
-        return id;
-    }
 
     public String getUsername() {
         return username;
@@ -57,9 +50,12 @@ public class SafeUser implements Serializable {
         return role;
     }
 
-    public String getResetPassword() {
+    public String getResetPassword(){
         return resetPassword;
     }
 
-}
+    public Integer getId() {
+        return id;
+    }
 
+}
