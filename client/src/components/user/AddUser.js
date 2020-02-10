@@ -8,6 +8,10 @@ const AddUser = ({addUser}) => {
     const [tempPassword, setTempPassword] = useState('');
     const [roleID, setRoleID] = useState('2');
 
+    /**
+     * This function  handles the adding of a user to the system from the form
+     * @param e the event that occurs with a submit
+     */
     function handleSubmit(e) {
         e.preventDefault();
         const user = {
