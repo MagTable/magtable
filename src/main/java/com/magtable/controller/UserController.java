@@ -4,8 +4,8 @@ import com.magtable.model.*;
 import com.magtable.repository.RoleRepository;
 import com.magtable.repository.UserRepository;
 
+import com.magtable.services.JwtUtil;
 import com.magtable.services.ValidationService;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -14,9 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Null;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +25,11 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
+   @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private JwtUtil jwtTokenUtil;
 
 
     /**
@@ -78,17 +78,17 @@ public class UserController {
      * @return SafeUser created user
      */
     @PostMapping("/add")
-    public SafeUser createUser(@RequestBody User user) {
+    public User createUser(@RequestBody User user) {
         // current cannot catch the error for when user.userId is a string, it occurs during the JSON -> Java translation
         new ValidationService<>("User", user).exists();
         new ValidationService<>("Password", user.getPassword()).exists().isString().isMinLengthString(8);
         new ValidationService<>("Username", user.getUsername()).exists().isString().isMinLengthString(5); // TODO discuss username min length
-        new ValidationService<>("UserId", user.getUserId()).notExists();
+        new ValidationService<>("UserId", user.getId()).notExists();
 
         Role role;
         try {
-            role = roleRepository.findById(user.getRole().getRoleId()).orElseThrow(() ->
-                    new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Role #%d not found.", user.getRole().getRoleId())));
+            role = roleRepository.findById(user.getRole().getId()).orElseThrow(() ->
+                    new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Role #%d not found.", user.getRole().getId())));
         } catch (NullPointerException e) {
             e.printStackTrace();
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Required field \"role\" is null.");
@@ -101,10 +101,12 @@ public class UserController {
             user.generateResetPassword(); //Setting the resetpassword of our user to be created to the randomly generated password
             userRepository.save(user); //Storing our new user in the database
 
-            return new SafeUser(user);
+            return user;
         } catch (DataIntegrityViolationException e) {
-            e.printStackTrace();
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists");
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }
@@ -130,6 +132,8 @@ public class UserController {
     }
 
 
+
+
     /**
      * route           GET /user/roles
      * description     provides a list of all user roles
@@ -149,20 +153,51 @@ public class UserController {
      * sets their password to null and generates a random temporary password for the resetPassword field
      * access          Private - System Managers
      *
-     * @return ResetUser user with newly reset password
+     * @return User object with newly reset password
      */
     @PutMapping("/reset/{id}")
-    public SafeUser resetPassword(@PathVariable(value = "id") final int userId) {
+    public User resetPassword(@PathVariable(value = "id") final int userId) {
         User user = userRepository.findById(userId).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User #%d not found.", userId)));
 
-        user.setPassword(null); // clear old, forgotten password
         user.generateResetPassword(); // create new resetPassword and set reset flag to true
 
         userRepository.save(user);
 
+        return user;
+    }
+
+    //TODO route user/setpassword
+
+
+
+
+
+
+
+
+    /**
+     * route           get /get/{jwt}
+     * description     extracts user data from a jwt
+     *
+     * access          Private - System Managers
+     *
+     * @return A SafeUser Object
+     */
+    @GetMapping("/get/{jwt}")
+    public SafeUser getUserByJwt(@PathVariable final String jwt){
+        //extracting the username from the jwt token
+        String username = jwtTokenUtil.extractUsername(jwt);
+
+        //searching the database for the user
+        User user = userRepository.findUserByUsername(username).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User %s not found.", username)));
+
+        //returning the new safe user
         return new SafeUser(user);
     }
+
+
+
 
 }
 

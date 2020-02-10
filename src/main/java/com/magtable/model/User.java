@@ -9,22 +9,27 @@ import java.util.Random;
 public class User implements Serializable {
     private final int TEMPORARY_PASSWORD_LENGTH = 8;
 
-    private Integer userId;
+    private Integer id;
     private String username;
     private String password;
     private Role role;
-    private String resetPassword;
     private boolean reset;
+
+    public User(){}
+
+    public User(User user) {
+        this.reset = user.isReset();
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userID", nullable = false)
-    public Integer getUserId() {
-        return userId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setId(Integer userId) {
+        this.id = userId;
     }
 
     @Basic
@@ -45,16 +50,6 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Basic
-    @Column(name = "resetpassword", length = 60)
-    public String getResetPassword() {
-        return resetPassword;
-    }
-
-    public void setResetPassword(String resetPassword) {
-        this.resetPassword = resetPassword;
     }
 
     @Basic
@@ -83,25 +78,24 @@ public class User implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(userId, user.userId) &&
+        return Objects.equals(id, user.id) &&
                 Objects.equals(username, user.username) &&
                 Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, username, password);
+        return Objects.hash(id, username, password);
     }
 
 
     @Override
     public String toString() {
         return "User{" +
-                "userId=" + userId +
+                "userId=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +
-                ", resetPassword='" + resetPassword + '\'' +
                 ", reset=" + reset +
                 '}';
     }
@@ -128,7 +122,7 @@ public class User implements Serializable {
 
         String randomPassword = new String(charArray); // convert random char array to String
 
-        this.setResetPassword(randomPassword); // set user's resetPassword to newly generated random string
+        this.setPassword(randomPassword); // set user's resetPassword to newly generated random string
         this.setReset(true);
     }
 }

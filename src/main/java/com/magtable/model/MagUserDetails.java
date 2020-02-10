@@ -20,7 +20,7 @@ public class MagUserDetails implements UserDetails {
         this.password = user.getPassword();
         this.active = true;
         this.authorities = new ArrayList<>();
-        this.authorities.add(new SimpleGrantedAuthority(user.getRole().getRolename()));
+        this.authorities.add(new SimpleGrantedAuthority(user.getRole().getName()));
     }
 
     @Override

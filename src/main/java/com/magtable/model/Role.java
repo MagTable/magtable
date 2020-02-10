@@ -6,38 +6,38 @@ import java.util.Objects;
 
 @Entity
 public class Role implements Serializable {
-    private Integer roleId;
-    private String rolename;
+    private Integer id;
+    private String name;
 
     public Role (){
     }
 
-    public Role(Integer roleId){
-        this.roleId = roleId;
+    public Role(Integer id){
+        this.id = id;
     }
 
-    public Role(String rolename){
-        this.rolename = rolename;
+    public Role(String name){
+        this.name = name;
     }
 
     @Id
     @Column(name = "roleID", nullable = false)
-    public Integer getRoleId() {
-        return roleId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
+    public void setId(Integer roleId) {
+        this.id = roleId;
     }
 
     @Basic
     @Column(name = "rolename", nullable = false, length = 25)
-    public String getRolename() {
-        return rolename;
+    public String getName() {
+        return name;
     }
 
-    public void setRolename(String rolename) {
-        this.rolename = rolename;
+    public void setName(String rolename) {
+        this.name = rolename;
     }
 
     @Override
@@ -45,13 +45,13 @@ public class Role implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Role role = (Role) o;
-        return Objects.equals(roleId, role.roleId) &&
-                Objects.equals(rolename, role.rolename);
+        return Objects.equals(id, role.id) &&
+                Objects.equals(name, role.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(roleId, rolename);
+        return Objects.hash(id, name);
     }
 
 }
