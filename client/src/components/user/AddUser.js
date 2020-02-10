@@ -1,24 +1,22 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import {addUser} from '../../actions/user';
-import {useDispatch} from 'react-redux';
+import {addUser, getLevelDescriptions} from '../../actions/user';
 import {AddUserInput, AddUserRow, AddUserSubmit, SelectUserLevel} from "../../styled/client/User";
 
 const AddUser = ({addUser}) => {
-    const [role, setRole] = useState('2');
     const [username, setUsername] = useState('');
     const [tempPassword, setTempPassword] = useState('');
-    const dispatch = useDispatch();
+    const [roleID, setRoleID] = useState('2');
 
     function handleSubmit(e) {
         e.preventDefault();
         const user = {
-            roleID: role,
             username: username,
-            password: tempPassword
+            password: tempPassword,
+            roleID: roleID
         };
         addUser(user);
-        setRole('2');
+        setRoleID('2');
         setUsername('');
         setTempPassword('');
     }
@@ -29,8 +27,8 @@ const AddUser = ({addUser}) => {
 				<AddUserRow>
                 <SelectUserLevel
                     name="role"
-                    value={role}
-                    onChange={e => setRole(e.target.value)}
+                    value={roleID}
+                    onChange={e => setRoleID(e.target.value)}
                 >
                     <option value="1">System Manager</option>
                     <option value="2" defaultValue={2}>
