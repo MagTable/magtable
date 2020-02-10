@@ -1,6 +1,7 @@
 package com.magtable.model;
 
 import java.io.Serializable;
+import java.util.Random;
 
 /**
  * Class for User objects with no password for safety
@@ -14,13 +15,19 @@ public class SafeUser implements Serializable {
      * PARAMETERS
      **/
 
-    private final int id;
+    private final int TEMPORARY_PASSWORD_LENGTH = 8;
+
+    private Integer id;
 
     private final String username;
 
     private final Role role;
 
-    /** CONSTRUCTORS **/
+    private String resetPassword;
+
+    private boolean reset;
+
+    /* CONSTRUCTORS */
 
     /**
      * Copy Constructor to sanitize the password from User model
@@ -30,6 +37,8 @@ public class SafeUser implements Serializable {
         this.id = user.getUserId();
         this.username = user.getUsername();
         this.role = user.getRole();
+        this.resetPassword = user.getResetPassword();
+        this.reset = user.isReset();
     }
 
     /**
@@ -47,4 +56,10 @@ public class SafeUser implements Serializable {
     public Role getRole() {
         return role;
     }
+
+    public String getResetPassword() {
+        return resetPassword;
+    }
+
 }
+
