@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import UserList from './components/user/UserList';
@@ -9,39 +9,32 @@ import store from './store';
 import Alert from './components/common/Alert';
 import NavBar from './components/_dumbcomponents/NavBar';
 import PasswordReset from './components/user/PasswordReset';
-import MenuPane from "./components/_dumbcomponents/MenuPane";
+import MenuPane from './components/_dumbcomponents/MenuPane';
+import Login from './components/auth/Login';
+import PrivateRoute from './components/auth/PrivateRoute';
+import { loadUser } from './actions/auth';
 
 function App() {
-
-
+	useEffect(() => {
+		async function fetch() {
+			await store.dispatch(loadUser());
+		}
+		fetch();
+	}, []);
 
 	return (
 		<Provider store={store}>
 			<Router>
-				<NavBar/>
-				{/*<Alert/>*/}
-				{/*<ul>*/}
-				{/*    <li>*/}
-				{/*        <Link to="/">/</Link>*/}
-				{/*    </li>*/}
-				{/*    <li>*/}
-				{/*        <Link to="/user/all">/user/all</Link>*/}
-				{/*    </li>*/}
-				{/*    <li>*/}
-				{/*        <Link to="/user/insert">/user/insert</Link>*/}
-				{/*    </li>*/}
-				{/*</ul>*/}
-				{/*<Switch>*/}
-				{/*    <Route exact path="/">*/}
-				{/*        <AssignmentTable/>*/}
-				{/*    </Route>*/}
-				{/*    <Route exact path="/user/all">*/}
-				<UserList />
-				{/*    </Route>*/}
-				{/*    <Route exact path="/user/insert">*/}
-				{/*        <AddUser/>*/}
-				{/*    </Route>*/}
-				{/*</Switch>*/}
+				<NavBar />
+
+				<Route exact path="/" component={Login} />
+
+				<PrivateRoute
+					exact
+					path="/user/all"
+					adminRoute
+					component={UserList}
+				/>
 			</Router>
 		</Provider>
 	);

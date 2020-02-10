@@ -39,58 +39,55 @@ export const NavButton = styled.button`
 `;
 
 export const NavIcon = styled.i`
-    width: 40px;
-    vertical-align: middle;
-    // padding: 0px 0 10px 0; 
+	width: 40px;
+	vertical-align: middle;
+	// padding: 0px 0 10px 0;
 `;
 
 export const MenuTip = styled.div`
-    font-size: 25px;
-    padding-top: 10px;
-    cursor: pointer;
+	font-size: 25px;
+	padding-top: 10px;
+	cursor: pointer;
 `;
 
 export const MenuTipIcon = styled.a`
-    transition-duration: 1s;
-    transform: ${({open}) => open ? 'rotate(360deg)' : 'rotate(270deg)'};
-    margin-right: 10px;
-    cursor: pointer;
+	transition-duration: 1s;
+	transform: ${({ open }) => (open ? 'rotate(360deg)' : 'rotate(270deg)')};
+	margin-right: 10px;
+	cursor: pointer;
 `;
 
 export const NavPane = styled.div`
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    wrap-option: none;
-    overflow: hidden;
-    transition: all 0.15s ease-in-out;
-    background-color: #DADADA;
-    position: absolute;
-    top: 80px;
-    right: 0px;
-    height: ${({open}) => open ? '145px' : '0px'};
-    `;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	wrap-option: none;
+	overflow: hidden;
+	transition: all 0.15s ease-in-out;
+	background-color: #dadada;
+	position: absolute;
+	top: 80px;
+	right: 0px;
+	height: ${({ open }) => (open ? '145px' : '0px')};
+`;
 //
 
 export const NavDiv = styled.div`
-    padding: 20px 0px 20px 20px;
-    width: 190px;
-    overflow: hidden;
-    transition: all 0.2s ease-in-out;
-    
+	padding: 20px 0px 20px 20px;
+	width: 190px;
+	overflow: hidden;
+	transition: all 0.2s ease-in-out;
 `;
 
-
 export const HeaderDiv = styled.div`
-    display: flex;
-    justify-content: space-between;
-    background-color: #CACACA;
-    height: 100px;
-    
+	display: flex;
+	justify-content: space-between;
+	background-color: #cacaca;
+	height: 100px;
 `;
 
 export const NavLink = styled.a`
-    width: 200px;
-    cursor: pointer;
-    padding: 10px 0px 15px 20px;
-    `;
+	width: 200px;
+	cursor: pointer;
+	padding: 10px 0px 15px 20px;
+`;

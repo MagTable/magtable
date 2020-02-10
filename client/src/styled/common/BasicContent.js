@@ -17,23 +17,23 @@ export const Title = styled.h1`
 `;
 
 export const TitleDiv = styled.div`
-    width: 100vw;
+	width: 100vw;
 	margin: auto;
 	position: absolute;
 	top: 0;
 	justify-content: space-around;
 	// width: 100vw;
-    z-index: 10;
-    display: flex;
+	z-index: 10;
+	display: flex;
 `;
 
 export const TitleDummy = styled.div`
-    width: 50px;
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    z-index: 10;
-    top: 0;
-    height: 85px;
-    flex-wrap: nowrap;
+	width: 50px;
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	z-index: 10;
+	top: 0;
+	height: 85px;
+	flex-wrap: nowrap;
 `;

@@ -1,7 +1,14 @@
-import React from "react";
+import React from 'react';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import {MenuTip, MenuTipIcon, NavDiv, NavIcon, NavLink, NavPane} from "../../styled/common/Navigation";
+import {
+	MenuTip,
+	MenuTipIcon,
+	NavDiv,
+	NavIcon,
+	NavLink,
+	NavPane
+} from '../../styled/common/Navigation';
 /**
  * @date 2020-02-09
  * @author MJ Kochuk
@@ -14,44 +21,38 @@ import {MenuTip, MenuTipIcon, NavDiv, NavIcon, NavLink, NavPane} from "../../sty
  * @param props
  * @returns {*} The MenuPane component
  */
-function MenuPane({menuOpen, setMenuOpen}) {
+function MenuPane({ menuOpen, setMenuOpen }) {
+	function openMenu() {
+		if (menuOpen) {
+			setMenuOpen(false);
+		} else {
+			setMenuOpen(true);
+		}
+	}
 
-    function openMenu(){
-        if (menuOpen) {
-            setMenuOpen(false);
-        }
-        else {
-            setMenuOpen(true);
-        }
-    }
-
-    // Todo Get transition groups functional
-    return (
-        <NavDiv>
-                <MenuTip onClick={() => openMenu()}>
-                    <MenuTipIcon open={menuOpen} className="fas fa-angle-down"/>
-                    Menu
-                </MenuTip>
-            <NavPane open={menuOpen}>
-                <Router>
-                    <NavLink to={"/"}>
-                        <NavIcon className="fas fa-home"/>
-                            Home
-                    </NavLink>
-                    <NavLink to={"/"}>
-                        <NavIcon className="fas fa-users"/>
-                            Manage Users
-                    </NavLink>
-                    <NavLink to={"/"}>
-                        <NavIcon className="fas fa-truck"/>
-                            Mag Table
-                    </NavLink>
-                </Router>
-            </NavPane>
-        </NavDiv>
-    )
+	// Todo Get transition groups functional
+	return (
+		<NavDiv>
+			<MenuTip onClick={() => openMenu()}>
+				<MenuTipIcon open={menuOpen} className="fas fa-angle-down" />
+				Menu
+			</MenuTip>
+			<NavPane open={menuOpen}>
+				<NavLink to={'/'}>
+					<NavIcon className="fas fa-home" />
+					Home
+				</NavLink>
+				<Link to={'/user/all/'}>
+					<NavIcon className="fas fa-users" />
+					Manage Users
+				</Link>
+				<NavLink to={'/'}>
+					<NavIcon className="fas fa-truck" />
+					Mag Table
+				</NavLink>
+			</NavPane>
+		</NavDiv>
+	);
 }
-
-
 
 export default MenuPane;

@@ -87,11 +87,11 @@ export const getUser = id => dispatch => {
 
 export const getUsers = () => dispatch => {
 	try {
-		// const data = axios.get("/user/all");
+		const res = axios.get('/user/all');
 
 		dispatch({
 			type: GET_USERS,
-			payload: testUsers // will be res.data once API request is implemented
+			payload: res.data
 		});
 	} catch (err) {
 		/*

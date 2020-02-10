@@ -29,7 +29,7 @@ var x = 'hello';
  */
 const todo = {
 	id: 1,
-	text: 'Hello',
+	text: 'Hello'
 };
 
 export default Title;

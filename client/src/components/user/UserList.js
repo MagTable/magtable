@@ -25,7 +25,7 @@ const UserList = ({ getUsers, deleteUser, users }) => {
 	const location = useLocation();
 
 	// todo this should probably throw an error?
-	if (users === null) return <h1>No Users in the System!</h1>;
+	if (!users) return <h1>No Users in the System!</h1>;
 	return (
 		<UserListDiv>
 			{/*<TitleDiv>*/}
@@ -74,6 +74,5 @@ export default connect(mapStateToProps, {
 	deleteUser,
 	resetPassword
 })(UserList);
-
 
 // export default UserList;

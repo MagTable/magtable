@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
 	AlertDiv as StyledAlertDiv,
-	Alert as StyledAlert,
+	Alert as StyledAlert
 } from '../../styled/common/Alert';
 
 const Alert = ({ alerts }) => {
@@ -23,11 +23,11 @@ const Alert = ({ alerts }) => {
 };
 
 Alert.propTypes = {
-	alerts: PropTypes.array.isRequired,
+	alerts: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({
-	alerts: state.alert,
+	alerts: state.alert
 });
 
 export default connect(mapStateToProps)(Alert);
