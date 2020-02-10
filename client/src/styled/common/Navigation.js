@@ -12,7 +12,7 @@ let opened = false;
  * Used for holding the AeroMag 2000 logo in the header / navigation bar.
  **/
 export const AeroLogo = styled.img`
-	height: 60px;
+	height: 35px;
 	padding: 20px;
 	z-index: 20;
 `;
@@ -45,8 +45,7 @@ export const NavIcon = styled.i`
 `;
 
 export const MenuTip = styled.div`
-    font-size: 25px;
-    padding-top: 10px;
+    padding-top: 5px;
     cursor: pointer;
 `;
 
@@ -74,7 +73,7 @@ export const NavPane = styled.div`
 
 export const NavDiv = styled.div`
     padding: 20px 0px 20px 20px;
-    width: 190px;
+    width: 110px;
     overflow: hidden;
     transition: all 0.2s ease-in-out;
     
@@ -84,8 +83,8 @@ export const NavDiv = styled.div`
 export const HeaderDiv = styled.div`
     display: flex;
     justify-content: space-between;
-    background-color: #CACACA;
-    height: 100px;
+    height: 70px;
+    border-bottom: 2px solid #DEDEDE;
     
 `;
 

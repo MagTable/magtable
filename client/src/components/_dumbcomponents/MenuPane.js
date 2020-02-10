@@ -25,7 +25,6 @@ function MenuPane({menuOpen, setMenuOpen}) {
         }
     }
 
-    // Todo Get transition groups functional
     return (
         <NavDiv>
                 <MenuTip onClick={() => openMenu()}>

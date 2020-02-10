@@ -12,7 +12,7 @@ import styled from "styled-components";
 export const Input = styled.input`
     background-color: #DADADA;
     border: 2px solid #CACACA;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
     outline: none;
 `;
 
