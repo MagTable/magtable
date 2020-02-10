@@ -5,7 +5,6 @@ import com.magtable.repository.RoleRepository;
 import com.magtable.repository.UserRepository;
 
 import com.magtable.services.ValidationService;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -14,9 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Null;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,12 +74,12 @@ public class UserController {
      * @return SafeUser created user
      */
     @PostMapping("/add")
-    public SafeUser createUser(@RequestBody User user) {
+    public User createUser(@RequestBody User user) {
         // current cannot catch the error for when user.userId is a string, it occurs during the JSON -> Java translation
         new ValidationService<>("User", user).exists();
         new ValidationService<>("Password", user.getPassword()).exists().isString().isMinLengthString(8);
         new ValidationService<>("Username", user.getUsername()).exists().isString().isMinLengthString(5); // TODO discuss username min length
-        new ValidationService<>("UserId", user.getUserId()).notExists();
+        new ValidationService<>("UserId", user.getId()).notExists();
 
         Role role;
         try {
@@ -101,7 +97,7 @@ public class UserController {
             user.generateResetPassword(); //Setting the resetpassword of our user to be created to the randomly generated password
             userRepository.save(user); //Storing our new user in the database
 
-            return new SafeUser(user);
+            return user;
         } catch (DataIntegrityViolationException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists");
         }catch (Exception e){
@@ -130,6 +126,8 @@ public class UserController {
                     String.format("Deletion failed: User #%d not found.", userId));
         }
     }
+
+
 
 
     /**
@@ -164,6 +162,12 @@ public class UserController {
 
         return new SafeUser(user);
     }
+
+    //TODO route user/setpassword
+
+    //TODO GetUserByJWT
+    //https://www.baeldung.com/get-user-in-spring-security
+
 
 }
 

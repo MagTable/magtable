@@ -2,6 +2,9 @@ package com.magtable.controller;
 
 import com.magtable.model.AuthenticationRequest;
 import com.magtable.model.AuthenticationResponse;
+import com.magtable.model.MagUserDetails;
+import com.magtable.model.User;
+import com.magtable.repository.UserRepository;
 import com.magtable.services.JwtUtil;
 import com.magtable.services.MagUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Optional;
+
 @RestController
 public class AuthenticationController {
 
@@ -28,6 +33,9 @@ public class AuthenticationController {
     @Autowired
     private JwtUtil jwtTokenUtil;
 
+    @Autowired
+    private UserRepository userRepository;
+
     /**
      * route           GET /authenticate
      * description     method to verify a username/password combo and return a JWT
@@ -39,14 +47,25 @@ public class AuthenticationController {
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest request) {
 
         //TODO @DAVID Add logic for chceking is a user is a reset user
+        UsernamePasswordAuthenticationToken authenticationToken;
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+            authenticationToken = new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword());
+            authenticationManager.authenticate(authenticationToken);
         } catch (BadCredentialsException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Authentication failed: User %s not found.", request.getUsername()));
         }
+        //User is authenticated here
+        //Finding the user in the database
+        Optional<User> user = userRepository.findUserByUsername(authenticationToken.getName());
 
-        UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
+        //I'm keeping this because we don't need a orElseThrow previously
+        if((user.map(User::new).get()).isReset()){
+            //User requires a password reset
+            throw new ResponseStatusException(HttpStatus.SEE_OTHER, "Password update required");
+        }
 
+        //User does not need a password reset
+        UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationToken.getName());
         String jwt = jwtTokenUtil.generateToken(userDetails);
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
