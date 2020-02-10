@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "2b24c229-c509-4a1a-9ca5-82a34d998bf9",
+		"_postman_id": "56be2f36-1308-409b-b78c-6e976c9b8d4c",
 		"name": "MagTable API Requests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -844,6 +844,39 @@
 										"user",
 										"delete",
 										"100"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "User PUT Requests",
+					"item": [
+						{
+							"name": "POST Reset User Password",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{jwt}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost:8080/user/reset/2",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"reset",
+										"2"
 									]
 								}
 							},
