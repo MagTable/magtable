@@ -8,12 +8,13 @@ import { Provider } from 'react-redux';
 import store from './store';
 import Alert from './components/layout/Alert';
 import NavBar from './components/_dumbcomponents/NavBar';
+import MenuPane from "./components/_dumbcomponents/MenuPane";
 
 function App() {
 	return (
 		<Provider store={store}>
 			<Router>
-				<NavBar />
+				<MenuPane/>
 				{/*<Alert/>*/}
 				{/*<ul>*/}
 				{/*    <li>*/}
