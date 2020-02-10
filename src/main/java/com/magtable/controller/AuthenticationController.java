@@ -19,7 +19,6 @@ import org.springframework.web.server.ResponseStatusException;
 @RestController
 public class AuthenticationController {
 
-
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -29,7 +28,6 @@ public class AuthenticationController {
     @Autowired
     private JwtUtil jwtTokenUtil;
 
-
     /**
      * route           GET /authenticate
      * description     method to verify a username/password combo and return a JWT
@@ -38,13 +36,13 @@ public class AuthenticationController {
      * @return a JWT response object
      */
     @PostMapping("/authenticate")
-    public ResponseEntity createAuthenticationToken(@RequestBody AuthenticationRequest request) {
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest request) {
 
-        //TODO @ARRAN Add logic for chceking is a user is a reset user
+        //TODO @DAVID Add logic for chceking is a user is a reset user
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
         } catch (BadCredentialsException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Authentication failed: User #%s not found.", request.getUsername()));
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Authentication failed: User %s not found.", request.getUsername()));
         }
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
@@ -52,12 +50,7 @@ public class AuthenticationController {
         String jwt = jwtTokenUtil.generateToken(userDetails);
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
-
-
-
-
     }
-
 
 }
 
