@@ -4,6 +4,7 @@ import com.magtable.model.*;
 import com.magtable.repository.RoleRepository;
 import com.magtable.repository.UserRepository;
 
+import com.magtable.services.JwtUtil;
 import com.magtable.services.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -26,6 +27,9 @@ public class UserController {
 
    @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private JwtUtil jwtTokenUtil;
 
 
     /**
@@ -149,10 +153,10 @@ public class UserController {
      * sets their password to null and generates a random temporary password for the resetPassword field
      * access          Private - System Managers
      *
-     * @return ResetUser user with newly reset password
+     * @return User object with newly reset password
      */
     @PutMapping("/reset/{id}")
-    public SafeUser resetPassword(@PathVariable(value = "id") final int userId) {
+    public User resetPassword(@PathVariable(value = "id") final int userId) {
         User user = userRepository.findById(userId).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User #%d not found.", userId)));
 
@@ -160,13 +164,39 @@ public class UserController {
 
         userRepository.save(user);
 
-        return new SafeUser(user);
+        return user;
     }
 
     //TODO route user/setpassword
 
-    //TODO GetUserByJWT
-    //https://www.baeldung.com/get-user-in-spring-security
+
+
+
+
+
+
+
+    /**
+     * route           get /get/{jwt}
+     * description     extracts user data from a jwt
+     *
+     * access          Private - System Managers
+     *
+     * @return A SafeUser Object
+     */
+    @GetMapping("/get/{jwt}")
+    public SafeUser getUserByJwt(@PathVariable final String jwt){
+        //extracting the username from the jwt token
+        String username = jwtTokenUtil.extractUsername(jwt);
+
+        //searching the database for the user
+        User user = userRepository.findUserByUsername(username).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User %s not found.", username)));
+
+        //returning the new safe user
+        return new SafeUser(user);
+    }
+
+
 
 
 }

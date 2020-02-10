@@ -60,7 +60,7 @@ public class AuthenticationController {
         // Finding the user in the database
         User user;
         user = userRepository.findUserByUsername(authenticationToken.getName()).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.SEE_OTHER));
+                new ResponseStatusException(HttpStatus.NOT_FOUND));
 
 
         // I'm keeping this because we don't need a orElseThrow previously
@@ -77,6 +77,9 @@ public class AuthenticationController {
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
+
+
+
 
 }
 
