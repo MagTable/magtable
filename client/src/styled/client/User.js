@@ -95,7 +95,7 @@ export const AddUserRow = styled.div`
     position: fixed;
     bottom: 0px;
     width: 100vw;
-    `;
+`;
 
 export const AddUserSubmit = styled(AddUserInput)`
     height: 34px;

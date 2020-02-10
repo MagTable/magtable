@@ -41,31 +41,36 @@ export const NavButton = styled.button`
 export const NavIcon = styled.i`
     width: 40px;
     vertical-align: middle;
-    padding: 10px 0 10px 0; 
+    // padding: 0px 0 10px 0; 
 `;
 
-export const MenuTip = styled.a`
+export const MenuTip = styled.div`
+    font-size: 25px;
+    padding-top: 10px;
+    cursor: pointer;
+`;
+
+export const MenuTipIcon = styled.a`
     transition-duration: 1s;
-    transform: rotate(90deg);
+    transform: ${({open}) => open ? 'rotate(360deg)' : 'rotate(270deg)'};
     margin-right: 10px;
     cursor: pointer;
-    `;
+`;
 
-// TODO Get this rule to work for when the menu tip is clicked.
-// height: ${(opened) ? '' : '0px'};
 export const NavPane = styled.div`
     display: flex;
     flex-direction: column;
-    padding: 10px 0px 10px 20px;
     flex-wrap: nowrap;
     wrap-option: none;
     overflow: hidden;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.15s ease-in-out;
     background-color: #DADADA;
     position: absolute;
-    top: 60px;
+    top: 80px;
     right: 0px;
+    height: ${({open}) => open ? '145px' : '0px'};
     `;
+//
 
 export const NavDiv = styled.div`
     padding: 20px 0px 20px 20px;
@@ -87,4 +92,5 @@ export const HeaderDiv = styled.div`
 export const NavLink = styled.a`
     width: 200px;
     cursor: pointer;
+    padding: 10px 0px 15px 20px;
     `;

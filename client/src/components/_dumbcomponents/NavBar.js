@@ -14,8 +14,6 @@ import MenuPane from "./MenuPane";
  * @module Component
  */
 
-// const [menuOpen, setMenuOpen] = useState(false);
-
 /**
  * The main navigation for the website.
  * @constructor
@@ -23,15 +21,12 @@ import MenuPane from "./MenuPane";
  * @returns {*} The NavBar component
  */
 function NavBar(props) {
+	const [menuOpen, setMenuOpen] = useState(false);
+
 	return (
 		<HeaderDiv>
 			<AeroLogo src={logo}/>
-			<MenuPane/>
-			{/*<NavBtnGroup>*/}
-			{/*	<NavButton>MagTable</NavButton>*/}
-			{/*	<NavButton>Quick View</NavButton>*/}
-			{/*	<NavButton>Login</NavButton>*/}
-			{/*</NavBtnGroup>*/}
+			<MenuPane menuOpen={menuOpen} setMenuOpen={setMenuOpen}/>
 		</HeaderDiv>
 	);
 }

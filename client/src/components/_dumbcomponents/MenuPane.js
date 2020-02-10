@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
-
-import {MenuTip, NavDiv, NavIcon, NavLink, NavPane} from "../../styled/common/Navigation";
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import {MenuTip, MenuTipIcon, NavDiv, NavIcon, NavLink, NavPane} from "../../styled/common/Navigation";
 /**
  * @date 2020-02-09
  * @author MJ Kochuk
@@ -14,15 +14,25 @@ import {MenuTip, NavDiv, NavIcon, NavLink, NavPane} from "../../styled/common/Na
  * @param props
  * @returns {*} The MenuPane component
  */
-function MenuPane() {
+function MenuPane({menuOpen, setMenuOpen}) {
 
+    function openMenu(){
+        if (menuOpen) {
+            setMenuOpen(false);
+        }
+        else {
+            setMenuOpen(true);
+        }
+    }
+
+    // Todo Get transition groups functional
     return (
         <NavDiv>
-            <NavLink onClick={() => openMenu()}>
-                <MenuTip className="fas fa-angle-down"/>
+                <MenuTip onClick={() => openMenu()}>
+                    <MenuTipIcon open={menuOpen} className="fas fa-angle-down"/>
                     Menu
-            </NavLink>
-            <NavPane>
+                </MenuTip>
+            <NavPane open={menuOpen}>
                 <Router>
                     <NavLink to={"/"}>
                         <NavIcon className="fas fa-home"/>
@@ -42,7 +52,6 @@ function MenuPane() {
     )
 }
 
-function openMenu(){
-}
+
 
 export default MenuPane;
