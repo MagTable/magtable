@@ -24,7 +24,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
+   @Autowired
     private RoleRepository roleRepository;
 
 
@@ -83,8 +83,8 @@ public class UserController {
 
         Role role;
         try {
-            role = roleRepository.findById(user.getRole().getRoleId()).orElseThrow(() ->
-                    new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Role #%d not found.", user.getRole().getRoleId())));
+            role = roleRepository.findById(user.getRole().getId()).orElseThrow(() ->
+                    new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Role #%d not found.", user.getRole().getId())));
         } catch (NullPointerException e) {
             e.printStackTrace();
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Required field \"role\" is null.");
