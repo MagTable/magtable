@@ -3,6 +3,12 @@ import {connect} from 'react-redux';
 import {addUser, getLevelDescriptions} from '../../actions/user';
 import {AddUserInput, AddUserRow, AddUserSubmit, SelectUserLevel} from "../../styled/client/User";
 
+/**
+ * This adds a user to the system
+ * @param addUser - adds a new user to the system
+ * @returns {*}
+ * @constructor
+ */
 const AddUser = ({addUser}) => {
     const [username, setUsername] = useState('');
     const [tempPassword, setTempPassword] = useState('');
