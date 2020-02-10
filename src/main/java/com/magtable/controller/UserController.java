@@ -167,15 +167,6 @@ public class UserController {
         return user;
     }
 
-    //TODO route user/setpassword
-
-
-
-
-
-
-
-
     /**
      * route           get /get/{jwt}
      * description     extracts user data from a jwt
