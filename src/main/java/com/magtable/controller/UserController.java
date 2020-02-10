@@ -103,8 +103,10 @@ public class UserController {
 
             return new SafeUser(user);
         } catch (DataIntegrityViolationException e) {
-            e.printStackTrace();
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists");
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }
@@ -156,7 +158,6 @@ public class UserController {
         User user = userRepository.findById(userId).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User #%d not found.", userId)));
 
-        user.setPassword(null); // clear old, forgotten password
         user.generateResetPassword(); // create new resetPassword and set reset flag to true
 
         userRepository.save(user);

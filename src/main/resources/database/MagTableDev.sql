@@ -20,7 +20,6 @@ CREATE TABLE User (
     `role` INT(2) NOT NULL,
     username VARCHAR(32) UNIQUE,
     password VARCHAR(60) NULL NULL,
-    resetpassword VARCHAR(60),
     resetflag boolean DEFAULT true,
     PRIMARY KEY (userID),
     CONSTRAINT FK_User_Role FOREIGN KEY (`Role`) REFERENCES `Role` (`roleID`) ON DELETE RESTRICT ON UPDATE RESTRICT

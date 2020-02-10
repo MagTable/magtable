@@ -48,16 +48,6 @@ public class User implements Serializable {
     }
 
     @Basic
-    @Column(name = "resetpassword", length = 60)
-    public String getResetPassword() {
-        return resetPassword;
-    }
-
-    public void setResetPassword(String resetPassword) {
-        this.resetPassword = resetPassword;
-    }
-
-    @Basic
     @Column(name = "resetflag")
     public boolean isReset() {
         return reset;
@@ -128,7 +118,7 @@ public class User implements Serializable {
 
         String randomPassword = new String(charArray); // convert random char array to String
 
-        this.setResetPassword(randomPassword); // set user's resetPassword to newly generated random string
+        this.setPassword(randomPassword); // set user's resetPassword to newly generated random string
         this.setReset(true);
     }
 }
