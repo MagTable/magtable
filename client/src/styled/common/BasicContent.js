@@ -25,7 +25,7 @@ export const TitleDiv = styled.div`
 	// width: 100vw;
     z-index: 10;
     display: flex;
-    `;
+`;
 
 export const TitleDummy = styled.div`
     width: 50px;
@@ -36,4 +36,4 @@ export const TitleDummy = styled.div`
     top: 0;
     height: 85px;
     flex-wrap: nowrap;
-    `;
+`;

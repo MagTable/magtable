@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import UserList from './components/user/UserList';
@@ -9,12 +9,16 @@ import store from './store';
 import Alert from './components/layout/Alert';
 import NavBar from './components/_dumbcomponents/NavBar';
 import PasswordReset from './components/user/PasswordReset';
+import MenuPane from "./components/_dumbcomponents/MenuPane";
 
 function App() {
+
+
+
 	return (
 		<Provider store={store}>
 			<Router>
-				<NavBar />
+				<NavBar/>
 				{/*<Alert/>*/}
 				{/*<ul>*/}
 				{/*    <li>*/}

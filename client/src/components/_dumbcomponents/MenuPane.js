@@ -1,9 +1,7 @@
 import React from "react";
-import triangle from "../../res/Images/details-triangle-shape-setting-polygon-31860.png";
-import home from "../../res/Images/home-house-building-page-casa-30503.png";
-import admin from "../../res/Images/developer-mode-coding-html-css-device-develope-31864.png";
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
-import {NavDiv, NavIcon, NavPane} from "../../styled/common/Navigation";
+import {MenuTip, NavDiv, NavIcon, NavLink, NavPane} from "../../styled/common/Navigation";
 /**
  * @date 2020-02-09
  * @author MJ Kochuk
@@ -11,41 +9,40 @@ import {NavDiv, NavIcon, NavPane} from "../../styled/common/Navigation";
  */
 
 /**
- *
+ * The menu used for navigating the site
  * @constructor
  * @param props
  * @returns {*} The MenuPane component
  */
-function MenuPane(props) {
+function MenuPane() {
+
     return (
         <NavDiv>
-            <a onClick={() => {}}>
-                {/*<i className="far fa-triangle"></i>*/}
-                {/*<i className="fas fa-angle-down"></i>*/}
-                <NavIcon className="fas fa-angle-down" id="menuTip"/>
+            <NavLink onClick={() => openMenu()}>
+                <MenuTip className="fas fa-angle-down"/>
                     Menu
-            </a>
+            </NavLink>
             <NavPane>
-                <div>
-                    <a href="index.html">
-                        <NavIcon src={home}/>
+                <Router>
+                    <NavLink to={"/"}>
+                        <NavIcon className="fas fa-home"/>
                             Home
-                    </a>
-                    <a href="projects.html">
-                        {/*<i className="fas fa-users"></i>*/}
+                    </NavLink>
+                    <NavLink to={"/"}>
                         <NavIcon className="fas fa-users"/>
                             Manage Users
-                    </a>
-                    <a href="about.html">
-                        {/*<i className="fas fa-truck"></i>*/}
+                    </NavLink>
+                    <NavLink to={"/"}>
                         <NavIcon className="fas fa-truck"/>
                             Mag Table
-                    </a>
-                </div>
-
+                    </NavLink>
+                </Router>
             </NavPane>
         </NavDiv>
     )
+}
+
+function openMenu(){
 }
 
 export default MenuPane;

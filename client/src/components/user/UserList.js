@@ -28,13 +28,13 @@ const UserList = ({ getUsers, deleteUser, users }) => {
 	if (users === null) return <h1>No Users in the System!</h1>;
 	return (
 		<UserListDiv>
-			<TitleDiv>
-				<TitleDummy />
-				<Title>User Management</Title>
-				<TitleDummy />
-			</TitleDiv>
+			{/*<TitleDiv>*/}
+			{/*	<TitleDummy />*/}
+			{/*	<Title>User Management</Title>*/}
+			{/*	<TitleDummy />*/}
+			{/*</TitleDiv>*/}
 			{users.map(user => (
-				<UserListRow key={user.id}>
+				<UserListRow key={user.id} isFresh={user.tempPassword}>
 					<UserListItem>
 						<b>{user.role ? user.role.roleName : 'No Role'}</b>
 					</UserListItem>
@@ -75,8 +75,5 @@ export default connect(mapStateToProps, {
 	resetPassword
 })(UserList);
 
-function getLevelDesc(levelId) {
-	return 1;
-}
 
 // export default UserList;

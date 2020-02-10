@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {Input} from "../common/Control";
 
 /**
  * @date 2020-02-05
@@ -43,7 +44,7 @@ export const UserListRow = styled.div`
     margin: auto;
     
     `;
-
+// background-color: ${isFresh ? 'red' : ''} ;
 // height: ${({isSelected}) ? '60px' : '90px'} ;
 
 /**
@@ -67,4 +68,35 @@ export const UserManipulateBlock = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+`;
+
+export const SelectUserLevel = styled.select`
+    height: 34px;
+    padding: 0 10px;
+    font-size: 20px;
+    background-color: #DADADA;
+    border: 2px solid #CACACA;
+`;
+
+export const AddUserInput = styled(Input)`
+    height: 30px;
+    padding: 0 10px;
+    font-size: 20px;
+`;
+
+export const AddUserRow = styled.div`
+    align-content: space-between;
+    justify-content: center;
+    display: flex;
+    padding: 15px;
+    margin: auto;
+    background-color: #F0F0F0;
+    // border-top: 3px solid #DADADA;
+    position: fixed;
+    bottom: 0px;
+    width: 100vw;
     `;
+
+export const AddUserSubmit = styled(AddUserInput)`
+    height: 34px;
+`;

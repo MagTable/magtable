@@ -1,6 +1,7 @@
 import React from 'react';
 import { getUser, resetPassword } from '../../actions/user';
 import { connect } from 'react-redux';
+import {ManipImg} from "../../styled/client/User";
 
 /**
  * @date 2020-02-09
@@ -30,13 +31,12 @@ const PasswordReset = ({ userID, resetPassword }) => {
 	}
 
 	return (
-		<button
+		<ManipImg className="fas fa-redo"
 			onClick={() => {
 				resetPassword(userID, tempPassword());
 			}}
 		>
-			Reset Password
-		</button>
+		</ManipImg>
 	);
 };
 
