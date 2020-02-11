@@ -1,13 +1,8 @@
-import React, { useState } from 'react';
-import logo from '../../res/Images/aeromag-logo.png';
-import {
-	NavDiv,
-	NavButton,
-	NavBtnGroup,
-	AeroLogo,
-	HeaderDiv
-} from '../../styled/common/Navigation';
-import MenuPane from './MenuPane';
+import React, { useState } from "react";
+import logo from "../../res/Images/aeromag-logo.png";
+import { AeroLogo, HeaderDiv } from "../../styled/common/Navigation";
+import MenuPane from "./MenuPane";
+import { Link } from "react-router-dom";
 
 /**
  * @date 2020-02-05
@@ -26,7 +21,9 @@ function NavBar(props) {
 
 	return (
 		<HeaderDiv>
-			<AeroLogo src={logo} />
+			<Link to={"/"}>
+				<AeroLogo src={logo} />
+			</Link>
 			<MenuPane menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
 		</HeaderDiv>
 	);

@@ -10,7 +10,7 @@ public class AuthenticationRequest implements Serializable {
 
     private String username;
     private String password;
-    private String newpassword;
+    private String newPassword;
 
     public AuthenticationRequest() {
     }
@@ -20,10 +20,10 @@ public class AuthenticationRequest implements Serializable {
         this.password = password;
     }
 
-    public AuthenticationRequest(String username, String password, String newpassword) {
+    public AuthenticationRequest(String username, String password, String newPassword) {
         this.username = username;
         this.password = password;
-        this.newpassword = newpassword;
+        this.newPassword = newPassword;
     }
 
     public String getUsername() {
@@ -42,7 +42,7 @@ public class AuthenticationRequest implements Serializable {
         this.password = password;
     }
 
-    public String getNewpassword(){
-        return this.newpassword;
+    public String getNewPassword(){
+        return this.newPassword;
     }
 }

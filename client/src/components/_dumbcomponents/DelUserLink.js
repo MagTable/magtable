@@ -1,5 +1,5 @@
-import React from 'react';
-import { DelUserImg } from '../../styled/client/User';
+import React from "react";
+import { DelUserImg } from "../../styled/client/User";
 
 /**
  * @date 2020-02-06
