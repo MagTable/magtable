@@ -27,6 +27,7 @@ public class SafeUser implements Serializable {
 
     /**
      * Copy Constructor to sanitize the password from User model
+     *
      * @param user - the user to copy
      */
     public SafeUser(User user) {
@@ -50,6 +51,10 @@ public class SafeUser implements Serializable {
 
     public Role getRole() {
         return role;
+    }
+
+    public boolean isReset() {
+        return reset;
     }
 
 }

@@ -1,173 +1,115 @@
-import axios from 'axios';
+import axios from "axios";
 import {
-    ADD_USER,
-    DELETE_USER,
-    GET_USERS,
-    GET_USER,
-    EDIT_USER,
-    GET_ROLES,
-    RESET_PASSWORD
-} from './constants';
-import { setAlert } from './alert';
+	ADD_USER,
+	DELETE_USER,
+	GET_USERS,
+	GET_ROLES,
+	RESET_PASSWORD,
+	AXIOS_JSON_HEADER
+} from "./constants";
+import { setAlert } from "./alert";
 
-const config = {
-    headers: {
-        'Content-Type': 'application/json'
-    }
-};
-
-const testUsers = [
-    {
-        id: 1,
-        username: 'mustafa',
-        tempPassword: '',
-        role: {
-            roleID: 1,
-            roleName: 'System Manager'
-        }
-    },
-    {
-        id: 2,
-        username: 'david',
-        tempPassword: '',
-        role: {
-            roleID: 2,
-            roleName: 'Personal Manager'
-        }
-    },
-    {
-        id: 3,
-        username: 'steven',
-        tempPassword: '',
-        role: {
-            roleID: 3,
-            roleName: 'Mechanic'
-        }
-    }
-];
-
-const testLevels = [
-    {
-        levelID: 1,
-        description: 'mechanic'
-    },
-    {
-        levelID: 2,
-        description: 'personnel manager'
-    },
-    {
-        levelID: 3,
-        description: 'system administrator'
-    }
-];
-
-const testUser = {
-    id: 3,
-    username: 'steven',
-    levelID: 3
-};
-
-export const getUser = id => dispatch => {
-    try {
-        // const data = axios.get(`/user/${id}`);
-
-        dispatch({
-            type: GET_USER,
-            payload: testUser // will be res.data once API request is implemented
-        });
-    } catch (err) {
-        /*
-         *@todo implement based on error return object, something like:
-         dispatch(setAlert(err.response.msg, danger));
-         */
-    }
-};
-
+/**
+ * Retrieves list of all user accounts
+ * GET /user/all
+ * Dispatch Type: GET_USERS
+ * Dispatch Payload: res.data
+ */
 export const getUsers = () => async dispatch => {
-    console.log(axios.defaults.headers.common['Authorization'])
-    try {
-        const res = await axios.get('/user/all');
+	try {
+		const res = await axios.get("/user/all");
 
-        dispatch({
-            type: GET_USERS,
-            payload: res.data
-        });
-    } catch (err) {
-        console.log(err.response?.data?.message);
-        /*
-         *@todo implement based on error return object, something like:
-         dispatch(setAlert(err.response.msg, danger));
-         */
-    }
+		dispatch({
+			type: GET_USERS,
+			payload: res.data
+		});
+	} catch (err) {
+		dispatch(setAlert(err.response?.data?.message, "danger"));
+	}
 };
 
-export const getLevels = () => async dispatch => {
-    try {
-        const res = await axios.get("/user/levels");
+/**
+ * Retrieves list of all user roles
+ * GET /user/roles
+ * Dispatch Type: GET_ROLES
+ * Dispatch Payload: res.data
+ */
+export const getRoles = () => async dispatch => {
+	try {
+		const res = await axios.get("/user/roles");
 
-        dispatch({
-            type: GET_ROLES,
-            payload: res.data
-        });
-    } catch (err) {
-        // todo implement based on error return object
-    }
+		dispatch({
+			type: GET_ROLES,
+			payload: res.data
+		});
+	} catch (err) {
+		dispatch(setAlert(err.response?.data?.message, "danger"));
+	}
 };
 
-export const addUser = user => dispatch => {
-    try {
-        //const data = axios.post("/user/add", user, config);
+/**
+ * Adds user account to the database
+ * POST /user/add
+ * Dispatch Type: ADD_USER
+ * Dispatch Payload: res.data
+ */
+export const addUser = user => async dispatch => {
+	try {
+		user.role = parseInt(user.role); // ensure user's role is a number (thanks java backend)
 
-        dispatch({
-            type: ADD_USER,
-            payload: user // will be res.data once API request is implemented
-        });
+		const res = await axios.post("/user/add", user, AXIOS_JSON_HEADER);
 
-        dispatch(setAlert('User Added Successfully.', 'success'));
-    } catch (err) {
-        /*
-         *@todo implement based on error return object, something like:
-         dispatch(setAlert(err.response.msg, danger));
-         */
-    }
+		dispatch({
+			type: ADD_USER,
+			payload: res.data
+		});
+
+		dispatch(
+			setAlert(`User "${user.username}" Added Successfully.`, "success")
+		);
+	} catch (err) {
+		dispatch(setAlert(err.response?.data?.message, "danger"));
+	}
 };
 
-export const deleteUser = id => dispatch => {
-    try {
-        // axios.delete(`/user/delete/${id}`);
+/**
+ * Removes a user account from the database
+ * DELETE /user/${id}
+ * Dispatch Type: DELETE_USER
+ * Dispatch Payload: id
+ */
+export const deleteUser = id => async dispatch => {
+	try {
+		await axios.delete(`/user/delete/${id}`);
 
-        dispatch({
-            type: DELETE_USER,
-            payload: id
-        });
+		dispatch({
+			type: DELETE_USER,
+			payload: id
+		});
 
-        dispatch(setAlert('User Deleted Successfully', 'sucess'));
-    } catch (err) {
-        /*
-         *@todo implement based on error return object, something like:
-         dispatch(setAlert(err.response.msg, danger));
-         */
-    }
+		dispatch(setAlert("User Deleted Successfully", "success"));
+	} catch (err) {
+		dispatch(setAlert(err.response?.data?.message, "danger"));
+	}
 };
 
-export const editUser = id => dispatch => {
-    try {
-        dispatch({
-            type: EDIT_USER,
-            payload: id
-        });
-    } catch (err) {
-        // todo implement based on error return object.
-    }
-};
+/**
+ * Retrieves list of all user accounts
+ * PUT /user/reset/${id}
+ * Dispatch Type: RESET_PASSWORD
+ * Dispatch Payload: { id, user: res.data }
+ */
+export const resetPassword = id => async dispatch => {
+	try {
+		const res = await axios.put(`/user/reset/${id}`);
 
-export const resetPassword = (id, tempPassword) => dispatch => {
-    try {
-        dispatch({
-            type: RESET_PASSWORD,
-            payload: { id, tempPassword }
-        });
-    } catch (err) {
-        //todo implement based on error
-    }
+		dispatch({
+			type: RESET_PASSWORD,
+			payload: { id, user: res.data }
+		});
+
+		dispatch(setAlert("User's Password Successfully Reset.", "success"));
+	} catch (err) {
+		dispatch(setAlert(err.response?.data?.message, "danger"));
+	}
 };

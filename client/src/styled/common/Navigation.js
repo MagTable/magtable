@@ -1,12 +1,10 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 /**
  * @date 2020-02-05
  * @author MJ Kochuk
  * @module Styled
  */
-
-let opened = false;
 
 /**
  * Used for holding the AeroMag 2000 logo in the header / navigation bar.
@@ -52,7 +50,7 @@ export const MenuTip = styled.div`
 
 export const MenuTipIcon = styled.a`
 	transition-duration: 1s;
-	transform: ${({ open }) => (open ? 'rotate(360deg)' : 'rotate(270deg)')};
+	transform: ${({ open }) => (open ? "rotate(360deg)" : "rotate(270deg)")};
 	margin-right: 10px;
 	cursor: pointer;
 `;
@@ -68,7 +66,7 @@ export const NavPane = styled.div`
 	position: absolute;
 	top: 80px;
 	right: 0px;
-	height: ${({ open }) => (open ? '145px' : '0px')};
+	height: ${({ open }) => (open ? "145px" : "0px")};
 `;
 //
 

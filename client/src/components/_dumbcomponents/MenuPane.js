@@ -1,14 +1,14 @@
-import React from 'react';
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import React from "react";
+import { Link } from "react-router-dom";
 import {
 	MenuTip,
 	MenuTipIcon,
 	NavDiv,
 	NavIcon,
-	NavLink,
 	NavPane
-} from '../../styled/common/Navigation';
+} from "../../styled/common/Navigation";
+import { useSelector } from "react-redux";
+import { SYSTEM_ADMINISTRATOR } from "../../actions/constants";
 /**
  * @date 2020-02-09
  * @author MJ Kochuk
@@ -30,6 +30,8 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 		}
 	}
 
+	const roleName = useSelector(state => state.auth?.user?.role?.name);
+
 	// Todo Get transition groups functional
 	return (
 		<NavDiv>
@@ -38,18 +40,17 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 				Menu
 			</MenuTip>
 			<NavPane open={menuOpen}>
-				<NavLink to={'/'}>
+				<Link to={"/"}>
 					<NavIcon className="fas fa-home" />
 					Home
-				</NavLink>
-				<Link to={'/user/all/'}>
-					<NavIcon className="fas fa-users" />
-					Manage Users
 				</Link>
-				<NavLink to={'/'}>
-					<NavIcon className="fas fa-truck" />
-					Mag Table
-				</NavLink>
+				{roleName === SYSTEM_ADMINISTRATOR && (
+					<Link to={"/user/all/"}>
+						<NavIcon className="fas fa-users" />
+						Manage Users
+					</Link>
+				)}
+				<Link to="/logout">Logout</Link>
 			</NavPane>
 		</NavDiv>
 	);

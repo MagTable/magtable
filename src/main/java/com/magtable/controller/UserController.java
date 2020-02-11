@@ -81,7 +81,6 @@ public class UserController {
     public User createUser(@RequestBody User user) {
         // current cannot catch the error for when user.userId is a string, it occurs during the JSON -> Java translation
         new ValidationService<>("User", user).exists();
-        new ValidationService<>("Password", user.getPassword()).exists().isString().isMinLengthString(8);
         new ValidationService<>("Username", user.getUsername()).exists().isString().isMinLengthString(5); // TODO discuss username min length
         new ValidationService<>("UserId", user.getId()).notExists();
 
@@ -166,29 +165,6 @@ public class UserController {
 
         return user;
     }
-
-    /**
-     * route           get /get/{jwt}
-     * description     extracts user data from a jwt
-     *
-     * access          Private - System Managers
-     *
-     * @return A SafeUser Object
-     */
-    @GetMapping("/get/{jwt}")
-    public SafeUser getUserByJwt(@PathVariable final String jwt){
-        //extracting the username from the jwt token
-        String username = jwtTokenUtil.extractUsername(jwt);
-
-        //searching the database for the user
-        User user = userRepository.findUserByUsername(username).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User %s not found.", username)));
-
-        //returning the new safe user
-        return new SafeUser(user);
-    }
-
-
-
 
 }
 

@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Input } from '../common/Control';
+import styled from "styled-components";
+import { Input } from "../common/Control";
 
 /**
  * @date 2020-02-05
@@ -17,6 +17,7 @@ export const UserListDiv = styled.div`
 /**
  * Holds the individual data for each user, ie. user level description, name.
  **/
+// TODO "text-transform: capitalize" is currently applied to the reset password which makes it inaccurate
 export const UserListItem = styled.div`
 	min-width: 230px;
 	height: 40px;
@@ -98,4 +99,5 @@ export const AddUserRow = styled.div`
 
 export const AddUserSubmit = styled(AddUserInput)`
 	height: 34px;
+	cursor: pointer;
 `;

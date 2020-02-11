@@ -1,14 +1,15 @@
 import {
 	AUTH_ERROR,
+	CLEAR_ERROR,
 	LOGGING_IN,
 	LOGIN_FAIL,
 	LOGIN_SUCCESS,
 	LOGOUT,
 	USER_LOADED
-} from '../actions/constants';
+} from "../actions/constants";
 
 const initialState = {
-	token: localStorage.getItem('token'),
+	token: localStorage.getItem("token"),
 	isAuthenticated: null,
 	loading: true,
 	user: null
@@ -25,7 +26,7 @@ export default function(state = initialState, action) {
 				user: payload
 			};
 		case LOGIN_SUCCESS:
-			localStorage.setItem('token', payload);
+			localStorage.setItem("token", payload);
 			return {
 				...state,
 				token: payload,
@@ -37,16 +38,30 @@ export default function(state = initialState, action) {
 				...state,
 				loading: true
 			};
-		case AUTH_ERROR:
 		case LOGIN_FAIL:
+			localStorage.removeItem("token");
+			return {
+				...state,
+				token: null,
+				isAuthenticated: false,
+				loading: false,
+				user: { username: payload.username },
+				error: payload
+			};
+		case AUTH_ERROR:
 		case LOGOUT:
-			localStorage.removeItem('token');
+			localStorage.removeItem("token");
 			return {
 				...state,
 				token: null,
 				isAuthenticated: false,
 				loading: false,
 				user: null
+			};
+		case CLEAR_ERROR:
+			return {
+				...state,
+				error: null
 			};
 		default:
 			return state;
