@@ -45,12 +45,6 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 
-    /**
-     * Method creates jwt tokens
-     *
-     * @param userDetails
-     * @return
-     */
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         return createToken(claims, userDetails.getUsername());
