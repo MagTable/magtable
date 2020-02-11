@@ -4,6 +4,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Entity class for the Role Table
+ */
 @Entity
 public class Role implements Serializable {
     private Integer id;

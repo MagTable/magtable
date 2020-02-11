@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * Class to override the loadUserByUsername method in {@link UserDetailsService} with our
+ * own implementation.
+ */
 @Service
 public class MagUserDetailsService implements UserDetailsService {
 
@@ -20,14 +24,8 @@ public class MagUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Optional<User> user = userRepository.findUserByUsername(username);
-
-        //checks if its null
-        user.orElseThrow(() -> new UsernameNotFoundException("Not found: " + username));
-
-
-        //builder pattern is dumb
-        //have to do this if it is optional
-        return user.map(MagUserDetails::new).get();
+        //Searching the database for the user
+        User user = userRepository.findUserByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Not found: " + username));
+        return new MagUserDetails(user);
     }
 }

@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Class to override the default Spring Boot UserDetails implementation
+ */
 public class MagUserDetails implements UserDetails {
 
     private final String username;

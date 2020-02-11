@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "56be2f36-1308-409b-b78c-6e976c9b8d4c",
+		"_postman_id": "b471776b-9273-43a9-a530-6320aca5eedd",
 		"name": "MagTable API Requests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -44,12 +44,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
+									"raw": ""
 								},
 								"url": {
 									"raw": "localhost:8080/user/all",
@@ -185,12 +180,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
+									"raw": ""
 								},
 								"url": {
 									"raw": "localhost:8080/user/roles",
@@ -202,6 +192,27 @@
 										"user",
 										"roles"
 									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET user by JWT",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
 								}
 							},
 							"response": []
@@ -449,7 +460,7 @@
 							"response": []
 						},
 						{
-							"name": "Authenticate User",
+							"name": "Authenticate User System Admin",
 							"request": {
 								"method": "POST",
 								"header": [
@@ -462,12 +473,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"username\": \"mustafa\",\n\t\"password\": \"password\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
+									"raw": "{\n\t\"username\": \"mustafa\",\n\t\"password\": \"password\"\n}"
 								},
 								"url": {
 									"raw": "localhost:8080/authenticate",
@@ -506,12 +512,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"password\": \"password\",\n\t\"role\": 1\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
+									"raw": "{\n\t\"password\": \"password\",\n\t\"role\": 1\n}"
 								},
 								"url": {
 									"raw": "localhost:8080/user/add",
@@ -551,12 +552,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"username\" : \"John1234\",\n\t\"password\" : \"password\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
+									"raw": "{\n\t\"username\" : \"John1234\",\n\t\"password\" : \"password\"\n}"
 								},
 								"url": {
 									"raw": "localhost:8080/user/add",
@@ -596,12 +592,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"userId\" : 99,\n\t\"username\" : \"UserWithIDProvided\",\n\t\"password\" : \"password\",\n\t\"role\" : 2\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
+									"raw": "{\n\t\"userId\" : 99,\n\t\"username\" : \"UserWithIDProvided\",\n\t\"password\" : \"password\",\n\t\"role\" : 2\n}"
 								},
 								"url": {
 									"raw": "localhost:8080/user/add",
@@ -641,12 +632,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"username\" : \"NullPasswordUser\",\n\t\"role\" : 3\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
+									"raw": "{\n\t\"username\" : \"NullPasswordUser\",\n\t\"role\" : 3\n}"
 								},
 								"url": {
 									"raw": "localhost:8080/user/add",
@@ -686,12 +672,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"username\": \"role_user\",\r\n    \"password\": \"password\",\r\n    \"role\": 100\r\n}\r\n",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
+									"raw": "{\r\n\t\"username\": \"role_user\",\r\n    \"password\": \"password\",\r\n    \"role\": 100\r\n}\r\n"
 								},
 								"url": {
 									"raw": "localhost:8080/user/add",
@@ -731,12 +712,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"username\": \"falseReset_user\",\r\n    \"password\": \"password\",\r\n    \"role\": 1,\r\n    \"reset\": false\r\n}\r\n",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
+									"raw": "{\r\n\t\"username\": \"falseReset_user\",\r\n    \"password\": \"password\",\r\n    \"role\": 1,\r\n    \"reset\": false\r\n}\r\n"
 								},
 								"url": {
 									"raw": "localhost:8080/user/add",
@@ -747,6 +723,69 @@
 									"path": [
 										"user",
 										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Authenticate new_user using temp password",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"new_user\",\n\t\"password\": \"uwihmhca\"\n}"
+								},
+								"url": {
+									"raw": "localhost:8080/authenticate",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"authenticate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Authenticate Password Reset",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"new_user\",\n\t\"password\": \"oxbilozf\",\n\t\"newpassword\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/passwordreset",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"passwordreset"
 									]
 								}
 							},

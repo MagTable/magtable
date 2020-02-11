@@ -5,6 +5,9 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.Random;
 
+/**
+ * Entity Class for User Table
+ */
 @Entity
 public class User implements Serializable {
     private final int TEMPORARY_PASSWORD_LENGTH = 8;
