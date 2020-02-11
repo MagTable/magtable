@@ -20,6 +20,7 @@ const UserList = () => {
 	}, [dispatch]);
 
 	const users = useSelector(state => state.user.users);
+	const authUser = useSelector(state => state.auth.user);
 
 	const handlePasswordReset = id => {
 		dispatch(resetPassword(id));
@@ -42,14 +43,18 @@ const UserList = () => {
 					<UserListItem>{user.username}</UserListItem>
 					<UserListItem>{user.password}</UserListItem>
 					<UserManipulateBlock>
-						<ManipImg
-							className="fas fa-trash-alt"
-							onClick={() => handleDelete(user.id)}
-						/>
-						<ManipImg
-							className="fas fa-redo"
-							onClick={() => handlePasswordReset(user.id)}
-						/>
+						{user.id !== authUser.id && (
+							<>
+								<ManipImg
+									className="fas fa-trash-alt"
+									onClick={() => handleDelete(user.id)}
+								/>
+								<ManipImg
+									className="fas fa-redo"
+									onClick={() => handlePasswordReset(user.id)}
+								/>
+							</>
+						)}
 						{user.reset && (
 							<i className="fas fa-exclamation-triangle" />
 						)}
