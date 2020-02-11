@@ -17,7 +17,7 @@ const PrivateRoute = ({ component: Component, data, adminRoute, ...rest }) => {
 
 	if (!localStorage.token) {
 		dispatch(logout);
-		return <Redirect to="/" />;
+		return <Redirect to="/login" />;
 	}
 
 	return (
@@ -25,7 +25,7 @@ const PrivateRoute = ({ component: Component, data, adminRoute, ...rest }) => {
 			{...rest}
 			render={props =>
 				!isAuthenticated ? (
-					<Redirect to="/" />
+					<Redirect to="/login" />
 				) : (
 					<Component {...props} {...data} />
 				)

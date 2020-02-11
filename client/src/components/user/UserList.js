@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useLocation } from 'react-router-dom';
 import { getUsers, deleteUser, resetPassword } from '../../actions/user';
-import { connect } from 'react-redux';
+import {connect, useDispatch} from 'react-redux';
 import { Title, TitleDiv, TitleDummy } from '../../styled/common/BasicContent';
 import {
 	UserListRow,
@@ -22,21 +21,21 @@ const UserList = ({ getUsers, deleteUser, users }) => {
 		getUsers();
 	}, [getUsers]);
 
-	const location = useLocation();
+	const dispatch = useDispatch();
+
+	const handlePasswordReset = (id) => {
+		dispatch(resetPassword(id))
+	}
 
 	// todo this should probably throw an error?
 	if (!users) return <h1>No Users in the System!</h1>;
+
 	return (
 		<UserListDiv>
-			{/*<TitleDiv>*/}
-			{/*	<TitleDummy />*/}
-			{/*	<Title>User Management</Title>*/}
-			{/*	<TitleDummy />*/}
-			{/*</TitleDiv>*/}
 			{users.map(user => (
 				<UserListRow key={user.id} isFresh={user.tempPassword}>
 					<UserListItem>
-						<b>{user.role ? user.role.roleName : 'No Role'}</b>
+						<b>{user.role ? user.role.name : 'No Role'}</b>
 					</UserListItem>
 					<UserListItem>{user.username}</UserListItem>
 					<UserManipulateBlock>
@@ -44,7 +43,10 @@ const UserList = ({ getUsers, deleteUser, users }) => {
 							className="fas fa-trash-alt"
 							onClick={() => deleteUser(user.id)}
 						/>
-						<PasswordReset userID={user.id} />
+						<ManipImg
+							className="fas fa-redo"
+							onClick={() => handlePasswordReset(user.id)}
+						/>
 					</UserManipulateBlock>
 				</UserListRow>
 			))}

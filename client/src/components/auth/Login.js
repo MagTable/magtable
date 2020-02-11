@@ -19,7 +19,7 @@ function Login() {
 	const dispatch = useDispatch();
 
 	const [formData, setFormData] = useState({
-		username: 'david',
+		username: 'mustafa',
 		password: 'password'
 	});
 
@@ -34,7 +34,7 @@ function Login() {
 	};
 
 	if (isAuthenticated) {
-		return <Redirect to="/dashboard" />;
+		return <Redirect to="/" />;
 	} // don't show the page until we know user is not authenticated
 
 	return (

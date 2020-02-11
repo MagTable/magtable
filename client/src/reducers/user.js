@@ -5,7 +5,7 @@ import {
 	GET_USER,
 	DELETE_USER,
 	EDIT_USER,
-	GET_LEVELS,
+	GET_ROLES,
 	RESET_PASSWORD
 } from '../actions/constants';
 
@@ -14,7 +14,7 @@ const initialState = {
 	user: null,
 	loading: true,
 	error: null,
-	levels: []
+	roles: []
 };
 
 export default function(state = initialState, action) {
@@ -39,10 +39,10 @@ export default function(state = initialState, action) {
 				user: payload, // set the current user to payload
 				loading: false
 			};
-		case GET_LEVELS:
+		case GET_ROLES:
 			return {
 				...state,
-				levels: payload, // set the list of level descriptions to payload
+				roles: payload, // set the list of level descriptions to payload
 				loading: false
 			};
 		case DELETE_USER:

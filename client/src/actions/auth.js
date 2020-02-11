@@ -10,6 +10,7 @@ import {
 
 import { setAlert } from './alert';
 import store from '../store';
+import setAuthToken from "./setAuthToken";
 
 window.addEventListener('storage', e => {
 	if (e.key === 'token' && e.oldValue && !e.newValue) {
@@ -77,14 +78,4 @@ export const login = (username, password) => async dispatch => {
 // logout / clear profile
 export const logout = () => dispatch => {
 	dispatch({ type: LOGOUT });
-};
-
-// set auth token for common axios parameters, this will be added to all requests
-const setAuthToken = token => {
-	if (token) {
-		axios.defaults.headers.common['Authentication'] = 'Bearer ' + token;
-		console.log(axios.defaults.headers.common);
-	} else {
-		delete axios.defaults.headers.common['Authentication'];
-	}
 };

@@ -27,11 +27,11 @@ function App() {
 			<Router>
 				<NavBar />
 
-				<Route exact path="/" component={Login} />
+				<Route exact path="/login" component={Login} />
 
 				<PrivateRoute
 					exact
-					path="/user/all"
+					path="/"
 					adminRoute
 					component={UserList}
 				/>
