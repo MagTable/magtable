@@ -1,4 +1,11 @@
 import styled from 'styled-components';
+import {Link} from "react-router-dom";
+import {
+    BrowserView,
+    MobileView,
+    isBrowser,
+    isMobile
+} from "react-device-detect";
 
 /**
  * @date 2020-02-05
@@ -34,19 +41,21 @@ export const NavButton = styled.button`
 	font-size: 25px;
 	border: 4px solid black;
 	background-color: #f0f0f0;
-	width: 150px;
+	width: 170px;
 	margin: -2px;
 `;
 
 export const NavIcon = styled.i`
-    width: 40px;
+    width: 45px;
     vertical-align: middle;
+    float: left;
     // padding: 0px 0 10px 0; 
 `;
 
 export const MenuTip = styled.div`
     padding-top: 5px;
     cursor: pointer;
+    transform: scale(1.2);
 `;
 
 export const MenuTipIcon = styled.a`
@@ -63,11 +72,12 @@ export const NavPane = styled.div`
     wrap-option: none;
     overflow: hidden;
     transition: all 0.15s ease-in-out;
-    background-color: #DADADA;
+    background-color: #DEDEDE;
     position: absolute;
-    top: 80px;
+    top: 70px;
     right: 0px;
-    height: ${({open}) => open ? '145px' : '0px'};
+    height: ${({open}) => open ? '195px' : '0px'};
+    z-index: 100;
     `;
 //
 
@@ -76,7 +86,6 @@ export const NavDiv = styled.div`
     width: 110px;
     overflow: hidden;
     transition: all 0.2s ease-in-out;
-    
 `;
 
 
@@ -88,8 +97,13 @@ export const HeaderDiv = styled.div`
     
 `;
 
-export const NavLink = styled.a`
-    width: 200px;
+export const NavLink = styled(Link)`
+    width: 100vw;
     cursor: pointer;
-    padding: 10px 0px 15px 20px;
+    padding: 20px 0px 20px 0px;
+    text-decoration: none;
+    color: black;
+    text-align: center;
+    font-size: 20px;
+    border-bottom: 2px solid #DADADA;
     `;

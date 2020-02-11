@@ -8,8 +8,6 @@ import { Provider } from 'react-redux';
 import store from './store';
 import Alert from './components/common/Alert';
 import NavBar from './components/_dumbcomponents/NavBar';
-import PasswordReset from './components/user/PasswordReset';
-import MenuPane from "./components/_dumbcomponents/MenuPane";
 
 function App() {
 
@@ -19,7 +17,7 @@ function App() {
 		<Provider store={store}>
 			<Router>
 				<NavBar/>
-				{/*<Alert/>*/}
+				<Alert/>
 				{/*<ul>*/}
 				{/*    <li>*/}
 				{/*        <Link to="/">/</Link>*/}

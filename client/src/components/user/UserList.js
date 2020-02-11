@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import { getUsers, deleteUser, resetPassword } from '../../actions/user';
 import { connect } from 'react-redux';
+
 import { Title, TitleDiv, TitleDummy } from '../../styled/common/BasicContent';
 import {
 	UserListRow,
@@ -25,11 +26,6 @@ const UserList = ({ getUsers, deleteUser, users }) => {
 	if (users === null) return <h1>No Users in the System!</h1>;
 	return (
 		<UserListDiv>
-			{/*<TitleDiv>*/}
-			{/*	<TitleDummy />*/}
-			{/*	<Title>User Management</Title>*/}
-			{/*	<TitleDummy />*/}
-			{/*</TitleDiv>*/}
 			{users.map(user => (
 				<UserListRow key={user.id} isFresh={user.tempPassword}>
 					<UserListItem>

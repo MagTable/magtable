@@ -1,5 +1,11 @@
 import styled from "styled-components";
 import {Input} from "../common/Control";
+import {
+    BrowserView,
+    MobileView,
+    isBrowser,
+    isMobile
+} from "react-device-detect";
 
 /**
  * @date 2020-02-05
@@ -11,25 +17,49 @@ import {Input} from "../common/Control";
  * Holds all of the rows / information in the user list.
  */
 export const UserListDiv = styled.div`
-    padding-top: 60px;
+    ${isMobile ?
+    // Mobile rules
+    'padding-top: 5px;'
+    :
+
+    // Desktop Rules
+    'padding-top: 60px;' +
+    ''}
+    \`;
+    
     `;
 
 /**
  * Holds the individual data for each user, ie. user level description, name.
  **/
 export const UserListItem = styled.div`
-    min-width: 230px;
-    height: 40px;
-    background-color: #F0F0F0;
-    border-top: 2px solid #DADADA;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
+    // Shared Rules
     text-transform: capitalize;
-    font-size: 20px;
-    padding-left: 15px; 
+    
+    
+    ${isMobile ?
+    // Mobile rules
+    'background-color: #E9E9E9;' +
+    'border-top: 2px solid #DEDEDE' +
+    'display: box;' +
+    'font-size: 20px;' +
+    'text-align: center;'
+    :
+
+    // Desktop Rules
+    'min-width: 230px;' +
+    'background-color: #F0F0F0;' +
+    'height: 40px;' +
+    'background-color: #DEDEDE;' +
+    'border-top: 2px solid #DADADA;' +
+    'justify-content: center;' +
+    'display: flex;' +
+    'flex-direction: column;' +
+    'align-content: center;' +
+    'justify-content: center;' +
+    'font-size: 20px;' +
+    'padding-left: 15px;' +
+    ''}
     `;
 
 /**
@@ -43,6 +73,16 @@ export const UserListRow = styled.div`
     padding-top: 5px;
     margin: auto;
     
+    ${isMobile ?
+    // Mobile rules
+    'flex-direction: column;' +
+    'justify-content: space-between;' +
+    '' :
+
+    // Desktop Rules
+    'min-width: 230px;' +
+    ''}
+    \`;
     `;
 // background-color: ${isFresh ? 'red' : ''} ;
 // height: ${({isSelected}) ? '60px' : '90px'} ;
@@ -51,9 +91,16 @@ export const UserListRow = styled.div`
  * Holds the icons for manipulating users.
  */
 export const ManipImg = styled.i`
-    width: 30px;
+    
     cursor: pointer;
-    // padding-left: 3px;
+    ${isMobile ?
+    // Mobile rules
+    'transform: scale(1.5);' +
+    'margin-bottom: 10px;' :
+
+    // Desktop Rules
+    'width: 30px;'}
+    \`;
     `;
 
 /**
@@ -63,11 +110,21 @@ export const UserManipulateBlock = styled.div`
     display: flex;
     width: 50px;
     height: 40px;
-    background-color: #F0F0F0;
-    border-top: 2px solid #DADADA;
+    background-color: #DEDEDE;
     display: flex;
     align-items: center;
     justify-content: center;
+    ${isMobile ?
+    // Mobile rules
+    'justify-content: space-around;' +
+    'width: 100vw;' +
+    'background-color: #E9E9E9;' +
+    'border-bottom: 2px solid #DEDEDE;' +
+    'margin-bottom: 10px;' :
+
+    // Desktop Rules
+    'border-top: 2px solid #DADADA;'}
+    \`;
 `;
 
 export const SelectUserLevel = styled.select`
