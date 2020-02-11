@@ -1,5 +1,6 @@
 package com.magtable.services;
 
+import com.magtable.model.SafeUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -44,12 +45,6 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 
-    /**
-     * Method creates jwt tokens
-     *
-     * @param userDetails
-     * @return
-     */
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         return createToken(claims, userDetails.getUsername());
@@ -69,4 +64,5 @@ public class JwtUtil {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
+
 }

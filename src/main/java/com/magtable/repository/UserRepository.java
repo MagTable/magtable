@@ -7,7 +7,9 @@ package com.magtable.repository;
         import java.util.List;
         import java.util.Optional;
 
-//@Repository annotation. This tells Spring to bootstrap the repository during component scan.
+/**
+ * Repository interface for accessing the User Table
+ */
 @Repository
 //Generics are the Model and the type of its primary key
 public interface UserRepository extends JpaRepository<User, Integer> {

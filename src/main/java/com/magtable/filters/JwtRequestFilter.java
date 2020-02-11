@@ -33,17 +33,20 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
+        //gets the authorization header from the request
         String authorizationHeader = request.getHeader("Authorization");
 
         String username = null;
         String jwt= null;
 
+        //looks for a Bearer authorization header
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             //substring of 7 because "Bearer " is 7 indexes long
             jwt = authorizationHeader.substring(7);
             username = jwtUtil.extractUsername(jwt);
         }
 
+        //Checking that authentication manager is not null
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
             UserDetails userDetails = this.magUserDetailsService.loadUserByUsername(username);

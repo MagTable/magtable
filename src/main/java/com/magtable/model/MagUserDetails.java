@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Class to override the default Spring Boot UserDetails implementation
+ */
 public class MagUserDetails implements UserDetails {
 
     private final String username;
@@ -20,7 +23,7 @@ public class MagUserDetails implements UserDetails {
         this.password = user.getPassword();
         this.active = true;
         this.authorities = new ArrayList<>();
-        this.authorities.add(new SimpleGrantedAuthority(user.getRole().getRolename()));
+        this.authorities.add(new SimpleGrantedAuthority(user.getRole().getName()));
     }
 
     @Override

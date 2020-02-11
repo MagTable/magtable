@@ -45,6 +45,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/*").hasAuthority(SYSTEM_ADMIN)
                 .antMatchers("/user*").hasAuthority(SYSTEM_ADMIN)
                 .antMatchers("/authenticate").permitAll()
+                .antMatchers("/passwordreset").permitAll()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(JwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
