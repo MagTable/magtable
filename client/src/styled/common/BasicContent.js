@@ -6,9 +6,8 @@ import styled from 'styled-components';
  * @module Styled
  */
 
-/**
- *
- **/
+// Todo will we be using titles? If not, this component is useless. File may be good for organisational purposes, however.
+
 export const Title = styled.h1`
 	width: fit-content;
 	margin: auto;

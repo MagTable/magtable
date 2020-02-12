@@ -20,8 +20,8 @@ let opened = false;
  **/
 export const AeroLogo = styled.img`
 	height: 35px;
-	padding: 20px;
-	z-index: 20;
+	// padding: 20px;
+	// z-index: 20;
 `;
 
 /**
@@ -45,6 +45,9 @@ export const NavButton = styled.button`
 	margin: -2px;
 `;
 
+/**
+ * The icons used in the mobile version of the navigation menu.
+ */
 export const NavIcon = styled.i`
     width: 45px;
     vertical-align: middle;
@@ -52,12 +55,18 @@ export const NavIcon = styled.i`
     // padding: 0px 0 10px 0; 
 `;
 
+/**
+ * The div holding all content pertaining to the link for opening the navigation menu.
+ */
 export const MenuTip = styled.div`
     padding-top: 5px;
     cursor: pointer;
     transform: scale(1.2);
 `;
 
+/**
+ * The icon for the link which opens the navigation menu
+ */
 export const MenuTipIcon = styled.a`
     transition-duration: 1s;
     transform: ${({open}) => open ? 'rotate(360deg)' : 'rotate(270deg)'};
@@ -65,6 +74,9 @@ export const MenuTipIcon = styled.a`
     cursor: pointer;
 `;
 
+/**
+ * The navigation menu used in the mobile version of the site.
+ */
 export const NavPane = styled.div`
     display: flex;
     flex-direction: column;
@@ -79,16 +91,27 @@ export const NavPane = styled.div`
     height: ${({open}) => open ? '195px' : '0px'};
     z-index: 100;
     `;
-//
 
+/**
+ * Holds the individual links in the navigation menu / bar.
+ */
 export const NavDiv = styled.div`
-    padding: 20px 0px 20px 20px;
-    width: 110px;
-    overflow: hidden;
-    transition: all 0.2s ease-in-out;
+    ${isMobile ?
+    // Mobile rules
+    'padding: 20px 0px 20px 20px;' +
+    'width: 110px;' +
+    'overflow: hidden;' +
+    'transition: all 0.2s ease-in-out;'
+    :
+    // Desktop Rules
+    'display: flex;'}
+    \`;
 `;
 
-
+// Todo update documentation when we know if we are using titles or not.
+/**
+ * The header div of the page that contains the logo, navigation and possibly the title of the page.
+ */
 export const HeaderDiv = styled.div`
     display: flex;
     justify-content: space-between;
@@ -97,13 +120,23 @@ export const HeaderDiv = styled.div`
     
 `;
 
+/**
+ * The link in the navigation menu / bar to access another page of the app.
+ */
 export const NavLink = styled(Link)`
-    width: 100vw;
-    cursor: pointer;
-    padding: 20px 0px 20px 0px;
     text-decoration: none;
     color: black;
-    text-align: center;
     font-size: 20px;
-    border-bottom: 2px solid #DADADA;
-    `;
+    ${isMobile ?
+    // Mobile rules
+    'width: 100vw;' +
+    'cursor: pointer;' +
+    'padding: 20px 0px 20px 0px;' +
+    'text-align: center;' +
+    'border-bottom: 2px solid #DADADA;'
+    :
+    // Desktop Rules
+    'margin-right: 50px;' +
+    'padding-top: 20px;'}
+    \`;
+`;

@@ -1,6 +1,4 @@
 import React from "react";
-import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {MenuTip, MenuTipIcon, NavDiv, NavIcon, NavLink, NavPane} from "../../styled/common/Navigation";
 import {
     BrowserView,
@@ -16,7 +14,8 @@ import {
  */
 
 /**
- * The menu used for navigating the site
+ * The menu used for navigating the site. The desktop version has a simple layout with links simply placed in the
+ * header, while the mobile version has a folding menu to preserve screen real estate.
  * @constructor
  * @param props
  * @returns {*} The MenuPane component
@@ -35,7 +34,17 @@ function MenuPane({menuOpen, setMenuOpen}) {
     return (
         <div>
             <BrowserView>
-                Hello
+                <NavDiv>
+                    <NavLink>
+                        Home
+                    </NavLink>
+                    <NavLink>
+                        Manage Users
+                    </NavLink>
+                    <NavLink>
+                        Mag Table
+                    </NavLink>
+                </NavDiv>
             </BrowserView>
             <MobileView>
                 <NavDiv>
