@@ -7,6 +7,7 @@ import com.magtable.model.User;
 import com.magtable.repository.UserRepository;
 import com.magtable.services.JwtUtil;
 import com.magtable.services.MagUserDetailsService;
+import com.magtable.services.PasswordService;
 import com.magtable.services.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.UnsatisfiedServletRequestParameterException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -35,6 +37,9 @@ public class AuthenticationController {
 
     @Autowired
     private JwtUtil jwtTokenUtil;
+
+    @Autowired
+    public PasswordService passwordService;
 
     @Autowired
     private UserRepository userRepository;
@@ -116,9 +121,13 @@ public class AuthenticationController {
             //Telling the front end that we didn't finish, the HTTP status may not be the right one.
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User is not eligible for a password reset");
         }
+
         // user is authenticated there new password is OK
-        // changing the users password to the new one and saving in the database
-        user.setPassword(request.getNewpassword());
+        // changing the users password to the new one, encoding it using PasswordService and saving in the database
+        String newPassword = request.getNewpassword();
+        String encodedPassword = passwordService.encodePass(newPassword);
+        user.setPassword(encodedPassword);
+
         //setting the reset flag back to false
         user.setReset(false);
         //saving the user in the database

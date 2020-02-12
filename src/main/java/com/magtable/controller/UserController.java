@@ -5,14 +5,17 @@ import com.magtable.repository.RoleRepository;
 import com.magtable.repository.UserRepository;
 
 import com.magtable.services.JwtUtil;
+import com.magtable.services.PasswordService;
 import com.magtable.services.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import sun.security.util.Password;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +28,14 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-   @Autowired
+    @Autowired
     private RoleRepository roleRepository;
 
     @Autowired
     private JwtUtil jwtTokenUtil;
 
+    @Autowired
+    public PasswordService passwordService;
 
     /**
      * route           GET /user/all
@@ -94,12 +99,14 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Required field \"role\" is null.");
         }
 
+        //PasswordService created here for the try/catch/finally block
         try {
+
             user.setReset(true); // reset is true at the time of account creation
             user.setRole(role);
             user.setPassword(null); //This is just a safety set to null;
-            user.generateResetPassword(); //Setting the resetpassword of our user to be created to the randomly generated password
-            userRepository.save(user); //Storing our new user in the database
+            String randomPassword = passwordService.generateResetPassword();
+            user.setPassword(randomPassword); //Setting the resetpassword of our user to be created to the randomly generated password by PasswordService
 
             return user;
         } catch (DataIntegrityViolationException e) {
@@ -107,6 +114,11 @@ public class UserController {
         }catch (Exception e){
             e.printStackTrace();
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        } finally {
+            //Password encoding using PasswordService
+            String encodedPassword = passwordService.encodePass(user.getPassword());
+            user.setPassword(encodedPassword);
+            userRepository.save(user); //Storing our new user in the database
         }
 
     }
@@ -160,8 +172,12 @@ public class UserController {
         User user = userRepository.findById(userId).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User #%d not found.", userId)));
 
-        user.generateResetPassword(); // create new resetPassword and set reset flag to true
 
+        // create new resetPassword, encode it and set reset flag to true
+        String randomPassword  = passwordService.generateResetPassword();
+        String encodedPassword = passwordService.encodePass(randomPassword);
+
+        user.setPassword(encodedPassword);
         userRepository.save(user);
 
         return user;
@@ -186,9 +202,5 @@ public class UserController {
         //returning the new safe user
         return new SafeUser(user);
     }
-
-
-
-
 }
 
