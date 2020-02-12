@@ -1,65 +1,75 @@
-import React, {useState} from 'react';
-import {connect} from 'react-redux';
-import {addUser} from '../../actions/user';
-import {useDispatch} from 'react-redux';
-import {AddUserInput, AddUserRow, AddUserSubmit, SelectUserLevel} from "../../styled/client/User";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser } from "../../actions/user";
+import {
+	AddUserInput,
+	AddUserRow,
+	AddUserSubmit,
+	SelectUserLevel
+} from "../../styled/client/User";
 
-const AddUser = ({addUser}) => {
-    const [role, setRole] = useState('2');
-    const [username, setUsername] = useState('');
-    const [tempPassword, setTempPassword] = useState('');
-    const dispatch = useDispatch();
+/**
+ * This adds a user to the system
+ * @returns {*}
+ * @constructor
+ */
+const AddUser = () => {
+	const initialFormState = {
+		username: "",
+		role: 1
+	};
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        const user = {
-            roleID: role,
-            username: username,
-            password: tempPassword
-        };
-        addUser(user);
-        setRole('2');
-        setUsername('');
-        setTempPassword('');
-    }
+	const [formData, setFormData] = useState(initialFormState);
+	const { username, role } = formData;
+	const dispatch = useDispatch();
 
-    return (
+	const roles = useSelector(state => state.user.roles);
 
-            <form onSubmit={e => handleSubmit(e)}>
-				<AddUserRow>
-                <SelectUserLevel
-                    name="role"
-                    value={role}
-                    onChange={e => setRole(e.target.value)}
-                >
-                    <option value="1">System Manager</option>
-                    <option value="2" defaultValue={2}>
-                        Personnel Manager
-                    </option>
-                    <option value="3">Mechanic</option>
-                </SelectUserLevel>
-                <AddUserInput
-                    type="text"
-                    name="username"
-                    placeholder="Username"
-                    value={username}
-                    required
-                    onChange={e => setUsername(e.target.value)}
-                />
-                <AddUserInput
-                    type="text"
-                    name="tempPassword"
-                    placeholder="Temp password"
-                    value={tempPassword}
-                    required
-                    onChange={e => setTempPassword(e.target.value)}
-                />
-                <AddUserSubmit type="submit" value="Add User"/>
-				</AddUserRow>
-            </form>
-    );
+	/**
+	 * This function  handles the adding of a user to the system from the form
+	 * @param e the event that occurs with a submit
+	 */
+	function handleSubmit(e) {
+		e.preventDefault();
+		// TODO VALIDATION WITH FORMIK + YUP
+		if (username.length >= 5) {
+			dispatch(addUser(formData));
+			setFormData(initialFormState);
+		}
+	}
+
+	// ask Arran if this syntax is confusing
+	const handleChange = e =>
+		setFormData({ ...formData, [e.target.name]: e.target.value });
+
+	return (
+		<form onSubmit={e => handleSubmit(e)}>
+			<AddUserRow>
+				<SelectUserLevel
+					name="role"
+					value={role}
+					onChange={e => handleChange(e)}
+				>
+					{roles.map(role => (
+						<option key={role.id} value={role.id}>
+							{role.name}
+						</option>
+					))}
+				</SelectUserLevel>
+				<AddUserInput
+					type="text"
+					name="username"
+					placeholder="Username"
+					value={username}
+					onChange={e => handleChange(e)}
+					required
+				/>
+				<AddUserSubmit type="submit" value="Add User" />
+			</AddUserRow>
+		</form>
+	);
 };
 
 AddUser.propTypes = {};
 
-export default connect(null, {addUser})(AddUser);
+export default AddUser;

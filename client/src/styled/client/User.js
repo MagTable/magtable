@@ -32,6 +32,7 @@ export const UserListDiv = styled.div`
 /**
  * Holds the individual data for each user, ie. user level description, name.
  **/
+// TODO "text-transform: capitalize" is currently applied to the reset password which makes it inaccurate
 export const UserListItem = styled.div`
     // Shared Rules
     text-transform: capitalize;

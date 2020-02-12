@@ -1,12 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React from "react";
+import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 import {
 	AlertDiv as StyledAlertDiv,
-	Alert as StyledAlert,
-} from '../../styled/common/Alert';
+	Alert as StyledAlert
+} from "../../styled/common/Alert";
 
-const Alert = ({ alerts }) => {
+const Alert = () => {
+	const alerts = useSelector(state => state.alert);
+
+	// only render if any alerts exist
 	if (alerts !== null && alerts.length > 0) {
 		return (
 			<StyledAlertDiv>
@@ -23,11 +26,7 @@ const Alert = ({ alerts }) => {
 };
 
 Alert.propTypes = {
-	alerts: PropTypes.array.isRequired,
+	alerts: PropTypes.array
 };
 
-const mapStateToProps = state => ({
-	alerts: state.alert,
-});
-
-export default connect(mapStateToProps)(Alert);
+export default Alert;

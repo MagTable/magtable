@@ -1,10 +1,7 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { useLocation } from 'react-router-dom';
-import { getUsers, deleteUser, resetPassword } from '../../actions/user';
-import { connect } from 'react-redux';
-
-import { Title, TitleDiv, TitleDummy } from '../../styled/common/BasicContent';
+import React, { useEffect } from "react";
+import PropTypes from "prop-types";
+import { getUsers, deleteUser, resetPassword } from "../../actions/user";
+import { useDispatch, useSelector } from "react-redux";
 import {
 	UserListRow,
 	UserListItem,
@@ -43,21 +40,61 @@ function groupByRole(userList) {
 }
 
 const UserList = ({ getUsers, deleteUser, users, roles }) => {
+const UserList = () => {
+	const dispatch = useDispatch();
+
 	useEffect(() => {
-		getUsers();
-	}, [getUsers]);
+		dispatch(getUsers());
+	}, [dispatch]);
+
+	const users = useSelector(state => state.user.users);
+	const authUser = useSelector(state => state.auth.user);
 
 
 	// const orderedUserList = groupByRole('role', users);
 	// const orderedUserList = groupByRoleName(users);
 	const location = useLocation();
+	const handlePasswordReset = id => {
+		dispatch(resetPassword(id));
+	};
+
+	const handleDelete = id => {
+		dispatch(deleteUser(id));
+	};
 
 	// todo this should probably throw an error?
 	if (users === null) return <h1>No Users in the System!</h1>;
 	console.log(roles);
 	// console.log(typeof orderedUserList, orderedUserList);
+	if (!users) return <h1>No Users in the System!</h1>;
+
 	return (
 		<UserListDiv>
+			{users.map(user => (
+				<UserListRow key={user.id} isFresh={user.tempPassword}>
+					<UserListItem>
+						<b>{user.role ? user.role.name : "No Role"}</b>
+					</UserListItem>
+					<UserListItem>{user.username}</UserListItem>
+					<UserListItem>{user.password}</UserListItem>
+					<UserManipulateBlock>
+						{user.id !== authUser.id && (
+							<>
+								<ManipImg
+									className="fas fa-trash-alt"
+									onClick={() => handleDelete(user.id)}
+								/>
+								<ManipImg
+									className="fas fa-redo"
+									onClick={() => handlePasswordReset(user.id)}
+								/>
+							</>
+						)}
+						{user.reset && (
+							<i className="fas fa-exclamation-triangle" />
+						)}
+					</UserManipulateBlock>
+				</UserListRow>
 			{roles.map(role => (
 			<>
 				<h1>{role.name}</h1>
@@ -122,9 +159,11 @@ UserList.propTypes = {
 		PropTypes.shape({
 			id: PropTypes.number.isRequired,
 			username: PropTypes.string.isRequired,
-			tempPassword: PropTypes.string.isRequired
+			password: PropTypes.string,
+			role: PropTypes.object.isRequired,
+			reset: PropTypes.bool.isRequired
 		}).isRequired
-	).isRequired
+	)
 };
 
 const mapStateToProps = state => {
@@ -142,3 +181,4 @@ export default connect(mapStateToProps, {
 
 
 // export default UserList;
+export default UserList;

@@ -1,4 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import {
+	MenuTip,
+	MenuTipIcon,
+	NavDiv,
+	NavIcon,
+	NavPane
+} from "../../styled/common/Navigation";
+import { useSelector } from "react-redux";
+import { SYSTEM_ADMINISTRATOR } from "../../actions/constants";
 import {MenuTip, MenuTipIcon, NavDiv, NavIcon, NavLink, NavPane} from "../../styled/common/Navigation";
 import {
     BrowserView,
@@ -22,10 +32,11 @@ import {
  */
 function MenuPane({menuOpen, setMenuOpen}) {
 
-    function openMenu() {
+    function openMenu(){
         if (menuOpen) {
             setMenuOpen(false);
-        } else {
+        }
+        else {
             setMenuOpen(true);
         }
     }
@@ -71,6 +82,5 @@ function MenuPane({menuOpen, setMenuOpen}) {
         </div>
     )
 }
-
 
 export default MenuPane;

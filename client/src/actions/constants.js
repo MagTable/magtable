@@ -1,11 +1,32 @@
-export const SET_ALERT = 'SET_ALERT';
-export const REMOVE_ALERT = 'REMOVE_ALERT';
+// mapped to role names from API
+export const SYSTEM_ADMINISTRATOR = "System Administrator";
+export const PERSONNEL_MANAGER = "Personnel Manager";
+export const MECHANIC = "Mechanic";
 
-export const ADD_USER = 'ADD_USER';
-export const USER_ERROR = 'USER_ERROR';
-export const GET_USERS = 'GET_USERS';
-export const GET_USER = 'GET_USER';
-export const DELETE_USER = 'DELETE_USER';
-export const EDIT_USER = 'EDIT_USER';
-export const GET_LEVELS = 'GET_LEVELS';
-export const RESET_PASSWORD = 'RESET_PASSWORD';
+export const SET_ALERT = "SET_ALERT";
+export const REMOVE_ALERT = "REMOVE_ALERT";
+
+export const ADD_USER = "ADD_USER";
+export const USER_ERROR = "USER_ERROR";
+export const GET_USERS = "GET_USERS";
+export const GET_USER = "GET_USER";
+export const DELETE_USER = "DELETE_USER";
+export const EDIT_USER = "EDIT_USER";
+export const GET_ROLES = "GET_ROLES";
+export const RESET_PASSWORD = "RESET_PASSWORD";
+
+export const USER_LOADED = "USER_LOADED";
+export const AUTH_ERROR = "AUTH_ERROR";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAIL = "LOGIN_FAIL";
+export const LOGOUT = "LOGOUT";
+export const LOGGING_IN = "LOGGING_IN";
+
+export const CLEAR_ERROR = "CLEAR_ERROR";
+
+// standard axios config object for POST requests
+export const AXIOS_JSON_HEADER = {
+	headers: {
+		"Content-Type": "application/json"
+	}
+};

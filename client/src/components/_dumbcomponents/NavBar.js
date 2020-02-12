@@ -1,12 +1,9 @@
-import React, {useState} from 'react';
-import logo from '../../res/Images/aeromag-logo.png';
-import {
-	NavDiv,
-	NavButton,
-	NavBtnGroup,
-	AeroLogo, HeaderDiv,
-} from '../../styled/common/Navigation';
+import React, { useState } from "react";
+import logo from "../../res/Images/aeromag-logo.png";
+import { AeroLogo, HeaderDiv } from "../../styled/common/Navigation";
 import MenuPane from "./MenuPane";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 /**
  * @date 2020-02-05
@@ -22,11 +19,15 @@ import MenuPane from "./MenuPane";
  */
 function NavBar(props) {
 	const [menuOpen, setMenuOpen] = useState(false);
-
+	const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 	return (
 		<HeaderDiv>
-			<AeroLogo src={logo}/>
-			<MenuPane menuOpen={menuOpen} setMenuOpen={setMenuOpen}/>
+			<Link to={"/"}>
+				<AeroLogo src={logo} />
+			</Link>
+			{isAuthenticated && (
+				<MenuPane menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+			)}
 		</HeaderDiv>
 	);
 }

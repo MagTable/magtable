@@ -5,16 +5,16 @@ import {
 	GET_USER,
 	DELETE_USER,
 	EDIT_USER,
-	GET_LEVELS,
+	GET_ROLES,
 	RESET_PASSWORD
-} from '../actions/constants';
+} from "../actions/constants";
 
 const initialState = {
 	users: [],
 	user: null,
 	loading: true,
 	error: null,
-	levels: []
+	roles: []
 };
 
 export default function(state = initialState, action) {
@@ -39,10 +39,10 @@ export default function(state = initialState, action) {
 				user: payload, // set the current user to payload
 				loading: false
 			};
-		case GET_LEVELS:
+		case GET_ROLES:
 			return {
 				...state,
-				levels: payload, // set the list of level descriptions to payload
+				roles: payload, // set the list of level descriptions to payload
 				loading: false
 			};
 		case DELETE_USER:
@@ -64,16 +64,12 @@ export default function(state = initialState, action) {
 				loading: false
 			};
 		case RESET_PASSWORD:
-			let users = state.users.map(user => {
-				if (user.id === payload.id) {
-					return { ...user, ...payload };
-				}
-				return user;
-			});
-
+			// users are looped through, if the payload id matches a user, it is replaced by payload.user
 			return {
 				...state,
-				users,
+				users: state.users.map(user =>
+					user.id === payload.id ? payload.user : user
+				),
 				loading: false
 			};
 		default:

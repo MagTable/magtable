@@ -19,9 +19,9 @@ let opened = false;
  * Used for holding the AeroMag 2000 logo in the header / navigation bar.
  **/
 export const AeroLogo = styled.img`
-	height: 35px;
-	// padding: 20px;
-	// z-index: 20;
+	height: 60px;
+	padding: 20px;
+	z-index: 20;
 `;
 
 /**

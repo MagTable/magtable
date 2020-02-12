@@ -1,5 +1,5 @@
 import React from "react";
-import {DelUserImg} from "../../styled/client/User";
+import { DelUserImg } from "../../styled/client/User";
 
 /**
  * @date 2020-02-06
@@ -14,9 +14,7 @@ import {DelUserImg} from "../../styled/client/User";
  * @returns {*} The DelUserLink component
  */
 function DelUserLink(props) {
-    return (
-        <DelUserImg className="fas fa-trash-alt"/>
-    )
+	return <DelUserImg className="fas fa-trash-alt" />;
 }
 
 export default DelUserLink;
