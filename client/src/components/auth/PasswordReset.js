@@ -3,6 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import { setUserPassword } from "../../actions/auth";
+import {
+	LoginBlock,
+	LoginBtn,
+	LoginInput,
+	LoginPane
+} from "../../styled/auth/login";
+import { ResetBlock } from "../../styled/auth/passwordReset";
 
 /**
  * @date 2/10/2020
@@ -49,38 +56,42 @@ function ResetPassword() {
 	}
 
 	return (
-		<form onSubmit={e => onSubmit(e)}>
-			<input
-				type="text"
-				value={username}
-				onChange={e => handleChange(e)}
-				disabled
-			/>
-			<input
-				type="password"
-				placeholder="Temporary Password"
-				name="password"
-				value={password}
-				onChange={e => handleChange(e)}
-			/>
-			<input
-				type="password"
-				placeholder="New Password"
-				name="newPassword"
-				value={newPassword}
-				onChange={e => handleChange(e)}
-			/>
-			<input
-				type="password"
-				placeholder="Confirm New Password"
-				name="confirmNewPassword"
-				value={confirmNewPassword}
-				onChange={e => handleChange(e)}
-			/>
-			<button type="submit" disabled={loading}>
-				Reset Password
-			</button>
-		</form>
+		<ResetBlock>
+			<LoginPane>
+				<form onSubmit={e => onSubmit(e)}>
+					<LoginInput
+						type="text"
+						value={username}
+						onChange={e => handleChange(e)}
+						disabled
+					/>
+					<LoginInput
+						type="password"
+						placeholder="Temporary Password"
+						name="password"
+						value={password}
+						onChange={e => handleChange(e)}
+					/>
+					<LoginInput
+						type="password"
+						placeholder="New Password"
+						name="newPassword"
+						value={newPassword}
+						onChange={e => handleChange(e)}
+					/>
+					<LoginInput
+						type="password"
+						placeholder="Confirm New Password"
+						name="confirmNewPassword"
+						value={confirmNewPassword}
+						onChange={e => handleChange(e)}
+					/>
+					<LoginBtn type="submit" disabled={loading}>
+						Reset Password
+					</LoginBtn>
+				</form>
+			</LoginPane>
+		</ResetBlock>
 	);
 }
 
