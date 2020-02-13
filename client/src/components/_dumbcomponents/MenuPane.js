@@ -44,9 +44,9 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 		<div>
 			<BrowserView>
 				<NavDiv>
-					<NavLink>Home</NavLink>
+					<NavLink to={"/"}>Truck Assignment</NavLink>
 					<NavLink to={"/user/all"}>Manage Users</NavLink>
-					<NavLink>Mag Table</NavLink>
+					<NavLink to={"/logout"}>Log Out</NavLink>
 				</NavDiv>
 			</BrowserView>
 			<MobileView>
@@ -60,16 +60,16 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 					</MenuTip>
 					<NavPane open={menuOpen}>
 						<NavLink to={"/"}>
-							<NavIcon className="fas fa-home" />
-							Home
+							<NavIcon className="fas fa-truck" />
+							Truck Assignment
 						</NavLink>
-						<NavLink to={"/"}>
+						<NavLink to={"/user/all"}>
 							<NavIcon className="fas fa-users" />
 							Manage Users
 						</NavLink>
-						<NavLink to={"/"}>
-							<NavIcon className="fas fa-truck" />
-							Mag Table
+						<NavLink to={"/logout"}>
+							<NavIcon className="fas fa-logout" />
+							Log Out
 						</NavLink>
 					</NavPane>
 				</NavDiv>
