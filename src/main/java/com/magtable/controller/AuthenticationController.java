@@ -5,10 +5,7 @@ import com.magtable.model.AuthenticationResponse;
 import com.magtable.model.MagUserDetails;
 import com.magtable.model.User;
 import com.magtable.repository.UserRepository;
-import com.magtable.services.JwtUtil;
-import com.magtable.services.MagUserDetailsService;
-import com.magtable.services.PasswordService;
-import com.magtable.services.ValidationService;
+import com.magtable.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +39,9 @@ public class AuthenticationController {
     public PasswordService passwordService;
 
     @Autowired
+    public AuthenticationService authenticationService;
+
+    @Autowired
     private UserRepository userRepository;
 
     /**
@@ -54,28 +54,8 @@ public class AuthenticationController {
     @PostMapping("/authenticate")
     public ResponseEntity<?> authenticateLogin(@RequestBody AuthenticationRequest request) {
 
-        UsernamePasswordAuthenticationToken authenticationToken;
-        try {
-            authenticationToken = new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword());
-            // authenticate() searches database authentication token values
-            authenticationManager.authenticate(authenticationToken);
-        } catch (BadCredentialsException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    String.format("Authentication failed: .", request.getUsername()));
-        }
-        // User is authenticated here
-        // Finding the user in the database
         User user;
-        user = userRepository.findUserByUsername(authenticationToken.getName()).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND));
-
-
-        // I'm keeping this because we don't need a orElseThrow previously
-        if(user.isReset()){
-            //User requires a password reset
-            //Telling the front end that we didn't finish, the HTTP status may not be the right one.
-            throw new ResponseStatusException(HttpStatus.SEE_OTHER, "Password update required");
-        }
+        user = authenticationService.authenticate(request);
 
         // User does not need a password reset
         // creating a new userdetails to generate the jwt token
@@ -99,27 +79,8 @@ public class AuthenticationController {
         new ValidationService<>("request", request).exists();
         new ValidationService<>("newpassword", request.getNewpassword()).exists().isString().isMinLengthString(8);
 
-        UsernamePasswordAuthenticationToken authenticationToken;
-        try {
-            authenticationToken = new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword());
-            // authenticate() searches database authentication token values
-            authenticationManager.authenticate(authenticationToken);
-        } catch (BadCredentialsException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    String.format("Authentication failed: .", request.getUsername()));
-        }
-
-        // User is authenticated here
-        // Finding the user in the database
         User user;
-        user = userRepository.findUserByUsername(authenticationToken.getName()).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND));
-
-        if(!user.isReset()){
-            //User requires a password reset
-            //Telling the front end that we didn't finish, the HTTP status may not be the right one.
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User is not eligible for a password reset");
-        }
+        user = authenticationService.authenticate(request);
 
         // user is authenticated there new password is OK
         // changing the users password to the new one, encoding it using PasswordService and saving in the database

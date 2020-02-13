@@ -105,8 +105,7 @@ public class UserController {
             user.setPassword(null); //This is just a safety set to null;
             String randomPassword = passwordService.generateResetPassword();
             user.setPassword(randomPassword); //Setting the resetpassword of our user to be created to the randomly generated password by PasswordService
-            User returnUser = new User(user);
-            return returnUser;
+            return new User(user);
         } catch (DataIntegrityViolationException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists");
         }catch (Exception e){
@@ -166,14 +165,13 @@ public class UserController {
         User user = userRepository.findById(userId).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User #%d not found.", userId)));
 
-
         // create new resetPassword, encode it and set reset flag to true
         String randomPassword  = passwordService.generateResetPassword();
         String encodedPassword = passwordService.encode(randomPassword);
 
         user.setPassword(encodedPassword);
         userRepository.save(user);
-
+        user.setPassword(randomPassword);
         return user;
     }
 
@@ -187,14 +185,12 @@ public class UserController {
      */
     @GetMapping("/get/{jwt}")
     public SafeUser getUserByJwt(@PathVariable final String jwt){
-        //extracting the username from the jwt token
-        String username = jwtTokenUtil.extractUsername(jwt);
+        String username = jwtTokenUtil.extractUsername(jwt); //extracting the username from the jwt token
 
         //searching the database for the user
         User user = userRepository.findUserByUsername(username).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User %s not found.", username)));
 
-        //returning the new safe user
-        return new SafeUser(user);
+        return new SafeUser(user); //returning the new safe user
     }
 
 }
