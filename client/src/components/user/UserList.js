@@ -45,25 +45,26 @@ const UserList = () => {
 
 	return (
 		<UserListDiv>
+			<i>
+				<UserListRoleHeader>Add User</UserListRoleHeader>
+			</i>
+			<AddUser />
+			<br />
 			{roles.map(role => (
 				<div key={role.id}>
 					<UserListRoleHeader>
 						<b>{role.name}</b>
 					</UserListRoleHeader>
-					<b>
-						{/*This part checks for users with the same role as above and adds them to that section*/}
-						{users.map(
-							user =>
-								user.role.id === role.id && (
-									<UserListRow key={user.id}>
-										<UserListItem>
-											{user.username}
-										</UserListItem>
-										<UserListItem>
-											{user.password}
-										</UserListItem>
+					{/*This part checks for users with the same role as above and adds them to that section*/}
+					{users.map(
+						user =>
+							user.role.id === role.id && (
+								<UserListRow key={user.id}>
+									<UserListItem>{user.username}</UserListItem>
+									<UserListItem>{user.password}</UserListItem>
+									<UserManipulateBlock>
 										{user.id !== authUser.id && (
-											<UserManipulateBlock>
+											<>
 												<ManipImg
 													className="fas fa-trash-alt"
 													onClick={() =>
@@ -81,15 +82,14 @@ const UserList = () => {
 												{user.reset && (
 													<ManipImg className="fas fa-exclamation-triangle" />
 												)}
-											</UserManipulateBlock>
+											</>
 										)}
-									</UserListRow>
-								)
-						)}
-					</b>
+									</UserManipulateBlock>
+								</UserListRow>
+							)
+					)}
 				</div>
 			))}
-			<AddUser />
 		</UserListDiv>
 	);
 };

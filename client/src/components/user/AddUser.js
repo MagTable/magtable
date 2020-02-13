@@ -5,7 +5,8 @@ import {
 	AddUserInput,
 	AddUserRow,
 	AddUserSubmit,
-	SelectUserLevel
+	SelectUserLevel,
+	SeparatorLine
 } from "../../styled/client/User";
 import {
 	BrowserView,
@@ -70,8 +71,9 @@ const AddUser = () => {
 					onChange={e => handleChange(e)}
 					required
 				/>
-				<AddUserSubmit type="submit" value="Add User" />
+				<AddUserSubmit type="submit" value="Add" />
 			</AddUserRow>
+			<SeparatorLine />
 		</form>
 	);
 };

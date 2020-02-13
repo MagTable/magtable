@@ -15,7 +15,7 @@ import UserList from "./components/user/UserList";
 import AddUser from "./components/user/AddUser";
 import AssignmentTable from "./components/magtable/AssignmentTable";
 import Alert from "./components/common/Alert";
-import NavBar from "./components/_dumbcomponents/NavBar";
+import NavBar from "./components/common/NavBar";
 
 function App() {
 	useEffect(() => {

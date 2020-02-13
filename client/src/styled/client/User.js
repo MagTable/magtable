@@ -22,7 +22,7 @@ export const UserListDiv = styled.div`
 		? // Mobile rules
 		  "padding-top: 5px;"
 		: // Desktop Rules
-		  "width: 80vw;" + ""}
+		  "width: min-content;" + ""}
 	\`;
 `;
 
@@ -32,7 +32,7 @@ export const UserListDiv = styled.div`
 // TODO "text-transform: capitalize" is currently applied to the reset password which makes it inaccurate
 export const UserListItem = styled.div`
 	// Shared Rules
-	text-transform: capitalize;
+	// text-transform: capitalize;
 
 	${isMobile
 		? // Mobile rules
@@ -53,7 +53,7 @@ export const UserListItem = styled.div`
 		  "align-content: center;" +
 		  "justify-content: center;" +
 		  "font-size: 20px;" +
-		  "padding-left: 15px;" +
+		  "padding-left: 20px;" +
 		  ""}
 `;
 
@@ -61,13 +61,13 @@ export const UserListItem = styled.div`
  * The row for user information, to contain UserListItems.
  */
 export const UserListRow = styled.div`
-	// display: table-row;
-	// align-content: center;
-	// justify-content: center;
+	align-content: center;
+	justify-content: center;
 	display: flex;
 	padding-top: 5px;
+	flex-basis: auto;
+	flex-grow: 1;
 	margin: auto;
-
 	${isMobile
 		? // Mobile rules
 		  "flex-direction: column;" + "justify-content: space-between;" + ""
@@ -96,7 +96,7 @@ export const ManipImg = styled.i`
  */
 export const UserManipulateBlock = styled.div`
 	display: flex;
-	width: 50px;
+	width: 90px;
 	height: 40px;
 	background-color: #dedede;
 	display: flex;
@@ -129,16 +129,15 @@ export const AddUserInput = styled(Input)`
 `;
 
 export const AddUserRow = styled.div`
-	align-content: space-between;
-	justify-content: center;
 	display: flex;
-	padding: 15px;
-	margin: auto;
-	background-color: #f0f0f0;
-	// border-top: 3px solid #DADADA;
-	position: fixed;
-	bottom: 0px;
-	width: 100vw;
+	justify-content: space-between;
+`;
+
+export const SeparatorLine = styled.div`
+	border-bottom: 2px solid #dedede;
+	height: 0px;
+	width: auto;
+	margin-top: 40px;
 `;
 
 export const AddUserSubmit = styled(AddUserInput)`
