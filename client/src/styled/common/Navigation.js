@@ -19,6 +19,7 @@ import {
 export const AeroLogo = styled.img`
 	height: 55px;
 	padding: 8px;
+	padding-left: 10px;
 	z-index: 20;
 `;
 
