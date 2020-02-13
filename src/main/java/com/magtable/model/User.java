@@ -23,6 +23,10 @@ public class User implements Serializable {
 
     public User(User user) {
         this.reset = user.isReset();
+        this.id = user.getId();
+        this.username = user.getUsername();
+        this.role = user.getRole();
+        this.password = user.getPassword();
     }
 
     @Id
