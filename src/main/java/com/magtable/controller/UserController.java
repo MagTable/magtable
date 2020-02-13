@@ -106,7 +106,7 @@ public class UserController {
 
             String randomPassword = passwordService.generateResetPassword();
 
-            String encodedPassword = passwordService.encode(user.getPassword());
+            String encodedPassword = passwordService.encode(randomPassword);
             user.setPassword(encodedPassword);
             userRepository.save(user); //Storing our new user in the database
 
