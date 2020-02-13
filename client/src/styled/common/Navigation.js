@@ -13,8 +13,6 @@ import {
  * @module Styled
  */
 
-let opened = false;
-
 /**
  * Used for holding the AeroMag 2000 logo in the header / navigation bar.
  **/
