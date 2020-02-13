@@ -9,18 +9,18 @@ CREATE DATABASE magtabledev;
 
 USE magtabledev;
 
-CREATE TABLE `UserLevel` (
-    levelID TINYINT(1) NOT NULL,
-    description VARCHAR(20),
-    PRIMARY KEY (levelID)
+CREATE TABLE Role (
+    roleID INT(1) NOT NULL,
+    rolename VARCHAR(25) NOT NULL,
+    PRIMARY KEY (roleID)
 );
 
-CREATE TABLE `User` (
+CREATE TABLE User (
     userID INT(32) NOT NULL AUTO_INCREMENT,
-    levelID TINYINT(1) NOT NULL,
+    `role` INT(2) NOT NULL,
     username VARCHAR(32) UNIQUE,
     password VARCHAR(60) NULL NULL,
+    resetflag boolean DEFAULT true,
     PRIMARY KEY (userID),
-    KEY `FK_levelID` (levelID),
-    CONSTRAINT `FK_levelID` FOREIGN KEY (levelID) REFERENCES `UserLevel` (levelID) ON DELETE RESTRICT ON UPDATE RESTRICT
+    CONSTRAINT FK_User_Role FOREIGN KEY (`Role`) REFERENCES `Role` (`roleID`) ON DELETE RESTRICT ON UPDATE RESTRICT
 );

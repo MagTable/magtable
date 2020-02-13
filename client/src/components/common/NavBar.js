@@ -1,9 +1,9 @@
-import React from 'react';
-import NavButton from '../../styled/NavButton';
-import logo from '../../res/Images/aeromag-logo.png';
-import NavDiv from '../../styled/NavDiv';
-import AeroLogo from '../../styled/AeroLogo';
-import NavBtnGroup from '../../styled/NavBtnGroup';
+import React, { useState } from "react";
+import logo from "../../res/Images/aeromag-logo.png";
+import { AeroLogo, HeaderDiv } from "../../styled/common/Navigation";
+import MenuPane from "./MenuPane";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 /**
  * @date 2020-02-05
@@ -18,15 +18,17 @@ import NavBtnGroup from '../../styled/NavBtnGroup';
  * @returns {*} The NavBar component
  */
 function NavBar(props) {
+	const [menuOpen, setMenuOpen] = useState(false);
+	const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 	return (
-		<NavDiv>
-			<AeroLogo src={logo} />
-			<NavBtnGroup>
-				<NavButton>MagTable</NavButton>
-				<NavButton>Quick View</NavButton>
-				<NavButton>Login</NavButton>
-			</NavBtnGroup>
-		</NavDiv>
+		<HeaderDiv>
+			<Link to={"/"}>
+				<AeroLogo src={logo} />
+			</Link>
+			{isAuthenticated && (
+				<MenuPane menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+			)}
+		</HeaderDiv>
 	);
 }
 

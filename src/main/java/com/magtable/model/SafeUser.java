@@ -4,38 +4,44 @@ import java.io.Serializable;
 
 /**
  * Class for User objects with no password for safety
- * @author David
- *
  */
 
 public class SafeUser implements Serializable {
 
 
-    /** PARAMETERS **/
+    /**
+     * PARAMETERS
+     **/
 
-    private Long id;
+    private final int TEMPORARY_PASSWORD_LENGTH = 8;
 
-    private String username;
+    private Integer id;
 
-    private int levelId;
+    private final String username;
 
-    /** CONSTRUCTORS **/
+    private final Role role;
+
+    private boolean reset;
+
+    /* CONSTRUCTORS */
 
     /**
      * Copy Constructor to sanitize the password from User model
+     *
      * @param user - the user to copy
      */
-    public SafeUser(User user){
-    this.id = user.getId();
-    this.username = user.getUsername();
-    this.levelId = user.getLevelId();
+    public SafeUser(User user) {
+        this.id = user.getId();
+        this.username = user.getUsername();
+        this.role = user.getRole();
+        this.reset = user.isReset();
     }
 
     /**
      * GETTERS
      */
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
@@ -43,7 +49,13 @@ public class SafeUser implements Serializable {
         return username;
     }
 
-    public int getLevelId() {
-        return levelId;
+    public Role getRole() {
+        return role;
     }
+
+    public boolean isReset() {
+        return reset;
+    }
+
 }
+
