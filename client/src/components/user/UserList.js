@@ -1,6 +1,11 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import { getUsers, deleteUser, resetPassword } from "../../actions/user";
+import {
+	getUsers,
+	deleteUser,
+	resetPassword,
+	getRoles
+} from "../../actions/user";
 import { useDispatch, useSelector } from "react-redux";
 import {
 	UserListRow,
@@ -18,9 +23,13 @@ const UserList = () => {
 	useEffect(() => {
 		dispatch(getUsers());
 	}, [dispatch]);
+	useEffect(() => {
+		dispatch(getRoles());
+	}, [dispatch]);
 
 	const users = useSelector(state => state.user.users);
 	const authUser = useSelector(state => state.auth.user);
+	const roles = useSelector(state => state.role.roles);
 
 	const handlePasswordReset = id => {
 		dispatch(resetPassword(id));
@@ -35,30 +44,38 @@ const UserList = () => {
 
 	return (
 		<UserListDiv>
-			{users.map(user => (
-				<UserListRow key={user.id} isFresh={user.tempPassword}>
+			{roles.map(role => (
+				<UserListRow key={role.id}>
 					<UserListItem>
-						<b>{user.role ? user.role.name : "No Role"}</b>
+						<b>{role.name}</b>
 					</UserListItem>
-					<UserListItem>{user.username}</UserListItem>
-					<UserListItem>{user.password}</UserListItem>
-					<UserManipulateBlock>
-						{user.id !== authUser.id && (
-							<>
-								<ManipImg
-									className="fas fa-trash-alt"
-									onClick={() => handleDelete(user.id)}
-								/>
-								<ManipImg
-									className="fas fa-redo"
-									onClick={() => handlePasswordReset(user.id)}
-								/>
-							</>
-						)}
-						{user.reset && (
-							<i className="fas fa-exclamation-triangle" />
-						)}
-					</UserManipulateBlock>
+					{users.map(user => (
+						<UserListRow key={user.id} isFresh={user.tempPassword}>
+							<UserListItem>{user.username}</UserListItem>
+							<UserListItem>{user.password}</UserListItem>
+							<UserManipulateBlock>
+								{user.id !== authUser.id && (
+									<>
+										<ManipImg
+											className="fas fa-trash-alt"
+											onClick={() =>
+												handleDelete(user.id)
+											}
+										/>
+										<ManipImg
+											className="fas fa-redo"
+											onClick={() =>
+												handlePasswordReset(user.id)
+											}
+										/>
+									</>
+								)}
+								{user.reset && (
+									<i className="fas fa-exclamation-triangle" />
+								)}
+							</UserManipulateBlock>
+						</UserListRow>
+					))}
 				</UserListRow>
 			))}
 			<AddUser />
