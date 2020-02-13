@@ -12,7 +12,8 @@ import {
 	UserListItem,
 	UserManipulateBlock,
 	ManipImg,
-	UserListDiv
+	UserListDiv,
+	UserListRoleHeader
 } from "../../styled/client/User";
 
 import AddUser from "./AddUser";
@@ -45,19 +46,16 @@ const UserList = () => {
 	return (
 		<UserListDiv>
 			{roles.map(role => (
-				<UserListRow key={role.id}>
-					<UserListItem>
+				<div key={role.id}>
+					<UserListRoleHeader>
 						<b>{role.name}</b>
-					</UserListItem>
+					</UserListRoleHeader>
 					<b>
-						<!--This part checks for users with the same role as above and adds them to that section-->
+						{/*This part checks for users with the same role as above and adds them to that section*/}
 						{users.map(
 							user =>
 								user.role.id === role.id && (
-									<UserListRow
-										key={user.id}
-										isFresh={user.tempPassword}
-									>
+									<UserListRow key={user.id}>
 										<UserListItem>
 											{user.username}
 										</UserListItem>
@@ -65,7 +63,7 @@ const UserList = () => {
 											{user.password}
 										</UserListItem>
 										{user.id !== authUser.id && (
-											<>
+											<UserManipulateBlock>
 												<ManipImg
 													className="fas fa-trash-alt"
 													onClick={() =>
@@ -80,16 +78,16 @@ const UserList = () => {
 														)
 													}
 												/>
-											</>
-										)}
-										{user.reset && (
-											<i className="fas fa-exclamation-triangle" />
+												{user.reset && (
+													<ManipImg className="fas fa-exclamation-triangle" />
+												)}
+											</UserManipulateBlock>
 										)}
 									</UserListRow>
 								)
 						)}
 					</b>
-				</UserListRow>
+				</div>
 			))}
 			<AddUser />
 		</UserListDiv>

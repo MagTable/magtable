@@ -62,8 +62,8 @@ export const UserListItem = styled.div`
  */
 export const UserListRow = styled.div`
 	// display: table-row;
-	align-content: center;
-	justify-content: center;
+	// align-content: center;
+	// justify-content: center;
 	display: flex;
 	padding-top: 5px;
 	margin: auto;
@@ -143,4 +143,8 @@ export const AddUserRow = styled.div`
 
 export const AddUserSubmit = styled(AddUserInput)`
 	height: 34px;
+`;
+
+export const UserListRoleHeader = styled.h2`
+	size: 20px;
 `;
