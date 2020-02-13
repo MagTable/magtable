@@ -1,9 +1,13 @@
 package com.magtable.controller;
 
-import com.magtable.model.*;
+import com.magtable.model.AuthenticationRequest;
+import com.magtable.model.AuthenticationResponse;
+import com.magtable.model.MagUserDetails;
+import com.magtable.model.User;
 import com.magtable.repository.UserRepository;
 import com.magtable.services.JwtUtil;
 import com.magtable.services.MagUserDetailsService;
+import com.magtable.services.PasswordService;
 import com.magtable.services.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,10 +15,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.UnsatisfiedServletRequestParameterException;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
 
 @RestController
 public class AuthenticationController {
@@ -27,6 +37,9 @@ public class AuthenticationController {
 
     @Autowired
     private JwtUtil jwtTokenUtil;
+
+    @Autowired
+    public PasswordService passwordService;
 
     @Autowired
     private UserRepository userRepository;
@@ -47,13 +60,17 @@ public class AuthenticationController {
             // authenticate() searches database authentication token values
             authenticationManager.authenticate(authenticationToken);
         } catch (BadCredentialsException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Authentication failed: Invalid Credentials.");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    String.format("Authentication failed: .", request.getUsername()));
         }
         // User is authenticated here
         // Finding the user in the database
-        User user = userRepository.findUserByUsername(authenticationToken.getName()).orElseThrow(() ->
+        User user;
+        user = userRepository.findUserByUsername(authenticationToken.getName()).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND));
 
+
+        // I'm keeping this because we don't need a orElseThrow previously
         if(user.isReset()){
             //User requires a password reset
             //Telling the front end that we didn't finish, the HTTP status may not be the right one.
@@ -69,46 +86,18 @@ public class AuthenticationController {
     }
 
     /**
-     * route           GET /authenticate
-     * description     returns the user associated with a valid JWT
-     * access          Public - Anyone can make this request
-     *
-     * @return SafeUser corresponding to given JWT
-     */
-    @GetMapping("/authenticate")
-    public SafeUser getSafeUser(HttpServletRequest request) {
-        //gets the authorization header from the request
-        String jwt = request.getHeader("Authorization");
-        try {
-            //extracting the username from the jwt token
-            String username = jwtTokenUtil.extractUsername(jwt.substring(7)); // jwt can potentially be null
-            //searching the database for the user
-            User user = userRepository.findUserByUsername(username).orElseThrow(() ->
-                    new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User %s not found.", username)));
-
-            //returning the new safe user
-            return new SafeUser(user);
-        } catch (NullPointerException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Authentication failed: JWT Not Found.");
-        }
-    }
-
-    /**
-     * route           POST /passwordreset
+     * route           POST /password/reset
      * description     method to verify a username/password/newpassword - sets the new password and stores in database then returns a JWT
      * access          Public - Anyone can make a request
      *
      * @return a JWT response object
      */
-    @PostMapping("/passwordreset")
+    @PostMapping("/password/reset")
     public ResponseEntity<?> authenticatePasswordReset(@RequestBody AuthenticationRequest request) {
 
         //Validating the new password follows business
         new ValidationService<>("request", request).exists();
-        new ValidationService<>("username", request.getUsername()).exists().isString().isMinLengthString(5);
-        new ValidationService<>("password", request.getPassword()).exists().isString().isMinLengthString(8);
-        System.out.println(request.getNewPassword());
-        new ValidationService<>("newPassword", request.getNewPassword()).exists().isString().isMinLengthString(8);
+        new ValidationService<>("newpassword", request.getNewpassword()).exists().isString().isMinLengthString(8);
 
         UsernamePasswordAuthenticationToken authenticationToken;
         try {
@@ -116,12 +105,14 @@ public class AuthenticationController {
             // authenticate() searches database authentication token values
             authenticationManager.authenticate(authenticationToken);
         } catch (BadCredentialsException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Authentication failed: Invalid Credentials.");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    String.format("Authentication failed: .", request.getUsername()));
         }
 
         // User is authenticated here
         // Finding the user in the database
-        User user = userRepository.findUserByUsername(authenticationToken.getName()).orElseThrow(() ->
+        User user;
+        user = userRepository.findUserByUsername(authenticationToken.getName()).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         if(!user.isReset()){
@@ -131,8 +122,11 @@ public class AuthenticationController {
         }
 
         // user is authenticated there new password is OK
-        // changing the users password to the new one and saving in the database
-        user.setPassword(request.getNewPassword());
+        // changing the users password to the new one, encoding it using PasswordService and saving in the database
+        String newPassword = request.getNewpassword();
+        String encodedPassword = passwordService.encode(newPassword);
+        user.setPassword(encodedPassword);
+
         //setting the reset flag back to false
         user.setReset(false);
         //saving the user in the database
@@ -144,8 +138,5 @@ public class AuthenticationController {
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
-
-
-
 }
 

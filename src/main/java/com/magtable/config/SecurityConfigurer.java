@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -25,17 +26,15 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsService userDetailsService;
 
-    @Autowired
-    private JwtRequestFilter JwtRequestFilter;
+   @Autowired
+   private JwtRequestFilter JwtRequestFilter;
 
     private final String SYSTEM_ADMIN = "System Administrator";
-
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
     }
-
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
@@ -45,15 +44,10 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/*").hasAuthority(SYSTEM_ADMIN)
                 .antMatchers("/user*").hasAuthority(SYSTEM_ADMIN)
                 .antMatchers("/authenticate").permitAll()
-                .antMatchers("/passwordreset").permitAll()
+                .antMatchers("/password/reset").permitAll()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(JwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-    }
-
-    @Bean
-    public PasswordEncoder getPasswordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
     }
 
     @Override
@@ -62,13 +56,9 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
         return super.authenticationManager();
     }
 
-
-
-
-    /*
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
     }
-     */
+
 }
