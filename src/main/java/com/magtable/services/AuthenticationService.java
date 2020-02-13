@@ -41,13 +41,6 @@ public class AuthenticationService {
         user = userRepository.findUserByUsername(authenticationToken.getName()).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        // I'm keeping this because we don't need a orElseThrow previously
-        if(user.isReset()){
-            //User requires a password reset
-            //Telling the front end that we didn't finish, the HTTP status may not be the right one.
-            throw new ResponseStatusException(HttpStatus.SEE_OTHER, "Password update required");
-        }
-
         return user;
     }
 }
