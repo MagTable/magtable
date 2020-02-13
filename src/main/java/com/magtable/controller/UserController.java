@@ -72,7 +72,6 @@ public class UserController {
         return new SafeUser(user);
     }
 
-
     /**
      * route           POST /user/add
      * description     Insert user
@@ -115,7 +114,7 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         } finally {
             //Password encoding using PasswordService
-            String encodedPassword = passwordService.encodePass(user.getPassword());
+            String encodedPassword = passwordService.encode(user.getPassword());
             user.setPassword(encodedPassword);
             userRepository.save(user); //Storing our new user in the database
         }
@@ -142,9 +141,6 @@ public class UserController {
         }
     }
 
-
-
-
     /**
      * route           GET /user/roles
      * description     provides a list of all user roles
@@ -156,7 +152,6 @@ public class UserController {
     public List<Role> getAllRoles() {
         return roleRepository.findAll();
     }
-
 
     /**
      * route           PUT /reset/{id}
@@ -174,7 +169,7 @@ public class UserController {
 
         // create new resetPassword, encode it and set reset flag to true
         String randomPassword  = passwordService.generateResetPassword();
-        String encodedPassword = passwordService.encodePass(randomPassword);
+        String encodedPassword = passwordService.encode(randomPassword);
 
         user.setPassword(encodedPassword);
         userRepository.save(user);
@@ -201,5 +196,6 @@ public class UserController {
         //returning the new safe user
         return new SafeUser(user);
     }
+
 }
 

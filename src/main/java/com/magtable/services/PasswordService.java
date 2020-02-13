@@ -12,9 +12,12 @@ public class PasswordService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    private final int TEMPORARY_PASSWORD_LENGTH = 8;
-
+    /**
+     * Generates a random string with a given length. Only uses lowercase English alphabet characters.
+     * @return Random password string.
+     */
     public String generateResetPassword() {
+        int TEMPORARY_PASSWORD_LENGTH = 8;
         char[] charArray = new char[TEMPORARY_PASSWORD_LENGTH]; // using a char array to build the random string
 
         Random r = new Random();
@@ -27,14 +30,15 @@ public class PasswordService {
             charArray[i] = (char) randint; // cast our random int to char and add it to charArray
         }
 
-        String randomPassword = new String(charArray); // convert random char array to String
-        return randomPassword;
+        return new String(charArray);
     }
 
-    public String encodePass(String password) {
-        //Password encoding
-        String encodedPassword = bCryptPasswordEncoder.encode(password);
-
-        return encodedPassword;
+    /**
+     * Encodes provided password string using a bCrypt hash and salt.
+     * @param password String to hash.
+     * @return Hashed password string.
+     */
+    public String encode(String password) {
+        return bCryptPasswordEncoder.encode(password);
     }
 }

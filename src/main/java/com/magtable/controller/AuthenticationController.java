@@ -85,15 +85,14 @@ public class AuthenticationController {
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 
-
     /**
-     * route           POST /passwordreset
+     * route           POST /password/reset
      * description     method to verify a username/password/newpassword - sets the new password and stores in database then returns a JWT
      * access          Public - Anyone can make a request
      *
      * @return a JWT response object
      */
-    @PostMapping("/passwordreset")
+    @PostMapping("/password/reset")
     public ResponseEntity<?> authenticatePasswordReset(@RequestBody AuthenticationRequest request) {
 
         //Validating the new password follows business
@@ -125,7 +124,7 @@ public class AuthenticationController {
         // user is authenticated there new password is OK
         // changing the users password to the new one, encoding it using PasswordService and saving in the database
         String newPassword = request.getNewpassword();
-        String encodedPassword = passwordService.encodePass(newPassword);
+        String encodedPassword = passwordService.encode(newPassword);
         user.setPassword(encodedPassword);
 
         //setting the reset flag back to false
@@ -139,8 +138,5 @@ public class AuthenticationController {
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
-
-
-
 }
 

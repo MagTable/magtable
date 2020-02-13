@@ -31,12 +31,10 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     private final String SYSTEM_ADMIN = "System Administrator";
 
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
     }
-
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
@@ -46,26 +44,17 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/*").hasAuthority(SYSTEM_ADMIN)
                 .antMatchers("/user*").hasAuthority(SYSTEM_ADMIN)
                 .antMatchers("/authenticate").permitAll()
-                .antMatchers("/passwordreset").permitAll()
+                .antMatchers("/password/reset").permitAll()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(JwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
-
-
 
     @Override
     @Bean
     protected AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();
     }
-
-
-
-    //    @Bean
-//    public PasswordEncoder getPasswordEncoder() {
-//        return NoOpPasswordEncoder.getInstance();
-//    }
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
