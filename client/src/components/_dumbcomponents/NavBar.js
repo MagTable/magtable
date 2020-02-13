@@ -22,7 +22,7 @@ function NavBar(props) {
 	const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 	return (
 		<HeaderDiv>
-			<Link to={"/"}>
+			<Link>
 				<AeroLogo src={logo} />
 			</Link>
 			{isAuthenticated && (
