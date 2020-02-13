@@ -1,11 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import {
-	BrowserView,
-	MobileView,
-	isBrowser,
-	isMobile
-} from "react-device-detect";
+import { isMobile } from "react-device-detect";
 
 /**
  * @date 2020-02-05
@@ -126,12 +121,13 @@ export const NavLink = styled(Link)`
 	font-size: 20px;
 	${isMobile
 		? // Mobile rules
-		  "width: 100vw;" +
-		  "cursor: pointer;" +
-		  "padding: 20px 0px 20px 0px;" +
-		  "text-align: center;" +
-		  "border-bottom: 2px solid #DADADA;"
+		  `width: 100vw;` +
+		  `cursor: pointer;` +
+		  `padding: 20px 0px 20px 0px;` +
+		  `text-align: center;` +
+		  `border-bottom: 2px solid #DADADA;`
 		: // Desktop Rules
-		  "margin-right: 50px;" + "padding-top: 20px;"}
+		  `margin-right: 50px; 
+		  padding-top: 20px;`}
 	\`;
 `;

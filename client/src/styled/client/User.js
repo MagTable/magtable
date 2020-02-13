@@ -1,11 +1,6 @@
 import styled from "styled-components";
 import { Input } from "../common/Control";
-import {
-	BrowserView,
-	MobileView,
-	isBrowser,
-	isMobile
-} from "react-device-detect";
+import { isMobile } from "react-device-detect";
 
 /**
  * @date 2020-02-05
@@ -20,9 +15,9 @@ export const UserListDiv = styled.div`
 	margin: auto;
 	${isMobile
 		? // Mobile rules
-		  "padding-top: 5px;"
+		  `padding-top: 5px;`
 		: // Desktop Rules
-		  "width: min-content;" + ""}
+		  `width: min-content;`}
 	\`;
 `;
 
@@ -36,25 +31,24 @@ export const UserListItem = styled.div`
 
 	${isMobile
 		? // Mobile rules
-		  "background-color: #E9E9E9;" +
-		  "border-top: 2px solid #DEDEDE" +
-		  "display: box;" +
-		  "font-size: 20px;" +
-		  "text-align: center;"
+		  `background-color: #E9E9E9;
+		  border-top: 2px solid #DEDEDE
+		  display: box;
+		  font-size: 20px; 
+		  text-align: center;`
 		: // Desktop Rules
-		  "min-width: 230px;" +
-		  "background-color: #F0F0F0;" +
-		  "height: 40px;" +
-		  "background-color: #DEDEDE;" +
-		  "border-top: 2px solid #DADADA;" +
-		  "justify-content: center;" +
-		  "display: flex;" +
-		  "flex-direction: column;" +
-		  "align-content: center;" +
-		  "justify-content: center;" +
-		  "font-size: 20px;" +
-		  "padding-left: 20px;" +
-		  ""}
+		  `min-width: 230px;
+		  background-color: #F0F0F0;
+		  height: 40px;
+		  background-color: #DEDEDE;
+		  border-top: 2px solid #DADADA;
+		  justify-content: center;
+		  display: flex;
+		  flex-direction: column;
+		  align-content: center;
+		  justify-content: center;
+		  font-size: 20px;
+		  padding-left: 20px;`}
 `;
 
 /**
@@ -70,9 +64,10 @@ export const UserListRow = styled.div`
 	margin: auto;
 	${isMobile
 		? // Mobile rules
-		  "flex-direction: column;" + "justify-content: space-between;" + ""
+		  `flex-direction: column;
+		  justify-content: space-between;`
 		: // Desktop Rules
-		  "min-width: 230px;" + ""}
+		  `min-width: 230px;`}
 	\`;
 `;
 // background-color: ${isFresh ? 'red' : ''} ;
@@ -85,9 +80,10 @@ export const ManipImg = styled.i`
 	cursor: pointer;
 	${isMobile
 		? // Mobile rules
-		  "transform: scale(1.5);" + "margin-bottom: 10px;"
+		  `transform: scale(1.5);
+		   margin-bottom: 10px;`
 		: // Desktop Rules
-		  "width: 30px;"}
+		  `width: 30px;`}
 	\`;
 
 	:hover {
