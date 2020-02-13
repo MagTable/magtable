@@ -52,6 +52,12 @@ public class AuthenticationController {
         User user;
         user = authenticationService.authenticate(request);
 
+        if(user.isReset()){
+            //User requires a password reset
+            //Telling the front end that we didn't finish, the HTTP status may not be the right one.
+            throw new ResponseStatusException(HttpStatus.SEE_OTHER, "Password update required");
+        }
+
         // User does not need a password reset
         // creating a new userdetails to generate the jwt token
         MagUserDetails userDetails = new MagUserDetails(user);
@@ -72,6 +78,11 @@ public class AuthenticationController {
 
         User user;
         user = authenticationService.authenticateReset(request);
+
+        if(!user.isReset()){
+            //Telling the front end that we didn't finish, the HTTP status may not be the right one.
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User is not eligible for a password reset");
+        }
 
         // user is authenticated there new password is OK
         // changing the users password to the new one, encoding it using PasswordService and saving in the database
