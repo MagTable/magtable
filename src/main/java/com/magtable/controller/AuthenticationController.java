@@ -1,9 +1,6 @@
 package com.magtable.controller;
 
-import com.magtable.model.AuthenticationRequest;
-import com.magtable.model.AuthenticationResponse;
-import com.magtable.model.MagUserDetails;
-import com.magtable.model.User;
+import com.magtable.model.*;
 import com.magtable.repository.UserRepository;
 import com.magtable.services.JwtUtil;
 import com.magtable.services.MagUserDetailsService;
@@ -18,12 +15,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.UnsatisfiedServletRequestParameterException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 @RestController
@@ -61,7 +56,7 @@ public class AuthenticationController {
             authenticationManager.authenticate(authenticationToken);
         } catch (BadCredentialsException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    String.format("Authentication failed: .", request.getUsername()));
+                    "Authentication failed: Invalid Credentials");
         }
         // User is authenticated here
         // Finding the user in the database
@@ -97,7 +92,7 @@ public class AuthenticationController {
 
         //Validating the new password follows business
         new ValidationService<>("request", request).exists();
-        new ValidationService<>("newpassword", request.getNewpassword()).exists().isString().isMinLengthString(8);
+        new ValidationService<>("new password", request.getNewPassword()).exists().isString().isMinLengthString(8);
 
         UsernamePasswordAuthenticationToken authenticationToken;
         try {
@@ -106,7 +101,7 @@ public class AuthenticationController {
             authenticationManager.authenticate(authenticationToken);
         } catch (BadCredentialsException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    String.format("Authentication failed: .", request.getUsername()));
+                    "Authentication failed: Invalid Credentials");
         }
 
         // User is authenticated here
@@ -123,7 +118,7 @@ public class AuthenticationController {
 
         // user is authenticated there new password is OK
         // changing the users password to the new one, encoding it using PasswordService and saving in the database
-        String newPassword = request.getNewpassword();
+        String newPassword = request.getNewPassword();
         String encodedPassword = passwordService.encode(newPassword);
         user.setPassword(encodedPassword);
 
@@ -137,6 +132,31 @@ public class AuthenticationController {
         String jwt = jwtTokenUtil.generateToken(userDetails);
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
+    }
+
+    /**
+     * route           GET /authenticate
+     * description     returns the user associated with a valid JWT
+     * access          Public - Anyone can make this request
+     *
+     * @return SafeUser corresponding to given JWT
+     */
+    @GetMapping("/authenticate")
+    public SafeUser getSafeUser(HttpServletRequest request) {
+        //gets the authorization header from the request
+        String jwt = request.getHeader("Authorization");
+        try {
+            //extracting the username from the jwt token
+            String username = jwtTokenUtil.extractUsername(jwt.substring(7)); // jwt can potentially be null
+            //searching the database for the user
+            User user = userRepository.findUserByUsername(username).orElseThrow(() ->
+                    new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User %s not found.", username)));
+
+            //returning the new safe user
+            return new SafeUser(user);
+        } catch (NullPointerException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Authentication failed: JWT Not Found.");
+        }
     }
 }
 

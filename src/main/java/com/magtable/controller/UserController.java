@@ -7,6 +7,7 @@ import com.magtable.repository.UserRepository;
 import com.magtable.services.JwtUtil;
 import com.magtable.services.PasswordService;
 import com.magtable.services.ValidationService;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -16,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,7 +86,6 @@ public class UserController {
     public User createUser(@RequestBody User user) {
         // current cannot catch the error for when user.userId is a string, it occurs during the JSON -> Java translation
         new ValidationService<>("User", user).exists();
-        new ValidationService<>("Password", user.getPassword()).exists().isString().isMinLengthString(8);
         new ValidationService<>("Username", user.getUsername()).exists().isString().isMinLengthString(5); // TODO discuss username min length
         new ValidationService<>("UserId", user.getId()).notExists();
 
@@ -99,26 +100,24 @@ public class UserController {
 
         //PasswordService created here for the try/catch/finally block
         try {
-
             user.setReset(true); // reset is true at the time of account creation
             user.setRole(role);
             user.setPassword(null); //This is just a safety set to null;
+
             String randomPassword = passwordService.generateResetPassword();
+
+            String encodedPassword = passwordService.encode(user.getPassword());
+            user.setPassword(encodedPassword);
+            userRepository.save(user); //Storing our new user in the database
+
             user.setPassword(randomPassword); //Setting the resetpassword of our user to be created to the randomly generated password by PasswordService
-            User returnUser = new User(user);
-            return returnUser;
+            return user;
         } catch (DataIntegrityViolationException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists");
         }catch (Exception e){
             e.printStackTrace();
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
-        } finally {
-            //Password encoding using PasswordService
-            String encodedPassword = passwordService.encode(user.getPassword());
-            user.setPassword(encodedPassword);
-            userRepository.save(user); //Storing our new user in the database
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Server Error");
         }
-
     }
 
     /**
@@ -166,35 +165,16 @@ public class UserController {
         User user = userRepository.findById(userId).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User #%d not found.", userId)));
 
+        String randomPassword  = passwordService.generateResetPassword(); // generate random password
+        String encodedPassword = passwordService.encode(randomPassword); // encode password
 
-        // create new resetPassword, encode it and set reset flag to true
-        String randomPassword  = passwordService.generateResetPassword();
-        String encodedPassword = passwordService.encode(randomPassword);
+        user.setReset(true); // set reset flag
+        user.setPassword(encodedPassword); // set the encoded password
 
-        user.setPassword(encodedPassword);
-        userRepository.save(user);
+        userRepository.save(user); // save the user to the database
 
+        user.setPassword(randomPassword); // reset to the unencoded password to send back to the front end
         return user;
-    }
-
-    /**
-     * route           get /get/{jwt}
-     * description     extracts user data from a jwt
-     *
-     * access          Private - System Managers
-     *
-     * @return A SafeUser Object
-     */
-    @GetMapping("/get/{jwt}")
-    public SafeUser getUserByJwt(@PathVariable final String jwt){
-        //extracting the username from the jwt token
-        String username = jwtTokenUtil.extractUsername(jwt);
-
-        //searching the database for the user
-        User user = userRepository.findUserByUsername(username).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User %s not found.", username)));
-
-        //returning the new safe user
-        return new SafeUser(user);
     }
 
 }

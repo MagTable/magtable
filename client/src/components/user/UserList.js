@@ -36,7 +36,7 @@ const UserList = () => {
 	return (
 		<UserListDiv>
 			{users.map(user => (
-				<UserListRow key={user.id} isFresh={user.tempPassword}>
+				<UserListRow key={user.id}>
 					<UserListItem>
 						<b>{user.role ? user.role.name : "No Role"}</b>
 					</UserListItem>
