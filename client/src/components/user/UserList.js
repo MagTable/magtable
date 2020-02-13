@@ -29,7 +29,7 @@ const UserList = () => {
 
 	const users = useSelector(state => state.user.users);
 	const authUser = useSelector(state => state.auth.user);
-	const roles = useSelector(state => state.role.roles);
+	const roles = useSelector(state => state.user.roles);
 
 	const handlePasswordReset = id => {
 		dispatch(resetPassword(id));
@@ -49,33 +49,46 @@ const UserList = () => {
 					<UserListItem>
 						<b>{role.name}</b>
 					</UserListItem>
-					{users.map(user => (
-						<UserListRow key={user.id} isFresh={user.tempPassword}>
-							<UserListItem>{user.username}</UserListItem>
-							<UserListItem>{user.password}</UserListItem>
-							<UserManipulateBlock>
-								{user.id !== authUser.id && (
-									<>
-										<ManipImg
-											className="fas fa-trash-alt"
-											onClick={() =>
-												handleDelete(user.id)
-											}
-										/>
-										<ManipImg
-											className="fas fa-redo"
-											onClick={() =>
-												handlePasswordReset(user.id)
-											}
-										/>
-									</>
-								)}
-								{user.reset && (
-									<i className="fas fa-exclamation-triangle" />
-								)}
-							</UserManipulateBlock>
-						</UserListRow>
-					))}
+					<b>
+						<!--This part checks for users with the same role as above and adds them to that section-->
+						{users.map(
+							user =>
+								user.role.id === role.id && (
+									<UserListRow
+										key={user.id}
+										isFresh={user.tempPassword}
+									>
+										<UserListItem>
+											{user.username}
+										</UserListItem>
+										<UserListItem>
+											{user.password}
+										</UserListItem>
+										{user.id !== authUser.id && (
+											<>
+												<ManipImg
+													className="fas fa-trash-alt"
+													onClick={() =>
+														handleDelete(user.id)
+													}
+												/>
+												<ManipImg
+													className="fas fa-redo"
+													onClick={() =>
+														handlePasswordReset(
+															user.id
+														)
+													}
+												/>
+											</>
+										)}
+										{user.reset && (
+											<i className="fas fa-exclamation-triangle" />
+										)}
+									</UserListRow>
+								)
+						)}
+					</b>
 				</UserListRow>
 			))}
 			<AddUser />
