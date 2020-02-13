@@ -8,7 +8,6 @@ import {
 	LoginInput,
 	LoginPane
 } from "../../styled/auth/login";
-import { Input } from "../../styled/common/Control";
 
 /**
  * @date 2/10/2020

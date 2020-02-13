@@ -76,7 +76,7 @@ const PrivateRoute = ({
 };
 
 PrivateRoute.propTypes = {
-	component: PropTypes.object.isRequired,
+	component: PropTypes.func.isRequired,
 	data: PropTypes.object,
 	adminRoute: PropTypes.bool,
 	personnelManagerRoute: PropTypes.bool

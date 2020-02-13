@@ -9,10 +9,8 @@ import PrivateRoute from "./components/auth/PrivateRoute";
 import Login from "./components/auth/Login";
 import Logout from "./components/auth/Logout";
 import PasswordReset from "./components/auth/PasswordReset";
-import { setAlert } from "./actions/alert";
 import "./App.css";
 import UserList from "./components/user/UserList";
-import AddUser from "./components/user/AddUser";
 import AssignmentTable from "./components/magtable/AssignmentTable";
 import Alert from "./components/common/Alert";
 import NavBar from "./components/common/NavBar";
@@ -28,7 +26,6 @@ function App() {
 	return (
 		<Provider store={store}>
 			<Router>
-				<Alert />
 				<NavBar />
 				<Alert />
 				<Switch>
@@ -46,7 +43,6 @@ function App() {
 						component={UserList}
 						adminRoute
 					/>
-					{/*<PrivateRoute exact path="/users" component={UserList}/>*/}
 					<PrivateRoute exact path="/logout" component={Logout} />
 				</Switch>
 			</Router>

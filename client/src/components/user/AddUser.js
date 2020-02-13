@@ -8,12 +8,6 @@ import {
 	SelectUserLevel,
 	SeparatorLine
 } from "../../styled/client/User";
-import {
-	BrowserView,
-	MobileView,
-	isBrowser,
-	isMobile
-} from "react-device-detect";
 
 /**
  * This adds a user to the system

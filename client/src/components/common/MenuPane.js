@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import {
 	MenuTip,
 	MenuTipIcon,
@@ -8,14 +7,7 @@ import {
 	NavLink,
 	NavPane
 } from "../../styled/common/Navigation";
-import { useSelector } from "react-redux";
-import { SYSTEM_ADMINISTRATOR } from "../../actions/constants";
-import {
-	BrowserView,
-	MobileView,
-	isBrowser,
-	isMobile
-} from "react-device-detect";
+import { BrowserView, MobileView } from "react-device-detect";
 
 /**
  * @date 2020-02-09

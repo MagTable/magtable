@@ -3,12 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import { setUserPassword } from "../../actions/auth";
-import {
-	LoginBlock,
-	LoginBtn,
-	LoginInput,
-	LoginPane
-} from "../../styled/auth/login";
+import { LoginBtn, LoginInput, LoginPane } from "../../styled/auth/login";
 import { ResetBlock } from "../../styled/auth/passwordReset";
 
 /**
