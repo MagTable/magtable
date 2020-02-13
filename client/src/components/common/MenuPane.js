@@ -31,7 +31,6 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 		}
 	}
 
-	//Todo make these links go to their respective pages.
 	return (
 		<div>
 			<BrowserView>

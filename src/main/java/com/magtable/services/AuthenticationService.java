@@ -5,7 +5,6 @@ import com.magtable.model.User;
 import com.magtable.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,7 +33,7 @@ public class AuthenticationService {
             authenticationManager.authenticate(authenticationToken); // authenticate() searches database authentication token values
         } catch (BadCredentialsException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    String.format("Authentication failed: .", request.getUsername()));
+                    "Authentication failed: .");
         }
 
         User user;
@@ -56,7 +55,7 @@ public class AuthenticationService {
             authenticationManager.authenticate(authenticationToken); // authenticate() searches database authentication token values
         } catch (BadCredentialsException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    String.format("Authentication failed: .", request.getUsername()));
+                    "Authentication failed: .");
         }
 
         User user;

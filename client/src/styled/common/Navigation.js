@@ -98,10 +98,8 @@ export const NavDiv = styled.div`
 		  "transition: all 0.2s ease-in-out;"
 		: // Desktop Rules
 		  "display: flex;"}
-	\`;
 `;
 
-// Todo update documentation when we know if we are using titles or not.
 /**
  * The header div of the page that contains the logo, navigation and possibly the title of the page.
  */
@@ -129,5 +127,4 @@ export const NavLink = styled(Link)`
 		: // Desktop Rules
 		  `margin-right: 50px; 
 		  padding-top: 20px;`}
-	\`;
 `;

@@ -7,7 +7,7 @@ import {
 	AddUserSubmit,
 	SelectUserLevel,
 	SeparatorLine
-} from "../../styled/client/User";
+} from "../../styled/user/User";
 
 /**
  * This adds a user to the system

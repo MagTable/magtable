@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Button, Input } from "../common/Control";
+import { Button, Input } from "../common/FormControl";
 
 /**
  * @date 2020-02-13

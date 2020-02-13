@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Input } from "../common/Control";
+import { Input } from "../common/FormControl";
 import { isMobile } from "react-device-detect";
 
 /**
@@ -24,7 +24,6 @@ export const UserListDiv = styled.div`
 /**
  * Holds the individual data for each user, ie. user level description, name.
  **/
-// TODO "text-transform: capitalize" is currently applied to the reset password which makes it inaccurate
 export const UserListItem = styled.div`
 	// Shared Rules
 	// text-transform: capitalize;
@@ -70,8 +69,6 @@ export const UserListRow = styled.div`
 		  `min-width: 230px;`}
 	\`;
 `;
-// background-color: ${isFresh ? 'red' : ''} ;
-// height: ${({isSelected}) ? '60px' : '90px'} ;
 
 /**
  * Holds the icons for manipulating users.

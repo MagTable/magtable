@@ -14,7 +14,7 @@ import {
 	ManipImg,
 	UserListDiv,
 	UserListRoleHeader
-} from "../../styled/client/User";
+} from "../../styled/user/User";
 
 import AddUser from "./AddUser";
 
@@ -40,7 +40,6 @@ const UserList = () => {
 		dispatch(deleteUser(id));
 	};
 
-	// todo this should probably throw an error?
 	if (!users) return <h1>No Users in the System!</h1>;
 
 	return (

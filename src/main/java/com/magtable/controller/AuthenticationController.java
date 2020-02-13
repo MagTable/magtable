@@ -6,26 +6,13 @@ import com.magtable.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.UnsatisfiedServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Optional;
 
 @RestController
 public class AuthenticationController {
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private MagUserDetailsService userDetailsService;
 
     @Autowired
     private JwtUtil jwtTokenUtil;

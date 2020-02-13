@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { LoginBlock, LoginPane } from "./login";
+import { LoginBlock, LoginPane } from "./Login";
 
 /**
  * @date 2020-02-13

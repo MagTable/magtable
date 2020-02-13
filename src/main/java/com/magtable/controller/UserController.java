@@ -7,17 +7,15 @@ import com.magtable.repository.UserRepository;
 import com.magtable.services.JwtUtil;
 import com.magtable.services.PasswordService;
 import com.magtable.services.ValidationService;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.sql.SQLIntegrityConstraintViolationException;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,14 +48,13 @@ public class UserController {
         List<SafeUser> safeList = new ArrayList<>();
         List<User> userList = userRepository.findAll();
 
-        //Iterating through the userList, converting each User to a SafeUser, then adding to the safeList
+        // Iterating through the userList, converting each User to a SafeUser, then adding to the safeList
         for (User user : userList) {
             safeList.add(new SafeUser(user));
         }
 
         return safeList;
     }
-
     /**
      * route            GET /user/{id}
      * description     Get user by ID
@@ -128,18 +125,29 @@ public class UserController {
      * @param userId id of user to delete
      */
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable(value = "id") final int userId) {
-        // TODO make sure user isn't deleting themselves
+    public ResponseEntity<?> deleteUser(HttpServletRequest request, @PathVariable(value = "id") final int userId) {
         // need access to request username from JWT
+        String jwt = request.getHeader("Authorization");
         try {
+            //extracting the username from the jwt token
+            String username = jwtTokenUtil.extractUsername(jwt.substring(7)); // jwt can potentially be null
+            //searching the database for the user
+            User user = userRepository.findUserByUsername(username).orElseThrow(() ->
+                    new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User %s not found.", username)));
+
+            if (user.getId() == userId) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot Delete Yourself.");
+            }
+
             userRepository.deleteById(userId);
             return ResponseEntity.ok(HttpStatus.OK);
         } catch (EmptyResultDataAccessException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     String.format("Deletion failed: User #%d not found.", userId));
+        } catch (NullPointerException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Authentication failed: JWT Not Found.");
         }
     }
-
     /**
      * route           GET /user/roles
      * description     provides a list of all user roles

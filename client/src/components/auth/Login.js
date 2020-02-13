@@ -7,7 +7,7 @@ import {
 	LoginBtn,
 	LoginInput,
 	LoginPane
-} from "../../styled/auth/login";
+} from "../../styled/auth/Login";
 
 /**
  * @date 2/10/2020
