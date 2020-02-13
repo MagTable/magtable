@@ -21,10 +21,6 @@ function App() {
 	useEffect(() => {
 		async function fetch() {
 			await store.dispatch(loadUser());
-			store.dispatch(setAlert("Test Warning", "warning"));
-			store.dispatch(setAlert("Test Success", "success"));
-			store.dispatch(setAlert("Test Danger", "danger"));
-			store.dispatch(setAlert("Test Info", "info"));
 		}
 		fetch();
 	}, []);

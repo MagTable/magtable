@@ -14,7 +14,6 @@ export const AlertDiv = styled.div`
 	transform: translateX(-50%);
 
 	padding: 1rem;
-	background: blue;
 
 	z-index: 1000;
 `;

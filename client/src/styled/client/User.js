@@ -89,6 +89,10 @@ export const ManipImg = styled.i`
 		: // Desktop Rules
 		  "width: 30px;"}
 	\`;
+
+	:hover {
+		color: #c91818;
+	}
 `;
 
 /**

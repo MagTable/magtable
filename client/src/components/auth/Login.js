@@ -2,6 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { clearAuthError, login } from "../../actions/auth";
+import {
+	LoginBlock,
+	LoginBtn,
+	LoginInput,
+	LoginPane
+} from "../../styled/auth/login";
+import { Input } from "../../styled/common/Control";
 
 /**
  * @date 2/10/2020
@@ -52,25 +59,32 @@ function Login() {
 	};
 
 	return (
-		<form onSubmit={e => onSubmit(e)}>
-			<input
-				type="text"
-				placeholder="Username"
-				name="username"
-				value={username}
-				onChange={e => handleChange(e)}
-			/>
-			<input
-				type="password"
-				placeholder="Password"
-				name="password"
-				value={password}
-				onChange={e => handleChange(e)}
-			/>
-			<button type="submit" disabled={loading}>
-				Login
-			</button>
-		</form>
+		<LoginBlock>
+			<LoginPane>
+				<h1>Login</h1>
+				<form onSubmit={e => onSubmit(e)}>
+					<LoginInput
+						type="text"
+						placeholder="Username"
+						name="username"
+						value={username}
+						onChange={e => handleChange(e)}
+					/>
+					<br />
+					<LoginInput
+						type="password"
+						placeholder="Password"
+						name="password"
+						value={password}
+						onChange={e => handleChange(e)}
+					/>
+					<br />
+					<LoginBtn type="submit" disabled={loading}>
+						Login
+					</LoginBtn>
+				</form>
+			</LoginPane>
+		</LoginBlock>
 	);
 }
 
