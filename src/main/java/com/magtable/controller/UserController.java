@@ -15,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import sun.security.util.Password;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,8 +106,8 @@ public class UserController {
             user.setPassword(null); //This is just a safety set to null;
             String randomPassword = passwordService.generateResetPassword();
             user.setPassword(randomPassword); //Setting the resetpassword of our user to be created to the randomly generated password by PasswordService
-
-            return user;
+            User returnUser = new User(user);
+            return returnUser;
         } catch (DataIntegrityViolationException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists");
         }catch (Exception e){

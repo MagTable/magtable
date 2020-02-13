@@ -61,7 +61,7 @@ public class AuthenticationController {
             authenticationManager.authenticate(authenticationToken);
         } catch (BadCredentialsException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    String.format("Authentication failed: User %s not found.", request.getUsername()));
+                    String.format("Authentication failed: .", request.getUsername()));
         }
         // User is authenticated here
         // Finding the user in the database
@@ -107,7 +107,7 @@ public class AuthenticationController {
             authenticationManager.authenticate(authenticationToken);
         } catch (BadCredentialsException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    String.format("Authentication failed: User %s not found.", request.getUsername()));
+                    String.format("Authentication failed: .", request.getUsername()));
         }
 
         // User is authenticated here

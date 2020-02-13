@@ -26,8 +26,8 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsService userDetailsService;
 
-    @Autowired
-    private JwtRequestFilter JwtRequestFilter;
+   @Autowired
+   private JwtRequestFilter JwtRequestFilter;
 
     private final String SYSTEM_ADMIN = "System Administrator";
 
@@ -52,11 +52,6 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(JwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
-//    @Bean
-//    public PasswordEncoder getPasswordEncoder() {
-//        return NoOpPasswordEncoder.getInstance();
-//    }
-
 
 
     @Override
@@ -66,6 +61,11 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     }
 
 
+
+    //    @Bean
+//    public PasswordEncoder getPasswordEncoder() {
+//        return NoOpPasswordEncoder.getInstance();
+//    }
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
