@@ -5,16 +5,19 @@ import com.magtable.repository.RoleRepository;
 import com.magtable.repository.UserRepository;
 
 import com.magtable.services.JwtUtil;
+import com.magtable.services.PasswordService;
 import com.magtable.services.ValidationService;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +35,8 @@ public class UserController {
     @Autowired
     private JwtUtil jwtTokenUtil;
 
+    @Autowired
+    public PasswordService passwordService;
 
     /**
      * route           GET /user/all
@@ -54,7 +59,7 @@ public class UserController {
     }
 
     /**
-     * route           GET /user/{id}
+     * route            GET /user/{id}
      * description     Get user by ID
      * access          Private - System Managers
      *
@@ -68,7 +73,6 @@ public class UserController {
 
         return new SafeUser(user);
     }
-
 
     /**
      * route           POST /user/add
@@ -94,21 +98,26 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Required field \"role\" is null.");
         }
 
+        //PasswordService created here for the try/catch/finally block
         try {
             user.setReset(true); // reset is true at the time of account creation
             user.setRole(role);
             user.setPassword(null); //This is just a safety set to null;
-            user.generateResetPassword(); //Setting the resetpassword of our user to be created to the randomly generated password
+
+            String randomPassword = passwordService.generateResetPassword();
+
+            String encodedPassword = passwordService.encode(randomPassword);
+            user.setPassword(encodedPassword);
             userRepository.save(user); //Storing our new user in the database
 
+            user.setPassword(randomPassword); //Setting the resetpassword of our user to be created to the randomly generated password by PasswordService
             return user;
         } catch (DataIntegrityViolationException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists");
-        } catch (Exception e) {
+        }catch (Exception e){
             e.printStackTrace();
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Server Error");
         }
-
     }
 
     /**
@@ -119,30 +128,17 @@ public class UserController {
      * @param userId id of user to delete
      */
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteUser(HttpServletRequest request, @PathVariable(value = "id") final int userId) {
+    public ResponseEntity<?> deleteUser(@PathVariable(value = "id") final int userId) {
+        // TODO make sure user isn't deleting themselves
         // need access to request username from JWT
-        String jwt = request.getHeader("Authorization");
         try {
-            //extracting the username from the jwt token
-            String username = jwtTokenUtil.extractUsername(jwt.substring(7)); // jwt can potentially be null
-            //searching the database for the user
-            User user = userRepository.findUserByUsername(username).orElseThrow(() ->
-                    new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User %s not found.", username)));
-
-            if (user.getId() == userId) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot Delete Yourself.");
-            }
-
             userRepository.deleteById(userId);
             return ResponseEntity.ok(HttpStatus.OK);
         } catch (EmptyResultDataAccessException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     String.format("Deletion failed: User #%d not found.", userId));
-        } catch (NullPointerException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Authentication failed: JWT Not Found.");
         }
     }
-
 
     /**
      * route           GET /user/roles
@@ -156,7 +152,6 @@ public class UserController {
         return roleRepository.findAll();
     }
 
-
     /**
      * route           PUT /reset/{id}
      * description     reset a user's password.
@@ -166,29 +161,19 @@ public class UserController {
      * @return User object with newly reset password
      */
     @PutMapping("/reset/{id}")
-    public User resetPassword(HttpServletRequest request, @PathVariable(value = "id") final int userId) {
-        try {
-            String jwt = request.getHeader("Authorization");
-            String username = jwtTokenUtil.extractUsername(jwt.substring(7)); // jwt can potentially be null todo address duplicate code error
-            User requestUser = userRepository.findUserByUsername(username).orElseThrow(() ->
-                    new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User %s not found.", username)));
-            // don't allow the requesting user to reset their own password in this way
-            System.out.println(requestUser.getId() + " " + userId);
-            if (requestUser.getId() == userId) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot Reset Your Own Password.");
-            }
-        } catch (NullPointerException e) {
-            e.printStackTrace(); // TODO find out what will be thrown, update in future pls
-        }
-
-
+    public User resetPassword(@PathVariable(value = "id") final int userId) {
         User user = userRepository.findById(userId).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User #%d not found.", userId)));
 
-        user.generateResetPassword(); // create new resetPassword and set reset flag to true
+        String randomPassword  = passwordService.generateResetPassword(); // generate random password
+        String encodedPassword = passwordService.encode(randomPassword); // encode password
 
-        userRepository.save(user);
+        user.setReset(true); // set reset flag
+        user.setPassword(encodedPassword); // set the encoded password
 
+        userRepository.save(user); // save the user to the database
+
+        user.setPassword(randomPassword); // reset to the unencoded password to send back to the front end
         return user;
     }
 

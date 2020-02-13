@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.Random;
 
+
 /**
  * Entity Class for User Table
  */
@@ -22,6 +23,10 @@ public class User implements Serializable {
 
     public User(User user) {
         this.reset = user.isReset();
+        this.id = user.getId();
+        this.username = user.getUsername();
+        this.role = user.getRole();
+        this.password = user.getPassword();
     }
 
     @Id
@@ -106,26 +111,28 @@ public class User implements Serializable {
     /*
      * HELPER METHODS
      */
-
     /**
      * Generates a random string with a given length. Only uses lowercase English alphabet characters.
+     * @return The randomly generated password.
      */
-    public void generateResetPassword() {
-        char[] charArray = new char[TEMPORARY_PASSWORD_LENGTH]; // using a char array to build the random string
 
-        Random r = new Random();
+//    public void generateResetPassword() {
+//        char[] charArray = new char[TEMPORARY_PASSWORD_LENGTH]; // using a char array to build the random string
+//
+//        Random r = new Random();
+//
+//        int asciiOffset = 97; // this is where the lower-case english alphabet starts in the ascii table
+//        int asciiLength = 26; // this is the range of ascii characters we want, starting from the offset
+//
+//        for (int i = 0; i < charArray.length; i++) {
+//            int randint = r.nextInt(asciiLength) + asciiOffset;
+//            charArray[i] = (char) randint; // cast our random int to char and add it to charArray
+//        }
+//
+//        String randomPassword = new String(charArray); // convert random char array to String
+//        this.setPassword(randomPassword); // set user's resetPassword to newly generated random string
+//        this.setReset(true);
+//
+//    }
 
-        int asciiOffset = 97; // this is where the lower-case english alphabet starts in the ascii table
-        int asciiLength = 26; // this is the range of ascii characters we want, starting from the offset
-
-        for (int i = 0; i < charArray.length; i++) {
-            int randint = r.nextInt(asciiLength) + asciiOffset;
-            charArray[i] = (char) randint; // cast our random int to char and add it to charArray
-        }
-
-        String randomPassword = new String(charArray); // convert random char array to String
-
-        this.setPassword(randomPassword); // set user's resetPassword to newly generated random string
-        this.setReset(true);
-    }
 }

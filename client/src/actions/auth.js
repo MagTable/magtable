@@ -89,7 +89,7 @@ export const setUserPassword = (
 ) => async dispatch => {
 	try {
 		const res = await axios.post(
-			"/passwordreset",
+			"/password/reset",
 			{ username, password, newPassword },
 			AXIOS_JSON_HEADER
 		);
