@@ -117,12 +117,22 @@ export const SelectUserLevel = styled.select`
 	font-size: 20px;
 	background-color: #dadada;
 	border: 2px solid #cacaca;
+	${({ error }) =>
+		error &&
+		`
+		border: 2px solid red;
+	`}
 `;
 
 export const AddUserInput = styled(Input)`
 	height: 30px;
 	padding: 0 10px;
 	font-size: 20px;
+	${({ error }) =>
+		error &&
+		`
+		border: 2px solid red;
+	`}
 `;
 
 export const AddUserRow = styled.div`
@@ -139,6 +149,7 @@ export const SeparatorLine = styled.div`
 
 export const AddUserSubmit = styled(AddUserInput)`
 	height: 34px;
+	cursor: pointer;
 `;
 
 export const UserListRoleHeader = styled.h2`

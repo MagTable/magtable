@@ -30,11 +30,7 @@ function App() {
 				<Alert />
 				<Switch>
 					<Route exact path="/login" component={Login} />
-					<Route
-						exact
-						path="/password/reset"
-						component={PasswordReset}
-					/>
+					<Route exact path="/password/reset" component={PasswordReset} />
 
 					<PrivateRoute exact path="/" component={AssignmentTable} />
 					<PrivateRoute

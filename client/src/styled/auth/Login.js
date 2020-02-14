@@ -29,6 +29,11 @@ export const LoginInput = styled(Input)`
 	font-size: 20px;
 	font-styling: bold;
 	background-color: #eaeaea;
+	${({ error }) =>
+		error &&
+		`
+		border: 2px solid red;
+	`}
 `;
 
 /**

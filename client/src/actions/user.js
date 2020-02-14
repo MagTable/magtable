@@ -43,7 +43,8 @@ export const getRoles = () => async dispatch => {
 			payload: res.data
 		});
 	} catch (err) {
-		dispatch(setAlert(err.response?.data?.message, "danger"));
+		// no error necessary here
+		// dispatch(setAlert(err.response?.data?.message, "danger"));
 	}
 };
 

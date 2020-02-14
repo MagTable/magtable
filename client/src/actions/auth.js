@@ -39,7 +39,8 @@ export const loadUser = () => async dispatch => {
 
 		dispatch(getRoles());
 	} catch (err) {
-		dispatch(setAlert(err.response?.data?.message, "danger"));
+		// this error is not necessary
+		// dispatch(setAlert(err.response?.data?.message, "danger"));
 
 		dispatch({
 			type: AUTH_ERROR
@@ -48,7 +49,7 @@ export const loadUser = () => async dispatch => {
 };
 
 // login user
-export const login = (username, password) => async dispatch => {
+export const login = ({ username, password }) => async dispatch => {
 	try {
 		dispatch({
 			type: LOGGING_IN
@@ -82,11 +83,11 @@ export const login = (username, password) => async dispatch => {
 	}
 };
 
-export const setUserPassword = (
+export const setUserPassword = ({
 	username,
 	password,
 	newPassword
-) => async dispatch => {
+}) => async dispatch => {
 	try {
 		const res = await axios.post(
 			"/password/reset",

@@ -117,6 +117,12 @@ export const NavLink = styled(Link)`
 	text-decoration: none;
 	color: black;
 	font-size: 20px;
+	padding-bottom: 0.5rem;
+	${({ active }) =>
+		active &&
+		`
+		border-bottom: 2px solid #28aae1;
+	`}
 	${isMobile
 		? // Mobile rules
 		  `width: 100vw;` +

@@ -8,6 +8,8 @@ import {
 	LoginInput,
 	LoginPane
 } from "../../styled/auth/Login";
+import { Field, Formik } from "formik";
+import * as Yup from "yup";
 
 /**
  * @date 2/10/2020
@@ -21,16 +23,11 @@ import {
  * @returns {*} The Login component
  */
 function Login() {
-	const { isAuthenticated, loading, error } = useSelector(
-		state => state.auth
-	);
+	const [showPassword, setShowPassword] = useState(false);
+
+	const { isAuthenticated, loading, error } = useSelector(state => state.auth);
 	const dispatch = useDispatch();
 	const history = useHistory(); // to allow us to redirect the user
-
-	const [formData, setFormData] = useState({
-		username: "mustafa",
-		password: "password"
-	});
 
 	useEffect(() => {
 		if (error?.status === 303) {
@@ -45,43 +42,76 @@ function Login() {
 		return <Redirect to="/" />;
 	} // don't show the page until we know user is not authenticated
 
-	// destructuring formData
-	const { username, password } = formData;
-
-	// ask Arran if this syntax is confusing
-	const handleChange = e =>
-		setFormData({ ...formData, [e.target.name]: e.target.value });
-
-	const onSubmit = async e => {
-		e.preventDefault();
-		dispatch(login(username, password));
-	};
-
 	return (
 		<LoginBlock>
 			<LoginPane>
 				<h1>Login</h1>
-				<form onSubmit={e => onSubmit(e)}>
-					<LoginInput
-						type="text"
-						placeholder="Username"
-						name="username"
-						value={username}
-						onChange={e => handleChange(e)}
-					/>
-					<br />
-					<LoginInput
-						type="password"
-						placeholder="Password"
-						name="password"
-						value={password}
-						onChange={e => handleChange(e)}
-					/>
-					<br />
-					<LoginBtn type="submit" disabled={loading}>
-						Login
-					</LoginBtn>
-				</form>
+				<Formik
+					initialValues={{
+						username: "mustafa",
+						password: "password"
+					}}
+					onSubmit={values => {
+						dispatch(login(values));
+					}}
+					validationSchema={Yup.object().shape({
+						username: Yup.string()
+							.matches(/^[a-zA-Z0-9]+$/, "Invalid Characters")
+							.required("Required field")
+							.min(5, "Minimum Username Length is 5")
+							.max(15, "Maximum Username Length is 15"),
+						password: Yup.string().required("Required Field")
+					})}
+				>
+					{props => (
+						<form onSubmit={props.handleSubmit}>
+							{/*See Formik Documentation*/}
+							<Field name={"username"}>
+								{({ field }) => (
+									<LoginInput
+										{...field}
+										error={props.errors?.username && props.touched?.username}
+										placeholder="Username"
+									/>
+								)}
+							</Field>
+							{props.errors?.username && props.touched?.username && (
+								<p>{props.errors.username}</p>
+							)}
+							<br />
+
+							<Field name={"password"}>
+								{({ field }) => (
+									<>
+										<LoginInput
+											{...field}
+											error={props.errors?.password && props.touched?.password}
+											type={showPassword ? "text" : "password"}
+											placeholder="Password"
+										/>
+										<i
+											className={
+												showPassword
+													? "fas fa-eye-slash fa-lg"
+													: "fas fa-eye fa-lg"
+											}
+											onClick={() => setShowPassword(!showPassword)}
+										/>
+									</>
+								)}
+							</Field>
+
+							{props.errors?.password && props.touched?.password && (
+								<p>{props.errors.password}</p>
+							)}
+							<br />
+
+							<LoginBtn type="submit" disabled={loading}>
+								Login
+							</LoginBtn>
+						</form>
+					)}
+				</Formik>
 			</LoginPane>
 		</LoginBlock>
 	);

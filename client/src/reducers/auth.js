@@ -30,8 +30,7 @@ export default function(state = initialState, action) {
 			return {
 				...state,
 				token: payload,
-				isAuthenticated: true,
-				loading: false
+				isAuthenticated: true
 			};
 		case LOGGING_IN:
 			return {

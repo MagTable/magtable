@@ -1,22 +1,11 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import {
-	getUsers,
-	deleteUser,
-	resetPassword,
-	getRoles
-} from "../../actions/user";
+import { getUsers } from "../../actions/user";
 import { useDispatch, useSelector } from "react-redux";
-import {
-	UserListRow,
-	UserListItem,
-	UserManipulateBlock,
-	ManipImg,
-	UserListDiv,
-	UserListRoleHeader
-} from "../../styled/user/User";
+import { UserListDiv, UserListRoleHeader } from "../../styled/user/User";
 
 import AddUser from "./AddUser";
+import UserListItem from "./UserListItem";
 
 const UserList = () => {
 	const dispatch = useDispatch();
@@ -24,21 +13,9 @@ const UserList = () => {
 	useEffect(() => {
 		dispatch(getUsers());
 	}, [dispatch]);
-	useEffect(() => {
-		dispatch(getRoles());
-	}, [dispatch]);
 
 	const users = useSelector(state => state.user.users);
-	const authUser = useSelector(state => state.auth.user);
 	const roles = useSelector(state => state.user.roles);
-
-	const handlePasswordReset = id => {
-		dispatch(resetPassword(id));
-	};
-
-	const handleDelete = id => {
-		dispatch(deleteUser(id));
-	};
 
 	if (!users) return <h1>No Users in the System!</h1>;
 
@@ -48,7 +25,6 @@ const UserList = () => {
 				<UserListRoleHeader>Add User</UserListRoleHeader>
 			</i>
 			<AddUser />
-			<br />
 			{roles.map(role => (
 				<div key={role.id}>
 					<UserListRoleHeader>
@@ -58,33 +34,7 @@ const UserList = () => {
 					{users.map(
 						user =>
 							user.role.id === role.id && (
-								<UserListRow key={user.id}>
-									<UserListItem>{user.username}</UserListItem>
-									<UserListItem>{user.password}</UserListItem>
-									<UserManipulateBlock>
-										{user.id !== authUser.id && (
-											<>
-												<ManipImg
-													className="fas fa-trash-alt"
-													onClick={() =>
-														handleDelete(user.id)
-													}
-												/>
-												<ManipImg
-													className="fas fa-redo"
-													onClick={() =>
-														handlePasswordReset(
-															user.id
-														)
-													}
-												/>
-												{user.reset && (
-													<ManipImg className="fas fa-exclamation-triangle" />
-												)}
-											</>
-										)}
-									</UserManipulateBlock>
-								</UserListRow>
+								<UserListItem key={user.id} user={user} />
 							)
 					)}
 				</div>
