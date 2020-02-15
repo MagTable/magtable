@@ -62,7 +62,7 @@ export const MenuTip = styled.div`
  * The icon for the link which opens the navigation menu
  */
 export const MenuTipIcon = styled.a`
-	transition-duration: 1s;
+	transition-duration: 0.5s;
 	transform: ${({ open }) => (open ? "rotate(360deg)" : "rotate(270deg)")};
 	margin-right: 10px;
 	cursor: pointer;
