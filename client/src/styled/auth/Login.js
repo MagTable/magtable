@@ -20,6 +20,27 @@ export const LoginPane = styled.div`
 	align-items: center;
 `;
 
+export const InputLabel = styled.label`
+	position: relative;
+	float: left;
+	margin-left: 10px;
+	top -30px;
+	background: #E9E9E9;
+	color: #aaa;
+	cursor: text;
+	transition: transform 150ms cubic-bezier(0.4,0,0.2,1),opacity 150ms cubic-bezier(0.4,0,0.2,1);
+	${({ error }) =>
+		error &&
+		`
+		color: red;
+	`}
+	${({ lifted }) =>
+		lifted &&
+		`
+				transform: scale(.75) translateY(-29px);
+		`}
+`;
+
 /**
  * Text boxes for username and password.
  */
@@ -29,11 +50,46 @@ export const LoginInput = styled(Input)`
 	font-size: 20px;
 	font-styling: bold;
 	background-color: #eaeaea;
+
+	border: 0;
+	border-bottom: 2px solid black;
+
 	${({ error }) =>
 		error &&
 		`
-		border: 2px solid red;
+		border-bottom: 2px solid red;
 	`}
+`;
+
+/**
+ * Div to contain a password input with an icon that toggle's it's type from password to text
+ * the icon is floated to the right and positioned relatively to be at the end of the input
+ */
+export const TogglePasswordField = styled.div`
+	margin-bottom: 0.25rem;
+
+	input {
+		padding-right: 35px;
+	}
+
+	i {
+		text-align: center;
+		width: 30px;
+		// above rules prevent icon from jumping when it changes
+		cursor: pointer;
+		float: right;
+		left: -10px;
+		top: -28px;
+		position: relative;
+	}
+
+	span {
+		position: relative;
+		float: left;
+		color: red;
+		font-size: 14px;
+		top: 5px;
+	}
 `;
 
 /**
@@ -59,8 +115,9 @@ export const LoginBlock = styled.div`
 	justify-self: center;
 	align-self: center;
 	justify-content: center;
-	background-color: #dedede;
+	// background-color: #dedede;
 	// background-color: #28aae111;
+	border: 2px solid #aaaaaa;
 	margin: auto;
 	border-radius: 4px;
 	flex-basis: auto;
