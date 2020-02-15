@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import ReactTooltip from "react-tooltip";
 import { IconButton as StyledIconButton } from "../../styled/common/IconButton";
-import { isDesktop } from "react-device-detect";
+import { BrowserView } from "react-device-detect";
 
 function IconButton({ faClassName, color, hoverColor, onClick, toolTip }) {
 	return (
@@ -14,9 +14,9 @@ function IconButton({ faClassName, color, hoverColor, onClick, toolTip }) {
 				hoverColor={hoverColor}
 				color={color}
 			/>
-			{isDesktop && (
+			<BrowserView>
 				<ReactTooltip place="top" type="dark" effect="solid" delayShow={200} />
-			)}
+			</BrowserView>
 		</>
 	);
 }
