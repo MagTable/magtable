@@ -29,16 +29,18 @@ export const InputLabel = styled.label`
 	color: #aaa;
 	cursor: text;
 	transition: transform 150ms cubic-bezier(0.4,0,0.2,1),opacity 150ms cubic-bezier(0.4,0,0.2,1);
-	${({ error }) =>
-		error &&
-		`
-		color: red;
-	`}
+	
 	${({ lifted }) =>
 		lifted &&
 		`
-				color: #28aae1;
-				transform: scale(.75) translateY(-29px);
+			color: #28aae1;
+			transform: scale(.75) translateY(-29px);
+		`}
+		
+	${({ error }) =>
+		error &&
+		`
+			color: red;
 		`}
 `;
 
