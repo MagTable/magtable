@@ -2,29 +2,41 @@ import styled from "styled-components";
 
 export const ConfirmationBox = styled.div`
 	position: relative;
-	float: center;
 
 	button {
 		z-index: 5;
-		padding: 1rem;
-		position: absolute;
-		top: 20px;
+		padding: 0.5rem;
+
+		cursor: pointer;
 		border: 0;
-		background: white;
-		color: red;
+		border-top: 2px solid black;
+		// border-radius: 5px;
+		background: red;
+		color: white;
+
+		box-shadow: 2px 2px 3px #999;
+
+		position: absolute;
+		width: 120px;
+		left: -45px;
+		top: 30px;
+
+		:hover {
+			background: #d00;
+		}
 	}
 
-	${({ color }) =>
-		color &&
-		`
-		color: ${color}
-	`}
+	#arrow {
+		position: absolute;
+		width: 120px;
+		left: 7px;
+		top: 25px;
 
-	${({ hoverColor }) =>
-		hoverColor &&
-		`
-		:hover {
-			color: ${hoverColor};
-		}
-	`}
+		width: 0;
+		height: 0;
+		border-left: 5px solid transparent;
+		border-right: 5px solid transparent;
+
+		border-bottom: 5px solid black;
+	}
 `;

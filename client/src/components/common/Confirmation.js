@@ -15,7 +15,8 @@ function Confirmation({ children, action }) {
 			{open && (
 				<>
 					<ClickCatcher onClick={() => setOpen(false)} />
-					<button onClick={action}>Confirm User Deletion</button>
+					<div id={"arrow"} />
+					<button onClick={action}>Confirm Deletion</button>
 				</>
 			)}
 			{children({ confirm })}
