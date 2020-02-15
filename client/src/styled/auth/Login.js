@@ -82,16 +82,11 @@ export const TogglePasswordField = styled.div`
 	margin-bottom: 0.25rem;
 
 	input {
-		padding-right: 35px;
+		padding-right: 30px;
 	}
 
 	i {
-		text-align: center;
-		width: 30px;
-		// above rules prevent icon from jumping when it changes
-		cursor: pointer;
 		float: right;
-		left: -10px;
 		top: -28px;
 		position: relative;
 		user-select: none;
