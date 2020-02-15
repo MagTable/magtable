@@ -37,6 +37,7 @@ export const InputLabel = styled.label`
 	${({ lifted }) =>
 		lifted &&
 		`
+				color: #28aae1;
 				transform: scale(.75) translateY(-29px);
 		`}
 `;
@@ -54,6 +55,11 @@ export const LoginInput = styled(Input)`
 	border: 0;
 	border-bottom: 2px solid black;
 
+	${({ lifted }) =>
+		lifted &&
+		` 
+			border-color: #28aae1;
+	`}
 	${({ error }) =>
 		error &&
 		`

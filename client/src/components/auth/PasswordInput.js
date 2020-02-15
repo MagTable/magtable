@@ -18,6 +18,7 @@ function PasswordInput(props) {
 				type={showPassword ? "text" : "password"}
 				onFocus={() => setFocus(true)}
 				onBlur={() => setFocus(false)}
+				lifted={props.labelLifted || focus}
 				id={"loginPassword"}
 			/>
 			{/* br + float:right takes the eye icon out of the same row as the input to avoid resizing the login block */}
