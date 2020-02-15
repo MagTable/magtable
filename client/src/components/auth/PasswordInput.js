@@ -5,6 +5,7 @@ import {
 	LoginInput,
 	InputLabel
 } from "../../styled/auth/Login";
+import IconButton from "../common/IconButton";
 
 function PasswordInput(props) {
 	const [showPassword, setShowPassword] = useState(false);
@@ -23,9 +24,10 @@ function PasswordInput(props) {
 			/>
 			{/* br + float:right takes the eye icon out of the same row as the input to avoid resizing the login block */}
 			<br />
-			<i
-				className={showPassword ? "fas fa-eye-slash fa-lg" : "fas fa-eye fa-lg"}
+			<IconButton
+				faClassName={showPassword ? "fa-eye-slash fa-lg" : "fa-eye fa-lg"}
 				onClick={() => setShowPassword(!showPassword)}
+				toolTip={showPassword ? "Hide Password" : "Show Password"}
 			/>
 			<InputLabel
 				error={props.errors && props.touched}
@@ -42,7 +44,8 @@ function PasswordInput(props) {
 
 PasswordInput.propTypes = {
 	errors: PropTypes.string,
-	touched: PropTypes.bool
+	touched: PropTypes.bool,
+	labelLifted: PropTypes.bool
 };
 
 export default PasswordInput;

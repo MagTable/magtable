@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {
-	ManipImg,
 	UserListRow,
 	UserManipulateBlock,
 	UserListItem as UserListItemText
 } from "../../styled/user/User";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUser, resetPassword } from "../../actions/user";
+import IconButton from "../common/IconButton";
 
 const UserListItem = ({ user }) => {
 	const dispatch = useDispatch();
@@ -28,15 +28,25 @@ const UserListItem = ({ user }) => {
 			<UserManipulateBlock>
 				{user.id !== authUser.id && (
 					<>
-						<ManipImg
-							className="fas fa-trash-alt"
+						<IconButton
+							faClassName="fa-trash-alt"
 							onClick={() => handleDelete(user.id)}
+							toolTip={"Delete User"}
+							hoverColor={"red"}
 						/>
-						<ManipImg
-							className="fas fa-redo"
+						<IconButton
+							toolTip={"Reset User's Password"}
 							onClick={() => handlePasswordReset(user.id)}
+							faClassName={"fa-unlock-alt"}
+							hoverColor={"blue"}
 						/>
-						{user.reset && <ManipImg className="fas fa-exclamation-triangle" />}
+						{user.reset && (
+							<IconButton
+								faClassName={"fa-exclamation-triangle"}
+								color={"orange"}
+								toolTip={"User's Password Has Been Reset"}
+							/>
+						)}
 					</>
 				)}
 			</UserManipulateBlock>
