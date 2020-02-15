@@ -8,6 +8,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUser, resetPassword } from "../../actions/user";
 import IconButton from "../common/IconButton";
+import Confirmation from "../common/Confirmation";
 
 const UserListItem = ({ user }) => {
 	const dispatch = useDispatch();
@@ -28,12 +29,16 @@ const UserListItem = ({ user }) => {
 			<UserManipulateBlock>
 				{user.id !== authUser.id && (
 					<>
-						<IconButton
-							faClassName="fa-trash-alt"
-							onClick={() => handleDelete(user.id)}
-							toolTip={"Delete User"}
-							hoverColor={"red"}
-						/>
+						<Confirmation action={() => handleDelete(user.id)}>
+							{({ confirm }) => (
+								<IconButton
+									faClassName="fa-trash-alt"
+									onClick={confirm}
+									toolTip={"Delete User"}
+									hoverColor={"red"}
+								/>
+							)}
+						</Confirmation>
 						<IconButton
 							toolTip={"Reset User's Password"}
 							onClick={() => handlePasswordReset(user.id)}
