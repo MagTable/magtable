@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { clearAuthError, login } from "../../actions/auth";
@@ -10,6 +10,7 @@ import {
 } from "../../styled/auth/Login";
 import { Field, Formik } from "formik";
 import * as Yup from "yup";
+import PasswordInput from "./PasswordInput";
 
 /**
  * @date 2/10/2020
@@ -23,8 +24,6 @@ import * as Yup from "yup";
  * @returns {*} The Login component
  */
 function Login() {
-	const [showPassword, setShowPassword] = useState(false);
-
 	const { isAuthenticated, loading, error } = useSelector(state => state.auth);
 	const dispatch = useDispatch();
 	const history = useHistory(); // to allow us to redirect the user
@@ -49,7 +48,7 @@ function Login() {
 				<Formik
 					initialValues={{
 						username: "mustafa",
-						password: "password"
+						password: ""
 					}}
 					onSubmit={values => {
 						dispatch(login(values));
@@ -82,28 +81,15 @@ function Login() {
 
 							<Field name={"password"}>
 								{({ field }) => (
-									<>
-										<LoginInput
-											{...field}
-											error={props.errors?.password && props.touched?.password}
-											type={showPassword ? "text" : "password"}
-											placeholder="Password"
-										/>
-										<i
-											className={
-												showPassword
-													? "fas fa-eye-slash fa-lg"
-													: "fas fa-eye fa-lg"
-											}
-											onClick={() => setShowPassword(!showPassword)}
-										/>
-									</>
+									<PasswordInput
+										{...field}
+										errors={props.errors?.password}
+										touched={props.touched?.password}
+										labelLifted={props.values.password.length > 0}
+									/>
 								)}
 							</Field>
 
-							{props.errors?.password && props.touched?.password && (
-								<p>{props.errors.password}</p>
-							)}
 							<br />
 
 							<LoginBtn type="submit" disabled={loading}>
