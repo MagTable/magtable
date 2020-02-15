@@ -29,16 +29,22 @@ export const InputLabel = styled.label`
 	color: #aaa;
 	cursor: text;
 	transition: transform 150ms cubic-bezier(0.4,0,0.2,1),opacity 150ms cubic-bezier(0.4,0,0.2,1);
-	${({ error }) =>
-		error &&
+	${({ focus }) =>
+		focus &&
 		`
-		color: red;
+		color: #28aae1;
 	`}
+	
 	${({ lifted }) =>
 		lifted &&
 		`
-				color: #28aae1;
-				transform: scale(.75) translateY(-29px);
+			transform: scale(.75) translateY(-29px);
+		`}
+		
+	${({ error }) =>
+		error &&
+		`
+			color: red;
 		`}
 `;
 
@@ -55,8 +61,8 @@ export const LoginInput = styled(Input)`
 	border: 0;
 	border-bottom: 2px solid black;
 
-	${({ lifted }) =>
-		lifted &&
+	${({ focus }) =>
+		focus &&
 		` 
 			border-color: #28aae1;
 	`}
