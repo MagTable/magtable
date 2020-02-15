@@ -10,12 +10,14 @@ import styled from "styled-components";
  * The app's basic text box.
  **/
 export const Input = styled.input`
-	// font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-	// 	"Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-	// 	"Helvetica Neue", sans-serif;
+	// font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+	// 	"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+	// 	sans-serif;
 	// outline: none;
 	background-color: #dadada;
-	border: 2px solid #cacaca;
+	border: 0;
+	border-bottom: 2px solid black;
+	border-radius: 2px;
 	font-family: "Nanum Gothic", sans-serif;
 	outline: none;
 `;
