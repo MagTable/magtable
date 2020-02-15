@@ -4,6 +4,7 @@ import com.magtable.model.*;
 import com.magtable.repository.RoleRepository;
 import com.magtable.repository.UserRepository;
 
+import com.magtable.services.ErrorService;
 import com.magtable.services.JwtUtil;
 import com.magtable.services.PasswordService;
 import com.magtable.services.ValidationService;
@@ -36,6 +37,9 @@ public class UserController {
     @Autowired
     public PasswordService passwordService;
 
+    @Autowired
+    public ErrorService errorService;
+
     /**
      * route           GET /user/all
      * description     Get all users
@@ -66,7 +70,7 @@ public class UserController {
     @GetMapping("/{id}")
     public SafeUser getUserById(@PathVariable(value = "id") int userId) {
         User user = userRepository.findById(userId).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User #%d not found.", userId)));
+                errorService.userIdNotFound(userId));
 
         return new SafeUser(user);
     }
@@ -89,10 +93,10 @@ public class UserController {
         Role role;
         try {
             role = roleRepository.findById(user.getRole().getId()).orElseThrow(() ->
-                    new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Role #%d not found.", user.getRole().getId())));
+                    errorService.roleNotFound(user.getRole().getId()));
         } catch (NullPointerException e) {
             e.printStackTrace();
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Required field \"role\" is null.");
+            throw errorService.nullRole();
         }
 
         //PasswordService created here for the try/catch/finally block
@@ -110,10 +114,10 @@ public class UserController {
             user.setPassword(randomPassword); //Setting the resetpassword of our user to be created to the randomly generated password by PasswordService
             return user;
         } catch (DataIntegrityViolationException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists");
-        }catch (Exception e){
+            throw errorService.duplicateUsername();
+        } catch (Exception e){
             e.printStackTrace();
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Server Error");
+            throw errorService.serverError();
         }
     }
 
@@ -133,19 +137,18 @@ public class UserController {
             String username = jwtTokenUtil.extractUsername(jwt.substring(7)); // jwt can potentially be null
             //searching the database for the user
             User user = userRepository.findUserByUsername(username).orElseThrow(() ->
-                    new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User %s not found.", username)));
+                    errorService.userNotFound(username));
 
             if (user.getId() == userId) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot Delete Yourself.");
+                throw errorService.deleteYourself();
             }
 
             userRepository.deleteById(userId);
             return ResponseEntity.ok(HttpStatus.OK);
         } catch (EmptyResultDataAccessException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    String.format("Deletion failed: User #%d not found.", userId));
+            throw errorService.userIdNotFound(userId);
         } catch (NullPointerException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Authentication failed: JWT Not Found.");
+            throw errorService.jwtNotFound();
         }
     }
     /**
@@ -171,7 +174,7 @@ public class UserController {
     @PutMapping("/reset/{id}")
     public User resetPassword(@PathVariable(value = "id") final int userId) {
         User user = userRepository.findById(userId).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User #%d not found.", userId)));
+                errorService.userIdNotFound(userId));
 
         String randomPassword  = passwordService.generateResetPassword(); // generate random password
         String encodedPassword = passwordService.encode(randomPassword); // encode password
