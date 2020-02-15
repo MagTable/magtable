@@ -29,7 +29,10 @@ const UserListItem = ({ user }) => {
 			<UserManipulateBlock>
 				{user.id !== authUser.id && (
 					<>
-						<Confirmation action={() => handleDelete(user.id)}>
+						<Confirmation
+							confirmationMessage={"Confirm Delete"}
+							action={() => handleDelete(user.id)}
+						>
 							{({ confirm }) => (
 								<IconButton
 									faClassName="fa-trash-alt"

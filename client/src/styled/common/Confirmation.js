@@ -9,8 +9,7 @@ export const ConfirmationBox = styled.div`
 
 		cursor: pointer;
 		border: 0;
-		border-top: 2px solid black;
-		// border-radius: 5px;
+		border-radius: 999px;
 		background: red;
 		color: white;
 
@@ -37,6 +36,6 @@ export const ConfirmationBox = styled.div`
 		border-left: 5px solid transparent;
 		border-right: 5px solid transparent;
 
-		border-bottom: 5px solid black;
+		border-bottom: 5px solid red;
 	}
 `;

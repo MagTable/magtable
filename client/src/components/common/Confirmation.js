@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { ConfirmationBox } from "../../styled/common/Confirmation";
 import { ClickCatcher } from "../../styled/common/ClickCatcher";
 
-function Confirmation({ children, action }) {
+function Confirmation({ children, action, confirmationMessage }) {
 	const [open, setOpen] = useState(false);
 
 	const confirm = () => {
@@ -16,7 +16,7 @@ function Confirmation({ children, action }) {
 				<>
 					<ClickCatcher onClick={() => setOpen(false)} />
 					<div id={"arrow"} />
-					<button onClick={action}>Confirm Deletion</button>
+					<button onClick={action}>{confirmationMessage}</button>
 				</>
 			)}
 			{children({ confirm })}
