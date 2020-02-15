@@ -21,14 +21,10 @@ const UserList = () => {
 
 	return (
 		<UserListDiv>
-			<i>
-				<UserListRoleHeader>Add User</UserListRoleHeader>
-			</i>
-			<AddUser />
 			{roles.map(role => (
 				<div key={role.id}>
 					<UserListRoleHeader>
-						<b>{role.name}</b>
+						<AddUser role={role} />
 					</UserListRoleHeader>
 					{/*This part checks for users with the same role as above and adds them to that section*/}
 					{users.map(

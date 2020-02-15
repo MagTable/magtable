@@ -128,6 +128,7 @@ export const AddUserInput = styled(Input)`
 	height: 30px;
 	padding: 0 10px;
 	font-size: 20px;
+	float: right;
 	${({ error }) =>
 		error &&
 		`
@@ -136,20 +137,21 @@ export const AddUserInput = styled(Input)`
 `;
 
 export const AddUserRow = styled.div`
-	display: flex;
-	justify-content: space-between;
+	// changed to floats
 `;
 
 export const SeparatorLine = styled.div`
 	border-bottom: 2px solid #dedede;
 	height: 0px;
 	width: auto;
-	margin-top: 40px;
+	margin-top: 20px;
 `;
 
 export const AddUserSubmit = styled(AddUserInput)`
 	height: 34px;
 	cursor: pointer;
+	float: right;
+	margin-left: 0.5rem;
 `;
 
 export const UserListRoleHeader = styled.h2`
