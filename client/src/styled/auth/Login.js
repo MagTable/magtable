@@ -35,8 +35,8 @@ export const InputLabel = styled.label`
 		color: #28aae1;
 	`}
 	
-	${({ lifted }) =>
-		lifted &&
+	${({ lifted, focus }) =>
+		(lifted || focus) &&
 		`
 			transform: scale(.75) translateY(-29px);
 		`}
