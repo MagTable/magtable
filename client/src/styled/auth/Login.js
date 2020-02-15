@@ -21,6 +21,7 @@ export const LoginPane = styled.div`
 `;
 
 export const InputLabel = styled.label`
+	user-select: none;
 	position: relative;
 	float: left;
 	margin-left: 10px;
@@ -35,8 +36,8 @@ export const InputLabel = styled.label`
 		color: #28aae1;
 	`}
 	
-	${({ lifted }) =>
-		lifted &&
+	${({ lifted, focus }) =>
+		(lifted || focus) &&
 		`
 			transform: scale(.75) translateY(-29px);
 		`}
@@ -93,6 +94,7 @@ export const TogglePasswordField = styled.div`
 		left: -10px;
 		top: -28px;
 		position: relative;
+		user-select: none;
 	}
 
 	span {
