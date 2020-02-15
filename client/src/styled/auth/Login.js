@@ -82,12 +82,13 @@ export const TogglePasswordField = styled.div`
 	margin-bottom: 0.25rem;
 
 	input {
-		padding-right: 30px;
+		padding-right: 35px;
 	}
 
 	i {
 		float: right;
 		top: -28px;
+		left: -5px;
 		position: relative;
 		user-select: none;
 	}
