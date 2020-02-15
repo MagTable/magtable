@@ -26,7 +26,7 @@ import { useLocation } from "react-router-dom";
  * @returns {*} The MenuPane component
  */
 function MenuPane({ menuOpen, setMenuOpen }) {
-	function openMenu() {
+	function toggleMenu() {
 		if (menuOpen) {
 			setMenuOpen(false);
 		} else {
@@ -58,11 +58,11 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 			</BrowserView>
 			<MobileView>
 				<NavDiv>
-					<MenuTip onClick={() => openMenu()}>
+					<MenuTip onClick={() => toggleMenu()}>
 						<MenuTipIcon open={menuOpen} className="fas fa-angle-down" />
 						Menu
 					</MenuTip>
-					<NavPane open={menuOpen}>
+					<NavPane onClick={() => toggleMenu()} open={menuOpen}>
 						<NavLink to={"/"}>
 							<NavIcon className="fas fa-truck" />
 							Truck Assignment
