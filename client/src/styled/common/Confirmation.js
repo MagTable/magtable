@@ -10,7 +10,7 @@ export const ConfirmationBox = styled.div`
 		cursor: pointer;
 		border: 0;
 		border-radius: 999px;
-		background: red;
+		background: ${({ color }) => color || "red"};
 		color: white;
 
 		box-shadow: 2px 2px 3px #999;
@@ -21,7 +21,7 @@ export const ConfirmationBox = styled.div`
 		top: 30px;
 
 		:hover {
-			background: #d00;
+			background: ${({ hoverColor }) => hoverColor || "#d00"};
 		}
 	}
 
@@ -36,6 +36,6 @@ export const ConfirmationBox = styled.div`
 		border-left: 5px solid transparent;
 		border-right: 5px solid transparent;
 
-		border-bottom: 5px solid red;
+		border-bottom: 5px solid ${({ color }) => color || "red"};
 	}
 `;
