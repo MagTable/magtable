@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import { OkButton } from "../common/FormControl";
 
-const formColor = "#dbf0ff";
-
 /**
  * @date 2020-02-13
  * @author MJ Kochuk
@@ -17,11 +15,10 @@ export const LoginBlock = styled.div`
 	height: auto;
 	padding: 2rem;
 
-	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.06), 0 3px 3px rgba(0, 0, 0, 0.13);
+	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.06), 0 0 6px rgba(0, 0, 0, 0.23);
 
-	background-color: ${formColor};
 	margin: auto;
-	border-radius: 4px;
+	border-radius: 0.45rem;
 	margin-top: 90px;
 
 	h1 {

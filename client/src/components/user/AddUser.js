@@ -1,14 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../actions/user";
-import {
-	AddUserInput,
-	AddUserRow,
-	AddUserSubmit,
-	SeparatorLine
-} from "../../styled/user/User";
-import { Field, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
+import TextInput from "../common/TextInput";
 
 /**
  * This adds a user to the system
@@ -21,8 +16,9 @@ const AddUser = ({ role }) => {
 	return (
 		<Formik
 			initialValues={{ username: "" }}
-			onSubmit={values => {
+			onSubmit={(values, { resetForm }) => {
 				dispatch(addUser({ ...values, role: role.id }));
+				resetForm();
 			}}
 			validationSchema={Yup.object().shape({
 				username: Yup.string()
@@ -33,27 +29,26 @@ const AddUser = ({ role }) => {
 			})}
 		>
 			{props => (
-				<form onSubmit={props.handleSubmit}>
-					<AddUserRow>
-						<b>{role?.name}</b>
-						{/*See Formik Documentation*/}
-						<AddUserSubmit type="submit" value="Add" />
-						<Field name={"username"}>
-							{({ field }) => (
-								<AddUserInput
-									{...field}
-									error={props.errors?.username && props.touched?.username}
-									placeholder="Username"
-									required
-								/>
-							)}
-						</Field>
-						{/*{props.errors?.username && props.touched?.username && (*/}
-						{/*	<p>{props.errors.username}</p>*/}
-						{/*)}*/}
-					</AddUserRow>
-					<SeparatorLine />
-				</form>
+				<Form>
+					{/*See Formik Documentation*/}
+					<Field name={"username"}>
+						{({ field }) => (
+							<TextInput
+								{...field}
+								errors={props.errors.username}
+								touched={props.touched.username}
+								value={props.values.username}
+								label={"Add a New " + role.name}
+								icon={{
+									iconClass: "fa-plus fa-lg text-green",
+									action: () => props.submitForm(),
+									toolTip: "New " + role.name
+								}}
+								fit
+							/>
+						)}
+					</Field>
+				</Form>
 			)}
 		</Formik>
 	);
