@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { clearAuthError, login } from "../../actions/auth";
 import { LoginBlock, LoginBtn } from "../../styled/auth/Login";
-import { Field, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import TextInput from "../common/TextInput";
 
@@ -58,19 +58,17 @@ function Login() {
 				})}
 			>
 				{props => (
-					<form onSubmit={props.handleSubmit}>
+					<Form>
 						{/*See Formik Documentation*/}
 						<Field name={"username"}>
 							{({ field }) => (
 								<TextInput
 									{...field}
-									errors={props.errors?.username}
-									touched={props.touched?.username}
-									labelLifted={props.values.username.length > 0}
-									label={
-										(props.touched?.username && props.errors?.username) ||
-										"Username"
-									}
+									errors={props.errors.username}
+									touched={props.touched.username}
+									value={props.values.username}
+									label={"Username"}
+									fit
 								/>
 							)}
 						</Field>
@@ -78,13 +76,10 @@ function Login() {
 							{({ field }) => (
 								<TextInput
 									{...field}
-									errors={props.errors?.password}
-									touched={props.touched?.password}
-									labelLifted={props.values.password.length > 0}
-									label={
-										(props.touched?.password && props.errors?.password) ||
-										"Password"
-									}
+									errors={props.errors.password}
+									touched={props.touched.password}
+									value={props.values.password}
+									label={"Password"}
 									type={showPassword ? "text" : "password"}
 									icon={{
 										action: () => setShowPassword(!showPassword),
@@ -93,6 +88,7 @@ function Login() {
 											: "fa-eye fa-lg",
 										toolTip: showPassword ? "Hide Password" : "Show Password"
 									}}
+									fit
 								/>
 							)}
 						</Field>
@@ -102,7 +98,7 @@ function Login() {
 						<LoginBtn type="submit" disabled={loading}>
 							Login
 						</LoginBtn>
-					</form>
+					</Form>
 				)}
 			</Formik>
 		</LoginBlock>

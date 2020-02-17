@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 
 import { setUserPassword } from "../../actions/auth";
 import { LoginBlock, LoginBtn } from "../../styled/auth/Login";
-import { Field, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import TextInput from "../common/TextInput";
 
@@ -61,7 +61,8 @@ function ResetPassword() {
 				})}
 			>
 				{props => (
-					<form onSubmit={props.handleSubmit}>
+					<Form>
+						<h2>Password Reset</h2>
 						<Field name={"username"}>
 							{({ field }) => (
 								<TextInput
@@ -69,6 +70,7 @@ function ResetPassword() {
 									label={"Username"}
 									labelLifted={true}
 									disabled
+									fit
 								/>
 							)}
 						</Field>
@@ -79,14 +81,11 @@ function ResetPassword() {
 							{({ field }) => (
 								<TextInput
 									{...field}
-									errors={props.errors?.newPassword}
-									touched={props.touched?.newPassword}
+									errors={props.errors.newPassword}
+									touched={props.touched.newPassword}
+									value={props.values.newPassword}
+									label={"New Password"}
 									type={showNewPassword ? "text" : "password"}
-									label={
-										(props.touched?.newPassword && props.errors?.newPassword) ||
-										"New Password"
-									}
-									labelLifted={props.values?.newPassword.length > 0}
 									icon={{
 										action: () => setShowNewPassword(!showNewPassword),
 										iconClass: showNewPassword
@@ -94,6 +93,7 @@ function ResetPassword() {
 											: "fa-eye fa-lg",
 										toolTip: showNewPassword ? "Hide Password" : "Show Password"
 									}}
+									fit
 								/>
 							)}
 						</Field>
@@ -104,13 +104,9 @@ function ResetPassword() {
 									{...field}
 									errors={props.errors?.confirmNewPassword}
 									touched={props.touched?.confirmNewPassword}
+									value={props.values.confirmNewPassword}
+									label={"Confirm New Password"}
 									type={showConfirmNewPassword ? "text" : "password"}
-									label={
-										(props.touched?.confirmNewPassword &&
-											props.errors?.confirmNewPassword) ||
-										"Confirm New Password"
-									}
-									labelLifted={props.values?.confirmNewPassword.length > 0}
 									icon={{
 										action: () =>
 											setShowConfirmNewPassword(!showConfirmNewPassword),
@@ -121,14 +117,15 @@ function ResetPassword() {
 											? "Hide Password"
 											: "Show Password"
 									}}
+									fit
 								/>
 							)}
 						</Field>
 
 						<LoginBtn type="submit" disabled={loading}>
-							Reset Password
+							Reset
 						</LoginBtn>
-					</form>
+					</Form>
 				)}
 			</Formik>
 		</LoginBlock>

@@ -20,7 +20,12 @@ export const Input = styled.input`
 	transition: border 0.3s ease-in-out;
 
 	:disabled {
-		background: #33333311;
+		background: rgb(51, 51, 51);
+		background: linear-gradient(
+			0deg,
+			rgba(51, 51, 51, 0.1) 0%,
+			rgba(255, 255, 255, 1) 95%
+		);
 	}
 `;
 

@@ -10,17 +10,17 @@ export const TextInputContainer = styled.div`
  */
 export const TextInput = styled(Input)`
 	margin-top: 20px;
-	font-size: 20px;
 	background: transparent;
 
 	padding: 7px;
-	width: calc(100% - 14px);
 
 	border: 0;
 	border-bottom: 2px solid black;
 
 	transition: border 0.3s ease-in-out;
 
+	${({ fit }) => fit && `width: calc(100% - 14px);`}
+	
 	${({ focus }) =>
 		focus &&
 		` 
@@ -29,7 +29,7 @@ export const TextInput = styled(Input)`
 	${({ error }) =>
 		error &&
 		`
-		border-bottom: 2px solid red;
+			border-bottom: 2px solid red;
 	`}
 `;
 
@@ -43,22 +43,14 @@ export const TextInputIcon = styled.i`
 	z-index: 3;
 	top: calc(100% - 25px);
 	left: calc(100% - 30px);
-	// user-select: none;
-`;
-
-export const TextInputError = styled.span`
-	position: relative;
-	top: -30px;
-	float: left;
-	color: red;
-	font-size: 14px;
+	user-select: none;
 `;
 
 export const TextInputLabel = styled.label`
 	user-select: none;
 	position: relative;
 	float: left;
-	top -35px;
+	top -30px;
 	left: 5px;
 	color: #aaa;
 	cursor: text;
@@ -69,18 +61,18 @@ export const TextInputLabel = styled.label`
 	${({ focus }) =>
 		focus &&
 		`
-		color: #28aae1;
+			color: #28aae1;
 	`}
 	
 	${({ lifted, focus }) =>
 		(lifted || focus) &&
 		`
 			transform: scale(.75) translateY(-29px) translateX(-40px);
-		`}
+	`}
 		
 	${({ error }) =>
 		error &&
 		`
 			color: red;
-		`}
+	`}
 `;
