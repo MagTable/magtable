@@ -1,6 +1,6 @@
 import React from "react";
 import {EmployeeList, EmployeeListItem} from "../../styled/magtable/Employee";
-import {TruckList, TruckListItem} from "../../styled/magtable/Truck";
+import {TruckList} from "../../styled/magtable/Truck";
 import {
 	AssignmentContainer,
 	MapsContainer,
@@ -9,6 +9,7 @@ import {
 	TowerPosition,
 	TruckMap
 } from "../../styled/magtable/Maps";
+import TruckListItem from "./TruckListItem";
 
 /**
  * Placeholder component to assist in displaying routing
@@ -17,14 +18,15 @@ import {
 const AssignmentTable = () => {
 	return (
 		<AssignmentContainer>
-			<EmployeeList>
-				<EmployeeListItem/>
-				<EmployeeListItem/>
-			</EmployeeList>
-			<TruckList>
-				<TruckListItem/>
-				<TruckListItem/>
-			</TruckList>
+				<EmployeeList>
+					<EmployeeListItem/>
+					<EmployeeListItem/>
+				</EmployeeList>
+				<TruckList>
+					<TruckListItem/>
+					<TruckListItem/>
+				</TruckList>
+
 				<MapsDiv>
 					<TruckMap/>
 					<TowerMap>

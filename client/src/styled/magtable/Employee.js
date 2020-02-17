@@ -12,9 +12,10 @@ import styled from "styled-components";
 export const EmployeeList = styled.div`
     border: 3px solid black;
     // height: calc(100vh - 73px);
-    min-width: 300px;
     margin: 0;
-    display: inline-block;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
 `;
 
 export const EmployeeListItem = styled.div`

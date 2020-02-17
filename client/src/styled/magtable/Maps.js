@@ -40,7 +40,7 @@ export const TowerPosition = styled.div`
 export const MapsDiv = styled.div`
       display: flex;
       flex-direction: column;
-      flex-grow: 1;
+      flex-grow: 4;
 `;
 
 export const AssignmentContainer = styled.div`
