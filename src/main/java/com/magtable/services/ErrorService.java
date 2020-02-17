@@ -3,10 +3,6 @@ package com.magtable.services;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import sun.security.provider.certpath.OCSPResponse;
-
-import javax.xml.ws.Response;
-
 
 @Service
 public class ErrorService {

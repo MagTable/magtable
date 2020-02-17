@@ -1,13 +1,7 @@
 package com.magtable.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
-
-
 public class ValidationService<E> {
 
-    @Autowired
     ErrorService errorService;
 
     private E element;
@@ -23,8 +17,8 @@ public class ValidationService<E> {
     public ValidationService(String fieldName, E element) {
         this.element = element;
         this.fieldName = fieldName;
+        this.errorService = new ErrorService();
     }
-
 
     public ValidationService<E> exists() {
         if (element != null) {

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
 import { getUsers } from "../../actions/user";
 import { useDispatch, useSelector } from "react-redux";
 import { UserListDiv, UserListSection } from "../../styled/user/User";
@@ -7,6 +6,12 @@ import { UserListDiv, UserListSection } from "../../styled/user/User";
 import AddUser from "./AddUser";
 import UserListItem from "./UserListItem";
 
+/**
+ * Handles rendering of user CRUD components
+ *
+ * @returns {*} The UserList component
+ * @constructor
+ */
 const UserList = () => {
 	const dispatch = useDispatch();
 
@@ -53,18 +58,6 @@ const UserList = () => {
 			))}
 		</UserListDiv>
 	);
-};
-
-UserList.propTypes = {
-	users: PropTypes.arrayOf(
-		PropTypes.shape({
-			id: PropTypes.number.isRequired,
-			username: PropTypes.string.isRequired,
-			password: PropTypes.string,
-			role: PropTypes.object.isRequired,
-			reset: PropTypes.bool.isRequired
-		}).isRequired
-	)
 };
 
 export default UserList;

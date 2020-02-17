@@ -6,8 +6,10 @@ import * as Yup from "yup";
 import TextInput from "../common/TextInput";
 
 /**
- * This adds a user to the system
- * @returns {*}
+ * Adds a user of the given role type
+ *
+ * @param role role of user to be added
+ * @returns {*} The AddUser component
  * @constructor
  */
 const AddUser = ({ role }) => {
@@ -30,7 +32,7 @@ const AddUser = ({ role }) => {
 		>
 			{props => (
 				<Form>
-					{/*See Formik Documentation*/}
+					{/* See Formik Documentation */}
 					<Field name={"username"}>
 						{({ field }) => (
 							<TextInput
@@ -54,6 +56,8 @@ const AddUser = ({ role }) => {
 	);
 };
 
-AddUser.propTypes = {};
+AddUser.propTypes = {
+	role: PropTypes.object.isRequired
+};
 
 export default AddUser;

@@ -1,9 +1,10 @@
 package com.magtable.controller;
 
-import com.magtable.model.*;
+import com.magtable.model.Role;
+import com.magtable.model.SafeUser;
+import com.magtable.model.User;
 import com.magtable.repository.RoleRepository;
 import com.magtable.repository.UserRepository;
-
 import com.magtable.services.ErrorService;
 import com.magtable.services.JwtUtil;
 import com.magtable.services.PasswordService;
@@ -14,7 +15,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;

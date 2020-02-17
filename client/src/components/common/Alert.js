@@ -1,11 +1,22 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import {
 	AlertDiv as StyledAlertDiv,
 	Alert as StyledAlert
 } from "../../styled/common/Alert";
 
+/**
+ * @date 2/10/2020
+ * @author Arran Woodruff
+ * @module Component
+ */
+
+/**
+ * Renders the current alerts from redux store.
+ *
+ * @returns {*} The Alert Component
+ * @constructor
+ */
 const Alert = () => {
 	const alerts = useSelector(state => state.alert);
 
@@ -23,10 +34,6 @@ const Alert = () => {
 	} else {
 		return null;
 	}
-};
-
-Alert.propTypes = {
-	alerts: PropTypes.array
 };
 
 export default Alert;
