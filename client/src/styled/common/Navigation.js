@@ -109,7 +109,7 @@ export const HeaderDiv = styled.div`
 	display: flex;
 	justify-content: space-between;
 	height: 70px;
-	border-bottom: 2px solid #dedede;
+	// border-bottom: 2px solid #dedede;
 `;
 
 /**
