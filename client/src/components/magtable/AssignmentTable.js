@@ -1,4 +1,14 @@
 import React from "react";
+import {EmployeeList, EmployeeListItem} from "../../styled/magtable/Employee";
+import {TruckList, TruckListItem} from "../../styled/magtable/Truck";
+import {
+	AssignmentContainer,
+	MapsContainer,
+	MapsDiv,
+	TowerMap,
+	TowerPosition,
+	TruckMap
+} from "../../styled/magtable/Maps";
 
 /**
  * Placeholder component to assist in displaying routing
@@ -6,11 +16,27 @@ import React from "react";
  */
 const AssignmentTable = () => {
 	return (
-		<div>
-			<h1>
-				Assignment Table <br /> <small>Coming Soon!</small>
-			</h1>
-		</div>
+		<AssignmentContainer>
+			<EmployeeList>
+				<EmployeeListItem/>
+				<EmployeeListItem/>
+			</EmployeeList>
+			<TruckList>
+				<TruckListItem/>
+				<TruckListItem/>
+			</TruckList>
+				<MapsDiv>
+					<TruckMap/>
+					<TowerMap>
+						<TowerPosition/>
+						<TowerPosition/>
+						<TowerPosition/>
+						<TowerPosition/>
+						<TowerPosition/>
+					</TowerMap>
+				</MapsDiv>
+
+		</AssignmentContainer>
 	);
 };
 
