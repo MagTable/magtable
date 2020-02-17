@@ -78,7 +78,7 @@ export const NavPane = styled.div`
 	wrap-option: none;
 	overflow: hidden;
 	transition: all 0.15s ease-in-out;
-	background-color: #dedede;
+	background-color: #e9e9e9;
 	position: absolute;
 	top: 70px;
 	right: 0px;
@@ -104,6 +104,8 @@ export const NavDiv = styled.div`
  * The header div of the page that contains the logo, navigation and possibly the title of the page.
  */
 export const HeaderDiv = styled.div`
+	background: #dbf0ff;
+
 	display: flex;
 	justify-content: space-between;
 	height: 70px;

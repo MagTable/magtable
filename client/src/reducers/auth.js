@@ -44,7 +44,7 @@ export default function(state = initialState, action) {
 				token: null,
 				isAuthenticated: false,
 				loading: false,
-				user: { username: payload.username },
+				user: { username: payload.username, password: payload.password },
 				error: payload
 			};
 		case AUTH_ERROR:

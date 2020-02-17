@@ -78,7 +78,7 @@ export const login = ({ username, password }) => async dispatch => {
 
 		dispatch({
 			type: LOGIN_FAIL,
-			payload: { status, message, username }
+			payload: { status, message, username, password }
 		});
 	}
 };

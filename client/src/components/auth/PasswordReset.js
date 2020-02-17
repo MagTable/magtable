@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import { setUserPassword } from "../../actions/auth";
-import { LoginBtn, LoginInput, LoginPane } from "../../styled/auth/Login";
-import { ResetBlock } from "../../styled/auth/PasswordReset";
+import { LoginBlock, LoginBtn } from "../../styled/auth/Login";
 import { Field, Formik } from "formik";
 import * as Yup from "yup";
+import TextInput from "../common/TextInput";
 
 /**
  * @date 2/10/2020
@@ -21,8 +21,12 @@ import * as Yup from "yup";
  */
 function ResetPassword() {
 	const { isAuthenticated, loading } = useSelector(state => state.auth);
-	const username = useSelector(state => state.auth.user?.username);
+	const authUser = useSelector(state => state.auth?.user);
+	// const authUser = { username: "username", password: "password" };
 	const dispatch = useDispatch();
+
+	const [showNewPassword, setShowNewPassword] = useState(false);
+	const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
 
 	// if an authenticated user ends up with this component, they are sent back to the homepage
 	if (isAuthenticated) {
@@ -30,97 +34,104 @@ function ResetPassword() {
 	} // don't show the page until we know user is not authenticated
 
 	// if we don't have the username, redirect them to login this component won't work without username
-	if (!username) {
+	if (!authUser) {
 		return <Redirect to="/login" />;
 	}
 
 	return (
-		<ResetBlock>
-			<LoginPane>
-				<Formik
-					initialValues={{
-						username,
-						password: "",
-						newPassword: "password",
-						confirmNewPassword: "password"
-					}}
-					onSubmit={values => {
-						dispatch(setUserPassword(values));
-					}}
-					validationSchema={Yup.object().shape({
-						password: Yup.string().required("Required Field"),
-						newPassword: Yup.string()
-							.required("Required Field")
-							.min(8, "Minimum Password Length is 8"),
-						confirmNewPassword: Yup.string()
-							.min(8, "Minimum Password Length is 8")
-							.oneOf([Yup.ref("newPassword"), null], "Passwords must match")
-							.required("Password confirm is required")
-					})}
-				>
-					{props => (
-						<form onSubmit={props.handleSubmit}>
-							<Field name={"username"}>
-								{({ field }) => <LoginInput {...field} disabled />}
-							</Field>
-
-							{/*See Formik Documentation*/}
-							<Field name={"password"}>
-								{({ field }) => (
-									<LoginInput
-										{...field}
-										error={props.errors.password && props.touched.password}
-										type={"password"}
-										placeholder={"Temporary Password"}
-									/>
-								)}
-							</Field>
-							{props.errors?.password && props.touched?.password && (
-								<p>{props.errors.password}</p>
+		<LoginBlock>
+			<Formik
+				initialValues={{
+					username: authUser.username,
+					password: authUser.password,
+					newPassword: "password",
+					confirmNewPassword: "password"
+				}}
+				onSubmit={values => {
+					dispatch(setUserPassword(values));
+				}}
+				validationSchema={Yup.object().shape({
+					newPassword: Yup.string()
+						.required("Required Field")
+						.min(8, "Minimum Length is 8"),
+					confirmNewPassword: Yup.string()
+						.min(8, "Minimum Length is 8")
+						.oneOf([Yup.ref("newPassword"), null], "Passwords must match")
+						.required("Required Field")
+				})}
+			>
+				{props => (
+					<form onSubmit={props.handleSubmit}>
+						<Field name={"username"}>
+							{({ field }) => (
+								<TextInput
+									{...field}
+									label={"Username"}
+									labelLifted={true}
+									disabled
+								/>
 							)}
+						</Field>
 
-							<Field name={"newPassword"}>
-								{({ field }) => (
-									<LoginInput
-										{...field}
-										error={
-											props.errors.newPassword && props.touched.newPassword
-										}
-										type={"password"}
-										placeholder={"New Password"}
-									/>
-								)}
-							</Field>
-							{props.errors?.newPassword && props.touched?.newPassword && (
-								<p>{props.errors.newPassword}</p>
+						{/*See Formik Documentation*/}
+
+						<Field name={"newPassword"}>
+							{({ field }) => (
+								<TextInput
+									{...field}
+									errors={props.errors?.newPassword}
+									touched={props.touched?.newPassword}
+									type={showNewPassword ? "text" : "password"}
+									label={
+										(props.touched?.newPassword && props.errors?.newPassword) ||
+										"New Password"
+									}
+									labelLifted={props.values?.newPassword.length > 0}
+									icon={{
+										action: () => setShowNewPassword(!showNewPassword),
+										iconClass: showNewPassword
+											? "fa-eye-slash fa-lg"
+											: "fa-eye fa-lg",
+										toolTip: showNewPassword ? "Hide Password" : "Show Password"
+									}}
+								/>
 							)}
+						</Field>
 
-							<Field name={"confirmNewPassword"}>
-								{({ field }) => (
-									<LoginInput
-										{...field}
-										error={
-											props.errors.confirmNewPassword &&
-											props.touched.confirmNewPassword
-										}
-										type={"password"}
-										placeholder={"Confirm New Password"}
-									/>
-								)}
-							</Field>
-							{props.errors?.confirmNewPassword &&
-								props.touched?.confirmNewPassword && (
-									<p>{props.errors.confirmNewPassword}</p>
-								)}
+						<Field name={"confirmNewPassword"}>
+							{({ field }) => (
+								<TextInput
+									{...field}
+									errors={props.errors?.confirmNewPassword}
+									touched={props.touched?.confirmNewPassword}
+									type={showConfirmNewPassword ? "text" : "password"}
+									label={
+										(props.touched?.confirmNewPassword &&
+											props.errors?.confirmNewPassword) ||
+										"Confirm New Password"
+									}
+									labelLifted={props.values?.confirmNewPassword.length > 0}
+									icon={{
+										action: () =>
+											setShowConfirmNewPassword(!showConfirmNewPassword),
+										iconClass: showConfirmNewPassword
+											? "fa-eye-slash fa-lg"
+											: "fa-eye fa-lg",
+										toolTip: showConfirmNewPassword
+											? "Hide Password"
+											: "Show Password"
+									}}
+								/>
+							)}
+						</Field>
 
-							<LoginBtn type="submit" disabled={loading}>
-								Reset Password
-							</LoginBtn>
-						</form>
-					)}
-				</Formik>
-			</LoginPane>
-		</ResetBlock>
+						<LoginBtn type="submit" disabled={loading}>
+							Reset Password
+						</LoginBtn>
+					</form>
+				)}
+			</Formik>
+		</LoginBlock>
 	);
 }
 

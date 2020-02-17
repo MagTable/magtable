@@ -7,10 +7,6 @@ export const AlertDiv = styled.div`
 	width: auto;
 
 	z-index: 100;
-	-webkit-transform: translateX(-50%);
-	-moz-transform: translateX(-50%);
-	-ms-transform: translateX(-50%);
-	-o-transform: translateX(-50%);
 	transform: translateX(-50%);
 
 	padding: 1rem;

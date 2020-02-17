@@ -148,7 +148,6 @@ export const SeparatorLine = styled.div`
 `;
 
 export const AddUserSubmit = styled(AddUserInput)`
-	height: 34px;
 	cursor: pointer;
 	float: right;
 	margin-left: 0.5rem;

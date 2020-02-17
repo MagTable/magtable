@@ -1,16 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { clearAuthError, login } from "../../actions/auth";
-import {
-	LoginBlock,
-	LoginBtn,
-	LoginInput,
-	LoginPane
-} from "../../styled/auth/Login";
+import { LoginBlock, LoginBtn } from "../../styled/auth/Login";
 import { Field, Formik } from "formik";
 import * as Yup from "yup";
-import PasswordInput from "./PasswordInput";
+import TextInput from "../common/TextInput";
 
 /**
  * @date 2/10/2020
@@ -24,6 +19,7 @@ import PasswordInput from "./PasswordInput";
  * @returns {*} The Login component
  */
 function Login() {
+	const [showPassword, setShowPassword] = useState(false);
 	const { isAuthenticated, loading, error } = useSelector(state => state.auth);
 	const dispatch = useDispatch();
 	const history = useHistory(); // to allow us to redirect the user
@@ -43,62 +39,72 @@ function Login() {
 
 	return (
 		<LoginBlock>
-			<LoginPane>
-				<h1>Login</h1>
-				<Formik
-					initialValues={{
-						username: "mustafa",
-						password: ""
-					}}
-					onSubmit={values => {
-						dispatch(login(values));
-					}}
-					validationSchema={Yup.object().shape({
-						username: Yup.string()
-							.matches(/^[a-zA-Z0-9]+$/, "Invalid Characters")
-							.required("Required field")
-							.min(5, "Minimum Username Length is 5")
-							.max(15, "Maximum Username Length is 15"),
-						password: Yup.string().required("Required Field")
-					})}
-				>
-					{props => (
-						<form onSubmit={props.handleSubmit}>
-							{/*See Formik Documentation*/}
-							<Field name={"username"}>
-								{({ field }) => (
-									<LoginInput
-										{...field}
-										error={props.errors?.username && props.touched?.username}
-										placeholder="Username"
-									/>
-								)}
-							</Field>
-							{props.errors?.username && props.touched?.username && (
-								<p>{props.errors.username}</p>
+			<h1>MagTable</h1>
+			<Formik
+				initialValues={{
+					username: "mustafa",
+					password: ""
+				}}
+				onSubmit={values => {
+					dispatch(login(values));
+				}}
+				validationSchema={Yup.object().shape({
+					username: Yup.string()
+						.matches(/^[a-zA-Z0-9]+$/, "Invalid Characters")
+						.required("Required field")
+						.min(5, "Minimum Length is 5")
+						.max(15, "Maximum Length is 15"),
+					password: Yup.string().required("Required Field")
+				})}
+			>
+				{props => (
+					<form onSubmit={props.handleSubmit}>
+						{/*See Formik Documentation*/}
+						<Field name={"username"}>
+							{({ field }) => (
+								<TextInput
+									{...field}
+									errors={props.errors?.username}
+									touched={props.touched?.username}
+									labelLifted={props.values.username.length > 0}
+									label={
+										(props.touched?.username && props.errors?.username) ||
+										"Username"
+									}
+								/>
 							)}
-							<br />
+						</Field>
+						<Field name={"password"}>
+							{({ field }) => (
+								<TextInput
+									{...field}
+									errors={props.errors?.password}
+									touched={props.touched?.password}
+									labelLifted={props.values.password.length > 0}
+									label={
+										(props.touched?.password && props.errors?.password) ||
+										"Password"
+									}
+									type={showPassword ? "text" : "password"}
+									icon={{
+										action: () => setShowPassword(!showPassword),
+										iconClass: showPassword
+											? "fa-eye-slash fa-lg"
+											: "fa-eye fa-lg",
+										toolTip: showPassword ? "Hide Password" : "Show Password"
+									}}
+								/>
+							)}
+						</Field>
 
-							<Field name={"password"}>
-								{({ field }) => (
-									<PasswordInput
-										{...field}
-										errors={props.errors?.password}
-										touched={props.touched?.password}
-										labelLifted={props.values.password.length > 0}
-									/>
-								)}
-							</Field>
+						<br />
 
-							<br />
-
-							<LoginBtn type="submit" disabled={loading}>
-								Login
-							</LoginBtn>
-						</form>
-					)}
-				</Formik>
-			</LoginPane>
+						<LoginBtn type="submit" disabled={loading}>
+							Login
+						</LoginBtn>
+					</form>
+				)}
+			</Formik>
 		</LoginBlock>
 	);
 }
