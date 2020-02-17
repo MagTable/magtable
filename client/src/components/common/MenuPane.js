@@ -11,6 +11,7 @@ import { BrowserView, MobileView } from "react-device-detect";
 import { useSelector } from "react-redux";
 import { SYSTEM_ADMINISTRATOR } from "../../actions/constants";
 import { useLocation } from "react-router-dom";
+import PropTypes from "prop-types";
 
 /**
  * @date 2020-02-09

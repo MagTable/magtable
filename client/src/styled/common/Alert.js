@@ -25,6 +25,8 @@ export const Alert = styled.div`
 	border-style: solid;
 	border-radius: 0.25rem;
 
+	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.06), 0 0 6px rgba(0, 0, 0, 0.23);
+
 	font-size: 1rem;
 
 	::before {
