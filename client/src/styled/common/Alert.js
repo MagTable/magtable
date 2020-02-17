@@ -7,10 +7,6 @@ export const AlertDiv = styled.div`
 	width: auto;
 
 	z-index: 100;
-	-webkit-transform: translateX(-50%);
-	-moz-transform: translateX(-50%);
-	-ms-transform: translateX(-50%);
-	-o-transform: translateX(-50%);
 	transform: translateX(-50%);
 
 	padding: 1rem;
@@ -28,6 +24,8 @@ export const Alert = styled.div`
 	border-width: 0 0 0 3px;
 	border-style: solid;
 	border-radius: 0.25rem;
+
+	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.06), 0 0 6px rgba(0, 0, 0, 0.23);
 
 	font-size: 1rem;
 

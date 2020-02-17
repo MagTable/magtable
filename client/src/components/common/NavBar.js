@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../../res/Images/aeromag-logo.png";
+import logo from "../../res/Images/logo-placeholder.png";
 import { AeroLogo, HeaderDiv } from "../../styled/common/Navigation";
 import MenuPane from "./MenuPane";
 import { Link } from "react-router-dom";
@@ -14,10 +14,9 @@ import { useSelector } from "react-redux";
 /**
  * The main navigation for the website.
  * @constructor
- * @param props See React Documentation
  * @returns {*} The NavBar component
  */
-function NavBar(props) {
+function NavBar() {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 	return (

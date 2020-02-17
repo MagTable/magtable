@@ -1,108 +1,63 @@
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
-import {
-	getUsers,
-	deleteUser,
-	resetPassword,
-	getRoles
-} from "../../actions/user";
+import { getUsers } from "../../actions/user";
 import { useDispatch, useSelector } from "react-redux";
-import {
-	UserListRow,
-	UserListItem,
-	UserManipulateBlock,
-	ManipImg,
-	UserListDiv,
-	UserListRoleHeader
-} from "../../styled/user/User";
+import { UserListDiv, UserListSection } from "../../styled/user/User";
 
 import AddUser from "./AddUser";
+import UserListItem from "./UserListItem";
 
+/**
+ * Handles rendering of user CRUD components
+ *
+ * @returns {*} The UserList component
+ * @constructor
+ */
 const UserList = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(getUsers());
 	}, [dispatch]);
-	useEffect(() => {
-		dispatch(getRoles());
-	}, [dispatch]);
 
 	const users = useSelector(state => state.user.users);
-	const authUser = useSelector(state => state.auth.user);
+	const usersLoading = useSelector(state => state.user.loading);
 	const roles = useSelector(state => state.user.roles);
 
-	const handlePasswordReset = id => {
-		dispatch(resetPassword(id));
-	};
+	if (usersLoading) return <h1>Loading...</h1>; // todo replace with spinner
 
-	const handleDelete = id => {
-		dispatch(deleteUser(id));
-	};
-
-	if (!users) return <h1>No Users in the System!</h1>;
+	// set flags for each empty role
+	roles.forEach(role => {
+		role.empty = true;
+		users.forEach(user => {
+			if (user.role.id === role.id) {
+				role.empty = false;
+			}
+		});
+	});
 
 	return (
 		<UserListDiv>
-			<i>
-				<UserListRoleHeader>Add User</UserListRoleHeader>
-			</i>
-			<AddUser />
-			<br />
 			{roles.map(role => (
-				<div key={role.id}>
-					<UserListRoleHeader>
-						<b>{role.name}</b>
-					</UserListRoleHeader>
+				<UserListSection key={role.id}>
+					<h2>{role.name}s</h2>
 					{/*This part checks for users with the same role as above and adds them to that section*/}
-					{users.map(
-						user =>
-							user.role.id === role.id && (
-								<UserListRow key={user.id}>
-									<UserListItem>{user.username}</UserListItem>
-									<UserListItem>{user.password}</UserListItem>
-									<UserManipulateBlock>
-										{user.id !== authUser.id && (
-											<>
-												<ManipImg
-													className="fas fa-trash-alt"
-													onClick={() =>
-														handleDelete(user.id)
-													}
-												/>
-												<ManipImg
-													className="fas fa-redo"
-													onClick={() =>
-														handlePasswordReset(
-															user.id
-														)
-													}
-												/>
-												{user.reset && (
-													<ManipImg className="fas fa-exclamation-triangle" />
-												)}
-											</>
-										)}
-									</UserManipulateBlock>
-								</UserListRow>
-							)
+					{!role.empty ? (
+						users.map(
+							user =>
+								user.role.id === role.id && (
+									<UserListItem key={user.id} user={user} />
+								)
+						)
+					) : (
+						<h4 className={"m-0"}>
+							<i className="fas fa-exclamation-circle" /> No {role.name}s
+						</h4>
 					)}
-				</div>
+					<AddUser role={role} />
+				</UserListSection>
 			))}
 		</UserListDiv>
 	);
-};
-
-UserList.propTypes = {
-	users: PropTypes.arrayOf(
-		PropTypes.shape({
-			id: PropTypes.number.isRequired,
-			username: PropTypes.string.isRequired,
-			password: PropTypes.string,
-			role: PropTypes.object.isRequired,
-			reset: PropTypes.bool.isRequired
-		}).isRequired
-	)
 };
 
 export default UserList;

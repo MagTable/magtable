@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import { setUserPassword } from "../../actions/auth";
-import { LoginBtn, LoginInput, LoginPane } from "../../styled/auth/Login";
-import { ResetBlock } from "../../styled/auth/PasswordReset";
+import { LoginBlock, LoginBtn } from "../../styled/auth/Login";
+import { Field, Form, Formik } from "formik";
+import * as Yup from "yup";
+import TextInput from "../common/TextInput";
 
 /**
  * @date 2/10/2020
@@ -19,26 +21,12 @@ import { ResetBlock } from "../../styled/auth/PasswordReset";
  */
 function ResetPassword() {
 	const { isAuthenticated, loading } = useSelector(state => state.auth);
-	const username = useSelector(state => state.auth.user?.username);
+	const authUser = useSelector(state => state.auth?.user);
+	// const authUser = { username: "username", password: "password" };
 	const dispatch = useDispatch();
 
-	const [formData, setFormData] = useState({
-		password: "",
-		newPassword: "password",
-		confirmNewPassword: "password"
-	});
-
-	// deconstructing formData object
-	const { password, newPassword, confirmNewPassword } = formData;
-
-	// ask Arran if this syntax is confusing
-	const handleChange = e =>
-		setFormData({ ...formData, [e.target.name]: e.target.value });
-
-	const onSubmit = async e => {
-		e.preventDefault();
-		dispatch(setUserPassword(username, password, newPassword));
-	};
+	const [showNewPassword, setShowNewPassword] = useState(false);
+	const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
 
 	// if an authenticated user ends up with this component, they are sent back to the homepage
 	if (isAuthenticated) {
@@ -46,47 +34,101 @@ function ResetPassword() {
 	} // don't show the page until we know user is not authenticated
 
 	// if we don't have the username, redirect them to login this component won't work without username
-	if (!username) {
+	if (!authUser) {
 		return <Redirect to="/login" />;
 	}
 
 	return (
-		<ResetBlock>
-			<LoginPane>
-				<form onSubmit={e => onSubmit(e)}>
-					<LoginInput
-						type="text"
-						value={username}
-						onChange={e => handleChange(e)}
-						disabled
-					/>
-					<LoginInput
-						type="password"
-						placeholder="Temporary Password"
-						name="password"
-						value={password}
-						onChange={e => handleChange(e)}
-					/>
-					<LoginInput
-						type="password"
-						placeholder="New Password"
-						name="newPassword"
-						value={newPassword}
-						onChange={e => handleChange(e)}
-					/>
-					<LoginInput
-						type="password"
-						placeholder="Confirm New Password"
-						name="confirmNewPassword"
-						value={confirmNewPassword}
-						onChange={e => handleChange(e)}
-					/>
-					<LoginBtn type="submit" disabled={loading}>
-						Reset Password
-					</LoginBtn>
-				</form>
-			</LoginPane>
-		</ResetBlock>
+		<LoginBlock>
+			<Formik
+				initialValues={{
+					username: authUser.username,
+					password: authUser.password,
+					newPassword: "password",
+					confirmNewPassword: "password"
+				}}
+				onSubmit={values => {
+					dispatch(setUserPassword(values));
+				}}
+				validationSchema={Yup.object().shape({
+					newPassword: Yup.string()
+						.required("Required Field")
+						.min(8, "Minimum Length is 8"),
+					confirmNewPassword: Yup.string()
+						.min(8, "Minimum Length is 8")
+						.oneOf([Yup.ref("newPassword"), null], "Passwords must match")
+						.required("Required Field")
+				})}
+			>
+				{props => (
+					<Form>
+						<h2>Password Reset</h2>
+						<Field name={"username"}>
+							{({ field }) => (
+								<TextInput
+									{...field}
+									label={"Username"}
+									labelLifted={true}
+									disabled
+									fit
+								/>
+							)}
+						</Field>
+
+						{/*See Formik Documentation*/}
+
+						<Field name={"newPassword"}>
+							{({ field }) => (
+								<TextInput
+									{...field}
+									errors={props.errors.newPassword}
+									touched={props.touched.newPassword}
+									value={props.values.newPassword}
+									label={"New Password"}
+									type={showNewPassword ? "text" : "password"}
+									icon={{
+										action: () => setShowNewPassword(!showNewPassword),
+										iconClass: showNewPassword
+											? "fa-eye-slash fa-lg"
+											: "fa-eye fa-lg",
+										toolTip: showNewPassword ? "Hide Password" : "Show Password"
+									}}
+									fit
+								/>
+							)}
+						</Field>
+
+						<Field name={"confirmNewPassword"}>
+							{({ field }) => (
+								<TextInput
+									{...field}
+									errors={props.errors?.confirmNewPassword}
+									touched={props.touched?.confirmNewPassword}
+									value={props.values.confirmNewPassword}
+									label={"Confirm New Password"}
+									type={showConfirmNewPassword ? "text" : "password"}
+									icon={{
+										action: () =>
+											setShowConfirmNewPassword(!showConfirmNewPassword),
+										iconClass: showConfirmNewPassword
+											? "fa-eye-slash fa-lg"
+											: "fa-eye fa-lg",
+										toolTip: showConfirmNewPassword
+											? "Hide Password"
+											: "Show Password"
+									}}
+									fit
+								/>
+							)}
+						</Field>
+
+						<LoginBtn type="submit" disabled={loading}>
+							Reset
+						</LoginBtn>
+					</Form>
+				)}
+			</Formik>
+		</LoginBlock>
 	);
 }
 

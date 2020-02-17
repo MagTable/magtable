@@ -1,77 +1,64 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 import { addUser } from "../../actions/user";
-import {
-	AddUserInput,
-	AddUserRow,
-	AddUserSubmit,
-	SelectUserLevel,
-	SeparatorLine
-} from "../../styled/user/User";
+import { Field, Form, Formik } from "formik";
+import * as Yup from "yup";
+import TextInput from "../common/TextInput";
 
 /**
- * This adds a user to the system
- * @returns {*}
+ * Adds a user of the given role type
+ *
+ * @param role role of user to be added
+ * @returns {*} The AddUser component
  * @constructor
  */
-const AddUser = () => {
-	const initialFormState = {
-		username: "",
-		role: 1
-	};
-
-	const [formData, setFormData] = useState(initialFormState);
-	const { username, role } = formData;
+const AddUser = ({ role }) => {
 	const dispatch = useDispatch();
 
-	const roles = useSelector(state => state.user.roles);
-
-	/**
-	 * This function  handles the adding of a user to the system from the form
-	 * @param e the event that occurs with a submit
-	 */
-	function handleSubmit(e) {
-		e.preventDefault();
-		// TODO VALIDATION WITH FORMIK + YUP
-		if (username.length >= 5) {
-			dispatch(addUser(formData));
-			setFormData(initialFormState);
-		}
-	}
-
-	// ask Arran if this syntax is confusing
-	const handleChange = e =>
-		setFormData({ ...formData, [e.target.name]: e.target.value });
-
 	return (
-		<form onSubmit={e => handleSubmit(e)}>
-			<AddUserRow>
-				<SelectUserLevel
-					name="role"
-					value={role}
-					onChange={e => handleChange(e)}
-				>
-					{roles.map(role => (
-						<option key={role.id} value={role.id}>
-							{role.name}
-						</option>
-					))}
-				</SelectUserLevel>
-				<AddUserInput
-					type="text"
-					name="username"
-					placeholder="Username"
-					value={username}
-					onChange={e => handleChange(e)}
-					required
-				/>
-				<AddUserSubmit type="submit" value="Add" />
-			</AddUserRow>
-			<SeparatorLine />
-		</form>
+		<Formik
+			initialValues={{ username: "" }}
+			onSubmit={(values, { resetForm }) => {
+				dispatch(addUser({ ...values, role: role.id }));
+				resetForm();
+			}}
+			validationSchema={Yup.object().shape({
+				username: Yup.string()
+					.matches(/^[a-zA-Z0-9]+$/, "Invalid Characters")
+					.required("Required field")
+					.min(5, "Minimum Username Length is 5")
+					.max(15, "Maximum Username Length is 15")
+			})}
+		>
+			{props => (
+				<Form>
+					{/* See Formik Documentation */}
+					<Field name={"username"}>
+						{({ field }) => (
+							<TextInput
+								{...field}
+								errors={props.errors.username}
+								touched={props.touched.username}
+								value={props.values.username}
+								label={"Add a New " + role.name}
+								icon={{
+									iconClass: "fa-plus fa-lg text-green",
+									action: () => props.submitForm(),
+									toolTip: "New " + role.name
+								}}
+								fit
+							/>
+						)}
+					</Field>
+				</Form>
+			)}
+		</Formik>
 	);
 };
 
-AddUser.propTypes = {};
+AddUser.propTypes = {
+	role: PropTypes.object.isRequired
+};
 
 export default AddUser;

@@ -10,14 +10,23 @@ import styled from "styled-components";
  * The app's basic text box.
  **/
 export const Input = styled.input`
-	// font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-	// 	"Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-	// 	"Helvetica Neue", sans-serif;
-	// outline: none;
-	background-color: #dadada;
-	border: 2px solid #cacaca;
 	font-family: "Nanum Gothic", sans-serif;
-	outline: none;
+
+	font-size: 20px;
+
+	border: 0;
+	border-bottom: 2px solid black;
+
+	transition: border 0.3s ease-in-out;
+
+	:disabled {
+		background: rgb(51, 51, 51);
+		background: linear-gradient(
+			0deg,
+			rgba(51, 51, 51, 0.1) 0%,
+			rgba(255, 255, 255, 1) 95%
+		);
+	}
 `;
 
 /**
@@ -25,6 +34,27 @@ export const Input = styled.input`
  */
 export const Button = styled.button`
 	background-color: #dadada;
-	border: 2px solid #cacaca;
 	outline: none;
+	border: 0;
+	cursor: pointer;
+	width: 100%;
+	font-size: 18px;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.13);
+
+	transition: background 0.3s ease-in-out;
+
+	:hover {
+		background: #bdbdbd;
+	}
+`;
+
+/**
+ * The submit button to log in to the app
+ */
+export const OkButton = styled(Button)`
+	background: #9cd5ff;
+
+	:hover {
+		background: #80c9ff;
+	}
 `;

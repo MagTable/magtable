@@ -1,9 +1,8 @@
 package com.magtable.services;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
-
 public class ValidationService<E> {
+
+    ErrorService errorService;
 
     private E element;
     private String fieldName;
@@ -18,15 +17,15 @@ public class ValidationService<E> {
     public ValidationService(String fieldName, E element) {
         this.element = element;
         this.fieldName = fieldName;
+        this.errorService = new ErrorService();
     }
-
 
     public ValidationService<E> exists() {
         if (element != null) {
             return this;
         }
 
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("\"%s\" does not exist.", fieldName));
+        throw errorService.nullUser();
     }
 
     public ValidationService<E> isString() {
@@ -34,9 +33,8 @@ public class ValidationService<E> {
             String test = (String) element;
             return this;
         } catch (ClassCastException e) {
-            throwStandardError();
+            throw errorService.invalidField(fieldName);
         }
-        return null;
     }
 
     /**
@@ -50,34 +48,25 @@ public class ValidationService<E> {
             String test = (String) element;
             if (test.length() >= length) return this;
 
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    String.format("\"%s\" is too short. Required length is %d", fieldName, length));
+            throw errorService.minLength(fieldName, length);
         } catch (ClassCastException e) {
-            throwStandardError();
+            throw errorService.invalidField(fieldName);
         }
-        return null;
     }
 
     public ValidationService<E> notExists() {
         if (element == null) return this;
 
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("\"%s\" exists.", fieldName));
+        throw errorService.provideId(fieldName);
     }
 
-    public ValidationService<E> notZero() {
-        try {
-            Integer test = (Integer) element;
-            if (test == 0) return this;
-        } catch (ClassCastException | NullPointerException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("\"%s\" is not zero.", fieldName));
-        }
-        return null;
-    }
-
-
-    private void throwStandardError() {
-        // opted for term "invalid" as this error may be seen by the user and
-        // I didn't want to assume everyone knows what a string is
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("\"%s\" is invalid.", fieldName));
-    }
+//    public ValidationService<E> notZero() {
+//        try {
+//            Integer test = (Integer) element;
+//            if (test == 0) return this;
+//        } catch (ClassCastException | NullPointerException e) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("\"%s\" is not zero.", fieldName));
+//        }
+//        return null;
+//    }
 }

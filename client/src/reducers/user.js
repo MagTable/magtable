@@ -42,8 +42,7 @@ export default function(state = initialState, action) {
 		case GET_ROLES:
 			return {
 				...state,
-				roles: payload, // set the list of level descriptions to payload
-				loading: false
+				roles: payload // set the list of level descriptions to payload
 			};
 		case DELETE_USER:
 			return {

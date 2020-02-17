@@ -62,7 +62,7 @@ export const MenuTip = styled.div`
  * The icon for the link which opens the navigation menu
  */
 export const MenuTipIcon = styled.a`
-	transition-duration: 1s;
+	transition-duration: 0.5s;
 	transform: ${({ open }) => (open ? "rotate(360deg)" : "rotate(270deg)")};
 	margin-right: 10px;
 	cursor: pointer;
@@ -78,7 +78,7 @@ export const NavPane = styled.div`
 	wrap-option: none;
 	overflow: hidden;
 	transition: all 0.15s ease-in-out;
-	background-color: #dedede;
+	background-color: #e9e9e9;
 	position: absolute;
 	top: 70px;
 	right: 0px;
@@ -104,6 +104,7 @@ export const NavDiv = styled.div`
  * The header div of the page that contains the logo, navigation and possibly the title of the page.
  */
 export const HeaderDiv = styled.div`
+	background: #474747;
 	display: flex;
 	justify-content: space-between;
 	height: 70px;
@@ -115,15 +116,21 @@ export const HeaderDiv = styled.div`
  */
 export const NavLink = styled(Link)`
 	text-decoration: none;
-	color: black;
+	color: #eee;
 	font-size: 20px;
+	padding-bottom: 0.5rem;
+	${({ active }) =>
+		active &&
+		`
+		border-bottom: 2px solid #28aae1;
+	`}
 	${isMobile
 		? // Mobile rules
-		  `width: 100vw;` +
-		  `cursor: pointer;` +
-		  `padding: 20px 0px 20px 0px;` +
-		  `text-align: center;` +
-		  `border-bottom: 2px solid #DADADA;`
+		  `width: 100vw;
+		  cursor: pointer;
+		  padding: 20px 0px 20px 0px;
+		  text-align: center;
+		  border-bottom: 2px solid #DADADA;`
 		: // Desktop Rules
 		  `margin-right: 50px; 
 		  padding-top: 20px;`}
