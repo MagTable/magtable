@@ -104,8 +104,7 @@ export const NavDiv = styled.div`
  * The header div of the page that contains the logo, navigation and possibly the title of the page.
  */
 export const HeaderDiv = styled.div`
-	background: #dbf0ff;
-
+	background: #474747;
 	display: flex;
 	justify-content: space-between;
 	height: 70px;
@@ -117,7 +116,7 @@ export const HeaderDiv = styled.div`
  */
 export const NavLink = styled(Link)`
 	text-decoration: none;
-	color: black;
+	color: #eee;
 	font-size: 20px;
 	padding-bottom: 0.5rem;
 	${({ active }) =>
@@ -127,11 +126,11 @@ export const NavLink = styled(Link)`
 	`}
 	${isMobile
 		? // Mobile rules
-		  `width: 100vw;` +
-		  `cursor: pointer;` +
-		  `padding: 20px 0px 20px 0px;` +
-		  `text-align: center;` +
-		  `border-bottom: 2px solid #DADADA;`
+		  `width: 100vw;
+		  cursor: pointer;
+		  padding: 20px 0px 20px 0px;
+		  text-align: center;
+		  border-bottom: 2px solid #DADADA;`
 		: // Desktop Rules
 		  `margin-right: 50px; 
 		  padding-top: 20px;`}

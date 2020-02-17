@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../../res/Images/aeromag-logo.png";
+import logo from "../../res/Images/logo-placeholder.png";
 import { AeroLogo, HeaderDiv } from "../../styled/common/Navigation";
 import MenuPane from "./MenuPane";
 import { Link } from "react-router-dom";
