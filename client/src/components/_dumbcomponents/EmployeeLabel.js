@@ -1,6 +1,6 @@
 import React from "react";
-import {EmployeeLabelDiv} from "../../styled/magtable/ListContent";
-import {IconButton as StyledIconButton} from "../../styled/common/IconButton";
+import { EmployeeLabelDiv } from "../../styled/magtable/ListContent";
+import { IconButton as StyledIconButton } from "../../styled/common/IconButton";
 import { BrowserView } from "react-device-detect";
 
 /**
@@ -17,10 +17,8 @@ import { BrowserView } from "react-device-detect";
  * @param props
  * @returns {*} The EmployeeLabel component
  */
-function EmployeeLabel({label, toolTip}) {
-    return (
-                <EmployeeLabelDiv label={label}/>
-    )
+function EmployeeLabel({ label, toolTip }) {
+	return <EmployeeLabelDiv label={label} />;
 }
 
 export default EmployeeLabel;
