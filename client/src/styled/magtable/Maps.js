@@ -59,7 +59,8 @@ export const TowerPositionDiv = styled.div`
 export const MapsDiv = styled.div`
       display: flex;
       flex-direction: column;
-      flex-grow: 4;
+      flex-grow: 3;
+      flex-basis: 0;
 `;
 
 /**

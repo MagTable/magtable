@@ -76,7 +76,6 @@ export const EmployeeLabelDiv = styled.div`
     background-color: var(${({label}) => getLabelColor(label)});
     float: right;
     margin-right 2px;
-    
 `;
 
 /**
@@ -89,7 +88,7 @@ export const TruckListDiv = styled.div`
     margin: 0;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    flex-grow: 1.2;
     flex-basis: 0;
     overflow-y: auto;
     overflow-x: hidden;
@@ -111,7 +110,7 @@ export const TruckNumberDiv = styled.div`
     min-width: 100px;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: black;
     font-size: 40px;
 `;
 

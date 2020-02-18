@@ -11,17 +11,22 @@ import styled from "styled-components";
  **/
 export const ListTitle = styled.div`
     background-color: #545454;
+    display: flex;
     position: sticky;
+    height: 50px;
+    align-items: center;
 `;
 
 /**
  * The text within the ListTitle div.
  */
 export const ListTitleText = styled.p`
-    padding-left: 30px;
+    padding-left: 20px;
     font-size: 20px;
     color: white;
     font-family: 'Noto Sans KR', sans-serif;
+        margin-block-start: 0em;
+    margin-block-end: 0em;
 `;
 
 /**
@@ -29,6 +34,8 @@ export const ListTitleText = styled.p`
  */
 export const TowerTitle = styled(ListTitle)`
     background-color: #949494;
+    justify-content: center;
+    
 `;
 
 /**
@@ -37,4 +44,5 @@ export const TowerTitle = styled(ListTitle)`
 export const TowerTitleText = styled(ListTitleText)`
     color: #333333;
     width: fit-content;
+    padding-left: 0px;
 `;
