@@ -69,7 +69,9 @@ function TruckListItem({truck, open}) {
                     </TruckListItemLocation>
                 </TruckInfoDiv>
             </TruckListItemDiv>
-            <TruckProblemsDiv open={open}/>
+            <TruckProblemsDiv open={open}>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, doloremque doloribus fuga ipsa necessitatibus nobis? Culpa eligendi est facere minima neque quod recusandae repudiandae. Aut dignissimos esse est iste laboriosam, libero maiores minima necessitatibus nostrum perferendis quae recusandae velit veniam veritatis voluptate! Aut cumque, earum et facere ipsa ipsam quod recusandae rem repellat sapiente sunt unde. Animi architecto autem consequuntur debitis fuga illum, ipsum quod veniam. Ad, architecto at dignissimos exercitationem inventore ipsum magni nisi perferendis recusandae rem rerum soluta temporibus! Atque consequuntur eius eveniet exercitationem facilis. Doloremque, perspiciatis, quibusdam.
+            </TruckProblemsDiv>
         </div>
 
     )

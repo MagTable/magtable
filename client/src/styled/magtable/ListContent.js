@@ -109,6 +109,7 @@ export const TruckListItemDiv = styled.div`
 export const TruckProblemsDiv = styled(TruckListItemDiv)`
     height: ${({ open }) => (open ? "130px" : "0px")};
     border-top: none;
+    overflow: auto;
 `;
 
 export const TruckNumberDiv = styled.div`
