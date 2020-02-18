@@ -5,11 +5,20 @@
 html{
   /*background-color: #E9E9E9;*/
   font-family: 'Karla', sans-serif;
-}
+  --border-color: #474747;
 
+  /*Context colors - for items that have an action or have meaning other than just style.*/
+  --context-green: #C7D645;
+  --context-red: #A62A32;
+  --context-blue: #90D5DA;
+  --context-grey: #46575E;
+
+}
 ::selection {
   background: #28aae1;
 }
+
+
 
 input:focus{
   outline: none;

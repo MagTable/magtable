@@ -1,0 +1,9 @@
+dummyTrucks.js - contains a bunch of truck objects in an array for the purpose of testing the Mag Table truck list.
+
+TowerMap.js - the "map" that holds the different positions available to be filled for the tower.
+
+TowerPosition.js - the individual positions/roles the tower has for scheduling.
+
+TruckList.js - The list of trucks on the left side of the screen.
+
+TruckMap.js - the map labelled "Parking Locations" - for assigning trucks to locations.
