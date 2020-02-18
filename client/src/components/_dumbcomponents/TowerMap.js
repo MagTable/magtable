@@ -24,7 +24,7 @@ function TowerMap({roles}) {
             </ListTitle>
             <TowerMapDiv>
                 {roles.map(role => (
-                    <TowerPosition role={role}/>
+                    <TowerPosition key={role} role={role}/>
                 ))}
             </TowerMapDiv>
         </TowerDiv>
