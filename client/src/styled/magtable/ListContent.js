@@ -84,6 +84,7 @@ export const EmployeeLabelDiv = styled.div`
 export const TruckListDiv = styled.div`
     // border: 2px solid var(--border-color);
     // height: calc(100vh - 73px);
+    transition: all 0.15s ease-in-out;
     min-width: 300px;
     margin: 0;
     display: flex;
@@ -99,9 +100,14 @@ export const TruckListDivWrapper = styled(TruckListDiv)`
 `;
 
 export const TruckListItemDiv = styled.div`
-    border-bottom: 2px solid var(--border-color);
+    transition: all 0.15s ease-in-out;
+    border-top: 1px solid var(--border-color);
     height: 90px;
     display:flex;
+`;
+
+export const TruckProblemsDiv = styled(TruckListItemDiv)`
+    height: ${({ open }) => (open ? "130px" : "0px")};
 `;
 
 export const TruckNumberDiv = styled.div`

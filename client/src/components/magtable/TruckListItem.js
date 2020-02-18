@@ -1,12 +1,10 @@
 import React from "react";
 import {
-    EmployeeLabel,
-    EmployeeListItem,
     TruckInfoDiv,
     TruckListItemDiv,
     TruckListItemEmployee, TruckListItemEmployeeList,
     TruckListItemLocation,
-    TruckNumberDiv
+    TruckNumberDiv, TruckProblemsDiv
 } from "../../styled/magtable/ListContent";
 
 /**
@@ -21,7 +19,7 @@ import {
  * @param props
  * @returns {*} The TruckListItem component
  */
-function TruckListItem({truck}) {
+function TruckListItem({truck, open}) {
     let colorCode;
 
     // Sets the color for the TruckNumberDiv based on the status of the truck
@@ -71,6 +69,7 @@ function TruckListItem({truck}) {
                     </TruckListItemLocation>
                 </TruckInfoDiv>
             </TruckListItemDiv>
+            <TruckProblemsDiv open={open}/>
         </div>
 
     )
