@@ -12,6 +12,7 @@ html{
   --context-red: #A62A32;
   --context-blue: #90D5DA;
   --context-grey: #46575E;
+  --context-orange: #d66e4b;
 
 }
 ::selection {

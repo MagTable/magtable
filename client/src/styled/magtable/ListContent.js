@@ -6,11 +6,32 @@ import styled from "styled-components";
  * @module Styled
  */
 
+/*
+   Labels:
+        gp: green pass
+        ojt: on the job training
+        ts: tower staff
+        bl: bay lead
+ */
+const getLabelColor = label => {
+    switch (label) {
+        case "gp":
+            return "--context-green";
+        case "ojt":
+            return "--context-orange";
+        case "ts":
+            return "--context-grey";
+        case "bl":
+            return "--context-blue";
+        default:
+            return "#fff";
+    }
+};
+
 /**
  *
  **/
-export const EmployeeList = styled.div`
-    border: 2px solid var(--border-color);
+export const EmployeeListDiv = styled.div`
     margin: 0;
     display: flex;
     flex-grow: 1;
@@ -18,11 +39,43 @@ export const EmployeeList = styled.div`
     flex-basis: 0;
     min-width: 250px;
     overflow-y: auto;
+    overflow-x: hidden;
+`;
+
+export const EmployeeListDivWrapper = styled(EmployeeListDiv)`
+    border: 2px solid var(--border-color);
 `;
 
 export const EmployeeListItem = styled.div`
     border-bottom: 2px solid var(--border-color);
-    height: 90px;
+    min-height: 75px; 
+`;
+
+export const EmployeeListItemContentDiv = styled.div`
+    display: inline-block;
+    margin-left: 10px;
+`;
+
+export const EmployeeListItemName = styled.p`
+    margin-block-end: 0em;
+    font-weight: bold;
+`;
+
+export const EmployeeListItemTime = styled.p`
+    margin-block-start: 0em;
+    font-style: italic;
+`;
+
+export const EmployeeLabelDiv = styled.div`
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border: 2px solid var(--border-color);
+    border-top: none;
+    width: 20px;
+    height: 20px;
+    background-color: var(${({label}) => getLabelColor(label)});
+    float: right;
+    margin-right 2px;
     
 `;
 

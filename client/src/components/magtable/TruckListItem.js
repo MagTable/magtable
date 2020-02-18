@@ -1,5 +1,7 @@
 import React from "react";
 import {
+    EmployeeLabel,
+    EmployeeListItem,
     TruckInfoDiv,
     TruckListItemDiv,
     TruckListItemEmployee, TruckListItemEmployeeList,
@@ -54,9 +56,13 @@ function TruckListItem({truck}) {
                 <TruckInfoDiv>
                     <TruckListItemEmployeeList>
                         {truck.employees.map(employee =>(
-                            <TruckListItemEmployee>
-                                {employee}
-                            </TruckListItemEmployee>
+                            employee === null?
+                                null
+                                :
+                                <TruckListItemEmployee key={employee}>
+                                    {employee}
+                                </TruckListItemEmployee>
+
                         ))}
                     </TruckListItemEmployeeList>
 

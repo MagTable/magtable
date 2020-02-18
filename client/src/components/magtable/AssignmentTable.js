@@ -4,11 +4,12 @@ import {
     MapsDiv
 } from "../../styled/magtable/Maps";
 import {ListTitle, ListTitleText} from "../../styled/magtable/Titling";
-import {EmployeeList, EmployeeListItem} from "../../styled/magtable/ListContent";
 import TowerMap from "../_dumbcomponents/TowerMap";
 import TruckMap from "../_dumbcomponents/TruckMap";
 import TruckList from "../_dumbcomponents/TruckList";
 import dummyTrucks from "../_dumbcomponents/dummyTrucks.js";
+import dummyEmployees from "../_dumbcomponents/dummyEmployees";
+import EmployeeList from "../_dumbcomponents/EmployeeList";
 
 /**
  * Placeholder component to assist in displaying routing
@@ -19,16 +20,7 @@ const AssignmentTable = () => {
 
     return (
         <AssignmentContainer>
-            <EmployeeList>
-                <ListTitle>
-                    <ListTitleText>
-                        Employees
-                    </ListTitleText>
-                </ListTitle>
-
-                <EmployeeListItem/>
-                <EmployeeListItem/>
-            </EmployeeList>
+            <EmployeeList employees={dummyEmployees}/>
             <TruckList trucks={dummyTrucks}/>
 
             <MapsDiv>
