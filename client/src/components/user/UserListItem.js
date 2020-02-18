@@ -10,6 +10,14 @@ import { deleteUser, resetPassword } from "../../actions/user";
 import IconButton from "../common/IconButton";
 import Confirmation from "../common/Confirmation";
 
+/**
+ * Displays the relevant user attributes as a list item
+ * Contains buttons that perform actions on the user (delete, reset password)
+ *
+ * @param user user to be rendered in the list item
+ * @returns {*} UserListItem Component
+ * @constructor
+ */
 const UserListItem = ({ user }) => {
 	const dispatch = useDispatch();
 	const authUser = useSelector(state => state.auth.user);

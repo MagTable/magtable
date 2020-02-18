@@ -14,10 +14,9 @@ import { useSelector } from "react-redux";
 /**
  * The main navigation for the website.
  * @constructor
- * @param props See React Documentation
  * @returns {*} The NavBar component
  */
-function NavBar(props) {
+function NavBar() {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 	return (

@@ -26,6 +26,9 @@ public class AuthenticationController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    public ErrorService errorService;
+
     /**
      * route           POST /authenticate
      * description     method to verify a username/password combo and return a JWT
@@ -42,7 +45,7 @@ public class AuthenticationController {
         if(user.isReset()){
             //User requires a password reset
             //Telling the front end that we didn't finish, the HTTP status may not be the right one.
-            throw new ResponseStatusException(HttpStatus.SEE_OTHER, "Password update required");
+           throw errorService.updatePassword();
         }
 
         // User does not need a password reset
@@ -62,13 +65,17 @@ public class AuthenticationController {
      */
     @PostMapping("/password/reset")
     public ResponseEntity<?> authenticatePasswordReset(@RequestBody AuthenticationRequest request) {
+        new ValidationService<>("request", request).exists();
+        // Validating the new password follows business
+        new ValidationService<>("newpassword", request.getNewPassword()).exists().isString().isMinLengthString(8);
 
         User user;
-        user = authenticationService.authenticateReset(request);
+        user = authenticationService.authenticate(request);
+        System.out.println(user);
 
         if(!user.isReset()){
             //Telling the front end that we didn't finish, the HTTP status may not be the right one.
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User is not eligible for a password reset");
+            throw errorService.ineligibleUser();
         }
 
         // user is authenticated there new password is OK
@@ -105,12 +112,12 @@ public class AuthenticationController {
             String username = jwtTokenUtil.extractUsername(jwt.substring(7)); // jwt can potentially be null
             //searching the database for the user
             User user = userRepository.findUserByUsername(username).orElseThrow(() ->
-                    new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User %s not found.", username)));
+                   errorService.userNotFound(username));
 
             //returning the new safe user
             return new SafeUser(user);
         } catch (NullPointerException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Authentication failed: JWT Not Found.");
+            throw errorService.jwtNotFound();
         }
     }
 }

@@ -20,11 +20,14 @@ public class MagUserDetailsService implements UserDetailsService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    ErrorService errorService;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         //Searching the database for the user
-        User user = userRepository.findUserByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Not found: " + username));
+        User user = userRepository.findUserByUsername(username).orElseThrow(() -> errorService.userNotFound(username));
         return new MagUserDetails(user);
     }
 }

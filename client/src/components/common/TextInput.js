@@ -7,6 +7,13 @@ import {
 	TextInputContainer
 } from "../../styled/common/TextInput";
 
+/**
+ * Standard component for text input, has support for labels, errors, and IconButtons
+ *
+ * @param props see PropTypes
+ * @returns {*} The TextInput Component
+ * @constructor
+ */
 function TextInput(props) {
 	const [focus, setFocus] = useState(false);
 

@@ -11,6 +11,7 @@ import { BrowserView, MobileView } from "react-device-detect";
 import { useSelector } from "react-redux";
 import { SYSTEM_ADMINISTRATOR } from "../../actions/constants";
 import { useLocation } from "react-router-dom";
+import PropTypes from "prop-types";
 
 /**
  * @date 2020-02-09
@@ -22,7 +23,8 @@ import { useLocation } from "react-router-dom";
  * The menu used for navigating the site. The desktop version has a simple layout with links simply placed in the
  * header, while the mobile version has a folding menu to preserve screen real estate.
  * @constructor
- * @param props
+ * @param menuOpen dictates whether or not the menu is in the open state
+ * @param setMenuOpen changes the value of menuOpen
  * @returns {*} The MenuPane component
  */
 function MenuPane({ menuOpen, setMenuOpen }) {
@@ -84,5 +86,10 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 		</div>
 	);
 }
+
+MenuPane.propTypes = {
+	menuOpen: PropTypes.bool,
+	setMenuOpen: PropTypes.func
+};
 
 export default MenuPane;

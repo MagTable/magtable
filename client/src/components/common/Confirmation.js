@@ -3,6 +3,22 @@ import PropTypes from "prop-types";
 import { ConfirmationBox } from "../../styled/common/Confirmation";
 import { ClickCatcher } from "../../styled/common/ClickCatcher";
 
+/**
+ * @date 2/17/2020
+ * @author Arran Woodruff
+ * @module Component
+ */
+
+/**
+ *
+ * @param children component that requires confirmation
+ * @param action function which will be called upon confirmation
+ * @param confirmationMessage message displayed on the confirmation button
+ * @param color base color of confirmation button
+ * @param hoverColor hover color of confirmation button
+ * @returns {*} the Confirmation component
+ * @constructor
+ */
 function Confirmation({
 	children,
 	action,
@@ -13,12 +29,12 @@ function Confirmation({
 	const [open, setOpen] = useState(false);
 
 	const confirm = () => {
-		setOpen(!open);
+		setOpen(true);
 	};
 
 	const handleClick = () => {
 		action();
-		setOpen(!open);
+		setOpen(false);
 	};
 
 	return (
@@ -37,7 +53,10 @@ function Confirmation({
 
 Confirmation.propTypes = {
 	children: PropTypes.func.isRequired,
-	action: PropTypes.func.isRequired
+	action: PropTypes.func.isRequired,
+	confirmationMessage: PropTypes.string.isRequired,
+	color: PropTypes.string,
+	hoverColor: PropTypes.string
 };
 
 export default Confirmation;
