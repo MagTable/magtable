@@ -3,10 +3,8 @@ import {
 	EmployeeListDiv,
 	EmployeeListDivWrapper
 } from "../../styled/magtable/ListContent";
-import EmployeeLabel from "./EmployeeLabel";
-import EmployeeListItemContent from "./EmployeeListItemContent";
 import EmployeeListItem from "./EmployeeListItem";
-import React, { useState } from "react";
+import React from "react";
 
 /**
  * @date 2020-02-18
@@ -21,7 +19,6 @@ import React, { useState } from "react";
  * @returns {*} The EmployeList component
  */
 function EmployeeList({ employees }) {
-	console.log(employees);
 	return (
 		<EmployeeListDivWrapper>
 			<ListTitle>
@@ -30,7 +27,7 @@ function EmployeeList({ employees }) {
 
 			<EmployeeListDiv>
 				{employees.map(employee => (
-					<EmployeeListItem key={employee.name} employee={employee} />
+					<EmployeeListItem key={employee.id} employee={employee} />
 				))}
 			</EmployeeListDiv>
 		</EmployeeListDivWrapper>
