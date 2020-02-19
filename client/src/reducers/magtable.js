@@ -99,6 +99,94 @@ const initialAssignments = [
 		employeeShifts: [],
 		parkingLocation: null,
 		brixRecords: []
+	},
+	{
+		equipment: {
+			id: 3,
+			label: 36,
+			notice: "",
+			status: "OOS"
+		},
+		employeeShifts: [],
+		parkingLocation: null,
+		brixRecords: []
+	},
+	{
+		equipment: {
+			id: 1001,
+			label: "TS",
+			notice: null,
+			status: null
+		},
+		employeeShifts: [],
+		parkingLocation: null,
+		brixRecords: []
+	},
+	{
+		equipment: {
+			id: 1002,
+			label: "CTM-E",
+			notice: null,
+			status: null
+		},
+		employeeShifts: [],
+		parkingLocation: null,
+		brixRecords: []
+	},
+	{
+		equipment: {
+			id: 1003,
+			label: "IM-E",
+			notice: null,
+			status: null
+		},
+		employeeShifts: [],
+		parkingLocation: null,
+		brixRecords: []
+	},
+	{
+		equipment: {
+			id: 1004,
+			label: "IH-E",
+			notice: null,
+			status: null
+		},
+		employeeShifts: [],
+		parkingLocation: null,
+		brixRecords: []
+	},
+	{
+		equipment: {
+			id: 1005,
+			label: "CTM-W",
+			notice: null,
+			status: null
+		},
+		employeeShifts: [],
+		parkingLocation: null,
+		brixRecords: []
+	},
+	{
+		equipment: {
+			id: 1006,
+			label: "IM-W",
+			notice: null,
+			status: null
+		},
+		employeeShifts: [],
+		parkingLocation: null,
+		brixRecords: []
+	},
+	{
+		equipment: {
+			id: 1007,
+			label: "IH-W",
+			notice: null,
+			status: null
+		},
+		employeeShifts: [],
+		parkingLocation: null,
+		brixRecords: []
 	}
 ];
 
