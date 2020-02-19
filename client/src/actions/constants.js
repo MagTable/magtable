@@ -3,6 +3,9 @@ export const SYSTEM_ADMINISTRATOR = "System Administrator";
 export const PERSONNEL_MANAGER = "Personnel Manager";
 export const MECHANIC = "Mechanic";
 
+export const EAST_APRON = "EDA";
+export const WEST_APRON = "WDA";
+
 export const SET_ALERT = "SET_ALERT";
 export const REMOVE_ALERT = "REMOVE_ALERT";
 
@@ -24,25 +27,22 @@ export const LOGGING_IN = "LOGGING_IN";
 export const CLEAR_ERROR = "CLEAR_ERROR";
 
 /* Assignment Table */
-export const SET_TRUCK_EMPLOYEE = "SET_TRUCK_EMPLOYEE";
-export const REMOVE_TRUCK_EMPLOYEE = "REMOVE_TRUCK_EMPLOYEE";
+export const SET_EQUIPMENT_EMPLOYEE = "SET_EQUIPMENT_EMPLOYEE";
+export const REMOVE_EQUIPMENT_EMPLOYEE = "REMOVE_EQUIPMENT_EMPLOYEE";
 export const SET_TRUCK_LOCATION = "SET_TRUCK_LOCATION";
 export const REMOVE_TRUCK_LOCATION = "REMOVE_TRUCK_LOCATION";
 export const TOGGLE_BAY_LEAD = "TOGGLE_BAY_LEAD";
 
-export const SET_TOWER_EMPLOYEE = "SET_TOWER_EMPLOYEE";
-export const REMOVE_TOWER_EMPLOYEE = "REMOVE_TOWER_EMPLOYEE";
-
 export const SET_SELECTED_APRON = "SET_SELECTED_APRON";
 
-export const ADD_SHIFT = "ADD_SHIFT";
-export const FORCE_UPDATE_SHIFTS = "FORCE_UPDATE_SHIFTS"; // server will periodically update shift list on it's own, this would force a refresh
+export const ADD_EMPLOYEE_SHIFT = "ADD_EMPLOYEE_SHIFT";
+export const FORCE_UPDATE_SHIFT_DATA = "FORCE_UPDATE_SHIFT_DATA";
+export const GET_ASSIGNMENT_DATA = "GET_ASSIGNMENT_DATA"; // server will periodically update shift list on it's own, this would force a refresh
 
 export const ADD_DAILY_MESSAGE = "ADD_DAILY_MESSAGE";
 export const REMOVE_DAILY_MESSAGE = "REMOVE_DAILY_MESSAGE";
 
 export const SET_DAILY_MIX = "SET_DAILY_MIX";
-export const UPDATE_DAILY_MIX = "UPDATE_DAILY_MIX";
 export const ADD_BRIX_RECORD = "ADD_BRIX_RECORD";
 
 export const PUBLISH_TABLE = "PUBLISH_TABLE";
