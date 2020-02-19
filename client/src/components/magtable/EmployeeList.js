@@ -19,22 +19,30 @@ import {
  * @returns {*} The EmployeeList component
  */
 const EmployeeList = () => {
-	const employees = useSelector(state => state.employee.employees); // get the employees
-	const startTimes = useSelector(state => state.employee.startTimes); // get the unique start times
+	const employees = useSelector(state => state.magtable.employeeShifts); // get the employees
+	const unsortedTimes = []; // to store the unsorted start times
+	employees.forEach(emp => {
+		unsortedTimes.push(emp.startTime); // store all the start times for the employees
+	});
+
+	const startTimes = [...new Set(unsortedTimes)]; // only takes in unique time values and put into a new array
+
+	startTimes.sort(); // sort the array so that they are in order
 
 	return (
 		<EmployeeListDiv>
 			{startTimes.map(startTime => (
-				<EmployeeListItemTime key={startTime}><!-- is this the right div? -->
+				<div name="start time header" key={startTime}>
 					<h2>{startTime}</h2>
-					{employees.map( // for each start time, display relevant employees
+					{employees.map(
+						// for each start time, display relevant employees
 						employee =>
 							employee.startTime ===
 							startTime(
 								<EmployeeListItem key={employee.id} employee={employee} />
 							)
 					)}
-				</EmployeeListItemTime>
+				</div>
 			))}
 		</EmployeeListDiv>
 	);
