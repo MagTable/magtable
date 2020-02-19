@@ -5,6 +5,14 @@ import {
     TruckListItemEmployee, TruckListItemEmployeeList,
     TruckListItemLocation,
     TruckNumberDiv, TruckProblemsDiv
+	EmployeeLabel,
+	EmployeeListItem,
+	TruckInfoDiv,
+	TruckListItemDiv,
+	TruckListItemEmployee,
+	TruckListItemEmployeeList,
+	TruckListItemLocation,
+	TruckNumberDiv
 } from "../../styled/magtable/ListContent";
 
 /**
@@ -22,28 +30,28 @@ import {
 function TruckListItem({truck, open}) {
     let colorCode;
 
-    // Sets the color for the TruckNumberDiv based on the status of the truck
-    switch (truck.status) {
-        case "GO":{
-            colorCode = '--context-green'; // Operational
-            break;
-        }
-        case "INOP":{
-            colorCode = '--context-red'; // Inoperable
-            break;
-        }
-        case "CON":{
-            colorCode = '--context-blue'; // Conditional
-            break;
-        }
-        case "OOS":{
-            colorCode = '--context-grey'; // Out of service
-            break;
-        }
-        default:{
-            // If an unknown tuck status is provided.
-        }
-    }
+	// Sets the color for the TruckNumberDiv based on the status of the truck
+	switch (truck.status) {
+		case "GO": {
+			colorCode = "--context-green"; // Operational
+			break;
+		}
+		case "INOP": {
+			colorCode = "--context-red"; // Inoperable
+			break;
+		}
+		case "CON": {
+			colorCode = "--context-blue"; // Conditional
+			break;
+		}
+		case "OOS": {
+			colorCode = "--context-grey"; // Out of service
+			break;
+		}
+		default: {
+			// If an unknown tuck status is provided.
+		}
+	}
 
     return (
         <div>

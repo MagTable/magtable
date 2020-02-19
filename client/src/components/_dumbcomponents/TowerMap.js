@@ -1,6 +1,6 @@
 import React from "react";
-import {ListTitle, ListTitleText} from "../../styled/magtable/Titling";
-import {TowerDiv, TowerMapDiv} from "../../styled/magtable/Maps";
+import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
+import { TowerDiv, TowerMapDiv } from "../../styled/magtable/Maps";
 import TowerPosition from "./TowerPosition";
 
 /**
@@ -14,23 +14,19 @@ import TowerPosition from "./TowerPosition";
  * @constructor
  * @returns {*} The TowerMap component
  */
-function TowerMap({roles}) {
-    return (
-        <TowerDiv>
-            <ListTitle>
-                <ListTitleText>
-                    Tower
-                </ListTitleText>
-            </ListTitle>
-            <TowerMapDiv>
-                {roles.map(role => (
-                    <TowerPosition key={role} role={role}/>
-                ))}
-            </TowerMapDiv>
-        </TowerDiv>
-
-
-    )
+function TowerMap({ roles }) {
+	return (
+		<TowerDiv>
+			<ListTitle>
+				<ListTitleText>Tower</ListTitleText>
+			</ListTitle>
+			<TowerMapDiv>
+				{roles.map(role => (
+					<TowerPosition key={role} role={role} />
+				))}
+			</TowerMapDiv>
+		</TowerDiv>
+	);
 }
 
 export default TowerMap;

@@ -3,6 +3,10 @@ import {ListTitle, ListTitleText} from "../../styled/magtable/Titling";
 import TruckListItem from "../magtable/TruckListItem";
 import {TruckListDiv, TruckListDivWrapper} from "../../styled/magtable/ListContent";
 import React, {useState} from "react";
+import {
+	TruckListDiv,
+	TruckListDivWrapper
+} from "../../styled/magtable/ListContent";
 
 /**
  * @date 2020-02-17

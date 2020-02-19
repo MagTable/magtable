@@ -1,8 +1,8 @@
 import React from "react";
 import {
-    EmployeeListItemContentDiv,
-    EmployeeListItemName,
-    EmployeeListItemTime
+	EmployeeListItemContentDiv,
+	EmployeeListItemName,
+	EmployeeListItemTime
 } from "../../styled/magtable/ListContent";
 
 /**
@@ -17,17 +17,15 @@ import {
  * @param props
  * @returns {*} The EmployeeListItemContent component
  */
-function EmployeeListItemContent({employee}) {
-    return (
-        <EmployeeListItemContentDiv>
-            <EmployeeListItemName>
-                {employee.name}
-            </EmployeeListItemName>
-            <EmployeeListItemTime>
-                {employee.startTime} - {employee.endTime}
-            </EmployeeListItemTime>
-        </EmployeeListItemContentDiv>
-    )
+function EmployeeListItemContent({ employee }) {
+	return (
+		<EmployeeListItemContentDiv>
+			<EmployeeListItemName>{employee.name}</EmployeeListItemName>
+			<EmployeeListItemTime>
+				{employee.startTime} - {employee.endTime}
+			</EmployeeListItemTime>
+		</EmployeeListItemContentDiv>
+	);
 }
 
 export default EmployeeListItemContent;

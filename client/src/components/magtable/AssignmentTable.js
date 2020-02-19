@@ -1,9 +1,6 @@
 import React from "react";
-import {
-    AssignmentContainer,
-    MapsDiv
-} from "../../styled/magtable/Maps";
-import {ListTitle, ListTitleText} from "../../styled/magtable/Titling";
+import { AssignmentContainer, MapsDiv } from "../../styled/magtable/Maps";
+import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import TowerMap from "../_dumbcomponents/TowerMap";
 import TruckMap from "../_dumbcomponents/TruckMap";
 import TruckList from "../_dumbcomponents/TruckList";
@@ -16,20 +13,17 @@ import EmployeeList from "../_dumbcomponents/EmployeeList";
  * @constructor
  */
 const AssignmentTable = () => {
+	return (
+		<AssignmentContainer>
+			<EmployeeList employees={dummyEmployees} />
+			<TruckList trucks={dummyTrucks} />
 
-
-    return (
-        <AssignmentContainer>
-            <EmployeeList employees={dummyEmployees}/>
-            <TruckList trucks={dummyTrucks}/>
-
-            <MapsDiv>
-                <TruckMap/>
-                <TowerMap roles={['Tower Spotter', 'CTM', 'Iceman', 'Ice House']}/>
-            </MapsDiv>
-
-        </AssignmentContainer>
-    );
+			<MapsDiv>
+				<TruckMap />
+				<TowerMap roles={["Tower Spotter", "CTM", "Iceman", "Ice House"]} />
+			</MapsDiv>
+		</AssignmentContainer>
+	);
 };
 
 export default AssignmentTable;

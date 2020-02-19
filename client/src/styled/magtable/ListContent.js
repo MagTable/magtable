@@ -14,18 +14,18 @@ import styled from "styled-components";
         bl: bay lead
  */
 const getLabelColor = label => {
-    switch (label) {
-        case "gp":
-            return "--context-green";
-        case "ojt":
-            return "--context-orange";
-        case "ts":
-            return "--context-grey";
-        case "bl":
-            return "--context-blue";
-        default:
-            return "#fff";
-    }
+	switch (label) {
+		case "gp":
+			return "--context-green";
+		case "ojt":
+			return "--context-orange";
+		case "ts":
+			return "--context-grey";
+		case "bl":
+			return "--context-blue";
+		default:
+			return "#fff";
+	}
 };
 
 /**
@@ -47,8 +47,8 @@ export const EmployeeListDivWrapper = styled(EmployeeListDiv)`
 `;
 
 export const EmployeeListItem = styled.div`
-    border-bottom: 2px solid var(--border-color);
-    min-height: 75px; 
+	border-bottom: 2px solid var(--border-color);
+	min-height: 75px;
 `;
 
 export const EmployeeListItemContentDiv = styled.div`
@@ -124,10 +124,9 @@ export const TruckNumberDiv = styled.div`
 `;
 
 export const TruckInfoDiv = styled.div`
-    display: flex;
-    flex-grow: 3;
-    justify-content: space-between;
-    
+	display: flex;
+	flex-grow: 3;
+	justify-content: space-between;
 `;
 
 export const TruckListItemEmployee = styled.p`
