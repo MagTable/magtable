@@ -1,8 +1,6 @@
-
-import {ListTitle, ListTitleText} from "../../styled/magtable/Titling";
+import React, { useState } from "react";
+import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import TruckListItem from "../magtable/TruckListItem";
-import {TruckListDiv, TruckListDivWrapper} from "../../styled/magtable/ListContent";
-import React, {useState} from "react";
 import {
 	TruckListDiv,
 	TruckListDivWrapper
@@ -20,29 +18,24 @@ import {
  * @param props
  * @returns {*} The TruckList component
  */
-function TruckList({trucks}) {
+function TruckList({ trucks }) {
+	const [open, setOpen] = useState(false);
 
-    const [open, setOpen] = useState(false);
-
-    return (
-        <TruckListDivWrapper>
-            <ListTitle>
-                <ListTitleText>
-                    Trucks
-                    <button onClick={() => setOpen(!open)}>open</button>
-                </ListTitleText>
-            </ListTitle>
-            <TruckListDiv >
-
-
-                {trucks.map(truck => (
-                    <TruckListItem open={open} key={truck.id} truck={truck}/>
-                ))}
-
-            </TruckListDiv>
-        </TruckListDivWrapper>
-
-    )
+	return (
+		<TruckListDivWrapper>
+			<ListTitle>
+				<ListTitleText>
+					Trucks
+					<button onClick={() => setOpen(!open)}>open</button>
+				</ListTitleText>
+			</ListTitle>
+			<TruckListDiv>
+				{trucks.map(truck => (
+					<TruckListItem open={open} key={truck.id} truck={truck} />
+				))}
+			</TruckListDiv>
+		</TruckListDivWrapper>
+	);
 }
 
 export default TruckList;
