@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const AlertDiv = styled.div`
 	position: fixed;
-	bottom: 10px;
+	top: 10px;
 	left: 50%;
 	width: auto;
 
@@ -21,7 +21,7 @@ export const Alert = styled.div`
 	padding: 0.75rem;
 	margin-bottom: 0.5rem;
 
-	border-width: 0 0 0 3px;
+	border-width: 1px 3px 1px 3px;
 	border-style: solid;
 	border-radius: 0.25rem;
 
