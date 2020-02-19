@@ -24,8 +24,8 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsService userDetailsService;
 
-   @Autowired
-   private JwtRequestFilter JwtRequestFilter;
+    @Autowired
+    private JwtRequestFilter JwtRequestFilter;
 
     private final String SYSTEM_ADMIN = "System Administrator";
 
