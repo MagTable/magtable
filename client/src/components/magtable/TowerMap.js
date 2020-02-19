@@ -24,6 +24,9 @@ function TowerMap() {
 	}, [dispatch]);
 
 	const assignments = useSelector(state => state.magtable.assignments);
+	const apron = useSelector(state => state.magtable.selectedApron);
+
+	console.log(apron);
 
 	return (
 		<TowerDiv>
@@ -33,10 +36,14 @@ function TowerMap() {
 			<TowerMapDiv>
 				{assignments.map(
 					assignment =>
-						assignment.equipment.id > 1000 && (
+						assignment.equipment.id >= 1000 &&
+						(apron === "EDA"
+							? assignment.equipment.id < 1010
+							: assignment.equipment.id > 1010 ||
+							  assignment.equipment.id === 1000) && (
 							<TowerPosition
 								key={assignment.equipment.id}
-								position={assignment.equipment.label}
+								position={assignment.equipment.position}
 							/>
 						)
 				)}

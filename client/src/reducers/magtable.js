@@ -102,8 +102,30 @@ const initialAssignments = [
 	},
 	{
 		equipment: {
+			id: 3,
+			label: 36,
+			notice: "",
+			status: "OOS"
+		},
+		employeeShifts: [],
+		parkingLocation: null,
+		brixRecords: []
+	},
+	{
+		equipment: {
+			id: 1000,
+			position: "Tower Spotter",
+			notice: null,
+			status: null
+		},
+		employeeShifts: [],
+		parkingLocation: null,
+		brixRecords: []
+	},
+	{
+		equipment: {
 			id: 1001,
-			label: "TS",
+			position: "EDA-CTM",
 			notice: null,
 			status: null
 		},
@@ -114,7 +136,7 @@ const initialAssignments = [
 	{
 		equipment: {
 			id: 1002,
-			label: "CTM-E",
+			position: "EDA-Ice Man",
 			notice: null,
 			status: null
 		},
@@ -125,7 +147,7 @@ const initialAssignments = [
 	{
 		equipment: {
 			id: 1003,
-			label: "IM-E",
+			position: "EDA-Ice House",
 			notice: null,
 			status: null
 		},
@@ -135,8 +157,8 @@ const initialAssignments = [
 	},
 	{
 		equipment: {
-			id: 1004,
-			label: "IH-E",
+			id: 1011,
+			position: "WDA-CTM",
 			notice: null,
 			status: null
 		},
@@ -146,8 +168,8 @@ const initialAssignments = [
 	},
 	{
 		equipment: {
-			id: 1005,
-			label: "CTM-W",
+			id: 1012,
+			position: "WDA-Ice Man",
 			notice: null,
 			status: null
 		},
@@ -157,19 +179,8 @@ const initialAssignments = [
 	},
 	{
 		equipment: {
-			id: 1006,
-			label: "IM-W",
-			notice: null,
-			status: null
-		},
-		employeeShifts: [],
-		parkingLocation: null,
-		brixRecords: []
-	},
-	{
-		equipment: {
-			id: 1007,
-			label: "IH-W",
+			id: 1013,
+			position: "WDA-Ice House",
 			notice: null,
 			status: null
 		},

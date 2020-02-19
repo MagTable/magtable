@@ -16,7 +16,6 @@ const AssignmentTable = () => {
 		<AssignmentContainer>
 			<EmployeeList employees={dummyEmployees} />
 			<TruckList trucks={dummyTrucks} />
-
 			<MapsDiv>
 				<TruckMap />
 				<TowerMap />
