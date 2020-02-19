@@ -193,7 +193,7 @@ const setSelectedApron = apronCode => dispatch => {
  *
  * @returns API returns the entire magtable object
  */
-const getMagTable = () => async dispatch => {
+export const getMagTable = () => async dispatch => {
 	try {
 		const res = await axios.get("/magtable");
 

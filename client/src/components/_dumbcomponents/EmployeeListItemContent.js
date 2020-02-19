@@ -20,7 +20,9 @@ import {
 function EmployeeListItemContent({ employee }) {
 	return (
 		<EmployeeListItemContentDiv>
-			<EmployeeListItemName>{employee.name}</EmployeeListItemName>
+			<EmployeeListItemName key={employee.id}>
+				{employee.name}
+			</EmployeeListItemName>
 			<EmployeeListItemTime>
 				{employee.startTime} - {employee.endTime}
 			</EmployeeListItemTime>

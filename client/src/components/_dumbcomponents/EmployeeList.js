@@ -30,11 +30,15 @@ function EmployeeList({ employees }) {
 
 			<EmployeeListDiv>
 				{employees.map(employee => (
-					<EmployeeListItem key={employee.name}>
+					<EmployeeListItem key={employee.id}>
 						<EmployeeListItemContent employee={employee} />
 						{employee.labels.map(label => (
 							//Todo pass in the right tooltip message for each label type.
-							<EmployeeLabel label={label} toolTip={"Example"} />
+							<EmployeeLabel
+								key={employee.id}
+								label={label}
+								toolTip={"Example"}
+							/>
 						))}
 					</EmployeeListItem>
 				))}
