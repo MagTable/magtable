@@ -2,13 +2,17 @@ import {
 	ADD_BRIX_RECORD,
 	ADD_DAILY_MESSAGE,
 	ADD_EMPLOYEE_SHIFT,
+	ADD_EQUIPMENT_EMPLOYEE,
 	EAST_APRON,
 	GET_ASSIGNMENT_DATA,
 	PUBLISH_TABLE,
 	REMOVE_DAILY_MESSAGE,
+	REMOVE_EQUIPMENT_EMPLOYEE,
+	REMOVE_TRUCK_LOCATION,
 	SET_DAILY_MIX,
 	SET_EQUIPMENT_EMPLOYEE,
 	SET_SELECTED_APRON,
+	SET_TRUCK_LOCATION,
 	TOGGLE_BAY_LEAD
 } from "../actions/constants";
 
@@ -16,19 +20,38 @@ import {
  * structure of objects in assignments array
  *
  * {
- * 	publishedBy: String
- * 	equipment: number
- * 	employeeShifts: object
+ * 	equipment: {
+ * 		id: String,
+ * 		notice: String,
+ * 		status: String,
+ * 	}
+ * 	employeeShifts: [
+ * 		{
+ * 			name: String,
+ * 			shiftTime: String,
+ * 			shiftPosition: String,
+ * 			isGreen: boolean,
+ * 			hasAvop: boolean,
+ * 		}
+ * 	]
  *	parkingLocation: String
- * 	brixRecords: array
+ * 	brixRecords: [
+ * 		{
+ * 			nozzle: number,
+ * 			t1Tank: number,
+ * 			t4Tank: number,
+ * 			litersPurged: number,
+ *			timeMeasured: Date,
+ * 		}
+ * 	]
  * }
  */
 
 const initialState = {
 	assignments: [],
 	employeeShifts: [],
-	trucks: [],
 	dailyMessages: [],
+	parkingLocations: [],
 	dailyMix: null,
 	selectedApron: EAST_APRON,
 	loading: true
@@ -38,35 +61,69 @@ export default function(state = initialState, action) {
 	const { type, payload } = action;
 
 	switch (type) {
-		case SET_EQUIPMENT_EMPLOYEE:
-			const existingAssignment = state.assignments.find(
-				assignment => assignment.equipmentID === payload.equipmentID
-			);
-
-			if (existingAssignment) {
-				return {
-					...state,
-					assignments: state.assignments.map(assignment =>
-						assignment.equipmentID === payload.equipmentID
-							? {
-									...assignment,
-									employeeShifts: [...assignment.employeeShifts, payload.shift]
-							  }
-							: assignment
-					)
-				};
-			} else {
-				return {
-					...state,
-					assignments: [
-						...state.assignments,
-						{
-							equipmentID: payload.equipmentID,
-							employeeShifts: [payload.shift]
-						}
-					]
-				};
-			}
+		case REMOVE_TRUCK_LOCATION:
+			return {
+				...state,
+				assignments: state.assignments.map(assignment =>
+					assignment.equipment.id === payload.equipmentID
+						? {
+								...assignment,
+								parkingLocation: null
+						  }
+						: assignment
+				)
+			};
+		case SET_TRUCK_LOCATION:
+			return {
+				...state,
+				assignments: state.assignments.map(assignment =>
+					assignment.equipment.id === payload.equipmentID
+						? {
+								...assignment,
+								parkingLocation: payload.parkingLocationID
+						  }
+						: assignment
+				)
+			};
+		case REMOVE_EQUIPMENT_EMPLOYEE:
+			return {
+				...state,
+				assignments: state.assignments.map(assignment =>
+					assignment.equipment.id === payload.equipmentID
+						? {
+								...assignment,
+								employeeShifts: assignment.employeeShifts.filter(
+									shift => shift.id !== payload.shiftID
+								)
+						  }
+						: assignment
+				)
+			};
+		case ADD_EQUIPMENT_EMPLOYEE: // if assignment exists already
+			return {
+				...state,
+				assignments: state.assignments.map(assignment =>
+					assignment.equipment.id === payload.equipmentID
+						? {
+								...assignment,
+								employeeShifts: [...assignment.employeeShifts, payload.shift]
+						  }
+						: assignment
+				)
+			};
+		case SET_EQUIPMENT_EMPLOYEE: // if assignment needs to be created
+			return {
+				...state,
+				assignments: [
+					...state.assignments,
+					{
+						equipment: payload.equipment,
+						employeeShifts: [payload.shift],
+						parkingLocation: null,
+						brixRecords: []
+					}
+				]
+			};
 		case PUBLISH_TABLE:
 			return {
 				...state,
@@ -103,9 +160,13 @@ export default function(state = initialState, action) {
 		case GET_ASSIGNMENT_DATA:
 			return {
 				...state,
-				assignments: payload.assignments,
+				assignments: payload.trucks.map(truck => ({
+					equipment: truck,
+					employeeShifts: [],
+					parkingLocation: null,
+					brixRecords: []
+				})),
 				employeeShifts: payload.employeeShifts,
-				trucks: payload.trucks,
 				dailyMessages: payload.dailyMessages,
 				dailyMix: payload.dailyMix,
 				loading: false

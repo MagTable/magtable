@@ -28,7 +28,9 @@ export const CLEAR_ERROR = "CLEAR_ERROR";
 
 /* Assignment Table */
 export const SET_EQUIPMENT_EMPLOYEE = "SET_EQUIPMENT_EMPLOYEE";
+export const ADD_EQUIPMENT_EMPLOYEE = "ADD_EQUIPMENT_EMPLOYEE";
 export const REMOVE_EQUIPMENT_EMPLOYEE = "REMOVE_EQUIPMENT_EMPLOYEE";
+
 export const SET_TRUCK_LOCATION = "SET_TRUCK_LOCATION";
 export const REMOVE_TRUCK_LOCATION = "REMOVE_TRUCK_LOCATION";
 export const TOGGLE_BAY_LEAD = "TOGGLE_BAY_LEAD";
@@ -36,7 +38,6 @@ export const TOGGLE_BAY_LEAD = "TOGGLE_BAY_LEAD";
 export const SET_SELECTED_APRON = "SET_SELECTED_APRON";
 
 export const ADD_EMPLOYEE_SHIFT = "ADD_EMPLOYEE_SHIFT";
-export const FORCE_UPDATE_SHIFT_DATA = "FORCE_UPDATE_SHIFT_DATA";
 export const GET_ASSIGNMENT_DATA = "GET_ASSIGNMENT_DATA"; // server will periodically update shift list on it's own, this would force a refresh
 
 export const ADD_DAILY_MESSAGE = "ADD_DAILY_MESSAGE";
