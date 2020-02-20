@@ -14,6 +14,10 @@ html{
   --context-grey: #46575E;
   --context-orange: #d66e4b;
 
+  /*Used for separating elements between one another, for example, shading every second row of a table or directly opposing divs. */
+  --shader-grey: #d3d3d3;
+  --shader-blue: rgba(74, 74, 255, 0.31);
+
 }
 ::selection {
   background: #28aae1;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Button } from "../common/FormControl";
 
 /**
  * @date 2020-02-17
@@ -85,7 +86,7 @@ export const TruckListDiv = styled.div`
 	// border: 2px solid var(--border-color);
 	// height: calc(100vh - 73px);
 	transition: all 0.15s ease-in-out;
-	min-width: 300px;
+	min-width: 330px;
 	margin: 0;
 	display: flex;
 	flex-direction: column;
@@ -101,16 +102,26 @@ export const TruckListDivWrapper = styled(TruckListDiv)`
 
 export const TruckListItemDiv = styled.div`
 	transition: all 0.15s ease-in-out;
-	border-top: 1px solid var(--border-color);
+	border-bottom: 1px solid var(--border-color);
 	height: 90px;
 	display: flex;
 `;
 
-export const TruckProblemsDiv = styled(TruckListItemDiv)`
-	max-height: ${({ open }) => (open ? "150px" : "0px")};
-	min-height: ${({ open }) => (open ? "130px" : "0px")};
+export const TruckProblemsDiv = styled.div`
+    // height: auto;
+	// transform: ${({ open }) => (open ? "scaleY(1)" : "scaleY(0)")};
+	transition: all 0.15s ease-in-out;
+	display: flex;
+	border-top: 1px solid var(--border-color);
+	max-height: ${({ open }) => (open ? "200px" : "0px")};
+	min-height: 0px;
 	border-top: none;
 	overflow: auto;
+`;
+
+export const TruckProblemsText = styled.p`
+	padding-left: 20px;
+	padding-right: 20px;
 `;
 
 export const TruckNumberDiv = styled.div`
@@ -134,7 +145,7 @@ export const TruckListItemEmployee = styled.p`
 	margin-block-end: 0em;
 	height: ${({ displayedTime, time }) =>
 		displayedTime === time ? "50%" : "0%"};
-	background-color: ${({ slot }) => (slot === 2 ? "grey" : "")};
+	background-color: var(${({ slot }) => (slot === 2 ? "--shader-grey" : "")});
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -158,4 +169,24 @@ export const TruckListItemLocation = styled.p`
 	margin-left: 10px;
 	flex-grow: 1;
 	flex-basis: 0;
+`;
+
+export const TruckListButton = styled(Button)`
+	font-size: 18px;
+	margin-right: 9px;
+	width: auto;
+	white-space: nowrap;
+	padding: 3px;
+	background-color: rgb(65, 66, 68);
+	color: white;
+
+	:hover {
+		background: rgb(95, 96, 98) npm install react-switch;
+	}
+`;
+
+export const TruckListManipDiv = styled.div`
+	display: flex;
+	flex-direction: row;
+	margin-right: 3px;
 `;
