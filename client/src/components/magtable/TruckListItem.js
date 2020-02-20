@@ -110,9 +110,10 @@ function TruckListItem({ assignment, open, displayedTime }) {
 							displayedTime={displayedTime}
 						>
 							{assignment.employeeShifts[0]?.name}
-							<button value={shift.id} onClick={handleClick}>
-								X
-							</button>
+							{/*//todo button value needs to now be the slot number.*/}
+							{/*<button value={slot.value} onClick={handleClick}>*/}
+							{/*	X*/}
+							{/*</button>*/}
 						</TruckListItemEmployee>
 						<TruckListItemEmployee
 							time={"am"}
