@@ -1,6 +1,5 @@
 import React from "react";
 import { AssignmentContainer, MapsDiv } from "../../styled/magtable/Maps";
-import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import TowerMap from "../_dumbcomponents/TowerMap";
 import TruckMap from "../_dumbcomponents/TruckMap";
 import TruckList from "../_dumbcomponents/TruckList";
