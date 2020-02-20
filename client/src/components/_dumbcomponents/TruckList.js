@@ -5,6 +5,7 @@ import {
 	TruckListDiv,
 	TruckListDivWrapper
 } from "../../styled/magtable/ListContent";
+import { useSelector } from "react-redux";
 
 /**
  * @date 2020-02-17
@@ -15,7 +16,6 @@ import {
 /**
  *
  * @constructor
- * @param props
  * @returns {*} The TruckList component
  */
 function TruckList() {

@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { TruckListDiv } from "../../styled/magtable/ListContent";
 
 /**
@@ -15,8 +14,6 @@ import { TruckListDiv } from "../../styled/magtable/ListContent";
  * @returns {*} The TruckList component
  */
 const TruckList = () => {
-	const trucks = useSelector(state => state.truck.trucks);
-
 	return <TruckListDiv></TruckListDiv>;
 };
 
