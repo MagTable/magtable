@@ -55,7 +55,22 @@ const initialAssignments = [
 			notice: "Equipment Conditional Status Message",
 			status: "CON"
 		},
-		employeeShifts: [],
+		employeeShifts: [
+			{
+				id: 1,
+				name: "MJ Kochuk",
+				startTime: 400,
+				endTime: 1600,
+				labels: ["gp", "ts"]
+			},
+			{
+				id: 2,
+				name: "Arran Woodruff",
+				startTime: 400,
+				endTime: 1600,
+				labels: ["ojt"]
+			}
+		],
 		parkingLocation: null,
 		brixRecords: []
 	},
@@ -91,7 +106,7 @@ const initialAssignments = [
 	},
 	{
 		equipment: {
-			id: 3,
+			id: 4,
 			label: 36,
 			notice: "",
 			status: "OOS"
@@ -102,12 +117,27 @@ const initialAssignments = [
 	},
 	{
 		equipment: {
-			id: 3,
+			id: 5,
 			label: 36,
 			notice: "",
 			status: "OOS"
 		},
-		employeeShifts: [],
+		employeeShifts: [
+			{
+				id: 3,
+				name: "Mustafa Al Khaldi",
+				startTime: 400,
+				endTime: 1600,
+				labels: ["ts"]
+			},
+			{
+				id: 4,
+				name: "Steven Wong",
+				startTime: 400,
+				endTime: 1600,
+				labels: ["bl"]
+			}
+		],
 		parkingLocation: null,
 		brixRecords: []
 	},
