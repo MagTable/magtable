@@ -20,18 +20,33 @@ import {
  */
 function TruckList({ trucks }) {
 	const [open, setOpen] = useState(false);
+	const [displayedTime, setDisplayedTime] = useState("am");
 
+	function toggleTime() {
+		if (displayedTime === "am") {
+			setDisplayedTime("pm");
+		} else {
+			setDisplayedTime("am");
+		}
+	}
 	return (
 		<TruckListDivWrapper>
 			<ListTitle>
 				<ListTitleText>
 					Trucks
 					<button onClick={() => setOpen(!open)}>open</button>
+					<button onClick={() => toggleTime()}>Toggle Time</button>
 				</ListTitleText>
 			</ListTitle>
 			<TruckListDiv>
 				{trucks.map(truck => (
-					<TruckListItem open={open} key={truck.id} truck={truck} />
+					<TruckListItem
+						open={open}
+						key={truck.id}
+						truck={truck}
+						displayedTime={displayedTime}
+						setDisplayedTime={setDisplayedTime}
+					/>
 				))}
 			</TruckListDiv>
 		</TruckListDivWrapper>

@@ -3,8 +3,8 @@ import {
 	EmployeeListDiv,
 	EmployeeListDivWrapper
 } from "../../styled/magtable/ListContent";
-import EmployeeListItem from "./EmployeeListItem";
 import React from "react";
+import EmployeeListItem from "./EmployeeListItem";
 
 /**
  * @date 2020-02-18

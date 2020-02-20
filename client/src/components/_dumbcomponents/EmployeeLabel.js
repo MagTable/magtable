@@ -15,7 +15,7 @@ import { EmployeeLabelDiv } from "../../styled/magtable/ListContent";
  * @param props
  * @returns {*} The EmployeeLabel component
  */
-function EmployeeLabel({ label, toolTip }) {
+function EmployeeLabel({ label }) {
 	return <EmployeeLabelDiv label={label} />;
 }
 

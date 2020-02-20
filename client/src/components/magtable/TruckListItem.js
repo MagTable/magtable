@@ -21,7 +21,7 @@ import {
  * @param props
  * @returns {*} The TruckListItem component
  */
-function TruckListItem({ truck, open }) {
+function TruckListItem({ truck, open, displayedTime, setDisplayedTime }) {
 	let colorCode;
 
 	// Sets the color for the TruckNumberDiv based on the status of the truck
@@ -53,13 +53,42 @@ function TruckListItem({ truck, open }) {
 				<TruckNumberDiv colorCode={colorCode}>{truck.id}</TruckNumberDiv>
 				<TruckInfoDiv>
 					<TruckListItemEmployeeList>
-						{truck.employees.map(employee =>
-							employee === null ? null : (
-								<TruckListItemEmployee key={employee}>
-									{employee}
-								</TruckListItemEmployee>
-							)
-						)}
+						<TruckListItemEmployee
+							time={"am"}
+							slot={1}
+							displayedTime={displayedTime}
+						>
+							{truck.employees[0]}
+						</TruckListItemEmployee>
+						<TruckListItemEmployee
+							time={"am"}
+							slot={2}
+							displayedTime={displayedTime}
+						>
+							{truck.employees[1]}
+						</TruckListItemEmployee>
+						<TruckListItemEmployee
+							time={"pm"}
+							slot={1}
+							displayedTime={displayedTime}
+						>
+							{truck.employees[2]}
+						</TruckListItemEmployee>
+						<TruckListItemEmployee
+							time={"pm"}
+							slot={2}
+							displayedTime={displayedTime}
+						>
+							{truck.employees[3]}
+						</TruckListItemEmployee>
+						{/*{truck.employees.map(employee =>*/}
+						{/*	employee === null ? null : (*/}
+						{/*		<TruckListItemEmployee key={employee}>*/}
+						{/*			{employee}*/}
+						{/*		</TruckListItemEmployee>*/}
+						{/*		*/}
+						{/*	)*/}
+						{/*)}*/}
 					</TruckListItemEmployeeList>
 
 					<TruckListItemLocation>{truck.location}</TruckListItemLocation>
