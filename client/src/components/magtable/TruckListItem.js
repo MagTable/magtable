@@ -21,11 +21,11 @@ import {
  * @param props
  * @returns {*} The TruckListItem component
  */
-function TruckListItem({ truck, open }) {
+function TruckListItem({ assignment, open }) {
 	let colorCode;
 
 	// Sets the color for the TruckNumberDiv based on the status of the truck
-	switch (truck.status) {
+	switch (assignment.equipment.status) {
 		case "GO": {
 			colorCode = "--context-green"; // Operational
 			break;
@@ -48,21 +48,21 @@ function TruckListItem({ truck, open }) {
 	}
 
 	return (
-		<div>
+		<>
 			<TruckListItemDiv>
-				<TruckNumberDiv colorCode={colorCode}>{truck.id}</TruckNumberDiv>
+				<TruckNumberDiv colorCode={colorCode}>
+					{assignment.equipment.id}
+				</TruckNumberDiv>
 				<TruckInfoDiv>
 					<TruckListItemEmployeeList>
-						{truck.employees.map(employee =>
-							employee === null ? null : (
-								<TruckListItemEmployee key={employee}>
-									{employee}
-								</TruckListItemEmployee>
-							)
-						)}
+						{assignment.employeeShifts.map(shift => (
+							<TruckListItemEmployee key={shift.id}>
+								{shift.name}
+							</TruckListItemEmployee>
+						))}
 					</TruckListItemEmployeeList>
 
-					<TruckListItemLocation>{truck.location}</TruckListItemLocation>
+					<TruckListItemLocation>{assignment.location}</TruckListItemLocation>
 				</TruckInfoDiv>
 			</TruckListItemDiv>
 			<TruckProblemsDiv open={open}>
@@ -78,7 +78,7 @@ function TruckListItem({ truck, open }) {
 				Atque consequuntur eius eveniet exercitationem facilis. Doloremque,
 				perspiciatis, quibusdam.
 			</TruckProblemsDiv>
-		</div>
+		</>
 	);
 }
 

@@ -5,6 +5,7 @@ import {
 	TruckListDiv,
 	TruckListDivWrapper
 } from "../../styled/magtable/ListContent";
+import { useSelector } from "react-redux";
 
 /**
  * @date 2020-02-17
@@ -15,11 +16,12 @@ import {
 /**
  *
  * @constructor
- * @param props
  * @returns {*} The TruckList component
  */
-function TruckList({ trucks }) {
+function TruckList() {
 	const [open, setOpen] = useState(false);
+
+	const assignments = useSelector(state => state.magtable.assignments);
 
 	return (
 		<TruckListDivWrapper>
@@ -30,9 +32,18 @@ function TruckList({ trucks }) {
 				</ListTitleText>
 			</ListTitle>
 			<TruckListDiv>
-				{trucks.map(truck => (
-					<TruckListItem open={open} key={truck.id} truck={truck} />
-				))}
+				{/* equipment with id < 1000 (trucks) */}
+				{assignments.map(
+					assignment =>
+						assignment.equipment.id < 1000 && (
+							<TruckListItem
+								open={open}
+								key={assignment.equipment.id}
+								assignment={assignment}
+								shift
+							/>
+						)
+				)}
 			</TruckListDiv>
 		</TruckListDivWrapper>
 	);
