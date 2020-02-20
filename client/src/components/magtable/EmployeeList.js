@@ -1,9 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import {
-	EmployeeListDiv,
-	EmployeeListItem,
-	EmployeeListItemTime
+	EmployeeListDiv
 } from "../../styled/magtable/ListContent";
 
 /**
@@ -39,7 +37,7 @@ const EmployeeList = () => {
 						employee =>
 							employee.startTime ===
 							startTime(
-								<EmployeeListItem key={employee.id} employee={employee} />
+								<div name"an employee" key={employee.id} employee={employee} />
 							)
 					)}
 				</div>
