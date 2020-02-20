@@ -19,7 +19,7 @@ import { setEquipmentEmployee } from "../../actions/magtable";
  * @param props
  * @returns {*} The EmployeeListItem component
  */
-function EmployeeListItem({ employee }) {
+function EmployeeListItem({ employee: employeeShift }) {
 	const dispatch = useDispatch();
 
 	const [{ isDragging }, drag] = useDrag({
@@ -30,7 +30,7 @@ function EmployeeListItem({ employee }) {
 				dispatch(
 					setEquipmentEmployee(
 						dropResult.equipmentID,
-						employee,
+						employeeShift,
 						dropResult.slotID
 					)
 				);
@@ -42,10 +42,10 @@ function EmployeeListItem({ employee }) {
 	});
 
 	return (
-		<EmployeeListItemDiv ref={drag} employee={employee}>
-			<EmployeeListItemContent employee={employee} />
-			{employee.labels.map(label => (
-				<EmployeeLabel key={employee.id + label} label={label} />
+		<EmployeeListItemDiv ref={drag} employee={employeeShift}>
+			<EmployeeListItemContent employee={employeeShift} />
+			{employeeShift.labels.map(label => (
+				<EmployeeLabel key={employeeShift.id + label} label={label} />
 			))}
 		</EmployeeListItemDiv>
 	);
