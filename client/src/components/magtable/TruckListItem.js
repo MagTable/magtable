@@ -101,11 +101,9 @@ function TruckListItem({ assignment, open, displayedTime }) {
 		dispatch(removeEquipmentEmployee(assignment.equipment.id, shiftID));
 	};
 
-	const shiftSlots = ["am", "am", "pm", "pm"];
-
 	return (
 		<div ref={drop}>
-			<TruckListItemDiv ref={drag}>
+			<TruckListItemDiv style={style} ref={drag}>
 				<TruckNumberDiv colorCode={colorCode}>
 					{assignment.equipment.id}
 				</TruckNumberDiv>
@@ -117,6 +115,13 @@ function TruckListItem({ assignment, open, displayedTime }) {
 							displayedTime={displayedTime}
 						>
 							{assignment.employeeShifts[0]?.name}
+							{assignment.employeeShifts[0]?.name && (
+								<button
+									onClick={() => handleClick(assignment.employeeShifts[0].id)}
+								>
+									X
+								</button>
+							)}
 						</TruckListItemEmployee>
 						<TruckListItemEmployee
 							time={"pm"}
@@ -124,6 +129,13 @@ function TruckListItem({ assignment, open, displayedTime }) {
 							displayedTime={displayedTime}
 						>
 							{assignment.employeeShifts[2]?.name}
+							{assignment.employeeShifts[2]?.name && (
+								<button
+									onClick={() => handleClick(assignment.employeeShifts[2].id)}
+								>
+									X
+								</button>
+							)}
 						</TruckListItemEmployee>
 						<TruckListItemEmployee
 							time={"am"}
@@ -131,6 +143,13 @@ function TruckListItem({ assignment, open, displayedTime }) {
 							displayedTime={displayedTime}
 						>
 							{assignment.employeeShifts[1]?.name}
+							{assignment.employeeShifts[1]?.name && (
+								<button
+									onClick={() => handleClick(assignment.employeeShifts[1].id)}
+								>
+									X
+								</button>
+							)}
 						</TruckListItemEmployee>
 
 						<TruckListItemEmployee
@@ -139,6 +158,13 @@ function TruckListItem({ assignment, open, displayedTime }) {
 							displayedTime={displayedTime}
 						>
 							{assignment.employeeShifts[3]?.name}
+							{assignment.employeeShifts[3]?.name && (
+								<button
+									onClick={() => handleClick(assignment.employeeShifts[3].id)}
+								>
+									X
+								</button>
+							)}
 						</TruckListItemEmployee>
 					</TruckListItemEmployeeList>
 
