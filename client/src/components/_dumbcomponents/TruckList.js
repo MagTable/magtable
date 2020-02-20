@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import TruckListItem from "../magtable/TruckListItem";
 import {
+	TruckListButton,
 	TruckListDiv,
-	TruckListDivWrapper
+	TruckListDivWrapper,
+	TruckListManipDiv
 } from "../../styled/magtable/ListContent";
+import Switch from "react-switch";
 
 /**
  * @date 2020-02-17
@@ -32,17 +35,27 @@ function TruckList({ trucks }) {
 	return (
 		<TruckListDivWrapper>
 			<ListTitle>
-				<ListTitleText>
-					Trucks
-					<button onClick={() => setOpen(!open)}>open</button>
-					<button onClick={() => toggleTime()}>Toggle Time</button>
-				</ListTitleText>
+				<ListTitleText>Trucks</ListTitleText>
+				<TruckListManipDiv>
+					<TruckListButton onClick={() => setOpen(!open)}>
+						Show Notices
+					</TruckListButton>
+
+					<Switch
+						onChange={() => toggleTime()}
+						checked={displayedTime === "am"}
+						offColor={"#414244"}
+						onColor={"#414244"}
+						// checkedIcon={<span>AM</span>}
+						// uncheckedIcon={<span>PM</span>}
+					/>
+				</TruckListManipDiv>
 			</ListTitle>
 			<TruckListDiv>
 				{trucks.map(truck => (
 					<TruckListItem
 						open={open}
-						key={truck.id}
+						key={truck.equipment.id}
 						truck={truck}
 						displayedTime={displayedTime}
 						setDisplayedTime={setDisplayedTime}
