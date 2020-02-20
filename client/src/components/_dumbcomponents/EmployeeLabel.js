@@ -1,5 +1,7 @@
 import React from "react";
 import { EmployeeLabelDiv } from "../../styled/magtable/ListContent";
+import ReactTooltip from "react-tooltip";
+import { BrowserView } from "react-device-detect";
 
 /**
  * @date 2020-02-18
@@ -7,16 +9,35 @@ import { EmployeeLabelDiv } from "../../styled/magtable/ListContent";
  * @module Component
  */
 
-// Todo get the tooltip working.
-
 /**
  *
  * @constructor
  * @param props
  * @returns {*} The EmployeeLabel component
  */
-function EmployeeLabel({ label, toolTip }) {
-	return <EmployeeLabelDiv label={label} />;
+function EmployeeLabel({ label }) {
+	function labelToolTip(label) {
+		switch (label) {
+			case "gp":
+				return "Green Pass";
+			case "ts":
+				return "Tower Staff";
+			case "ojt":
+				return "On the Job Training";
+			case "bl":
+				return "Bay Lead";
+			default:
+				return null;
+		}
+	}
+
+	return (
+		<EmployeeLabelDiv label={label} data-tip={labelToolTip(label)}>
+			<BrowserView>
+				<ReactTooltip place="top" type="dark" effect="solid" delayShow={200} />
+			</BrowserView>
+		</EmployeeLabelDiv>
+	);
 }
 
 export default EmployeeLabel;
