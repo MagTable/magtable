@@ -5,7 +5,7 @@ import TruckMap from "../_dumbcomponents/TruckMap";
 import TruckList from "../_dumbcomponents/TruckList";
 import dummyTrucks from "../_dumbcomponents/dummyTrucks.js";
 import dummyEmployees from "../_dumbcomponents/dummyEmployees";
-import EmployeeList from "../_dumbcomponents/EmployeeList";
+import EmployeeList from "./EmployeeList";
 
 /**
  * Placeholder component to assist in displaying routing

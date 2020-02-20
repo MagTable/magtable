@@ -1,8 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import {
-	EmployeeListDiv
+	EmployeeListDiv,
+	EmployeeListDivWrapper
 } from "../../styled/magtable/ListContent";
+import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
+import EmployeeListItem from "../_dumbcomponents/EmployeeListItem";
 
 /**
  * @date 2/19/2020
@@ -18,31 +21,35 @@ import {
  */
 const EmployeeList = () => {
 	const employees = useSelector(state => state.magtable.employeeShifts); // get the employees
-	const unsortedTimes = []; // to store the unsorted start times
+	// employees are already sorted by time
+	const startTimes = [];
+
 	employees.forEach(emp => {
-		unsortedTimes.push(emp.startTime); // store all the start times for the employees
+		if (!startTimes.includes(emp.startTime)) {
+			startTimes.push(emp.startTime); // add the start time if it's not already in the list
+		}
 	});
 
-	const startTimes = [...new Set(unsortedTimes)]; // only takes in unique time values and put into a new array
-
-	startTimes.sort(); // sort the array so that they are in order
-
 	return (
-		<EmployeeListDiv>
-			{startTimes.map(startTime => (
-				<div name="start time header" key={startTime}>
-					<h2>{startTime}</h2>
-					{employees.map(
-						// for each start time, display relevant employees
-						employee =>
-							employee.startTime ===
-							startTime(
-								<div name"an employee" key={employee.id} employee={employee} />
-							)
-					)}
-				</div>
-			))}
-		</EmployeeListDiv>
+		<EmployeeListDivWrapper>
+			<ListTitle>
+				<ListTitleText>Employees</ListTitleText>
+			</ListTitle>
+
+			<EmployeeListDiv>
+				{startTimes.map(startTime => (
+					<div key={startTime}>
+						<h2>{startTime}</h2>
+						{employees.map(
+							employee =>
+								employee.startTime === startTime && (
+									<EmployeeListItem key={employee.id} employee={employee} />
+								)
+						)}
+					</div>
+				))}
+			</EmployeeListDiv>
+		</EmployeeListDivWrapper>
 	);
 };
 
