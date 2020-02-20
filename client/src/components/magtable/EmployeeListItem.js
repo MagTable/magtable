@@ -1,10 +1,10 @@
 import React from "react";
-import EmployeeListItemContent from "./EmployeeListItemContent";
-import EmployeeLabel from "./EmployeeLabel";
 import {
 	EmployeeLabelDiv,
 	EmployeeListItemContentDiv,
-	EmployeeListItemDiv
+	EmployeeListItemDiv,
+	EmployeeListItemName,
+	EmployeeListItemTime
 } from "../../styled/magtable/ListContent";
 import { useDrag } from "react-dnd";
 import { SET_EQUIPMENT_EMPLOYEE } from "../../actions/constants";
@@ -47,7 +47,16 @@ function EmployeeListItem({ employee: employeeShift }) {
 
 	return (
 		<EmployeeListItemDiv ref={drag} employee={employeeShift}>
-			<EmployeeListItemContent employee={employeeShift} />
+			<EmployeeListItemContentDiv>
+				<EmployeeListItemName key={employeeShift.id}>
+					{employeeShift.name}
+				</EmployeeListItemName>
+				<EmployeeListItemTime>
+					{employeeShift.startTime} - {employeeShift.endTime}
+				</EmployeeListItemTime>
+				<EmployeeListItemName>{employeeShift.description}</EmployeeListItemName>
+			</EmployeeListItemContentDiv>
+
 			{employeeShift.isGreen && <EmployeeLabelDiv label={"gp"} />}
 			{employeeShift.hasAvop && <EmployeeLabelDiv label={"ts"} />}
 		</EmployeeListItemDiv>
