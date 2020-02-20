@@ -33,15 +33,22 @@ const TowerPosition = ({ assignment }) => {
 			equipmentID: assignment.equipment.id,
 			equipmentSlotID: assignment.employeeShifts.length
 		}),
-		canDrop: () => assignment.employeeShifts.length < 4, // Logic to not allow more than 4 employees in a location.
+		canDrop: item =>
+			!assignment.employeeShifts.find(shift => shift.id === item.id) &&
+			assignment.employeeShifts.length < 4,
+		// Logic to not allow more than 4 employees in a location.
 		collect: monitor => ({
 			isOver: monitor.isOver(),
-			canDrop: monitor.canDrop
+			canDrop: monitor.canDrop()
 		})
 	});
 
-	const isActive = canDrop && isOver;
-	const style = isActive ? { border: "2px solid red" } : null;
+	const dangerStyle = { border: "2px solid red" };
+	const successStyle = { border: "2px solid green" };
+
+	let style = {};
+	if (isOver && canDrop) style = successStyle;
+	if (isOver && !canDrop) style = dangerStyle;
 
 	return (
 		<TowerPositionDiv style={style} ref={drop}>

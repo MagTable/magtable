@@ -23,7 +23,7 @@ function EmployeeListItem({ employee: employeeShift }) {
 	const dispatch = useDispatch();
 
 	const [{ isDragging }, drag] = useDrag({
-		item: { type: SET_EQUIPMENT_EMPLOYEE },
+		item: { type: SET_EQUIPMENT_EMPLOYEE, id: employeeShift.id },
 		end: (item, monitor) => {
 			const dropResult = monitor.getDropResult();
 			if (item && dropResult) {
