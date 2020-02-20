@@ -8,8 +8,6 @@ import {
 	TruckNumberDiv,
 	TruckProblemsDiv
 } from "../../styled/magtable/ListContent";
-import { useDrop } from "react-dnd";
-import { SET_EQUIPMENT_EMPLOYEE } from "../../actions/constants";
 
 /**
  * @date 2020-02-17
@@ -23,7 +21,7 @@ import { SET_EQUIPMENT_EMPLOYEE } from "../../actions/constants";
  * @param props
  * @returns {*} The TruckListItem component
  */
-function TruckListItem({ assignment, open }) {
+function TruckListItem({ assignment, open, displayedTime}) {
 	let colorCode;
 
 	// Sets the color for the TruckNumberDiv based on the status of the truck
@@ -73,11 +71,34 @@ function TruckListItem({ assignment, open }) {
 				</TruckNumberDiv>
 				<TruckInfoDiv>
 					<TruckListItemEmployeeList>
-						{assignment.employeeShifts.map(shift => (
-							<TruckListItemEmployee key={shift.id}>
-								{shift.name}
-							</TruckListItemEmployee>
-						))}
+						<TruckListItemEmployee
+							time={"am"}
+							slot={1}
+							displayedTime={displayedTime}
+						>
+							{assignment.employeeShifts[0]}
+						</TruckListItemEmployee>
+						<TruckListItemEmployee
+							time={"am"}
+							slot={2}
+							displayedTime={displayedTime}
+						>
+							{assignment.employeeShifts[1]}
+						</TruckListItemEmployee>
+						<TruckListItemEmployee
+							time={"pm"}
+							slot={1}
+							displayedTime={displayedTime}
+						>
+							{assignment.employeeShifts[2]}
+						</TruckListItemEmployee>
+						<TruckListItemEmployee
+							time={"pm"}
+							slot={2}
+							displayedTime={displayedTime}
+						>
+							{assignment.employeeShifts[3]}
+						</TruckListItemEmployee>
 					</TruckListItemEmployeeList>
 
 					<TruckListItemLocation>{assignment.location}</TruckListItemLocation>

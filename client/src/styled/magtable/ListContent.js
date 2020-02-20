@@ -132,18 +132,30 @@ export const TruckInfoDiv = styled.div`
 export const TruckListItemEmployee = styled.p`
 	margin-block-start: 0em;
 	margin-block-end: 0em;
-	padding: 2px;
+	height: ${({ displayedTime, time }) =>
+		displayedTime === time ? "50%" : "0%"};
+	background-color: ${({ slot }) => (slot === 2 ? "grey" : "")};
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	transition: all 0.15s ease-in-out;
 `;
 
 export const TruckListItemEmployeeList = styled.div`
 	display: flex;
 	align-self: center;
-	margin-left: 10px;
 	flex-direction: column;
+	flex-grow: 4;
+	flex-basis: 0;
+	height: 100%;
 `;
 
 export const TruckListItemLocation = styled.p`
 	font-weight: bold;
 	align-self: center;
 	margin-right: 10px;
+	margin-left: 10px;
+	flex-grow: 1;
+	flex-basis: 0;
 `;
