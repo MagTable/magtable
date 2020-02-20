@@ -1,5 +1,6 @@
 import React from "react";
 import {
+	EmployeeLabelDiv,
 	EmployeeListItemContentDiv,
 	EmployeeListItemName,
 	EmployeeListItemTime
@@ -26,6 +27,7 @@ function EmployeeListItemContent({ employee }) {
 			<EmployeeListItemTime>
 				{employee.startTime} - {employee.endTime}
 			</EmployeeListItemTime>
+			<EmployeeListItemName>{employee.description}</EmployeeListItemName>
 		</EmployeeListItemContentDiv>
 	);
 }

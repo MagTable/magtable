@@ -1,7 +1,11 @@
 import React from "react";
 import EmployeeListItemContent from "./EmployeeListItemContent";
 import EmployeeLabel from "./EmployeeLabel";
-import { EmployeeListItemDiv } from "../../styled/magtable/ListContent";
+import {
+	EmployeeLabelDiv,
+	EmployeeListItemContentDiv,
+	EmployeeListItemDiv
+} from "../../styled/magtable/ListContent";
 import { useDrag } from "react-dnd";
 import { SET_EQUIPMENT_EMPLOYEE } from "../../actions/constants";
 import { useDispatch } from "react-redux";
@@ -44,9 +48,8 @@ function EmployeeListItem({ employee: employeeShift }) {
 	return (
 		<EmployeeListItemDiv ref={drag} employee={employeeShift}>
 			<EmployeeListItemContent employee={employeeShift} />
-			{employeeShift.labels.map(label => (
-				<EmployeeLabel key={employeeShift.id + label} label={label} />
-			))}
+			{employeeShift.isGreen && <EmployeeLabelDiv label={"gp"} />}
+			{employeeShift.hasAvop && <EmployeeLabelDiv label={"ts"} />}
 		</EmployeeListItemDiv>
 	);
 }

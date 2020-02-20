@@ -90,6 +90,8 @@ function TruckListItem({ assignment, open, displayedTime }) {
 		})
 	});
 
+	const handleCanDrop = () => {};
+
 	const dangerStyle = { border: "2px solid red" };
 	const successStyle = { border: "2px solid green" };
 
@@ -167,7 +169,6 @@ function TruckListItem({ assignment, open, displayedTime }) {
 							)}
 						</TruckListItemEmployee>
 					</TruckListItemEmployeeList>
-
 					<TruckListItemLocation>{assignment.location}</TruckListItemLocation>
 				</TruckInfoDiv>
 			</TruckListItemDiv>

@@ -10,6 +10,7 @@ import { BrowserView } from "react-device-detect";
  */
 
 /**
+ * deprecated
  *
  * @constructor
  * @param props
