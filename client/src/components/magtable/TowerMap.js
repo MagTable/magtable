@@ -19,10 +19,6 @@ import { getMagTable } from "../../actions/magtable";
 function TowerMap() {
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		dispatch(getMagTable());
-	}, [dispatch]);
-
 	const assignments = useSelector(state => state.magtable.assignments);
 	const apron = useSelector(state => state.magtable.selectedApron);
 

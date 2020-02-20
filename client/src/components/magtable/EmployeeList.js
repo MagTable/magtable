@@ -5,7 +5,7 @@ import {
 	EmployeeListDivWrapper
 } from "../../styled/magtable/ListContent";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
-import EmployeeListItem from "../_dumbcomponents/EmployeeListItem";
+import EmployeeListItem from "./EmployeeListItem";
 
 /**
  * @date 2/19/2020

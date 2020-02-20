@@ -3,9 +3,9 @@ import { AssignmentContainer, MapsDiv } from "../../styled/magtable/Maps";
 import { DndProvider } from "react-dnd";
 import Backend from "react-dnd-html5-backend";
 import TowerMap from "./TowerMap";
-import TruckMap from "../_dumbcomponents/TruckMap";
-import TruckList from "../_dumbcomponents/TruckList";
+import TruckMap from "./TruckMap";
 import EmployeeList from "./EmployeeList";
+import TruckList from "./TruckList";
 
 /**
  * Placeholder component to assist in displaying routing

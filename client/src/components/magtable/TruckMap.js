@@ -1,7 +1,7 @@
 import React from "react";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import { TruckMapDiv } from "../../styled/magtable/Maps";
-import ApronToggle from "../magtable/ApronToggle";
+import ApronToggle from "./ApronToggle";
 
 /**
  * @date 2020-02-17
