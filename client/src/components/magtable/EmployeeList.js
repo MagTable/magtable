@@ -6,6 +6,8 @@ import {
 } from "../../styled/magtable/ListContent";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import EmployeeListItem from "../_dumbcomponents/EmployeeListItem";
+import { useDrag } from "react-dnd";
+import { SET_EQUIPMENT_EMPLOYEE } from "../../actions/constants";
 
 /**
  * @date 2/19/2020

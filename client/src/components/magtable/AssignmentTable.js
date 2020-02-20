@@ -1,4 +1,7 @@
 import React from "react";
+import Backend from "react-dnd-html5-backend";
+import { DndProvider } from "react-dnd";
+
 import { AssignmentContainer, MapsDiv } from "../../styled/magtable/Maps";
 import TowerMap from "../_dumbcomponents/TowerMap";
 import TruckMap from "../_dumbcomponents/TruckMap";
@@ -12,15 +15,17 @@ import EmployeeList from "./EmployeeList";
  */
 const AssignmentTable = () => {
 	return (
-		<AssignmentContainer>
-			<EmployeeList employees={dummyEmployees} />
-			<TruckList />
+		<DndProvider backend={Backend}>
+			<AssignmentContainer>
+				<EmployeeList />
+				<TruckList />
 
-			<MapsDiv>
-				<TruckMap />
-				<TowerMap roles={["Tower Spotter", "CTM", "Iceman", "Ice House"]} />
-			</MapsDiv>
-		</AssignmentContainer>
+				<MapsDiv>
+					<TruckMap />
+					<TowerMap roles={["Tower Spotter", "CTM", "Iceman", "Ice House"]} />
+				</MapsDiv>
+			</AssignmentContainer>
+		</DndProvider>
 	);
 };
 

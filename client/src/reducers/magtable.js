@@ -444,7 +444,12 @@ export default function(state = initialState, action) {
 				assignment => assignment.equipment.id === payload.equipmentID
 			);
 
-			modifiedAssignment.splice(payload.equipmentSlotID, 0, payload.shift);
+			console.log(typeof modifiedAssignment, modifiedAssignment);
+			modifiedAssignment.employeeShifts.splice(
+				payload.equipmentSlotID,
+				0,
+				payload.shift
+			);
 			// assignment.employeeShifts[payload.equipmentSlotID] = payload.shift;
 
 			return {
