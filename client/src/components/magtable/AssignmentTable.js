@@ -5,8 +5,6 @@ import Backend from "react-dnd-html5-backend";
 import TowerMap from "./TowerMap";
 import TruckMap from "../_dumbcomponents/TruckMap";
 import TruckList from "../_dumbcomponents/TruckList";
-import dummyTrucks from "../_dumbcomponents/dummyTrucks.js";
-import dummyEmployees from "../_dumbcomponents/dummyEmployees";
 import EmployeeList from "../_dumbcomponents/EmployeeList";
 
 /**
@@ -19,12 +17,12 @@ const AssignmentTable = () => {
 	return (
 		<DndProvider backend={Backend}>
 			<AssignmentContainer>
-				<EmployeeList employees={dummyEmployees} />
-				<TruckList trucks={dummyTrucks} />
+				<EmployeeList />
+				<TruckList />
 
 				<MapsDiv>
 					<TruckMap />
-					<TowerMap roles={["Tower Spotter", "CTM", "Iceman", "Ice House"]} />
+					<TowerMap />
 				</MapsDiv>
 			</AssignmentContainer>
 		</DndProvider>
