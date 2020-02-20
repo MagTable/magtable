@@ -34,7 +34,7 @@ const getLabelColor = label => {
 export const EmployeeListDiv = styled.div`
 	margin: 0;
 	display: flex;
-	flex-grow: 1.3;
+	flex-grow: 1;
 	flex-direction: column;
 	flex-basis: 0;
 	min-width: 250px;
@@ -46,7 +46,7 @@ export const EmployeeListDivWrapper = styled(EmployeeListDiv)`
 	border: 2px solid var(--border-color);
 `;
 
-export const EmployeeListItem = styled.div`
+export const EmployeeListItemDiv = styled.div`
 	border-bottom: 2px solid var(--border-color);
 	min-height: 75px;
 `;
@@ -84,15 +84,15 @@ export const EmployeeLabelDiv = styled.div`
 export const TruckListDiv = styled.div`
 	// border: 2px solid var(--border-color);
 	// height: calc(100vh - 73px);
+	transition: all 0.15s ease-in-out;
 	min-width: 300px;
 	margin: 0;
 	display: flex;
 	flex-direction: column;
-	flex-grow: 1.5;
+	flex-grow: 1.2;
 	flex-basis: 0;
 	overflow-y: auto;
 	overflow-x: hidden;
-	transition: width 1s ease-in-out;
 `;
 
 export const TruckListDivWrapper = styled(TruckListDiv)`
@@ -100,9 +100,17 @@ export const TruckListDivWrapper = styled(TruckListDiv)`
 `;
 
 export const TruckListItemDiv = styled.div`
-	border-bottom: 2px solid var(--border-color);
+	transition: all 0.15s ease-in-out;
+	border-top: 1px solid var(--border-color);
 	height: 90px;
 	display: flex;
+`;
+
+export const TruckProblemsDiv = styled(TruckListItemDiv)`
+	max-height: ${({ open }) => (open ? "150px" : "0px")};
+	min-height: ${({ open }) => (open ? "130px" : "0px")};
+	border-top: none;
+	overflow: auto;
 `;
 
 export const TruckNumberDiv = styled.div`

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import TruckListItem from "../magtable/TruckListItem";
 import {
@@ -19,14 +19,19 @@ import {
  * @returns {*} The TruckList component
  */
 function TruckList({ trucks }) {
+	const [open, setOpen] = useState(false);
+
 	return (
 		<TruckListDivWrapper>
 			<ListTitle>
-				<ListTitleText>Trucks</ListTitleText>
+				<ListTitleText>
+					Trucks
+					<button onClick={() => setOpen(!open)}>open</button>
+				</ListTitleText>
 			</ListTitle>
 			<TruckListDiv>
 				{trucks.map(truck => (
-					<TruckListItem key={truck.id} truck={truck} />
+					<TruckListItem open={open} key={truck.id} truck={truck} />
 				))}
 			</TruckListDiv>
 		</TruckListDivWrapper>
