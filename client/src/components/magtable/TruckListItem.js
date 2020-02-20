@@ -1,13 +1,12 @@
 import React from "react";
 import {
-	EmployeeLabel,
-	EmployeeListItem,
 	TruckInfoDiv,
 	TruckListItemDiv,
 	TruckListItemEmployee,
 	TruckListItemEmployeeList,
 	TruckListItemLocation,
-	TruckNumberDiv
+	TruckNumberDiv,
+	TruckProblemsDiv
 } from "../../styled/magtable/ListContent";
 
 /**
@@ -22,11 +21,11 @@ import {
  * @param props
  * @returns {*} The TruckListItem component
  */
-function TruckListItem({ truck }) {
+function TruckListItem({ assignment, open }) {
 	let colorCode;
 
 	// Sets the color for the TruckNumberDiv based on the status of the truck
-	switch (truck.status) {
+	switch (assignment.equipment.status) {
 		case "GO": {
 			colorCode = "--context-green"; // Operational
 			break;
@@ -49,24 +48,37 @@ function TruckListItem({ truck }) {
 	}
 
 	return (
-		<div>
+		<>
 			<TruckListItemDiv>
-				<TruckNumberDiv colorCode={colorCode}>{truck.id}</TruckNumberDiv>
+				<TruckNumberDiv colorCode={colorCode}>
+					{assignment.equipment.id}
+				</TruckNumberDiv>
 				<TruckInfoDiv>
 					<TruckListItemEmployeeList>
-						{truck.employees.map(employee =>
-							employee === null ? null : (
-								<TruckListItemEmployee key={employee}>
-									{employee}
-								</TruckListItemEmployee>
-							)
-						)}
+						{assignment.employeeShifts.map(shift => (
+							<TruckListItemEmployee key={shift.id}>
+								{shift.name}
+							</TruckListItemEmployee>
+						))}
 					</TruckListItemEmployeeList>
 
-					<TruckListItemLocation>{truck.location}</TruckListItemLocation>
+					<TruckListItemLocation>{assignment.location}</TruckListItemLocation>
 				</TruckInfoDiv>
 			</TruckListItemDiv>
-		</div>
+			<TruckProblemsDiv open={open}>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi,
+				doloremque doloribus fuga ipsa necessitatibus nobis? Culpa eligendi est
+				facere minima neque quod recusandae repudiandae. Aut dignissimos esse
+				est iste laboriosam, libero maiores minima necessitatibus nostrum
+				perferendis quae recusandae velit veniam veritatis voluptate! Aut
+				cumque, earum et facere ipsa ipsam quod recusandae rem repellat sapiente
+				sunt unde. Animi architecto autem consequuntur debitis fuga illum, ipsum
+				quod veniam. Ad, architecto at dignissimos exercitationem inventore
+				ipsum magni nisi perferendis recusandae rem rerum soluta temporibus!
+				Atque consequuntur eius eveniet exercitationem facilis. Doloremque,
+				perspiciatis, quibusdam.
+			</TruckProblemsDiv>
+		</>
 	);
 }
 

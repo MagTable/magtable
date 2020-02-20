@@ -43,7 +43,7 @@ function Login() {
 			<Formik
 				initialValues={{
 					username: "mustafa",
-					password: ""
+					password: "password"
 				}}
 				onSubmit={values => {
 					dispatch(login(values));

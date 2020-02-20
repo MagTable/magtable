@@ -1,12 +1,10 @@
-import React from "react";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import {
 	EmployeeListDiv,
-	EmployeeListDivWrapper,
-	EmployeeListItem
+	EmployeeListDivWrapper
 } from "../../styled/magtable/ListContent";
-import EmployeeLabel from "./EmployeeLabel";
-import EmployeeListItemContent from "./EmployeeListItemContent";
+import EmployeeListItem from "./EmployeeListItem";
+import React from "react";
 
 /**
  * @date 2020-02-18
@@ -21,7 +19,6 @@ import EmployeeListItemContent from "./EmployeeListItemContent";
  * @returns {*} The EmployeList component
  */
 function EmployeeList({ employees }) {
-	console.log(employees);
 	return (
 		<EmployeeListDivWrapper>
 			<ListTitle>
@@ -30,17 +27,7 @@ function EmployeeList({ employees }) {
 
 			<EmployeeListDiv>
 				{employees.map(employee => (
-					<EmployeeListItem key={employee.id}>
-						<EmployeeListItemContent employee={employee} />
-						{employee.labels.map(label => (
-							//Todo pass in the right tooltip message for each label type.
-							<EmployeeLabel
-								key={employee.id}
-								label={label}
-								toolTip={"Example"}
-							/>
-						))}
-					</EmployeeListItem>
+					<EmployeeListItem key={employee.id} employee={employee} />
 				))}
 			</EmployeeListDiv>
 		</EmployeeListDivWrapper>
