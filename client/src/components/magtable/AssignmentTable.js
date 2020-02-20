@@ -5,7 +5,7 @@ import Backend from "react-dnd-html5-backend";
 import TowerMap from "./TowerMap";
 import TruckMap from "../_dumbcomponents/TruckMap";
 import TruckList from "../_dumbcomponents/TruckList";
-import EmployeeList from "../_dumbcomponents/EmployeeList";
+import EmployeeList from "./EmployeeList";
 
 /**
  * The Mag Table portion of the website. Used for modifying what trucks employees are assigned to, where those trucks

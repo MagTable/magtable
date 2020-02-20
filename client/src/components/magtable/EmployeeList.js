@@ -9,7 +9,7 @@ import EmployeeListItem from "../_dumbcomponents/EmployeeListItem";
 
 /**
  * @date 2/19/2020
- * @author Tom Allcock
+ * @author Tom Allcock, Arran Woodruff
  * @module Component
  */
 
