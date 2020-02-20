@@ -8,12 +8,20 @@ import {
 	TruckNumberDiv,
 	TruckProblemsDiv
 } from "../../styled/magtable/ListContent";
-import { useDrop } from "react-dnd";
-import { SET_EQUIPMENT_EMPLOYEE } from "../../actions/constants";
+import { useDrop, useDrag } from "react-dnd";
+import {
+	SET_EQUIPMENT_EMPLOYEE,
+	SET_TRUCK_LOCATION
+} from "../../actions/constants";
+import { useDispatch } from "react-redux";
+import {
+	removeEquipmentEmployee,
+	setTruckLocation
+} from "../../actions/magtable";
 
 /**
  * @date 2020-02-17
- * @author MJ Kochuk
+ * @author MJ Kochuk, Steven Wong, Arran Woodruff
  * @module Component
  */
 
@@ -49,13 +57,28 @@ function TruckListItem({ assignment, open }) {
 		}
 	}
 
+	const [{ isDragging }, drag] = useDrag({
+		item: { type: SET_TRUCK_LOCATION },
+		end: (item, monitor) => {
+			const dropResult = monitor.getDropResult();
+			if (item && dropResult) {
+				dispatch(
+					setTruckLocation(dropResult.equipmentID, dropResult.parkingLocation)
+				);
+			}
+		},
+		collect: monitor => ({
+			isDragging: !!monitor.isDragging()
+		})
+	});
+
 	const [{ canDrop, isOver }, drop] = useDrop({
 		accept: SET_EQUIPMENT_EMPLOYEE,
 		drop: () => ({
 			equipmentID: assignment.equipment.id,
 			slotID: assignment.employeeShifts.length
 		}),
-		canDrop: () => true,
+		canDrop: () => assignment.employeeShifts.length < 4, // Logic to not allow more than 4 employees in a location.
 		collect: monitor => ({
 			isOver: monitor.isOver(),
 			canDrop: monitor.canDrop()
@@ -63,11 +86,19 @@ function TruckListItem({ assignment, open }) {
 	});
 
 	const isActive = canDrop && isOver;
-	const style = isActive ? { border: "2px solid red" } : null;
+	const style = isActive ? { border: "3px solid #6ac259" } : null;
+
+	const dispatch = useDispatch();
+
+	const handleClick = e => {
+		dispatch(
+			removeEquipmentEmployee(assignment.equipment.id, parseInt(e.target.value))
+		);
+	};
 
 	return (
 		<div ref={drop}>
-			<TruckListItemDiv style={style}>
+			<TruckListItemDiv style={style} ref={drag}>
 				<TruckNumberDiv colorCode={colorCode}>
 					{assignment.equipment.id}
 				</TruckNumberDiv>
@@ -76,6 +107,9 @@ function TruckListItem({ assignment, open }) {
 						{assignment.employeeShifts.map(shift => (
 							<TruckListItemEmployee key={shift.id}>
 								{shift.name}
+								<button value={shift.id} onClick={handleClick}>
+									X
+								</button>
 							</TruckListItemEmployee>
 						))}
 					</TruckListItemEmployeeList>

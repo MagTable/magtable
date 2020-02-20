@@ -7,7 +7,7 @@ import { getMagTable } from "../../actions/magtable";
 
 /**
  * @date 2020-02-19
- * @author Steven Wong
+ * @author MJ Kochuk, Steven Wong
  * @module Component
  */
 
@@ -25,10 +25,6 @@ function TowerMap() {
 
 	const assignments = useSelector(state => state.magtable.assignments);
 	const apron = useSelector(state => state.magtable.selectedApron);
-
-	// const selectedTowerPositions = (
-	//
-	// );
 
 	return (
 		<TowerDiv>
