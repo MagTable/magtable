@@ -181,7 +181,7 @@ const removeDailyMessage = messageID => async dispatch => {
  *
  * @param apronCode apronCode to change to
  */
-const setSelectedApron = apronCode => dispatch => {
+export const setSelectedApron = apronCode => dispatch => {
 	dispatch({
 		type: SET_SELECTED_APRON,
 		payload: apronCode

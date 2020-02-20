@@ -1,9 +1,23 @@
 import React from "react";
-import { SET_SELECTED_APRON } from "../../actions/constants";
+import { setSelectedApron } from "../../actions/magtable";
+import { useDispatch } from "react-redux";
 
-const ApronToggle = () => {
+const ApronToggle = ({ selected }) => {
+	const dispatch = useDispatch();
+
+	const handleClick = e => {
+		dispatch(setSelectedApron(e.target.value));
+	};
+
 	return (
-		(<button>EAST BUTTON HERE</button>), (<button>WEST BUTTON HERE</button>)
+		<span>
+			<button value="EDA" onClick={handleClick}>
+				EAST
+			</button>
+			<button value="WDA" onClick={handleClick}>
+				WEST
+			</button>
+		</span>
 	);
 };
 
