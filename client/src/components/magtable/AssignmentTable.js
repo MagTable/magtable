@@ -17,15 +17,17 @@ import EmployeeList from "../_dumbcomponents/EmployeeList";
  */
 const AssignmentTable = () => {
 	return (
-		<AssignmentContainer>
-			<EmployeeList employees={dummyEmployees} />
-			<TruckList trucks={dummyTrucks} />
+		<DndProvider backend={Backend}>
+			<AssignmentContainer>
+				<EmployeeList employees={dummyEmployees} />
+				<TruckList trucks={dummyTrucks} />
 
-			<MapsDiv>
-				<TruckMap />
-				<TowerMap roles={["Tower Spotter", "CTM", "Iceman", "Ice House"]} />
-			</MapsDiv>
-		</AssignmentContainer>
+				<MapsDiv>
+					<TruckMap />
+					<TowerMap roles={["Tower Spotter", "CTM", "Iceman", "Ice House"]} />
+				</MapsDiv>
+			</AssignmentContainer>
+		</DndProvider>
 	);
 };
 

@@ -9,6 +9,16 @@ import {
 	TruckProblemsDiv,
 	TruckProblemsText
 } from "../../styled/magtable/ListContent";
+import {
+	removeEquipmentEmployee,
+	setTruckLocation
+} from "../../actions/magtable";
+import {
+	SET_EQUIPMENT_EMPLOYEE,
+	SET_TRUCK_LOCATION
+} from "../../actions/constants";
+import { useDrag, useDrop } from "react-dnd";
+import { useDispatch } from "react-redux";
 
 /**
  * @date 2020-02-17
@@ -126,8 +136,8 @@ function TruckListItem({ assignment, open, displayedTime }) {
 				</TruckInfoDiv>
 			</TruckListItemDiv>
 			<TruckProblemsDiv open={open}>
-				{truck.equipment.notice == null ? null : (
-					<TruckProblemsText>{truck.equipment.notice}</TruckProblemsText>
+				{assignment.equipment.notice == null ? null : (
+					<TruckProblemsText>{assignment.equipment.notice}</TruckProblemsText>
 				)}
 			</TruckProblemsDiv>
 		</div>
