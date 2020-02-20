@@ -146,7 +146,7 @@ function TruckListItem({ assignment, open, displayedTime }) {
 				</TruckInfoDiv>
 			</TruckListItemDiv>
 			<TruckProblemsDiv open={open}>
-				{assignment.equipment.notice == null ? null : (
+				{assignment.equipment.notice == +"" ? null : (
 					<TruckProblemsText>{assignment.equipment.notice}</TruckProblemsText>
 				)}
 			</TruckProblemsDiv>

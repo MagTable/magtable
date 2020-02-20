@@ -108,8 +108,6 @@ export const TruckListItemDiv = styled.div`
 `;
 
 export const TruckProblemsDiv = styled.div`
-    // height: auto;
-	// transform: ${({ open }) => (open ? "scaleY(1)" : "scaleY(0)")};
 	transition: all 0.15s ease-in-out;
 	display: flex;
 	border-top: 1px solid var(--border-color);
