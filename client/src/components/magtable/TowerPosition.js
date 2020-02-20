@@ -5,16 +5,24 @@ import { useDrop } from "react-dnd";
 import { SET_EQUIPMENT_EMPLOYEE } from "../../actions/constants";
 
 const TowerPosition = ({ assignment }) => {
-	const [, drop] = useDrop({
+	const [{ canDrop, isOver }, drop] = useDrop({
 		accept: SET_EQUIPMENT_EMPLOYEE,
 		drop: () => ({
 			equipmentID: assignment.equipment.id,
 			equipmentSlotID: assignment.employeeShifts.length
+		}),
+		canDrop: () => true,
+		collect: monitor => ({
+			isOver: monitor.isOver(),
+			canDrop: monitor.canDrop
 		})
 	});
 
+	const isActive = canDrop && isOver;
+	const style = isActive ? { border: "2px solid red" } : null;
+
 	return (
-		<TowerPositionDiv ref={drop}>
+		<TowerPositionDiv style={style} ref={drop}>
 			<TowerTitle>
 				<TowerTitleText>{assignment.equipment.position}</TowerTitleText>
 			</TowerTitle>

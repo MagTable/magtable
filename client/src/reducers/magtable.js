@@ -117,18 +117,11 @@ const initialAssignments = [
 	},
 	{
 		equipment: {
-<<<<<<<<< Temporary merge branch 1
-			id: 3,
-=========
 			id: 5,
->>>>>>>>> Temporary merge branch 2
 			label: 36,
 			notice: "",
 			status: "OOS"
 		},
-<<<<<<<<< Temporary merge branch 1
-		employeeShifts: [],
-=========
 		employeeShifts: [
 			{
 				id: 3,
@@ -145,7 +138,6 @@ const initialAssignments = [
 				labels: ["bl"]
 			}
 		],
->>>>>>>>> Temporary merge branch 2
 		parkingLocation: null,
 		brixRecords: []
 	},
@@ -156,7 +148,15 @@ const initialAssignments = [
 			notice: null,
 			status: null
 		},
-		employeeShifts: [],
+		employeeShifts: [
+			{
+				id: 3,
+				name: "Mustafa Al Khaldi",
+				startTime: 400,
+				endTime: 1600,
+				labels: ["ts"]
+			}
+		],
 		parkingLocation: null,
 		brixRecords: []
 	},
@@ -211,7 +211,22 @@ const initialAssignments = [
 			notice: null,
 			status: null
 		},
-		employeeShifts: [],
+		employeeShifts: [
+			{
+				id: 3,
+				name: "Mustafa Al Khaldi",
+				startTime: 400,
+				endTime: 1600,
+				labels: ["ts"]
+			},
+			{
+				id: 4,
+				name: "Steven Wong",
+				startTime: 400,
+				endTime: 1600,
+				labels: ["bl"]
+			}
+		],
 		parkingLocation: null,
 		brixRecords: []
 	},
