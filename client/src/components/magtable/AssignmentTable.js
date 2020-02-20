@@ -8,14 +8,33 @@ import dummyEmployees from "../_dumbcomponents/dummyEmployees";
 import EmployeeList from "../_dumbcomponents/EmployeeList";
 
 /**
- * Placeholder component to assist in displaying routing
+ * The Mag Table portion of the website. Used for modifying what trucks employees are assigned to, where those trucks
+ * will operate, what employees are working on each tower position, listing all available employees and trucks.
+ *
  * @constructor
  */
 const AssignmentTable = () => {
+	/**
+	 * Filters the list of equipment and creates a new array of only trucks.
+	 * @returns {[]} An array of trucks
+	 */
+	function getTrucks() {
+		let trucks = []; // Holds the trucks, devoid of tower positions.
+
+		for (let i in dummyTrucks) {
+			// Trucks have IDs lower than 1000.
+			if (dummyTrucks[i].equipment.id < 1000) {
+				trucks.push(dummyTrucks[i]); // Because it is a truck, include it in the list.
+			}
+		}
+
+		return trucks;
+	}
+
 	return (
 		<AssignmentContainer>
 			<EmployeeList employees={dummyEmployees} />
-			<TruckList trucks={dummyTrucks} />
+			<TruckList trucks={getTrucks()} />
 
 			<MapsDiv>
 				<TruckMap />
