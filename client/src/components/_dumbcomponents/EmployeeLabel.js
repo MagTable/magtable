@@ -31,6 +31,7 @@ function EmployeeLabel({ label }) {
 		}
 	}
 
+	//todo label is causing dragging issues in chrome. Need to address.
 	return (
 		<EmployeeLabelDiv label={label} data-tip={labelToolTip(label)}>
 			<BrowserView>
