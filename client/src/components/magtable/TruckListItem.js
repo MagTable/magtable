@@ -8,6 +8,8 @@ import {
 	TruckNumberDiv,
 	TruckProblemsDiv
 } from "../../styled/magtable/ListContent";
+import { useDrop } from "react-dnd";
+import { SET_EQUIPMENT_EMPLOYEE } from "../../actions/constants";
 
 /**
  * @date 2020-02-17
@@ -47,9 +49,25 @@ function TruckListItem({ assignment, open }) {
 		}
 	}
 
+	const [{ canDrop, isOver }, drop] = useDrop({
+		accept: SET_EQUIPMENT_EMPLOYEE,
+		drop: () => ({
+			equipmentID: assignment.equipment.id,
+			slotID: assignment.employeeShifts.length
+		}),
+		canDrop: () => true,
+		collect: monitor => ({
+			isOver: monitor.isOver(),
+			canDrop: monitor.canDrop()
+		})
+	});
+
+	const isActive = canDrop && isOver;
+	const style = isActive ? { border: "2px solid red" } : null;
+
 	return (
-		<>
-			<TruckListItemDiv>
+		<div ref={drop}>
+			<TruckListItemDiv style={style}>
 				<TruckNumberDiv colorCode={colorCode}>
 					{assignment.equipment.id}
 				</TruckNumberDiv>
@@ -78,7 +96,7 @@ function TruckListItem({ assignment, open }) {
 				Atque consequuntur eius eveniet exercitationem facilis. Doloremque,
 				perspiciatis, quibusdam.
 			</TruckProblemsDiv>
-		</>
+		</div>
 	);
 }
 

@@ -4,8 +4,8 @@ import EmployeeLabel from "./EmployeeLabel";
 import { EmployeeListItemDiv } from "../../styled/magtable/ListContent";
 import { useDrag } from "react-dnd";
 import { SET_EQUIPMENT_EMPLOYEE } from "../../actions/constants";
-import { setEquipmentEmployee } from "../../actions/magtable";
 import { useDispatch } from "react-redux";
+import { setEquipmentEmployee } from "../../actions/magtable";
 
 /**
  * @date 2020-02-19
@@ -31,15 +31,18 @@ function EmployeeListItem({ employee }) {
 					setEquipmentEmployee(
 						dropResult.equipmentID,
 						employee,
-						dropResult.equipmentSlotID
+						dropResult.slotID
 					)
 				);
 			}
-		}
+		},
+		collect: monitor => ({
+			isDragging: !!monitor.isDragging()
+		})
 	});
 
 	return (
-		<EmployeeListItemDiv key={employee.name} employee={employee} ref={drag}>
+		<EmployeeListItemDiv ref={drag} employee={employee}>
 			<EmployeeListItemContent employee={employee} />
 			{employee.labels.map(label => (
 				//Todo pass in the right tooltip message for each label type.
