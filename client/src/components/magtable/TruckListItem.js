@@ -32,13 +32,13 @@ import {
  * @param props
  * @returns {*} The TruckListItem component
  */
-function TruckListItem({ truck, open, displayedTime }) {
+function TruckListItem({ assignment, open, displayedTime }) {
 	const dispatch = useDispatch();
 
 	let colorCode;
 
 	// Sets the color for the TruckNumberDiv based on the status of the truck
-	switch (truck.equipment.status) {
+	switch (assignment.equipment.status) {
 		case "GO": {
 			colorCode = "--context-green"; // Operational
 			break;
@@ -78,12 +78,12 @@ function TruckListItem({ truck, open, displayedTime }) {
 	const [{ canDrop, isOver }, drop] = useDrop({
 		accept: SET_EQUIPMENT_EMPLOYEE,
 		drop: () => ({
-			equipmentID: truck.equipment.id,
-			slotID: truck.employeeShifts.length
+			equipmentID: assignment.equipment.id,
+			slotID: assignment.employeeShifts.length
 		}),
 		canDrop: item =>
-			!truck.employeeShifts.find(shift => shift.id === item.id) &&
-			truck.employeeShifts.length < 4, // Logic to not allow more than 4 employees in a location.
+			!assignment.employeeShifts.find(shift => shift.id === item.id) &&
+			assignment.employeeShifts.length < 4, // Logic to not allow more than 4 employees in a location.
 		collect: monitor => ({
 			isOver: monitor.isOver(),
 			canDrop: monitor.canDrop()
@@ -98,16 +98,16 @@ function TruckListItem({ truck, open, displayedTime }) {
 	if (isOver && !canDrop) style = dangerStyle;
 
 	const handleClick = shiftID => {
-		dispatch(removeEquipmentEmployee(truck.equipment.id, shiftID));
+		dispatch(removeEquipmentEmployee(assignment.equipment.id, shiftID));
 	};
 
 	const shiftSlots = ["am", "am", "pm", "pm"];
 
 	return (
-		<div>
-			<TruckListItemDiv>
+		<div ref={drop}>
+			<TruckListItemDiv ref={drag}>
 				<TruckNumberDiv colorCode={colorCode}>
-					{truck.equipment.id}
+					{assignment.equipment.id}
 				</TruckNumberDiv>
 				<TruckInfoDiv>
 					<TruckListItemEmployeeList>
@@ -116,21 +116,21 @@ function TruckListItem({ truck, open, displayedTime }) {
 							slot={1}
 							displayedTime={displayedTime}
 						>
-							{truck.employeeShifts[0]}
+							{assignment.employeeShifts[0]?.name}
 						</TruckListItemEmployee>
 						<TruckListItemEmployee
 							time={"pm"}
 							slot={1}
 							displayedTime={displayedTime}
 						>
-							{truck.employeeShifts[2]}
+							{assignment.employeeShifts[2]?.name}
 						</TruckListItemEmployee>
 						<TruckListItemEmployee
 							time={"am"}
 							slot={2}
 							displayedTime={displayedTime}
 						>
-							{truck.employeeShifts[1]}
+							{assignment.employeeShifts[1]?.name}
 						</TruckListItemEmployee>
 
 						<TruckListItemEmployee
@@ -138,16 +138,16 @@ function TruckListItem({ truck, open, displayedTime }) {
 							slot={2}
 							displayedTime={displayedTime}
 						>
-							{truck.employeeShifts[3]}
+							{assignment.employeeShifts[3]?.name}
 						</TruckListItemEmployee>
 					</TruckListItemEmployeeList>
 
-					<TruckListItemLocation>{truck.location}</TruckListItemLocation>
+					<TruckListItemLocation>{assignment.location}</TruckListItemLocation>
 				</TruckInfoDiv>
 			</TruckListItemDiv>
 			<TruckProblemsDiv open={open}>
-				{truck.equipment.notice == null ? null : (
-					<TruckProblemsText>{truck.equipment.notice}</TruckProblemsText>
+				{assignment.equipment.notice == null ? null : (
+					<TruckProblemsText>{assignment.equipment.notice}</TruckProblemsText>
 				)}
 			</TruckProblemsDiv>
 		</div>
