@@ -32,6 +32,8 @@ import {
  * @returns {*} The TruckListItem component
  */
 function TruckListItem({ assignment, open, displayedTime }) {
+	const dispatch = useDispatch();
+
 	let colorCode;
 
 	// Sets the color for the TruckNumberDiv based on the status of the truck
@@ -78,23 +80,27 @@ function TruckListItem({ assignment, open, displayedTime }) {
 			equipmentID: assignment.equipment.id,
 			slotID: assignment.employeeShifts.length
 		}),
-		canDrop: () => assignment.employeeShifts.length < 4, // Logic to not allow more than 4 employees in a location.
+		canDrop: item =>
+			!assignment.employeeShifts.find(shift => shift.id === item.id) &&
+			assignment.employeeShifts.length < 4, // Logic to not allow more than 4 employees in a location.
 		collect: monitor => ({
 			isOver: monitor.isOver(),
 			canDrop: monitor.canDrop()
 		})
 	});
 
-	const isActive = canDrop && isOver;
-	const style = isActive ? { border: "3px solid #6ac259" } : null;
+	const dangerStyle = { border: "2px solid red" };
+	const successStyle = { border: "2px solid green" };
 
-	const dispatch = useDispatch();
+	let style = {};
+	if (isOver && canDrop) style = successStyle;
+	if (isOver && !canDrop) style = dangerStyle;
 
-	const handleClick = e => {
-		dispatch(
-			removeEquipmentEmployee(assignment.equipment.id, parseInt(e.target.value))
-		);
+	const handleClick = shiftID => {
+		dispatch(removeEquipmentEmployee(assignment.equipment.id, shiftID));
 	};
+
+	const shiftSlots = ["am", "am", "pm", "pm"];
 
 	return (
 		<div ref={drop}>
@@ -104,38 +110,25 @@ function TruckListItem({ assignment, open, displayedTime }) {
 				</TruckNumberDiv>
 				<TruckInfoDiv>
 					<TruckListItemEmployeeList>
-						<TruckListItemEmployee
-							time={"am"}
-							slot={1}
-							displayedTime={displayedTime}
-						>
-							{assignment.employeeShifts[0]?.name}
-							{/*//todo button value needs to now be the slot number.*/}
-							{/*<button value={slot.value} onClick={handleClick}>*/}
-							{/*	X*/}
-							{/*</button>*/}
-						</TruckListItemEmployee>
-						<TruckListItemEmployee
-							time={"am"}
-							slot={2}
-							displayedTime={displayedTime}
-						>
-							{assignment.employeeShifts[1]?.name}
-						</TruckListItemEmployee>
-						<TruckListItemEmployee
-							time={"pm"}
-							slot={1}
-							displayedTime={displayedTime}
-						>
-							{assignment.employeeShifts[2]?.name}
-						</TruckListItemEmployee>
-						<TruckListItemEmployee
-							time={"pm"}
-							slot={2}
-							displayedTime={displayedTime}
-						>
-							{assignment.employeeShifts[3]?.name}
-						</TruckListItemEmployee>
+						{shiftSlots.map(
+							(slot, i) =>
+								assignment.employeeShifts[i] && (
+									<TruckListItemEmployee
+										time={slot}
+										slot={i + 1}
+										displayedTime={displayedTime}
+									>
+										{assignment.employeeShifts[i]?.name}
+										<button
+											onClick={() =>
+												handleClick(assignment.employeeShifts[i].id)
+											}
+										>
+											X
+										</button>
+									</TruckListItemEmployee>
+								)
+						)}
 					</TruckListItemEmployeeList>
 
 					<TruckListItemLocation>{assignment.location}</TruckListItemLocation>
