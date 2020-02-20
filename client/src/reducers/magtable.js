@@ -148,7 +148,15 @@ const initialAssignments = [
 			notice: null,
 			status: null
 		},
-		employeeShifts: [],
+		employeeShifts: [
+			{
+				id: 3,
+				name: "Mustafa Al Khaldi",
+				startTime: 400,
+				endTime: 1600,
+				labels: ["ts"]
+			}
+		],
 		parkingLocation: null,
 		brixRecords: []
 	},
@@ -203,7 +211,22 @@ const initialAssignments = [
 			notice: null,
 			status: null
 		},
-		employeeShifts: [],
+		employeeShifts: [
+			{
+				id: 3,
+				name: "Mustafa Al Khaldi",
+				startTime: 400,
+				endTime: 1600,
+				labels: ["ts"]
+			},
+			{
+				id: 4,
+				name: "Steven Wong",
+				startTime: 400,
+				endTime: 1600,
+				labels: ["bl"]
+			}
+		],
 		parkingLocation: null,
 		brixRecords: []
 	},
@@ -444,7 +467,11 @@ export default function(state = initialState, action) {
 				assignment => assignment.equipment.id === payload.equipmentID
 			);
 
-			modifiedAssignment.splice(payload.equipmentSlotID, 0, payload.shift);
+			modifiedAssignment.employeeShifts.splice(
+				payload.equipmentSlotID,
+				0,
+				payload.shift
+			);
 			// assignment.employeeShifts[payload.equipmentSlotID] = payload.shift;
 
 			return {

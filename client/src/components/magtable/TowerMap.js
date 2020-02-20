@@ -47,7 +47,7 @@ function TowerMap() {
 							  assignment.equipment.id === 1000) && (
 							<TowerPosition
 								key={assignment.equipment.id}
-								position={assignment.equipment.position}
+								assignment={assignment}
 							/>
 						)
 				)}
