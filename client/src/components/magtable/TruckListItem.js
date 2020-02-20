@@ -6,7 +6,8 @@ import {
 	TruckListItemEmployeeList,
 	TruckListItemLocation,
 	TruckNumberDiv,
-	TruckProblemsDiv
+	TruckProblemsDiv,
+	TruckProblemsText
 } from "../../styled/magtable/ListContent";
 import { useDrop, useDrag } from "react-dnd";
 import {
@@ -31,13 +32,13 @@ import {
  * @param props
  * @returns {*} The TruckListItem component
  */
-function TruckListItem({ assignment, open, displayedTime }) {
+function TruckListItem({ truck, open, displayedTime }) {
 	const dispatch = useDispatch();
 
 	let colorCode;
 
 	// Sets the color for the TruckNumberDiv based on the status of the truck
-	switch (assignment.equipment.status) {
+	switch (truck.equipment.status) {
 		case "GO": {
 			colorCode = "--context-green"; // Operational
 			break;
@@ -77,12 +78,12 @@ function TruckListItem({ assignment, open, displayedTime }) {
 	const [{ canDrop, isOver }, drop] = useDrop({
 		accept: SET_EQUIPMENT_EMPLOYEE,
 		drop: () => ({
-			equipmentID: assignment.equipment.id,
-			slotID: assignment.employeeShifts.length
+			equipmentID: truck.equipment.id,
+			slotID: truck.employeeShifts.length
 		}),
 		canDrop: item =>
-			!assignment.employeeShifts.find(shift => shift.id === item.id) &&
-			assignment.employeeShifts.length < 4, // Logic to not allow more than 4 employees in a location.
+			!truck.employeeShifts.find(shift => shift.id === item.id) &&
+			truck.employeeShifts.length < 4, // Logic to not allow more than 4 employees in a location.
 		collect: monitor => ({
 			isOver: monitor.isOver(),
 			canDrop: monitor.canDrop()
@@ -97,55 +98,57 @@ function TruckListItem({ assignment, open, displayedTime }) {
 	if (isOver && !canDrop) style = dangerStyle;
 
 	const handleClick = shiftID => {
-		dispatch(removeEquipmentEmployee(assignment.equipment.id, shiftID));
+		dispatch(removeEquipmentEmployee(truck.equipment.id, shiftID));
 	};
 
 	const shiftSlots = ["am", "am", "pm", "pm"];
 
 	return (
-		<div ref={drop}>
-			<TruckListItemDiv style={style} ref={drag}>
+		<div>
+			<TruckListItemDiv>
 				<TruckNumberDiv colorCode={colorCode}>
-					{assignment.equipment.id}
+					{truck.equipment.id}
 				</TruckNumberDiv>
 				<TruckInfoDiv>
 					<TruckListItemEmployeeList>
-						{shiftSlots.map(
-							(slot, i) =>
-								assignment.employeeShifts[i] && (
-									<TruckListItemEmployee
-										time={slot}
-										slot={i + 1}
-										displayedTime={displayedTime}
-									>
-										{assignment.employeeShifts[i]?.name}
-										<button
-											onClick={() =>
-												handleClick(assignment.employeeShifts[i].id)
-											}
-										>
-											X
-										</button>
-									</TruckListItemEmployee>
-								)
-						)}
+						<TruckListItemEmployee
+							time={"am"}
+							slot={1}
+							displayedTime={displayedTime}
+						>
+							{truck.employeeShifts[0]}
+						</TruckListItemEmployee>
+						<TruckListItemEmployee
+							time={"pm"}
+							slot={1}
+							displayedTime={displayedTime}
+						>
+							{truck.employeeShifts[2]}
+						</TruckListItemEmployee>
+						<TruckListItemEmployee
+							time={"am"}
+							slot={2}
+							displayedTime={displayedTime}
+						>
+							{truck.employeeShifts[1]}
+						</TruckListItemEmployee>
+
+						<TruckListItemEmployee
+							time={"pm"}
+							slot={2}
+							displayedTime={displayedTime}
+						>
+							{truck.employeeShifts[3]}
+						</TruckListItemEmployee>
 					</TruckListItemEmployeeList>
 
-					<TruckListItemLocation>{assignment.location}</TruckListItemLocation>
+					<TruckListItemLocation>{truck.location}</TruckListItemLocation>
 				</TruckInfoDiv>
 			</TruckListItemDiv>
 			<TruckProblemsDiv open={open}>
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi,
-				doloremque doloribus fuga ipsa necessitatibus nobis? Culpa eligendi est
-				facere minima neque quod recusandae repudiandae. Aut dignissimos esse
-				est iste laboriosam, libero maiores minima necessitatibus nostrum
-				perferendis quae recusandae velit veniam veritatis voluptate! Aut
-				cumque, earum et facere ipsa ipsam quod recusandae rem repellat sapiente
-				sunt unde. Animi architecto autem consequuntur debitis fuga illum, ipsum
-				quod veniam. Ad, architecto at dignissimos exercitationem inventore
-				ipsum magni nisi perferendis recusandae rem rerum soluta temporibus!
-				Atque consequuntur eius eveniet exercitationem facilis. Doloremque,
-				perspiciatis, quibusdam.
+				{truck.equipment.notice == null ? null : (
+					<TruckProblemsText>{truck.equipment.notice}</TruckProblemsText>
+				)}
 			</TruckProblemsDiv>
 		</div>
 	);

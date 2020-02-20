@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import TruckListItem from "../magtable/TruckListItem";
 import {
+	TruckListButton,
 	TruckListDiv,
-	TruckListDivWrapper
+	TruckListDivWrapper,
+	TruckListManipDiv
 } from "../../styled/magtable/ListContent";
 import { useSelector } from "react-redux";
+import Switch from "react-switch";
 
 /**
  * @date 2020-02-17
@@ -16,6 +19,7 @@ import { useSelector } from "react-redux";
 /**
  *
  * @constructor
+ * @param props
  * @returns {*} The TruckList component
  */
 function TruckList() {
@@ -34,11 +38,21 @@ function TruckList() {
 	return (
 		<TruckListDivWrapper>
 			<ListTitle>
-				<ListTitleText>
-					Trucks
-					<button onClick={() => setOpen(!open)}>open</button>
-					<button onClick={() => toggleTime()}>Toggle Time</button>
-				</ListTitleText>
+				<ListTitleText>Trucks</ListTitleText>
+				<TruckListManipDiv>
+					<TruckListButton onClick={() => setOpen(!open)}>
+						Show Notices
+					</TruckListButton>
+
+					<Switch
+						onChange={() => toggleTime()}
+						checked={displayedTime === "am"}
+						offColor={"#414244"}
+						onColor={"#414244"}
+						// checkedIcon={<span>AM</span>}
+						// uncheckedIcon={<span>PM</span>}
+					/>
+				</TruckListManipDiv>
 			</ListTitle>
 			<TruckListDiv>
 				{/* equipment with id < 1000 (trucks) */}
