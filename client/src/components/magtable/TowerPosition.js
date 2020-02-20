@@ -20,10 +20,8 @@ import { useDispatch } from "react-redux";
 const TowerPosition = ({ assignment }) => {
 	const dispatch = useDispatch();
 
-	const handleClick = e => {
-		dispatch(
-			removeEquipmentEmployee(assignment.equipment.id, parseInt(e.target.value))
-		);
+	const handleClick = shiftID => {
+		dispatch(removeEquipmentEmployee(assignment.equipment.id, shiftID));
 	};
 
 	/**
@@ -53,9 +51,7 @@ const TowerPosition = ({ assignment }) => {
 			{assignment.employeeShifts.map(shift => (
 				<span key={shift.id}>
 					{shift.name}
-					<button value={shift.id} onClick={handleClick}>
-						X
-					</button>
+					<button onClick={() => handleClick(shift.id)}>X</button>
 				</span>
 			))}
 		</TowerPositionDiv>
