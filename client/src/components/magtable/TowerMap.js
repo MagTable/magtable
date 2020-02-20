@@ -14,7 +14,7 @@ import { getMagTable } from "../../actions/magtable";
 /**
  *
  * @constructor
- * @returns {*} The TowerMap component
+ * @returns {*} The TowerMap component and sets the tower positions based on the selected Apron
  */
 function TowerMap() {
 	const dispatch = useDispatch();
@@ -26,12 +26,16 @@ function TowerMap() {
 	const assignments = useSelector(state => state.magtable.assignments);
 	const apron = useSelector(state => state.magtable.selectedApron);
 
-	console.log(apron);
+	// const selectedTowerPositions = (
+	//
+	// );
 
 	return (
 		<TowerDiv>
 			<ListTitle>
-				<ListTitleText>Tower</ListTitleText>
+				<ListTitleText>
+					{apron === "EDA" ? "East Tower" : "West Tower"}
+				</ListTitleText>
 			</ListTitle>
 			<TowerMapDiv>
 				{assignments.map(
