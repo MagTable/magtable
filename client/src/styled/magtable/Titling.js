@@ -15,6 +15,7 @@ export const ListTitle = styled.div`
 	position: sticky;
 	height: 50px;
 	align-items: center;
+	justify-content: space-between;
 `;
 
 /**
@@ -27,6 +28,8 @@ export const ListTitleText = styled.p`
 	font-family: "Noto Sans KR", sans-serif;
 	margin-block-start: 0em;
 	margin-block-end: 0em;
+	display: flex;
+	flex-direction: row;
 `;
 
 /**

@@ -6,18 +6,9 @@ import {
 	TruckListItemEmployeeList,
 	TruckListItemLocation,
 	TruckNumberDiv,
-	TruckProblemsDiv
+	TruckProblemsDiv,
+	TruckProblemsText
 } from "../../styled/magtable/ListContent";
-import { useDrop, useDrag } from "react-dnd";
-import {
-	SET_EQUIPMENT_EMPLOYEE,
-	SET_TRUCK_LOCATION
-} from "../../actions/constants";
-import { useDispatch } from "react-redux";
-import {
-	removeEquipmentEmployee,
-	setTruckLocation
-} from "../../actions/magtable";
 
 /**
  * @date 2020-02-17
@@ -135,17 +126,9 @@ function TruckListItem({ assignment, open, displayedTime }) {
 				</TruckInfoDiv>
 			</TruckListItemDiv>
 			<TruckProblemsDiv open={open}>
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi,
-				doloremque doloribus fuga ipsa necessitatibus nobis? Culpa eligendi est
-				facere minima neque quod recusandae repudiandae. Aut dignissimos esse
-				est iste laboriosam, libero maiores minima necessitatibus nostrum
-				perferendis quae recusandae velit veniam veritatis voluptate! Aut
-				cumque, earum et facere ipsa ipsam quod recusandae rem repellat sapiente
-				sunt unde. Animi architecto autem consequuntur debitis fuga illum, ipsum
-				quod veniam. Ad, architecto at dignissimos exercitationem inventore
-				ipsum magni nisi perferendis recusandae rem rerum soluta temporibus!
-				Atque consequuntur eius eveniet exercitationem facilis. Doloremque,
-				perspiciatis, quibusdam.
+				{truck.equipment.notice == null ? null : (
+					<TruckProblemsText>{truck.equipment.notice}</TruckProblemsText>
+				)}
 			</TruckProblemsDiv>
 		</div>
 	);
