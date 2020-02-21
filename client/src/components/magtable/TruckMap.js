@@ -7,12 +7,9 @@ import {
 	MapWrapper,
 	NumberMiddle,
 	NumberTop,
-	PadColumn,
-	PadDiv
+	PadColumn
 } from "../../styled/magtable/TruckMapMedia";
 import { useSelector } from "react-redux";
-import { SET_TRUCK_LOCATION } from "../../actions/constants";
-import { useDrop, useDrag } from "react-dnd";
 import ParkingLocations from "../_dumbcomponents/ParkingLocations";
 
 /**
@@ -27,20 +24,8 @@ import ParkingLocations from "../_dumbcomponents/ParkingLocations";
  * @param props
  * @returns {*} The TruckMap component
  */
-function TruckMap() {
+function TruckMap(props) {
 	const apron = useSelector(state => state.magtable.selectedApron);
-
-	// const [{ canDrop, isOver }, drop] = useDrop({
-	// 	accept: SET_TRUCK_LOCATION,
-	// 	drop: () => ({
-	// 		locationID: parkingID
-	// 	}),
-	// 	canDrop: item => true,
-	// 	collect: monitor => ({
-	// 		isOver: monitor.isOver(),
-	// 		canDrop: monitor.canDrop()
-	// 	})
-	// });
 
 	return (
 		<TruckMapDiv>
@@ -52,89 +37,91 @@ function TruckMap() {
 				<MapWrapper>
 					<PadColumn>
 						<div>
-							<ParkingLocations parkingID={1} pad={"AE"}></ParkingLocations>
-							<ParkingLocations parkingID={2} pad={"AC"}></ParkingLocations>
-							<PadDiv parkingID={3}>AW</PadDiv>
+							<ParkingLocations parkingID={12} pad={"AE"} />
+							<ParkingLocations parkingID={13} pad={"AC"} />
+							<ParkingLocations parkingID={14} pad={"AW"} />
 						</div>
 					</PadColumn>
 					<NumberMiddle>1</NumberMiddle>
 					<PadColumn>
 						<div>
 							<NumberTop>2</NumberTop>
-							<PadDiv>BE</PadDiv>
-							<PadDiv>BC</PadDiv>
-							<PadDiv>BW</PadDiv>
+							<ParkingLocations parkingID={15} pad={"BE"} />
+							<ParkingLocations parkingID={16} pad={"BC"} />
+							<ParkingLocations parkingID={17} pad={"BW"} />
 						</div>
 					</PadColumn>
 					<NumberMiddle>3</NumberMiddle>
 					<PadColumn>
 						<div>
-							<PadDiv>CE</PadDiv>
-							<PadDiv>CC</PadDiv>
-							<PadDiv>CW</PadDiv>
+							<ParkingLocations parkingID={21} pad={"CE"} />
+							<ParkingLocations parkingID={22} pad={"CC"} />
+							<ParkingLocations parkingID={23} pad={"CW"} />
 						</div>
 					</PadColumn>
 					<NumberMiddle>4</NumberMiddle>
 					<PadColumn>
 						<div>
 							<NumberTop>5</NumberTop>
-							<PadDiv>DE</PadDiv>
-							<PadDiv>DC</PadDiv>
-							<PadDiv>DW</PadDiv>
+							{/*No 5 is listed in Initial Parking Locations, assigning id's for 4, for now*/}
+							<ParkingLocations parkingID={27} pad={"DE"} />
+							<ParkingLocations parkingID={28} pad={"DC"} />
+							<ParkingLocations parkingID={29} pad={"DW"} />
 						</div>
 					</PadColumn>
 					<NumberMiddle>6</NumberMiddle>
 					<PadColumn>
 						<div>
-							<PadDiv>EE</PadDiv>
-							<PadDiv>EC</PadDiv>
-							<PadDiv>EW</PadDiv>
+							<ParkingLocations parkingID={33} pad={"EE"} />
+							<ParkingLocations parkingID={34} pad={"EC"} />
+							<ParkingLocations parkingID={35} pad={"EW"} />
 						</div>
 					</PadColumn>
 					<NumberMiddle>7</NumberMiddle>
 					<PadColumn>
 						<div>
-							<PadDiv>FE</PadDiv>
-							<PadDiv>FC</PadDiv>
-							<PadDiv>FW</PadDiv>
+							<ParkingLocations parkingID={39} pad={"FE"} />
+							<ParkingLocations parkingID={40} pad={"FC"} />
+							<ParkingLocations parkingID={41} pad={"FW"} />
 						</div>
 					</PadColumn>
 					<NumberMiddle>9</NumberMiddle>
 					<PadColumn>
 						<div>
-							<PadDiv>GE</PadDiv>
-							<PadDiv>GC</PadDiv>
-							<PadDiv>GW</PadDiv>
+							<ParkingLocations parkingID={45} pad={"GE"} />
+							<ParkingLocations parkingID={46} pad={"GC"} />
+							<ParkingLocations parkingID={47} pad={"GW"} />
 						</div>
 					</PadColumn>
 				</MapWrapper>
 			) : (
+				//West Apron
 				<MapWrapper>
 					<PadColumn>
 						<div>
-							<PadDiv>AE</PadDiv>
-							<PadDiv>AW</PadDiv>
+							<ParkingLocations parkingID={1} pad={"AE"} />
+							<ParkingLocations parkingID={2} pad={"AW"} />
 						</div>
 					</PadColumn>
 					<NumberMiddle>1</NumberMiddle>
 					<PadColumn>
 						<div>
-							<PadDiv>BE</PadDiv>
-							<PadDiv>BW</PadDiv>
+							<ParkingLocations parkingID={4} pad={"BE"} />
+							<ParkingLocations parkingID={3} pad={"BW"} />
 						</div>
 					</PadColumn>
 					<NumberMiddle>2</NumberMiddle>
 					<PadColumn>
 						<div>
 							<NumberTop>3</NumberTop>
-							<PadDiv parkingID={9}>CE</PadDiv>
-							<PadDiv>CW</PadDiv>
+							<ParkingLocations parkingID={9} pad={"CE"} />
+							<ParkingLocations parkingID={10} pad={"CW"} />
 						</div>
 					</PadColumn>
 					<NumberMiddle>4</NumberMiddle>
 					<PadColumn>
 						<div>
-							<PadDiv>D</PadDiv>
+							<ParkingLocations parkingID={11} pad={"D"} />
 							<FakePadDiv />
 						</div>
 					</PadColumn>

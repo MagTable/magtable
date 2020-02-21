@@ -1,6 +1,4 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { ParkingLocation } from "../../styled/magtable/Maps";
 import { useDrop } from "react-dnd";
 import { SET_TRUCK_LOCATION } from "../../actions/constants";
 import { PadDiv } from "../../styled/magtable/TruckMapMedia";
@@ -22,19 +20,6 @@ import { PadDiv } from "../../styled/magtable/TruckMapMedia";
  * @returns {*} The ParkingLocations component
  */
 function ParkingLocations({ parkingID, pad }) {
-	// const [{ canDrop, isOver }, drop] = useDrop({
-	// 	accept: SET_TRUCK_LOCATION,
-	// 	drop: () => ({
-	// 		equipmentID: assignment.equipment.id,
-	// 		locationID: parkingID
-	// 	}),
-	// 	canDrop: item => true,
-	// 	collect: monitor => ({
-	// 		isOver: monitor.isOver(),
-	// 		canDrop: monitor.canDrop()
-	// 	})
-	// });
-
 	const [{ canDrop, isOver }, drop] = useDrop({
 		accept: SET_TRUCK_LOCATION,
 		drop: () => ({
