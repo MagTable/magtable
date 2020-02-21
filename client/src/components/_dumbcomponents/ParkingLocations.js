@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { ParkingLocation } from "../../styled/magtable/Maps";
 import { useDrop } from "react-dnd";
 import { SET_TRUCK_LOCATION } from "../../actions/constants";
+import { PadDiv } from "../../styled/magtable/TruckMapMedia";
 
 /**
  * @date 2/20/2020
@@ -20,19 +21,24 @@ import { SET_TRUCK_LOCATION } from "../../actions/constants";
  * @constructor
  * @returns {*} The ParkingLocations component
  */
-function ParkingLocations({ assignment }) {
-	const dispatch = useDispatch();
-
-	const parkingLocations = useSelector(
-		state => state.magtable.parkingLocations
-	);
-	const apron = useSelector(state => state.magtable.selectedApron);
+function ParkingLocations({ parkingID, pad }) {
+	// const [{ canDrop, isOver }, drop] = useDrop({
+	// 	accept: SET_TRUCK_LOCATION,
+	// 	drop: () => ({
+	// 		equipmentID: assignment.equipment.id,
+	// 		locationID: parkingID
+	// 	}),
+	// 	canDrop: item => true,
+	// 	collect: monitor => ({
+	// 		isOver: monitor.isOver(),
+	// 		canDrop: monitor.canDrop()
+	// 	})
+	// });
 
 	const [{ canDrop, isOver }, drop] = useDrop({
 		accept: SET_TRUCK_LOCATION,
 		drop: () => ({
-			equipmentID: assignment.equipment.id,
-			locationID: parkingLocations[2].id //is this right?
+			locationID: parkingID
 		}),
 		canDrop: item => true,
 		collect: monitor => ({
@@ -41,20 +47,7 @@ function ParkingLocations({ assignment }) {
 		})
 	});
 
-	console.log({ ...parkingLocations });
-
-	return (
-		<div ref={drop}>
-			{parkingLocations.map(
-				parkingLocation =>
-					apron === parkingLocation.apron && (
-						<ParkingLocation key={parkingLocation.id}>
-							<span>{parkingLocation.code}</span>
-						</ParkingLocation>
-					)
-			)}
-		</div>
-	);
+	return <PadDiv ref={drop}>{pad}</PadDiv>;
 }
 
 export default ParkingLocations;

@@ -13,6 +13,7 @@ import {
 import { useSelector } from "react-redux";
 import { SET_TRUCK_LOCATION } from "../../actions/constants";
 import { useDrop, useDrag } from "react-dnd";
+import ParkingLocations from "../_dumbcomponents/ParkingLocations";
 
 /**
  * @date 2020-02-17
@@ -26,20 +27,20 @@ import { useDrop, useDrag } from "react-dnd";
  * @param props
  * @returns {*} The TruckMap component
  */
-function TruckMap({ parkingID }) {
+function TruckMap() {
 	const apron = useSelector(state => state.magtable.selectedApron);
 
-	const [{ canDrop, isOver }, drop] = useDrop({
-		accept: SET_TRUCK_LOCATION,
-		drop: () => ({
-			locationID: 2
-		}),
-		canDrop: item => true,
-		collect: monitor => ({
-			isOver: monitor.isOver(),
-			canDrop: monitor.canDrop
-		})
-	});
+	// const [{ canDrop, isOver }, drop] = useDrop({
+	// 	accept: SET_TRUCK_LOCATION,
+	// 	drop: () => ({
+	// 		locationID: parkingID
+	// 	}),
+	// 	canDrop: item => true,
+	// 	collect: monitor => ({
+	// 		isOver: monitor.isOver(),
+	// 		canDrop: monitor.canDrop()
+	// 	})
+	// });
 
 	return (
 		<TruckMapDiv>
@@ -49,10 +50,10 @@ function TruckMap({ parkingID }) {
 			</ListTitle>
 			{apron === "EDA" ? (
 				<MapWrapper>
-					<PadColumn ref={drop}>
+					<PadColumn>
 						<div>
-							<PadDiv parkingID={1}>AE</PadDiv>
-							<PadDiv parkingID={2}>AC</PadDiv>
+							<ParkingLocations parkingID={1} pad={"AE"}></ParkingLocations>
+							<ParkingLocations parkingID={2} pad={"AC"}></ParkingLocations>
 							<PadDiv parkingID={3}>AW</PadDiv>
 						</div>
 					</PadColumn>
