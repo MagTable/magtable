@@ -122,4 +122,20 @@ public class Shift implements Serializable {
     public void setIsGreen(Boolean isGreen) {
         this.isGreen = isGreen;
     }
+
+    @Override
+    public String toString() {
+        return "Shift{" +
+                "shiftID=" + shiftID +
+                ", assignmentID=" + assignmentID +
+                ", description='" + description + '\'' +
+                ", timeOfDay='" + timeOfDay + '\'' +
+                ", employeeName='" + employeeName + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", activeBaylead=" + activeBaylead +
+                ", hasAvop=" + hasAvop +
+                ", isGreen=" + isGreen +
+                '}';
+    }
 }

@@ -1,4 +1,4 @@
-package com.magtable.services;
+package com.magtable.services.userServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
