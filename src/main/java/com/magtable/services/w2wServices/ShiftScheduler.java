@@ -53,12 +53,11 @@ public class ShiftScheduler {
 
 
     /*** HELPER METHODs ***/
-
     //every 5 seconds
    // @Scheduled(cron = "*/5 * * * * *")
     //everyday at 2Am
     @Scheduled(cron = "0 0 2,22 * * *")
-    public void getShifts() throws Exception {
+    public void updateShifts() throws Exception {
        ShiftScheduler shiftScheduler = getInstance();
        shiftScheduler.setShiftList(new ArrayList());
 

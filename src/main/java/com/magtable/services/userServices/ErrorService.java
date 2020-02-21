@@ -141,4 +141,9 @@ public class ErrorService {
     public ResponseStatusException invalidInput() {
         return new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid Input");
     }
+
+
+    public ResponseStatusException sessionExpired() {
+        return new ResponseStatusException(HttpStatus.FORBIDDEN, "Session Expired");
+    }
 }
