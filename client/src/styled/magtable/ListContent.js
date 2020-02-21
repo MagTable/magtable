@@ -78,7 +78,7 @@ export const EmployeeListItemDesc = styled.p`
 	margin-block-start: 0em;
 	margin-block-end: 1em;
 	font-weight: bold;
-	color: var(--context-grey);
+	color: var(--emphasis-grey);
 `;
 
 export const EmployeeLabelDiv = styled.div`

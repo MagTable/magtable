@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { EmployeeListItemName } from "./ListContent";
+import { Button } from "../common/FormControl";
 
 /**
  * @date 2020-02-17
@@ -82,4 +84,25 @@ export const TowerAssignmentWrapper = styled.div`
 	height: 100%;
 	display: flex;
 	flex-direction: column;
+	height: -webkit-fill-available;
+`;
+
+export const AssignedEmployeeDiv = styled.div`
+	display: flex;
+	height: fit-content;
+	justify-content: space-between;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	align-items: center;
+	border: 1px solid black;
+`;
+
+export const AssignedEmployeeName = styled(EmployeeListItemName)`
+	margin-block-start: 0em;
+	margin-left: 20px;
+`;
+
+export const DeleteTowerAssignmentBtn = styled(Button)`
+	width: fit-content;
+	margin-right: 20px;
 `;

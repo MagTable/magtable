@@ -1,6 +1,9 @@
 import React from "react";
 import { TowerTitle, TowerTitleText } from "../../styled/magtable/Titling";
 import {
+	AssignedEmployeeDiv,
+	AssignedEmployeeName,
+	DeleteTowerAssignmentBtn,
 	TowerAssignmentWrapper,
 	TowerPositionDiv
 } from "../../styled/magtable/Maps";
@@ -8,6 +11,9 @@ import { useDrop } from "react-dnd";
 import { SET_EQUIPMENT_EMPLOYEE } from "../../actions/constants";
 import { removeEquipmentEmployee } from "../../actions/magtable";
 import { useDispatch } from "react-redux";
+import { Button } from "../../styled/common/FormControl";
+import IconButton from "../common/IconButton";
+import { EmployeeListItemName } from "../../styled/magtable/ListContent";
 
 /**
  * @date 2020-02-19
@@ -53,6 +59,8 @@ const TowerPosition = ({ assignment }) => {
 	if (isOver && canDrop) style = successStyle;
 	if (isOver && !canDrop) style = dangerStyle;
 
+	let orderNum;
+
 	return (
 		<TowerPositionDiv style={style} ref={drop}>
 			<TowerTitle>
@@ -60,10 +68,12 @@ const TowerPosition = ({ assignment }) => {
 			</TowerTitle>
 			<TowerAssignmentWrapper>
 				{assignment.employeeShifts.map(shift => (
-					<span key={shift.id}>
-						{shift.name}
-						<button onClick={() => handleClick(shift.id)}>X</button>
-					</span>
+					<AssignedEmployeeDiv key={shift.id}>
+						<AssignedEmployeeName>{shift.name + shift.id}</AssignedEmployeeName>
+						<DeleteTowerAssignmentBtn onClick={() => handleClick(shift.id)}>
+							X
+						</DeleteTowerAssignmentBtn>
+					</AssignedEmployeeDiv>
 				))}
 			</TowerAssignmentWrapper>
 		</TowerPositionDiv>
