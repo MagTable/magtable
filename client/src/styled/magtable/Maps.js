@@ -53,7 +53,7 @@ export const TowerPositionDiv = styled.div`
 	display: flex;
 	flex-grow: 1;
 	flex-basis: 0;
-	border-right: 2px solid grey;
+	border: 2px solid grey;
 	flex-direction: column;
 	height: 100%;
 `;

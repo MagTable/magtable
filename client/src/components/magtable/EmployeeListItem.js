@@ -2,6 +2,7 @@ import React from "react";
 import {
 	EmployeeLabelDiv,
 	EmployeeListItemContentDiv,
+	EmployeeListItemDesc,
 	EmployeeListItemDiv,
 	EmployeeListItemName,
 	EmployeeListItemTime
@@ -54,7 +55,7 @@ function EmployeeListItem({ employee: employeeShift }) {
 				<EmployeeListItemTime>
 					{employeeShift.startTime} - {employeeShift.endTime}
 				</EmployeeListItemTime>
-				<EmployeeListItemName>{employeeShift.description}</EmployeeListItemName>
+				<EmployeeListItemDesc>{employeeShift.description}</EmployeeListItemDesc>
 			</EmployeeListItemContentDiv>
 
 			{employeeShift.isGreen && <EmployeeLabelDiv label={"gp"} />}
