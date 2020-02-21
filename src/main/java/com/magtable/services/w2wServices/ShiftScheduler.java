@@ -125,6 +125,7 @@ public class ShiftScheduler {
                     shift.setGreen(true);
                 }
 
+                //todo invert this when merging with NAV changes
                 shift.setHasAvop(true);
                 if (name.contains("(NAV)")) {
                     shift.setHasAvop(false);
