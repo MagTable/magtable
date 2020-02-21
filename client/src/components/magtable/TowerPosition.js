@@ -1,6 +1,9 @@
 import React from "react";
 import { TowerTitle, TowerTitleText } from "../../styled/magtable/Titling";
-import { TowerPositionDiv } from "../../styled/magtable/Maps";
+import {
+	TowerAssignmentWrapper,
+	TowerPositionDiv
+} from "../../styled/magtable/Maps";
 import { useDrop } from "react-dnd";
 import { SET_EQUIPMENT_EMPLOYEE } from "../../actions/constants";
 import { removeEquipmentEmployee } from "../../actions/magtable";
@@ -55,12 +58,14 @@ const TowerPosition = ({ assignment }) => {
 			<TowerTitle>
 				<TowerTitleText>{assignment.equipment.position}</TowerTitleText>
 			</TowerTitle>
-			{assignment.employeeShifts.map(shift => (
-				<span key={shift.id}>
-					{shift.name}
-					<button onClick={() => handleClick(shift.id)}>X</button>
-				</span>
-			))}
+			<TowerAssignmentWrapper>
+				{assignment.employeeShifts.map(shift => (
+					<span key={shift.id}>
+						{shift.name}
+						<button onClick={() => handleClick(shift.id)}>X</button>
+					</span>
+				))}
+			</TowerAssignmentWrapper>
 		</TowerPositionDiv>
 	);
 };

@@ -9,6 +9,10 @@ import {
 } from "../../styled/magtable/ListContent";
 import { useSelector } from "react-redux";
 import Switch from "react-switch";
+import {
+	ToggleLabelLeft,
+	ToggleLabelRight
+} from "../../styled/common/FormControl";
 
 /**
  * @date 2020-02-17
@@ -52,8 +56,9 @@ function TruckList() {
 						checked={displayedTime === "am"}
 						offColor={"#414244"}
 						onColor={"#414244"}
-						// checkedIcon={<span>AM</span>}
-						// uncheckedIcon={<span>PM</span>}
+						checkedIcon={<ToggleLabelLeft>AM</ToggleLabelLeft>}
+						uncheckedIcon={<ToggleLabelRight>PM</ToggleLabelRight>}
+						width={80}
 					/>
 				</TruckListManipDiv>
 			</ListTitle>

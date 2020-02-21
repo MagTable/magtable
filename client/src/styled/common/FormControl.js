@@ -58,3 +58,21 @@ export const OkButton = styled(Button)`
 		background: #80c9ff;
 	}
 `;
+
+const ToggleLabel = styled.div`
+	display: flex;
+	justify-self: center;
+	align-self: center;
+	justify-content: center;
+	align-content: center;
+	color: white;
+	font-family: "Noto Sans KR", sans-serif;
+`;
+
+export const ToggleLabelRight = styled(ToggleLabel)`
+	padding-right: 20px;
+`;
+
+export const ToggleLabelLeft = styled(ToggleLabel)`
+	padding-left: 20px;
+`;
