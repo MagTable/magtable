@@ -11,6 +11,8 @@ import {
 } from "../../styled/magtable/ListContent";
 import { useDrop, useDrag } from "react-dnd";
 import {
+	AM,
+	PM,
 	SET_EQUIPMENT_EMPLOYEE,
 	SET_TRUCK_LOCATION
 } from "../../actions/constants";
@@ -54,18 +56,40 @@ function TruckListItem({ assignment, open, displayedTime }) {
 		accept: SET_EQUIPMENT_EMPLOYEE,
 		drop: () => ({
 			equipmentID: assignment.equipment.id,
-			slotID: assignment.employeeShifts.length
+			equipmentSlotID: nextOpenSlot()
 		}),
-		canDrop: item =>
-			!assignment.employeeShifts.find(shift => shift.id === item.id) &&
-			assignment.employeeShifts.length < 4, // Logic to not allow more than 4 employees in a location.
+		canDrop: item => handleCanDrop(item),
 		collect: monitor => ({
 			isOver: monitor.isOver(),
 			canDrop: monitor.canDrop()
 		})
 	});
 
-	const handleCanDrop = () => {};
+	const nextOpenSlot = () => {
+		if (displayedTime === AM) {
+			// if we're showing AM, if the [0] slot is taken, fill in [1], otherwise fill in [0]
+			return assignment.employeeShifts[0] ? 1 : 0;
+		}
+		if (displayedTime === PM) {
+			// if we're showing PM, if the [2] slot is taken, fill in [3], otherwise fill in [2]
+			return assignment.employeeShifts[2] ? 3 : 2;
+		}
+	};
+
+	const handleCanDrop = item => {
+		// Logic to not allow more than 4 employees in a location.
+		if (!assignment.employeeShifts.includes(null)) return false;
+		// make sure the employee isn't already assigned here
+		if (assignment.employeeShifts.find(shift => shift?.id === item.id))
+			return false;
+
+		if (displayedTime === AM) {
+			return !assignment.employeeShifts[1];
+		}
+		if (displayedTime === PM) {
+			return !assignment.employeeShifts[3];
+		}
+	};
 
 	const dangerStyle = { border: "2px solid red" };
 	const successStyle = { border: "2px solid green" };

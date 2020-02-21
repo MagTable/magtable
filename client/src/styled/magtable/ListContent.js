@@ -86,6 +86,8 @@ export const EmployeeListDivWrapper = styled(EmployeeListDiv)`
 export const EmployeeListItemDiv = styled.div`
 	border-bottom: 2px solid var(--border-color);
 	min-height: 75px;
+	${({ disabled }) =>
+		disabled ? `background-color: var(--shader-grey);` : `cursor: pointer;`}
 `;
 
 /**
@@ -127,15 +129,18 @@ export const EmployeeListItemDesc = styled.p`
  * A label representing the abilities of the employee, displayed in the employee's shift divs.
  */
 export const EmployeeLabelDiv = styled.div`
-	// border-bottom-right-radius: 10px;
-	// border-bottom-left-radius: 10px;
-	border: 2px solid var(--border-color);
-	border-top: none;
-	width: 20px;
-	height: 20px;
-	background-color: var(${({ label }) => getLabelColor(label)});
-	float: right;
-	// margin-right 2px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border: 2px solid var(--border-color);
+    border-top: none;
+    width: 20px;
+    height: 20px;
+    float: right;
+    margin-right 2px;
+    ${({ type }) =>
+			type === "greenPass" && `background-color: var(--context-green);`}
+    ${({ type }) =>
+			type === "noAvop" && `background-color: var(--context-orange);`}
 `;
 
 /**
