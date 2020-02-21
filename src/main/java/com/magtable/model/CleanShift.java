@@ -26,6 +26,10 @@ public class CleanShift implements Serializable {
         this.isGreen = shift.getIsGreen();
     }
 
+    public CleanShift() {
+        this.id = count.incrementAndGet();
+    }
+
     public int getId() {
         return id;
     }
