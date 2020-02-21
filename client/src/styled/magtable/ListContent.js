@@ -43,6 +43,8 @@ export const EmployeeListDiv = styled.div`
 	overflow-x: hidden;
 `;
 
+export const StartTimeSeparator = styled.div``;
+
 export const EmployeeListDivWrapper = styled(EmployeeListDiv)`
 	border: 2px solid var(--border-color);
 `;

@@ -3,12 +3,13 @@ import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import { TruckMapDiv } from "../../styled/magtable/Maps";
 import ApronToggle from "./ApronToggle";
 import {
+	FakePadDiv,
 	MapWrapper,
 	NumberMiddle,
 	NumberTop,
 	PadColumn,
 	PadDiv
-} from "../../styled/magtable/TruckMapMediaNoSVGStyle";
+} from "../../styled/magtable/TruckMapMedia";
 import { useSelector } from "react-redux";
 
 /**
@@ -93,7 +94,38 @@ function TruckMap(props) {
 							</div>
 						</PadColumn>
 					</MapWrapper>
-				) : null}
+				) : (
+					<MapWrapper>
+						<PadColumn>
+							<div>
+								<PadDiv>AE</PadDiv>
+								<PadDiv>AW</PadDiv>
+							</div>
+						</PadColumn>
+						<NumberMiddle>1</NumberMiddle>
+						<PadColumn>
+							<div>
+								<PadDiv>BE</PadDiv>
+								<PadDiv>BW</PadDiv>
+							</div>
+						</PadColumn>
+						<NumberMiddle>2</NumberMiddle>
+						<PadColumn>
+							<div>
+								<NumberTop>3</NumberTop>
+								<PadDiv>CE</PadDiv>
+								<PadDiv>CW</PadDiv>
+							</div>
+						</PadColumn>
+						<NumberMiddle>4</NumberMiddle>
+						<PadColumn>
+							<div>
+								<PadDiv>D</PadDiv>
+								<FakePadDiv />
+							</div>
+						</PadColumn>
+					</MapWrapper>
+				)}
 			</>
 		</TruckMapDiv>
 	);
