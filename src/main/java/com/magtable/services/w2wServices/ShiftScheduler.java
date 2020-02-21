@@ -12,9 +12,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 @Component
 public class ShiftScheduler {
@@ -23,6 +24,7 @@ public class ShiftScheduler {
     private String SID = "32325584041A4";
     private ArrayList<CleanShift> shiftList;
     private static ShiftScheduler shiftScheduler;
+    private String lastUpdated;
 
     /** CONSTRUCTOR **/
 
@@ -51,6 +53,13 @@ public class ShiftScheduler {
         this.SID = SID;
     }
 
+    public String getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(String lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
 
     /*** HELPER METHODs ***/
     //every 5 seconds
@@ -61,11 +70,14 @@ public class ShiftScheduler {
        ShiftScheduler shiftScheduler = getInstance();
        shiftScheduler.setShiftList(new ArrayList());
 
+
         Calendar cal = Calendar.getInstance();
         //months are 0 indexed so have to add one - January = 0
         final int MONTH = cal.get(Calendar.MONTH) + 1;
         final int DAY = cal.get(Calendar.DAY_OF_MONTH);
         final int YEAR = cal.get(Calendar.YEAR);
+
+        shiftScheduler.setLastUpdated(String.format("%d-%s @ %d:%d", DAY,cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()),cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE)));
 
         Document doc;
 

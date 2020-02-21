@@ -30,10 +30,10 @@ public class ShiftController {
      */
     @GetMapping("/get")
     public CleanShiftList getAllShifts(){
-
         ShiftScheduler shiftScheduler = ShiftScheduler.getInstance();
-        ArrayList<CleanShift> cleanShifts = shiftScheduler.getShiftList();
-        return new CleanShiftList(cleanShifts);
+        CleanShiftList cleanShiftList = new CleanShiftList(shiftScheduler.getShiftList());
+        cleanShiftList.setLastUpdated(shiftScheduler.getLastUpdated());
+        return cleanShiftList;
     }
 
     /**
