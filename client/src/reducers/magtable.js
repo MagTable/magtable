@@ -72,6 +72,9 @@ export default function(state = initialState, action) {
 				)
 			};
 		case REMOVE_EQUIPMENT_EMPLOYEE:
+			// loops through assignments to find the match for given payload.equipmentID
+			// when the right assignment is found, its employeeShifts are filtered
+			// and the employeeShift with a matching payload.shiftID is removed
 			return {
 				...state,
 				assignments: state.assignments.map(assignment =>
@@ -83,20 +86,13 @@ export default function(state = initialState, action) {
 								)
 						  }
 						: assignment
+				),
+				employeeShifts: state.employeeShifts.map(shift =>
+					shift.id === payload.shiftID
+						? { ...shift, assignedEquipment: null }
+						: shift
 				)
 			};
-		// case ADD_EQUIPMENT_EMPLOYEE: // if assignment exists already
-		// 	return {
-		// 		...state,
-		// 		assignments: state.assignments.map(assignment =>
-		// 			assignment.equipment.id === payload.equipmentID
-		// 				? {
-		// 						...assignment,
-		// 						employeeShifts: [...assignment.employeeShifts, payload.shift]
-		// 				  }
-		// 				: assignment
-		// 		)
-		// 	};
 		case SET_EQUIPMENT_EMPLOYEE: // if assignment needs to be created
 			const modifiedAssignment = state.assignments.find(
 				assignment => assignment.equipment.id === payload.equipmentID
@@ -107,14 +103,20 @@ export default function(state = initialState, action) {
 				0,
 				payload.shift
 			);
-			// assignment.employeeShifts[payload.equipmentSlotID] = payload.shift;
 
+			// replaces the modified assignment in the assignments list
+			// sets assigned equipment for the associated shift object
 			return {
 				...state,
 				assignments: state.assignments.map(assignment =>
 					assignment.equipment.id === payload.equipmentID
 						? modifiedAssignment
 						: assignment
+				),
+				employeeShifts: state.employeeShifts.map(shift =>
+					shift.id === payload.shift.id
+						? { ...shift, assignedEquipment: payload.equipmentID }
+						: shift
 				)
 			};
 		case PUBLISH_TABLE:

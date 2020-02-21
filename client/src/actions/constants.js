@@ -17,6 +17,9 @@ const TECHNICIAN = "Technician";
 export const EAST_APRON = "EDA";
 export const WEST_APRON = "WDA";
 
+export const AM = "am";
+export const PM = "pm";
+
 export const SET_ALERT = "SET_ALERT";
 export const REMOVE_ALERT = "REMOVE_ALERT";
 

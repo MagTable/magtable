@@ -7,28 +7,6 @@ import { Button } from "../common/FormControl";
  * @module Styled
  */
 
-/*
-   Labels:
-        gp: green pass
-        ojt: on the job training
-        ts: tower staff
-        bl: bay lead
- */
-const getLabelColor = label => {
-	switch (label) {
-		case "gp":
-			return "--context-green";
-		case "ojt":
-			return "--context-orange";
-		case "ts":
-			return "--context-grey";
-		case "bl":
-			return "--context-blue";
-		default:
-			return "#fff";
-	}
-};
-
 /**
  *
  **/
@@ -50,6 +28,8 @@ export const EmployeeListDivWrapper = styled(EmployeeListDiv)`
 export const EmployeeListItemDiv = styled.div`
 	border-bottom: 2px solid var(--border-color);
 	min-height: 75px;
+	${({ disabled }) =>
+		disabled ? `background-color: var(--shader-grey);` : `cursor: pointer;`}
 `;
 
 export const EmployeeListItemContentDiv = styled.div`
@@ -74,9 +54,12 @@ export const EmployeeLabelDiv = styled.div`
     border-top: none;
     width: 20px;
     height: 20px;
-    background-color: var(${({ label }) => getLabelColor(label)});
     float: right;
     margin-right 2px;
+    ${({ type }) =>
+			type === "greenPass" && `background-color: var(--context-green);`}
+    ${({ type }) =>
+			type === "noAvop" && `background-color: var(--context-orange);`}
 `;
 
 /**

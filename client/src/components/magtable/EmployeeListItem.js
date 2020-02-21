@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import {
-	EmployeeLabelDiv,
-	EmployeeListItemContentDiv,
-	EmployeeListItemDiv,
-	EmployeeListItemName,
-	EmployeeListItemTime
+	EmployeeLabelDiv as Label,
+	EmployeeListItemContentDiv as Content,
+	EmployeeListItemDiv as Wrapper,
+	EmployeeListItemName as ItemName,
+	EmployeeListItemTime as ItemTime
 } from "../../styled/magtable/ListContent";
 import { useDrag } from "react-dnd";
 import { SET_EQUIPMENT_EMPLOYEE } from "../../actions/constants";
@@ -28,6 +28,7 @@ function EmployeeListItem({ employee: employeeShift }) {
 
 	const [{ isDragging }, drag] = useDrag({
 		item: { type: SET_EQUIPMENT_EMPLOYEE, id: employeeShift.id },
+		canDrag: !employeeShift.assignedEquipment,
 		end: (item, monitor) => {
 			const dropResult = monitor.getDropResult();
 			if (item && dropResult) {
@@ -35,7 +36,7 @@ function EmployeeListItem({ employee: employeeShift }) {
 					setEquipmentEmployee(
 						dropResult.equipmentID,
 						employeeShift,
-						dropResult.slotID
+						dropResult.equipmentSlotID
 					)
 				);
 			}
@@ -46,20 +47,24 @@ function EmployeeListItem({ employee: employeeShift }) {
 	});
 
 	return (
-		<EmployeeListItemDiv ref={drag} employee={employeeShift}>
-			<EmployeeListItemContentDiv>
-				<EmployeeListItemName key={employeeShift.id}>
-					{employeeShift.name}
-				</EmployeeListItemName>
-				<EmployeeListItemTime>
+		<Wrapper
+			ref={drag}
+			employee={employeeShift}
+			disabled={employeeShift.assignedEquipment}
+		>
+			<Content>
+				<ItemName key={employeeShift.id}>{employeeShift.name}</ItemName>
+				<ItemTime>
 					{employeeShift.startTime} - {employeeShift.endTime}
-				</EmployeeListItemTime>
-				<EmployeeListItemName>{employeeShift.description}</EmployeeListItemName>
-			</EmployeeListItemContentDiv>
+				</ItemTime>
+				<ItemName>{employeeShift.description}</ItemName>
+			</Content>
 
-			{employeeShift.isGreen && <EmployeeLabelDiv label={"gp"} />}
-			{employeeShift.hasAvop && <EmployeeLabelDiv label={"ts"} />}
-		</EmployeeListItemDiv>
+			{employeeShift.isGreen && <Label type={"greenPass"}>Green Pass</Label>}
+			{!employeeShift.hasAvop && <Label type={"noAvop"}>No AVOP</Label>}
+
+			{employeeShift.assignedEquipment}
+		</Wrapper>
 	);
 }
 
