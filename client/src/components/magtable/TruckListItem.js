@@ -43,7 +43,7 @@ function TruckListItem({ assignment, open, displayedTime }) {
 			const dropResult = monitor.getDropResult();
 			if (item && dropResult) {
 				dispatch(
-					setTruckLocation(dropResult.equipmentID, dropResult.locationID)
+					setTruckLocation(assignment.equipment.id, dropResult.locationID)
 				);
 			}
 		},
@@ -104,7 +104,11 @@ function TruckListItem({ assignment, open, displayedTime }) {
 
 	return (
 		<div ref={drop}>
-			<TruckListItemDiv style={style} ref={drag}>
+			<TruckListItemDiv
+				style={style}
+				ref={drag}
+				assignment={assignment.equipment.id}
+			>
 				<TruckNumberDiv status={assignment.equipment.status}>
 					{assignment.equipment.id}
 				</TruckNumberDiv>
