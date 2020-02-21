@@ -1,8 +1,8 @@
 /*
     Program Name: MagTableDev
     Author: Mustafa Al Khaldi
-    Created: February 4, 2020
-    Description: Use Case one database scheme for MagTable
+    Created: February 21, 2020
+    Description: Use Case two updated database scheme for MagTable.
  */
 DROP DATABASE IF EXISTS magtabledev;
 CREATE DATABASE magtabledev;
@@ -81,7 +81,7 @@ CREATE TABLE Assignment (
 );
 
 CREATE TABLE Equipment (
-    equipmentID  INT(5) NOT NULL,
+    equipmentID  INT(5) NOT NULL AUTO_INCREMENT,
     assignmentID INT(5) NOT NULL,
     truckID      INT(5),
     towerID      INT(5),
@@ -89,12 +89,12 @@ CREATE TABLE Equipment (
     notice       VARCHAR(2000),
     position     INT(2),
     PRIMARY KEY (equipmentID),
-    CONSTRAINT FK_Assignment_ID_Equipment FOREIGN KEY (assignmentID) REFERENCES Assignment (assignmentID) ON DELETE RESTRICT ON UPDATE RESTRICT ,
-    CONSTRAINT CK_Equipment_ID CHECK (
-        CASE
-            WHEN equipmentID < 1000 THEN truckID = equipmentID
-            WHEN equipmentID >= 1000 THEN towerID = equipmentID
-        END),
+#     CONSTRAINT FK_Assignment_ID_Equipment FOREIGN KEY (assignmentID) REFERENCES Assignment (assignmentID) ON DELETE RESTRICT ON UPDATE RESTRICT ,
+#     CONSTRAINT CK_Equipment_ID CHECK (
+#         CASE
+#             WHEN equipmentID < 1000 THEN truckID = equipmentID
+#             WHEN equipmentID >= 1000 THEN towerID = equipmentID
+#         END),
     CONSTRAINT FK_Truck_ID FOREIGN KEY (truckID) REFERENCES Truck (truckID) ON DELETE RESTRICT ON UPDATE RESTRICT ,
     CONSTRAINT FK_Tower_ID FOREIGN KEY (towerID) REFERENCES Tower (towerID) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
