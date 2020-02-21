@@ -17,7 +17,7 @@ import { EmployeeListItemName } from "../../styled/magtable/ListContent";
 
 /**
  * @date 2020-02-19
- * @author Steven Wong
+ * @author Steven Wong, MJ Kochuk
  * @module Component
  */
 
@@ -59,8 +59,6 @@ const TowerPosition = ({ assignment }) => {
 	if (isOver && canDrop) style = successStyle;
 	if (isOver && !canDrop) style = dangerStyle;
 
-	let orderNum;
-
 	return (
 		<TowerPositionDiv style={style} ref={drop}>
 			<TowerTitle>
@@ -69,7 +67,7 @@ const TowerPosition = ({ assignment }) => {
 			<TowerAssignmentWrapper>
 				{assignment.employeeShifts.map(shift => (
 					<AssignedEmployeeDiv key={shift.id}>
-						<AssignedEmployeeName>{shift.name + shift.id}</AssignedEmployeeName>
+						<AssignedEmployeeName>{shift.name}</AssignedEmployeeName>
 						<DeleteTowerAssignmentBtn onClick={() => handleClick(shift.id)}>
 							X
 						</DeleteTowerAssignmentBtn>

@@ -79,6 +79,10 @@ export const AssignmentContainer = styled.div`
 	height: calc(100vh - 70px);
 `;
 
+/**
+ * Holds individual assignments placed in the tower, ensures the section stays a consistent height whilst adding
+ * employees.
+ */
 export const TowerAssignmentWrapper = styled.div`
 	max-height: 100%;
 	height: 100%;
@@ -87,6 +91,9 @@ export const TowerAssignmentWrapper = styled.div`
 	height: -webkit-fill-available;
 `;
 
+/**
+ * Holds the name of an assigned employee and their delete button.
+ */
 export const AssignedEmployeeDiv = styled.div`
 	display: flex;
 	height: fit-content;
@@ -97,11 +104,17 @@ export const AssignedEmployeeDiv = styled.div`
 	border: 1px solid black;
 `;
 
+/**
+ * The name of the employee assigned.
+ */
 export const AssignedEmployeeName = styled(EmployeeListItemName)`
 	margin-block-start: 0em;
 	margin-left: 20px;
 `;
 
+/**
+ * A smaller version of Button specific to tower assignment deletions.
+ */
 export const DeleteTowerAssignmentBtn = styled(Button)`
 	width: fit-content;
 	margin-right: 20px;

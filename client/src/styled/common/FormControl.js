@@ -59,6 +59,9 @@ export const OkButton = styled(Button)`
 	}
 `;
 
+/**
+ * The on / off state labels for toggles.
+ */
 const ToggleLabel = styled.div`
 	display: flex;
 	justify-self: center;
@@ -69,10 +72,16 @@ const ToggleLabel = styled.div`
 	font-family: "Noto Sans KR", sans-serif;
 `;
 
+/**
+ * The label for a toggle, specific to the right side.
+ */
 export const ToggleLabelRight = styled(ToggleLabel)`
 	padding-right: 20px;
 `;
 
+/**
+ * The label for a toggle, specific to the left side.
+ */
 export const ToggleLabelLeft = styled(ToggleLabel)`
 	padding-left: 20px;
 `;
