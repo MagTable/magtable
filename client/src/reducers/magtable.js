@@ -81,8 +81,8 @@ export default function(state = initialState, action) {
 					assignment.equipment.id === payload.equipmentID
 						? {
 								...assignment,
-								employeeShifts: assignment.employeeShifts.filter(
-									shift => shift.id !== payload.shiftID
+								employeeShifts: assignment.employeeShifts.map(shift =>
+									shift?.id === payload.shiftID ? null : shift
 								)
 						  }
 						: assignment
@@ -98,11 +98,14 @@ export default function(state = initialState, action) {
 				assignment => assignment.equipment.id === payload.equipmentID
 			);
 
-			modifiedAssignment.employeeShifts.splice(
-				payload.equipmentSlotID,
-				0,
-				payload.shift
-			);
+			// modifiedAssignment.employeeShifts.splice(
+			// 	payload.equipmentSlotID,
+			// 	0,
+			// 	payload.shift
+			// );
+			modifiedAssignment.employeeShifts[payload.equipmentSlotID] =
+				payload.shift;
+			console.log(modifiedAssignment);
 
 			// replaces the modified assignment in the assignments list
 			// sets assigned equipment for the associated shift object

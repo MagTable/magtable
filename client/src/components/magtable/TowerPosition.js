@@ -34,7 +34,7 @@ const TowerPosition = ({ assignment }) => {
 			equipmentSlotID: assignment.employeeShifts.length
 		}),
 		canDrop: item =>
-			!assignment.employeeShifts.find(shift => shift.id === item.id) &&
+			!assignment.employeeShifts.find(shift => shift?.id === item.id) &&
 			assignment.employeeShifts.length < 4,
 		// Logic to not allow more than 4 employees in a location.
 		collect: monitor => ({
@@ -55,12 +55,15 @@ const TowerPosition = ({ assignment }) => {
 			<TowerTitle>
 				<TowerTitleText>{assignment.equipment.position}</TowerTitleText>
 			</TowerTitle>
-			{assignment.employeeShifts.map(shift => (
-				<span key={shift.id}>
-					{shift.name}
-					<button onClick={() => handleClick(shift.id)}>X</button>
-				</span>
-			))}
+			{assignment.employeeShifts.map(
+				shift =>
+					shift && (
+						<span key={shift.id}>
+							{shift.name}
+							<button onClick={() => handleClick(shift.id)}>X</button>
+						</span>
+					)
+			)}
 		</TowerPositionDiv>
 	);
 };

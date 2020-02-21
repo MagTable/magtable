@@ -37,7 +37,7 @@ export const initialAssignments = [
 			notice: "Equipment Conditional Status Message",
 			status: "CON"
 		},
-		employeeShifts: [],
+		employeeShifts: [null, null, null, null],
 		parkingLocation: null,
 		brixRecords: []
 	},
@@ -47,7 +47,7 @@ export const initialAssignments = [
 			notice: "",
 			status: "GO"
 		},
-		employeeShifts: [],
+		employeeShifts: [null, null, null, null],
 		parkingLocation: null,
 		brixRecords: [
 			{
@@ -65,7 +65,7 @@ export const initialAssignments = [
 			notice: "",
 			status: "INOP"
 		},
-		employeeShifts: [],
+		employeeShifts: [null, null, null, null],
 		parkingLocation: null,
 		brixRecords: []
 	},
@@ -75,7 +75,7 @@ export const initialAssignments = [
 			notice: "",
 			status: "OOS"
 		},
-		employeeShifts: [],
+		employeeShifts: [null, null, null, null],
 		parkingLocation: null,
 		brixRecords: []
 	},
@@ -85,7 +85,7 @@ export const initialAssignments = [
 			notice: "",
 			status: "OOS"
 		},
-		employeeShifts: [],
+		employeeShifts: [null, null, null, null],
 		parkingLocation: null,
 		brixRecords: []
 	},
@@ -96,7 +96,7 @@ export const initialAssignments = [
 			notice: null,
 			status: null
 		},
-		employeeShifts: [],
+		employeeShifts: [null, null, null, null],
 		parkingLocation: null,
 		brixRecords: []
 	},
@@ -107,7 +107,7 @@ export const initialAssignments = [
 			notice: null,
 			status: null
 		},
-		employeeShifts: [],
+		employeeShifts: [null, null, null, null],
 		parkingLocation: null,
 		brixRecords: []
 	},
@@ -118,7 +118,7 @@ export const initialAssignments = [
 			notice: null,
 			status: null
 		},
-		employeeShifts: [],
+		employeeShifts: [null, null, null, null],
 		parkingLocation: null,
 		brixRecords: []
 	},
@@ -129,7 +129,7 @@ export const initialAssignments = [
 			notice: null,
 			status: null
 		},
-		employeeShifts: [],
+		employeeShifts: [null, null, null, null],
 		parkingLocation: null,
 		brixRecords: []
 	},
@@ -140,7 +140,7 @@ export const initialAssignments = [
 			notice: null,
 			status: null
 		},
-		employeeShifts: [],
+		employeeShifts: [null, null, null, null],
 		parkingLocation: null,
 		brixRecords: []
 	},
@@ -151,7 +151,7 @@ export const initialAssignments = [
 			notice: null,
 			status: null
 		},
-		employeeShifts: [],
+		employeeShifts: [null, null, null, null],
 		parkingLocation: null,
 		brixRecords: []
 	},
@@ -162,7 +162,7 @@ export const initialAssignments = [
 			notice: null,
 			status: null
 		},
-		employeeShifts: [],
+		employeeShifts: [null, null, null, null],
 		parkingLocation: null,
 		brixRecords: []
 	}

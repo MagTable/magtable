@@ -81,7 +81,7 @@ function TruckListItem({ assignment, open, displayedTime }) {
 		accept: SET_EQUIPMENT_EMPLOYEE,
 		drop: () => ({
 			equipmentID: assignment.equipment.id,
-			slotID: nextOpenSlot()
+			equipmentSlotID: nextOpenSlot()
 		}),
 		canDrop: item => handleCanDrop(item),
 		collect: monitor => ({
@@ -103,7 +103,7 @@ function TruckListItem({ assignment, open, displayedTime }) {
 
 	const handleCanDrop = item => {
 		// Logic to not allow more than 4 employees in a location.
-		if (assignment.employeeShifts.length >= 4) return false;
+		if (!assignment.employeeShifts.includes(null)) return false;
 		// make sure the employee isn't already assigned here
 		if (assignment.employeeShifts.find(shift => shift?.id === item.id))
 			return false;
