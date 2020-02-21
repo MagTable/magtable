@@ -1,6 +1,8 @@
 package com.magtable.controller;
 
 
+import com.magtable.model.CleanShift;
+import com.magtable.model.Shift;
 import com.magtable.services.userServices.ErrorService;
 import com.magtable.services.w2wServices.ShiftScheduler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +29,14 @@ public class ShiftController {
      */
     @GetMapping("/get")
     public ArrayList getAllShifts(){
+
         ShiftScheduler shiftScheduler = ShiftScheduler.getInstance();
-        return shiftScheduler.getShiftList();
+        ArrayList<Shift> shiftList = shiftScheduler.getShiftList();
+        ArrayList<CleanShift> cleanShifts = new ArrayList<>();
+        for(Shift shift : shiftList){
+            cleanShifts.add(new CleanShift(shift));
+        }
+        return cleanShifts;
     }
 
     /**

@@ -123,8 +123,8 @@ public class ShiftScheduler {
                 // 1. that shifts that start in the PM can end the next day, whereas AM shifts cannot
                 // 2. We only have end times, so shifts that start in the PM and end in the AM are the next day
                 if (Integer.parseInt(splittedEndTime[0]) < 12 && shift.getTimeOfDay().equals("PM")) {
-                    int nextDay = DAY + 15;
-                    int nextMonth = MONTH + 12;
+                    int nextDay = DAY + 1;
+                    int nextMonth = MONTH + 1;
 
                     //if the next day is greater than the last day of the month
                     if (nextDay > cal.getActualMaximum(Calendar.DAY_OF_MONTH)) {
@@ -163,11 +163,9 @@ public class ShiftScheduler {
 
                 //Getting the assignment
                 String[] splittedAssignment = shifts.next().next().next().first().text().split(" - ");
-                shift.setAssignmentID(Integer.parseInt(splittedAssignment[0]));
                 shift.setDescription(splittedAssignment[1]);
 
                 shifts.remove(0); //Always removing the top-most shift
-
                 shiftScheduler.shiftList.add(shift);
             }
     }
