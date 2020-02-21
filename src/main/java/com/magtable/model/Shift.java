@@ -34,6 +34,15 @@ public class Shift implements Serializable {
     @Column(name = "endTime", nullable = false)
     private Timestamp endTime;
 
+    @Column(name = "activeBaylead", nullable = false)
+    private Boolean activeBaylead;
+
+    @Column(name = "hasAvop", nullable = false)
+    private Boolean hasAvop;
+
+    @Column(name = "isGreen", nullable = false)
+    private Boolean isGreen;
+
     public Integer getShiftID() {
         return shiftID;
     }
@@ -88,5 +97,29 @@ public class Shift implements Serializable {
 
     public void setEndTime(Timestamp endTime) {
         this.endTime = endTime;
+    }
+
+    public Boolean getActiveBaylead() {
+        return activeBaylead;
+    }
+
+    public void setActiveBaylead(Boolean activeBaylead) {
+        this.activeBaylead = activeBaylead;
+    }
+
+    public Boolean getHasAvop() {
+        return hasAvop;
+    }
+
+    public void setHasAvop(Boolean hasAvop) {
+        this.hasAvop = hasAvop;
+    }
+
+    public Boolean getIsGreen() {
+        return isGreen;
+    }
+
+    public void setIsGreen(Boolean isGreen) {
+        this.isGreen = isGreen;
     }
 }
