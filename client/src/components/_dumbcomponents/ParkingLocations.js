@@ -28,30 +28,32 @@ function ParkingLocations({ assignment }) {
 	);
 	const apron = useSelector(state => state.magtable.selectedApron);
 
-	// const [{ canDrop, isOver }, drop] = useDrop({
-	// 	accept: SET_TRUCK_LOCATION,
-	// 	drop: () => ({
-	//         locationID: assignment.location.id, //is this right?
-	//
-	//     }),
-	//     canDrop: item =>,
-	//     collect: monitor => ({
-	//         isOver: monitor.isOver(),
-	//         canDrop: monitor.canDrop()
-	//     })
-	// });
+	const [{ canDrop, isOver }, drop] = useDrop({
+		accept: SET_TRUCK_LOCATION,
+		drop: () => ({
+			equipmentID: assignment.equipment.id,
+			locationID: parkingLocations[2].id //is this right?
+		}),
+		canDrop: item => true,
+		collect: monitor => ({
+			isOver: monitor.isOver(),
+			canDrop: monitor.canDrop()
+		})
+	});
+
+	console.log({ ...parkingLocations });
 
 	return (
-		<>
+		<div ref={drop}>
 			{parkingLocations.map(
 				parkingLocation =>
 					apron === parkingLocation.apron && (
 						<ParkingLocation key={parkingLocation.id}>
-							{parkingLocation.code}
+							<span>{parkingLocation.code}</span>
 						</ParkingLocation>
 					)
 			)}
-		</>
+		</div>
 	);
 }
 

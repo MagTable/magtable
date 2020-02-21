@@ -66,7 +66,7 @@ function TruckListItem({ assignment, open, displayedTime }) {
 			const dropResult = monitor.getDropResult();
 			if (item && dropResult) {
 				dispatch(
-					setTruckLocation(dropResult.equipmentID, dropResult.parkingLocation)
+					setTruckLocation(dropResult.equipmentID, dropResult.locationID)
 				);
 			}
 		},
