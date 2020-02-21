@@ -282,7 +282,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"username\": \"new_user\",\r\n    \"password\": \"password\",\r\n    \"role\": 3\r\n}\r\n"
+									"raw": "{\r\n\t\"username\": \"hashed_user\",\r\n    \"password\": \"password\",\r\n    \"role\": 3\r\n}\r\n"
 								},
 								"url": {
 									"raw": "localhost:8080/user/add",
@@ -924,6 +924,50 @@
 					],
 					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "ShiftRequests",
+			"item": [
+				{
+					"name": "GET Shifts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/shift/update",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shift",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Shifts",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/shift/update",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shift",
+								"update"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
