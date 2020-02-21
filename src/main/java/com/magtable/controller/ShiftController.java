@@ -2,6 +2,7 @@ package com.magtable.controller;
 
 
 import com.magtable.model.CleanShift;
+import com.magtable.model.CleanShiftList;
 import com.magtable.model.Shift;
 import com.magtable.services.userServices.ErrorService;
 import com.magtable.services.w2wServices.ShiftScheduler;
@@ -28,15 +29,11 @@ public class ShiftController {
      * @return A list of the W2W shifts
      */
     @GetMapping("/get")
-    public ArrayList getAllShifts(){
+    public CleanShiftList getAllShifts(){
 
         ShiftScheduler shiftScheduler = ShiftScheduler.getInstance();
-        ArrayList<Shift> shiftList = shiftScheduler.getShiftList();
-        ArrayList<CleanShift> cleanShifts = new ArrayList<>();
-        for(Shift shift : shiftList){
-            cleanShifts.add(new CleanShift(shift));
-        }
-        return cleanShifts;
+        ArrayList<CleanShift> cleanShifts = shiftScheduler.getShiftList();
+        return new CleanShiftList(cleanShifts);
     }
 
     /**
