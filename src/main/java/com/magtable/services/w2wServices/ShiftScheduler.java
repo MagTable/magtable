@@ -1,6 +1,7 @@
 package com.magtable.services.w2wServices;
 
 
+import com.magtable.model.CleanShift;
 import com.magtable.model.Shift;
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
@@ -14,20 +15,19 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.TimerTask;
 
 @Component
 public class ShiftScheduler {
 
     //SID will have to be updated once and awhile
     private String SID = "32325584041A4";
-    private ArrayList<Shift> shiftList;
+    private ArrayList<CleanShift> shiftList;
     private static ShiftScheduler shiftScheduler;
 
     /** CONSTRUCTOR **/
 
     private ShiftScheduler() {
-        shiftList = new ArrayList<Shift>();
+        shiftList = new ArrayList<CleanShift>();
     }
 
     //singleton get instance
@@ -39,7 +39,7 @@ public class ShiftScheduler {
     }
 
 
-    public ArrayList<Shift> getShiftList() {
+    public ArrayList<CleanShift> getShiftList() {
         return shiftList;
     }
 
@@ -93,67 +93,24 @@ public class ShiftScheduler {
             //selecting the elements that contain shift data from the page
             Elements shifts = doc.select("span.sftstart");
 
-            //Start Time -> shifts.first().text()
-            //End Time -> shifts.next().first().text()
-            //Name -> shifts.next().next().first().text())\
-            //Assignment_ID & Description -> shifts.next().next().next().first().text()
-
             //iterating through the shift list
             while (!shifts.isEmpty()) {
 
-                Shift shift = new Shift(); //Creating a new shift
+                CleanShift shift = new CleanShift(); //Creating a new shift
 
                 String startTime = shifts.first().text();
-                shift.setStartTime(Timestamp.valueOf(YEAR + "-" + MONTH + "-" + DAY + " " + startTime + ":" + "00"));
+                shift.setStartTime(startTime.replace(":", ""));
 
-                //startTime -> 04:00
-                String[] splittedStartTime = startTime.split(":");
-                shift.setTimeOfDay("PM");
-                if (Integer.parseInt(splittedStartTime[0]) < 12) {
-                    shift.setTimeOfDay("AM");
-                }
-
-                //End time
                 String endTime = shifts.next().first().text();
-                String[] splittedEndTime = endTime.split(":");
-                shift.setEndTime(Timestamp.valueOf(YEAR + "-" + MONTH + "-" + DAY + " " + endTime + ":" + "00"));
-
-                //there is no real way to check the date when the shifts ends
-                //the conditional assumes some things
-                // 1. that shifts that start in the PM can end the next day, whereas AM shifts cannot
-                // 2. We only have end times, so shifts that start in the PM and end in the AM are the next day
-                if (Integer.parseInt(splittedEndTime[0]) < 12 && shift.getTimeOfDay().equals("PM")) {
-                    int nextDay = DAY + 1;
-                    int nextMonth = MONTH + 1;
-
-                    //if the next day is greater than the last day of the month
-                    if (nextDay > cal.getActualMaximum(Calendar.DAY_OF_MONTH)) {
-                        //If its a new month the day is always 1
-                        nextDay = 1;
-                        //check to see if we need to roll over the year
-                        if (nextMonth > cal.getActualMaximum(Calendar.MONTH)) {
-                            //HAPPY NEW YEAR!
-                            nextMonth = cal.get(Calendar.JANUARY);
-                            int nextYear = YEAR + 1;
-                            shift.setEndTime(Timestamp.valueOf(nextYear + "-" + nextMonth + "-" + nextDay + " " + endTime + ":" + "00"));
-                        } else {
-                            //don't need to roll over the year, just going to next month
-                            shift.setEndTime(Timestamp.valueOf(YEAR + "-" + nextMonth + "-" + nextDay + " " + endTime + ":" + "00"));
-                        }
-                    } else {
-                        //Just need to go to the next day
-                        shift.setEndTime(Timestamp.valueOf(YEAR + "-" + MONTH + "-" + nextDay + " " + endTime + ":" + "00"));
-                    }
-
-                }
+                shift.setEndTime(endTime.replace(":", ""));
 
                 //getting the employee name
                 String name = shifts.next().next().first().text();
-                shift.setEmployeeName(name); //todo remove (NAV) and (GP) from names
+                shift.setName(name); //todo remove (NAV) and (GP) from names
 
-                shift.setIsGreen(false);
+                shift.setGreen(false);
                 if (name.contains("(GP)")) {
-                    shift.setIsGreen(true);
+                    shift.setGreen(true);
                 }
 
                 shift.setHasAvop(true);
