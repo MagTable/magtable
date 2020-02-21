@@ -7,12 +7,9 @@ import { Button } from "../common/FormControl";
  * @module Styled
  */
 
-/*
-   Labels:
-        gp: green pass
-        ojt: on the job training
-        ts: tower staff
-        bl: bay lead
+/**
+ * Provides the correct color code for an employee's label based on their abilities/role
+ * @param label The codes representing an employees roles. Can be gp (Green pass), ts (Tower staff), ojt (On the job training) or bl (bay lead)
  */
 const getLabelColor = label => {
 	switch (label) {
@@ -30,8 +27,32 @@ const getLabelColor = label => {
 };
 
 /**
- *
- **/
+ * Provides the correct color code for a truck based on the status of the truck.
+ * @param status The status of the truck. Can be GO (Operational), INOP (Inoperable), CON (Conditional) or OOS(Out of service)
+ */
+const getTruckColorCode = status => {
+	switch (status) {
+		case "GO": {
+			return "--context-green";
+		}
+		case "INOP": {
+			return "--context-red";
+		}
+		case "CON": {
+			return "--context-blue";
+		}
+		case "OOS": {
+			return "--context-grey";
+		}
+		default: {
+			return "#fff"; // If an unknown tuck status is provided.
+		}
+	}
+};
+
+/**
+ *	Holds the currently available employees and separator divs for start times.
+ */
 export const EmployeeListDiv = styled.div`
 	margin: 0;
 	display: flex;
@@ -43,40 +64,78 @@ export const EmployeeListDiv = styled.div`
 	overflow-x: hidden;
 `;
 
+/**
+ * Divides the list of available employees into sections based on start time.
+ */
+export const StartTimeSeparator = styled.div`
+	display: flex;
+	background: var(--shader-grey);
+	padding-left: 20px;
+`;
+
+/**
+ * Holds the employee list and title for the list.
+ */
 export const EmployeeListDivWrapper = styled(EmployeeListDiv)`
 	border: 2px solid var(--border-color);
 `;
 
+/**
+ * Holds the content div for an employee shift and the labels representing their abilities.
+ */
 export const EmployeeListItemDiv = styled.div`
 	border-bottom: 2px solid var(--border-color);
 	min-height: 75px;
 `;
 
+/**
+ * Used per employee shift, holds all pertinent information for the employee's shift.
+ */
 export const EmployeeListItemContentDiv = styled.div`
 	display: inline-block;
 	margin-left: 10px;
 `;
 
+/**
+ * The name of the employee being displayed in their shift's div.
+ */
 export const EmployeeListItemName = styled.p`
 	margin-block-end: 0em;
 	font-weight: bold;
 `;
 
+/**
+ * The time of the employees shift being represented in their shift div.
+ */
 export const EmployeeListItemTime = styled.p`
 	margin-block-start: 0em;
+	margin-block-end: 0em;
 	font-style: italic;
 `;
 
+/**
+ * The job description of the employee being represented in the employee's shift divs.
+ */
+export const EmployeeListItemDesc = styled.p`
+	margin-block-start: 0em;
+	margin-block-end: 1em;
+	font-weight: bold;
+	color: var(--emphasis-grey);
+`;
+
+/**
+ * A label representing the abilities of the employee, displayed in the employee's shift divs.
+ */
 export const EmployeeLabelDiv = styled.div`
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border: 2px solid var(--border-color);
-    border-top: none;
-    width: 20px;
-    height: 20px;
-    background-color: var(${({ label }) => getLabelColor(label)});
-    float: right;
-    margin-right 2px;
+	// border-bottom-right-radius: 10px;
+	// border-bottom-left-radius: 10px;
+	border: 2px solid var(--border-color);
+	border-top: none;
+	width: 20px;
+	height: 20px;
+	background-color: var(${({ label }) => getLabelColor(label)});
+	float: right;
+	// margin-right 2px;
 `;
 
 /**
@@ -123,7 +182,7 @@ export const TruckProblemsText = styled.p`
 `;
 
 export const TruckNumberDiv = styled.div`
-	background: var(${props => props.colorCode});
+	background: var(${({ status }) => getTruckColorCode(status)});
 	display: flex;
 	min-width: 100px;
 	justify-content: center;

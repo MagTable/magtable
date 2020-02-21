@@ -2,7 +2,14 @@ import React from "react";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import { TruckMapDiv } from "../../styled/magtable/Maps";
 import ApronToggle from "./ApronToggle";
-import ParkingLocations from "../_dumbcomponents/ParkingLocations";
+import {
+	FakePadDiv,
+	MapWrapper,
+	NumberMiddle,
+	NumberTop,
+	PadColumn,
+	PadDiv
+} from "../../styled/magtable/TruckMapMedia";
 import { useSelector } from "react-redux";
 
 /**
@@ -18,7 +25,7 @@ import { useSelector } from "react-redux";
  * @returns {*} The TruckMap component
  */
 function TruckMap(props) {
-	const assignments = useSelector(state => state.magtable.assignments);
+	const apron = useSelector(state => state.magtable.selectedApron);
 
 	return (
 		<TruckMapDiv>
@@ -26,9 +33,100 @@ function TruckMap(props) {
 				<ListTitleText>Parking Locations</ListTitleText>
 				<ApronToggle />
 			</ListTitle>
-			{assignments.map(assignment => (
-				<ParkingLocations assignment={assignment} />
-			))}
+			<>
+				{apron === "EDA" ? (
+					<MapWrapper>
+						<PadColumn>
+							<div>
+								<PadDiv>AE</PadDiv>
+								<PadDiv>AC</PadDiv>
+								<PadDiv>AW</PadDiv>
+							</div>
+						</PadColumn>
+						<NumberMiddle>1</NumberMiddle>
+						<PadColumn>
+							<div>
+								<NumberTop>2</NumberTop>
+								<PadDiv>BE</PadDiv>
+								<PadDiv>BC</PadDiv>
+								<PadDiv>BW</PadDiv>
+							</div>
+						</PadColumn>
+						<NumberMiddle>3</NumberMiddle>
+						<PadColumn>
+							<div>
+								<PadDiv>CE</PadDiv>
+								<PadDiv>CC</PadDiv>
+								<PadDiv>CW</PadDiv>
+							</div>
+						</PadColumn>
+						<NumberMiddle>4</NumberMiddle>
+						<PadColumn>
+							<div>
+								<NumberTop>5</NumberTop>
+								<PadDiv>DE</PadDiv>
+								<PadDiv>DC</PadDiv>
+								<PadDiv>DW</PadDiv>
+							</div>
+						</PadColumn>
+						<NumberMiddle>6</NumberMiddle>
+						<PadColumn>
+							<div>
+								<PadDiv>EE</PadDiv>
+								<PadDiv>EC</PadDiv>
+								<PadDiv>EW</PadDiv>
+							</div>
+						</PadColumn>
+						<NumberMiddle>7</NumberMiddle>
+						<PadColumn>
+							<div>
+								<PadDiv>FE</PadDiv>
+								<PadDiv>FC</PadDiv>
+								<PadDiv>FW</PadDiv>
+							</div>
+						</PadColumn>
+						<NumberMiddle>9</NumberMiddle>
+						<PadColumn>
+							<div>
+								<PadDiv>GE</PadDiv>
+								<PadDiv>GC</PadDiv>
+								<PadDiv>GW</PadDiv>
+							</div>
+						</PadColumn>
+					</MapWrapper>
+				) : (
+					<MapWrapper>
+						<PadColumn>
+							<div>
+								<PadDiv>AE</PadDiv>
+								<PadDiv>AW</PadDiv>
+							</div>
+						</PadColumn>
+						<NumberMiddle>1</NumberMiddle>
+						<PadColumn>
+							<div>
+								<PadDiv>BE</PadDiv>
+								<PadDiv>BW</PadDiv>
+							</div>
+						</PadColumn>
+						<NumberMiddle>2</NumberMiddle>
+						<PadColumn>
+							<div>
+								<NumberTop>3</NumberTop>
+								<PadDiv>CE</PadDiv>
+								<PadDiv>CW</PadDiv>
+							</div>
+						</PadColumn>
+						<NumberMiddle>4</NumberMiddle>
+						<PadColumn>
+							<div>
+								<PadDiv>D</PadDiv>
+								<FakePadDiv />
+							</div>
+						</PadColumn>
+					</MapWrapper>
+				)}
+			</>
 		</TruckMapDiv>
 	);
 }

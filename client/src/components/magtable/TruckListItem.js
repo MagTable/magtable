@@ -35,31 +35,6 @@ import {
 function TruckListItem({ assignment, open, displayedTime }) {
 	const dispatch = useDispatch();
 
-	let colorCode;
-
-	// Sets the color for the TruckNumberDiv based on the status of the truck
-	switch (assignment.equipment.status) {
-		case "GO": {
-			colorCode = "--context-green"; // Operational
-			break;
-		}
-		case "INOP": {
-			colorCode = "--context-red"; // Inoperable
-			break;
-		}
-		case "CON": {
-			colorCode = "--context-blue"; // Conditional
-			break;
-		}
-		case "OOS": {
-			colorCode = "--context-grey"; // Out of service
-			break;
-		}
-		default: {
-			// If an unknown tuck status is provided.
-		}
-	}
-
 	const [{ isDragging }, drag] = useDrag({
 		item: { type: SET_TRUCK_LOCATION },
 		end: (item, monitor) => {
@@ -106,7 +81,7 @@ function TruckListItem({ assignment, open, displayedTime }) {
 	return (
 		<div ref={drop}>
 			<TruckListItemDiv style={style} ref={drag}>
-				<TruckNumberDiv colorCode={colorCode}>
+				<TruckNumberDiv status={assignment.equipment.status}>
 					{assignment.equipment.id}
 				</TruckNumberDiv>
 				<TruckInfoDiv>
