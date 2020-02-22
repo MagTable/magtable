@@ -30,7 +30,6 @@ function TowerPosition({ assignment, displayedTime }) {
 	const dispatch = useDispatch();
 
 	const handleClick = shiftID => {
-		// remove employee from tower position
 		dispatch(removeEquipmentEmployee(assignment.equipment.id, shiftID));
 	};
 
@@ -41,9 +40,9 @@ function TowerPosition({ assignment, displayedTime }) {
 		accept: SET_EQUIPMENT_EMPLOYEE,
 		drop: () => ({
 			equipmentID: assignment.equipment.id,
-			equipmentSlotID: nextOpenSlot()
+			equipmentSlotID: assignment.employeeShifts.length
 		}),
-		canDrop: item => handleCanDrop(item),
+		canDrop: item => true,
 		collect: monitor => ({
 			isOver: monitor.isOver(),
 			canDrop: monitor.canDrop()
@@ -51,7 +50,6 @@ function TowerPosition({ assignment, displayedTime }) {
 	});
 
 	const nextOpenSlot = () => {
-		// like in TruckListItem, sets employee in the next open slot
 		if (displayedTime === AM) {
 			// if we're showing AM, if the [0] slot is taken, fill in [1], otherwise fill in [0]
 			return assignment.employeeShifts[0] ? 1 : 0;
@@ -59,21 +57,6 @@ function TowerPosition({ assignment, displayedTime }) {
 		if (displayedTime === PM) {
 			// if we're showing PM, if the [2] slot is taken, fill in [3], otherwise fill in [2]
 			return assignment.employeeShifts[2] ? 3 : 2;
-		}
-	};
-
-	const handleCanDrop = item => {
-		// Logic to not allow more than 4 employees in a location.
-		if (!assignment.employeeShifts.includes(null)) return false;
-		// make sure the employee isn't already assigned here
-		if (assignment.employeeShifts.find(shift => shift?.id === item.id))
-			return false;
-
-		if (displayedTime === AM) {
-			return !assignment.employeeShifts[1];
-		}
-		if (displayedTime === PM) {
-			return !assignment.employeeShifts[3];
 		}
 	};
 
@@ -89,40 +72,57 @@ function TowerPosition({ assignment, displayedTime }) {
 			<TowerTitle>
 				<TowerTitleText>{assignment.equipment.position}</TowerTitleText>
 			</TowerTitle>
-			<span time={"am"} slot={1} displayedTime={displayedTime}>
-				{assignment.employeeShifts[0]?.name}
-				{assignment.employeeShifts[0]?.name && (
-					<button onClick={() => handleClick(assignment.employeeShifts[0].id)}>
-						X
-					</button>
-				)}
-			</span>
-			<span time={"pm"} slot={1} displayedTime={displayedTime}>
-				{assignment.employeeShifts[2]?.name}
-				{assignment.employeeShifts[2]?.name && (
-					<button onClick={() => handleClick(assignment.employeeShifts[2].id)}>
-						X
-					</button>
-				)}
-			</span>
-			<span time={"am"} slot={2} displayedTime={displayedTime}>
-				{assignment.employeeShifts[1]?.name}
-				{assignment.employeeShifts[1]?.name && (
-					<button onClick={() => handleClick(assignment.employeeShifts[1].id)}>
-						X
-					</button>
-				)}
-			</span>
-			<span time={"pm"} slot={2} displayedTime={displayedTime}>
-				{assignment.employeeShifts[3]?.name}
-				{assignment.employeeShifts[3]?.name && (
-					<button onClick={() => handleClick(assignment.employeeShifts[3].id)}>
-						X
-					</button>
-				)}
-			</span>
+			{assignment.employeeShifts.map(
+				shift =>
+					shift && (
+						<span key={shift.id}>
+							{shift.name}
+							<button onClick={() => handleClick(shift.id)}>X</button>
+						</span>
+					)
+			)}
 		</TowerPositionDiv>
 	);
+
+	// return (
+	// 	<TowerPositionDiv style={style} ref={drop}>
+	// 		<TowerTitle>
+	// 			<TowerTitleText>{assignment.equipment.position}</TowerTitleText>
+	// 		</TowerTitle>
+	// 		<span time={"am"} slot={1} displayedTime={displayedTime}>
+	// 			{assignment.employeeShifts[0]?.name}
+	// 			{assignment.employeeShifts[0]?.name && (
+	// 				<button onClick={() => handleClick(assignment.employeeShifts[0].id)}>
+	// 					X
+	// 				</button>
+	// 			)}
+	// 		</span>
+	// 		<span time={"pm"} slot={1} displayedTime={displayedTime}>
+	// 			{assignment.employeeShifts[2]?.name}
+	// 			{assignment.employeeShifts[2]?.name && (
+	// 				<button onClick={() => handleClick(assignment.employeeShifts[2].id)}>
+	// 					X
+	// 				</button>
+	// 			)}
+	// 		</span>
+	// 		<span time={"am"} slot={2} displayedTime={displayedTime}>
+	// 			{assignment.employeeShifts[1]?.name}
+	// 			{assignment.employeeShifts[1]?.name && (
+	// 				<button onClick={() => handleClick(assignment.employeeShifts[1].id)}>
+	// 					X
+	// 				</button>
+	// 			)}
+	// 		</span>
+	// 		<span time={"pm"} slot={2} displayedTime={displayedTime}>
+	// 			{assignment.employeeShifts[3]?.name}
+	// 			{assignment.employeeShifts[3]?.name && (
+	// 				<button onClick={() => handleClick(assignment.employeeShifts[3].id)}>
+	// 					X
+	// 				</button>
+	// 			)}
+	// 		</span>
+	// 	</TowerPositionDiv>
+	// );
 }
 
 export default TowerPosition;
