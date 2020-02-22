@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "magtablerecord")
@@ -20,6 +21,9 @@ public class Magtablerecord implements Serializable {
 
     @Column(name = "forcastLow", nullable = false)
     private Integer forcastLow;
+
+    @Column(name = "date", nullable = false)
+    private Timestamp date;
 
     public Integer getMagID() {
         return magID;
@@ -43,5 +47,13 @@ public class Magtablerecord implements Serializable {
 
     public void setForcastLow(Integer forcastLow) {
         this.forcastLow = forcastLow;
+    }
+
+    public Timestamp getDate() {
+        return date;
+    }
+
+    public void setDate(Timestamp date) {
+        this.date = date;
     }
 }

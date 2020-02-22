@@ -23,8 +23,7 @@ public class Assignment implements Serializable {
     @Column(name = "locationID", nullable = false)
     private Integer locationID;
 
-    @Column(name = "date", nullable = false)
-    private Timestamp date;
+
 
     public Integer getAssignmentID() {
         return assignmentID;
@@ -48,13 +47,5 @@ public class Assignment implements Serializable {
 
     public void setLocationID(Integer locationID) {
         this.locationID = locationID;
-    }
-
-    public Timestamp getDate() {
-        return date;
-    }
-
-    public void setDate(Timestamp date) {
-        this.date = date;
     }
 }

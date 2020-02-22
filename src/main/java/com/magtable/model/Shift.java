@@ -37,8 +37,8 @@ public class Shift implements Serializable {
     @Column(name = "activeBaylead", nullable = false)
     private Boolean activeBaylead;
 
-    @Column(name = "hasAvop", nullable = false)
-    private Boolean hasAvop;
+    @Column(name = "noAvop", nullable = false)
+    private Boolean noAvop;
 
     @Column(name = "isGreen", nullable = false)
     private Boolean isGreen;
@@ -107,12 +107,12 @@ public class Shift implements Serializable {
         this.activeBaylead = activeBaylead;
     }
 
-    public Boolean getHasAvop() {
-        return hasAvop;
+    public Boolean getNoAvop() {
+        return noAvop;
     }
 
-    public void setHasAvop(Boolean hasAvop) {
-        this.hasAvop = hasAvop;
+    public void setNoAvop(Boolean noAvop) {
+        this.noAvop = noAvop;
     }
 
     public Boolean getIsGreen() {

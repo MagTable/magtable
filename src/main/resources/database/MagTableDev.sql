@@ -67,6 +67,7 @@ CREATE TABLE MagTableRecord (
     magID      INT(5) NOT NULL AUTO_INCREMENT,
     dailyMix   INT(2) NOT NULL,
     forcastLow INT(2) NOT NULL,
+    date         DATETIME NOT NULL,
     PRIMARY KEY (magID)
 );
 
@@ -74,7 +75,6 @@ CREATE TABLE Assignment (
     assignmentID INT(5)   NOT NULL AUTO_INCREMENT,
     magID        INT(5)   NOT NULL,
     locationID   INT(5),
-    date         DATETIME NOT NULL,
     PRIMARY KEY (assignmentID),
     CONSTRAINT FK_Mag_ID FOREIGN KEY (magID) REFERENCES MagTableRecord (magID) ON DELETE RESTRICT ON UPDATE RESTRICT,
     CONSTRAINT FK_Location_ID FOREIGN KEY (locationID) REFERENCES ParkingLocation (locationID) ON DELETE RESTRICT ON UPDATE RESTRICT
@@ -122,9 +122,9 @@ CREATE TABLE Shift (
     startTime     DATETIME    NOT NULL,
     endTime       DATETIME    NOT NULL,
     activeBaylead BOOLEAN     NOT NULL,
-    hasAvop       BOOLEAN     NOT NULL,
+    noAvop        BOOLEAN     NOT NULL,
     isGreen       BOOLEAN     NOT NULL,
     PRIMARY KEY (shiftID),
-    CONSTRAINT FK_Assignment_ID_Shift FOREIGN KEY (assignmentID) REFERENCES Assignment (assignmentID) ON DELETE RESTRICT ON UPDATE RESTRICT ,
+    CONSTRAINT FK_Assignment_ID_Shift FOREIGN KEY (assignmentID) REFERENCES Assignment (assignmentID) ON DELETE RESTRICT ON UPDATE RESTRICT,
     CONSTRAINT CK_timeOfDay CHECK ( timeOfDay = 'AM' OR timeOfDay = 'PM')
 );
