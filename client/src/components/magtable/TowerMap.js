@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import { TowerDiv, TowerMapDiv } from "../../styled/magtable/Maps";
-import TowerPosition from "./TowerPosition";
+import TowerPosition from "../_dumbcomponents/TowerPosition";
 import { useDispatch, useSelector } from "react-redux";
 import { getMagTable } from "../../actions/magtable";
 
@@ -16,7 +16,7 @@ import { getMagTable } from "../../actions/magtable";
  * @constructor
  * @returns {*} The TowerMap component and sets the tower positions based on the selected Apron
  */
-function TowerMap() {
+function TowerMap(displayedTime) {
 	const dispatch = useDispatch();
 
 	const assignments = useSelector(state => state.magtable.assignments);
@@ -40,6 +40,7 @@ function TowerMap() {
 							<TowerPosition
 								key={assignment.equipment.id}
 								assignment={assignment}
+								displayedTime={displayedTime}
 							/>
 						)
 				)}
