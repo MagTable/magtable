@@ -3,7 +3,7 @@ import { useDrop } from "react-dnd";
 import { SET_TRUCK_LOCATION } from "../../actions/constants";
 import { FakePadDiv, PadDiv } from "../../styled/magtable/TruckMapMedia";
 import { useDispatch, useSelector } from "react-redux";
-import { removeTruckLocation } from "../../actions/magtable";
+import { removeTruckLocation, setTruckLocation } from "../../actions/magtable";
 
 /**
  * @date 2/20/2020
@@ -25,12 +25,18 @@ function ParkingLocations({ parkingID, pad }) {
 	const dispatch = useDispatch();
 	const assignments = useSelector(state => state.magtable.assignments);
 
+	// checks to see if the parking location is equal to the parkingID
 	const filterParkingLocations = assignments.filter(
 		assignment => assignment.parkingLocation === parkingID
 	);
 
+	// Finds the equipment id.
 	const filteredTrucks = filterParkingLocations.map(
-		truck => truck.equipment.id
+		assignment => assignment.equipment.id
+	);
+
+	const filteredParkedLocations = assignments.map(
+		parked => parked.parkingLocation
 	);
 
 	const [{ canDrop, isOver }, drop] = useDrop({
@@ -53,7 +59,8 @@ function ParkingLocations({ parkingID, pad }) {
 		// Truck 24 is already there, and trying to add truck 26. First fire off a new setTruckLocation with truck 24 and locationID + 1,
 		// then truck 26 gets added to locationID 3+2.
 		// This information is consistent with initialParkingLocations.
-		return true;
+		console.log(filteredParkedLocations?.includes(parkingID));
+		if (!filteredParkedLocations?.includes(parkingID)) return true;
 	};
 
 	const dangerStyle = { border: "4px solid red" };
@@ -68,8 +75,9 @@ function ParkingLocations({ parkingID, pad }) {
 		dispatch(removeTruckLocation(equipmentID));
 	};
 
-	//todo need to fix the filtedLocations[0] to be where the actual button truck is in the array. Maybe another turnary operator that
-	//todo checks if there's more than one vehicle?
+	//todo need to fix the filtedLocations[0] to be where the actual button truck is in the array. Maybe another turnary operator that checks if there's more than one vehicle?
+
+	// This wont be needed if I can get the drop to move the truck location when dropping in a second truck. Would have to edit the delete button so that if reverts the trucks location to one spot thou
 	return (
 		<>
 			{filteredTrucks.length <= 0 ? (

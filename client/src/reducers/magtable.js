@@ -105,7 +105,6 @@ export default function(state = initialState, action) {
 			// );
 			modifiedAssignment.employeeShifts[payload.equipmentSlotID] =
 				payload.shift;
-			console.log(modifiedAssignment);
 
 			// replaces the modified assignment in the assignments list
 			// sets assigned equipment for the associated shift object
