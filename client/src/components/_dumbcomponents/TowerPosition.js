@@ -63,15 +63,15 @@ function TowerPosition({ assignment, displayedTime }) {
 	};
 
 	const handleCanDrop = item => {
-		// Logic to not allow more than 4 employees in a location.
+		// // Logic to not allow more than 4 employees in a location.
 		if (!assignment.employeeShifts.includes(null)) return false;
-		// make sure the employee isn't already assigned here
+		// // make sure the employee isn't already assigned here
 		if (assignment.employeeShifts.find(shift => shift?.id === item.id))
-			return false;
+			if (displayedTime === AM) {
+				// 	return false;
 
-		if (displayedTime === AM) {
-			return !assignment.employeeShifts[1];
-		}
+				return !assignment.employeeShifts[1];
+			}
 		if (displayedTime === PM) {
 			return !assignment.employeeShifts[3];
 		}
