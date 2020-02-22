@@ -25,8 +25,15 @@ export const PadDiv = styled.div`
 	color: grey;
 `;
 
-export const FakePadDiv = styled(PadDiv)`
-	border: none;
+export const FakePadDiv = styled.div`
+	height: 130px;
+	width: 65px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: x-large;
+	font-family: "Noto Sans KR", sans-serif;
+	color: grey;
 `;
 
 export const PadColumn = styled.div`
