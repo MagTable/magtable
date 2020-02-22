@@ -13,7 +13,6 @@ import { removeEquipmentEmployee } from "../../actions/magtable";
 import { useDispatch } from "react-redux";
 import { Button } from "../../styled/common/FormControl";
 import IconButton from "../common/IconButton";
-import { EmployeeListItemName } from "../../styled/magtable/ListContent";
 
 /**
  * @date 2/21/2020
@@ -90,15 +89,38 @@ function TowerPosition({ assignment, displayedTime }) {
 			<TowerTitle>
 				<TowerTitleText>{assignment.equipment.position}</TowerTitleText>
 			</TowerTitle>
-			{assignment.employeeShifts.map(
-				shift =>
-					shift && (
-						<span key={shift.id} time={"pm"} slot={1}>
-							{shift.name}
-							<button onClick={() => handleClick(shift.id)}>X</button>
-						</span>
-					)
-			)}
+			<span time={"am"} slot={1} displayedTime={displayedTime}>
+				{assignment.employeeShifts[0]?.name}
+				{assignment.employeeShifts[0]?.name && (
+					<button onClick={() => handleClick(assignment.employeeShifts[0].id)}>
+						X
+					</button>
+				)}
+			</span>
+			<span time={"pm"} slot={1} displayedTime={displayedTime}>
+				{assignment.employeeShifts[2]?.name}
+				{assignment.employeeShifts[2]?.name && (
+					<button onClick={() => handleClick(assignment.employeeShifts[2].id)}>
+						X
+					</button>
+				)}
+			</span>
+			<span time={"am"} slot={2} displayedTime={displayedTime}>
+				{assignment.employeeShifts[1]?.name}
+				{assignment.employeeShifts[1]?.name && (
+					<button onClick={() => handleClick(assignment.employeeShifts[1].id)}>
+						X
+					</button>
+				)}
+			</span>
+			<span time={"pm"} slot={2} displayedTime={displayedTime}>
+				{assignment.employeeShifts[3]?.name}
+				{assignment.employeeShifts[3]?.name && (
+					<button onClick={() => handleClick(assignment.employeeShifts[3].id)}>
+						X
+					</button>
+				)}
+			</span>
 		</TowerPositionDiv>
 	);
 }
