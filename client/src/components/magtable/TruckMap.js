@@ -34,29 +34,30 @@ function TruckMap(props) {
 				<ApronToggle />
 			</ListTitle>
 			{apron === "EDA" ? (
+				//East Apron
 				<MapWrapper>
 					<PadColumn>
 						<div>
-							<ParkingLocations parkingID={12} pad={"AE"} />
-							<ParkingLocations parkingID={13} pad={"AC"} />
-							<ParkingLocations parkingID={14} pad={"AW"} />
+							<ParkingLocations parkingID={17} pad={"AE1"} />
+							<ParkingLocations parkingID={18} pad={"AC1"} />
+							<ParkingLocations parkingID={19} pad={"AW1"} />
 						</div>
 					</PadColumn>
 					<NumberMiddle>1</NumberMiddle>
 					<PadColumn>
 						<div>
 							<NumberTop>2</NumberTop>
-							<ParkingLocations parkingID={15} pad={"BE"} />
-							<ParkingLocations parkingID={16} pad={"BC"} />
-							<ParkingLocations parkingID={17} pad={"BW"} />
+							<ParkingLocations parkingID={20} pad={"BE"} />
+							<ParkingLocations parkingID={23} pad={"BC"} />
+							<ParkingLocations parkingID={26} pad={"BW"} />
 						</div>
 					</PadColumn>
 					<NumberMiddle>3</NumberMiddle>
 					<PadColumn>
 						<div>
-							<ParkingLocations parkingID={21} pad={"CE"} />
-							<ParkingLocations parkingID={22} pad={"CC"} />
-							<ParkingLocations parkingID={23} pad={"CW"} />
+							<ParkingLocations parkingID={29} pad={"CE"} />
+							<ParkingLocations parkingID={32} pad={"CC"} />
+							<ParkingLocations parkingID={35} pad={"CW"} />
 						</div>
 					</PadColumn>
 					<NumberMiddle>4</NumberMiddle>
@@ -64,33 +65,33 @@ function TruckMap(props) {
 						<div>
 							<NumberTop>5</NumberTop>
 							{/*No 5 is listed in Initial Parking Locations, assigning id's for 4, for now*/}
-							<ParkingLocations parkingID={27} pad={"DE"} />
-							<ParkingLocations parkingID={28} pad={"DC"} />
-							<ParkingLocations parkingID={29} pad={"DW"} />
+							<ParkingLocations parkingID={38} pad={"DE"} />
+							<ParkingLocations parkingID={41} pad={"DC"} />
+							<ParkingLocations parkingID={44} pad={"DW"} />
 						</div>
 					</PadColumn>
 					<NumberMiddle>6</NumberMiddle>
 					<PadColumn>
 						<div>
-							<ParkingLocations parkingID={33} pad={"EE"} />
-							<ParkingLocations parkingID={34} pad={"EC"} />
-							<ParkingLocations parkingID={35} pad={"EW"} />
+							<ParkingLocations parkingID={47} pad={"EE"} />
+							<ParkingLocations parkingID={50} pad={"EC"} />
+							<ParkingLocations parkingID={53} pad={"EW"} />
 						</div>
 					</PadColumn>
 					<NumberMiddle>7</NumberMiddle>
 					<PadColumn>
 						<div>
-							<ParkingLocations parkingID={39} pad={"FE"} />
-							<ParkingLocations parkingID={40} pad={"FC"} />
-							<ParkingLocations parkingID={41} pad={"FW"} />
+							<ParkingLocations parkingID={56} pad={"FE"} />
+							<ParkingLocations parkingID={59} pad={"FC"} />
+							<ParkingLocations parkingID={62} pad={"FW"} />
 						</div>
 					</PadColumn>
 					<NumberMiddle>9</NumberMiddle>
 					<PadColumn>
 						<div>
-							<ParkingLocations parkingID={45} pad={"GE"} />
-							<ParkingLocations parkingID={46} pad={"GC"} />
-							<ParkingLocations parkingID={47} pad={"GW"} />
+							<ParkingLocations parkingID={65} pad={"GE9"} />
+							<ParkingLocations parkingID={66} pad={"GC9"} />
+							<ParkingLocations parkingID={67} pad={"GW9"} />
 						</div>
 					</PadColumn>
 				</MapWrapper>
@@ -99,15 +100,15 @@ function TruckMap(props) {
 				<MapWrapper>
 					<PadColumn>
 						<div>
-							<ParkingLocations parkingID={1} pad={"AE"} />
-							<ParkingLocations parkingID={2} pad={"AW"} />
+							<ParkingLocations parkingID={2} pad={"AE1"} />
+							<ParkingLocations parkingID={1} pad={"AW1"} />
 						</div>
 					</PadColumn>
 					<NumberMiddle>1</NumberMiddle>
 					<PadColumn>
 						<div>
-							<ParkingLocations parkingID={4} pad={"BE"} />
-							<ParkingLocations parkingID={3} pad={"BW"} />
+							<ParkingLocations parkingID={3} pad={"BE"} />
+							<ParkingLocations parkingID={6} pad={"BW"} />
 						</div>
 					</PadColumn>
 					<NumberMiddle>2</NumberMiddle>
@@ -115,13 +116,13 @@ function TruckMap(props) {
 						<div>
 							<NumberTop>3</NumberTop>
 							<ParkingLocations parkingID={9} pad={"CE"} />
-							<ParkingLocations parkingID={10} pad={"CW"} />
+							<ParkingLocations parkingID={12} pad={"CW"} />
 						</div>
 					</PadColumn>
 					<NumberMiddle>4</NumberMiddle>
 					<PadColumn>
 						<div>
-							<ParkingLocations parkingID={11} pad={"D"} />
+							<ParkingLocations parkingID={15} pad={"D4"} />
 							<FakePadDiv />
 						</div>
 					</PadColumn>
