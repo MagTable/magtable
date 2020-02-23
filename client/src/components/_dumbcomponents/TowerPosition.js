@@ -26,7 +26,7 @@ import IconButton from "../common/IconButton";
  * @param assignment
  * @returns {*} The TowerPosition component
  */
-function TowerPosition({ assignment, displayedTime }) {
+function TowerPosition({ assignment, showAM }) {
 	const dispatch = useDispatch();
 
 	const handleClick = shiftID => {
@@ -40,9 +40,9 @@ function TowerPosition({ assignment, displayedTime }) {
 		accept: SET_EQUIPMENT_EMPLOYEE,
 		drop: () => ({
 			equipmentID: assignment.equipment.id,
-			equipmentSlotID: assignment.employeeShifts.length
+			equipmentSlotID: nextOpenSlot()
 		}),
-		canDrop: item => true,
+		canDrop: item => handleCanDrop(item),
 		collect: monitor => ({
 			isOver: monitor.isOver(),
 			canDrop: monitor.canDrop()
@@ -50,13 +50,28 @@ function TowerPosition({ assignment, displayedTime }) {
 	});
 
 	const nextOpenSlot = () => {
-		if (displayedTime === AM) {
+		if (showAM === true) {
 			// if we're showing AM, if the [0] slot is taken, fill in [1], otherwise fill in [0]
 			return assignment.employeeShifts[0] ? 1 : 0;
 		}
-		if (displayedTime === PM) {
+		if (showAM === false) {
 			// if we're showing PM, if the [2] slot is taken, fill in [3], otherwise fill in [2]
 			return assignment.employeeShifts[2] ? 3 : 2;
+		}
+	};
+
+	const handleCanDrop = item => {
+		// Logic to not allow more than 4 employees in a location.
+		if (!assignment.employeeShifts.includes(null)) return false;
+		// make sure the employee isn't already assigned here
+		if (assignment.employeeShifts.find(shift => shift?.id === item.id))
+			return false;
+
+		if (showAM === true) {
+			return !assignment.employeeShifts[1];
+		}
+		if (showAM === false) {
+			return !assignment.employeeShifts[3];
 		}
 	};
 
@@ -72,15 +87,38 @@ function TowerPosition({ assignment, displayedTime }) {
 			<TowerTitle>
 				<TowerTitleText>{assignment.equipment.position}</TowerTitleText>
 			</TowerTitle>
-			{assignment.employeeShifts.map(
-				shift =>
-					shift && (
-						<span key={shift.id}>
-							{shift.name}
-							<button onClick={() => handleClick(shift.id)}>X</button>
-						</span>
-					)
-			)}
+			<span time={true} slot={1} showAM={showAM}>
+				{assignment.employeeShifts[0]?.name}
+				{assignment.employeeShifts[0]?.name && (
+					<button onClick={() => handleClick(assignment.employeeShifts[0].id)}>
+						X
+					</button>
+				)}
+			</span>
+			<span time={"pm"} slot={1} showAM={showAM}>
+				{assignment.employeeShifts[2]?.name}
+				{assignment.employeeShifts[2]?.name && (
+					<button onClick={() => handleClick(assignment.employeeShifts[2].id)}>
+						X
+					</button>
+				)}
+			</span>
+			<span time={"am"} slot={2} showAM={showAM}>
+				{assignment.employeeShifts[1]?.name}
+				{assignment.employeeShifts[1]?.name && (
+					<button onClick={() => handleClick(assignment.employeeShifts[1].id)}>
+						X
+					</button>
+				)}
+			</span>
+			<span time={"pm"} slot={2} showAM={showAM}>
+				{assignment.employeeShifts[3]?.name}
+				{assignment.employeeShifts[3]?.name && (
+					<button onClick={() => handleClick(assignment.employeeShifts[3].id)}>
+						X
+					</button>
+				)}
+			</span>
 		</TowerPositionDiv>
 	);
 
@@ -89,7 +127,7 @@ function TowerPosition({ assignment, displayedTime }) {
 	// 		<TowerTitle>
 	// 			<TowerTitleText>{assignment.equipment.position}</TowerTitleText>
 	// 		</TowerTitle>
-	// 		<span time={"am"} slot={1} displayedTime={displayedTime}>
+	// 		<span time={"am"} slot={1} showAM={showAM}>
 	// 			{assignment.employeeShifts[0]?.name}
 	// 			{assignment.employeeShifts[0]?.name && (
 	// 				<button onClick={() => handleClick(assignment.employeeShifts[0].id)}>
@@ -97,7 +135,7 @@ function TowerPosition({ assignment, displayedTime }) {
 	// 				</button>
 	// 			)}
 	// 		</span>
-	// 		<span time={"pm"} slot={1} displayedTime={displayedTime}>
+	// 		<span time={"pm"} slot={1} showAM={showAM}>
 	// 			{assignment.employeeShifts[2]?.name}
 	// 			{assignment.employeeShifts[2]?.name && (
 	// 				<button onClick={() => handleClick(assignment.employeeShifts[2].id)}>
@@ -105,7 +143,7 @@ function TowerPosition({ assignment, displayedTime }) {
 	// 				</button>
 	// 			)}
 	// 		</span>
-	// 		<span time={"am"} slot={2} displayedTime={displayedTime}>
+	// 		<span time={"am"} slot={2} showAM={showAM}>
 	// 			{assignment.employeeShifts[1]?.name}
 	// 			{assignment.employeeShifts[1]?.name && (
 	// 				<button onClick={() => handleClick(assignment.employeeShifts[1].id)}>
@@ -113,7 +151,7 @@ function TowerPosition({ assignment, displayedTime }) {
 	// 				</button>
 	// 			)}
 	// 		</span>
-	// 		<span time={"pm"} slot={2} displayedTime={displayedTime}>
+	// 		<span time={"pm"} slot={2} showAM={showAM}>
 	// 			{assignment.employeeShifts[3]?.name}
 	// 			{assignment.employeeShifts[3]?.name && (
 	// 				<button onClick={() => handleClick(assignment.employeeShifts[3].id)}>

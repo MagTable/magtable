@@ -29,17 +29,10 @@ import {
  * @constructor
  * @returns {*} The TruckList component
  */
-function TruckList() {
+function TruckList({ showAM, setShowAM }) {
 	const [open, setOpen] = useState(false);
-	const [displayedTime, setDisplayedTime] = useState("am");
+	// const [showAM, setShowAM] = useState(true);
 
-	function toggleTime() {
-		if (displayedTime === "am") {
-			setDisplayedTime("pm");
-		} else {
-			setDisplayedTime("am");
-		}
-	}
 	const assignments = useSelector(state => state.magtable.assignments);
 
 	return (
@@ -52,8 +45,8 @@ function TruckList() {
 					</TruckListButton>
 
 					<Switch
-						onChange={() => toggleTime()}
-						checked={displayedTime === "am"}
+						onChange={() => setShowAM(!showAM)}
+						checked={showAM === true}
 						offColor={"#414244"}
 						onColor={"#414244"}
 						checkedIcon={<ToggleLabelLeft>AM</ToggleLabelLeft>}
@@ -71,7 +64,7 @@ function TruckList() {
 								open={open}
 								key={assignment.equipment.id}
 								assignment={assignment}
-								displayedTime={displayedTime}
+								showAM={showAM}
 								shift
 							/>
 						)

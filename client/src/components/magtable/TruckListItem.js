@@ -34,7 +34,7 @@ import {
  * @param props
  * @returns {*} The TruckListItem component
  */
-function TruckListItem({ assignment, open, displayedTime }) {
+function TruckListItem({ assignment, open, showAM }) {
 	const dispatch = useDispatch();
 
 	const [{ isDragging }, drag] = useDrag({
@@ -66,11 +66,11 @@ function TruckListItem({ assignment, open, displayedTime }) {
 	});
 
 	const nextOpenSlot = () => {
-		if (displayedTime === AM) {
+		if (showAM === true) {
 			// if we're showing AM, if the [0] slot is taken, fill in [1], otherwise fill in [0]
 			return assignment.employeeShifts[0] ? 1 : 0;
 		}
-		if (displayedTime === PM) {
+		if (showAM === false) {
 			// if we're showing PM, if the [2] slot is taken, fill in [3], otherwise fill in [2]
 			return assignment.employeeShifts[2] ? 3 : 2;
 		}
@@ -83,10 +83,10 @@ function TruckListItem({ assignment, open, displayedTime }) {
 		if (assignment.employeeShifts.find(shift => shift?.id === item.id))
 			return false;
 
-		if (displayedTime === AM) {
+		if (showAM === true) {
 			return !assignment.employeeShifts[1];
 		}
-		if (displayedTime === PM) {
+		if (showAM === false) {
 			return !assignment.employeeShifts[3];
 		}
 	};
@@ -114,11 +114,7 @@ function TruckListItem({ assignment, open, displayedTime }) {
 				</TruckNumberDiv>
 				<TruckInfoDiv>
 					<TruckListItemEmployeeList>
-						<TruckListItemEmployee
-							time={"am"}
-							slot={1}
-							displayedTime={displayedTime}
-						>
+						<TruckListItemEmployee time={true} slot={1} showAM={showAM}>
 							{assignment.employeeShifts[0]?.name}
 							{assignment.employeeShifts[0]?.name && (
 								<button
@@ -128,11 +124,7 @@ function TruckListItem({ assignment, open, displayedTime }) {
 								</button>
 							)}
 						</TruckListItemEmployee>
-						<TruckListItemEmployee
-							time={"pm"}
-							slot={1}
-							displayedTime={displayedTime}
-						>
+						<TruckListItemEmployee time={false} slot={1} showAM={showAM}>
 							{assignment.employeeShifts[2]?.name}
 							{assignment.employeeShifts[2]?.name && (
 								<button
@@ -142,11 +134,7 @@ function TruckListItem({ assignment, open, displayedTime }) {
 								</button>
 							)}
 						</TruckListItemEmployee>
-						<TruckListItemEmployee
-							time={"am"}
-							slot={2}
-							displayedTime={displayedTime}
-						>
+						<TruckListItemEmployee time={true} slot={2} showAM={showAM}>
 							{assignment.employeeShifts[1]?.name}
 							{assignment.employeeShifts[1]?.name && (
 								<button
@@ -157,11 +145,7 @@ function TruckListItem({ assignment, open, displayedTime }) {
 							)}
 						</TruckListItemEmployee>
 
-						<TruckListItemEmployee
-							time={"pm"}
-							slot={2}
-							displayedTime={displayedTime}
-						>
+						<TruckListItemEmployee time={false} slot={2} showAM={showAM}>
 							{assignment.employeeShifts[3]?.name}
 							{assignment.employeeShifts[3]?.name && (
 								<button

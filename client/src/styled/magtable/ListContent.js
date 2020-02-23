@@ -205,8 +205,7 @@ export const TruckInfoDiv = styled.div`
 export const TruckListItemEmployee = styled.p`
 	margin-block-start: 0em;
 	margin-block-end: 0em;
-	height: ${({ displayedTime, time }) =>
-		displayedTime === time ? "50%" : "0%"};
+	height: ${({ showAM, time }) => (showAM === time ? "50%" : "0%")};
 	background-color: var(${({ slot }) => (slot === 2 ? "--shader-grey" : "")});
 	display: flex;
 	align-items: center;

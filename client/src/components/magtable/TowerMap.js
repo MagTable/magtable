@@ -16,7 +16,7 @@ import { getMagTable } from "../../actions/magtable";
  * @constructor
  * @returns {*} The TowerMap component and sets the tower positions based on the selected Apron
  */
-function TowerMap(displayedTime) {
+function TowerMap({ showAM }) {
 	const dispatch = useDispatch();
 
 	const assignments = useSelector(state => state.magtable.assignments);
@@ -40,7 +40,7 @@ function TowerMap(displayedTime) {
 							<TowerPosition
 								key={assignment.equipment.id}
 								assignment={assignment}
-								displayedTime={displayedTime}
+								showAM={showAM}
 							/>
 						)
 				)}
