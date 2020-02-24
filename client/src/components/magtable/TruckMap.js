@@ -46,15 +46,13 @@ function TruckMap(props) {
 				//East Apron
 				<MapWrapper>
 					<PadColumn>
-						<div>
+							<NumberTop/>
 							<ParkingLocations parkingID={17} pad={"AE1"} />
 							<ParkingLocations parkingID={18} pad={"AC1"} />
 							<ParkingLocations parkingID={19} pad={"AW1"} />
-						</div>
 					</PadColumn>
 					<NumberMiddle>1</NumberMiddle>
 					<PadColumn>
-						<div>
 							<NumberTop>2</NumberTop>
 							{filteredLocations.includes(21) ? (
 								<FakePadDiv>
@@ -80,11 +78,10 @@ function TruckMap(props) {
 							) : (
 								<ParkingLocations parkingID={26} pad={"BW"} />
 							)}
-						</div>
 					</PadColumn>
 					<NumberMiddle>3</NumberMiddle>
 					<PadColumn>
-						<div>
+							<NumberTop/>
 							{filteredLocations.includes(30) ? (
 								<FakePadDiv>
 									<ParkingLocations parkingID={30} pad={"CE4"} />
@@ -109,11 +106,9 @@ function TruckMap(props) {
 							) : (
 								<ParkingLocations parkingID={35} pad={"CW"} />
 							)}
-						</div>
 					</PadColumn>
 					<NumberMiddle>4</NumberMiddle>
 					<PadColumn>
-						<div>
 							<NumberTop>5</NumberTop>
 							{filteredLocations.includes(39) ? (
 								<FakePadDiv>
@@ -139,11 +134,10 @@ function TruckMap(props) {
 							) : (
 								<ParkingLocations parkingID={44} pad={"DW"} />
 							)}
-						</div>
 					</PadColumn>
 					<NumberMiddle>6</NumberMiddle>
 					<PadColumn>
-						<div>
+							<NumberTop/>
 							{filteredLocations.includes(48) ? (
 								<FakePadDiv>
 									<ParkingLocations parkingID={48} pad={"EE6"} />
@@ -168,11 +162,10 @@ function TruckMap(props) {
 							) : (
 								<ParkingLocations parkingID={53} pad={"EW"} />
 							)}
-						</div>
 					</PadColumn>
 					<NumberMiddle>7</NumberMiddle>
 					<PadColumn>
-						<div>
+							<NumberTop/>
 							{filteredLocations.includes(57) ? (
 								<FakePadDiv>
 									<ParkingLocations parkingID={57} pad={"FE7"} />
@@ -197,21 +190,20 @@ function TruckMap(props) {
 							) : (
 								<ParkingLocations parkingID={63} pad={"FW"} />
 							)}
-						</div>
 					</PadColumn>
 					<NumberMiddle>9</NumberMiddle>
 					<PadColumn>
-						<div>
+							<NumberTop/>
 							<ParkingLocations parkingID={65} pad={"GE9"} />
 							<ParkingLocations parkingID={66} pad={"GC9"} />
 							<ParkingLocations parkingID={67} pad={"GW9"} />
-						</div>
 					</PadColumn>
 				</MapWrapper>
 			) : (
 				//West Apron
 				<MapWrapper>
 					<PadColumn>
+						<NumberTop/>
 						<div>
 							<ParkingLocations parkingID={2} pad={"AE1"} />
 							<ParkingLocations parkingID={1} pad={"AW1"} />
@@ -219,6 +211,7 @@ function TruckMap(props) {
 					</PadColumn>
 					<NumberMiddle>1</NumberMiddle>
 					<PadColumn>
+						<NumberTop/>
 						<div>
 							{filteredLocations.includes(3) ? (
 								<FakePadDiv>

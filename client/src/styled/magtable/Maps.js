@@ -33,7 +33,7 @@ export const ParkingLocation = styled.div`
 export const TowerMapDiv = styled.div`
 	display: flex;
 	flex-grow: 1;
-	height: 100%;
+	min-height: 200px;
 `;
 
 /**
@@ -45,7 +45,7 @@ export const TowerDiv = styled.div`
 	flex-grow: 1;
 	flex-basis: 0;
 	border: 2px solid var(--border-color);
-	height: 100%;
+	height: 35%;
 `;
 
 /**
