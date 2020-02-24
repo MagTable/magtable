@@ -7,7 +7,7 @@ import { removeTruckLocation } from "../../actions/magtable";
 
 /**
  * @date 2/20/2020
- * @author Tom Allcock
+ * @author Tom Allcock, Steven Wong
  * @module Component
  */
 
