@@ -1,7 +1,7 @@
 import React from "react";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import { TowerDiv, TowerMapDiv } from "../../styled/magtable/Maps";
-import TowerPosition from "../_dumbcomponents/TowerPosition";
+import TowerPosition from "./TowerPosition";
 import { useSelector } from "react-redux";
 
 /**
