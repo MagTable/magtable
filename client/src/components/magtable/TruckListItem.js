@@ -11,8 +11,6 @@ import {
 } from "../../styled/magtable/ListContent";
 import { useDrop, useDrag } from "react-dnd";
 import {
-	AM,
-	PM,
 	SET_EQUIPMENT_EMPLOYEE,
 	SET_TRUCK_LOCATION
 } from "../../actions/constants";
@@ -160,7 +158,7 @@ function TruckListItem({ assignment, open, showAM }) {
 				</TruckInfoDiv>
 			</TruckListItemDiv>
 			<TruckProblemsDiv open={open}>
-				{assignment.equipment.notice == +"" ? null : (
+				{assignment.equipment.notice === +"" ? null : (
 					<TruckProblemsText>{assignment.equipment.notice}</TruckProblemsText>
 				)}
 			</TruckProblemsDiv>

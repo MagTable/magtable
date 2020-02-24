@@ -19,29 +19,17 @@ import {
 	initialAssignments,
 	initialDailyMessages,
 	initialDailyMix,
-	initialEmployeeShifts,
-	initialParkingLocations
+	initialEmployeeShifts
 } from "../res/test_data/magtable";
 
 const initialState = {
 	assignments: initialAssignments,
 	employeeShifts: initialEmployeeShifts,
 	dailyMessages: initialDailyMessages,
-	parkingLocations: initialParkingLocations,
 	dailyMix: initialDailyMix,
 	selectedApron: EAST_APRON,
 	loading: false
 };
-
-// const initialState = {
-// 	assignments: [],
-// 	employeeShifts: [],
-// 	dailyMessages: [],
-// 	parkingLocations: [],
-// 	dailyMix: null,
-// 	selectedApron: EAST_APRON,
-// 	loading: true
-// };
 
 export default function(state = initialState, action) {
 	const { type, payload } = action;

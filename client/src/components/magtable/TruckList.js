@@ -56,7 +56,6 @@ function TruckList({ showAM, setShowAM }) {
 				</TruckListManipDiv>
 			</ListTitle>
 			<TruckListDiv>
-				{/* equipment with id < 1000 (trucks) */}
 				{assignments.map(
 					assignment =>
 						assignment.equipment.id < 1000 && (

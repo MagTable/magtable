@@ -1,9 +1,9 @@
 import React from "react";
 import { useDrop } from "react-dnd";
 import { SET_TRUCK_LOCATION } from "../../actions/constants";
-import { FakePadDiv, PadDiv } from "../../styled/magtable/TruckMapMedia";
+import { PadDiv } from "../../styled/magtable/TruckMapMedia";
 import { useDispatch, useSelector } from "react-redux";
-import { removeTruckLocation, setTruckLocation } from "../../actions/magtable";
+import { removeTruckLocation } from "../../actions/magtable";
 
 /**
  * @date 2/20/2020
