@@ -9,7 +9,10 @@ import {
 import { useDrag } from "react-dnd";
 import { SET_EQUIPMENT_EMPLOYEE } from "../../actions/constants";
 import { useDispatch } from "react-redux";
-import { setEquipmentEmployee } from "../../actions/magtable";
+import {
+	removeEquipmentEmployee,
+	setEquipmentEmployee
+} from "../../actions/magtable";
 
 /**
  * @date 2020-02-19
@@ -26,6 +29,8 @@ import { setEquipmentEmployee } from "../../actions/magtable";
 function EmployeeListItem({ employee: employeeShift }) {
 	const dispatch = useDispatch();
 
+	const [assignmentEquipmentID, setAssignmentEquipmentID] = useState(null);
+
 	const [{ isDragging }, drag] = useDrag({
 		item: { type: SET_EQUIPMENT_EMPLOYEE, id: employeeShift.id },
 		canDrag: !employeeShift.assignedEquipment,
@@ -39,12 +44,17 @@ function EmployeeListItem({ employee: employeeShift }) {
 						dropResult.equipmentSlotID
 					)
 				);
+				setAssignmentEquipmentID(dropResult.equipmentID);
 			}
 		},
 		collect: monitor => ({
 			isDragging: !!monitor.isDragging()
 		})
 	});
+
+	function handleClick() {
+		dispatch(removeEquipmentEmployee(assignmentEquipmentID, employeeShift.id));
+	}
 
 	return (
 		<Wrapper
@@ -64,6 +74,9 @@ function EmployeeListItem({ employee: employeeShift }) {
 			{!employeeShift.hasAvop && <Label type={"noAvop"}>No AVOP</Label>}
 
 			{employeeShift.assignedEquipment}
+			{employeeShift.assignedEquipment && (
+				<button onClick={() => handleClick()}>X</button>
+			)}
 		</Wrapper>
 	);
 }
