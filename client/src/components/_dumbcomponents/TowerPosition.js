@@ -1,19 +1,11 @@
 import React from "react";
 import { TowerTitle, TowerTitleText } from "../../styled/magtable/Titling";
-import {
-	AssignedEmployeeDiv,
-	AssignedEmployeeName,
-	DeleteTowerAssignmentBtn,
-	TowerAssignmentWrapper,
-	TowerPositionDiv
-} from "../../styled/magtable/Maps";
+import { TowerPositionDiv } from "../../styled/magtable/Maps";
 import { TowerPositionEmployee } from "../../styled/magtable/ListContent";
 import { useDrop } from "react-dnd";
-import { AM, PM, SET_EQUIPMENT_EMPLOYEE } from "../../actions/constants";
+import { SET_EQUIPMENT_EMPLOYEE } from "../../actions/constants";
 import { removeEquipmentEmployee } from "../../actions/magtable";
 import { useDispatch } from "react-redux";
-import { Button } from "../../styled/common/FormControl";
-import IconButton from "../common/IconButton";
 
 /**
  * @date 2/21/2020
@@ -25,6 +17,7 @@ import IconButton from "../common/IconButton";
  *
  * @constructor
  * @param assignment
+ * @param showAM
  * @returns {*} The TowerPosition component
  */
 function TowerPosition({ assignment, showAM }) {
@@ -122,46 +115,6 @@ function TowerPosition({ assignment, showAM }) {
 			</TowerPositionEmployee>
 		</TowerPositionDiv>
 	);
-
-	// return (
-	// 	<TowerPositionDiv style={style} ref={drop}>
-	// 		<TowerTitle>
-	// 			<TowerTitleText>{assignment.equipment.position}</TowerTitleText>
-	// 		</TowerTitle>
-	// 		<TowerPositionEmployee time={"am"} slot={1} showAM={showAM}>
-	// 			{assignment.employeeShifts[0]?.name}
-	// 			{assignment.employeeShifts[0]?.name && (
-	// 				<button onClick={() => handleClick(assignment.employeeShifts[0].id)}>
-	// 					X
-	// 				</button>
-	// 			)}
-	// 		</TowerPositionEmployee>
-	// 		<TowerPositionEmployee time={"pm"} slot={1} showAM={showAM}>
-	// 			{assignment.employeeShifts[2]?.name}
-	// 			{assignment.employeeShifts[2]?.name && (
-	// 				<button onClick={() => handleClick(assignment.employeeShifts[2].id)}>
-	// 					X
-	// 				</button>
-	// 			)}
-	// 		</TowerPositionEmployee>
-	// 		<TowerPositionEmployee time={"am"} slot={2} showAM={showAM}>
-	// 			{assignment.employeeShifts[1]?.name}
-	// 			{assignment.employeeShifts[1]?.name && (
-	// 				<button onClick={() => handleClick(assignment.employeeShifts[1].id)}>
-	// 					X
-	// 				</button>
-	// 			)}
-	// 		</TowerPositionEmployee>
-	// 		<TowerPositionEmployee time={"pm"} slot={2} showAM={showAM}>
-	// 			{assignment.employeeShifts[3]?.name}
-	// 			{assignment.employeeShifts[3]?.name && (
-	// 				<button onClick={() => handleClick(assignment.employeeShifts[3].id)}>
-	// 					X
-	// 				</button>
-	// 			)}
-	// 		</TowerPositionEmployee>
-	// 	</TowerPositionDiv>
-	// );
 }
 
 export default TowerPosition;

@@ -1,19 +1,10 @@
 import React from "react";
 import { TowerTitle, TowerTitleText } from "../../styled/magtable/Titling";
-import {
-	AssignedEmployeeDiv,
-	AssignedEmployeeName,
-	DeleteTowerAssignmentBtn,
-	TowerAssignmentWrapper,
-	TowerPositionDiv
-} from "../../styled/magtable/Maps";
+import { TowerPositionDiv } from "../../styled/magtable/Maps";
 import { useDrop } from "react-dnd";
 import { SET_EQUIPMENT_EMPLOYEE } from "../../actions/constants";
 import { removeEquipmentEmployee } from "../../actions/magtable";
 import { useDispatch } from "react-redux";
-import { Button } from "../../styled/common/FormControl";
-import IconButton from "../common/IconButton";
-import { EmployeeListItemName } from "../../styled/magtable/ListContent";
 
 /**
  * @date 2020-02-19
