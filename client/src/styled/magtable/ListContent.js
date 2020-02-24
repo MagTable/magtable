@@ -251,3 +251,15 @@ export const TruckListManipDiv = styled.div`
 	flex-direction: row;
 	margin-right: 3px;
 `;
+
+export const TowerPositionEmployee = styled.p`
+	margin-block-start: 0em;
+	margin-block-end: 0em;
+	height: ${({ showAM, time }) => (showAM === time ? "50%" : "0%")};
+	background-color: var(${({ slot }) => (slot === 2 ? "--shader-grey" : "")});
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	transition: all 0.15s ease-in-out;
+`;

@@ -7,6 +7,7 @@ import {
 	TowerAssignmentWrapper,
 	TowerPositionDiv
 } from "../../styled/magtable/Maps";
+import { TowerPositionEmployee } from "../../styled/magtable/ListContent";
 import { useDrop } from "react-dnd";
 import { AM, PM, SET_EQUIPMENT_EMPLOYEE } from "../../actions/constants";
 import { removeEquipmentEmployee } from "../../actions/magtable";
@@ -87,38 +88,38 @@ function TowerPosition({ assignment, showAM }) {
 			<TowerTitle>
 				<TowerTitleText>{assignment.equipment.position}</TowerTitleText>
 			</TowerTitle>
-			<span time={true} slot={1} showAM={showAM}>
+			<TowerPositionEmployee time={true} slot={1} showAM={showAM}>
 				{assignment.employeeShifts[0]?.name}
 				{assignment.employeeShifts[0]?.name && (
 					<button onClick={() => handleClick(assignment.employeeShifts[0].id)}>
 						X
 					</button>
 				)}
-			</span>
-			<span time={"pm"} slot={1} showAM={showAM}>
+			</TowerPositionEmployee>
+			<TowerPositionEmployee time={false} slot={1} showAM={showAM}>
 				{assignment.employeeShifts[2]?.name}
 				{assignment.employeeShifts[2]?.name && (
 					<button onClick={() => handleClick(assignment.employeeShifts[2].id)}>
 						X
 					</button>
 				)}
-			</span>
-			<span time={"am"} slot={2} showAM={showAM}>
+			</TowerPositionEmployee>
+			<TowerPositionEmployee time={true} slot={2} showAM={showAM}>
 				{assignment.employeeShifts[1]?.name}
 				{assignment.employeeShifts[1]?.name && (
 					<button onClick={() => handleClick(assignment.employeeShifts[1].id)}>
 						X
 					</button>
 				)}
-			</span>
-			<span time={"pm"} slot={2} showAM={showAM}>
+			</TowerPositionEmployee>
+			<TowerPositionEmployee time={false} slot={2} showAM={showAM}>
 				{assignment.employeeShifts[3]?.name}
 				{assignment.employeeShifts[3]?.name && (
 					<button onClick={() => handleClick(assignment.employeeShifts[3].id)}>
 						X
 					</button>
 				)}
-			</span>
+			</TowerPositionEmployee>
 		</TowerPositionDiv>
 	);
 
@@ -127,38 +128,38 @@ function TowerPosition({ assignment, showAM }) {
 	// 		<TowerTitle>
 	// 			<TowerTitleText>{assignment.equipment.position}</TowerTitleText>
 	// 		</TowerTitle>
-	// 		<span time={"am"} slot={1} showAM={showAM}>
+	// 		<TowerPositionEmployee time={"am"} slot={1} showAM={showAM}>
 	// 			{assignment.employeeShifts[0]?.name}
 	// 			{assignment.employeeShifts[0]?.name && (
 	// 				<button onClick={() => handleClick(assignment.employeeShifts[0].id)}>
 	// 					X
 	// 				</button>
 	// 			)}
-	// 		</span>
-	// 		<span time={"pm"} slot={1} showAM={showAM}>
+	// 		</TowerPositionEmployee>
+	// 		<TowerPositionEmployee time={"pm"} slot={1} showAM={showAM}>
 	// 			{assignment.employeeShifts[2]?.name}
 	// 			{assignment.employeeShifts[2]?.name && (
 	// 				<button onClick={() => handleClick(assignment.employeeShifts[2].id)}>
 	// 					X
 	// 				</button>
 	// 			)}
-	// 		</span>
-	// 		<span time={"am"} slot={2} showAM={showAM}>
+	// 		</TowerPositionEmployee>
+	// 		<TowerPositionEmployee time={"am"} slot={2} showAM={showAM}>
 	// 			{assignment.employeeShifts[1]?.name}
 	// 			{assignment.employeeShifts[1]?.name && (
 	// 				<button onClick={() => handleClick(assignment.employeeShifts[1].id)}>
 	// 					X
 	// 				</button>
 	// 			)}
-	// 		</span>
-	// 		<span time={"pm"} slot={2} showAM={showAM}>
+	// 		</TowerPositionEmployee>
+	// 		<TowerPositionEmployee time={"pm"} slot={2} showAM={showAM}>
 	// 			{assignment.employeeShifts[3]?.name}
 	// 			{assignment.employeeShifts[3]?.name && (
 	// 				<button onClick={() => handleClick(assignment.employeeShifts[3].id)}>
 	// 					X
 	// 				</button>
 	// 			)}
-	// 		</span>
+	// 		</TowerPositionEmployee>
 	// 	</TowerPositionDiv>
 	// );
 }
