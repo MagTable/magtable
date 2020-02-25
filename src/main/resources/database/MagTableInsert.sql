@@ -27,20 +27,51 @@ INSERT INTO `user` (`role`, username, password, resetflag) VALUES (1, 'mustafa',
 INSERT INTO `user` (role, username, password,resetflag) VALUES (2, 'david', '$2a$10$p5Z.PzEZm2J6ikfp9T4lFeW6hdRjDQUfTdfqOiKK5xHRsd2C9GqKK', false);
 INSERT INTO `user` (role, username, password, resetflag) VALUES (3, 'steven', '$2a$10$p5Z.PzEZm2J6ikfp9T4lFeW6hdRjDQUfTdfqOiKK5xHRsd2C9GqKK', false);
 
-INSERT INTO tower (towerID, position) VALUES (1, 'Tower Spotter');
-INSERT INTO tower (towerID, position) VALUES (2, 'EDA-CTM');
-INSERT INTO tower (towerID, position) VALUES (3, 'EDA-Ice Man');
-INSERT INTO tower (towerID, position) VALUES (4, 'EDA-Ice House');
-INSERT INTO tower (towerID, position) VALUES (5, 'WDA-CTM');
-INSERT INTO tower (towerID, position) VALUES (6, 'WDA-Ice Man');
-INSERT INTO tower (towerID, position) VALUES (7, 'WDA-Ice House');
+INSERT INTO tower (towerID, position) VALUES (1000, 'Tower Spotter');
+INSERT INTO tower (towerID, position) VALUES (1001, 'EDA-CTM');
+INSERT INTO tower (towerID, position) VALUES (1002, 'EDA-Ice Man');
+INSERT INTO tower (towerID, position) VALUES (1003, 'EDA-Ice House');
+INSERT INTO tower (towerID, position) VALUES (1011, 'WDA-CTM');
+INSERT INTO tower (towerID, position) VALUES (1012, 'WDA-Ice Man');
+INSERT INTO tower (towerID, position) VALUES (1013, 'WDA-Ice House');
 
 
-INSERT INTO truck (truckID, status, notice) VALUES  (24, 'GO', '');
-INSERT INTO truck (truckID, status, notice) VALUES  (26, 'GO', '');
-INSERT INTO truck (truckID, status, notice) VALUES  (32, 'GO', '');
-INSERT INTO truck (truckID, status, notice) VALUES  (34, 'GO', '');
-INSERT INTO truck (truckID, status, notice) VALUES  (36, 'GO', '');
+INSERT INTO truck (truckID, status, notice) VALUES  (6, 'CON', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (8, 'GO', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (9, 'INOP', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (14, 'OOS', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (15, 'GO', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (16, 'CON', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (17, 'GO', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (18, 'INOP', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (19, 'OOS', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (20, 'GO', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (21, 'GO', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (22, 'INOP', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (23, 'OOS', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (24 'GO', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (25, 'GO', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (26, 'INOP', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (27, 'OOS', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (28, 'GO', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (29, 'GO', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (30, 'INOP', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (31, 'OOS', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (32, 'GO', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (33, 'GO', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (34, 'INOP', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (35, 'OOS', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (36, 'GO', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (37, 'GO', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (38, 'INOP', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (39, 'OOS', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (40, 'GO', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (41, 'GO', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (42, 'INOP', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (43, 'OOS', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (44, 'GO', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (45, 'OOS', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (46, 'GO', 'Equipment Conditional Status Message');
 
 /*
  These inserts are desgined to show a sample of data will appear and be stored in the database.
