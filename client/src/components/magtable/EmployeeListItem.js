@@ -33,13 +33,14 @@ function EmployeeListItem({ employee: employeeShift }) {
 	const dispatch = useDispatch();
 
 	const [assignedSlotID, setAssignedSlotID] = useState();
-	const [canClear, setCanClear] = useState(false);
+	const [canRemove, setCanClear] = useState(false);
 
 	const assignment = useSelector(state =>
 		state.magtable.assignments.find(
 			assignment => assignment.equipment.id === employeeShift.assignedEquipment
 		)
 	);
+
 	useEffect(() => {
 		// if there's no assignment, you can't clear
 		if (assignment) {
@@ -81,14 +82,18 @@ function EmployeeListItem({ employee: employeeShift }) {
 		})
 	});
 
-	function handleClick() {
+	function handleRemove() {
 		dispatch(
 			removeEquipmentEmployee(employeeShift.assignedEquipment, employeeShift.id)
 		);
 	}
 
 	return (
-		<EmployeeListItemDiv ref={drag} employee={employeeShift}>
+		<EmployeeListItemDiv
+			ref={drag}
+			employee={employeeShift}
+			disabled={isDragging || employeeShift.assignedEquipment}
+		>
 			<EmployeeListItemContentDiv>
 				<EmployeeListItemName key={employeeShift.id}>
 					{employeeShift.name}
@@ -103,7 +108,7 @@ function EmployeeListItem({ employee: employeeShift }) {
 			{!employeeShift.hasAvop && <Label type={"noAvop"}>No AVOP</Label>}
 
 			{employeeShift.assignedEquipment}
-			{canClear && <button onClick={() => handleClick()}>X</button>}
+			{canRemove && <button onClick={() => handleRemove()}>X</button>}
 		</EmployeeListItemDiv>
 	);
 }

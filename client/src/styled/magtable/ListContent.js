@@ -267,7 +267,7 @@ export const TruckListManipDiv = styled.div`
 export const TowerPositionEmployee = styled.p`
 	margin-block-start: 0em;
 	margin-block-end: 0em;
-	height: ${({ showAM, time }) => (showAM === time ? "50%" : "0%")};
+	height: ${({ showAM }) => (showAM ? "50%" : "0%")};
 	background-color: var(${({ slot }) => (slot === 2 ? "--shader-grey" : "")});
 	display: flex;
 	align-items: center;

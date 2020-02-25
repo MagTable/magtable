@@ -138,14 +138,8 @@ function TruckListItem({ assignment, open, showAM }) {
 	// todo see if we can refactor this
 	return (
 		<div ref={drop}>
-			{/*todo assignment prop is redundant*/}
-			<TruckListItemDiv assignment={assignment.equipment.id}>
-				{/* todo changed the drag ref to avoid the tooltip issue*/}
-				<TruckNumberDiv
-					ref={drag}
-					status={assignment.equipment.status}
-					style={{ cursor: "pointer" }}
-				>
+			<TruckListItemDiv>
+				<TruckNumberDiv ref={drag} status={assignment.equipment.status}>
 					{assignment.equipment.id}
 				</TruckNumberDiv>
 				<TruckInfoDiv>

@@ -4,13 +4,9 @@ import {
 	DeleteTowerAssignmentBtn,
 	TowerPositionDiv
 } from "../../styled/magtable/Maps";
-import {
-	TowerPositionEmployee,
-	TruckListItemEmployee
-} from "../../styled/magtable/ListContent";
+import { TowerPositionEmployee } from "../../styled/magtable/ListContent";
 import { useDrop } from "react-dnd";
 import {
-	OJT,
 	OJT_TOWER,
 	SET_EQUIPMENT_EMPLOYEE,
 	TOWER_POSITIONS
@@ -41,7 +37,7 @@ function TowerPosition({ assignment, showAM }) {
 		dispatch(removeEquipmentEmployee(assignment.equipment.id, shiftID));
 	};
 
-	/**
+	/*
 	 * Drop component that accepts only SET_EQUIPMENT_EMPLOYEE draggables.
 	 */
 	const [{ canDrop, isOver }, drop] = useDrop({
@@ -86,13 +82,6 @@ function TowerPosition({ assignment, showAM }) {
 		}
 	};
 
-	const dangerStyle = { border: "2px solid red" };
-	const successStyle = { border: "2px solid green" };
-
-	let style = {};
-	if (isOver && canDrop) style = successStyle;
-	if (isOver && !canDrop) style = dangerStyle;
-
 	function getOutline(index) {
 		if (index !== nextOpenSlot()) return null;
 
@@ -134,22 +123,16 @@ function TowerPosition({ assignment, showAM }) {
 	}
 
 	return (
-		// todo refactor styled component props "time"
 		<TowerPositionDiv ref={drop}>
 			<TowerTitle>
 				<TowerTitleText>{assignment.equipment.position}</TowerTitleText>
 			</TowerTitle>
-			<TowerPositionEmployee
-				time={true}
-				slot={1}
-				showAM={showAM}
-				outline={getOutline(0)}
-			>
+			<TowerPositionEmployee slot={1} showAM={showAM} outline={getOutline(0)}>
 				{assignment.employeeShifts[0]?.name}
 				{ojtWarn(0) && (
 					<>
 						<i
-							className="fas fa-exclamation-triangle"
+							className={"fas fa-exclamation-triangle"}
 							style={{ color: "orange" }}
 							data-tip={"OJT Requires Qualified Secondary"}
 						/>
@@ -170,12 +153,7 @@ function TowerPosition({ assignment, showAM }) {
 						</DeleteTowerAssignmentBtn>
 					)}
 			</TowerPositionEmployee>
-			<TowerPositionEmployee
-				time={false}
-				slot={1}
-				showAM={showAM}
-				outline={getOutline(2)}
-			>
+			<TowerPositionEmployee slot={1} showAM={!showAM} outline={getOutline(2)}>
 				{assignment.employeeShifts[2]?.name}
 				{ojtWarn(2) && (
 					<>
@@ -201,12 +179,7 @@ function TowerPosition({ assignment, showAM }) {
 						</DeleteTowerAssignmentBtn>
 					)}
 			</TowerPositionEmployee>
-			<TowerPositionEmployee
-				time={true}
-				slot={2}
-				showAM={showAM}
-				outline={getOutline(1)}
-			>
+			<TowerPositionEmployee slot={2} showAM={showAM} outline={getOutline(1)}>
 				{assignment.employeeShifts[1]?.name}
 				{assignment.employeeShifts[1]?.name && (
 					<DeleteTowerAssignmentBtn
@@ -216,12 +189,7 @@ function TowerPosition({ assignment, showAM }) {
 					</DeleteTowerAssignmentBtn>
 				)}
 			</TowerPositionEmployee>
-			<TowerPositionEmployee
-				time={false}
-				slot={2}
-				showAM={showAM}
-				outline={getOutline(3)}
-			>
+			<TowerPositionEmployee slot={2} showAM={!showAM} outline={getOutline(3)}>
 				{assignment.employeeShifts[3]?.name}
 				{assignment.employeeShifts[3]?.name && (
 					<DeleteTowerAssignmentBtn
