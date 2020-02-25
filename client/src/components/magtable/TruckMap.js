@@ -1,6 +1,6 @@
 import React from "react";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
-import { ParkingLocation, TruckMapDiv } from "../../styled/magtable/Maps";
+import { TruckMapDiv } from "../../styled/magtable/Maps";
 import ApronToggle from "./ApronToggle";
 import {
 	FakePadDiv,
