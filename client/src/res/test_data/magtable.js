@@ -92,9 +92,7 @@ export const initialAssignments = [
 	{
 		equipment: {
 			id: 1000,
-			position: "Tower Spotter",
-			notice: null,
-			status: null
+			position: "Tower Spotter"
 		},
 		employeeShifts: [null, null, null, null],
 		parkingLocation: null,
@@ -103,9 +101,7 @@ export const initialAssignments = [
 	{
 		equipment: {
 			id: 1001,
-			position: "EDA-CTM",
-			notice: null,
-			status: null
+			position: "EDA-CTM"
 		},
 		employeeShifts: [null, null, null, null],
 		parkingLocation: null,
@@ -114,9 +110,7 @@ export const initialAssignments = [
 	{
 		equipment: {
 			id: 1002,
-			position: "EDA-Ice Man",
-			notice: null,
-			status: null
+			position: "EDA-Ice Man"
 		},
 		employeeShifts: [null, null, null, null],
 		parkingLocation: null,
@@ -125,9 +119,7 @@ export const initialAssignments = [
 	{
 		equipment: {
 			id: 1003,
-			position: "EDA-Ice House",
-			notice: null,
-			status: null
+			position: "EDA-Ice House"
 		},
 		employeeShifts: [null, null, null, null],
 		parkingLocation: null,
@@ -136,9 +128,7 @@ export const initialAssignments = [
 	{
 		equipment: {
 			id: 1011,
-			position: "WDA-CTM",
-			notice: null,
-			status: null
+			position: "WDA-CTM"
 		},
 		employeeShifts: [null, null, null, null],
 		parkingLocation: null,
@@ -147,9 +137,7 @@ export const initialAssignments = [
 	{
 		equipment: {
 			id: 1012,
-			position: "WDA-Ice Man",
-			notice: null,
-			status: null
+			position: "WDA-Ice Man"
 		},
 		employeeShifts: [null, null, null, null],
 		parkingLocation: null,
@@ -158,9 +146,7 @@ export const initialAssignments = [
 	{
 		equipment: {
 			id: 1013,
-			position: "WDA-Ice House",
-			notice: null,
-			status: null
+			position: "WDA-Ice House"
 		},
 		employeeShifts: [null, null, null, null],
 		parkingLocation: null,
@@ -174,7 +160,7 @@ export const initialEmployeeShifts = [
 		name: "MJ Kochuk",
 		startTime: 400,
 		endTime: 1600,
-		description: "CTM",
+		description: "OJT",
 		hasAvop: true,
 		isGreen: false
 	},
@@ -201,7 +187,7 @@ export const initialEmployeeShifts = [
 		name: "Steven Wong",
 		startTime: 400,
 		endTime: 1600,
-		description: "Bay Lead",
+		description: "OJT",
 		hasAvop: false,
 		isGreen: true
 	},

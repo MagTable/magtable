@@ -73,4 +73,4 @@ function TruckList({ showAM, setShowAM }) {
 	);
 }
 
-export default TruckList;
+export default React.memo(TruckList);

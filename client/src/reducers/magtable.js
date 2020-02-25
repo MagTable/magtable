@@ -82,25 +82,18 @@ export default function(state = initialState, action) {
 				)
 			};
 		case SET_EQUIPMENT_EMPLOYEE: // if assignment needs to be created
-			const modifiedAssignment = state.assignments.find(
-				assignment => assignment.equipment.id === payload.equipmentID
-			);
-
-			// modifiedAssignment.employeeShifts.splice(
-			// 	payload.equipmentSlotID,
-			// 	0,
-			// 	payload.shift
-			// );
-			modifiedAssignment.employeeShifts[payload.equipmentSlotID] =
-				payload.shift;
-
 			// replaces the modified assignment in the assignments list
 			// sets assigned equipment for the associated shift object
 			return {
 				...state,
 				assignments: state.assignments.map(assignment =>
 					assignment.equipment.id === payload.equipmentID
-						? modifiedAssignment
+						? {
+								...assignment,
+								employeeShifts: assignment.employeeShifts.map((shift, i) =>
+									i === payload.equipmentSlotID ? payload.shift : shift
+								)
+						  }
 						: assignment
 				),
 				employeeShifts: state.employeeShifts.map(shift =>

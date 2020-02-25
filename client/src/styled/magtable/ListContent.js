@@ -202,16 +202,28 @@ export const TruckInfoDiv = styled.div`
 	justify-content: space-between;
 `;
 
+// todo can we change this to a div?
 export const TruckListItemEmployee = styled.p`
 	margin-block-start: 0em;
 	margin-block-end: 0em;
-	height: ${({ showAM, time }) => (showAM === time ? "50%" : "0%")};
+	height: ${({ show }) => (show ? "50%" : "0%")};
 	background-color: var(${({ slot }) => (slot === 2 ? "--shader-grey" : "")});
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
-	transition: all 0.15s ease-in-out;
+	transition: height 0.15s ease-in-out;
+	${({ outline }) =>
+		outline &&
+		`
+			outline-width: 2px;
+			outline-offset: -2px;
+			outline-style: solid;
+	`}
+	
+	outline-color: ${({ outline }) => outline === "danger" && `red;`};
+	outline-color: ${({ outline }) => outline === "warning" && `orange;`};
+	outline-color: ${({ outline }) => outline === "success" && `green;`};
 `;
 
 export const TruckListItemEmployeeList = styled.div`

@@ -52,14 +52,13 @@ function ParkingLocations({ parkingID, pad }) {
 	});
 
 	//todo Change up canDrop to check if a truck is already in the location. If so assign to the right side location for now.
-	const handleCanDrop = item => {
+	const handleCanDrop = () => {
 		// basically, if there's a truck in X location, take current truck and change it's location by + 1, then the new truck going in
 		// take the original location and + 2.
 		// Example, id: 3, apron: WDA, code: BE
 		// Truck 24 is already there, and trying to add truck 26. First fire off a new setTruckLocation with truck 24 and locationID + 1,
 		// then truck 26 gets added to locationID 3+2.
 		// This information is consistent with initialParkingLocations.
-		console.log(filteredParkedLocations?.includes(parkingID));
 		if (!filteredParkedLocations?.includes(parkingID)) return true;
 	};
 
