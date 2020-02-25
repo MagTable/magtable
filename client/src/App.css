@@ -8,15 +8,19 @@ html{
   --border-color: #474747;
 
   /*Context colors - for items that have an action or have meaning other than just style.*/
-  --context-green: #C7D645;
-  --context-red: #A62A32;
-  --context-blue: #90D5DA;
-  --context-grey: #46575E;
-  --context-orange: #d66e4b;
+
+  --context-green: #d0e6a5;
+  --context-red: #fa897b;
+  --context-blue: #86e3ce;
+  --context-grey: #b2b2b2;
+  --context-orange: #ccabd8;
+  --context-yellow: #ffdd94;
 
   /*Used for separating elements between one another, for example, shading every second row of a table or directly opposing divs. */
   --shader-grey: #d3d3d3;
   --shader-blue: rgba(74, 74, 255, 0.31);
+
+  --emphasis-grey: #575757;
 
 }
 ::selection {

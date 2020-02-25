@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { AssignmentContainer, MapsDiv } from "../../styled/magtable/Maps";
 import { DndProvider } from "react-dnd";
 import Backend from "react-dnd-html5-backend";
@@ -12,15 +12,17 @@ import TruckList from "./TruckList";
  * @constructor
  */
 const AssignmentTable = () => {
+	const [showAM, setShowAM] = useState(true);
+
 	return (
 		<DndProvider backend={Backend}>
 			<AssignmentContainer>
 				<EmployeeList />
-				<TruckList />
+				<TruckList showAM={showAM} setShowAM={setShowAM} />
 
 				<MapsDiv>
 					<TruckMap />
-					<TowerMap />
+					<TowerMap showAM={showAM} />
 				</MapsDiv>
 			</AssignmentContainer>
 		</DndProvider>

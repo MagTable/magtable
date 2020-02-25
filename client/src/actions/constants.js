@@ -4,15 +4,24 @@ export const PERSONNEL_MANAGER = "Personnel Manager";
 export const MECHANIC = "Mechanic";
 
 // Employee Shift Descriptions
-const OPERATIONS_MANAGER = "Operations Manager";
-const OPERATIONS_SUPERVISOR = "Operations Supervisor";
-const CTM = "CTM";
-const TOWER_SPOTTER = "Tower Spotter";
-const ICEMAN = "Iceman";
-const ICEHOUSE = "Icehouse";
-const BAY_LEAD = "Bay Lead";
-const PRACTICAL_TRAINER = "Practical Trainer";
-const TECHNICIAN = "Technician";
+// const OPERATIONS_MANAGER = "Operations Manager";
+// const OPERATIONS_SUPERVISOR = "Operations Supervisor";
+export const CTM = "CTM";
+export const TOWER_SPOTTER = "Tower Spotter";
+export const ICEMAN = "Iceman";
+export const ICEHOUSE = "Icehouse";
+// const BAY_LEAD = "Bay Lead";
+// const PRACTICAL_TRAINER = "Practical Trainer";
+// const TECHNICIAN = "Technician";
+export const OJT = "OJT";
+export const OJT_TOWER = "OJT-Tower";
+export const TOWER_POSITIONS = [
+	CTM,
+	TOWER_SPOTTER,
+	ICEMAN,
+	ICEHOUSE,
+	OJT_TOWER
+];
 
 export const EAST_APRON = "EDA";
 export const WEST_APRON = "WDA";

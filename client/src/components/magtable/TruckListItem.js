@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
 	TruckInfoDiv,
 	TruckListItemDiv,
@@ -11,8 +11,7 @@ import {
 } from "../../styled/magtable/ListContent";
 import { useDrop, useDrag } from "react-dnd";
 import {
-	AM,
-	PM,
+	OJT,
 	SET_EQUIPMENT_EMPLOYEE,
 	SET_TRUCK_LOCATION
 } from "../../actions/constants";
@@ -21,6 +20,7 @@ import {
 	removeEquipmentEmployee,
 	setTruckLocation
 } from "../../actions/magtable";
+import ReactTooltip from "react-tooltip";
 
 /**
  * @date 2020-02-17
@@ -34,33 +34,9 @@ import {
  * @param props
  * @returns {*} The TruckListItem component
  */
-function TruckListItem({ assignment, open, displayedTime }) {
+function TruckListItem({ assignment, open, showAM }) {
+	const [hoveredShiftDescription, setHoveredShiftDescription] = useState(null);
 	const dispatch = useDispatch();
-
-	let colorCode;
-
-	// Sets the color for the TruckNumberDiv based on the status of the truck
-	switch (assignment.equipment.status) {
-		case "GO": {
-			colorCode = "--context-green"; // Operational
-			break;
-		}
-		case "INOP": {
-			colorCode = "--context-red"; // Inoperable
-			break;
-		}
-		case "CON": {
-			colorCode = "--context-blue"; // Conditional
-			break;
-		}
-		case "OOS": {
-			colorCode = "--context-grey"; // Out of service
-			break;
-		}
-		default: {
-			// If an unknown tuck status is provided.
-		}
-	}
 
 	const [{ isDragging }, drag] = useDrag({
 		item: { type: SET_TRUCK_LOCATION },
@@ -68,7 +44,7 @@ function TruckListItem({ assignment, open, displayedTime }) {
 			const dropResult = monitor.getDropResult();
 			if (item && dropResult) {
 				dispatch(
-					setTruckLocation(dropResult.equipmentID, dropResult.parkingLocation)
+					setTruckLocation(assignment.equipment.id, dropResult.locationID)
 				);
 			}
 		},
@@ -83,7 +59,10 @@ function TruckListItem({ assignment, open, displayedTime }) {
 			equipmentID: assignment.equipment.id,
 			equipmentSlotID: nextOpenSlot()
 		}),
-		canDrop: item => handleCanDrop(item),
+		canDrop: item => {
+			setHoveredShiftDescription(item.shiftDescription);
+			return handleCanDrop(item);
+		},
 		collect: monitor => ({
 			isOver: monitor.isOver(),
 			canDrop: monitor.canDrop()
@@ -91,11 +70,11 @@ function TruckListItem({ assignment, open, displayedTime }) {
 	});
 
 	const nextOpenSlot = () => {
-		if (displayedTime === AM) {
+		if (showAM === true) {
 			// if we're showing AM, if the [0] slot is taken, fill in [1], otherwise fill in [0]
 			return assignment.employeeShifts[0] ? 1 : 0;
 		}
-		if (displayedTime === PM) {
+		if (showAM === false) {
 			// if we're showing PM, if the [2] slot is taken, fill in [3], otherwise fill in [2]
 			return assignment.employeeShifts[2] ? 3 : 2;
 		}
@@ -103,73 +82,144 @@ function TruckListItem({ assignment, open, displayedTime }) {
 
 	const handleCanDrop = item => {
 		// Logic to not allow more than 4 employees in a location.
+		// if the list of employeeShifts does not have any nulls, it's full
 		if (!assignment.employeeShifts.includes(null)) return false;
 		// make sure the employee isn't already assigned here
 		if (assignment.employeeShifts.find(shift => shift?.id === item.id))
 			return false;
 
-		if (displayedTime === AM) {
+		if (showAM === true) {
 			return !assignment.employeeShifts[1];
 		}
-		if (displayedTime === PM) {
+		if (showAM === false) {
 			return !assignment.employeeShifts[3];
 		}
 	};
-
-	const dangerStyle = { border: "2px solid red" };
-	const successStyle = { border: "2px solid green" };
-
-	let style = {};
-	if (isOver && canDrop) style = successStyle;
-	if (isOver && !canDrop) style = dangerStyle;
 
 	const handleClick = shiftID => {
 		dispatch(removeEquipmentEmployee(assignment.equipment.id, shiftID));
 	};
 
+	function getOutline(index) {
+		if (index !== nextOpenSlot()) return null;
+
+		if (isOver && !canDrop) return "danger";
+
+		// if hovered shift is OJT and placed in a primary slot
+		if (
+			isOver &&
+			canDrop &&
+			hoveredShiftDescription === OJT &&
+			(index === 0 || index === 2)
+		)
+			return "warning";
+
+		if (isOver && canDrop) return "success";
+	}
+
+	function ojtWarn(index) {
+		if (
+			assignment.employeeShifts[index]?.description === OJT &&
+			!assignment.employeeShifts[index + 1]
+		) {
+			return true;
+		}
+
+		if (
+			assignment.employeeShifts[index]?.description === OJT &&
+			assignment.employeeShifts[index + 1]?.description === OJT
+		) {
+			return true;
+		}
+
+		return false;
+	}
+
+	// todo see if we can refactor this
 	return (
 		<div ref={drop}>
-			<TruckListItemDiv style={style} ref={drag}>
-				<TruckNumberDiv colorCode={colorCode}>
+			{/*todo assignment prop is redundant*/}
+			<TruckListItemDiv assignment={assignment.equipment.id}>
+				{/* todo changed the drag ref to avoid the tooltip issue*/}
+				<TruckNumberDiv
+					ref={drag}
+					status={assignment.equipment.status}
+					style={{ cursor: "pointer" }}
+				>
 					{assignment.equipment.id}
 				</TruckNumberDiv>
 				<TruckInfoDiv>
 					<TruckListItemEmployeeList>
+						{/* First AM Employee */}
 						<TruckListItemEmployee
-							time={"am"}
 							slot={1}
-							displayedTime={displayedTime}
+							show={showAM}
+							outline={getOutline(0)}
 						>
 							{assignment.employeeShifts[0]?.name}
-							{assignment.employeeShifts[0]?.name && (
-								<button
-									onClick={() => handleClick(assignment.employeeShifts[0].id)}
-								>
-									X
-								</button>
+							{ojtWarn(0) && (
+								<>
+									<i
+										className="fas fa-exclamation-triangle"
+										style={{ color: "orange" }}
+										data-tip={"OJT Requires Qualified Secondary"}
+									/>
+									<ReactTooltip
+										place="top"
+										type="dark"
+										effect="solid"
+										delayShow={200}
+									/>
+								</>
 							)}
+							{assignment.employeeShifts[0]?.name &&
+								!assignment.employeeShifts[1] && (
+									<button
+										onClick={() => handleClick(assignment.employeeShifts[0].id)}
+									>
+										X
+									</button>
+								)}
 						</TruckListItemEmployee>
+						{/* First PM Employee */}
 						<TruckListItemEmployee
-							time={"pm"}
 							slot={1}
-							displayedTime={displayedTime}
+							show={!showAM}
+							outline={getOutline(2)}
 						>
 							{assignment.employeeShifts[2]?.name}
-							{assignment.employeeShifts[2]?.name && (
-								<button
-									onClick={() => handleClick(assignment.employeeShifts[2].id)}
-								>
-									X
-								</button>
+							{ojtWarn(2) && (
+								<>
+									<i
+										className="fas fa-exclamation-triangle"
+										style={{ color: "orange" }}
+										data-tip={"OJT Requires Qualified Secondary"}
+									/>
+									<ReactTooltip
+										place="top"
+										type="dark"
+										effect="solid"
+										delayShow={200}
+									/>
+								</>
 							)}
+							{assignment.employeeShifts[2]?.name &&
+								!assignment.employeeShifts[3] && (
+									<button
+										onClick={() => handleClick(assignment.employeeShifts[2].id)}
+									>
+										X
+									</button>
+								)}
 						</TruckListItemEmployee>
+						{/* Second AM Employee */}
 						<TruckListItemEmployee
-							time={"am"}
 							slot={2}
-							displayedTime={displayedTime}
+							show={showAM}
+							outline={getOutline(1)}
 						>
 							{assignment.employeeShifts[1]?.name}
-							{assignment.employeeShifts[1]?.name && (
+							{assignment.employeeShifts[1] && (
 								<button
 									onClick={() => handleClick(assignment.employeeShifts[1].id)}
 								>
@@ -177,11 +227,11 @@ function TruckListItem({ assignment, open, displayedTime }) {
 								</button>
 							)}
 						</TruckListItemEmployee>
-
+						{/* Second PM Employee */}
 						<TruckListItemEmployee
-							time={"pm"}
 							slot={2}
-							displayedTime={displayedTime}
+							show={!showAM}
+							outline={getOutline(3)}
 						>
 							{assignment.employeeShifts[3]?.name}
 							{assignment.employeeShifts[3]?.name && (
@@ -197,7 +247,7 @@ function TruckListItem({ assignment, open, displayedTime }) {
 				</TruckInfoDiv>
 			</TruckListItemDiv>
 			<TruckProblemsDiv open={open}>
-				{assignment.equipment.notice == +"" ? null : (
+				{assignment.equipment.notice === "" ? null : (
 					<TruckProblemsText>{assignment.equipment.notice}</TruckProblemsText>
 				)}
 			</TruckProblemsDiv>

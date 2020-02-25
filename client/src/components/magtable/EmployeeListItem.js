@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
 	EmployeeLabelDiv as Label,
-	EmployeeListItemContentDiv as Content,
-	EmployeeListItemDiv as Wrapper,
-	EmployeeListItemName as ItemName,
-	EmployeeListItemTime as ItemTime
+	EmployeeListItemDesc
 } from "../../styled/magtable/ListContent";
 import { useDrag } from "react-dnd";
 import { SET_EQUIPMENT_EMPLOYEE } from "../../actions/constants";
-import { useDispatch } from "react-redux";
-import { setEquipmentEmployee } from "../../actions/magtable";
+import { useDispatch, useSelector } from "react-redux";
+import {
+	removeEquipmentEmployee,
+	setEquipmentEmployee
+} from "../../actions/magtable";
+import {
+	EmployeeListItemContentDiv,
+	EmployeeListItemDiv,
+	EmployeeListItemName,
+	EmployeeListItemTime
+} from "../../styled/magtable/ListContent";
 
 /**
  * @date 2020-02-19
@@ -26,8 +32,35 @@ import { setEquipmentEmployee } from "../../actions/magtable";
 function EmployeeListItem({ employee: employeeShift }) {
 	const dispatch = useDispatch();
 
+	const [assignedSlotID, setAssignedSlotID] = useState();
+	const [canClear, setCanClear] = useState(false);
+
+	const assignment = useSelector(state =>
+		state.magtable.assignments.find(
+			assignment => assignment.equipment.id === employeeShift.assignedEquipment
+		)
+	);
+	useEffect(() => {
+		// if there's no assignment, you can't clear
+		if (assignment) {
+			setCanClear(true);
+			// if there's an assignment and the assigned slot is a primary
+			// and the associated secondary slot is filled, you can't clear
+			if (assignedSlotID === 0 && assignment.employeeShifts[assignedSlotID + 1])
+				setCanClear(false);
+			if (assignedSlotID === 2 && assignment.employeeShifts[assignedSlotID + 1])
+				setCanClear(false);
+		} else {
+			setCanClear(false);
+		}
+	}, [assignment]);
+
 	const [{ isDragging }, drag] = useDrag({
-		item: { type: SET_EQUIPMENT_EMPLOYEE, id: employeeShift.id },
+		item: {
+			type: SET_EQUIPMENT_EMPLOYEE,
+			id: employeeShift.id,
+			shiftDescription: employeeShift.description
+		},
 		canDrag: !employeeShift.assignedEquipment,
 		end: (item, monitor) => {
 			const dropResult = monitor.getDropResult();
@@ -39,6 +72,8 @@ function EmployeeListItem({ employee: employeeShift }) {
 						dropResult.equipmentSlotID
 					)
 				);
+				setAssignedSlotID(dropResult.equipmentSlotID);
+				setCanClear(true);
 			}
 		},
 		collect: monitor => ({
@@ -46,25 +81,30 @@ function EmployeeListItem({ employee: employeeShift }) {
 		})
 	});
 
+	function handleClick() {
+		dispatch(
+			removeEquipmentEmployee(employeeShift.assignedEquipment, employeeShift.id)
+		);
+	}
+
 	return (
-		<Wrapper
-			ref={drag}
-			employee={employeeShift}
-			disabled={employeeShift.assignedEquipment}
-		>
-			<Content>
-				<ItemName key={employeeShift.id}>{employeeShift.name}</ItemName>
-				<ItemTime>
+		<EmployeeListItemDiv ref={drag} employee={employeeShift}>
+			<EmployeeListItemContentDiv>
+				<EmployeeListItemName key={employeeShift.id}>
+					{employeeShift.name}
+				</EmployeeListItemName>
+				<EmployeeListItemTime>
 					{employeeShift.startTime} - {employeeShift.endTime}
-				</ItemTime>
-				<ItemName>{employeeShift.description}</ItemName>
-			</Content>
+				</EmployeeListItemTime>
+				<EmployeeListItemDesc>{employeeShift.description}</EmployeeListItemDesc>
+			</EmployeeListItemContentDiv>
 
 			{employeeShift.isGreen && <Label type={"greenPass"}>Green Pass</Label>}
 			{!employeeShift.hasAvop && <Label type={"noAvop"}>No AVOP</Label>}
 
 			{employeeShift.assignedEquipment}
-		</Wrapper>
+			{canClear && <button onClick={() => handleClick()}>X</button>}
+		</EmployeeListItemDiv>
 	);
 }
 

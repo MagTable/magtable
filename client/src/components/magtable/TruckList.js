@@ -9,6 +9,10 @@ import {
 } from "../../styled/magtable/ListContent";
 import { useSelector } from "react-redux";
 import Switch from "react-switch";
+import {
+	ToggleLabelLeft,
+	ToggleLabelRight
+} from "../../styled/common/FormControl";
 
 /**
  * @date 2020-02-17
@@ -25,17 +29,10 @@ import Switch from "react-switch";
  * @constructor
  * @returns {*} The TruckList component
  */
-function TruckList() {
+function TruckList({ showAM, setShowAM }) {
 	const [open, setOpen] = useState(false);
-	const [displayedTime, setDisplayedTime] = useState("am");
+	// const [showAM, setShowAM] = useState(true);
 
-	function toggleTime() {
-		if (displayedTime === "am") {
-			setDisplayedTime("pm");
-		} else {
-			setDisplayedTime("am");
-		}
-	}
 	const assignments = useSelector(state => state.magtable.assignments);
 
 	return (
@@ -48,17 +45,17 @@ function TruckList() {
 					</TruckListButton>
 
 					<Switch
-						onChange={() => toggleTime()}
-						checked={displayedTime === "am"}
+						onChange={() => setShowAM(!showAM)}
+						checked={showAM === true}
 						offColor={"#414244"}
 						onColor={"#414244"}
-						// checkedIcon={<span>AM</span>}
-						// uncheckedIcon={<span>PM</span>}
+						checkedIcon={<ToggleLabelLeft>AM</ToggleLabelLeft>}
+						uncheckedIcon={<ToggleLabelRight>PM</ToggleLabelRight>}
+						width={80}
 					/>
 				</TruckListManipDiv>
 			</ListTitle>
 			<TruckListDiv>
-				{/* equipment with id < 1000 (trucks) */}
 				{assignments.map(
 					assignment =>
 						assignment.equipment.id < 1000 && (
@@ -66,7 +63,7 @@ function TruckList() {
 								open={open}
 								key={assignment.equipment.id}
 								assignment={assignment}
-								displayedTime={displayedTime}
+								showAM={showAM}
 								shift
 							/>
 						)
@@ -76,4 +73,4 @@ function TruckList() {
 	);
 }
 
-export default TruckList;
+export default React.memo(TruckList);

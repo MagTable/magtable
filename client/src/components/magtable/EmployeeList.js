@@ -2,7 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import {
 	EmployeeListDiv,
-	EmployeeListDivWrapper
+	EmployeeListDivWrapper,
+	StartTimeSeparator
 } from "../../styled/magtable/ListContent";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import EmployeeListItem from "./EmployeeListItem";
@@ -39,7 +40,9 @@ const EmployeeList = () => {
 			<EmployeeListDiv>
 				{startTimes.map(startTime => (
 					<div key={startTime}>
-						<h2>{startTime}</h2>
+						<StartTimeSeparator>
+							<h2>{startTime}</h2>
+						</StartTimeSeparator>
 						{employees.map(
 							employee =>
 								employee.startTime === startTime && (
