@@ -7,17 +7,20 @@ import {
 	ToggleLabelLeft,
 	ToggleLabelRight
 } from "../../styled/common/FormControl";
+import { EAST_APRON, WEST_APRON } from "../../actions/constants";
 
-const ApronToggle = ({ selected }) => {
+const ApronToggle = () => {
 	const dispatch = useDispatch();
-	const [padDisplayed, setPadDisplayed] = useState("EDA");
+
+	const [padDisplayed, setPadDisplayed] = useState(EAST_APRON);
+
 	function handleClick(e) {
 		dispatch(setSelectedApron(e));
 
-		if (padDisplayed === "EDA") {
-			setPadDisplayed("WDA");
+		if (padDisplayed === EAST_APRON) {
+			setPadDisplayed(WEST_APRON);
 		} else {
-			setPadDisplayed("EDA");
+			setPadDisplayed(EAST_APRON);
 		}
 	}
 
@@ -25,8 +28,10 @@ const ApronToggle = ({ selected }) => {
 		<TruckListManipDiv>
 			<label>
 				<Switch
-					onChange={() => handleClick(padDisplayed === "EDA" ? "WDA" : "EDA")}
-					checked={padDisplayed === "EDA"}
+					onChange={() =>
+						handleClick(padDisplayed === EAST_APRON ? WEST_APRON : EAST_APRON)
+					}
+					checked={padDisplayed === EAST_APRON}
 					offColor={"#414244"}
 					onColor={"#414244"}
 					checkedIcon={<ToggleLabelLeft>East</ToggleLabelLeft>}
