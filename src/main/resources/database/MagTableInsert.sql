@@ -33,27 +33,20 @@ INSERT INTO `user` (`role`, username, password, resetflag) VALUES (1, 'mustafa',
 INSERT INTO `user` (role, username, password,resetflag) VALUES (2, 'david', '$2a$10$p5Z.PzEZm2J6ikfp9T4lFeW6hdRjDQUfTdfqOiKK5xHRsd2C9GqKK', false);
 INSERT INTO `user` (role, username, password, resetflag) VALUES (3, 'steven', '$2a$10$p5Z.PzEZm2J6ikfp9T4lFeW6hdRjDQUfTdfqOiKK5xHRsd2C9GqKK', false);
 
-INSERT INTO position (positionID, description) VALUES (1, 'Tower Spotter');
-INSERT INTO position (positionID, description) VALUES (2, 'EDA-CTM');
-INSERT INTO position (positionID, description) VALUES (3, 'EDA-Ice Man');
-INSERT INTO position (positionID, description) VALUES (4, 'EDA-Ice House');
-INSERT INTO position (positionID, description) VALUES (5, 'WDA-CTM');
-INSERT INTO position (positionID, description) VALUES (6, 'WDA-Ice Man');
-INSERT INTO position (positionID, description) VALUES (7, 'WDA-Ice House');
+INSERT INTO tower (towerID, position) VALUES (1, 'Tower Spotter');
+INSERT INTO tower (towerID, position) VALUES (2, 'EDA-CTM');
+INSERT INTO tower (towerID, position) VALUES (3, 'EDA-Ice Man');
+INSERT INTO tower (towerID, position) VALUES (4, 'EDA-Ice House');
+INSERT INTO tower (towerID, position) VALUES (5, 'WDA-CTM');
+INSERT INTO tower (towerID, position) VALUES (6, 'WDA-Ice Man');
+INSERT INTO tower (towerID, position) VALUES (7, 'WDA-Ice House');
 
-INSERT INTO tower (towerID, position) VALUES (1000, 1);
-INSERT INTO tower (towerID, position) VALUES (1001, 2);
-INSERT INTO tower (towerID, position) VALUES (1002, 3);
-INSERT INTO tower (towerID, position) VALUES (1003, 4);
-INSERT INTO tower (towerID, position) VALUES (1011, 5);
-INSERT INTO tower (towerID, position) VALUES (1012, 6);
-INSERT INTO tower (towerID, position) VALUES (1013, 7);
 
-INSERT INTO truck (truckID, status, notice, vehicleType) VALUES  (24, 'GO', '', '');
-INSERT INTO truck (truckID, status, notice, vehicleType) VALUES  (26, 'GO', '', '');
-INSERT INTO truck (truckID, status, notice, vehicleType) VALUES  (32, 'GO', '', '');
-INSERT INTO truck (truckID, status, notice, vehicleType) VALUES  (34, 'GO', '', '');
-INSERT INTO truck (truckID, status, notice, vehicleType) VALUES  (36, 'GO', '', '');
+INSERT INTO truck (truckID, status, notice) VALUES  (24, 'GO', '');
+INSERT INTO truck (truckID, status, notice) VALUES  (26, 'GO', '');
+INSERT INTO truck (truckID, status, notice) VALUES  (32, 'GO', '');
+INSERT INTO truck (truckID, status, notice) VALUES  (34, 'GO', '');
+INSERT INTO truck (truckID, status, notice) VALUES  (36, 'GO', '');
 
 /*
  These inserts are desgined to show a sample of data will appear and be stored in the database.

@@ -17,7 +17,7 @@ public class Tower implements Serializable {
     private Integer towerID;
 
     @Column(name = "position", nullable = false)
-    private Integer position;
+    private String position;
 
     public Integer getTowerID() {
         return towerID;
@@ -27,11 +27,11 @@ public class Tower implements Serializable {
         this.towerID = towerID;
     }
 
-    public Integer getPosition() {
+    public String getPosition() {
         return position;
     }
 
-    public void setPosition(Integer position) {
+    public void setPosition(String position) {
         this.position = position;
     }
 }

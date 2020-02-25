@@ -16,14 +16,8 @@ public class Shift implements Serializable {
     @Column(insertable = false, name = "shiftID", nullable = false)
     private Integer shiftID;
 
-    @Column(name = "assignmentID", nullable = false)
-    private Integer assignmentID;
-
     @Column(name = "description")
     private String description;
-
-    @Column(name = "timeOfDay", nullable = false)
-    private String timeOfDay;
 
     @Column(name = "employeeName", nullable = false)
     private String name;
@@ -33,9 +27,6 @@ public class Shift implements Serializable {
 
     @Column(name = "endTime", nullable = false)
     private Timestamp endTime;
-
-    @Column(name = "activeBaylead", nullable = false)
-    private Boolean activeBaylead;
 
     @Column(name = "noAvop", nullable = false)
     private Boolean noAvop;
@@ -51,28 +42,12 @@ public class Shift implements Serializable {
         this.shiftID = shiftID;
     }
 
-    public Integer getAssignmentID() {
-        return assignmentID;
-    }
-
-    public void setAssignmentID(Integer assignmentID) {
-        this.assignmentID = assignmentID;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getTimeOfDay() {
-        return timeOfDay;
-    }
-
-    public void setTimeOfDay(String timeOfDay) {
-        this.timeOfDay = timeOfDay;
     }
 
     public String getName() {
@@ -97,14 +72,6 @@ public class Shift implements Serializable {
 
     public void setEndTime(Timestamp endTime) {
         this.endTime = endTime;
-    }
-
-    public Boolean getActiveBaylead() {
-        return activeBaylead;
-    }
-
-    public void setActiveBaylead(Boolean activeBaylead) {
-        this.activeBaylead = activeBaylead;
     }
 
     public Boolean getNoAvop() {

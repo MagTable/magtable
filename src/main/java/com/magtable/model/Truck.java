@@ -22,9 +22,6 @@ public class Truck implements Serializable {
     @Column(name = "notice", nullable = false)
     private String notice;
 
-    @Column(name= "vehicleType", nullable = false)
-    private String vehicleType;
-
     public Integer getTruckID() {
         return truckID;
     }
@@ -49,11 +46,4 @@ public class Truck implements Serializable {
         this.notice = notice;
     }
 
-    public String getVehicleType() {
-        return vehicleType;
-    }
-
-    public void setVehicleType(String vehicleType) {
-        this.vehicleType = vehicleType;
-    }
 }
