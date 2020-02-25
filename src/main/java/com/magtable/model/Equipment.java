@@ -1,8 +1,8 @@
 package com.magtable.model;
 
-
-import javax.persistence.*;
 import java.io.Serializable;
+import javax.persistence.*;
+import javax.persistence.Table;
 
 @Table(name = "equipment")
 @Entity
@@ -15,7 +15,7 @@ public class Equipment implements Serializable {
     private Integer equipmentID;
 
     @Column(name = "assignmentID", nullable = false)
-    private Integer assignmentID;
+    private Integer id;
 
     @Column(name = "truckID")
     private Integer truckID;
@@ -41,11 +41,11 @@ public class Equipment implements Serializable {
     }
 
     public Integer getAssignmentID() {
-        return assignmentID;
+        return id;
     }
 
     public void setAssignmentID(Integer assignmentID) {
-        this.assignmentID = assignmentID;
+        this.id = assignmentID;
     }
 
     public Integer getTruckID() {

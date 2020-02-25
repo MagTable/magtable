@@ -26,7 +26,7 @@ public class Shift implements Serializable {
     private String timeOfDay;
 
     @Column(name = "employeeName", nullable = false)
-    private String employeeName;
+    private String name;
 
     @Column(name = "startTime", nullable = false)
     private Timestamp startTime;
@@ -75,12 +75,12 @@ public class Shift implements Serializable {
         this.timeOfDay = timeOfDay;
     }
 
-    public String getEmployeeName() {
-        return employeeName;
+    public String getName() {
+        return name;
     }
 
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Timestamp getStartTime() {

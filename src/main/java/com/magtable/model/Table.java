@@ -1,67 +1,26 @@
 package com.magtable.model;
 
+import org.springframework.context.annotation.Bean;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Class for storing all data arriving from the MagTable in order to be stored in the database.
  */
-public class Table {
-    //Parameters
-    private Magtablerecord mtr;
-    private Assignment assignment;
-    private Shift employee;
-    private Brixrecord brixRecord;
-    private Equipment equipment;
 
+public class Table implements Serializable{
+
+
+    //Parameters
+    private Equipment equipment;
+    private ArrayList<Shift> employeeShifts;
+    private Integer parkingLocation;
+    private ArrayList<Brixrecord> brixRecords;
 
     //Constructors
-    public Table() {
 
-    }
-
-    public Table(Magtablerecord mtr, Assignment assignment, Shift employee, Brixrecord brixRecord, Equipment equipment) {
-        this.mtr = mtr;
-        this.assignment = assignment;
-        this.employee = employee;
-        this.brixRecord = brixRecord;
-        this.equipment = equipment;
-
-    }
-
-    //Getters and Setters.
-
-
-    public Magtablerecord getMtr() {
-        return mtr;
-    }
-
-    public void setMtr(Magtablerecord mtr) {
-        this.mtr = mtr;
-    }
-
-    public Assignment getAssignment() {
-        return assignment;
-    }
-
-    public void setAssignment(Assignment assignment) {
-        this.assignment = assignment;
-    }
-
-    public Shift getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Shift employee) {
-        this.employee = employee;
-    }
-
-    public Brixrecord getBrixRecord() {
-        return brixRecord;
-    }
-
-    public void setBrixRecord(Brixrecord brixRecord) {
-        this.brixRecord = brixRecord;
-    }
+    //Getter and Setters
 
     public Equipment getEquipment() {
         return equipment;
@@ -69,5 +28,29 @@ public class Table {
 
     public void setEquipment(Equipment equipment) {
         this.equipment = equipment;
+    }
+
+    public ArrayList<Shift> getEmployeeShifts() {
+        return employeeShifts;
+    }
+
+    public void setEmployeeShifts(ArrayList<Shift> employeeShifts) {
+        this.employeeShifts = employeeShifts;
+    }
+
+    public Integer getParkingLocation() {
+        return parkingLocation;
+    }
+
+    public void setParkingLocation(Integer parkingLocation) {
+        this.parkingLocation = parkingLocation;
+    }
+
+    public ArrayList<Brixrecord> getBrixRecords() {
+        return brixRecords;
+    }
+
+    public void setBrixRecords(ArrayList<Brixrecord> brixRecords) {
+        this.brixRecords = brixRecords;
     }
 }
