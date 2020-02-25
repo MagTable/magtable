@@ -51,7 +51,7 @@ const getTruckColorCode = status => {
 };
 
 /**
- *	Holds the currently available employees and separator divs for start times.
+ *    Holds the currently available employees and separator divs for start times.
  */
 export const EmployeeListDiv = styled.div`
 	margin: 0;
@@ -271,9 +271,11 @@ export const TowerPositionEmployee = styled.p`
 	background-color: var(${({ slot }) => (slot === 2 ? "--shader-grey" : "")});
 	display: flex;
 	align-items: center;
-	justify-content: center;
 	overflow: hidden;
 	transition: height 0.15s ease-in-out;
+	    justify-content: space-between;
+	    padding-left: 10px;
+	    
 	${({ outline }) =>
 		outline &&
 		`

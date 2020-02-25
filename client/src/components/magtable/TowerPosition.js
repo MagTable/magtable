@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { TowerTitle, TowerTitleText } from "../../styled/magtable/Titling";
-import { TowerPositionDiv } from "../../styled/magtable/Maps";
+import {
+	DeleteTowerAssignmentBtn,
+	TowerPositionDiv
+} from "../../styled/magtable/Maps";
 import {
 	TowerPositionEmployee,
 	TruckListItemEmployee
@@ -160,11 +163,11 @@ function TowerPosition({ assignment, showAM }) {
 				)}
 				{assignment.employeeShifts[0]?.name &&
 					!assignment.employeeShifts[1] && (
-						<button
+						<DeleteTowerAssignmentBtn
 							onClick={() => handleClick(assignment.employeeShifts[0].id)}
 						>
 							X
-						</button>
+						</DeleteTowerAssignmentBtn>
 					)}
 			</TowerPositionEmployee>
 			<TowerPositionEmployee
@@ -191,11 +194,11 @@ function TowerPosition({ assignment, showAM }) {
 				)}
 				{assignment.employeeShifts[2]?.name &&
 					!assignment.employeeShifts[3] && (
-						<button
+						<DeleteTowerAssignmentBtn
 							onClick={() => handleClick(assignment.employeeShifts[2].id)}
 						>
 							X
-						</button>
+						</DeleteTowerAssignmentBtn>
 					)}
 			</TowerPositionEmployee>
 			<TowerPositionEmployee
@@ -206,9 +209,11 @@ function TowerPosition({ assignment, showAM }) {
 			>
 				{assignment.employeeShifts[1]?.name}
 				{assignment.employeeShifts[1]?.name && (
-					<button onClick={() => handleClick(assignment.employeeShifts[1].id)}>
+					<DeleteTowerAssignmentBtn
+						onClick={() => handleClick(assignment.employeeShifts[1].id)}
+					>
 						X
-					</button>
+					</DeleteTowerAssignmentBtn>
 				)}
 			</TowerPositionEmployee>
 			<TowerPositionEmployee
@@ -219,9 +224,11 @@ function TowerPosition({ assignment, showAM }) {
 			>
 				{assignment.employeeShifts[3]?.name}
 				{assignment.employeeShifts[3]?.name && (
-					<button onClick={() => handleClick(assignment.employeeShifts[3].id)}>
+					<DeleteTowerAssignmentBtn
+						onClick={() => handleClick(assignment.employeeShifts[3].id)}
+					>
 						X
-					</button>
+					</DeleteTowerAssignmentBtn>
 				)}
 			</TowerPositionEmployee>
 		</TowerPositionDiv>

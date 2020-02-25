@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { TruckListDiv } from "./ListContent";
 
 /**
  * @date 2020-02-20
@@ -16,9 +15,8 @@ export const PadDiv = styled.div`
 	border-left: 4px solid black;
 	border-right: 4px solid black;
 	display: flex;
-	height: 4em;
 	width: 65px;
-	// flex-grow: 1;
+	flex-grow: 1;
 	flex-basis: 0;
 	align-items: center;
 	justify-content: center;
@@ -28,7 +26,6 @@ export const PadDiv = styled.div`
 `;
 
 export const FakePadDiv = styled.div`
-	height: 130px;
 	width: 65px;
 	display: flex;
 	align-items: center;
@@ -36,14 +33,17 @@ export const FakePadDiv = styled.div`
 	font-size: x-large;
 	font-family: "Noto Sans KR", sans-serif;
 	color: grey;
+	flex-grow: 1;
+	flex-basis: 0;
 `;
 
 export const PadColumn = styled.div`
-	height: 100%;
 	width: fit-content;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	margin-bottom: 20px;
+	height: 90%;
 `;
 
 export const MapWrapper = styled.div`
@@ -52,6 +52,7 @@ export const MapWrapper = styled.div`
 	width: 100%;
 	justify-content: space-around;
 	overflow-y: auto;
+	align-items: center;
 `;
 
 const NumberLabel = styled.div`
@@ -71,12 +72,4 @@ export const NumberTop = styled(NumberLabel)`
 	height: 40px;
 	width: 100%;
 	text-align: center;
-`;
-
-export const TruckMapDivWrapper = styled(TruckListDiv)`
-	border: 2px solid var(--border-color);
-`;
-
-export const ColumnWrap = styled.div`
-height: 90%
 `;
