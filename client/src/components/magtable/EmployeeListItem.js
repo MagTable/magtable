@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
 	EmployeeLabelDiv as Label,
-	EmployeeListItemContentDiv as Content,
-	EmployeeListItemDiv as Wrapper,
-	EmployeeListItemName as ItemName,
-	EmployeeListItemTime as ItemTime
+	EmployeeListItemDesc
 } from "../../styled/magtable/ListContent";
 import { useDrag } from "react-dnd";
 import { SET_EQUIPMENT_EMPLOYEE } from "../../actions/constants";
@@ -13,6 +10,12 @@ import {
 	removeEquipmentEmployee,
 	setEquipmentEmployee
 } from "../../actions/magtable";
+import {
+	EmployeeListItemContentDiv,
+	EmployeeListItemDiv,
+	EmployeeListItemName,
+	EmployeeListItemTime
+} from "../../styled/magtable/ListContent";
 
 /**
  * @date 2020-02-19
@@ -85,27 +88,23 @@ function EmployeeListItem({ employee: employeeShift }) {
 	}
 
 	return (
-		// todo employee prop redundant
-		<Wrapper
-			ref={drag}
-			employee={employeeShift}
-			disabled={employeeShift.assignedEquipment}
-		>
-			<Content>
-				{/* todo key prop redundant */}
-				<ItemName key={employeeShift.id}>{employeeShift.name}</ItemName>
-				<ItemTime>
+		<EmployeeListItemDiv ref={drag} employee={employeeShift}>
+			<EmployeeListItemContentDiv>
+				<EmployeeListItemName key={employeeShift.id}>
+					{employeeShift.name}
+				</EmployeeListItemName>
+				<EmployeeListItemTime>
 					{employeeShift.startTime} - {employeeShift.endTime}
-				</ItemTime>
-				<ItemName>{employeeShift.description}</ItemName>
-			</Content>
+				</EmployeeListItemTime>
+				<EmployeeListItemDesc>{employeeShift.description}</EmployeeListItemDesc>
+			</EmployeeListItemContentDiv>
 
 			{employeeShift.isGreen && <Label type={"greenPass"}>Green Pass</Label>}
 			{!employeeShift.hasAvop && <Label type={"noAvop"}>No AVOP</Label>}
 
 			{employeeShift.assignedEquipment}
 			{canClear && <button onClick={() => handleClick()}>X</button>}
-		</Wrapper>
+		</EmployeeListItemDiv>
 	);
 }
 
