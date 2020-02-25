@@ -8,16 +8,10 @@ use magtabledev;
 
 DELETE FROM user;
 DELETE FROM role;
-DELETE FROM brixchart;
-DELETE FROM equipment;
 DELETE FROM tower;
-DELETE FROM position;
 DELETE FROM truck;
 DELETE FROM shift;
-DELETE FROM brixrecord;
-DELETE FROM assignment;
-DELETE FROM parkinglocation;
-DELETE FROM magtablerecord;
+
 
 /*
  These inserts are inorder to set up the database in terms of dependencies. When data about assignments and shifts
@@ -55,89 +49,3 @@ INSERT INTO truck (truckID, status, notice) VALUES  (36, 'GO', '');
  You are expected to check back on the inserts above to see if you are referencing a non existent tower or truck.
  Failure to do will result in a foreign key restraint being triggered.
  */
-
-INSERT INTO magtablerecord (dailyMix, forcastLow, date) VALUES (10, -10, current_date);
-
-#Assignment 1
-INSERT INTO assignment (magID) VALUES (1);
-
-INSERT INTO equipment (assignmentID, truckID, status, notice) VALUES (1, 24, 'CON', 'Equipment Conditional Status Message');
-
-INSERT INTO shift (assignmentID, description, timeOfDay, employeeName, startTime, endTime, activeBaylead, noAvop, isGreen)
-VALUES (1, 'Mechanic', 'AM', 'MJ kochuk', '2020-02-20 04:00:00', '2020-02-20 16:00:00', FALSE, FALSE, FALSE);
-
-INSERT INTO shift (assignmentID, description, timeOfDay, employeeName, startTime, endTime, activeBaylead, noAvop, isGreen)
-VALUES (1, 'Mechanic', 'PM', 'Arran Woodruff', '2020-02-20 04:00:00', '2020-02-20 16:00:00', FALSE, FALSE, FALSE);
-
-#Assignment 2
-INSERT INTO assignment (magID) VALUES (1);
-
-INSERT INTO equipment (assignmentID, truckID, status, notice) VALUES (2, 26, 'GO', '');
-
-INSERT INTO brixrecord (assignmentID, nozzle, type1, type4, litersPurged, timeMeasured)
-VALUES (2, 24.5, 52.3, 32.4, 80, '2020-02-20 16:30:00');
-
-#Assignment 3
-INSERT INTO assignment (magID) VALUES (1);
-
-INSERT INTO equipment (assignmentID, truckID, status, notice) VALUES (3, 32, 'INOP', '');
-
-#Assignment 4
-INSERT INTO assignment (magID) VALUES (1);
-
-INSERT INTO equipment (assignmentID, truckID, status, notice) VALUES (4, 34, 'OOS', '');
-
-#Assignment 5
-INSERT INTO assignment (magID) VALUES (1);
-
-INSERT INTO equipment (assignmentID, truckID, status, notice) VALUES (5, 34, 'OOS', '');
-
-INSERT INTO shift (assignmentID, description, timeOfDay, employeeName, startTime, endTime, activeBaylead, noAvop, isGreen)
-VALUES (5, 'Mechanic', 'AM', 'Mustafa Al Khaldi', '2020-02-21 04:00:00', '2020-02-21 16:00:00', FALSE, FALSE, FALSE);
-
-INSERT INTO shift (assignmentID, description, timeOfDay, employeeName, startTime, endTime, activeBaylead, noAvop, isGreen)
-VALUES (5, 'Mechanic', 'AM', 'Steven Wong', '2020-02-21 04:00:00', '2020-02-21 16:00:00', FALSE, FALSE, FALSE);
-
-#Assignment 6
-INSERT INTO assignment (magID) VALUES (1);
-
-INSERT INTO equipment (assignmentID, towerID, position) VALUES (6, 1000, 1);
-
-INSERT INTO shift (assignmentID, description, timeOfDay, employeeName, startTime, endTime, activeBaylead, noAvop, isGreen)
-VALUES (6, 'Tower Spotter', 'AM', 'Mustafa Al Khaldi', '2020-02-22 04:00:00', '2020-02-22 16:00:00', FALSE, FALSE, FALSE);
-
-#Assignment 7
-INSERT INTO assignment (magID) VALUES (1);
-
-INSERT INTO equipment (assignmentID, towerID, position) VALUES (7, 1001, 2);
-
-#Assignment 8
-INSERT INTO assignment (magID) VALUES (1);
-
-INSERT INTO equipment (assignmentID, towerID, position) VALUES (7, 1002, 3);
-
-#Assignment 9
-INSERT INTO assignment (magID) VALUES (1);
-
-INSERT INTO equipment (assignmentID, towerID, position) VALUES (9, 1003, 4);
-
-#Assignment 10
-INSERT INTO assignment (magID) VALUES (1);
-
-INSERT INTO equipment (assignmentID, towerID, position) VALUES (10, 1011, 5);
-
-#Assignment 11
-INSERT INTO assignment (magID) VALUES (1);
-
-INSERT INTO equipment (assignmentID, towerID, position) VALUES (11, 1012, 6);
-
-INSERT INTO shift (assignmentID, description, timeOfDay, employeeName, startTime, endTime, activeBaylead, noAvop, isGreen)
-VALUES (11, 'Tower Spotter', 'AM', 'Mustafa Al Khaldi', '2020-02-23 04:00:00', '2020-02-23 16:00:00', FALSE, FALSE, FALSE);
-
-INSERT INTO shift (assignmentID, description, timeOfDay, employeeName, startTime, endTime, activeBaylead, noAvop, isGreen)
-VALUES (11, 'Ice Man', 'PM', 'Steven Wong', '2020-02-23 04:00:00', '2020-02-23 16:00:00', FALSE, FALSE, FALSE);
-
-#Assignment 12
-INSERT INTO assignment (magID) VALUES (1);
-
-INSERT INTO equipment (assignmentID, towerID, position) VALUES (12, 1013, 7);

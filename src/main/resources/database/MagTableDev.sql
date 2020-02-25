@@ -41,7 +41,6 @@ CREATE TABLE Tower (
 CREATE TABLE Shift
 (
     shiftID      INT(10)     NOT NULL AUTO_INCREMENT,
-    assignmentID INT(5)      NOT NULL,
     description  VARCHAR(20) NOT NULL,
     employeeName VARCHAR(50) NOT NULL,
     startTime    DATETIME    NOT NULL,
