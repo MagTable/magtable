@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { TowerTitle, TowerTitleText } from "../../styled/magtable/Titling";
 import { TowerPositionDiv } from "../../styled/magtable/Maps";
-import { TowerPositionEmployee } from "../../styled/magtable/ListContent";
+import {
+	TowerPositionEmployee,
+	TruckListItemEmployee
+} from "../../styled/magtable/ListContent";
 import { useDrop } from "react-dnd";
-import { SET_EQUIPMENT_EMPLOYEE } from "../../actions/constants";
+import {
+	OJT,
+	OJT_TOWER,
+	SET_EQUIPMENT_EMPLOYEE,
+	TOWER_POSITIONS
+} from "../../actions/constants";
 import { removeEquipmentEmployee } from "../../actions/magtable";
 import { useDispatch } from "react-redux";
+import ReactTooltip from "react-tooltip";
 
 /**
  * @date 2/21/2020
@@ -21,6 +30,8 @@ import { useDispatch } from "react-redux";
  * @returns {*} The TowerPosition component
  */
 function TowerPosition({ assignment, showAM }) {
+	const [hoveredShiftDescription, setHoveredShiftDescription] = useState(null);
+
 	const dispatch = useDispatch();
 
 	const handleClick = shiftID => {
@@ -36,7 +47,10 @@ function TowerPosition({ assignment, showAM }) {
 			equipmentID: assignment.equipment.id,
 			equipmentSlotID: nextOpenSlot()
 		}),
-		canDrop: item => handleCanDrop(item),
+		canDrop: item => {
+			setHoveredShiftDescription(item.shiftDescription);
+			return handleCanDrop(item);
+		},
 		collect: monitor => ({
 			isOver: monitor.isOver(),
 			canDrop: monitor.canDrop()
@@ -76,28 +90,120 @@ function TowerPosition({ assignment, showAM }) {
 	if (isOver && canDrop) style = successStyle;
 	if (isOver && !canDrop) style = dangerStyle;
 
+	function getOutline(index) {
+		if (index !== nextOpenSlot()) return null;
+
+		if (isOver && !canDrop) return "danger";
+
+		// if hovered shift is OJT and placed in a primary slot
+		if (
+			isOver &&
+			canDrop &&
+			hoveredShiftDescription === OJT_TOWER &&
+			(index === 0 || index === 2)
+		)
+			return "warning";
+
+		// if the hovered shift's description isn't contained in the array of tower
+		// positions, set a warning border
+		if (isOver && canDrop && !TOWER_POSITIONS.includes(hoveredShiftDescription))
+			return "warning";
+
+		if (isOver && canDrop) return "success";
+	}
+
+	function ojtWarn(index) {
+		if (
+			assignment.employeeShifts[index]?.description === OJT_TOWER &&
+			!assignment.employeeShifts[index + 1]
+		) {
+			return true;
+		}
+
+		if (
+			assignment.employeeShifts[index]?.description === OJT_TOWER &&
+			assignment.employeeShifts[index + 1]?.description === OJT_TOWER
+		) {
+			return true;
+		}
+
+		return false;
+	}
+
 	return (
-		<TowerPositionDiv style={style} ref={drop}>
+		// todo refactor styled component props "time"
+		<TowerPositionDiv ref={drop}>
 			<TowerTitle>
 				<TowerTitleText>{assignment.equipment.position}</TowerTitleText>
 			</TowerTitle>
-			<TowerPositionEmployee time={true} slot={1} showAM={showAM}>
+			<TowerPositionEmployee
+				time={true}
+				slot={1}
+				showAM={showAM}
+				outline={getOutline(0)}
+			>
 				{assignment.employeeShifts[0]?.name}
-				{assignment.employeeShifts[0]?.name && (
-					<button onClick={() => handleClick(assignment.employeeShifts[0].id)}>
-						X
-					</button>
+				{ojtWarn(0) && (
+					<>
+						<i
+							className="fas fa-exclamation-triangle"
+							style={{ color: "orange" }}
+							data-tip={"OJT Requires Qualified Secondary"}
+						/>
+						<ReactTooltip
+							place="top"
+							type="dark"
+							effect="solid"
+							delayShow={200}
+						/>
+					</>
 				)}
+				{assignment.employeeShifts[0]?.name &&
+					!assignment.employeeShifts[1] && (
+						<button
+							onClick={() => handleClick(assignment.employeeShifts[0].id)}
+						>
+							X
+						</button>
+					)}
 			</TowerPositionEmployee>
-			<TowerPositionEmployee time={false} slot={1} showAM={showAM}>
+			<TowerPositionEmployee
+				time={false}
+				slot={1}
+				showAM={showAM}
+				outline={getOutline(2)}
+			>
 				{assignment.employeeShifts[2]?.name}
-				{assignment.employeeShifts[2]?.name && (
-					<button onClick={() => handleClick(assignment.employeeShifts[2].id)}>
-						X
-					</button>
+				{ojtWarn(2) && (
+					<>
+						<i
+							className="fas fa-exclamation-triangle"
+							style={{ color: "orange" }}
+							data-tip={"OJT Requires Qualified Secondary"}
+						/>
+						<ReactTooltip
+							place="top"
+							type="dark"
+							effect="solid"
+							delayShow={200}
+						/>
+					</>
 				)}
+				{assignment.employeeShifts[2]?.name &&
+					!assignment.employeeShifts[3] && (
+						<button
+							onClick={() => handleClick(assignment.employeeShifts[2].id)}
+						>
+							X
+						</button>
+					)}
 			</TowerPositionEmployee>
-			<TowerPositionEmployee time={true} slot={2} showAM={showAM}>
+			<TowerPositionEmployee
+				time={true}
+				slot={2}
+				showAM={showAM}
+				outline={getOutline(1)}
+			>
 				{assignment.employeeShifts[1]?.name}
 				{assignment.employeeShifts[1]?.name && (
 					<button onClick={() => handleClick(assignment.employeeShifts[1].id)}>
@@ -105,7 +211,12 @@ function TowerPosition({ assignment, showAM }) {
 					</button>
 				)}
 			</TowerPositionEmployee>
-			<TowerPositionEmployee time={false} slot={2} showAM={showAM}>
+			<TowerPositionEmployee
+				time={false}
+				slot={2}
+				showAM={showAM}
+				outline={getOutline(3)}
+			>
 				{assignment.employeeShifts[3]?.name}
 				{assignment.employeeShifts[3]?.name && (
 					<button onClick={() => handleClick(assignment.employeeShifts[3].id)}>

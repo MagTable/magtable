@@ -214,7 +214,7 @@ export const initialEmployeeShifts = [
 		name: "MJ Kochuk",
 		startTime: 600,
 		endTime: 1200,
-		description: "Technician",
+		description: "OJT-Tower",
 		hasAvop: true,
 		isGreen: false
 	},
@@ -232,7 +232,7 @@ export const initialEmployeeShifts = [
 		name: "Mustafa Al Khaldi",
 		startTime: 1430,
 		endTime: 230,
-		description: "Iceman",
+		description: "OJT-Tower",
 		hasAvop: true,
 		isGreen: true
 	},

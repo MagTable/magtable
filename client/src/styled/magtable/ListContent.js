@@ -273,5 +273,16 @@ export const TowerPositionEmployee = styled.p`
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
-	transition: all 0.15s ease-in-out;
+	transition: height 0.15s ease-in-out;
+	${({ outline }) =>
+		outline &&
+		`
+			outline-width: 2px;
+			outline-offset: -2px;
+			outline-style: solid;
+	`}
+	
+	outline-color: ${({ outline }) => outline === "danger" && `red;`};
+	outline-color: ${({ outline }) => outline === "warning" && `orange;`};
+	outline-color: ${({ outline }) => outline === "success" && `green;`};
 `;
