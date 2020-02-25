@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { setSelectedApron } from "../../actions/magtable";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { TruckListManipDiv } from "../../styled/magtable/ListContent";
 import Switch from "react-switch";
 import {
@@ -12,15 +12,13 @@ import { EAST_APRON, WEST_APRON } from "../../actions/constants";
 const ApronToggle = () => {
 	const dispatch = useDispatch();
 
-	const [padDisplayed, setPadDisplayed] = useState(EAST_APRON);
+	const selectedApron = useSelector(state => state.magtable.selectedApron);
 
-	function handleClick(e) {
-		dispatch(setSelectedApron(e));
-
-		if (padDisplayed === EAST_APRON) {
-			setPadDisplayed(WEST_APRON);
+	function handleClick() {
+		if (selectedApron === EAST_APRON) {
+			dispatch(setSelectedApron(WEST_APRON));
 		} else {
-			setPadDisplayed(EAST_APRON);
+			dispatch(setSelectedApron(EAST_APRON));
 		}
 	}
 
@@ -28,10 +26,8 @@ const ApronToggle = () => {
 		<TruckListManipDiv>
 			<label>
 				<Switch
-					onChange={() =>
-						handleClick(padDisplayed === EAST_APRON ? WEST_APRON : EAST_APRON)
-					}
-					checked={padDisplayed === EAST_APRON}
+					onChange={() => handleClick()}
+					checked={selectedApron === EAST_APRON}
 					offColor={"#414244"}
 					onColor={"#414244"}
 					checkedIcon={<ToggleLabelLeft>East</ToggleLabelLeft>}
