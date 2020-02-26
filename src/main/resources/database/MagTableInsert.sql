@@ -49,7 +49,7 @@ INSERT INTO truck (truckID, status, notice) VALUES  (20, 'GO', 'Equipment Condit
 INSERT INTO truck (truckID, status, notice) VALUES  (21, 'GO', 'Equipment Conditional Status Message');
 INSERT INTO truck (truckID, status, notice) VALUES  (22, 'INOP', 'Equipment Conditional Status Message');
 INSERT INTO truck (truckID, status, notice) VALUES  (23, 'OOS', 'Equipment Conditional Status Message');
-INSERT INTO truck (truckID, status, notice) VALUES  (24 'GO', 'Equipment Conditional Status Message');
+INSERT INTO truck (truckID, status, notice) VALUES  (24, 'GO', 'Equipment Conditional Status Message');
 INSERT INTO truck (truckID, status, notice) VALUES  (25, 'GO', 'Equipment Conditional Status Message');
 INSERT INTO truck (truckID, status, notice) VALUES  (26, 'INOP', 'Equipment Conditional Status Message');
 INSERT INTO truck (truckID, status, notice) VALUES  (27, 'OOS', 'Equipment Conditional Status Message');
