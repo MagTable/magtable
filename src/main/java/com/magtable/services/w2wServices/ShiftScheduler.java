@@ -2,7 +2,6 @@ package com.magtable.services.w2wServices;
 
 
 import com.magtable.model.CleanShift;
-import com.magtable.model.Shift;
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 @Component
