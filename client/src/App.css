@@ -13,11 +13,13 @@ html{
   --context-red: #fa897b;
   --context-blue: #86e3ce;
   --context-grey: #b2b2b2;
-  --context-orange: #ccabd8;
+  --context-orange: #d88d1e;
   --context-yellow: #ffdd94;
 
+  --alert-warning: #ff990066;
+
   /*Used for separating elements between one another, for example, shading every second row of a table or directly opposing divs. */
-  --shader-grey: #d3d3d3;
+  --shader-grey: #d3d3d333;
   --shader-blue: rgba(74, 74, 255, 0.31);
 
   --emphasis-grey: #575757;

@@ -11,16 +11,22 @@ import {
 } from "../../styled/magtable/ListContent";
 import { useDrop, useDrag } from "react-dnd";
 import {
+	DANGER,
+	MANAGEMENT_POSITIONS,
 	OJT,
 	SET_EQUIPMENT_EMPLOYEE,
-	SET_TRUCK_LOCATION
+	SET_TRUCK_LOCATION,
+	SUCCESS,
+	TECHNICIAN_POSITIONS,
+	TOWER_POSITIONS,
+	WARNING
 } from "../../actions/constants";
 import { useDispatch } from "react-redux";
 import {
 	removeEquipmentEmployee,
 	setTruckLocation
 } from "../../actions/magtable";
-import ReactTooltip from "react-tooltip";
+import IconButton from "../common/IconButton";
 
 /**
  * @date 2020-02-17
@@ -29,16 +35,29 @@ import ReactTooltip from "react-tooltip";
  */
 
 /**
+ * Displays the content of a Truck's assignment.
+ *
+ * Truck's assignment status is displayed as a color within TruckNumberDiv as a prop
+ *
+ * Renders each associated employeeShift with the ability to clear assignments
+ * in accordance with business rules (no secondaries assigned without a primary)
+ *
+ * showAM toggles which employees are displayed (not handled with react, handled in css)
+ *
+ * Logic is written to determine wether incoming shifts are allowed, provide
+ * a warning, or are permitted
  *
  * @constructor
- * @param props
+ * @param assignment the associated assignment object
+ * @param noticeOpen dictates whether or not to render the truck's notices
+ * @param showAM toggle to display am or pm shift slots
  * @returns {*} The TruckListItem component
  */
-function TruckListItem({ assignment, open, showAM }) {
+function TruckListItem({ assignment, noticeOpen, showAM }) {
 	const [hoveredShiftDescription, setHoveredShiftDescription] = useState(null);
 	const dispatch = useDispatch();
 
-	const [{ isDragging }, drag] = useDrag({
+	const [{}, drag] = useDrag({
 		item: { type: SET_TRUCK_LOCATION },
 		end: (item, monitor) => {
 			const dropResult = monitor.getDropResult();
@@ -88,22 +107,26 @@ function TruckListItem({ assignment, open, showAM }) {
 		if (assignment.employeeShifts.find(shift => shift?.id === item.id))
 			return false;
 
+		// if AM secondary slot is filled, then AM is full
 		if (showAM === true) {
 			return !assignment.employeeShifts[1];
 		}
+
+		// if PM secondary slot is filled, then PM is full
 		if (showAM === false) {
 			return !assignment.employeeShifts[3];
 		}
 	};
 
-	const handleClick = shiftID => {
+	const handleClear = shiftID => {
 		dispatch(removeEquipmentEmployee(assignment.equipment.id, shiftID));
 	};
 
 	function getOutline(index) {
 		if (index !== nextOpenSlot()) return null;
 
-		if (isOver && !canDrop) return "danger";
+		// if can't drop, danger
+		if (isOver && !canDrop) return DANGER;
 
 		// if hovered shift is OJT and placed in a primary slot
 		if (
@@ -112,30 +135,86 @@ function TruckListItem({ assignment, open, showAM }) {
 			hoveredShiftDescription === OJT &&
 			(index === 0 || index === 2)
 		)
-			return "warning";
+			return WARNING;
 
-		if (isOver && canDrop) return "success";
+		// if hovered shift is not included in technician positions
+		if (
+			isOver &&
+			canDrop &&
+			!TECHNICIAN_POSITIONS.includes(hoveredShiftDescription)
+		)
+			return WARNING;
+
+		if (isOver && canDrop) return SUCCESS;
 	}
 
-	function ojtWarn(index) {
+	function getAssignmentWarning(index) {
+		if (assignment.employeeShifts[index] === null) return null;
+
 		if (
+			TOWER_POSITIONS.includes(assignment.employeeShifts[index]?.description)
+		) {
+			return "Tower Staff Assigned to Truck";
+		}
+
+		if (
+			MANAGEMENT_POSITIONS.includes(
+				assignment.employeeShifts[index]?.description
+			)
+		) {
+			return "Management Assigned to Truck";
+		}
+
+		if (
+			(index === 0 || index === 2) &&
 			assignment.employeeShifts[index]?.description === OJT &&
 			!assignment.employeeShifts[index + 1]
 		) {
-			return true;
+			return "OJT Requires Qualified Secondary";
 		}
 
 		if (
+			(index === 0 || index === 2) &&
 			assignment.employeeShifts[index]?.description === OJT &&
 			assignment.employeeShifts[index + 1]?.description === OJT
 		) {
-			return true;
+			return "OJT Requires Qualified Secondary";
 		}
 
-		return false;
+		return null;
 	}
 
-	// todo see if we can refactor this
+	const employeeShifts = [
+		{
+			assignmentIndex: 0,
+			shift: assignment.employeeShifts[0],
+			slot: 1,
+			show: showAM,
+			canClear: assignment.employeeShifts[0] && !assignment.employeeShifts[1]
+		},
+		{
+			assignmentIndex: 2,
+			shift: assignment.employeeShifts[2],
+			slot: 1,
+			show: !showAM,
+			canClear: assignment.employeeShifts[2] && !assignment.employeeShifts[3]
+		},
+		{
+			assignmentIndex: 1,
+			shift: assignment.employeeShifts[1],
+			slot: 2,
+			show: showAM,
+			canClear: assignment.employeeShifts[1]
+		},
+		{
+			assignmentIndex: 3,
+			shift: assignment.employeeShifts[3],
+			slot: 2,
+			show: !showAM,
+			canClear: assignment.employeeShifts[3]
+		}
+	];
+
 	return (
 		<div ref={drop}>
 			<TruckListItemDiv>
@@ -144,104 +223,33 @@ function TruckListItem({ assignment, open, showAM }) {
 				</TruckNumberDiv>
 				<TruckInfoDiv>
 					<TruckListItemEmployeeList>
-						{/* First AM Employee */}
-						<TruckListItemEmployee
-							slot={1}
-							show={showAM}
-							outline={getOutline(0)}
-						>
-							{assignment.employeeShifts[0]?.name}
-							{ojtWarn(0) && (
-								<>
-									<i
-										className="fas fa-exclamation-triangle"
-										style={{ color: "orange" }}
-										data-tip={"OJT Requires Qualified Secondary"}
+						{employeeShifts.map(elem => (
+							<TruckListItemEmployee
+								slot={elem.slot}
+								show={elem.show}
+								outlineType={getOutline(elem.assignmentIndex)}
+								warningBackground={getAssignmentWarning(elem.assignmentIndex)}
+							>
+								{elem.shift?.name}
+								{getAssignmentWarning(elem.assignmentIndex) && (
+									<IconButton
+										faClassName={"fa-exclamation-triangle"}
+										color={"orange"}
+										outlineType={"darkorange"}
+										toolTip={getAssignmentWarning(elem.assignmentIndex)}
 									/>
-									<ReactTooltip
-										place="top"
-										type="dark"
-										effect="solid"
-										delayShow={200}
-									/>
-								</>
-							)}
-							{assignment.employeeShifts[0]?.name &&
-								!assignment.employeeShifts[1] && (
-									<button
-										onClick={() => handleClick(assignment.employeeShifts[0].id)}
-									>
-										X
-									</button>
 								)}
-						</TruckListItemEmployee>
-						{/* First PM Employee */}
-						<TruckListItemEmployee
-							slot={1}
-							show={!showAM}
-							outline={getOutline(2)}
-						>
-							{assignment.employeeShifts[2]?.name}
-							{ojtWarn(2) && (
-								<>
-									<i
-										className="fas fa-exclamation-triangle"
-										style={{ color: "orange" }}
-										data-tip={"OJT Requires Qualified Secondary"}
-									/>
-									<ReactTooltip
-										place="top"
-										type="dark"
-										effect="solid"
-										delayShow={200}
-									/>
-								</>
-							)}
-							{assignment.employeeShifts[2]?.name &&
-								!assignment.employeeShifts[3] && (
-									<button
-										onClick={() => handleClick(assignment.employeeShifts[2].id)}
-									>
-										X
-									</button>
+								{elem.canClear && (
+									<button onClick={() => handleClear(elem.shift.id)}>X</button>
 								)}
-						</TruckListItemEmployee>
-						{/* Second AM Employee */}
-						<TruckListItemEmployee
-							slot={2}
-							show={showAM}
-							outline={getOutline(1)}
-						>
-							{assignment.employeeShifts[1]?.name}
-							{assignment.employeeShifts[1] && (
-								<button
-									onClick={() => handleClick(assignment.employeeShifts[1].id)}
-								>
-									X
-								</button>
-							)}
-						</TruckListItemEmployee>
-						{/* Second PM Employee */}
-						<TruckListItemEmployee
-							slot={2}
-							show={!showAM}
-							outline={getOutline(3)}
-						>
-							{assignment.employeeShifts[3]?.name}
-							{assignment.employeeShifts[3]?.name && (
-								<button
-									onClick={() => handleClick(assignment.employeeShifts[3].id)}
-								>
-									X
-								</button>
-							)}
-						</TruckListItemEmployee>
+							</TruckListItemEmployee>
+						))}
 					</TruckListItemEmployeeList>
 					<TruckListItemLocation>{assignment.location}</TruckListItemLocation>
 				</TruckInfoDiv>
 			</TruckListItemDiv>
-			<TruckProblemsDiv open={open}>
-				{assignment.equipment.notice === "" ? null : (
+			<TruckProblemsDiv noticeOpen={noticeOpen}>
+				{assignment.equipment.notice !== "" && (
 					<TruckProblemsText>{assignment.equipment.notice}</TruckProblemsText>
 				)}
 			</TruckProblemsDiv>
@@ -249,4 +257,4 @@ function TruckListItem({ assignment, open, showAM }) {
 	);
 }
 
-export default TruckListItem;
+export default React.memo(TruckListItem);

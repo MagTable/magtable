@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Button } from "../common/FormControl";
+import warning from "react-redux/lib/utils/warning";
+import { DANGER, SUCCESS, WARNING } from "../../actions/constants";
 
 /**
  * @date 2020-02-17
@@ -9,18 +11,16 @@ import { Button } from "../common/FormControl";
 
 /**
  * Provides the correct color code for an employee's label based on their abilities/role
- * @param label The codes representing an employees roles. Can be gp (Green pass), ts (Tower staff), ojt (On the job training) or bl (bay lead)
+ * @param type The codes representing an employees roles. Can be gp (Green pass), ts (Tower staff), ojt (On the job training) or bl (bay lead)
  */
-const getLabelColor = label => {
-	switch (label) {
-		case "gp":
+const getColor = type => {
+	switch (type) {
+		case DANGER:
+			return "--context-red";
+		case WARNING:
+			return "--alert-warning";
+		case SUCCESS:
 			return "--context-green";
-		case "ojt":
-			return "--context-orange";
-		case "ts":
-			return "--context-grey";
-		case "bl":
-			return "--context-blue";
 		default:
 			return "#fff";
 	}
@@ -175,7 +175,7 @@ export const TruckProblemsDiv = styled.div`
 	transition: all 0.15s ease-in-out;
 	display: flex;
 	border-top: 1px solid var(--border-color);
-	max-height: ${({ open }) => (open ? "200px" : "0px")};
+	max-height: ${({ noticeOpen }) => (noticeOpen ? "200px" : "0px")};
 	min-height: 0px;
 	border-top: none;
 	overflow: auto;
@@ -213,17 +213,21 @@ export const TruckListItemEmployee = styled.p`
 	justify-content: center;
 	overflow: hidden;
 	transition: height 0.15s ease-in-out;
-	${({ outline }) =>
-		outline &&
+
+	${({ warningBackground }) =>
+		warningBackground &&
 		`
-			outline-width: 2px;
-			outline-offset: -2px;
-			outline-style: solid;
+		background: #ff990033;
 	`}
-	
-	outline-color: ${({ outline }) => outline === "danger" && `red;`};
-	outline-color: ${({ outline }) => outline === "warning" && `orange;`};
-	outline-color: ${({ outline }) => outline === "success" && `green;`};
+
+	${({ outlineType }) =>
+		outlineType &&
+		`
+			// outline-width: 2px;
+			// outline-offset: -2px;
+			// outline-style: solid;
+			background: var(${getColor(outlineType)});
+	`}
 `;
 
 export const TruckListItemEmployeeList = styled.div`

@@ -8,7 +8,7 @@ export const IconButton = styled.i`
 	${({ color }) =>
 		color &&
 		`
-		color: ${color}
+		color: ${color};
 	`}
 
 	${({ hoverColor }) =>

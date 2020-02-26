@@ -30,8 +30,7 @@ import {
  * @returns {*} The TruckList component
  */
 function TruckList({ showAM, setShowAM }) {
-	const [open, setOpen] = useState(false);
-	// const [showAM, setShowAM] = useState(true);
+	const [noticesOpen, setNoticesOpen] = useState(false);
 
 	const assignments = useSelector(state => state.magtable.assignments);
 
@@ -40,7 +39,7 @@ function TruckList({ showAM, setShowAM }) {
 			<ListTitle>
 				<ListTitleText>Trucks</ListTitleText>
 				<TruckListManipDiv>
-					<TruckListButton onClick={() => setOpen(!open)}>
+					<TruckListButton onClick={() => setNoticesOpen(!noticesOpen)}>
 						Show Notices
 					</TruckListButton>
 
@@ -60,7 +59,7 @@ function TruckList({ showAM, setShowAM }) {
 					assignment =>
 						assignment.equipment.id < 1000 && (
 							<TruckListItem
-								open={open}
+								noticeOpen={noticesOpen}
 								key={assignment.equipment.id}
 								assignment={assignment}
 								showAM={showAM}
