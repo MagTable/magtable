@@ -16,17 +16,11 @@ public class Shift implements Serializable {
     @Column(insertable = false, name = "shiftID", nullable = false)
     private Integer shiftID;
 
-    @Column(name = "assignmentID", nullable = false)
-    private Integer assignmentID;
-
     @Column(name = "description")
     private String description;
 
-    @Column(name = "timeOfDay", nullable = false)
-    private String timeOfDay;
-
     @Column(name = "employeeName", nullable = false)
-    private String employeeName;
+    private String name;
 
     @Column(name = "startTime", nullable = false)
     private Timestamp startTime;
@@ -34,11 +28,8 @@ public class Shift implements Serializable {
     @Column(name = "endTime", nullable = false)
     private Timestamp endTime;
 
-    @Column(name = "activeBaylead", nullable = false)
-    private Boolean activeBaylead;
-
-    @Column(name = "hasAvop", nullable = false)
-    private Boolean hasAvop;
+    @Column(name = "noAvop", nullable = false)
+    private Boolean noAvop;
 
     @Column(name = "isGreen", nullable = false)
     private Boolean isGreen;
@@ -51,14 +42,6 @@ public class Shift implements Serializable {
         this.shiftID = shiftID;
     }
 
-    public Integer getAssignmentID() {
-        return assignmentID;
-    }
-
-    public void setAssignmentID(Integer assignmentID) {
-        this.assignmentID = assignmentID;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -67,20 +50,12 @@ public class Shift implements Serializable {
         this.description = description;
     }
 
-    public String getTimeOfDay() {
-        return timeOfDay;
+    public String getName() {
+        return name;
     }
 
-    public void setTimeOfDay(String timeOfDay) {
-        this.timeOfDay = timeOfDay;
-    }
-
-    public String getEmployeeName() {
-        return employeeName;
-    }
-
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Timestamp getStartTime() {
@@ -99,20 +74,12 @@ public class Shift implements Serializable {
         this.endTime = endTime;
     }
 
-    public Boolean getActiveBaylead() {
-        return activeBaylead;
+    public Boolean getNoAvop() {
+        return noAvop;
     }
 
-    public void setActiveBaylead(Boolean activeBaylead) {
-        this.activeBaylead = activeBaylead;
-    }
-
-    public Boolean getHasAvop() {
-        return hasAvop;
-    }
-
-    public void setHasAvop(Boolean hasAvop) {
-        this.hasAvop = hasAvop;
+    public void setNoAvop(Boolean noAvop) {
+        this.noAvop = noAvop;
     }
 
     public Boolean getIsGreen() {
