@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class CleanShiftList implements Serializable {
+public class ShiftList implements Serializable {
 
     private String scheduleDate;
     private String lastUpdated;
     private ArrayList<CleanShift> shifts;
 
 
-    public CleanShiftList ( ArrayList<CleanShift> list) {
+    public ShiftList(ArrayList<CleanShift> list) {
         Calendar cal = Calendar.getInstance();
         this.scheduleDate = String.format("%d/%d/%d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH)+1, cal.get(Calendar.DATE));
         this.shifts = list;
