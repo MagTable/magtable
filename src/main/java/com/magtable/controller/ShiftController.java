@@ -1,9 +1,7 @@
 package com.magtable.controller;
 
 
-import com.magtable.model.CleanShift;
-import com.magtable.model.CleanShiftList;
-import com.magtable.model.Shift;
+import com.magtable.model.ShiftList;
 import com.magtable.services.userServices.ErrorService;
 import com.magtable.services.w2wServices.ShiftScheduler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,15 +9,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-
 @RestController
 @RequestMapping("/shift")
 public class ShiftController {
 
     @Autowired
     private ErrorService errorService;
-
 
     /**
      * route           GET /shift/get
@@ -29,11 +24,11 @@ public class ShiftController {
      * @return A list of the W2W shifts
      */
     @GetMapping("/get")
-    public CleanShiftList getAllShifts(){
+    public ShiftList getAllShifts(){
         ShiftScheduler shiftScheduler = ShiftScheduler.getInstance();
-        CleanShiftList cleanShiftList = new CleanShiftList(shiftScheduler.getShiftList());
-        cleanShiftList.setLastUpdated(shiftScheduler.getLastUpdated());
-        return cleanShiftList;
+        ShiftList shiftList = new ShiftList(shiftScheduler.getShiftList());
+        shiftList.setLastUpdated(shiftScheduler.getLastUpdated());
+        return shiftList;
     }
 
     /**
@@ -61,10 +56,5 @@ public class ShiftController {
         shiftScheduler.setSID(SID);
         return ResponseEntity.ok(HttpStatus.OK);
     }
-
-
-
-
-
 
 }
