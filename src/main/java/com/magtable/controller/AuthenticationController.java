@@ -2,12 +2,10 @@ package com.magtable.controller;
 
 import com.magtable.model.*;
 import com.magtable.repository.UserRepository;
-import com.magtable.services.*;
+import com.magtable.services.userServices.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
 
