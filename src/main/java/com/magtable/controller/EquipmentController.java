@@ -24,12 +24,26 @@ public class EquipmentController {
     @Autowired
     private TowerRepository towerRepository;
 
+    /**
+     * route           GET /equipment/trucks
+     * description     route to fetch the trucks from the database
+     * access          Personnel Managers, System Admins
+     *
+     * @return the list of trucks
+     */
     @GetMapping("/trucks")
     public List<Truck> getAllTrucks(){
         List<Truck> truckList = truckRepository.findAll();
         return truckList;
     }
 
+    /**
+     * route           GET /equipment/towers
+     * description     route to fetch the towers from the database
+     * access          Personnel Managers, System Admins
+     *
+     * @return the list of towers
+     */
     @GetMapping("/towers")
     public List<Tower> getAllTowers(){
         List<Tower> towerList = towerRepository.findAll();
