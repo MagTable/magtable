@@ -194,12 +194,19 @@ export const setSelectedApron = apronCode => dispatch => {
  * @returns API returns the entire magtable object
  */
 export const getMagTable = () => async dispatch => {
+	// todo currently only equipment and shifts are returned here,
+	//  will be updated once entire magtable is returned by api
 	try {
-		const res = await axios.get("/magtable");
+		const shiftRes = await axios.get("/shift/all");
+		const truckRes = await axios.get("/equipment/truck/all");
+		const towerRes = await axios.get("/equipment/tower/all");
 
 		dispatch({
 			type: GET_ASSIGNMENT_DATA,
-			payload: res.data
+			payload: {
+				employeeShifts: shiftRes.data,
+				equipment: [...truckRes.data, ...towerRes.data]
+			}
 		});
 	} catch (err) {
 		console.log(err);

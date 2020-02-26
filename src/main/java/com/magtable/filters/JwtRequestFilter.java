@@ -1,7 +1,7 @@
 package com.magtable.filters;
 
-import com.magtable.services.JwtUtil;
-import com.magtable.services.MagUserDetailsService;
+import com.magtable.services.userServices.JwtUtil;
+import com.magtable.services.userServices.MagUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

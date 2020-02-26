@@ -15,20 +15,29 @@ import {
 	TOGGLE_BAY_LEAD
 } from "../actions/constants";
 
-import {
-	initialAssignments,
-	initialDailyMessages,
-	initialDailyMix,
-	initialEmployeeShifts
-} from "../res/test_data/magtable";
+// import {
+// 	initialAssignments,
+// 	initialDailyMessages,
+// 	initialDailyMix,
+// 	initialEmployeeShifts
+// } from "../res/test_data/magtable";
+
+// const initialState = {
+// 	assignments: initialAssignments,
+// 	employeeShifts: initialEmployeeShifts,
+// 	dailyMessages: initialDailyMessages,
+// 	dailyMix: initialDailyMix,
+// 	selectedApron: EAST_APRON,
+// 	loading: false
+// };
 
 const initialState = {
-	assignments: initialAssignments,
-	employeeShifts: initialEmployeeShifts,
-	dailyMessages: initialDailyMessages,
-	dailyMix: initialDailyMix,
+	assignments: [],
+	employeeShifts: [],
+	dailyMessages: "",
+	dailyMix: 40,
 	selectedApron: EAST_APRON,
-	loading: false
+	loading: true
 };
 
 export default function(state = initialState, action) {
@@ -75,11 +84,14 @@ export default function(state = initialState, action) {
 						  }
 						: assignment
 				),
-				employeeShifts: state.employeeShifts.map(shift =>
-					shift.id === payload.shiftID
-						? { ...shift, assignedEquipment: null }
-						: shift
-				)
+				employeeShifts: {
+					...state.employeeShifts,
+					shifts: state.employeeShifts.shifts.map(shift =>
+						shift.id === payload.shiftID
+							? { ...shift, assignedEquipment: null }
+							: shift
+					)
+				}
 			};
 		case SET_EQUIPMENT_EMPLOYEE: // if assignment needs to be created
 			// replaces the modified assignment in the assignments list
@@ -96,11 +108,14 @@ export default function(state = initialState, action) {
 						  }
 						: assignment
 				),
-				employeeShifts: state.employeeShifts.map(shift =>
-					shift.id === payload.shift.id
-						? { ...shift, assignedEquipment: payload.equipmentID }
-						: shift
-				)
+				employeeShifts: {
+					...state.employeeShifts,
+					shifts: state.employeeShifts.shifts.map(shift =>
+						shift.id === payload.shift.id
+							? { ...shift, assignedEquipment: payload.equipmentID }
+							: shift
+					)
+				}
 			};
 		case PUBLISH_TABLE:
 			return {
@@ -138,15 +153,15 @@ export default function(state = initialState, action) {
 		case GET_ASSIGNMENT_DATA:
 			return {
 				...state,
-				assignments: payload.trucks.map(truck => ({
-					equipment: truck,
-					employeeShifts: [],
+				assignments: payload.equipment.map(elem => ({
+					equipment: elem,
+					employeeShifts: [null, null, null, null],
 					parkingLocation: null,
 					brixRecords: []
 				})),
 				employeeShifts: payload.employeeShifts,
-				dailyMessages: payload.dailyMessages,
-				dailyMix: payload.dailyMix,
+				// dailyMessages: payload.dailyMessages,
+				// dailyMix: payload.dailyMix,
 				loading: false
 			};
 		case ADD_EMPLOYEE_SHIFT:

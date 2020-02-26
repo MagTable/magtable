@@ -1,4 +1,4 @@
-package com.magtable.services;
+package com.magtable.services.userServices;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

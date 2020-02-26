@@ -5,8 +5,13 @@ import {
 	EmployeeListDivWrapper,
 	StartTimeSeparator
 } from "../../styled/magtable/ListContent";
-import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
+import {
+	ListSubtitle,
+	ListTitle,
+	ListTitleText
+} from "../../styled/magtable/Titling";
 import EmployeeListItem from "./EmployeeListItem";
+import IconButton from "../common/IconButton";
 
 /**
  * @date 2/19/2020
@@ -21,11 +26,21 @@ import EmployeeListItem from "./EmployeeListItem";
  * @returns {*} The EmployeeList component
  */
 const EmployeeList = () => {
-	const employees = useSelector(state => state.magtable.employeeShifts); // get the employees
+	const employeeShifts = useSelector(state => state.magtable.employeeShifts); // get the employees
+	const loading = useSelector(state => state.magtable.loading);
 	// employees are already sorted by time
 	const startTimes = [];
 
-	employees.forEach(emp => {
+	if (loading) return <h1>Loading Users...</h1>;
+
+	if (employeeShifts.shifts.length === 0)
+		return (
+			<h1>
+				No Users... <small>update shift list</small>
+			</h1>
+		);
+
+	employeeShifts.shifts.forEach(emp => {
 		if (!startTimes.includes(emp.startTime)) {
 			startTimes.push(emp.startTime); // add the start time if it's not already in the list
 		}
@@ -35,6 +50,16 @@ const EmployeeList = () => {
 		<EmployeeListDivWrapper>
 			<ListTitle>
 				<ListTitleText>Employees</ListTitleText>
+				<ListSubtitle>
+					{employeeShifts.scheduleDate} Last Updated:
+					{/* NEW LINE */}
+					{employeeShifts.lastUpdated}
+				</ListSubtitle>
+				<IconButton
+					faClassName={"fa-sync-alt"}
+					color={"white"}
+					hoverColor={"grey"}
+				/>
 			</ListTitle>
 
 			<EmployeeListDiv>
@@ -43,7 +68,7 @@ const EmployeeList = () => {
 						<StartTimeSeparator>
 							<h2>{startTime}</h2>
 						</StartTimeSeparator>
-						{employees.map(
+						{employeeShifts.shifts.map(
 							employee =>
 								employee.startTime === startTime && (
 									<EmployeeListItem key={employee.id} employee={employee} />

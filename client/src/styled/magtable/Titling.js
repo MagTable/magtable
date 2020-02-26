@@ -33,6 +33,14 @@ export const ListTitleText = styled.p`
 `;
 
 /**
+ * Subtitle for lists, refer to employee shift list
+ * todo make it appear on the next line
+ */
+export const ListSubtitle = styled.h4`
+	color: white;
+`;
+
+/**
  * Title div specific to the tower, since the tower map contains roles that need titles.
  */
 export const TowerTitle = styled(ListTitle)`

@@ -24,10 +24,12 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsService userDetailsService;
 
-   @Autowired
-   private JwtRequestFilter JwtRequestFilter;
+    @Autowired
+    private JwtRequestFilter JwtRequestFilter;
 
     private final String SYSTEM_ADMIN = "System Administrator";
+    private final String PERSONNEL_MANAGER = "Personnel Manager";
+    private final String MECHANIC = "Mechanic";
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -41,6 +43,11 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/*/*").hasAuthority(SYSTEM_ADMIN)
                 .antMatchers("/user/*").hasAuthority(SYSTEM_ADMIN)
                 .antMatchers("/user*").hasAuthority(SYSTEM_ADMIN)
+                .antMatchers("/equipment/*").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER)
+                .antMatchers("/equipment").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER)
+                .antMatchers("/shift/*/*").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER)
+                .antMatchers("/shift/*").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER)
+                .antMatchers("/shift").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER)
                 .antMatchers("/authenticate").permitAll()
                 .antMatchers("/password/reset").permitAll()
                 .and().csrf().disable()

@@ -100,6 +100,7 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 	};
 
 	const handleCanDrop = item => {
+		console.log(item);
 		// Logic to not allow more than 4 employees in a location.
 		// if the list of employeeShifts does not have any nulls, it's full
 		if (!assignment.employeeShifts.includes(null)) return false;

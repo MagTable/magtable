@@ -105,7 +105,7 @@ function EmployeeListItem({ employee: employeeShift }) {
 			</EmployeeListItemContentDiv>
 
 			{employeeShift.isGreen && <Label type={"greenPass"}>Green Pass</Label>}
-			{!employeeShift.hasAvop && <Label type={"noAvop"}>No AVOP</Label>}
+			{employeeShift.noAvop && <Label type={"noAvop"}>No AVOP</Label>}
 
 			{employeeShift.assignedEquipment}
 			{canRemove && <button onClick={() => handleRemove()}>X</button>}

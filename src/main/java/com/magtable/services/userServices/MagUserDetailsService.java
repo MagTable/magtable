@@ -1,4 +1,4 @@
-package com.magtable.services;
+package com.magtable.services.userServices;
 
 import com.magtable.model.MagUserDetails;
 import com.magtable.model.User;
