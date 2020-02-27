@@ -12,24 +12,9 @@ import {
 	SET_EQUIPMENT_EMPLOYEE,
 	SET_SELECTED_APRON,
 	SET_TRUCK_LOCATION,
-	TOGGLE_BAY_LEAD
+	TOGGLE_BAY_LEAD,
+	REFRESH_EMPLOYEE_SHIFTS
 } from "../actions/constants";
-
-// import {
-// 	initialAssignments,
-// 	initialDailyMessages,
-// 	initialDailyMix,
-// 	initialEmployeeShifts
-// } from "../res/test_data/magtable";
-
-// const initialState = {
-// 	assignments: initialAssignments,
-// 	employeeShifts: initialEmployeeShifts,
-// 	dailyMessages: initialDailyMessages,
-// 	dailyMix: initialDailyMix,
-// 	selectedApron: EAST_APRON,
-// 	loading: false
-// };
 
 const initialState = {
 	assignments: [],
@@ -178,6 +163,12 @@ export default function(state = initialState, action) {
 						? { ...truck, isBayLead: !truck.isBayLead }
 						: truck
 				)
+			};
+		case REFRESH_EMPLOYEE_SHIFTS:
+			return {
+				...state,
+				employeeShifts: payload.employeeShifts,
+				loading: false
 			};
 		default:
 			return state;

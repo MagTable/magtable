@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
 	EmployeeListDiv,
 	EmployeeListDivWrapper,
@@ -12,6 +12,7 @@ import {
 } from "../../styled/magtable/Titling";
 import EmployeeListItem from "./EmployeeListItem";
 import IconButton from "../common/IconButton";
+import { refreshEmployeeShifts } from "../../actions/magtable";
 
 /**
  * @date 2/19/2020
@@ -26,6 +27,7 @@ import IconButton from "../common/IconButton";
  * @returns {*} The EmployeeList component
  */
 const EmployeeList = () => {
+	const dispatch = useDispatch();
 	const employeeShifts = useSelector(state => state.magtable.employeeShifts); // get the employees
 	const loading = useSelector(state => state.magtable.loading);
 	// employees are already sorted by time
@@ -59,6 +61,7 @@ const EmployeeList = () => {
 					faClassName={"fa-sync-alt"}
 					color={"white"}
 					hoverColor={"grey"}
+					onClick={() => dispatch(refreshEmployeeShifts())}
 				/>
 			</ListTitle>
 
