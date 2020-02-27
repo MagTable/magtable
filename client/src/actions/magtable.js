@@ -16,6 +16,7 @@ import {
 	REFRESH_EMPLOYEE_SHIFTS
 } from "./constants";
 import axios from "axios";
+import { setAlert } from "./alert";
 
 // todo update all async actions with API calls
 
@@ -251,18 +252,14 @@ const toggleBayLead = equipmentID => dispatch => {
 
 export const refreshEmployeeShifts = () => async dispatch => {
 	try {
-		//todo change from post to get when merging API
-		const update = await axios.post("/shift/update");
-
-		if (update.data === "OK") {
-			const res = await axios.get("/shift/all");
-			dispatch({
-				type: REFRESH_EMPLOYEE_SHIFTS,
-				payload: {
-					employeeShifts: res.data
-				}
-			});
-		}
+		const res = await axios.get("/shift/all");
+		dispatch({
+			type: REFRESH_EMPLOYEE_SHIFTS,
+			payload: {
+				employeeShifts: res.data
+			}
+		});
+		dispatch(setAlert("Shifts Updated!", "success"));
 	} catch (err) {
 		console.log(err);
 	}
