@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Button } from "../common/FormControl";
-import warning from "react-redux/lib/utils/warning";
 import { DANGER, SUCCESS, WARNING } from "../../actions/constants";
 
 /**
@@ -268,27 +267,29 @@ export const TruckListManipDiv = styled.div`
 	margin-right: 3px;
 `;
 
-export const TowerPositionEmployee = styled.p`
+export const TowerListItemEmployee = styled.p`
 	margin-block-start: 0em;
 	margin-block-end: 0em;
-	height: ${({ showAM }) => (showAM ? "50%" : "0%")};
+	height: ${({ show }) => (show ? "50%" : "0%")};
 	background-color: var(${({ slot }) => (slot === 2 ? "--shader-grey" : "")});
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	overflow: hidden;
 	transition: height 0.15s ease-in-out;
-	    justify-content: space-between;
-	    padding-left: 10px;
-	    
-	${({ outline }) =>
-		outline &&
+
+	${({ warningBackground }) =>
+		warningBackground &&
 		`
-			outline-width: 2px;
-			outline-offset: -2px;
-			outline-style: solid;
+		background: #ff990033;
 	`}
-	
-	outline-color: ${({ outline }) => outline === "danger" && `red;`};
-	outline-color: ${({ outline }) => outline === "warning" && `orange;`};
-	outline-color: ${({ outline }) => outline === "success" && `green;`};
+
+	${({ outlineType }) =>
+		outlineType &&
+		`
+			// outline-width: 2px;
+			// outline-offset: -2px;
+			// outline-style: solid;
+			background: var(${getColor(outlineType)});
+	`}
 `;

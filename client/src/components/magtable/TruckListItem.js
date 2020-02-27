@@ -44,7 +44,7 @@ import IconButton from "../common/IconButton";
  *
  * showAM toggles which employees are displayed (not handled with react, handled in css)
  *
- * Logic is written to determine wether incoming shifts are allowed, provide
+ * Logic is written to determine whether incoming shifts are allowed, provide
  * a warning, or are permitted
  *
  * @constructor
@@ -57,7 +57,7 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 	const [hoveredShiftDescription, setHoveredShiftDescription] = useState(null);
 	const dispatch = useDispatch();
 
-	const [{}, drag] = useDrag({
+	const [{ isDragging }, drag] = useDrag({
 		item: { type: SET_TRUCK_LOCATION },
 		end: (item, monitor) => {
 			const dropResult = monitor.getDropResult();
@@ -100,7 +100,6 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 	};
 
 	const handleCanDrop = item => {
-		console.log(item);
 		// Logic to not allow more than 4 employees in a location.
 		// if the list of employeeShifts does not have any nulls, it's full
 		if (!assignment.employeeShifts.includes(null)) return false;
@@ -226,6 +225,7 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 					<TruckListItemEmployeeList>
 						{employeeShifts.map(elem => (
 							<TruckListItemEmployee
+								key={elem.assignmentIndex}
 								slot={elem.slot}
 								show={elem.show}
 								outlineType={getOutline(elem.assignmentIndex)}
