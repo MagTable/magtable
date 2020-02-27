@@ -13,6 +13,7 @@ import { useDrop, useDrag } from "react-dnd";
 import {
 	DANGER,
 	MANAGEMENT_POSITIONS,
+	MECHANIC,
 	OJT,
 	SET_EQUIPMENT_EMPLOYEE,
 	SET_TRUCK_LOCATION,
@@ -163,6 +164,10 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 			)
 		) {
 			return "Management Assigned to Truck";
+		}
+
+		if (MECHANIC.includes(assignment.employeeShifts[index]?.description)) {
+			return "Mechanic Assigned to Tower";
 		}
 
 		if (

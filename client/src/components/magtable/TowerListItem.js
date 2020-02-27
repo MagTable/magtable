@@ -9,6 +9,7 @@ import { useDrop } from "react-dnd";
 import {
 	DANGER,
 	MANAGEMENT_POSITIONS,
+	MECHANIC,
 	OJT,
 	OJT_TOWER,
 	SET_EQUIPMENT_EMPLOYEE,
@@ -127,6 +128,10 @@ function TowerListItem({ assignment, showAM }) {
 			)
 		) {
 			return "Management Assigned to Tower";
+		}
+
+		if (MECHANIC.includes(assignment.employeeShifts[index]?.description)) {
+			return "Mechanic Assigned to Tower";
 		}
 
 		if (
