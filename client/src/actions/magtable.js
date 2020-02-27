@@ -199,7 +199,7 @@ export const getMagTable = () => async dispatch => {
 	// todo currently only equipment and shifts are returned here,
 	//  will be updated once entire magtable is returned by api
 	try {
-		const shiftRes = await axios.get("/shift/update");
+		const shiftRes = await axios.get("/shift/all");
 		const truckRes = await axios.get("/equipment/truck/all");
 		const towerRes = await axios.get("/equipment/tower/all");
 
