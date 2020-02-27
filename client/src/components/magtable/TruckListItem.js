@@ -167,7 +167,7 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 		}
 
 		if (MECHANIC.includes(assignment.employeeShifts[index]?.description)) {
-			return "Mechanic Assigned to Tower";
+			return "Mechanic Assigned to Truck";
 		}
 
 		if (
