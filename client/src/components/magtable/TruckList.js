@@ -11,7 +11,9 @@ import { useSelector } from "react-redux";
 import Switch from "react-switch";
 import {
 	ToggleLabelLeft,
-	ToggleLabelRight
+	ToggleLabelLeftNotice,
+	ToggleLabelRight,
+	ToggleLabelRightNotice
 } from "../../styled/common/FormControl";
 
 /**
@@ -39,9 +41,25 @@ function TruckList({ showAM, setShowAM }) {
 			<ListTitle>
 				<ListTitleText>Trucks</ListTitleText>
 				<TruckListManipDiv>
-					<TruckListButton onClick={() => setNoticesOpen(!noticesOpen)}>
-						Show Notices
-					</TruckListButton>
+					{/*<TruckListButton onClick={() => setNoticesOpen(!noticesOpen)}>*/}
+					{/*	Show Notices*/}
+					{/*</TruckListButton>*/}
+
+					<Switch
+						onChange={() => setNoticesOpen(!noticesOpen)}
+						checked={noticesOpen !== true}
+						offColor={"#161616"}
+						onColor={"#161616"}
+						onHandleColor={"#bfb8ad"}
+						offHandleColor={"#bfb8ad"}
+						checkedIcon={
+							<ToggleLabelLeftNotice>Show Notices</ToggleLabelLeftNotice>
+						}
+						uncheckedIcon={
+							<ToggleLabelRightNotice>Hide Notices</ToggleLabelRightNotice>
+						}
+						width={150}
+					/>
 
 					<Switch
 						onChange={() => setShowAM(!showAM)}
