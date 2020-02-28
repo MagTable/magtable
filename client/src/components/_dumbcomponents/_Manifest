@@ -6,4 +6,4 @@ TowerListItem.js - the individual positions/roles the tower has for scheduling.
 
 TruckList.js - The list of trucks on the left side of the screen.
 
-TruckMap.js - the map labelled "Parking Locations" - for assigning trucks to locations.
+LocationMap.js - the map labelled "Parking Locations" - for assigning trucks to locations.
