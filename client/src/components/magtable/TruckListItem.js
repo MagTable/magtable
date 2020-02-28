@@ -251,7 +251,15 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 							</TruckListItemEmployee>
 						))}
 					</TruckListItemEmployeeList>
-					<TruckListItemLocation>{assignment.location}</TruckListItemLocation>
+					<TruckListItemLocation>
+						<input
+							type="text"
+							value={assignment.parkingLocation}
+							maxLength={3}
+							style={{ width: "30px" }}
+							readOnly={true}
+						/>
+					</TruckListItemLocation>
 				</TruckInfoDiv>
 			</TruckListItemDiv>
 			<TruckProblemsDiv noticeOpen={noticeOpen}>
