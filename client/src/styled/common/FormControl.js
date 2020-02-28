@@ -68,8 +68,9 @@ const ToggleLabel = styled.div`
 	align-self: center;
 	justify-content: center;
 	align-content: center;
-	color: white;
+	color: var(--title-bright);
 	font-family: "Noto Sans KR", sans-serif;
+	white-space: nowrap;
 `;
 
 /**
@@ -84,4 +85,12 @@ export const ToggleLabelRight = styled(ToggleLabel)`
  */
 export const ToggleLabelLeft = styled(ToggleLabel)`
 	padding-left: 20px;
+`;
+
+export const ToggleLabelLeftNotice = styled(ToggleLabel)`
+	padding-left: 65px;
+`;
+
+export const ToggleLabelRightNotice = styled(ToggleLabel)`
+	transform: translate(-45px, 0);
 `;

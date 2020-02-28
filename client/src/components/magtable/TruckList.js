@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import TruckListItem from "../magtable/TruckListItem";
 import {
-	TruckListButton,
 	TruckListDiv,
 	TruckListDivWrapper,
 	TruckListManipDiv
@@ -11,7 +10,9 @@ import { useSelector } from "react-redux";
 import Switch from "react-switch";
 import {
 	ToggleLabelLeft,
-	ToggleLabelRight
+	ToggleLabelLeftNotice,
+	ToggleLabelRight,
+	ToggleLabelRightNotice
 } from "../../styled/common/FormControl";
 
 /**
@@ -24,7 +25,7 @@ import {
  * Rendered on the Truck Assignment page, displays all available trucks, the employees assigned to each (two AM and two
  * PM slots for employees) while color-coding each truck to represent their operational status. User can expand and
  * contract notices on all trucks and swap between displaying AM employees and PM employees. Trucks are draggable for
- * assigning them to locations in the TruckMap.
+ * assigning them to locations in the LocationMap.
  *
  * @constructor
  * @returns {*} The TruckList component
@@ -39,9 +40,25 @@ function TruckList({ showAM, setShowAM }) {
 			<ListTitle>
 				<ListTitleText>Trucks</ListTitleText>
 				<TruckListManipDiv>
-					<TruckListButton onClick={() => setNoticesOpen(!noticesOpen)}>
-						Show Notices
-					</TruckListButton>
+					{/*<TruckListButton onClick={() => setNoticesOpen(!noticesOpen)}>*/}
+					{/*	Show Notices*/}
+					{/*</TruckListButton>*/}
+
+					<Switch
+						onChange={() => setNoticesOpen(!noticesOpen)}
+						checked={noticesOpen !== true}
+						offColor={"#161616"}
+						onColor={"#161616"}
+						onHandleColor={"#bfb8ad"}
+						offHandleColor={"#bfb8ad"}
+						checkedIcon={
+							<ToggleLabelLeftNotice>Show Notices</ToggleLabelLeftNotice>
+						}
+						uncheckedIcon={
+							<ToggleLabelRightNotice>Hide Notices</ToggleLabelRightNotice>
+						}
+						width={150}
+					/>
 
 					<Switch
 						onChange={() => setShowAM(!showAM)}
