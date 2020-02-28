@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Locale;
 
 @Component
 public class ShiftScheduler {
@@ -22,6 +21,7 @@ public class ShiftScheduler {
     private String SID = "32325584041A4";
     private ArrayList<CleanShift> shiftList;
     private static ShiftScheduler shiftScheduler;
+    private String lastUpdatedUI;
     private String lastUpdated;
 
     /** CONSTRUCTOR **/
@@ -51,6 +51,14 @@ public class ShiftScheduler {
         this.SID = SID;
     }
 
+    public String getLastUpdatedUI() {
+        return lastUpdatedUI;
+    }
+
+    public void setLastUpdatedUI(String lastUpdatedUI) {
+        this.lastUpdatedUI = lastUpdatedUI;
+    }
+
     public String getLastUpdated() {
         return lastUpdated;
     }
@@ -75,7 +83,7 @@ public class ShiftScheduler {
         final int DAY = cal.get(Calendar.DAY_OF_MONTH);
         final int YEAR = cal.get(Calendar.YEAR);
 
-        shiftScheduler.setLastUpdated(String.format("%d:%d",cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE)));
+        shiftScheduler.setLastUpdated(String.format("%d:%02d",cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE)));
 
         Document doc;
 

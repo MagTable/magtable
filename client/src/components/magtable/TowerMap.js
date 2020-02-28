@@ -1,7 +1,7 @@
 import React from "react";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import { TowerDiv, TowerMapDiv } from "../../styled/magtable/Maps";
-import TowerPosition from "./TowerPosition";
+import TowerListItem from "./TowerListItem";
 import { useSelector } from "react-redux";
 import { EAST_APRON, WEST_APRON } from "../../actions/constants";
 
@@ -36,6 +36,8 @@ function TowerMap({ showAM }) {
 
 		// only return tower positions (id >= 1000)
 		if (equipmentID >= 1000) return false;
+
+		return null;
 	});
 
 	return (
@@ -48,10 +50,11 @@ function TowerMap({ showAM }) {
 			</ListTitle>
 			<TowerMapDiv>
 				{towerPositions.map(towerPosition => (
-					<TowerPosition
+					<TowerListItem
 						key={towerPosition.equipment.id}
 						assignment={towerPosition}
 						showAM={showAM}
+						shift
 					/>
 				))}
 			</TowerMapDiv>
@@ -59,4 +62,4 @@ function TowerMap({ showAM }) {
 	);
 }
 
-export default TowerMap;
+export default React.memo(TowerMap);

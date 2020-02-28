@@ -12,9 +12,11 @@ import {
 	SET_SELECTED_APRON,
 	GET_ASSIGNMENT_DATA,
 	ADD_EMPLOYEE_SHIFT,
-	TOGGLE_BAY_LEAD
+	TOGGLE_BAY_LEAD,
+	REFRESH_EMPLOYEE_SHIFTS
 } from "./constants";
 import axios from "axios";
+import { setAlert } from "./alert";
 
 // todo update all async actions with API calls
 
@@ -246,4 +248,19 @@ const toggleBayLead = equipmentID => dispatch => {
 		type: TOGGLE_BAY_LEAD,
 		payload: equipmentID
 	});
+};
+
+export const refreshEmployeeShifts = () => async dispatch => {
+	try {
+		const res = await axios.get("/shift/update");
+		dispatch({
+			type: REFRESH_EMPLOYEE_SHIFTS,
+			payload: {
+				employeeShifts: res.data
+			}
+		});
+		dispatch(setAlert("Shifts Updated!", "success"));
+	} catch (err) {
+		console.log(err);
+	}
 };
