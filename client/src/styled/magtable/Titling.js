@@ -13,7 +13,7 @@ export const ListTitle = styled.div`
 	background-color: var(--section-title-bg);
 	display: flex;
 	position: sticky;
-	height: 50px;
+	min-height: 50px;
 	align-items: center;
 	justify-content: space-between;
 `;

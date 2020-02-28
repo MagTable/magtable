@@ -91,7 +91,10 @@ function NewEmployeeListItem({ employee: employeeShift }) {
 	}
 
 	return (
-		<EmpWrap>
+		<EmpWrap
+			ref={drag}
+			disabled={isDragging || employeeShift.assignedEquipment}
+		>
 			<ShiftInfo>
 				<EmpName>{employeeShift.name}</EmpName>
 				<Hours>
@@ -100,7 +103,7 @@ function NewEmployeeListItem({ employee: employeeShift }) {
 			</ShiftInfo>
 
 			<AssignedToWrap>
-				<UnassignBtn></UnassignBtn>
+				<UnassignBtn>X</UnassignBtn>
 				{/*Todo replace me with the assigned truck number*/}
 			</AssignedToWrap>
 

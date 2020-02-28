@@ -32,8 +32,8 @@ export const ParkingLocation = styled.div`
  */
 export const TowerMapDiv = styled.div`
 	display: flex;
-	flex-grow: 1;
-	min-height: 200px;
+	// flex-grow: 1;
+	height: 130px;
 `;
 
 /**
@@ -42,7 +42,6 @@ export const TowerMapDiv = styled.div`
 export const TowerDiv = styled.div`
 	display: flex;
 	flex-direction: column;
-	flex-grow: 1;
 	flex-basis: 0;
 	border: 2px solid var(--border-color);
 	height: 35%;
@@ -117,5 +116,5 @@ export const AssignedEmployeeName = styled(EmployeeListItemName)`
  */
 export const DeleteTowerAssignmentBtn = styled(Button)`
 	width: fit-content;
-	margin-right: 20px;
+	margin-left: 5px;
 `;

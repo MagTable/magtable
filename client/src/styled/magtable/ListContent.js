@@ -58,7 +58,7 @@ export const EmployeeListDiv = styled.div`
 	flex-grow: 1;
 	flex-direction: column;
 	flex-basis: 0;
-	min-width: 250px;
+	min-width: 180px;
 	overflow-y: auto;
 	overflow-x: hidden;
 `;
@@ -78,6 +78,7 @@ export const StartTimeSeparator = styled.div`
  */
 export const EmployeeListDivWrapper = styled(EmployeeListDiv)`
 	border: 2px solid var(--border-color);
+	max-width: 234px;
 `;
 
 /**
@@ -167,7 +168,7 @@ export const TruckListDivWrapper = styled(TruckListDiv)`
 export const TruckListItemDiv = styled.div`
 	transition: all 0.15s ease-in-out;
 	border-bottom: 1px solid var(--border-color);
-	height: 90px;
+	height: 75px;
 	display: flex;
 `;
 
@@ -189,7 +190,8 @@ export const TruckProblemsText = styled.p`
 export const TruckNumberDiv = styled.div`
 	background: var(${({ status }) => getTruckColorCode(status)});
 	display: flex;
-	min-width: 100px;
+	width: 75px;
+	height: 75px;
 	justify-content: center;
 	align-items: center;
 	color: black;
@@ -294,6 +296,16 @@ export const TowerListItemEmployee = styled.p`
 			// outline-style: solid;
 			background: var(${getColor(outlineType)});
 	`}
+	
+	justify-content: space-between;
+	padding-left: 15px;
+`;
+
+export const TowerListEmployeeMgmt = styled.div`
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-right: 15px;
 `;
 
 // -----------------------------------------------------------------------------------------------------------------------
@@ -323,6 +335,9 @@ export const EmpWrap = styled.div`
 		display: block;
 		opacity: 1;
 	}
+
+	${({ disabled }) =>
+		disabled ? `background-color: var(--shader-grey);` : `cursor: pointer;`}
 `;
 
 export const EmpName = styled.div`
@@ -383,13 +398,12 @@ export const AssignedToWrap = styled.div`
 	align-items: center;
 	vertical-align: top;
 	position: relative;
-	transform: translate(1px, 0);
+	transform: translate(180px, -45px);
 	font-size: 24px;
 `;
 
 export const ShiftInfo = styled.div`
 	width: 180px;
-	display: inline-block;
 	text-overflow: ellipsis;
 `;
 
