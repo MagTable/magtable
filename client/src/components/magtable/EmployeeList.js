@@ -3,16 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import {
 	EmployeeListDiv,
 	EmployeeListDivWrapper,
+	EmployeeListItemContentDiv,
 	EmployeeListItemDiv,
 	EmployeeListItemName,
 	EmployeeListItemTime,
 	StartTimeSeparator
 } from "../../styled/magtable/ListContent";
-import {
-	ListSubtitle,
-	ListTitle,
-	ListTitleText
-} from "../../styled/magtable/Titling";
+import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import EmployeeListItem from "./EmployeeListItem";
 import IconButton from "../common/IconButton";
 import { refreshEmployeeShifts } from "../../actions/magtable";
@@ -56,8 +53,8 @@ const EmployeeList = () => {
 				/>
 			</ListTitle>
 
-			<EmployeeListDiv>
-				<EmployeeListItemDiv>
+			<EmployeeListItemDiv>
+				<EmployeeListItemContentDiv>
 					<EmployeeListItemName>
 						{employeeShifts.scheduleDate}
 					</EmployeeListItemName>
@@ -65,7 +62,10 @@ const EmployeeList = () => {
 						Last Updated:
 						{employeeShifts.lastUpdated}
 					</EmployeeListItemTime>
-				</EmployeeListItemDiv>
+				</EmployeeListItemContentDiv>
+			</EmployeeListItemDiv>
+
+			<EmployeeListDiv>
 				{startTimes.map(startTime => (
 					<div key={startTime}>
 						<StartTimeSeparator>
@@ -79,7 +79,6 @@ const EmployeeList = () => {
 						)}
 					</div>
 				))}
-				<EmployeeListItemDiv></EmployeeListItemDiv>
 				{startTimes.length > 0 ? (
 					startTimes.map(startTime => (
 						<div key={startTime}>
