@@ -1,14 +1,13 @@
 import React from "react";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
-import { TruckMapDiv } from "../../styled/magtable/Maps";
+import { ParkingLocation, TruckMapDiv } from "../../styled/magtable/Maps";
 import ApronToggle from "./ApronToggle";
 import {
-	PadDiv,
+	FakePadDiv,
 	MapWrapper,
 	NumberMiddle,
 	NumberTop,
-	PadColumn,
-	FakePadDiv
+	PadColumn
 } from "../../styled/magtable/TruckMapMedia";
 import { useSelector } from "react-redux";
 import ParkingLocations from "../_dumbcomponents/ParkingLocations";
@@ -47,219 +46,302 @@ function TruckMap(props) {
 				//East Apron
 				<MapWrapper>
 					<PadColumn>
-						<NumberTop />
-						<ParkingLocations parkingID={17} pad={"AE1"} />
-						<ParkingLocations parkingID={18} pad={"AC1"} />
-						<ParkingLocations parkingID={19} pad={"AW1"} />
+						<div>
+							<ParkingLocations parkingID={17} pad={"AE1"} />
+							<ParkingLocations parkingID={18} pad={"AC1"} />
+							<ParkingLocations parkingID={19} pad={"AW1"} />
+						</div>
 					</PadColumn>
 					<NumberMiddle>1</NumberMiddle>
 					<PadColumn>
-						<NumberTop>2</NumberTop>
-						{filteredLocations.includes(21) ? (
-							<PadDiv>
-								<ParkingLocations parkingID={21} pad={"BE1"} />
-								<ParkingLocations parkingID={22} pad={"BE3"} />
-							</PadDiv>
-						) : (
-							<ParkingLocations parkingID={20} pad={"BE"} />
-						)}
-						{filteredLocations.includes(24) ? (
-							<PadDiv>
-								<ParkingLocations parkingID={24} pad={"BC1"} />
-								<ParkingLocations parkingID={25} pad={"BC3"} />
-							</PadDiv>
-						) : (
-							<ParkingLocations parkingID={23} pad={"BC"} />
-						)}
-						{filteredLocations.includes(27) ? (
-							<PadDiv>
-								<ParkingLocations parkingID={27} pad={"BW1"} />
-								<ParkingLocations parkingID={28} pad={"BW3"} />
-							</PadDiv>
-						) : (
-							<ParkingLocations parkingID={26} pad={"BW"} />
-						)}
+						<div>
+							<NumberTop>2</NumberTop>
+							{filteredLocations.includes(21) &&
+							filteredLocations.includes(22) ? (
+								<FakePadDiv>
+									<ParkingLocations
+										parkingID={21}
+										originalParkingLocationID={20}
+										pad={"BE1"}
+										isSplit={true}
+									/>
+									<ParkingLocations
+										parkingID={22}
+										originalParkingLocationID={20}
+										pad={"BE3"}
+										isSplit={true}
+									/>
+								</FakePadDiv>
+							) : (
+								<ParkingLocations
+									id={20}
+									parkingID={20}
+									originalParkingLocationID={20}
+									pad={"BE"}
+									leftPad={"BE1"}
+									rightPad={"BE3"}
+									enableDrop={true}
+								/>
+							)}
+							{filteredLocations.includes(24) &&
+							filteredLocations.includes(25) ? (
+								<FakePadDiv>
+									<ParkingLocations
+										parkingID={24}
+										originalParkingLocationID={23}
+										pad={"BC1"}
+										isSplit={true}
+									/>
+									<ParkingLocations
+										parkingID={25}
+										originalParkingLocationID={23}
+										pad={"BC3"}
+										isSplit={true}
+									/>
+								</FakePadDiv>
+							) : (
+								<ParkingLocations
+									parkingID={23}
+									originalParkingLocationID={23}
+									pad={"BC"}
+									leftPad={"BC1"}
+									rightPad={"BC3"}
+								/>
+							)}
+							{filteredLocations.includes(27) &&
+							filteredLocations.includes(28) ? (
+								<FakePadDiv>
+									<ParkingLocations
+										parkingID={27}
+										originalParkingLocationID={26}
+										isSplit={true}
+										pad={"BW1"}
+									/>
+									<ParkingLocations
+										parkingID={28}
+										originalParkingLocationID={26}
+										isSplit={true}
+										pad={"BW3"}
+									/>
+								</FakePadDiv>
+							) : (
+								<ParkingLocations
+									parkingID={26}
+									originalParkingLocationID={26}
+									pad={"BW"}
+									leftPad={"BW1"}
+									rightPad={"BW3"}
+								/>
+							)}
+						</div>
 					</PadColumn>
 					<NumberMiddle>3</NumberMiddle>
 					<PadColumn>
-						<NumberTop />
-						{filteredLocations.includes(30) ? (
-							<PadDiv>
-								<ParkingLocations parkingID={30} pad={"CE4"} />
-								<ParkingLocations parkingID={31} pad={"CE5"} />
-							</PadDiv>
-						) : (
-							<ParkingLocations parkingID={29} pad={"CE"} />
-						)}
-						{filteredLocations.includes(33) ? (
-							<PadDiv>
-								<ParkingLocations parkingID={33} pad={"CC4"} />
-								<ParkingLocations parkingID={34} pad={"CC5"} />
-							</PadDiv>
-						) : (
-							<ParkingLocations parkingID={32} pad={"CC"} />
-						)}
-						{filteredLocations.includes(36) ? (
-							<PadDiv>
-								<ParkingLocations parkingID={36} pad={"CW4"} />
-								<ParkingLocations parkingID={37} pad={"CW5"} />
-							</PadDiv>
-						) : (
-							<ParkingLocations parkingID={35} pad={"CW"} />
-						)}
+						<div>
+							{filteredLocations.includes(30) ||
+							filteredLocations.includes(31) ? (
+								<FakePadDiv>
+									<ParkingLocations parkingID={30} pad={"CE4"} />
+									<ParkingLocations parkingID={31} pad={"CE5"} />
+								</FakePadDiv>
+							) : (
+								<ParkingLocations parkingID={29} pad={"CE"} />
+							)}
+							{filteredLocations.includes(33) ||
+							filteredLocations.includes(34) ? (
+								<FakePadDiv>
+									<ParkingLocations parkingID={33} pad={"CC4"} />
+									<ParkingLocations parkingID={34} pad={"CC5"} />
+								</FakePadDiv>
+							) : (
+								<ParkingLocations parkingID={32} pad={"CC"} />
+							)}
+							{filteredLocations.includes(36) ||
+							filteredLocations.includes(37) ? (
+								<FakePadDiv>
+									<ParkingLocations parkingID={36} pad={"CW4"} />
+									<ParkingLocations parkingID={37} pad={"CW5"} />
+								</FakePadDiv>
+							) : (
+								<ParkingLocations parkingID={35} pad={"CW"} />
+							)}
+						</div>
 					</PadColumn>
 					<NumberMiddle>4</NumberMiddle>
 					<PadColumn>
-						<NumberTop>5</NumberTop>
-						{filteredLocations.includes(39) ? (
-							<PadDiv>
-								<ParkingLocations parkingID={39} pad={"DE4"} />
-								<ParkingLocations parkingID={40} pad={"DE6"} />
-							</PadDiv>
-						) : (
-							<ParkingLocations parkingID={38} pad={"DE"} />
-						)}
-						{filteredLocations.includes(42) ? (
-							<PadDiv>
-								<ParkingLocations parkingID={42} pad={"DC4"} />
-								<ParkingLocations parkingID={43} pad={"DC6"} />
-							</PadDiv>
-						) : (
-							<ParkingLocations parkingID={41} pad={"DC"} />
-						)}
-						{filteredLocations.includes(45) ? (
-							<PadDiv>
-								<ParkingLocations parkingID={45} pad={"DW4"} />
-								<ParkingLocations parkingID={46} pad={"DW6"} />
-							</PadDiv>
-						) : (
-							<ParkingLocations parkingID={44} pad={"DW"} />
-						)}
+						<div>
+							<NumberTop>5</NumberTop>
+							{filteredLocations.includes(39) ||
+							filteredLocations.includes(40) ? (
+								<FakePadDiv>
+									<ParkingLocations parkingID={39} pad={"DE4"} />
+									<ParkingLocations parkingID={40} pad={"DE6"} />
+								</FakePadDiv>
+							) : (
+								<ParkingLocations parkingID={38} pad={"DE"} />
+							)}
+							{filteredLocations.includes(42) ||
+							filteredLocations.includes(43) ? (
+								<FakePadDiv>
+									<ParkingLocations parkingID={42} pad={"DC4"} />
+									<ParkingLocations parkingID={43} pad={"DC6"} />
+								</FakePadDiv>
+							) : (
+								<ParkingLocations parkingID={41} pad={"DC"} />
+							)}
+							{filteredLocations.includes(45) ||
+							filteredLocations.includes(46) ? (
+								<FakePadDiv>
+									<ParkingLocations parkingID={45} pad={"DW4"} />
+									<ParkingLocations parkingID={46} pad={"DW6"} />
+								</FakePadDiv>
+							) : (
+								<ParkingLocations parkingID={44} pad={"DW"} />
+							)}
+						</div>
 					</PadColumn>
 					<NumberMiddle>6</NumberMiddle>
 					<PadColumn>
-						<NumberTop />
-						{filteredLocations.includes(48) ? (
-							<PadDiv>
-								<ParkingLocations parkingID={48} pad={"EE6"} />
-								<ParkingLocations parkingID={49} pad={"EE7"} />
-							</PadDiv>
-						) : (
-							<ParkingLocations parkingID={47} pad={"EE"} />
-						)}
-						{filteredLocations.includes(51) ? (
-							<PadDiv>
-								<ParkingLocations parkingID={51} pad={"EC6"} />
-								<ParkingLocations parkingID={52} pad={"EC7"} />
-							</PadDiv>
-						) : (
-							<ParkingLocations parkingID={50} pad={"EC"} />
-						)}
-						{filteredLocations.includes(54) ? (
-							<PadDiv>
-								<ParkingLocations parkingID={54} pad={"EW6"} />
-								<ParkingLocations parkingID={55} pad={"EW7"} />
-							</PadDiv>
-						) : (
-							<ParkingLocations parkingID={53} pad={"EW"} />
-						)}
+						<div>
+							{filteredLocations.includes(48) ||
+							filteredLocations.includes(49) ? (
+								<FakePadDiv>
+									<ParkingLocations parkingID={48} pad={"EE6"} />
+									<ParkingLocations parkingID={49} pad={"EE7"} />
+								</FakePadDiv>
+							) : (
+								<ParkingLocations parkingID={47} pad={"EE"} />
+							)}
+							{filteredLocations.includes(51) ||
+							filteredLocations.includes(52) ? (
+								<FakePadDiv>
+									<ParkingLocations parkingID={51} pad={"EC6"} />
+									<ParkingLocations parkingID={52} pad={"EC7"} />
+								</FakePadDiv>
+							) : (
+								<ParkingLocations parkingID={50} pad={"EC"} />
+							)}
+							{filteredLocations.includes(54) ||
+							filteredLocations.includes(55) ? (
+								<FakePadDiv>
+									<ParkingLocations parkingID={54} pad={"EW6"} />
+									<ParkingLocations parkingID={55} pad={"EW7"} />
+								</FakePadDiv>
+							) : (
+								<ParkingLocations parkingID={53} pad={"EW"} />
+							)}
+						</div>
 					</PadColumn>
 					<NumberMiddle>7</NumberMiddle>
 					<PadColumn>
-						<NumberTop />
-						{filteredLocations.includes(57) ? (
-							<PadDiv>
-								<ParkingLocations parkingID={57} pad={"FE7"} />
-								<ParkingLocations parkingID={58} pad={"FE9"} />
-							</PadDiv>
-						) : (
-							<ParkingLocations parkingID={56} pad={"CE"} />
-						)}
-						{filteredLocations.includes(60) ? (
-							<PadDiv>
-								<ParkingLocations parkingID={60} pad={"FC7"} />
-								<ParkingLocations parkingID={61} pad={"FC9"} />
-							</PadDiv>
-						) : (
-							<ParkingLocations parkingID={59} pad={"FC"} />
-						)}
-						{filteredLocations.includes(63) ? (
-							<PadDiv>
-								<ParkingLocations parkingID={63} pad={"FW7"} />
-								<ParkingLocations parkingID={64} pad={"FW9"} />
-							</PadDiv>
-						) : (
-							<ParkingLocations parkingID={63} pad={"FW"} />
-						)}
+						<div>
+							{filteredLocations.includes(57) ||
+							filteredLocations.includes(58) ? (
+								<FakePadDiv>
+									<ParkingLocations parkingID={57} pad={"FE7"} />
+									<ParkingLocations parkingID={58} pad={"FE9"} />
+								</FakePadDiv>
+							) : (
+								<ParkingLocations parkingID={56} pad={"CE"} />
+							)}
+							{filteredLocations.includes(60) ||
+							filteredLocations.includes(61) ? (
+								<FakePadDiv>
+									<ParkingLocations parkingID={60} pad={"FC7"} />
+									<ParkingLocations parkingID={61} pad={"FC9"} />
+								</FakePadDiv>
+							) : (
+								<ParkingLocations parkingID={59} pad={"FC"} />
+							)}
+							{filteredLocations.includes(63) ||
+							filteredLocations.includes(64) ? (
+								<FakePadDiv>
+									<ParkingLocations parkingID={63} pad={"FW7"} />
+									<ParkingLocations parkingID={64} pad={"FW9"} />
+								</FakePadDiv>
+							) : (
+								<ParkingLocations parkingID={63} pad={"FW"} />
+							)}
+						</div>
 					</PadColumn>
 					<NumberMiddle>9</NumberMiddle>
 					<PadColumn>
-						<NumberTop />
-						<ParkingLocations parkingID={65} pad={"GE9"} />
-						<ParkingLocations parkingID={66} pad={"GC9"} />
-						<ParkingLocations parkingID={67} pad={"GW9"} />
+						<div>
+							<ParkingLocations parkingID={65} pad={"GE9"} />
+							<ParkingLocations parkingID={66} pad={"GC9"} />
+							<ParkingLocations parkingID={67} pad={"GW9"} />
+						</div>
 					</PadColumn>
 				</MapWrapper>
 			) : (
 				//West Apron
 				<MapWrapper>
 					<PadColumn>
-						<NumberTop />
-						<ParkingLocations parkingID={2} pad={"AE1"} />
-						<ParkingLocations parkingID={1} pad={"AW1"} />
+						<div>
+							<ParkingLocations parkingID={2} pad={"AE1"} />
+							<ParkingLocations parkingID={1} pad={"AW1"} />
+						</div>
 					</PadColumn>
 					<NumberMiddle>1</NumberMiddle>
 					<PadColumn>
-						<NumberTop />
-						{filteredLocations.includes(3) ? (
-							<PadDiv>
-								<ParkingLocations parkingID={4} pad={"BE1"} />
-								<ParkingLocations parkingID={5} pad={"BE2"} />
-							</PadDiv>
-						) : (
-							<ParkingLocations parkingID={3} pad={"BE"} />
-						)}
-						{filteredLocations.includes(6) ? (
-							<PadDiv>
-								<ParkingLocations parkingID={7} pad={"BW1"} />
-								<ParkingLocations parkingID={8} pad={"BW2"} />
-							</PadDiv>
-						) : (
-							<ParkingLocations parkingID={6} pad={"BW"} />
-						)}
+						<div>
+							{filteredLocations.includes(4) ||
+							filteredLocations.includes(5) ? (
+								<FakePadDiv>
+									<ParkingLocations parkingID={4} pad={"BE1"} />
+									<ParkingLocations parkingID={5} pad={"BE2"} />
+								</FakePadDiv>
+							) : (
+								<ParkingLocations parkingID={3} pad={"BE"} />
+							)}
+							{filteredLocations.includes(7) ||
+							filteredLocations.includes(8) ? (
+								<FakePadDiv>
+									<ParkingLocations parkingID={7} pad={"BW1"} />
+									<ParkingLocations parkingID={8} pad={"BW2"} />
+								</FakePadDiv>
+							) : (
+								<ParkingLocations parkingID={6} pad={"BW"} />
+							)}
+						</div>
 					</PadColumn>
 					<NumberMiddle>2</NumberMiddle>
 					<PadColumn>
-						<NumberTop>3</NumberTop>
-						{filteredLocations.includes(10) ? (
-							<PadDiv>
-								<ParkingLocations parkingID={10} pad={"CE2"} />
-								<ParkingLocations parkingID={11} pad={"CE4"} />
-							</PadDiv>
-						) : (
-							<ParkingLocations parkingID={9} pad={"CE"} />
-						)}
-						{filteredLocations.includes(13) ? (
-							<PadDiv>
-								<ParkingLocations parkingID={13} pad={"CW2"} />
-								<ParkingLocations parkingID={14} pad={"CW4"} />
-							</PadDiv>
-						) : (
-							<ParkingLocations parkingID={12} pad={"CW"} />
-						)}
+						<div>
+							<NumberTop>3</NumberTop>
+							{filteredLocations.includes(10) ||
+							filteredLocations.includes(11) ? (
+								<FakePadDiv>
+									<ParkingLocations parkingID={10} pad={"CE2"} />
+									<ParkingLocations parkingID={11} pad={"CE4"} />
+								</FakePadDiv>
+							) : (
+								<ParkingLocations parkingID={9} pad={"CE"} />
+							)}
+							{filteredLocations.includes(13) ||
+							filteredLocations.includes(14) ? (
+								<FakePadDiv>
+									<ParkingLocations parkingID={13} pad={"CW2"} />
+									<ParkingLocations parkingID={14} pad={"CW4"} />
+								</FakePadDiv>
+							) : (
+								<ParkingLocations parkingID={12} pad={"CW"} />
+							)}
+						</div>
 					</PadColumn>
 					<NumberMiddle>4</NumberMiddle>
 					<PadColumn>
-						<NumberTop />
-						{filteredLocations.includes(16) ? (
-							<PadDiv>
+						<div>
+							{filteredLocations.includes(15) ||
+							filteredLocations.includes(16) ? (
+								<FakePadDiv>
+									<ParkingLocations parkingID={15} pad={"D4"} />
+									<ParkingLocations parkingID={16} pad={"D4"} />
+								</FakePadDiv>
+							) : (
 								<ParkingLocations parkingID={15} pad={"D4"} />
-								<ParkingLocations parkingID={16} pad={"D4"} />
-							</PadDiv>
-						) : (
-							<ParkingLocations parkingID={15} pad={"D4"} />
-						)}
-						<FakePadDiv />
+							)}
+						</div>
 					</PadColumn>
 				</MapWrapper>
 			)}
