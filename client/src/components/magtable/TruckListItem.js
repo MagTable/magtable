@@ -59,7 +59,7 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 	const dispatch = useDispatch();
 
 	const [{ isDragging }, drag] = useDrag({
-		item: { type: SET_TRUCK_LOCATION },
+		item: { type: SET_TRUCK_LOCATION, id: assignment.equipment.id },
 		end: (item, monitor) => {
 			const dropResult = monitor.getDropResult();
 			if (item && dropResult) {

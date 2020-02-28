@@ -11,6 +11,7 @@ import {
 } from "../../styled/magtable/TruckMapMedia";
 import { useSelector } from "react-redux";
 import ParkingLocations from "../_dumbcomponents/ParkingLocations";
+import { CENTER, EAST, WEST } from "../../actions/constants";
 
 /**
  * @date 2020-02-17
@@ -46,19 +47,22 @@ function LocationMap(props) {
 									{location.east && (
 										<ParkingLocations
 											parkingID={location.id}
-											pad={location.phonetic + "E"}
+											label={location.phonetic + "E"}
+											position={EAST}
 										/>
 									)}
 									{location.center && (
 										<ParkingLocations
 											parkingID={location.id}
-											pad={location.phonetic + "C"}
+											label={location.phonetic + "C"}
+											position={CENTER}
 										/>
 									)}
 									{location.west && (
 										<ParkingLocations
 											parkingID={location.id}
-											pad={location.phonetic + "W"}
+											label={location.phonetic + "W"}
+											position={WEST}
 										/>
 									)}
 									{location.double && <FakePadDiv />}
