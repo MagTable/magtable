@@ -295,3 +295,109 @@ export const TowerListItemEmployee = styled.p`
 			background: var(${getColor(outlineType)});
 	`}
 `;
+
+// -----------------------------------------------------------------------------------------------------------------------
+// For the new version of EmployeeListItem
+// -----------------------------------------------------------------------------------------------------------------------
+export const UnassignBtn = styled.button`
+	float: right;
+	position: absolute;
+	transform: translate(20px, -20px);
+	border-radius: 30px;
+	width: 30px;
+	height: 30px;
+	border: 2px solid grey;
+	overflow: hidden;
+	white-space: nowrap;
+	opacity: 0;
+	transition: 0.2s ease-in-out;
+	cursor: pointer;
+`;
+
+export const EmpWrap = styled.div`
+	outline: 2px solid black;
+	outline-offset: -1px;
+	width: 227px;
+
+	&:hover ${UnassignBtn} {
+		display: block;
+		opacity: 1;
+	}
+`;
+
+export const EmpName = styled.div`
+	padding: 5px 0 0 5px;
+	margin-block-start: 0;
+	margin-block-end: 0;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	font-weight: bold;
+`;
+
+export const Hours = styled.p`
+	padding-left: 5px;
+	margin-block-start: 0;
+	font-style: italic;
+	margin-bottom: 3px;
+`;
+
+export const LabelWrapper = styled.div`
+	background-color: #ffa5a5;
+	width: 23px;
+	height: 23px;
+	transition: 0.3s ease-in-out;
+`;
+
+export const LabelText = styled.p`
+	margin-block-start: 0;
+	margin-block-end: 0;
+	margin: 0 5px 0 5px;
+	width: 0px;
+	overflow: hidden;
+	transition: 0.3s ease-in-out;
+	white-space: nowrap;
+	font-family: "Lato";
+`;
+
+export const Labels = styled.div`
+	width: 23px;
+
+	:hover {
+		width: 100px;
+	}
+	&:hover ${LabelWrapper} {
+		width: 100px;
+	}
+	&:hover ${LabelText} {
+		width: 100px;
+	}
+`;
+
+export const AssignedToWrap = styled.div`
+	display: inline-flex;
+	width: 46px;
+	height: 46px;
+	justify-content: center;
+	background-color: #0496b2;
+	align-items: center;
+	vertical-align: top;
+	position: relative;
+	transform: translate(1px, 0);
+	font-size: 24px;
+`;
+
+export const ShiftInfo = styled.div`
+	width: 180px;
+	display: inline-block;
+	text-overflow: ellipsis;
+`;
+
+export const EmpRole = styled.h2`
+	float: right;
+	transform: translate(-12px, -50px);
+	color: grey;
+	font-size: 17px;
+	position: relative;
+	z-index: -5;
+`;
