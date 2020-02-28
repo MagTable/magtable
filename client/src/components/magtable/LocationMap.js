@@ -10,7 +10,8 @@ import {
 	FakePadDiv
 } from "../../styled/magtable/TruckMapMedia";
 import { useSelector } from "react-redux";
-import ParkingLocations from "../_dumbcomponents/ParkingLocations";
+import ParkingLocation from "../_dumbcomponents/ParkingLocation";
+import { CENTER, EAST, WEST } from "../../actions/constants";
 
 /**
  * @date 2020-02-17
@@ -29,6 +30,13 @@ function LocationMap(props) {
 	const parkingLocations = useSelector(
 		state => state.magtable.parkingLocations
 	);
+	const assignmentsWithLocation = useSelector(state =>
+		state.magtable.assignments.filter(
+			assignment => !!assignment.parkingLocation
+		)
+	);
+
+	console.log(assignmentsWithLocation);
 
 	return (
 		<TruckMapDiv>
@@ -44,21 +52,29 @@ function LocationMap(props) {
 								<PadColumn>
 									<NumberTop>{location.composite}</NumberTop>
 									{location.east && (
-										<ParkingLocations
-											parkingID={location.id}
-											pad={location.phonetic + "E"}
+										<ParkingLocation
+											locationID={location.id}
+											phonetic={location.phonetic}
+											position={EAST}
+											equipment={assignmentsWithLocation.filter(
+												assignment =>
+													assignment.parkingLocation.id === location.id &&
+													assignment.parkingLocation.position === EAST
+											)}
 										/>
 									)}
 									{location.center && (
-										<ParkingLocations
+										<ParkingLocation
 											parkingID={location.id}
-											pad={location.phonetic + "C"}
+											phonetic={location.phonetic}
+											position={CENTER}
 										/>
 									)}
 									{location.west && (
-										<ParkingLocations
+										<ParkingLocation
 											parkingID={location.id}
-											pad={location.phonetic + "W"}
+											phonetic={location.phonetic}
+											position={WEST}
 										/>
 									)}
 									{location.double && <FakePadDiv />}

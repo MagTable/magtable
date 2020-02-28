@@ -37,15 +37,24 @@ export const removeTruckLocation = equipmentID => dispatch => {
  * Sets the associated equipment's assignment parkingLocation
  *
  * @param equipmentID equipmentID of equipment to set location
- * @param parkingLocationID parkingLocationID of location to give to equipment
+ * @param locationID parkingLocationID of location to give to equipment
+ * @param position position of truck within location
+ * @param bay assigned bay of truck
+ * @param phonetic phonetic identifier of the parking loation
  */
 export const setTruckLocation = (
 	equipmentID,
-	parkingLocationID
+	locationID,
+	phonetic,
+	position,
+	bay
 ) => dispatch => {
 	dispatch({
 		type: SET_TRUCK_LOCATION,
-		payload: { equipmentID, parkingLocationID }
+		payload: {
+			equipmentID,
+			parkingLocation: { id: locationID, phonetic, position, bay }
+		}
 	});
 };
 

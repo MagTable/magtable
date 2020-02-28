@@ -40,6 +40,12 @@ export const SUCCESS = "SUCCESS";
 export const EAST_APRON = "EDA";
 export const WEST_APRON = "WDA";
 
+export const WEST = "W";
+export const EAST = "E";
+export const CENTER = "C";
+export const LEFT = "left";
+export const RIGHT = "right";
+
 export const AM = "am";
 export const PM = "pm";
 

@@ -19,30 +19,32 @@ import { removeTruckLocation } from "../../actions/magtable";
  * other than the parking locations in the first and last column.
  *
  * @constructor
- * @returns {*} The ParkingLocations component
+ * @returns {*} The ParkingLocation component
  */
-function ParkingLocations({ parkingID, pad }) {
+function ParkingLocation({ locationID, phonetic, position, assignments }) {
 	const dispatch = useDispatch();
-	const assignments = useSelector(state => state.magtable.assignments);
 
+	console.log(assignments);
 	// checks to see if the parking location is equal to the parkingID
-	const filterParkingLocations = assignments.filter(
-		assignment => assignment.parkingLocation === parkingID
-	);
+	// const filterParkingLocations = assignments.filter(
+	// 	assignment => assignment.parkingLocation === parkingID
+	// );
 
 	// Finds the equipment id.
-	const filteredTrucks = filterParkingLocations.map(
-		assignment => assignment.equipment.id
-	);
+	// const filteredTrucks = filterParkingLocations.map(
+	// 	assignment => assignment.equipment.id
+	// );
 
-	const filteredParkedLocations = assignments.map(
-		parked => parked.parkingLocation
-	);
+	// const filteredParkedLocations = assignments.map(
+	// 	parked => parked.parkingLocation
+	// );
 
 	const [{ canDrop, isOver }, drop] = useDrop({
 		accept: SET_TRUCK_LOCATION,
 		drop: () => ({
-			locationID: parkingID
+			locationID: locationID,
+			phonetic,
+			position
 		}),
 		canDrop: item => handleCanDrop(item),
 		collect: monitor => ({
@@ -53,13 +55,14 @@ function ParkingLocations({ parkingID, pad }) {
 
 	//todo Change up canDrop to check if a truck is already in the location. If so assign to the right side location for now.
 	const handleCanDrop = () => {
+		return true;
 		// basically, if there's a truck in X location, take current truck and change it's location by + 1, then the new truck going in
 		// take the original location and + 2.
 		// Example, id: 3, apron: WDA, code: BE
 		// Truck 24 is already there, and trying to add truck 26. First fire off a new setTruckLocation with truck 24 and locationID + 1,
 		// then truck 26 gets added to locationID 3+2.
 		// This information is consistent with initialParkingLocations.
-		if (!filteredParkedLocations?.includes(parkingID)) return true;
+		// if (!filteredParkedLocations?.includes(parkingID)) return true;
 	};
 
 	const dangerStyle = { border: "4px solid red" };
@@ -79,18 +82,19 @@ function ParkingLocations({ parkingID, pad }) {
 	// This wont be needed if I can get the drop to move the truck location when dropping in a second truck. Would have to edit the delete button so that if reverts the trucks location to one spot thou
 	return (
 		<>
-			{filteredTrucks.length <= 0 ? (
-				<PadDiv ref={drop} style={style}>
-					{pad}
-				</PadDiv>
-			) : (
-				<PadDiv ref={drop} style={style}>
-					{filteredTrucks}
-					<button onClick={() => handleClick(filteredTrucks[0])}>X</button>
-				</PadDiv>
-			)}
+			<PadDiv />
+			{/*{filteredTrucks.length <= 0 ? (*/}
+			{/*	<PadDiv ref={drop} style={style}>*/}
+			{/*		{phonetic + position}*/}
+			{/*	</PadDiv>*/}
+			{/*) : (*/}
+			{/*	<PadDiv ref={drop} style={style}>*/}
+			{/*		{filteredTrucks}*/}
+			{/*		<button onClick={() => handleClick(filteredTrucks[0])}>X</button>*/}
+			{/*	</PadDiv>*/}
+			{/*)}*/}
 		</>
 	);
 }
 
-export default ParkingLocations;
+export default ParkingLocation;
