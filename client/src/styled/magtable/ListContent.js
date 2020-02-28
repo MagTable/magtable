@@ -68,8 +68,9 @@ export const EmployeeListDiv = styled.div`
  */
 export const StartTimeSeparator = styled.div`
 	display: flex;
-	background: var(--shader-grey);
+	background: var(--subsection-title-bg);
 	padding-left: 20px;
+	color: var(--light-text);
 `;
 
 /**
@@ -255,7 +256,8 @@ export const TruckListButton = styled(Button)`
 	padding: 3px;
 	background-color: rgb(65, 66, 68);
 	color: white;
-
+	padding: 5px;
+	border-radius: 20px;
 	:hover {
 		background: rgb(95, 96, 98) npm install react-switch;
 	}

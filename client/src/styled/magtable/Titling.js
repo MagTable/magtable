@@ -10,7 +10,7 @@ import styled from "styled-components";
  * A block to hold the title for a section of the Mag Table eg. Employees, Trucks, Parking Locations, Tower.
  **/
 export const ListTitle = styled.div`
-	background-color: #545454;
+	background-color: var(--section-title-bg);
 	display: flex;
 	position: sticky;
 	height: 50px;

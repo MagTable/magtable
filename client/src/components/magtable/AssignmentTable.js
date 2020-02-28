@@ -3,7 +3,7 @@ import { AssignmentContainer, MapsDiv } from "../../styled/magtable/Maps";
 import { DndProvider } from "react-dnd";
 import Backend from "react-dnd-html5-backend";
 import TowerMap from "./TowerMap";
-import TruckMap from "./TruckMap";
+import LocationMap from "./LocationMap";
 import EmployeeList from "./EmployeeList";
 import TruckList from "./TruckList";
 
@@ -21,7 +21,7 @@ const AssignmentTable = () => {
 				<TruckList showAM={showAM} setShowAM={setShowAM} />
 
 				<MapsDiv>
-					<TruckMap />
+					<LocationMap />
 					<TowerMap showAM={showAM} />
 				</MapsDiv>
 			</AssignmentContainer>

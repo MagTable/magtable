@@ -22,9 +22,9 @@ import ParkingLocations from "../_dumbcomponents/ParkingLocations";
  *
  * @constructor
  * @param props
- * @returns {*} The TruckMap component
+ * @returns {*} The LocationMap component
  */
-function TruckMap(props) {
+function LocationMap(props) {
 	const apron = useSelector(state => state.magtable.selectedApron);
 	const assignments = useSelector(state => state.magtable.assignments);
 
@@ -349,4 +349,4 @@ function TruckMap(props) {
 	);
 }
 
-export default TruckMap;
+export default LocationMap;
