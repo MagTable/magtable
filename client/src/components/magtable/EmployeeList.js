@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
 	EmployeeListDiv,
 	EmployeeListDivWrapper,
+	EmployeeListItemDiv,
 	StartTimeSeparator
 } from "../../styled/magtable/ListContent";
 import {
@@ -35,13 +36,6 @@ const EmployeeList = () => {
 
 	if (loading) return <h1>Loading Users...</h1>;
 
-	if (employeeShifts.shifts.length === 0)
-		return (
-			<h1>
-				No Users... <small>update shift list</small>
-			</h1>
-		);
-
 	employeeShifts.shifts.forEach(emp => {
 		if (!startTimes.includes(emp.startTime)) {
 			startTimes.push(emp.startTime); // add the start time if it's not already in the list
@@ -66,19 +60,26 @@ const EmployeeList = () => {
 			</ListTitle>
 
 			<EmployeeListDiv>
-				{startTimes.map(startTime => (
-					<div key={startTime}>
-						<StartTimeSeparator>
-							<h2>{startTime}</h2>
-						</StartTimeSeparator>
-						{employeeShifts.shifts.map(
-							employee =>
-								employee.startTime === startTime && (
-									<EmployeeListItem key={employee.id} employee={employee} />
-								)
-						)}
-					</div>
-				))}
+				<EmployeeListItemDiv></EmployeeListItemDiv>
+				{startTimes.length > 0 ? (
+					startTimes.map(startTime => (
+						<div key={startTime}>
+							<StartTimeSeparator>
+								<h2>{startTime}</h2>
+							</StartTimeSeparator>
+							{employeeShifts.shifts.map(
+								employee =>
+									employee.startTime === startTime && (
+										<EmployeeListItem key={employee.id} employee={employee} />
+									)
+							)}
+						</div>
+					))
+				) : (
+					<h1>
+						No Employee Shifts... <br /> <small>update shift list</small>
+					</h1>
+				)}
 			</EmployeeListDiv>
 		</EmployeeListDivWrapper>
 	);
