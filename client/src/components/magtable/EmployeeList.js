@@ -3,6 +3,9 @@ import { useSelector } from "react-redux";
 import {
 	EmployeeListDiv,
 	EmployeeListDivWrapper,
+	EmployeeListItemDiv,
+	EmployeeListItemName,
+	EmployeeListItemTime,
 	StartTimeSeparator
 } from "../../styled/magtable/ListContent";
 import {
@@ -50,11 +53,6 @@ const EmployeeList = () => {
 		<EmployeeListDivWrapper>
 			<ListTitle>
 				<ListTitleText>Employees</ListTitleText>
-				<ListSubtitle>
-					{employeeShifts.scheduleDate} Last Updated:
-					{/* NEW LINE */}
-					{employeeShifts.lastUpdated}
-				</ListSubtitle>
 				<IconButton
 					faClassName={"fa-sync-alt"}
 					color={"white"}
@@ -63,6 +61,15 @@ const EmployeeList = () => {
 			</ListTitle>
 
 			<EmployeeListDiv>
+				<EmployeeListItemDiv>
+					<EmployeeListItemName>
+						{employeeShifts.scheduleDate}
+					</EmployeeListItemName>
+					<EmployeeListItemTime>
+						Last Updated:
+						{employeeShifts.lastUpdated}
+					</EmployeeListItemTime>
+				</EmployeeListItemDiv>
 				{startTimes.map(startTime => (
 					<div key={startTime}>
 						<StartTimeSeparator>
