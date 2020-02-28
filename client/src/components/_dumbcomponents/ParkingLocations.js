@@ -21,19 +21,19 @@ import { removeTruckLocation } from "../../actions/magtable";
  * @constructor
  * @returns {*} The ParkingLocations component
  */
-function ParkingLocations({ parkingID, pad }) {
+function ParkingLocations({ locationID, pad: label }) {
 	const dispatch = useDispatch();
 	const assignments = useSelector(state => state.magtable.assignments);
 
 	// checks to see if the parking location is equal to the parkingID
-	const filterParkingLocations = assignments.filter(
-		assignment => assignment.parkingLocation === parkingID
-	);
+	// const filterParkingLocations = assignments.filter(
+	// 	assignment => assignment.parkingLocation === parkingID
+	// );
 
 	// Finds the equipment id.
-	const filteredTrucks = filterParkingLocations.map(
-		assignment => assignment.equipment.id
-	);
+	// const filteredTrucks = filterParkingLocations.map(
+	// 	assignment => assignment.equipment.id
+	// );
 
 	const filteredParkedLocations = assignments.map(
 		parked => parked.parkingLocation
@@ -42,7 +42,7 @@ function ParkingLocations({ parkingID, pad }) {
 	const [{ canDrop, isOver }, drop] = useDrop({
 		accept: SET_TRUCK_LOCATION,
 		drop: () => ({
-			locationID: parkingID
+			locationID: locationID
 		}),
 		canDrop: item => handleCanDrop(item),
 		collect: monitor => ({
@@ -59,7 +59,7 @@ function ParkingLocations({ parkingID, pad }) {
 		// Truck 24 is already there, and trying to add truck 26. First fire off a new setTruckLocation with truck 24 and locationID + 1,
 		// then truck 26 gets added to locationID 3+2.
 		// This information is consistent with initialParkingLocations.
-		if (!filteredParkedLocations?.includes(parkingID)) return true;
+		// if (!filteredParkedLocations?.includes(parkingID)) return true;
 	};
 
 	const dangerStyle = { border: "4px solid red" };
@@ -79,16 +79,16 @@ function ParkingLocations({ parkingID, pad }) {
 	// This wont be needed if I can get the drop to move the truck location when dropping in a second truck. Would have to edit the delete button so that if reverts the trucks location to one spot thou
 	return (
 		<>
-			{filteredTrucks.length <= 0 ? (
-				<PadDiv ref={drop} style={style}>
-					{pad}
-				</PadDiv>
-			) : (
-				<PadDiv ref={drop} style={style}>
-					{filteredTrucks}
-					<button onClick={() => handleClick(filteredTrucks[0])}>X</button>
-				</PadDiv>
-			)}
+			{/*{filteredTrucks.length <= 0 ? (*/}
+			{/*	<PadDiv ref={drop} style={style}>*/}
+			{/*		{label}*/}
+			{/*	</PadDiv>*/}
+			{/*) : (*/}
+			{/*	<PadDiv ref={drop} style={style}>*/}
+			{/*		{filteredTrucks}*/}
+			{/*		<button onClick={() => handleClick(filteredTrucks[0])}>X</button>*/}
+			{/*	</PadDiv>*/}
+			{/*)}*/}
 		</>
 	);
 }

@@ -258,12 +258,15 @@ export const refreshEmployeeShifts = () => async dispatch => {
 		});
 
 		const res = await axios.get("/shift/update");
-		dispatch({
-			type: REFRESH_EMPLOYEE_SHIFTS,
-			payload: {
-				employeeShifts: res.data
-			}
-		});
+
+		setTimeout(() => {
+			dispatch({
+				type: REFRESH_EMPLOYEE_SHIFTS,
+				payload: {
+					employeeShifts: res.data
+				}
+			});
+		}, 500);
 		dispatch(setAlert("Shifts Updated!", "success"));
 	} catch (err) {
 		console.log(err);
