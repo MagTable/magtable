@@ -43,11 +43,11 @@ export const WEST_APRON = "WDA";
 export const WEST = "W";
 export const EAST = "E";
 export const CENTER = "C";
-export const LEFT = "left";
-export const RIGHT = "right";
+// export const LEFT = "left";
+// export const RIGHT = "right";
 
-export const AM = "am";
-export const PM = "pm";
+// export const AM = "am";
+// export const PM = "pm";
 
 export const SET_ALERT = "SET_ALERT";
 export const REMOVE_ALERT = "REMOVE_ALERT";
@@ -71,7 +71,7 @@ export const CLEAR_ERROR = "CLEAR_ERROR";
 
 /* Assignment Table */
 export const SET_EQUIPMENT_EMPLOYEE = "SET_EQUIPMENT_EMPLOYEE";
-export const ADD_EQUIPMENT_EMPLOYEE = "ADD_EQUIPMENT_EMPLOYEE";
+// export const ADD_EQUIPMENT_EMPLOYEE = "ADD_EQUIPMENT_EMPLOYEE";
 export const REMOVE_EQUIPMENT_EMPLOYEE = "REMOVE_EQUIPMENT_EMPLOYEE";
 
 export const SET_TRUCK_LOCATION = "SET_TRUCK_LOCATION";
