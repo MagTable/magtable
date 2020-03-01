@@ -29,17 +29,17 @@ import { refreshEmployeeShifts } from "../../actions/magtable";
 const EmployeeList = () => {
 	const dispatch = useDispatch();
 	const employeeShifts = useSelector(state => state.magtable.employeeShifts); // get the employees
-	const loading = useSelector(state => state.magtable.loading);
+	const loading = useSelector(state => state.magtable.shiftsLoading);
 	// employees are already sorted by time
 	const startTimes = [];
 
-	if (loading) return <h1>Loading Users...</h1>;
-
-	employeeShifts.shifts.forEach(emp => {
-		if (!startTimes.includes(emp.startTime)) {
-			startTimes.push(emp.startTime); // add the start time if it's not already in the list
-		}
-	});
+	if (!loading) {
+		employeeShifts.shifts.forEach(emp => {
+			if (!startTimes.includes(emp.startTime)) {
+				startTimes.push(emp.startTime); // add the start time if it's not already in the list
+			}
+		});
+	}
 
 	return (
 		<EmployeeListDivWrapper>
@@ -53,52 +53,61 @@ const EmployeeList = () => {
 				/>
 			</ListTitle>
 
-			<EmployeeListItemDiv>
-				<EmployeeListItemContentDiv>
-					<EmployeeListItemName>
-						{employeeShifts.scheduleDate}
-					</EmployeeListItemName>
-					<EmployeeListItemTime>
-						Last Updated:
-						{employeeShifts.lastUpdated}
-					</EmployeeListItemTime>
-				</EmployeeListItemContentDiv>
-			</EmployeeListItemDiv>
+			{!loading ? (
+				<>
+					<EmployeeListItemDiv>
+						<EmployeeListItemContentDiv>
+							<EmployeeListItemName>
+								{employeeShifts.scheduleDate}
+							</EmployeeListItemName>
+							<EmployeeListItemTime>
+								Last Updated:
+								{employeeShifts.lastUpdated}
+							</EmployeeListItemTime>
+						</EmployeeListItemContentDiv>
+					</EmployeeListItemDiv>
 
-			<EmployeeListDiv>
-				{startTimes.map(startTime => (
-					<div key={startTime}>
-						<StartTimeSeparator>
-							<h2>{startTime}</h2>
-						</StartTimeSeparator>
-						{employeeShifts.shifts.map(
-							employee =>
-								employee.startTime === startTime && (
-									<EmployeeListItem key={employee.id} employee={employee} />
-								)
+					<EmployeeListDiv>
+						{startTimes.map(startTime => (
+							<div key={startTime}>
+								<StartTimeSeparator>
+									<h2>{startTime}</h2>
+								</StartTimeSeparator>
+								{employeeShifts.shifts.map(
+									employee =>
+										employee.startTime === startTime && (
+											<EmployeeListItem key={employee.id} employee={employee} />
+										)
+								)}
+							</div>
+						))}
+						{startTimes.length > 0 ? (
+							startTimes.map(startTime => (
+								<div key={startTime}>
+									<StartTimeSeparator>
+										<h2>{startTime}</h2>
+									</StartTimeSeparator>
+									{employeeShifts.shifts.map(
+										employee =>
+											employee.startTime === startTime && (
+												<EmployeeListItem
+													key={employee.id}
+													employee={employee}
+												/>
+											)
+									)}
+								</div>
+							))
+						) : (
+							<h1>
+								No Employee Shifts... <br /> <small>update shift list</small>
+							</h1>
 						)}
-					</div>
-				))}
-				{startTimes.length > 0 ? (
-					startTimes.map(startTime => (
-						<div key={startTime}>
-							<StartTimeSeparator>
-								<h2>{startTime}</h2>
-							</StartTimeSeparator>
-							{employeeShifts.shifts.map(
-								employee =>
-									employee.startTime === startTime && (
-										<EmployeeListItem key={employee.id} employee={employee} />
-									)
-							)}
-						</div>
-					))
-				) : (
-					<h1>
-						No Employee Shifts... <br /> <small>update shift list</small>
-					</h1>
-				)}
-			</EmployeeListDiv>
+					</EmployeeListDiv>
+				</>
+			) : (
+				<h1>Loading Users...</h1>
+			)}
 		</EmployeeListDivWrapper>
 	);
 };

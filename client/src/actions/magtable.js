@@ -13,7 +13,8 @@ import {
 	GET_ASSIGNMENT_DATA,
 	ADD_EMPLOYEE_SHIFT,
 	TOGGLE_BAY_LEAD,
-	REFRESH_EMPLOYEE_SHIFTS
+	REFRESH_EMPLOYEE_SHIFTS,
+	REFRESHING_EMPLOYEE_SHIFTS
 } from "./constants";
 import axios from "axios";
 import { setAlert } from "./alert";
@@ -258,6 +259,10 @@ const toggleBayLead = equipmentID => dispatch => {
 
 export const refreshEmployeeShifts = () => async dispatch => {
 	try {
+		dispatch({
+			type: REFRESHING_EMPLOYEE_SHIFTS
+		});
+
 		const res = await axios.get("/shift/update");
 		dispatch({
 			type: REFRESH_EMPLOYEE_SHIFTS,
