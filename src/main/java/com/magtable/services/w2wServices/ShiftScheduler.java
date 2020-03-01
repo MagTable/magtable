@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Locale;
 
 @Component
 public class ShiftScheduler {
@@ -22,6 +21,7 @@ public class ShiftScheduler {
     private String SID = "32325584041A4";
     private ArrayList<CleanShift> shiftList;
     private static ShiftScheduler shiftScheduler;
+    private String lastUpdatedUI;
     private String lastUpdated;
 
     /** CONSTRUCTOR **/
@@ -51,6 +51,14 @@ public class ShiftScheduler {
         this.SID = SID;
     }
 
+    public String getLastUpdatedUI() {
+        return lastUpdatedUI;
+    }
+
+    public void setLastUpdatedUI(String lastUpdatedUI) {
+        this.lastUpdatedUI = lastUpdatedUI;
+    }
+
     public String getLastUpdated() {
         return lastUpdated;
     }
@@ -75,7 +83,7 @@ public class ShiftScheduler {
         final int DAY = cal.get(Calendar.DAY_OF_MONTH);
         final int YEAR = cal.get(Calendar.YEAR);
 
-        shiftScheduler.setLastUpdated(String.format("%d-%s @ %d:%d", DAY,cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()),cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE)));
+        shiftScheduler.setLastUpdated(String.format("%d:%02d",cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE)));
 
         Document doc;
 
@@ -116,18 +124,19 @@ public class ShiftScheduler {
 
                 //getting the employee name
                 String name = shifts.next().next().first().text();
-                shift.setName(name); //todo remove (NAV) and (GP) from names
 
-                shift.setGreen(false);
+                // todo remove unassigned
+                shift.setIsGreen(false);
                 if (name.contains("(GP)")) {
-                    shift.setGreen(true);
+                    shift.setIsGreen(true);
                 }
 
-                //todo invert this when merging with NAV changes
-                shift.setHasAvop(true);
+                shift.setNoAvop(false);
                 if (name.contains("(NAV)")) {
-                    shift.setHasAvop(false);
+                    shift.setNoAvop(true);
                 }
+
+                shift.setName(name.replace("(GP)", "").replace("(NAV)", ""));
 
                 //Getting the assignment
                 String[] splittedAssignment = shifts.next().next().next().first().text().split(" - ");

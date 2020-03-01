@@ -14,17 +14,17 @@ public class Tower implements Serializable {
 
     @Id
     @Column(name = "towerID", insertable = false, nullable = false)
-    private Integer towerID;
+    private Integer id;
 
     @Column(name = "position", nullable = false)
     private String position;
 
-    public Integer getTowerID() {
-        return towerID;
+    public Integer getID() {
+        return id;
     }
 
-    public void setTowerID(Integer towerID) {
-        this.towerID = towerID;
+    public void setID(Integer id) {
+        this.id = id;
     }
 
     public String getPosition() {

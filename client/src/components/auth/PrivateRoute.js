@@ -39,6 +39,8 @@ const PrivateRoute = ({
 	// this will prevent crashes and provide a waiting state. can be replaced with a spinner gif component in the future
 	if (loading) return <h1>Loading User...</h1>;
 
+	if (!isAuthenticated) return <Redirect to={"/login"} />;
+
 	// if the private route has been declared as an admin route via the adminRoute boolean prop,
 	// we check the user's role and redirect if it's not sufficient
 	if (adminRoute && user?.role?.name !== SYSTEM_ADMINISTRATOR) {

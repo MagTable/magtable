@@ -14,7 +14,7 @@ public class Shift implements Serializable {
 
     @Id
     @Column(insertable = false, name = "shiftID", nullable = false)
-    private Integer shiftID;
+    private Integer id;
 
     @Column(name = "description")
     private String description;
@@ -34,12 +34,12 @@ public class Shift implements Serializable {
     @Column(name = "isGreen", nullable = false)
     private Boolean isGreen;
 
-    public Integer getShiftID() {
-        return shiftID;
+    public Integer getId() {
+        return id;
     }
 
-    public void setShiftID(Integer shiftID) {
-        this.shiftID = shiftID;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getDescription() {

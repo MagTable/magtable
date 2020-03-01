@@ -14,6 +14,7 @@ import store from "../store";
 
 import { setAlert } from "./alert";
 import { getRoles } from "./user";
+import { getMagTable } from "./magtable";
 
 window.addEventListener("storage", e => {
 	// whenever our token changes, log the user out.
@@ -38,6 +39,7 @@ export const loadUser = () => async dispatch => {
 		});
 
 		dispatch(getRoles());
+		dispatch(getMagTable());
 	} catch (err) {
 		// this error is not necessary
 		// dispatch(setAlert(err.response?.data?.message, "danger"));
