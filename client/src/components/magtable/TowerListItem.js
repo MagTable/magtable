@@ -47,7 +47,7 @@ function TowerListItem({ assignment, showAM }) {
 			equipmentID: assignment.equipment.id,
 			equipmentSlotID: nextOpenSlot()
 		}),
-		canDrop: item => {
+		defaultCanDrop: item => {
 			setHoveredShiftDescription(item.shiftDescription);
 			return handleCanDrop(item);
 		},

@@ -36,7 +36,13 @@ function LocationMap(props) {
 		)
 	);
 
-	console.log(assignmentsWithLocation);
+	console.log(
+		assignmentsWithLocation.filter(
+			assignment =>
+				assignment.parkingLocation.id === 1 &&
+				assignment.parkingLocation.position === EAST
+		)
+	);
 
 	return (
 		<TruckMapDiv>
@@ -53,10 +59,9 @@ function LocationMap(props) {
 									<NumberTop>{location.composite}</NumberTop>
 									{location.east && (
 										<ParkingLocation
-											locationID={location.id}
-											phonetic={location.phonetic}
+											parkingLocation={location}
 											position={EAST}
-											equipment={assignmentsWithLocation.filter(
+											assignments={assignmentsWithLocation.filter(
 												assignment =>
 													assignment.parkingLocation.id === location.id &&
 													assignment.parkingLocation.position === EAST
@@ -65,16 +70,24 @@ function LocationMap(props) {
 									)}
 									{location.center && (
 										<ParkingLocation
-											parkingID={location.id}
-											phonetic={location.phonetic}
+											parkingLocation={location}
 											position={CENTER}
+											assignments={assignmentsWithLocation.filter(
+												assignment =>
+													assignment.parkingLocation.id === location.id &&
+													assignment.parkingLocation.position === CENTER
+											)}
 										/>
 									)}
 									{location.west && (
 										<ParkingLocation
-											parkingID={location.id}
-											phonetic={location.phonetic}
+											parkingLocation={location}
 											position={WEST}
+											assignments={assignmentsWithLocation.filter(
+												assignment =>
+													assignment.parkingLocation.id === location.id &&
+													assignment.parkingLocation.position === WEST
+											)}
 										/>
 									)}
 									{location.double && <FakePadDiv />}
