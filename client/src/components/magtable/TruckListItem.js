@@ -64,7 +64,13 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 			const dropResult = monitor.getDropResult();
 			if (item && dropResult) {
 				dispatch(
-					setTruckLocation(assignment.equipment.id, dropResult.locationID)
+					setTruckLocation(
+						assignment.equipment.id,
+						dropResult.locationID,
+						dropResult.phonetic,
+						dropResult.position,
+						dropResult.bay
+					)
 				);
 			}
 		},
@@ -79,7 +85,7 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 			equipmentID: assignment.equipment.id,
 			equipmentSlotID: nextOpenSlot()
 		}),
-		canDrop: item => {
+		defaultCanDrop: item => {
 			setHoveredShiftDescription(item.shiftDescription);
 			return handleCanDrop(item);
 		},
@@ -251,7 +257,20 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 							</TruckListItemEmployee>
 						))}
 					</TruckListItemEmployeeList>
-					<TruckListItemLocation>{assignment.location}</TruckListItemLocation>
+					<TruckListItemLocation>
+						<input
+							type="text"
+							value={
+								assignment.parkingLocation
+									? assignment.parkingLocation.phonetic +
+									  assignment.parkingLocation.position
+									: ""
+							}
+							maxLength={3}
+							style={{ width: "30px" }}
+							readOnly={true}
+						/>
+					</TruckListItemLocation>
 				</TruckInfoDiv>
 			</TruckListItemDiv>
 			<TruckProblemsDiv noticeOpen={noticeOpen}>

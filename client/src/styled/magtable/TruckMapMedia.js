@@ -1,10 +1,42 @@
 import styled from "styled-components";
+import { getColor } from "./ListContent";
 
 /**
  * @date 2020-02-20
  * @author MJ Kochuk
  * @module Styled
  */
+
+/**
+ * todo - arran
+ */
+export const HalfPadDiv = styled.div`
+	position: absolute;
+	height: 100%;
+	top: 0;
+
+	${({ left }) =>
+		left &&
+		`
+		left: 0; 
+		width: 50%;
+		border: 1px solid pink;
+	`}
+
+	${({ right }) =>
+		right &&
+		`
+		left: 50%; 
+		width: 50%;
+		border: 1px solid pink;
+	`}
+	
+	button: {
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+`;
 
 /**
  *
@@ -23,6 +55,7 @@ export const PadDiv = styled.div`
 	font-size: x-large;
 	font-family: "Noto Sans KR", sans-serif;
 	color: grey;
+	position: relative;
 `;
 
 export const FakePadDiv = styled.div`

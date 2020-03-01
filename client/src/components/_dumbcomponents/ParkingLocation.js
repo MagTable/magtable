@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDrop } from "react-dnd";
-import { SET_TRUCK_LOCATION } from "../../actions/constants";
-import { PadDiv } from "../../styled/magtable/TruckMapMedia";
+import { SET_TRUCK_LOCATION, SUCCESS } from "../../actions/constants";
+import {
+	HalfPadDiv,
+	PadDiv,
+	TopHalfPadDiv
+} from "../../styled/magtable/TruckMapMedia";
 import { useDispatch, useSelector } from "react-redux";
 import { removeTruckLocation } from "../../actions/magtable";
 
@@ -19,58 +23,18 @@ import { removeTruckLocation } from "../../actions/magtable";
  * other than the parking locations in the first and last column.
  *
  * @constructor
- * @returns {*} The ParkingLocations component
+ * @returns {*} The ParkingLocation component
  */
-function ParkingLocations({ parkingID, label, position }) {
+function ParkingLocation({ parkingLocation, position, assignments }) {
 	const dispatch = useDispatch();
-	const assignments = useSelector(state => state.magtable.assignments);
-
-	const defaultSpot = useSelector(state =>
-		state.magtable.assignments.find(
-			assignment =>
-				assignment.parkingLocation.id === parkingID &&
-				assignment.parkingLocation.position === position &&
-				assignment.parkingLocation.default
-		)
-	);
-
-	const leftSpot = useSelector(state =>
-		state.magtable.assignments.find(
-			assignment =>
-				assignment.parkingLocation.id === parkingID &&
-				assignment.parkingLocation.position === position &&
-				assignment.parkingLocation.left
-		)
-	);
-
-	const rightSpot = useSelector(state =>
-		state.magtable.assignments.find(
-			assignment =>
-				assignment.parkingLocation.id === parkingID &&
-				assignment.parkingLocation.position === position &&
-				assignment.parkingLocation.right
-		)
-	);
-
-	// checks to see if the parking location is equal to the parkingID
-	const filterParkingLocations = assignments.filter(
-		assignment => assignment.parkingLocation === parkingID
-	);
-
-	// Finds the equipment id.
-	const filteredTrucks = filterParkingLocations.map(
-		assignment => assignment.equipment.id
-	);
-
-	const filteredParkedLocations = assignments.map(
-		parked => parked.parkingLocation
-	);
 
 	const [{ canDrop, isOver }, drop] = useDrop({
 		accept: SET_TRUCK_LOCATION,
 		drop: () => ({
-			locationID: parkingID,
-			position: position
+			locationID: parkingLocation.id,
+			phonetic: parkingLocation.phonetic,
+			bay: null,
+			position
 		}),
 		canDrop: item => handleCanDrop(item),
 		collect: monitor => ({
@@ -80,25 +44,15 @@ function ParkingLocations({ parkingID, label, position }) {
 	});
 
 	//todo Change up canDrop to check if a truck is already in the location. If so assign to the right side location for now.
-	const handleCanDrop = item => {
-		console.log(item);
-
-		if (leftSpot && rightSpot) return false;
-
-		if (
-			item.id === defaultSpot.id ||
-			item.id === leftSpot.id ||
-			item.id === rightSpot.id
-		)
-			return false;
-
+	const handleCanDrop = () => {
+		return true;
 		// basically, if there's a truck in X location, take current truck and change it's location by + 1, then the new truck going in
 		// take the original location and + 2.
 		// Example, id: 3, apron: WDA, code: BE
 		// Truck 24 is already there, and trying to add truck 26. First fire off a new setTruckLocation with truck 24 and locationID + 1,
 		// then truck 26 gets added to locationID 3+2.
 		// This information is consistent with initialParkingLocations.
-		if (!filteredParkedLocations?.includes(parkingID)) return true;
+		// if (!filteredParkedLocations?.includes(parkingID)) return true;
 	};
 
 	const dangerStyle = { border: "4px solid red" };
@@ -114,22 +68,50 @@ function ParkingLocations({ parkingID, label, position }) {
 	};
 
 	//todo need to fix the filtedLocations[0] to be where the actual button truck is in the array. Maybe another turnary operator that checks if there's more than one vehicle?
+	console.log(canDrop, isOver);
 
 	// This wont be needed if I can get the drop to move the truck location when dropping in a second truck. Would have to edit the delete button so that if reverts the trucks location to one spot thou
-	return (
-		<>
-			{filteredTrucks.length <= 0 ? (
-				<PadDiv ref={drop} style={style}>
-					{label}
-				</PadDiv>
-			) : (
-				<PadDiv ref={drop} style={style}>
-					{filteredTrucks}
-					<button onClick={() => handleClick(filteredTrucks[0])}>X</button>
-				</PadDiv>
-			)}
-		</>
-	);
+	if (assignments.length === 0)
+		return <PadDiv ref={drop}>{parkingLocation.phonetic + position}</PadDiv>;
+
+	if (assignments.length === 1)
+		return (
+			<PadDiv>
+				<HalfPadDiv
+					// outlineType={rightCanDrop && rightIsOver && SUCCESS}
+					left={isOver}
+				>
+					{assignments[0].equipment.id}
+					<button>X</button>
+				</HalfPadDiv>
+				<HalfPadDiv
+					// outlineType={rightCanDrop && rightIsOver && SUCCESS}
+					right={isOver}
+				>
+					{assignments[0].equipment.id}
+					<button>X</button>
+				</HalfPadDiv>
+			</PadDiv>
+		);
+
+	if (assignments.length === 1 && !isOver)
+		return <PadDiv ref={drop}>{assignments[0].equipment.id}</PadDiv>;
+
+	if (assignments.length === 2)
+		return (
+			<PadDiv>
+				<HalfPadDiv left ref={drop}>
+					{assignments[0].equipment.id}
+					<button>X</button>
+				</HalfPadDiv>
+				<HalfPadDiv right ref={drop}>
+					{assignments[1].equipment.id}
+					<button>X</button>
+				</HalfPadDiv>
+			</PadDiv>
+		);
 }
 
-export default ParkingLocations;
+// function HalfPadDiv() {}
+
+export default React.memo(ParkingLocation);

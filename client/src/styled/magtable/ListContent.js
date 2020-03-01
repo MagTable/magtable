@@ -12,7 +12,7 @@ import { DANGER, SUCCESS, WARNING } from "../../actions/constants";
  * Provides the correct color code for an employee's label based on their abilities/role
  * @param type The codes representing an employees roles. Can be gp (Green pass), ts (Tower staff), ojt (On the job training) or bl (bay lead)
  */
-const getColor = type => {
+export const getColor = type => {
 	switch (type) {
 		case DANGER:
 			return "--context-red";

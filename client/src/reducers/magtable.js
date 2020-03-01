@@ -52,7 +52,7 @@ export default function(state = initialState, action) {
 					assignment.equipment.id === payload.equipmentID
 						? {
 								...assignment,
-								parkingLocation: payload.parkingLocationID
+								parkingLocation: payload.parkingLocation
 						  }
 						: assignment
 				)

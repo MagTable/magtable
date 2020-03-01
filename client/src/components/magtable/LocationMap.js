@@ -10,7 +10,7 @@ import {
 	FakePadDiv
 } from "../../styled/magtable/TruckMapMedia";
 import { useSelector } from "react-redux";
-import ParkingLocations from "../_dumbcomponents/ParkingLocations";
+import ParkingLocation from "../_dumbcomponents/ParkingLocation";
 import { CENTER, EAST, WEST } from "../../actions/constants";
 
 /**
@@ -30,6 +30,19 @@ function LocationMap(props) {
 	const parkingLocations = useSelector(
 		state => state.magtable.parkingLocations
 	);
+	const assignmentsWithLocation = useSelector(state =>
+		state.magtable.assignments.filter(
+			assignment => !!assignment.parkingLocation
+		)
+	);
+
+	console.log(
+		assignmentsWithLocation.filter(
+			assignment =>
+				assignment.parkingLocation.id === 1 &&
+				assignment.parkingLocation.position === EAST
+		)
+	);
 
 	return (
 		<TruckMapDiv>
@@ -45,24 +58,36 @@ function LocationMap(props) {
 								<PadColumn>
 									<NumberTop>{location.composite}</NumberTop>
 									{location.east && (
-										<ParkingLocations
-											parkingID={location.id}
-											label={location.phonetic + "E"}
+										<ParkingLocation
+											parkingLocation={location}
 											position={EAST}
+											assignments={assignmentsWithLocation.filter(
+												assignment =>
+													assignment.parkingLocation.id === location.id &&
+													assignment.parkingLocation.position === EAST
+											)}
 										/>
 									)}
 									{location.center && (
-										<ParkingLocations
-											parkingID={location.id}
-											label={location.phonetic + "C"}
+										<ParkingLocation
+											parkingLocation={location}
 											position={CENTER}
+											assignments={assignmentsWithLocation.filter(
+												assignment =>
+													assignment.parkingLocation.id === location.id &&
+													assignment.parkingLocation.position === CENTER
+											)}
 										/>
 									)}
 									{location.west && (
-										<ParkingLocations
-											parkingID={location.id}
-											label={location.phonetic + "W"}
+										<ParkingLocation
+											parkingLocation={location}
 											position={WEST}
+											assignments={assignmentsWithLocation.filter(
+												assignment =>
+													assignment.parkingLocation.id === location.id &&
+													assignment.parkingLocation.position === WEST
+											)}
 										/>
 									)}
 									{location.double && <FakePadDiv />}
