@@ -145,13 +145,7 @@ export default function(state = initialState, action) {
 				assignments: payload.equipment.map(elem => ({
 					equipment: elem,
 					employeeShifts: [null, null, null, null],
-					parkingLocation: {
-						id: null,
-						position: null,
-						default: false,
-						left: false,
-						right: false
-					},
+					parkingLocation: null,
 					brixRecords: []
 				})),
 				employeeShifts: payload.employeeShifts,

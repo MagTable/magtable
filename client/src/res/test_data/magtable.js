@@ -390,9 +390,9 @@ export const initialParkingLocations = [
 		right: 9
 	},
 	{
-		id: 10,
+		id: 11,
 		apron: "EDA",
-		phonetic: "F",
+		phonetic: "G",
 		east: true,
 		center: true,
 		west: true,
