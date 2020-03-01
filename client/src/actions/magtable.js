@@ -221,18 +221,24 @@ export const getMagTable = () => async dispatch => {
  * @param shiftData
  * @returns API returns the updated list of employee shifts
  */
-const addEmployeeShift = shiftData => async dispatch => {
+export const addEmployeeShift = shiftData => async dispatch => {
 	try {
-		const res = await axios.put(
-			"/magtable/shift",
-			AXIOS_JSON_HEADER,
-			shiftData
-		);
+		// const res = await axios.put(
+		// 	"/magtable/shift",
+		// 	AXIOS_JSON_HEADER,
+		// 	shiftData
+		// );
+
+		console.log(shiftData);
 
 		dispatch({
 			type: ADD_EMPLOYEE_SHIFT,
-			payload: res.data
+			payload: shiftData
 		});
+
+		dispatch(
+			setAlert(`Employee "${shiftData.name}" Added Successfully.`, "success")
+		);
 	} catch (err) {
 		console.log(err);
 	}
