@@ -224,17 +224,13 @@ export const getMagTable = () => async dispatch => {
  */
 export const addEmployeeShift = shiftData => async dispatch => {
 	try {
-		// const res = await axios.put(
-		// 	"/magtable/shift",
-		// 	AXIOS_JSON_HEADER,
-		// 	shiftData
-		// );
+		const res = await axios.post("/shift/add", shiftData, AXIOS_JSON_HEADER);
 
 		console.log(shiftData);
 
 		dispatch({
 			type: ADD_EMPLOYEE_SHIFT,
-			payload: shiftData
+			payload: res.data
 		});
 
 		dispatch(

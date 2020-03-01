@@ -9,54 +9,70 @@ const AddEmployeeShift = () => {
 	const dispatch = useDispatch();
 
 	const shiftTimes = [
-		"0000",
-		"0030",
-		"0100",
-		"0130",
-		"0200",
-		"0230",
-		"0300",
-		"0330",
-		"0400",
-		"0430",
-		"0500",
-		"0530",
-		"0600",
-		"0630",
-		"0700",
-		"0730",
-		"0800",
-		"0830",
-		"0900",
-		"0930",
-		"1000",
-		"1030",
-		"1100",
-		"1130",
-		"1200",
-		"1230",
-		"1300",
-		"1330",
-		"1400",
-		"1430",
-		"1500",
-		"1530",
-		"1600",
-		"1630",
-		"1700",
-		"1730",
-		"1800",
-		"1830",
-		"1900",
-		"1930",
-		"2000",
-		"2030",
-		"2100",
-		"2130",
-		"2200",
-		"2230",
-		"2300",
-		"2330"
+		{ value: "0000", name: "0000" },
+		{ value: "0030", name: "0030" },
+		{ value: "0100", name: "0100" },
+		{ value: "0130", name: "0130" },
+		{ value: "0200", name: "0200" },
+		{ value: "0230", name: "0230" },
+		{ value: "0300", name: "0300" },
+		{ value: "0330", name: "0330" },
+		{ value: "0400", name: "0400" },
+		{ value: "0430", name: "0430" },
+		{ value: "0500", name: "0500" },
+		{ value: "0530", name: "0530" },
+		{ value: "0600", name: "0600" },
+		{ value: "0630", name: "0630" },
+		{ value: "0700", name: "0700" },
+		{ value: "0730", name: "0730" },
+		{ value: "0800", name: "0800" },
+		{ value: "0830", name: "0830" },
+		{ value: "0900", name: "0900" },
+		{ value: "0930", name: "0930" },
+		{ value: "1000", name: "1000" },
+		{ value: "1030", name: "1030" },
+		{ value: "1100", name: "1100" },
+		{ value: "1130", name: "1130" },
+		{ value: "1200", name: "1200" },
+		{ value: "1230", name: "1230" },
+		{ value: "1300", name: "1300" },
+		{ value: "1330", name: "1330" },
+		{ value: "1400", name: "1400" },
+		{ value: "1430", name: "1430" },
+		{ value: "1500", name: "1500" },
+		{ value: "1530", name: "1530" },
+		{ value: "1600", name: "1600" },
+		{ value: "1630", name: "1630" },
+		{ value: "1700", name: "1700" },
+		{ value: "1730", name: "1730" },
+		{ value: "1800", name: "1800" },
+		{ value: "1830", name: "1830" },
+		{ value: "1900", name: "1900" },
+		{ value: "1930", name: "1930" },
+		{ value: "2000", name: "2000" },
+		{ value: "2030", name: "2030" },
+		{ value: "2100", name: "2100" },
+		{ value: "2130", name: "2130" },
+		{ value: "2200", name: "2200" },
+		{ value: "2230", name: "2230" },
+		{ value: "2300", name: "2300" },
+		{ value: "2330", name: "2330" }
+	];
+
+	const jobRoles = [
+		{ value: "Operations Manager", name: "Operations Manager" },
+		{ value: "Operations Supervisor", name: "Operations Supervisor" },
+		{ value: "CTM", name: "CTM" },
+		{ value: "Tower Spotter", name: "Tower Spotter" },
+		{ value: "Iceman", name: "Iceman" },
+		{ value: "Icehouse", name: "Icehouse" },
+		{ value: "Bay Lead", name: "Bay Lead" },
+		{ value: "Practical Trainer", name: "Practical Trainer" },
+		{ value: "Technician", name: "Technician" },
+		{ value: "OJT", name: "OJT" },
+		{ value: "OJT-Tower", name: "OJT-Tower" },
+		{ value: "Tower Trainer", name: "Tower Trainer" },
+		{ value: "Mechanic", name: "Mechanic" }
 	];
 
 	return (
@@ -77,12 +93,13 @@ const AddEmployeeShift = () => {
 				}}
 				validationSchema={Yup.object().shape({
 					name: Yup.string()
-						.matches(/^[a-zA-Z0-9]+$/, "Invalid Characters")
+						.matches(
+							/^(([A-za-z]+[\s]{1}[A-za-z]+)|([A-Za-z]+))$/,
+							"Invalid Characters"
+						)
 						.required("Required field")
 						.min(5, "Minimum Length is 5")
-						.max(20, "Maximum Length is 20"),
-					startTime: Yup.string().oneOf(shiftTimes),
-					endTime: Yup.string().oneOf(shiftTimes)
+						.max(20, "Maximum Length is 20")
 				})}
 			>
 				{props => (
@@ -100,269 +117,37 @@ const AddEmployeeShift = () => {
 						</Field>
 						<Field as="select" label={"Start Time"} name={"startTime"}>
 							<option value="">Select a Start Time</option>
-							<option type="number" value="0700">
-								0700
-							</option>
-							<option type="number" value="0730">
-								0730
-							</option>
-							<option type="number" value="0800">
-								0800
-							</option>
-							<option type="number" value="0830">
-								0830
-							</option>
-							<option type="number" value="0900">
-								0900
-							</option>
-							<option type="number" value="0930">
-								0930
-							</option>
-							<option type="number" value="1000">
-								1000
-							</option>
-							<option type="number" value="1030">
-								1030
-							</option>
-							<option type="number" value="1100">
-								1100
-							</option>
-							<option type="number" value="1130">
-								1130
-							</option>
-							<option type="number" value="1200">
-								1200
-							</option>
-							<option type="number" value="1230">
-								1230
-							</option>
-							<option type="number" value="1300">
-								1300
-							</option>
-							<option type="number" value="1330">
-								1330
-							</option>
-							<option type="number" value="1400">
-								1400
-							</option>
-							<option type="number" value="1430">
-								1430
-							</option>
-							<option type="number" value="1500">
-								1500
-							</option>
-							<option type="number" value="1530">
-								1530
-							</option>
-							<option type="number" value="1600">
-								1600
-							</option>
-							<option type="number" value="1630">
-								1630
-							</option>
-							<option type="number" value="1700">
-								1700
-							</option>
-							<option type="number" value="1730">
-								1730
-							</option>
-							<option type="number" value="1800">
-								1800
-							</option>
-							<option type="number" value="1830">
-								1830
-							</option>
-							<option type="number" value="1900">
-								1900
-							</option>
-							<option type="number" value="1930">
-								1930
-							</option>
-							<option type="number" value="2000">
-								2000
-							</option>
-							<option type="number" value="2030">
-								2030
-							</option>
-							<option type="number" value="2100">
-								2100
-							</option>
-							<option type="number" value="2130">
-								2130
-							</option>
-							<option type="number" value="2200">
-								2200
-							</option>
-							<option type="number" value="2230">
-								2230
-							</option>
-							<option type="number" value="2300">
-								2300
-							</option>
-							<option type="number" value="2330">
-								2330
-							</option>
+							{shiftTimes.map((time, key) => {
+								return (
+									<option key={time.value} value={time.value}>
+										{time.name}
+									</option>
+								);
+							})}
 						</Field>
 						<br />
 						<Field as="select" label={"End Time"} name={"endTime"}>
 							<option value="">Select a End Time</option>
-							<option type="number" value="0500">
-								0500
-							</option>
-							<option type="number" value="0530">
-								0530
-							</option>
-							<option type="number" value="0600">
-								0600
-							</option>
-							<option type="number" value="0630">
-								0630
-							</option>
-							<option type="number" value="0700">
-								0700
-							</option>
-							<option type="number" value="0730">
-								0730
-							</option>
-							<option type="number" value="0800">
-								0800
-							</option>
-							<option type="number" value="0830">
-								0830
-							</option>
-							<option type="number" value="0900">
-								0900
-							</option>
-							<option type="number" value="0930">
-								0930
-							</option>
-							<option type="number" value="1000">
-								1000
-							</option>
-							<option type="number" value="1030">
-								1030
-							</option>
-							<option type="number" value="1100">
-								1100
-							</option>
-							<option type="number" value="1130">
-								1130
-							</option>
-							<option type="number" value="1200">
-								1200
-							</option>
-							<option type="number" value="1230">
-								1230
-							</option>
-							<option type="number" value="1300">
-								1300
-							</option>
-							<option type="number" value="1330">
-								1330
-							</option>
-							<option type="number" value="1400">
-								1400
-							</option>
-							<option type="number" value="1430">
-								1430
-							</option>
-							<option type="number" value="1500">
-								1500
-							</option>
-							<option type="number" value="1530">
-								1530
-							</option>
-							<option type="number" value="1600">
-								1600
-							</option>
-							<option type="number" value="1630">
-								1630
-							</option>
-							<option type="number" value="1700">
-								1700
-							</option>
-							<option type="number" value="1730">
-								1730
-							</option>
-							<option type="number" value="1800">
-								1800
-							</option>
-							<option type="number" value="1830">
-								1830
-							</option>
-							<option type="number" value="1900">
-								1900
-							</option>
-							<option type="number" value="1930">
-								1930
-							</option>
-							<option type="number" value="2000">
-								2000
-							</option>
-							<option type="number" value="2030">
-								2030
-							</option>
-							<option type="number" value="2100">
-								2100
-							</option>
-							<option type="number" value="2130">
-								2130
-							</option>
-							<option type="number" value="2200">
-								2200
-							</option>
-							<option type="number" value="2230">
-								2230
-							</option>
-							<option type="number" value="2300">
-								2300
-							</option>
-							<option type="number" value="2330">
-								2330
-							</option>
-							<option type="number" value="2300">
-								0000
-							</option>
-							<option type="number" value="2330">
-								0030
-							</option>
-							<option type="number" value="2300">
-								0100
-							</option>
-							<option type="number" value="2330">
-								0130
-							</option>
-							<option type="number" value="2300">
-								0200
-							</option>
-							<option type="number" value="2330">
-								0230
-							</option>
-							<option type="number" value="2300">
-								0300
-							</option>
-							<option type="number" value="2330">
-								0330
-							</option>
-							<option type="number" value="2300">
-								0400
-							</option>
-							<option type="number" value="2330">
-								0430
-							</option>
+							{shiftTimes.map((time, key) => {
+								return (
+									<option key={time.value} value={time.value}>
+										{time.name}
+									</option>
+								);
+							})}
 						</Field>
 						<br />
-						<Field name={"description"}>
-							{({ field }) => (
-								<TextInput
-									{...field}
-									errors={props.errors.description}
-									touched={props.touched.description}
-									value={props.values.description}
-									label={"Role"}
-								/>
-							)}
+						<Field as="select" label={"Description"} name={"description"}>
+							<option value="">Select a Role</option>
+							{jobRoles.map((descriptions, key) => {
+								return (
+									<option key={descriptions.value} value={descriptions.value}>
+										{descriptions.name}
+									</option>
+								);
+							})}
 						</Field>
+						<br />
 						<Field name={"hasAvop"} as="checkbox">
 							<input type={"checkbox"} name={"hasAvop"} /> Has AVOP?
 						</Field>
