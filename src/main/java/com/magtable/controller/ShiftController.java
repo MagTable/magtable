@@ -98,7 +98,7 @@ public class ShiftController {
      * description     route to add a shift to shiftList
      * access          Personnel Managers, System Admins
      *
-     * @return the udpatedShiftList with the added employee in the correct spot
+     * @return the updatedShiftList with the added employee in the correct spot
      */
     @PostMapping("/add")
     public ShiftList addShift(@RequestBody CleanShift cleanShift){
@@ -111,18 +111,13 @@ public class ShiftController {
         for(CleanShift shift : listShifts){
             if(Integer.parseInt(shift.getStartTime()) >= Integer.parseInt(cleanShift.getStartTime())){
                 //insert the user into this part of the list
+                cleanShift.setId();
                 listShifts.add(listShifts.indexOf(shift), cleanShift);
                 break;
             }
         }
-        //Our front end sorts by IDs so have to reassign the IDs in sequential order
-        ArrayList<CleanShift> updatedIDs = new ArrayList<>(listShifts.size());
-        for(CleanShift shift : listShifts){
-            //setId method automatically increments ids
-        shift.setId();
-        updatedIDs.add(shift);
-        }
-        shiftList.setShifts(updatedIDs);
+        shiftList.setShifts(listShifts);
+
         return shiftList;
     }
 
