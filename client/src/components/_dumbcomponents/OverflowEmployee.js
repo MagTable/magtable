@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { OverflowMenuItem } from "./Overflow";
 import { ClickCatcher } from "../../styled/common/ClickCatcher";
 import { useDispatch } from "react-redux";
-import { refreshEmployeeShifts } from "../../actions/magtable";
 
 /**
  * @date 3/1/2020
@@ -25,7 +24,9 @@ function OverflowEmployee({
 	setOpen,
 	refreshEmployees,
 	showAMEmployees,
-	showPMEmployees
+	showPMEmployees,
+	showTechEmployees,
+	showTowerEmployees
 }) {
 	const dispatch = useDispatch();
 
@@ -43,9 +44,13 @@ function OverflowEmployee({
 				<>
 					<ClickCatcher onClick={() => setOpen(false)} />
 					<div id={"arrow"} />
-					<button1 onClick={showAMEmployees}>AM Employees</button1>
-					<button2 onClick={showPMEmployees}>PM Employees</button2>
-					<button3 onClick={refreshEmployees}>Refresh Employees</button3>
+					<buttonAM onClick={showAMEmployees}>AM Employees</buttonAM>
+					<buttonPM onClick={showPMEmployees}>PM Employees</buttonPM>
+					<buttonTech onClick={showTechEmployees}>Technicians</buttonTech>
+					<buttonTower onClick={showTowerEmployees}>Tower Staff</buttonTower>
+					<buttonRefresh onClick={refreshEmployees}>
+						Refresh Employees
+					</buttonRefresh>
 				</>
 			)}
 			{children({ openOverflow })}

@@ -14,6 +14,7 @@ import EmployeeListItem from "./EmployeeListItem";
 import IconButton from "../common/IconButton";
 import { refreshEmployeeShifts } from "../../actions/magtable";
 import OverflowEmployee from "../_dumbcomponents/OverflowEmployee";
+import { TECHNICIAN_POSITIONS, TOWER_POSITIONS } from "../../actions/constants";
 
 /**
  * @date 2/19/2020
@@ -35,10 +36,14 @@ const EmployeeList = () => {
 	// employees are already sorted by time
 	const startTimes = [];
 
-	// used to determine if the app show employees who start before noon, but after midnight
+	// used to determine if the app shows employees who start before noon, but after midnight, default false to show all times
 	const [filterAM, setFilterAM] = useState(false);
-	// used to determine if the app show employees who start before midnight, but after noon
+	// used to determine if the app shows employees who start before midnight, but after noon, default false to show all times
 	const [filterPM, setFilterPM] = useState(false);
+	// used to determine if the app shows employees that are part of the technician staff, default true to show all employees
+	const [filterTech, setFilterTech] = useState(true);
+	// used to determine if the app shows employees that are part of the tower staff, default true to show all employees
+	const [filterTower, setFilterTower] = useState(true);
 
 	if (loading) return <h1>Loading Users...</h1>;
 
@@ -65,12 +70,21 @@ const EmployeeList = () => {
 		setFilterAM(false);
 		setOpen(false);
 	};
+	const showTechEmployees = () => {
+		// toggle the tech filter, no need to make sure that tower filter is off
+		setFilterTech(!filterTech);
+		setOpen(false);
+	};
+	const showTowerEmployees = () => {
+		// toggle the tower filter, no need to make sure that tech filter is off
+		setFilterTower(!filterTower);
+		setOpen(false);
+	};
 
 	// determine what filter is applied, then apply the filter and return corresponding boolean value
 	function timeFilter(startTime) {
 		const start = parseInt(startTime);
 		if (filterAM) {
-			console.log(filterPM);
 			// if we are only showing AM shifts...
 			// if startTime is in the morning (AM) then return true here
 			if (start >= 0 && start < 1200) {
@@ -94,22 +108,31 @@ const EmployeeList = () => {
 		}
 	}
 
+	function positionFilter(position) {
+		if (filterTech && TECHNICIAN_POSITIONS.includes(position)) {
+			// if we want to see technicians AND position is included in TECHNICIAN_POSITIONS, return true
+			return true;
+		} else if (filterTower && TOWER_POSITIONS.includes(position)) {
+			// if we want to see tower staff AND position is included in TOWER+POSITIONS, return true
+			return true;
+		} else {
+			// we are filtering off everything, so show nothing
+			return false;
+		}
+	}
+
 	return (
 		<EmployeeListDivWrapper>
 			<ListTitle>
 				<ListTitleText>Employees</ListTitleText>
-				<IconButton
-					faClassName={"fa-sync-alt"}
-					color={"white"}
-					hoverColor={"grey"}
-					onClick={() => dispatch(refreshEmployeeShifts())}
-				/>
 				<OverflowEmployee
 					open={open}
 					setOpen={setOpen}
 					refreshEmployees={refreshEmployees}
 					showAMEmployees={showAMEmployees}
 					showPMEmployees={showPMEmployees}
+					showTechEmployees={showTechEmployees}
+					showTowerEmployees={showTowerEmployees}
 				>
 					{({ openOverflow }) => (
 						<IconButton
@@ -145,7 +168,8 @@ const EmployeeList = () => {
 									</StartTimeSeparator>
 									{employeeShifts.shifts.map(
 										employee =>
-											employee.startTime === startTime && (
+											employee.startTime === startTime &&
+											positionFilter(employee.description) && (
 												<EmployeeListItem
 													key={employee.id}
 													employee={employee}
