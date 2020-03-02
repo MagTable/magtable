@@ -73,8 +73,7 @@ const AddEmployeeShift = () => {
 		{ value: "2330", name: "2330" }
 	];
 
-	// All the possible job roles within the company.
-	//todo decide which roles we do NOT want to be able to be assigned to new shifts.
+	// All the possible job roles within the company. These go back as "description" to the backend.
 	const jobRoles = [
 		{ value: "Operations Manager", name: "Operations Manager" },
 		{ value: "Operations Supervisor", name: "Operations Supervisor" },
@@ -91,31 +90,51 @@ const AddEmployeeShift = () => {
 		{ value: "Mechanic", name: "Mechanic" }
 	];
 
+	// selectedTimes and selectedRole go through the objects above and get just the value
+	// so Yup validation can validate the options.
+	const selectedTime = [];
+	shiftTimes.forEach(shift => {
+		selectedTime.push(shift.value);
+	});
+
+	const selectedRole = [];
+	jobRoles.forEach(roles => {
+		selectedRole.push(jobRoles.value);
+	});
+
 	return (
 		<>
 			<Formik
 				initialValues={{
 					name: "",
-					startTime: 0,
-					endTime: 0,
+					startTime: "",
+					endTime: "",
 					description: "",
-					hasAvop: false,
+					noAvop: false,
 					isGreen: false
 				}}
 				onSubmit={(values, { resetForm }) => {
 					dispatch(addEmployeeShift(values));
-					alert(JSON.stringify(values, null, 2));
 					resetForm();
 				}}
 				validationSchema={Yup.object().shape({
 					name: Yup.string()
 						.matches(
-							/^(([A-za-z]+[\s]{1}[A-za-z]+)|([A-Za-z]+))$/,
+							/^(([A-za-z]+[\s]{1}[A-za-z]+)|([A-Za-z]+)|([A-za-z]+[\s]{1}[A-za-z]+[\s]{1}[A-za-z]+))$/,
 							"Invalid Characters"
 						)
 						.required("Required field")
 						.min(5, "Minimum Length is 5")
-						.max(20, "Maximum Length is 20")
+						.max(20, "Maximum Length is 20"),
+					startTime: Yup.string()
+						.oneOf(selectedTime)
+						.required("Required Start Time"),
+					endTime: Yup.string()
+						.oneOf(selectedTime)
+						.required("Required End Time"),
+					description: Yup.string()
+						.oneOf(selectedRole)
+						.required("Required Position")
 				})}
 			>
 				{props => (
@@ -131,7 +150,7 @@ const AddEmployeeShift = () => {
 								/>
 							)}
 						</Field>
-						{/* todo style the select boxes and options. */}
+						{/* todo style the select boxes and options. Make sure to include somewhere for Errors like TextInput has. */}
 						<Field as="select" label={"Start Time"} name={"startTime"}>
 							<option value="">Select a Start Time</option>
 							{shiftTimes.map((time, key) => {
@@ -143,7 +162,7 @@ const AddEmployeeShift = () => {
 							})}
 						</Field>
 						<br />
-						{/* todo style the select boxes and options. */}
+						{/* todo style the select boxes and options. Make sure to include somewhere for Errors like TextInput has.*/}
 						<Field as="select" label={"End Time"} name={"endTime"}>
 							<option value="">Select a End Time</option>
 							{shiftTimes.map((time, key) => {
@@ -155,7 +174,7 @@ const AddEmployeeShift = () => {
 							})}
 						</Field>
 						<br />
-						{/* todo style the select boxes and options. */}
+						{/* todo style the select boxes and options. Make sure to include somewhere for Errors like TextInput has.*/}
 						<Field as="select" label={"Description"} name={"description"}>
 							<option value="">Select a Role</option>
 							{jobRoles.map((descriptions, key) => {
@@ -167,9 +186,9 @@ const AddEmployeeShift = () => {
 							})}
 						</Field>
 						<br />
-						{/* todo style the checkboxes. */}
-						<Field name={"hasAvop"} as="checkbox">
-							<input type={"checkbox"} name={"hasAvop"} /> Has AVOP?
+						{/* todo style the checkboxes.*/}
+						<Field name={"noAvop"} as="checkbox">
+							<input type={"checkbox"} name={"noAvop"} /> No AVOP?
 						</Field>
 						<br />
 						{/* todo style the checkboxes. */}

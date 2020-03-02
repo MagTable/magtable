@@ -1,14 +1,11 @@
 package com.magtable.model;
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "magtablerecord")
-@Data
 public class Magtablerecord implements Serializable {
     private static final long serialVersionUID = 1L;
 
