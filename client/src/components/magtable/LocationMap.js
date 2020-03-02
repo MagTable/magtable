@@ -11,7 +11,7 @@ import {
 } from "../../styled/magtable/TruckMapMedia";
 import { useSelector } from "react-redux";
 import ParkingLocations from "../_dumbcomponents/ParkingLocations";
-import AddEmployeeShift from "./AddEmployeeShift";
+import AddEmployeeShift from "../modal/AddEmployeeShift";
 
 /**
  * @date 2020-02-17
