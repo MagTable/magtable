@@ -128,9 +128,9 @@ function FullDropDiv({ parkingLocation, position, assignments }) {
 	console.log(assignments);
 	return (
 		<FullPadDropDiv ref={drop} hover={isOver}>
-			{assignments[0] && assignments[0].equipment.id}
-			{assignments[1] && assignments[1].equipment.id}
-			{assignments[2] && "/" + assignments[2].equipment.id}
+			<span>{assignments[0] && assignments[0].equipment.id}</span>
+			<span>{assignments[1] && assignments[1].equipment.id}</span>
+			<span>{assignments[2] && "|" + assignments[2].equipment.id}</span>
 		</FullPadDropDiv>
 	);
 }

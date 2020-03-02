@@ -74,8 +74,8 @@ export const HalfPadDropDiv = styled(PadDropDiv)`
 	width: 50%;
 	outline: 1px solid pink;
 	outline-offset: -3px;
-	height: ${padHeaderHeight}px;
-	top: calc(100% - ${padHeaderHeight}px);
+	height: 50px;
+	top: calc(100% - 50px);
 	
 	${({ left, hover }) =>
 		left &&
@@ -100,6 +100,14 @@ export const FullPadDropDiv = styled(PadDropDiv)`
 	font-size: 2rem;
 
 	${({ hover }) => hover && `background: var(--context-green);`}
+	span {
+		transform: translateY(-20px);
+	}
+	hover: {
+		span {
+			transform: translateY(-20px);
+		}
+	}
 `;
 
 /**
@@ -111,7 +119,7 @@ export const PadDiv = styled.div`
 	outline: 2px solid black;
 	display: flex;
 	width: 95px;
-	flex-grow: 0.3;
+	flex-grow: 1.3;
 	flex-basis: 0;
 	font-size: x-large;
 	font-family: "Noto Sans KR", sans-serif;
