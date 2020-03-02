@@ -1,12 +1,10 @@
 package com.magtable.model;
 
-import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Data
 @Table(name = "assignment")
 public class Assignment implements Serializable {
     private static final long serialVersionUID = 1L;

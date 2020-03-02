@@ -1,11 +1,9 @@
 package com.magtable.model;
 
-import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Data
 @Table(name = "equipment")
 @Entity
 public class Equipment implements Serializable {

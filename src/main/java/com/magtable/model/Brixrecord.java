@@ -1,13 +1,11 @@
 package com.magtable.model;
 
-import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Table(name = "brixrecord")
-@Data
 @Entity
 public class Brixrecord implements Serializable {
     private static final long serialVersionUID = 1L;
