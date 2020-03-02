@@ -5,9 +5,23 @@ import * as Yup from "yup";
 import { addEmployeeShift } from "../../actions/magtable";
 import TextInput from "../common/TextInput";
 
+/**
+ * @date 2/28/2020
+ * @author Steven Wong
+ * @module Component
+ */
+
+/**
+ *
+ * Handles the rendering of the form to add an Employee Shift to the current shifts in the EmployeeListItems.
+ *
+ * @constructor
+ * @returns {*} The AddEmployeeShift component.
+ */
 const AddEmployeeShift = () => {
 	const dispatch = useDispatch();
 
+	// All potential shift times going by every 30 minutes following 24hr format standards.
 	const shiftTimes = [
 		{ value: "0000", name: "0000" },
 		{ value: "0030", name: "0030" },
@@ -59,6 +73,8 @@ const AddEmployeeShift = () => {
 		{ value: "2330", name: "2330" }
 	];
 
+	// All the possible job roles within the company.
+	//todo decide which roles we do NOT want to be able to be assigned to new shifts.
 	const jobRoles = [
 		{ value: "Operations Manager", name: "Operations Manager" },
 		{ value: "Operations Supervisor", name: "Operations Supervisor" },
@@ -115,6 +131,7 @@ const AddEmployeeShift = () => {
 								/>
 							)}
 						</Field>
+						{/* todo style the select boxes and options. */}
 						<Field as="select" label={"Start Time"} name={"startTime"}>
 							<option value="">Select a Start Time</option>
 							{shiftTimes.map((time, key) => {
@@ -126,6 +143,7 @@ const AddEmployeeShift = () => {
 							})}
 						</Field>
 						<br />
+						{/* todo style the select boxes and options. */}
 						<Field as="select" label={"End Time"} name={"endTime"}>
 							<option value="">Select a End Time</option>
 							{shiftTimes.map((time, key) => {
@@ -137,6 +155,7 @@ const AddEmployeeShift = () => {
 							})}
 						</Field>
 						<br />
+						{/* todo style the select boxes and options. */}
 						<Field as="select" label={"Description"} name={"description"}>
 							<option value="">Select a Role</option>
 							{jobRoles.map((descriptions, key) => {
@@ -148,14 +167,17 @@ const AddEmployeeShift = () => {
 							})}
 						</Field>
 						<br />
+						{/* todo style the checkboxes. */}
 						<Field name={"hasAvop"} as="checkbox">
 							<input type={"checkbox"} name={"hasAvop"} /> Has AVOP?
 						</Field>
 						<br />
+						{/* todo style the checkboxes. */}
 						<Field name={"isGreen"} as="checkbox">
 							<input type={"checkbox"} name={"isGreen"} /> Green Pass?
 						</Field>
 						<br />
+						{/* todo style the submit button. Maybe just make it exactly the same as our login one? */}
 						<button type="submit">Submit</button>
 					</Form>
 				)}
