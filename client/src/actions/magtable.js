@@ -226,8 +226,6 @@ export const addEmployeeShift = shiftData => async dispatch => {
 	try {
 		const res = await axios.post("/shift/add", shiftData, AXIOS_JSON_HEADER);
 
-		console.log(res.data);
-
 		dispatch({
 			type: ADD_EMPLOYEE_SHIFT,
 			payload: res.data
