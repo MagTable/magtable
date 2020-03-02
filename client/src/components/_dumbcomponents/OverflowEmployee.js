@@ -19,23 +19,23 @@ import { refreshEmployeeShifts } from "../../actions/magtable";
  */
 function OverflowEmployee({
 	children,
-	overflowAction,
-	action,
 	color,
-	hoverColor
+	hoverColor,
+	open,
+	setOpen,
+	refreshEmployees,
+	showAMEmployees,
+	showPMEmployees
 }) {
-	const [open, setOpen] = useState(false);
-
 	const dispatch = useDispatch();
 
 	const openOverflow = () => {
 		setOpen(true);
 	};
 
-	const handleClick = () => {
-		action();
+	function handleClick() {
 		setOpen(false);
-	};
+	}
 
 	return (
 		<OverflowMenuItem color={color} hoverColor={hoverColor}>
@@ -43,7 +43,9 @@ function OverflowEmployee({
 				<>
 					<ClickCatcher onClick={() => setOpen(false)} />
 					<div id={"arrow"} />
-					<button onClick={handleClick}>{overflowAction}</button>
+					<button1 onClick={showAMEmployees}>AM Employees</button1>
+					<button2 onClick={showPMEmployees}>PM Employees</button2>
+					<button3 onClick={refreshEmployees}>Refresh Employees</button3>
 				</>
 			)}
 			{children({ openOverflow })}
@@ -53,7 +55,6 @@ function OverflowEmployee({
 
 OverflowEmployee.propTypes = {
 	children: PropTypes.func.isRequired,
-	overflowActions: PropTypes.func.isRequired,
 	color: PropTypes.string,
 	hoverColor: PropTypes.string
 };
