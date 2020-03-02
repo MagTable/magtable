@@ -13,7 +13,7 @@ import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import EmployeeListItem from "./EmployeeListItem";
 import IconButton from "../common/IconButton";
 import { refreshEmployeeShifts } from "../../actions/magtable";
-import OverflowEmployee from "../_dumbcomponents/OverflowEmployee";
+import OverflowEmployee from "./OverflowEmployee";
 import { TECHNICIAN_POSITIONS, TOWER_POSITIONS } from "../../actions/constants";
 
 /**
