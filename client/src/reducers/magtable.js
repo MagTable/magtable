@@ -155,7 +155,7 @@ export default function(state = initialState, action) {
 		case ADD_EMPLOYEE_SHIFT:
 			return {
 				...state,
-				shifts: [...state.employeeShifts.shifts, payload]
+				employeeShifts: payload
 			};
 		case TOGGLE_BAY_LEAD:
 			// toggles the isBayLead attribute of the specified truck according to payload (id)
