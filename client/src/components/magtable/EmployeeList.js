@@ -13,6 +13,7 @@ import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import EmployeeListItem from "./EmployeeListItem";
 import IconButton from "../common/IconButton";
 import { refreshEmployeeShifts } from "../../actions/magtable";
+import OverflowEmployee from "../_dumbcomponents/OverflowEmployee";
 
 /**
  * @date 2/19/2020
@@ -51,6 +52,19 @@ const EmployeeList = () => {
 					hoverColor={"grey"}
 					onClick={() => dispatch(refreshEmployeeShifts())}
 				/>
+				<OverflowEmployee
+					overflowAction={"Refresh Employees"}
+					action={() => dispatch(refreshEmployeeShifts())}
+				>
+					{({ openOverflow }) => (
+						<IconButton
+							faClassName="fa-bars"
+							onClick={openOverflow}
+							color={"white"}
+							hoverColor={"grey"}
+						/>
+					)}
+				</OverflowEmployee>
 			</ListTitle>
 
 			<EmployeeListItemDiv>
