@@ -112,6 +112,26 @@ export const OverflowMenuItem = styled.div`
 			background: ${({ hoverColor }) => hoverColor || "#c7c7c7"};
 		}
 	}
+	buttonShifts {
+		z-index: 5;
+		padding: 0.5rem;
+
+		cursor: pointer;
+		border: 0;
+		background: ${({ color }) => color || "white"};
+		color: black;
+
+		box-shadow: 2px 2px 3px #999;
+
+		position: absolute;
+		width: 140px;
+		left: -130px;
+		top: 170px;
+
+		:hover {
+			background: ${({ hoverColor }) => hoverColor || "#c7c7c7"};
+		}
+	}
 
 	#arrow {
 		position: absolute;

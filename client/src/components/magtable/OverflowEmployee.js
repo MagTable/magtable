@@ -26,7 +26,8 @@ function OverflowEmployee({
 	showAMEmployees,
 	showPMEmployees,
 	showTechEmployees,
-	showTowerEmployees
+	showTowerEmployees,
+	addShifts
 }) {
 	const dispatch = useDispatch();
 
@@ -51,6 +52,13 @@ function OverflowEmployee({
 					<buttonRefresh onClick={refreshEmployees}>
 						Refresh Employees
 					</buttonRefresh>
+					<button
+						onClick={e => {
+							this.showAddEmployeeShift();
+						}}
+					>
+						Add Employee Shift
+					</button>
 				</>
 			)}
 			{children({ openOverflow })}

@@ -21,7 +21,7 @@ import CheckBox from "../common/CheckBox";
  * @constructor
  * @returns {*} The AddEmployeeShift component.
  */
-const AddEmployeeShift = () => {
+const AddEmployeeShift = ({ showModal, setModal }) => {
 	const dispatch = useDispatch();
 
 	// All potential shift times going by every 30 minutes following 24hr format standards.
@@ -79,6 +79,9 @@ const AddEmployeeShift = () => {
 	// All the possible job roles within the company. These go back as "description" to the backend.
 	const jobRoles = ALL_POSITIONS;
 
+	if (!this.props.show) {
+		return null;
+	}
 	return (
 		<>
 			<Formik
