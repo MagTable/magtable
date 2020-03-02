@@ -204,8 +204,7 @@ export const TruckInfoDiv = styled.div`
 	justify-content: space-between;
 `;
 
-// todo can we change this to a div?
-export const TruckListItemEmployee = styled.p`
+export const TruckListItemEmployee = styled.div`
 	margin-block-start: 0em;
 	margin-block-end: 0em;
 	height: ${({ show }) => (show ? "50%" : "0%")};

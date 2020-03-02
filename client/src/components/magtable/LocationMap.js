@@ -10,7 +10,7 @@ import {
 	FakePadDiv
 } from "../../styled/magtable/TruckMapMedia";
 import { useSelector } from "react-redux";
-import ParkingLocation from "../_dumbcomponents/ParkingLocation";
+import ParkingLocation from "./ParkingLocation";
 import { CENTER, EAST, WEST } from "../../actions/constants";
 
 /**
@@ -36,14 +36,7 @@ function LocationMap(props) {
 		)
 	);
 
-	console.log(
-		assignmentsWithLocation.filter(
-			assignment =>
-				assignment.parkingLocation.id === 1 &&
-				assignment.parkingLocation.position === EAST
-		)
-	);
-
+	// todo @mj help with unique key error here (added div messes up the map)
 	return (
 		<TruckMapDiv>
 			<ListTitle>
