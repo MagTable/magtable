@@ -11,8 +11,8 @@ public class CleanShift implements Serializable {
     private String startTime;
     private String endTime;
     private String description;
-    private boolean hasAvop;
-    private boolean isGreen;
+    private Boolean noAvop;
+    private Boolean isGreen;
 
     private static final AtomicInteger count = new AtomicInteger(0);
 
@@ -24,8 +24,8 @@ public class CleanShift implements Serializable {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId() {
+        this.id = count.incrementAndGet();
     }
 
     public String getName() {
@@ -60,19 +60,20 @@ public class CleanShift implements Serializable {
         this.description = description;
     }
 
-    public boolean isHasAvop() {
-        return hasAvop;
+
+    public Boolean getNoAvop() {
+        return noAvop;
     }
 
-    public void setHasAvop(boolean hasAvop) {
-        this.hasAvop = hasAvop;
+    public void setNoAvop(Boolean noAvop) {
+        this.noAvop = noAvop;
     }
 
-    public boolean isGreen() {
+    public Boolean getIsGreen() {
         return isGreen;
     }
 
-    public void setGreen(boolean green) {
-        isGreen = green;
+    public void setIsGreen(Boolean isGreen) {
+        this.isGreen = isGreen;
     }
 }

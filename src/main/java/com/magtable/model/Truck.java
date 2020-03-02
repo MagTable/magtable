@@ -14,7 +14,7 @@ public class Truck implements Serializable {
 
     @Id
     @Column(name = "truckID", insertable = false, nullable = false)
-    private Integer truckID;
+    private Integer id;
 
     @Column(name = "status", nullable = false)
     private String status;
@@ -22,12 +22,12 @@ public class Truck implements Serializable {
     @Column(name = "notice", nullable = false)
     private String notice;
 
-    public Integer getTruckID() {
-        return truckID;
+    public Integer getID() {
+        return id;
     }
 
-    public void setTruckID(Integer truckID) {
-        this.truckID = truckID;
+    public void setID(Integer id) {
+        this.id = id;
     }
 
     public String getStatus() {

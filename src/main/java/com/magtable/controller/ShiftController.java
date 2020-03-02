@@ -1,6 +1,7 @@
 package com.magtable.controller;
 
 
+import com.magtable.model.CleanShift;
 import com.magtable.model.ShiftList;
 import com.magtable.services.userServices.ErrorService;
 import com.magtable.services.w2wServices.ShiftScheduler;
@@ -8,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/shift")
@@ -23,38 +28,97 @@ public class ShiftController {
      *
      * @return A list of the W2W shifts
      */
-    @GetMapping("/get")
-    public ShiftList getAllShifts(){
+    @GetMapping("/all")
+    public ShiftList getAllShifts() {
         ShiftScheduler shiftScheduler = ShiftScheduler.getInstance();
         ShiftList shiftList = new ShiftList(shiftScheduler.getShiftList());
-        shiftList.setLastUpdated(shiftScheduler.getLastUpdated());
+        shiftList.setLastUpdated(shiftScheduler.getLastUpdatedUI());
         return shiftList;
     }
 
     /**
-     * route           POST /shift/update
+     * route           GET /shift/update
      * description     route to force a new fetch of W2W shift data
      * access          Personnel Managers, System Admins
      *
      * @return an OK status if routes were updated
      */
-    @PostMapping("/update")
-    public ResponseEntity<HttpStatus> updateShifts(){
+    @GetMapping("/update")
+    public ShiftList updateShifts() {
+        boolean update = true;
+
         ShiftScheduler shiftScheduler = ShiftScheduler.getInstance();
-        try {
-            shiftScheduler.updateShifts();
-        } catch (Exception e) {
-            throw errorService.sessionExpired();
+        ShiftList shiftList = new ShiftList(shiftScheduler.getShiftList());
+
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        String lastUpdated = shiftScheduler.getLastUpdated();
+        String currentTime = sdf.format(new Date());
+
+        if (lastUpdated != null) {
+            try {
+                // https://mkyong.com/java/how-to-calculate-date-time-difference-in-java/
+
+                Date d1 = sdf.parse(lastUpdated);
+                Date d2 = sdf.parse(currentTime);
+                long diff = d2.getTime() - d1.getTime();
+                long diffMinutes = diff / (60 * 1000) % 60;
+                if (diffMinutes < 10)
+                    update = false;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        return ResponseEntity.ok(HttpStatus.OK);
+        if (update) {
+            try {
+                shiftScheduler.updateShifts();
+                shiftList.setLastUpdated(shiftScheduler.getLastUpdated());
+            } catch (Exception e) {
+                throw errorService.sessionExpired();
+            }
+        }
+            ///update for UI
+            Calendar cal = Calendar.getInstance();
+            shiftScheduler.setLastUpdatedUI(String.format("%d:%02d",cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE)));
+
+        shiftList.setShifts(shiftScheduler.getShiftList());
+        shiftList.setLastUpdated(shiftScheduler.getLastUpdatedUI());
+        return shiftList;
     }
 
-    //TODO discuss with arran -> I don't know if this is what we need. I assume the SID will be gotten from the front end
     @PostMapping("/update/SID")
-    public ResponseEntity<HttpStatus> updateSID(@RequestBody String SID){
+    public ResponseEntity<HttpStatus> updateSID(@RequestBody String SID) {
         ShiftScheduler shiftScheduler = ShiftScheduler.getInstance();
         shiftScheduler.setSID(SID);
         return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    /**
+     * route           POST /shift/add
+     * description     route to add a shift to shiftList
+     * access          Personnel Managers, System Admins
+     *
+     * @return the updatedShiftList with the added employee in the correct spot
+     */
+    @PostMapping("/add")
+    public ShiftList addShift(@RequestBody CleanShift cleanShift){
+        ShiftScheduler shiftScheduler = ShiftScheduler.getInstance();
+        ShiftList shiftList = new ShiftList(shiftScheduler.getShiftList());
+        //Arraylist to modify with the new shift
+        ArrayList<CleanShift> listShifts = shiftList.getShifts();
+
+        //Finding where to insert the added user into
+        for(CleanShift shift : listShifts){
+            if(Integer.parseInt(shift.getStartTime()) >= Integer.parseInt(cleanShift.getStartTime())){
+                //insert the user into this part of the list
+                cleanShift.setId();
+                listShifts.add(listShifts.indexOf(shift), cleanShift);
+                break;
+            }
+        }
+        shiftList.setShifts(listShifts);
+
+        return shiftList;
     }
 
 }

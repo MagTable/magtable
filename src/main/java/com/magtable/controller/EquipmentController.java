@@ -31,7 +31,7 @@ public class EquipmentController {
      *
      * @return the list of trucks
      */
-    @GetMapping("/trucks")
+    @GetMapping("/truck/all")
     public List<Truck> getAllTrucks(){
         List<Truck> truckList = truckRepository.findAll();
         return truckList;
@@ -44,7 +44,7 @@ public class EquipmentController {
      *
      * @return the list of towers
      */
-    @GetMapping("/towers")
+    @GetMapping("/tower/all")
     public List<Tower> getAllTowers(){
         List<Tower> towerList = towerRepository.findAll();
         return towerList;
