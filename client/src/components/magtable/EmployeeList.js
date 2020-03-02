@@ -45,13 +45,6 @@ const EmployeeList = () => {
 	// used to determine if the app shows employees that are part of the tower staff, default true to show all employees
 	const [filterTower, setFilterTower] = useState(true);
 
-	if (loading) return <h1>Loading Users...</h1>;
-
-	employeeShifts.shifts.forEach(emp => {
-		if (!startTimes.includes(emp.startTime)) {
-			startTimes.push(emp.startTime); // add the start time if it's not already in the list
-		}
-	});
 	if (!loading) {
 		employeeShifts.shifts.forEach(emp => {
 			if (!startTimes.includes(emp.startTime)) {
@@ -167,36 +160,27 @@ const EmployeeList = () => {
 					</EmployeeListItemDiv>
 
 					<EmployeeListDiv>
-						{startTimes.map(startTime => (
-							<div key={startTime}>
-								<StartTimeSeparator>
-									<h2>{startTime}</h2>
-								</StartTimeSeparator>
-								{employeeShifts.shifts.map(
-									employee =>
-										employee.startTime === startTime && (
-											<EmployeeListItem key={employee.id} employee={employee} />
-										)
-								)}
-							</div>
-						))}
 						{startTimes.length > 0 ? (
-							startTimes.map(startTime => (
-								<div key={startTime}>
-									<StartTimeSeparator>
-										<h2>{startTime}</h2>
-									</StartTimeSeparator>
-									{employeeShifts.shifts.map(
-										employee =>
-											employee.startTime === startTime && (
-												<EmployeeListItem
-													key={employee.id}
-													employee={employee}
-												/>
-											)
-									)}
-								</div>
-							))
+							startTimes.map(
+								startTime =>
+									timeFilter(startTime) && (
+										<div key={startTime}>
+											<StartTimeSeparator>
+												<h2>{startTime}</h2>
+											</StartTimeSeparator>
+											{employeeShifts.shifts.map(
+												employee =>
+													employee.startTime === startTime &&
+													positionFilter(employee.description) && (
+														<EmployeeListItem
+															key={employee.id}
+															employee={employee}
+														/>
+													)
+											)}
+										</div>
+									)
+							)
 						) : (
 							<h1>
 								No Employee Shifts... <br /> <small>update shift list</small>
@@ -205,7 +189,7 @@ const EmployeeList = () => {
 					</EmployeeListDiv>
 				</>
 			) : (
-				<h1>Loading Users...</h1>
+				<h1>Loading Employee Shifts...</h1>
 			)}
 		</EmployeeListDivWrapper>
 	);
