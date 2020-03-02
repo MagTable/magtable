@@ -12,7 +12,7 @@ import { DANGER, SUCCESS, WARNING } from "../../actions/constants";
  * Provides the correct color code for an employee's label based on their abilities/role
  * @param type The codes representing an employees roles. Can be gp (Green pass), ts (Tower staff), ojt (On the job training) or bl (bay lead)
  */
-const getColor = type => {
+export const getColor = type => {
 	switch (type) {
 		case DANGER:
 			return "--context-red";
@@ -44,13 +44,14 @@ const getTruckColorCode = status => {
 			return "--context-grey";
 		}
 		default: {
-			return "#fff"; // If an unknown tuck status is provided.
+			return "#fff"; // If an unknown truck status is provided.
 		}
 	}
 };
 
 /**
  *    Holds the currently available employees and separator divs for start times.
+ *    todo would like to set a max width on this - arran
  */
 export const EmployeeListDiv = styled.div`
 	margin: 0;
@@ -144,7 +145,7 @@ export const EmployeeLabelDiv = styled.div`
 `;
 
 /**
- *
+ * todo would like to set a max width on this - arran
  **/
 export const TruckListDiv = styled.div`
 	// border: 2px solid var(--border-color);
@@ -194,6 +195,7 @@ export const TruckNumberDiv = styled.div`
 	align-items: center;
 	color: black;
 	font-size: 40px;
+	${({ isDragging }) => isDragging && `opacity: 0.5;`}
 `;
 
 export const TruckInfoDiv = styled.div`
@@ -202,8 +204,7 @@ export const TruckInfoDiv = styled.div`
 	justify-content: space-between;
 `;
 
-// todo can we change this to a div?
-export const TruckListItemEmployee = styled.p`
+export const TruckListItemEmployee = styled.div`
 	margin-block-start: 0em;
 	margin-block-end: 0em;
 	height: ${({ show }) => (show ? "50%" : "0%")};

@@ -25,6 +25,7 @@ import {
 import { useDispatch } from "react-redux";
 import {
 	removeEquipmentEmployee,
+	removeTruckLocation,
 	setTruckLocation
 } from "../../actions/magtable";
 import IconButton from "../common/IconButton";
@@ -59,13 +60,33 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 	const dispatch = useDispatch();
 
 	const [{ isDragging }, drag] = useDrag({
-		item: { type: SET_TRUCK_LOCATION },
+		item: { type: SET_TRUCK_LOCATION, id: assignment.equipment.id },
 		end: (item, monitor) => {
 			const dropResult = monitor.getDropResult();
 			if (item && dropResult) {
-				dispatch(
-					setTruckLocation(assignment.equipment.id, dropResult.locationID)
-				);
+				if (dropResult.assign) {
+					dispatch(
+						setTruckLocation(
+							dropResult.parkingLocation,
+							dropResult.position,
+							dropResult.assign.equipmentID,
+							dropResult.assign.bay
+						)
+					);
+				}
+				if (dropResult.reassign) {
+					dispatch(
+						setTruckLocation(
+							dropResult.parkingLocation,
+							dropResult.position,
+							dropResult.reassign.equipmentID,
+							dropResult.reassign.bay
+						)
+					);
+				}
+				if (dropResult.unassign) {
+					dropResult.unassign.forEach(id => dispatch(removeTruckLocation(id)));
+				}
 			}
 		},
 		collect: monitor => ({
@@ -143,8 +164,9 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 			isOver &&
 			canDrop &&
 			!TECHNICIAN_POSITIONS.includes(hoveredShiftDescription)
-		)
+		) {
 			return WARNING;
+		}
 
 		if (isOver && canDrop) return SUCCESS;
 	}
@@ -223,7 +245,11 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 	return (
 		<div ref={drop}>
 			<TruckListItemDiv>
-				<TruckNumberDiv ref={drag} status={assignment.equipment.status}>
+				<TruckNumberDiv
+					ref={drag}
+					status={assignment.equipment.status}
+					isDragging={isDragging}
+				>
 					{assignment.equipment.id}
 				</TruckNumberDiv>
 				<TruckInfoDiv>
@@ -254,7 +280,13 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 					<TruckListItemLocation>
 						<input
 							type="text"
-							value={assignment.parkingLocation}
+							value={
+								assignment.parkingLocation
+									? assignment.parkingLocation.phonetic +
+									  assignment.parkingLocation.position +
+									  assignment.parkingLocation.bay
+									: ""
+							}
 							maxLength={3}
 							style={{ width: "30px" }}
 							readOnly={true}

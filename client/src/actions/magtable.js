@@ -37,15 +37,27 @@ export const removeTruckLocation = equipmentID => dispatch => {
  * Sets the associated equipment's assignment parkingLocation
  *
  * @param equipmentID equipmentID of equipment to set location
- * @param parkingLocationID parkingLocationID of location to give to equipment
+ * @param parkingLocation parkingLocation to give to equipment
+ * @param position position of truck within location
+ * @param bay bay to assign to truck
  */
 export const setTruckLocation = (
+	parkingLocation,
+	position,
 	equipmentID,
-	parkingLocationID
+	bay
 ) => dispatch => {
 	dispatch({
 		type: SET_TRUCK_LOCATION,
-		payload: { equipmentID, parkingLocationID }
+		payload: {
+			equipmentID,
+			parkingLocation: {
+				id: parkingLocation.id,
+				phonetic: parkingLocation.phonetic,
+				position,
+				bay
+			}
+		}
 	});
 };
 
@@ -86,21 +98,21 @@ export const setEquipmentEmployee = (
  * @param magtable magtable to publish
  * @returns API returns the saved state of the magtable
  */
-const publishTable = magtable => async dispatch => {
-	try {
-		const res = await axios.post(
-			"/magtable/publish",
-			AXIOS_JSON_HEADER,
-			magtable
-		);
-		dispatch({
-			type: PUBLISH_TABLE,
-			payload: res.data
-		});
-	} catch (err) {
-		console.log(err);
-	}
-};
+// const publishTable = magtable => async dispatch => {
+// 	try {
+// 		const res = await axios.post(
+// 			"/magtable/publish",
+// 			AXIOS_JSON_HEADER,
+// 			magtable
+// 		);
+// 		dispatch({
+// 			type: PUBLISH_TABLE,
+// 			payload: res.data
+// 		});
+// 	} catch (err) {
+// 		console.log(err);
+// 	}
+// };
 
 /**
  * Saves a brix record to an assignment's brixRecords list
@@ -109,33 +121,33 @@ const publishTable = magtable => async dispatch => {
  * @param brixRecord brixRecord to save to assignment
  * @returns API returns updated list of brix records for the assignment
  */
-const addBrixRecord = (equipmentID, brixRecord) => async dispatch => {
-	try {
-		const res = await axios.put("/magtable/brix", AXIOS_JSON_HEADER, {
-			equipmentID,
-			brixRecord
-		});
-
-		dispatch({
-			type: ADD_BRIX_RECORD,
-			payload: res.data
-		});
-	} catch (err) {
-		console.log(err);
-	}
-};
+// const addBrixRecord = (equipmentID, brixRecord) => async dispatch => {
+// 	try {
+// 		const res = await axios.put("/magtable/brix", AXIOS_JSON_HEADER, {
+// 			equipmentID,
+// 			brixRecord
+// 		});
+//
+// 		dispatch({
+// 			type: ADD_BRIX_RECORD,
+// 			payload: res.data
+// 		});
+// 	} catch (err) {
+// 		console.log(err);
+// 	}
+// };
 
 /**
  * Sets the daily mix to a given percentage
  *
  * @param dailyMix dailyMix to set
  */
-const setDailyMix = dailyMix => dispatch => {
-	dispatch({
-		type: SET_DAILY_MIX,
-		payload: dailyMix
-	});
-};
+// const setDailyMix = dailyMix => dispatch => {
+// 	dispatch({
+// 		type: SET_DAILY_MIX,
+// 		payload: dailyMix
+// 	});
+// };
 
 /**
  * Adds a daily message to the magtable
@@ -143,22 +155,22 @@ const setDailyMix = dailyMix => dispatch => {
  * @param message message to add to the magtable
  * @returns API returns the updated list of daily messages
  */
-const addDailyMessage = message => async dispatch => {
-	try {
-		const res = await axios.put(
-			"/magtable/message/",
-			AXIOS_JSON_HEADER,
-			message
-		);
-
-		dispatch({
-			type: ADD_DAILY_MESSAGE,
-			payload: res.data
-		});
-	} catch (err) {
-		console.log(err);
-	}
-};
+// const addDailyMessage = message => async dispatch => {
+// 	try {
+// 		const res = await axios.put(
+// 			"/magtable/message/",
+// 			AXIOS_JSON_HEADER,
+// 			message
+// 		);
+//
+// 		dispatch({
+// 			type: ADD_DAILY_MESSAGE,
+// 			payload: res.data
+// 		});
+// 	} catch (err) {
+// 		console.log(err);
+// 	}
+// };
 
 /**
  * Removes a message from the daily message list
@@ -166,18 +178,18 @@ const addDailyMessage = message => async dispatch => {
  * @param messageID messageID of the messaged to remove
  * @returns API returns the updated list of daily messages
  */
-const removeDailyMessage = messageID => async dispatch => {
-	try {
-		const res = await axios.delete(`/magtable/message/${messageID}`);
-
-		dispatch({
-			type: REMOVE_DAILY_MESSAGE,
-			payload: res.data
-		});
-	} catch (err) {
-		console.log(err);
-	}
-};
+// const removeDailyMessage = messageID => async dispatch => {
+// 	try {
+// 		const res = await axios.delete(`/magtable/message/${messageID}`);
+//
+// 		dispatch({
+// 			type: REMOVE_DAILY_MESSAGE,
+// 			payload: res.data
+// 		});
+// 	} catch (err) {
+// 		console.log(err);
+// 	}
+// };
 
 /**
  * Changes the selected apron
@@ -244,12 +256,12 @@ export const addEmployeeShift = shiftData => async dispatch => {
  *
  * @param equipmentID equipmentID of assignment to toggle
  */
-const toggleBayLead = equipmentID => dispatch => {
-	dispatch({
-		type: TOGGLE_BAY_LEAD,
-		payload: equipmentID
-	});
-};
+// const toggleBayLead = equipmentID => dispatch => {
+// 	dispatch({
+// 		type: TOGGLE_BAY_LEAD,
+// 		payload: equipmentID
+// 	});
+// };
 
 export const refreshEmployeeShifts = () => async dispatch => {
 	try {
@@ -258,12 +270,15 @@ export const refreshEmployeeShifts = () => async dispatch => {
 		});
 
 		const res = await axios.get("/shift/update");
-		dispatch({
-			type: REFRESH_EMPLOYEE_SHIFTS,
-			payload: {
-				employeeShifts: res.data
-			}
-		});
+
+		setTimeout(() => {
+			dispatch({
+				type: REFRESH_EMPLOYEE_SHIFTS,
+				payload: {
+					employeeShifts: res.data
+				}
+			});
+		}, 500);
 		dispatch(setAlert("Shifts Updated!", "success"));
 	} catch (err) {
 		console.log(err);

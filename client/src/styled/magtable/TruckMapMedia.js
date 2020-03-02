@@ -6,23 +6,127 @@ import styled from "styled-components";
  * @module Styled
  */
 
+const padHeaderHeight = 30;
+
+/**
+ * Header that contains parkinglocation code
+ */
+export const PadDivHeader = styled.div`
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: ${padHeaderHeight}px;
+	background: white;
+	border-bottom: 2px solid grey;
+`;
+
+const PadDropDiv = styled.div`
+	position: absolute;
+	height: calc(100% - ${padHeaderHeight}px);
+
+	top: ${padHeaderHeight}px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+`;
+
+const rightTriangle = `
+	&:after {
+		position: absolute;
+		
+		height: 0;
+		width: 0;
+		top: 25%;
+		right: 0;
+		
+		border-top: solid 10px transparent;
+		border-bottom: solid 10px transparent;
+		border-left: solid 10px var(--context-green);
+		
+		transform: translateX(100%);
+		z-index: -1;
+		content: "";
+	}
+`;
+const leftTriangle = `
+	&:after {
+		position: absolute;
+		
+		height: 0;
+		width: 0;
+		top: 25%;
+		left: -10px;
+		
+		border-top: solid 10px transparent;
+		border-bottom: solid 10px transparent;
+		border-right: solid 10px var(--context-green);
+		
+		z-index: -1;
+		content: "";
+	}
+`;
+
+export const HalfPadDropDiv = styled(PadDropDiv)`
+	z-index: 2;
+	position: absolute;
+	width: 50%;
+	outline: 1px solid pink;
+	outline-offset: -3px;
+	height: 50px;
+	top: calc(100% - 50px);
+	
+	${({ left, hover }) =>
+		left &&
+		`
+			left: 0;
+			${hover && leftTriangle}
+		`}
+	${({ right, hover }) =>
+		right &&
+		`
+			left: 50%;
+			${hover && rightTriangle}
+	`}
+	
+
+	${({ hover }) => hover && `background: var(--context-green);`}
+`;
+
+export const FullPadDropDiv = styled(PadDropDiv)`
+	z-index: 1;
+	width: 100%;
+	font-size: 2rem;
+
+	${({ hover }) => hover && `background: var(--context-green);`}
+	span {
+		transform: translateY(-20px);
+	}
+	hover: {
+		span {
+			transform: translateY(-20px);
+		}
+	}
+`;
+
 /**
  *
  **/
 export const PadDiv = styled.div`
-	border-top: 3px solid black;
-	border-bottom: 3px solid black;
-	border-left: 4px solid black;
-	border-right: 4px solid black;
+	position: relative;
+	text-align: center;
+	outline: 2px solid black;
 	display: flex;
-	width: 65px;
-	flex-grow: 1;
+	width: 95px;
+	flex-grow: 1.3;
 	flex-basis: 0;
-	align-items: center;
-	justify-content: center;
 	font-size: x-large;
 	font-family: "Noto Sans KR", sans-serif;
 	color: grey;
+	position: relative;
+	background: ${({ hoverColor }) => hoverColor && `${hoverColor};`};
+	margin-bottom: 0.5rem;
 `;
 
 export const FakePadDiv = styled.div`

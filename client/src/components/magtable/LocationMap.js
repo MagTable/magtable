@@ -1,17 +1,17 @@
 import React from "react";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
-import { ParkingLocation, TruckMapDiv } from "../../styled/magtable/Maps";
+import { TruckMapDiv } from "../../styled/magtable/Maps";
 import ApronToggle from "./ApronToggle";
 import {
-	FakePadDiv,
 	MapWrapper,
 	NumberMiddle,
 	NumberTop,
-	PadColumn
+	PadColumn,
+	FakePadDiv
 } from "../../styled/magtable/TruckMapMedia";
 import { useSelector } from "react-redux";
-import ParkingLocations from "../_dumbcomponents/ParkingLocations";
-import AddEmployeeShift from "../modal/AddEmployeeShift";
+import ParkingLocation from "./ParkingLocation";
+import { CENTER, EAST, WEST } from "../../actions/constants";
 
 /**
  * @date 2020-02-17
@@ -26,18 +26,72 @@ import AddEmployeeShift from "../modal/AddEmployeeShift";
  * @returns {*} The LocationMap component
  */
 function LocationMap(props) {
-	const apron = useSelector(state => state.magtable.selectedApron);
-	const assignments = useSelector(state => state.magtable.assignments);
-
-	const filterParkingLocations = assignments.filter(
-		assignment => assignment.parkingLocation !== null
+	const selectedApron = useSelector(state => state.magtable.selectedApron);
+	const parkingLocations = useSelector(
+		state => state.magtable.parkingLocations
+	);
+	const assignmentsWithLocation = useSelector(state =>
+		state.magtable.assignments.filter(
+			assignment => !!assignment.parkingLocation
+		)
 	);
 
-	const filteredLocations = filterParkingLocations.map(
-		parkingLocation => parkingLocation.parkingLocation
+	// todo @mj help with unique key error here (added div messes up the map)
+	return (
+		<TruckMapDiv>
+			<ListTitle>
+				<ListTitleText>Parking Locations</ListTitleText>
+				<ApronToggle />
+			</ListTitle>
+			<MapWrapper>
+				{parkingLocations.map(
+					location =>
+						location.apron === selectedApron && (
+							<>
+								<PadColumn>
+									<NumberTop>{location.composite}</NumberTop>
+									{location.east && (
+										<ParkingLocation
+											parkingLocation={location}
+											position={EAST}
+											assignments={assignmentsWithLocation.filter(
+												assignment =>
+													assignment.parkingLocation.id === location.id &&
+													assignment.parkingLocation.position === EAST
+											)}
+										/>
+									)}
+									{location.center && (
+										<ParkingLocation
+											parkingLocation={location}
+											position={CENTER}
+											assignments={assignmentsWithLocation.filter(
+												assignment =>
+													assignment.parkingLocation.id === location.id &&
+													assignment.parkingLocation.position === CENTER
+											)}
+										/>
+									)}
+									{location.west && (
+										<ParkingLocation
+											parkingLocation={location}
+											position={WEST}
+											assignments={assignmentsWithLocation.filter(
+												assignment =>
+													assignment.parkingLocation.id === location.id &&
+													assignment.parkingLocation.position === WEST
+											)}
+										/>
+									)}
+									{location.double && <FakePadDiv />}
+								</PadColumn>
+								<NumberMiddle>{location.right}</NumberMiddle>
+							</>
+						)
+				)}
+			</MapWrapper>
+		</TruckMapDiv>
 	);
-
-	return <AddEmployeeShift />;
 }
 
 export default LocationMap;
