@@ -274,6 +274,21 @@ export const initialDailyMessages = [
 export const initialDailyMix = 45;
 
 export const initialParkingLocations = [
+	{
+		id: 1,
+		apron: "EDA",
+		code: "AE",
+		parkingLocations: {}
+	},
+	{
+		id: 2,
+		apron: "EDA",
+		code: "BE",
+		parkingLocations: {
+			left: "1",
+			right: "2"
+		}
+	},
 	{ id: 1, apron: "WDA", code: "AW1" },
 	{ id: 2, apron: "WDA", code: "AE1" },
 	{ id: 3, apron: "WDA", code: "BE" },

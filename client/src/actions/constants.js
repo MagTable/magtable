@@ -76,6 +76,7 @@ export const SET_SELECTED_APRON = "SET_SELECTED_APRON";
 
 export const ADD_EMPLOYEE_SHIFT = "ADD_EMPLOYEE_SHIFT";
 export const GET_ASSIGNMENT_DATA = "GET_ASSIGNMENT_DATA"; // server will periodically update shift list on it's own, this would force a refresh
+export const REFRESHING_EMPLOYEE_SHIFTS = "REFRESHING_EMPLOYEE_SHIFTS";
 export const REFRESH_EMPLOYEE_SHIFTS = "REFRESH_EMPLOYEE_SHIFTS";
 
 export const ADD_DAILY_MESSAGE = "ADD_DAILY_MESSAGE";

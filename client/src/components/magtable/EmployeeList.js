@@ -13,7 +13,6 @@ import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import EmployeeListItem from "./EmployeeListItem";
 import IconButton from "../common/IconButton";
 import { refreshEmployeeShifts } from "../../actions/magtable";
-import NewEmployeeListItem from "./NewEmployeeListItem";
 
 /**
  * @date 2/19/2020
@@ -54,55 +53,61 @@ const EmployeeList = () => {
 				/>
 			</ListTitle>
 
-			<EmployeeListItemDiv>
-				<EmployeeListItemContentDiv>
-					<EmployeeListItemName>
-						{employeeShifts.scheduleDate}
-					</EmployeeListItemName>
-					<EmployeeListItemTime>
-						Last Updated:
-						{employeeShifts.lastUpdated}
-					</EmployeeListItemTime>
-				</EmployeeListItemContentDiv>
-			</EmployeeListItemDiv>
+			{!loading ? (
+				<>
+					<EmployeeListItemDiv>
+						<EmployeeListItemContentDiv>
+							<EmployeeListItemName>
+								{employeeShifts.scheduleDate}
+							</EmployeeListItemName>
+							<EmployeeListItemTime>
+								Last Updated:
+								{employeeShifts.lastUpdated}
+							</EmployeeListItemTime>
+						</EmployeeListItemContentDiv>
+					</EmployeeListItemDiv>
 
-			<EmployeeListDiv>
-				{startTimes.map(startTime => (
-					<div key={startTime}>
-						<StartTimeSeparator>
-							<h2>{startTime}</h2>
-						</StartTimeSeparator>
-						{employeeShifts.shifts.map(
-							employee =>
-								employee.startTime === startTime && (
-									<NewEmployeeListItem key={employee.id} employee={employee} />
-								)
+					<EmployeeListDiv>
+						{startTimes.map(startTime => (
+							<div key={startTime}>
+								<StartTimeSeparator>
+									<h2>{startTime}</h2>
+								</StartTimeSeparator>
+								{employeeShifts.shifts.map(
+									employee =>
+										employee.startTime === startTime && (
+											<EmployeeListItem key={employee.id} employee={employee} />
+										)
+								)}
+							</div>
+						))}
+						{startTimes.length > 0 ? (
+							startTimes.map(startTime => (
+								<div key={startTime}>
+									<StartTimeSeparator>
+										<h2>{startTime}</h2>
+									</StartTimeSeparator>
+									{employeeShifts.shifts.map(
+										employee =>
+											employee.startTime === startTime && (
+												<EmployeeListItem
+													key={employee.id}
+													employee={employee}
+												/>
+											)
+									)}
+								</div>
+							))
+						) : (
+							<h1>
+								No Employee Shifts... <br /> <small>update shift list</small>
+							</h1>
 						)}
-					</div>
-				))}
-				{startTimes.length > 0 ? (
-					startTimes.map(startTime => (
-						<div key={startTime}>
-							<StartTimeSeparator>
-								<h2>{startTime}</h2>
-							</StartTimeSeparator>
-							{employeeShifts.shifts.map(
-								employee =>
-									employee.startTime === startTime && (
-										<NewEmployeeListItem
-											key={employee.id}
-											employee={employee}
-										/>
-									)
-							)}
-						</div>
-					))
-				) : (
-					<h1>
-						No Employee Shifts... <br /> <small>update shift list</small>
-					</h1>
-				)}
-			</EmployeeListDiv>
+					</EmployeeListDiv>
+				</>
+			) : (
+				<h1>Loading Users...</h1>
+			)}
 		</EmployeeListDivWrapper>
 	);
 };
