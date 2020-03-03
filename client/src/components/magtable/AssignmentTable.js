@@ -6,7 +6,7 @@ import TowerMap from "./TowerMap";
 import LocationMap from "./LocationMap";
 import EmployeeList from "./EmployeeList";
 import TruckList from "./TruckList";
-import AddEmployeeShift from "../modal/AddEmployeeShift";
+import AddEmployeeShift from "./AddEmployeeShift";
 
 /**
  * Placeholder component to assist in displaying routing
@@ -15,14 +15,12 @@ import AddEmployeeShift from "../modal/AddEmployeeShift";
 const AssignmentTable = () => {
 	const [showAM, setShowAM] = useState(true);
 
-	const [showModal, setModal] = useState(false);
-
 	return (
 		<DndProvider backend={Backend}>
 			<AssignmentContainer>
 				<EmployeeList />
 				<TruckList showAM={showAM} setShowAM={setShowAM} />
-				<AddEmployeeShift showModal={showModal} setModal={setModal} />
+				{/*<AddEmployeeShift showModal={showModal} setModal={setModal} />*/}
 				<MapsDiv>
 					<LocationMap />
 					<TowerMap showAM={showAM} />

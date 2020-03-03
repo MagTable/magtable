@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { OverflowMenuItem } from "./Overflow";
 import { ClickCatcher } from "../../styled/common/ClickCatcher";
 import { useDispatch } from "react-redux";
+import AddEmployeeShift from "./AddEmployeeShift";
+import AddEmployeeShiftModal from "../modal/AddEmployeeShiftModal";
 
 /**
  * @date 3/1/2020
@@ -26,8 +28,7 @@ function OverflowEmployee({
 	showAMEmployees,
 	showPMEmployees,
 	showTechEmployees,
-	showTowerEmployees,
-	addShifts
+	showTowerEmployees
 }) {
 	const dispatch = useDispatch();
 
@@ -38,6 +39,11 @@ function OverflowEmployee({
 	function handleClick() {
 		setOpen(false);
 	}
+
+	const [showModal, setModal] = useState(false);
+
+	const handleClose = () => setModal(false);
+	const handleShow = () => setModal(true);
 
 	return (
 		<OverflowMenuItem color={color} hoverColor={hoverColor}>
@@ -52,13 +58,10 @@ function OverflowEmployee({
 					<buttonRefresh onClick={refreshEmployees}>
 						Refresh Employees
 					</buttonRefresh>
-					<button
-						onClick={e => {
-							this.showAddEmployeeShift();
-						}}
-					>
-						Add Employee Shift
-					</button>
+					<AddEmployeeShiftModal show={showModal} handleClose={handleClose}>
+						<AddEmployeeShift />
+					</AddEmployeeShiftModal>
+					<buttonShifts onClick={handleShow}>Add Employee Shift</buttonShifts>
 				</>
 			)}
 			{children({ openOverflow })}
