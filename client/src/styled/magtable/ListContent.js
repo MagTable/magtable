@@ -84,43 +84,6 @@ export const EmployeeListRefreshInfo = styled.div`
 `;
 
 /**
- * The time of the employees shift being represented in their shift div.
- */
-export const EmployeeListItemTime = styled.p`
-	margin-block-start: 0em;
-	margin-block-end: 0em;
-	font-style: italic;
-`;
-
-/**
- * The job description of the employee being represented in the employee's shift divs.
- */
-export const EmployeeListItemDesc = styled.p`
-	margin-block-start: 0em;
-	margin-block-end: 1em;
-	font-weight: bold;
-	color: var(--emphasis-grey);
-`;
-
-/**
- * A label representing the abilities of the employee, displayed in the employee's shift divs.
- */
-export const EmployeeLabelDiv = styled.div`
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border: 2px solid var(--border-color);
-    border-top: none;
-    width: 20px;
-    height: 20px;
-    float: right;
-    margin-right 2px;
-    ${({ type }) =>
-			type === "greenPass" && `background-color: var(--context-green);`}
-    ${({ type }) =>
-			type === "noAvop" && `background-color: var(--context-orange);`}
-`;
-
-/**
  * todo would like to set a max width on this - arran
  **/
 export const TruckListDiv = styled.div`

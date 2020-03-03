@@ -228,7 +228,7 @@ const EmployeeList = () => {
 									timeFilter(startTime) && (
 										<div key={startTime}>
 											<StartTimeSeparator>{startTime}</StartTimeSeparator>
-											{employeeShifts.shifts.map(
+											{filteredEmployeeShifts.map(
 												employee =>
 													employee.startTime === startTime && (
 														<EmployeeListItem
