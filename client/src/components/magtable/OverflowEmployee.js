@@ -34,6 +34,7 @@ function OverflowEmployee({
 	filterTowerEmployees,
 	filterManagementEmployees,
 	filterMechanicEmployees,
+	filterTrainerEmployees,
 	refreshEmployees
 }) {
 	const openOverflow = () => {
@@ -100,6 +101,14 @@ function OverflowEmployee({
 							)}
 							Mechanics
 						</OverflowMenuButton>
+						<OverflowMenuButton onClick={filterTrainerEmployees}>
+							{activeFilters[6] ? (
+								<FilterIcon className={"fas fa-times"} color={"red"} />
+							) : (
+								<FilterIcon className={"fas fa-check"} color={"green"} />
+							)}
+							Trainers
+						</OverflowMenuButton>
 						<OverflowMenuButton
 							onClick={() => {
 								setOpen(false);
@@ -114,6 +123,7 @@ function OverflowEmployee({
 						</AddEmployeeShiftModal>
 						<OverflowMenuButton onClick={handleShow}>
 							Add Employee Shift
+							<FilterIcon className={"fas fa-user-plus"} />
 						</OverflowMenuButton>
 					</div>
 				</>
