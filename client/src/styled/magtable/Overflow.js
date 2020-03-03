@@ -41,7 +41,7 @@ export const OverflowMenuButton = styled.button`
 
 	position: relative;
 	width: 180px;
-	left: -30px;
+	left: -50px;
 	top: 100px;
 
 	:hover {
@@ -51,7 +51,9 @@ export const OverflowMenuButton = styled.button`
 
 export const FilterIcon = styled.i`
 	cursor: pointer;
-	text-align: right;
+	float: right;
+	width: 30px;
+	text-align: center;
 
 	${({ color }) =>
 		color &&

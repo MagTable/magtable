@@ -53,38 +53,50 @@ function OverflowEmployee({
 					<div id={"arrow"} />
 					<OverflowMenuButton onClick={filterAMEmployees}>
 						{activeFilters[0] ? (
+							<FilterIcon className={"fas fa-times"} color={"red"} />
+						) : (
 							<FilterIcon className={"fas fa-check"} color={"green"} />
-						) : null}
+						)}
 						AM Employees
 					</OverflowMenuButton>
 					<OverflowMenuButton onClick={filterPMEmployees}>
 						{activeFilters[1] ? (
+							<FilterIcon className={"fas fa-times"} color={"red"} />
+						) : (
 							<FilterIcon className={"fas fa-check"} color={"green"} />
-						) : null}
+						)}
 						PM Employees
 					</OverflowMenuButton>
 					<OverflowMenuButton onClick={filterTechEmployees}>
 						{activeFilters[2] ? (
+							<FilterIcon className={"fas fa-times"} color={"red"} />
+						) : (
 							<FilterIcon className={"fas fa-check"} color={"green"} />
-						) : null}
+						)}
 						Technicians
 					</OverflowMenuButton>
 					<OverflowMenuButton onClick={filterTowerEmployees}>
 						{activeFilters[3] ? (
+							<FilterIcon className={"fas fa-times"} color={"red"} />
+						) : (
 							<FilterIcon className={"fas fa-check"} color={"green"} />
-						) : null}
+						)}
 						Tower Staff
 					</OverflowMenuButton>
 					<OverflowMenuButton onClick={filterManagementEmployees}>
 						{activeFilters[4] ? (
+							<FilterIcon className={"fas fa-times"} color={"red"} />
+						) : (
 							<FilterIcon className={"fas fa-check"} color={"green"} />
-						) : null}
+						)}
 						Management
 					</OverflowMenuButton>
 					<OverflowMenuButton onClick={filterMechanicEmployees}>
 						{activeFilters[5] ? (
+							<FilterIcon className={"fas fa-times"} color={"red"} />
+						) : (
 							<FilterIcon className={"fas fa-check"} color={"green"} />
-						) : null}
+						)}
 						Mechanics
 					</OverflowMenuButton>
 					<OverflowMenuButton onClick={refreshEmployees}>
