@@ -13,7 +13,7 @@ public class Tower implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "towerID", insertable = false, nullable = false)
+    @Column(name = "towerid", insertable = false, nullable = false)
     private Integer id;
 
     @Column(name = "position", nullable = false)

@@ -1,7 +1,7 @@
 package com.magtable.controller;
 
 
-import com.magtable.model.CleanShift;
+import com.magtable.model.ShiftResponse;
 import com.magtable.model.ShiftList;
 import com.magtable.services.userServices.ErrorService;
 import com.magtable.services.w2wServices.ShiftScheduler;
@@ -101,14 +101,14 @@ public class ShiftController {
      * @return the updatedShiftList with the added employee in the correct spot
      */
     @PostMapping("/add")
-    public ShiftList addShift(@RequestBody CleanShift cleanShift){
+    public ShiftList addShift(@RequestBody ShiftResponse cleanShift){
         ShiftScheduler shiftScheduler = ShiftScheduler.getInstance();
         ShiftList shiftList = new ShiftList(shiftScheduler.getShiftList());
         //Arraylist to modify with the new shift
-        ArrayList<CleanShift> listShifts = shiftList.getShifts();
+        ArrayList<ShiftResponse> listShifts = shiftList.getShifts();
 
         //Finding where to insert the added user into
-        for(CleanShift shift : listShifts){
+        for(ShiftResponse shift : listShifts){
             if(Integer.parseInt(shift.getStartTime()) >= Integer.parseInt(cleanShift.getStartTime())){
                 //insert the user into this part of the list
                 cleanShift.setId();

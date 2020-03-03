@@ -4,7 +4,7 @@ package com.magtable.model;
 import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class CleanShift implements Serializable {
+public class ShiftResponse implements Serializable {
 
     private int id;
     private String name;
@@ -16,7 +16,7 @@ public class CleanShift implements Serializable {
 
     private static final AtomicInteger count = new AtomicInteger(0);
 
-    public CleanShift() {
+    public ShiftResponse() {
         this.id = count.incrementAndGet();
     }
 

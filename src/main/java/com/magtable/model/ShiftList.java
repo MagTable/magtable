@@ -3,16 +3,15 @@ package com.magtable.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 public class ShiftList implements Serializable {
 
     private String scheduleDate;
     private String lastUpdated;
-    private ArrayList<CleanShift> shifts;
+    private ArrayList<ShiftResponse> shifts;
 
 
-    public ShiftList(ArrayList<CleanShift> list) {
+    public ShiftList(ArrayList<ShiftResponse> list) {
         Calendar cal = Calendar.getInstance();
         this.scheduleDate = String.format("%d/%d/%d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH)+1, cal.get(Calendar.DATE));
         this.shifts = list;
@@ -22,11 +21,11 @@ public class ShiftList implements Serializable {
         return scheduleDate;
     }
 
-    public ArrayList<CleanShift> getShifts() {
+    public ArrayList<ShiftResponse> getShifts() {
         return shifts;
     }
 
-    public void setShifts(ArrayList<CleanShift> shifts) {
+    public void setShifts(ArrayList<ShiftResponse> shifts) {
         this.shifts = shifts;
     }
 
