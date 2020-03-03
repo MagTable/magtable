@@ -11,38 +11,44 @@ import styled from "styled-components";
  **/
 export const OverflowMenu = styled.div`
 	position: relative;
+	overflow: visible;
 
 	#arrow {
+		z-index: 100;
 		position: absolute;
-		width: 120px;
 		left: 7px;
-		top: 25px;
-
+		top: 20px;
 		width: 0;
 		height: 0;
+
 		border-left: 5px solid transparent;
 		border-right: 5px solid transparent;
+		border-bottom: 5px solid white};
+	}
 
-		border-bottom: 5px solid ${({ color }) => color || "white"};
+	#container {
+		z-index: 100;
+		background: white;
+		box-shadow: 2px 3px 3px #999;
+
+		position: absolute;
+		height: auto;
+		right: calc(100% - 17px);
+		top: 25px;
 	}
 `;
 
 export const OverflowMenuButton = styled.button`
-	z-index: 5;
+	z-index: 100;
 	padding: 0.5rem;
+	width: 150px;
 
 	cursor: pointer;
 	border: 0;
-	background: ${({ color }) => color || "white"};
 	color: black;
 	text-align: left;
 
 	box-shadow: 2px 2px 3px #999;
-
-	position: relative;
-	width: 180px;
-	left: -50px;
-	top: 100px;
 
 	:hover {
 		background: ${({ hoverColor }) => hoverColor || "#c7c7c7"};
