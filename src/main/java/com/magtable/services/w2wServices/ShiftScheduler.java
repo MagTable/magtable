@@ -143,7 +143,10 @@ public class ShiftScheduler {
                 shift.setDescription(splittedAssignment[1]);
 
                 shifts.remove(0); //Always removing the top-most shift
-                shiftScheduler.shiftList.add(shift);
+                if(!name.equals("(Unassigned)")){
+                    shiftScheduler.shiftList.add(shift);
+                }
+
             }
     }
 

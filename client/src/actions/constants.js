@@ -15,7 +15,7 @@ export const PRACTICAL_TRAINER = "Practical Trainer";
 export const TECHNICIAN = "Technician";
 export const OJT = "OJT";
 export const OJT_TOWER = "OJT-Tower";
-export const TOWER_TRAINER = "TOWER_TRAINER";
+export const TOWER_TRAINER = "Tower Trainer";
 export const MANAGEMENT_POSITIONS = [OPERATIONS_MANAGER, OPERATIONS_SUPERVISOR];
 export const TECHNICIAN_POSITIONS = [
 	OJT,
@@ -32,11 +32,20 @@ export const TOWER_POSITIONS = [
 	TOWER_TRAINER
 ];
 
-// truck status'
-export const GO = "GO";
-export const CON = "CON";
-export const OOS = "OOS";
-export const INOP = "INOP";
+export const ALL_POSITIONS = [
+	OPERATIONS_MANAGER,
+	OPERATIONS_SUPERVISOR,
+	CTM,
+	TOWER_SPOTTER,
+	ICEMAN,
+	ICEHOUSE,
+	BAY_LEAD,
+	PRACTICAL_TRAINER,
+	OJT,
+	OJT_TOWER,
+	TOWER_TRAINER,
+	MECHANIC
+];
 
 // UI Hint Types
 export const DANGER = "DANGER";

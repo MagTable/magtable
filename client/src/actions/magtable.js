@@ -3,18 +3,18 @@ import {
 	REMOVE_EQUIPMENT_EMPLOYEE,
 	SET_TRUCK_LOCATION,
 	REMOVE_TRUCK_LOCATION,
+	PUBLISH_TABLE,
+	ADD_BRIX_RECORD,
+	SET_DAILY_MIX,
+	ADD_DAILY_MESSAGE,
+	AXIOS_JSON_HEADER,
+	REMOVE_DAILY_MESSAGE,
 	SET_SELECTED_APRON,
 	GET_ASSIGNMENT_DATA,
+	ADD_EMPLOYEE_SHIFT,
+	TOGGLE_BAY_LEAD,
 	REFRESH_EMPLOYEE_SHIFTS,
 	REFRESHING_EMPLOYEE_SHIFTS
-	// PUBLISH_TABLE,
-	// ADD_BRIX_RECORD,
-	// SET_DAILY_MIX,
-	// ADD_DAILY_MESSAGE,
-	// AXIOS_JSON_HEADER,
-	// REMOVE_DAILY_MESSAGE,
-	// ADD_EMPLOYEE_SHIFT,
-	// TOGGLE_BAY_LEAD,
 } from "./constants";
 import axios from "axios";
 import { setAlert } from "./alert";
@@ -234,22 +234,22 @@ export const getMagTable = () => async dispatch => {
  * @param shiftData
  * @returns API returns the updated list of employee shifts
  */
-// const addEmployeeShift = shiftData => async dispatch => {
-// 	try {
-// 		const res = await axios.put(
-// 			"/magtable/shift",
-// 			AXIOS_JSON_HEADER,
-// 			shiftData
-// 		);
-//
-// 		dispatch({
-// 			type: ADD_EMPLOYEE_SHIFT,
-// 			payload: res.data
-// 		});
-// 	} catch (err) {
-// 		console.log(err);
-// 	}
-// };
+export const addEmployeeShift = shiftData => async dispatch => {
+	try {
+		const res = await axios.post("/shift/add", shiftData, AXIOS_JSON_HEADER);
+
+		dispatch({
+			type: ADD_EMPLOYEE_SHIFT,
+			payload: res.data
+		});
+
+		dispatch(
+			setAlert(`Employee "${shiftData.name}" Added Successfully.`, "success")
+		);
+	} catch (err) {
+		console.log(err);
+	}
+};
 
 /**
  * Toggles bay lead status of an assignment

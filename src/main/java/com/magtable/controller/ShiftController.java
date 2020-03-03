@@ -1,6 +1,7 @@
 package com.magtable.controller;
 
 
+import com.magtable.model.CleanShift;
 import com.magtable.model.ShiftList;
 import com.magtable.services.userServices.ErrorService;
 import com.magtable.services.w2wServices.ShiftScheduler;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -35,7 +37,7 @@ public class ShiftController {
     }
 
     /**
-     * route           POST /shift/update
+     * route           GET /shift/update
      * description     route to force a new fetch of W2W shift data
      * access          Personnel Managers, System Admins
      *
@@ -89,6 +91,34 @@ public class ShiftController {
         ShiftScheduler shiftScheduler = ShiftScheduler.getInstance();
         shiftScheduler.setSID(SID);
         return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    /**
+     * route           POST /shift/add
+     * description     route to add a shift to shiftList
+     * access          Personnel Managers, System Admins
+     *
+     * @return the updatedShiftList with the added employee in the correct spot
+     */
+    @PostMapping("/add")
+    public ShiftList addShift(@RequestBody CleanShift cleanShift){
+        ShiftScheduler shiftScheduler = ShiftScheduler.getInstance();
+        ShiftList shiftList = new ShiftList(shiftScheduler.getShiftList());
+        //Arraylist to modify with the new shift
+        ArrayList<CleanShift> listShifts = shiftList.getShifts();
+
+        //Finding where to insert the added user into
+        for(CleanShift shift : listShifts){
+            if(Integer.parseInt(shift.getStartTime()) >= Integer.parseInt(cleanShift.getStartTime())){
+                //insert the user into this part of the list
+                cleanShift.setId();
+                listShifts.add(listShifts.indexOf(shift), cleanShift);
+                break;
+            }
+        }
+        shiftList.setShifts(listShifts);
+
+        return shiftList;
     }
 
 }
