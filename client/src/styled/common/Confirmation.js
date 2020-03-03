@@ -4,7 +4,7 @@ export const ConfirmationBox = styled.div`
 	position: relative;
 
 	button {
-		z-index: 5;
+		z-index: 100;
 		padding: 0.5rem;
 
 		cursor: pointer;

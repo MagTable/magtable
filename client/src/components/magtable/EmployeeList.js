@@ -3,10 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
 	EmployeeListDiv,
 	EmployeeListDivWrapper,
-	EmployeeListItemContentDiv,
-	EmployeeListItemDiv,
-	EmployeeListItemName,
-	EmployeeListItemTime,
+	EmployeeListRefreshInfo,
 	StartTimeSeparator
 } from "../../styled/magtable/ListContent";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
@@ -177,28 +174,24 @@ const EmployeeList = () => {
 
 			{!loading ? (
 				<>
-					<EmployeeListItemDiv>
-						<EmployeeListItemContentDiv>
-							<EmployeeListItemName>
-								{employeeShifts.scheduleDate}
-							</EmployeeListItemName>
-							<EmployeeListItemTime>
-								Last Updated:
+					<EmployeeListRefreshInfo>
+						<h4>
+							{employeeShifts.scheduleDate}
+							<br />
+							<small>
+								Last Updated at{"\t"}
 								{employeeShifts.lastUpdated}
-							</EmployeeListItemTime>
-						</EmployeeListItemContentDiv>
-					</EmployeeListItemDiv>
+							</small>
+						</h4>
+					</EmployeeListRefreshInfo>
 
 					<EmployeeListDiv>
 						{startTimes.length > 0 ? (
 							startTimes.map(
 								startTime =>
 									timeFilter(startTime) && (
-										<>
-											{/*// <div key={startTime}>*/}
-											<StartTimeSeparator>
-												<h2>{startTime}</h2>
-											</StartTimeSeparator>
+										<div key={startTime}>
+											<StartTimeSeparator>{startTime}</StartTimeSeparator>
 											{employeeShifts.shifts.map(
 												employee =>
 													employee.startTime === startTime &&
@@ -209,8 +202,7 @@ const EmployeeList = () => {
 														/>
 													)
 											)}
-											{/*</div>*/}
-										</>
+										</div>
 									)
 							)
 						) : (

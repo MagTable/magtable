@@ -9,5 +9,4 @@ export const ClickCatcher = styled.div`
 	right: 0;
 	height: 100vh;
 	width: 100vw;
-	background: #00000022;
 `;

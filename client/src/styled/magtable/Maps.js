@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { EmployeeListItemName } from "./ListContent";
 import { Button } from "../common/FormControl";
 
 /**
@@ -100,14 +99,6 @@ export const AssignedEmployeeDiv = styled.div`
 	padding-bottom: 8px;
 	align-items: center;
 	border: 1px solid black;
-`;
-
-/**
- * The name of the employee assigned.
- */
-export const AssignedEmployeeName = styled(EmployeeListItemName)`
-	margin-block-start: 0em;
-	margin-left: 20px;
 `;
 
 /**
