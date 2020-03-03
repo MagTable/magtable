@@ -6,6 +6,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class ShiftResponse implements Serializable {
 
+    private static final long serialVersionUID = -8106437984727025966L;
+
     private int id;
     private String name;
     private String startTime;
@@ -76,5 +78,18 @@ public class ShiftResponse implements Serializable {
 
     public void setIsGreen(Boolean isGreen) {
         this.isGreen = isGreen;
+    }
+
+    @Override
+    public String toString() {
+        return "ShiftResponse{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", startTime='" + startTime + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", description='" + description + '\'' +
+                ", noAvop=" + noAvop +
+                ", isGreen=" + isGreen +
+                '}';
     }
 }
