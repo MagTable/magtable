@@ -3,16 +3,16 @@ import {
 	REMOVE_EQUIPMENT_EMPLOYEE,
 	SET_TRUCK_LOCATION,
 	REMOVE_TRUCK_LOCATION,
-	PUBLISH_TABLE,
-	ADD_BRIX_RECORD,
-	SET_DAILY_MIX,
-	ADD_DAILY_MESSAGE,
+	// PUBLISH_TABLE,
+	// ADD_BRIX_RECORD,
+	// SET_DAILY_MIX,
+	// ADD_DAILY_MESSAGE,
+	// REMOVE_DAILY_MESSAGE,
+	// TOGGLE_BAY_LEAD,
 	AXIOS_JSON_HEADER,
-	REMOVE_DAILY_MESSAGE,
 	SET_SELECTED_APRON,
 	GET_ASSIGNMENT_DATA,
 	ADD_EMPLOYEE_SHIFT,
-	TOGGLE_BAY_LEAD,
 	REFRESH_EMPLOYEE_SHIFTS,
 	REFRESHING_EMPLOYEE_SHIFTS
 } from "./constants";
@@ -251,7 +251,7 @@ export const addEmployeeShift = shiftData => async dispatch => {
 	}
 };
 
-/**
+/*
  * Toggles bay lead status of an assignment
  *
  * @param equipmentID equipmentID of assignment to toggle

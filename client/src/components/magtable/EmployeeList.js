@@ -171,7 +171,6 @@ const EmployeeList = () => {
 
 	// fill a list of start times from the start times of the list of filtered employee shifts
 	function filterStartTimes() {
-		console.log(filteredEmployeeShifts);
 		filteredEmployeeShifts.forEach(emp => {
 			if (
 				!filteredStartTimes.includes(emp.startTime) &&

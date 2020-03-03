@@ -230,7 +230,7 @@ export const TruckListManipDiv = styled.div`
 	margin-right: 3px;
 `;
 
-export const TowerListItemEmployee = styled.p`
+export const TowerListItemEmployee = styled.div`
 	margin-block-start: 0em;
 	margin-block-end: 0em;
 	height: ${({ show }) => (show ? "50%" : "0%")};

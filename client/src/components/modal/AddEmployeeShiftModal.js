@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { UnassignBtn } from "../../styled/magtable/ListContent";
 
 const StyledDiv = styled.div`
 	position: fixed;
