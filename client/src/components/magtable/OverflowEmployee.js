@@ -109,11 +109,12 @@ function OverflowEmployee({
 					<OverflowMenuButton onClick={refreshEmployees}>
 						<FilterIcon className={"fas fa-sync"} />
 						Refresh Employees
-					</buttonRefresh>
+					</OverflowMenuButton>
 					<AddEmployeeShiftModal show={showModal} handleClose={handleClose}>
 						<AddEmployeeShift />
 					</AddEmployeeShiftModal>
-					<buttonShifts onClick={handleShow}>Add Employee Shift</buttonShifts>
+					<OverflowMenuButton onClick={handleShow}>
+						Add Employee Shift
 					</OverflowMenuButton>
 				</>
 			)}
