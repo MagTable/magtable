@@ -1,19 +1,19 @@
 import React from "react";
 import styled from "styled-components";
+import { UnassignBtn } from "../../styled/magtable/ListContent";
 
-//Todo Naming
 const StyledDiv = styled.div`
 	position: fixed;
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
-	width: 500px;
-	height: 650px;
+	width: 40%;
+	height: 80%;
 	margin: auto;
 	z-index: 100;
-	// background: #3c4146;
-	// box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.06), 0 0 6px rgba(0, 0, 0, 0.23);
+	background: #3c4146;
+
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -21,25 +21,30 @@ const StyledDiv = styled.div`
 		showHideClassName ? `display: block;` : `display: none;`}
 `;
 
-// Todo Naming
-const StyledSection = styled.section`
-	background: #fff;
-	margin: 5%;
-	z-index: 100;
-	border: 3px solid black;
-	height: 548px;
-`;
-
-const AddShiftCloseBtn = styled.button`
+const StyledButton = styled.button`
+	float: right;
 	position: absolute;
-	transform: translate(431px, -523px);
+	right: 0px;
+	top: 0px;
+	transform: translate(13px, -13px);
 	border-radius: 30px;
 	width: 30px;
 	height: 30px;
 	border: 2px solid grey;
 	overflow: hidden;
+	white-space: nowrap;
+	transition: 0.2s ease-in-out;
 	cursor: pointer;
 	z-index: 1;
+	display: block;
+	opacity: 1;
+`;
+
+const StyledSection = styled.section`
+	background: #fff;
+	z-index: 100;
+	padding: 10px;
+	border: 3px solid black;
 `;
 
 /**
@@ -65,7 +70,7 @@ const AddEmployeeShiftModal = ({ handleClose, show, children }) => {
 		<StyledDiv showHideClassName={showHideClassName}>
 			<StyledSection className="modal-main">
 				{children}
-				<AddShiftCloseBtn onClick={handleClose}>X</AddShiftCloseBtn>
+				<StyledButton onClick={handleClose}>X</StyledButton>
 			</StyledSection>
 		</StyledDiv>
 	);

@@ -345,25 +345,9 @@ export const UnassignBtn = styled.button`
 	z-index: 1;
 `;
 
-export const EmpWrap = styled.div`
-	outline: 2px solid black;
-	outline-offset: -1px;
-	width: 227px;
-	transform: translateY(-45px);
-	position: relative;
-	z-index: 0;
-
-	&:hover ${UnassignBtn} {
-		display: block;
-		opacity: 1;
-	}
-
-	${({ disabled }) =>
-		disabled ? `background-color: var(--shader-grey);` : `cursor: pointer;`}
-`;
+export const EmpWrap = styled.div``;
 
 export const EmpName = styled.div`
-	width: 172px;
 	padding: 5px 0 0 5px;
 	margin-block-start: 0;
 	margin-block-end: 0;
@@ -396,7 +380,7 @@ export const LabelWrapper = styled.div`
 export const LabelText = styled.div`
 	margin-block-start: 0;
 	margin-block-end: 0;
-	margin: 0 5px 0 5px;
+	margin: 0 5px;
 	width: 0px;
 	overflow: hidden;
 	transition: 0.3s ease-in-out;
@@ -405,12 +389,13 @@ export const LabelText = styled.div`
 `;
 
 export const Labels = styled.div`
+	margin: 1px;
 	width: 23px;
-	transform: translate(1px, 1px);
 	height: 46px;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
+	grid-area: labels;
 	:hover {
 		width: 100px;
 	}
@@ -423,37 +408,51 @@ export const Labels = styled.div`
 `;
 
 export const AssignedToWrap = styled.div`
-	display: inline-flex;
-	width: 46px;
-	height: 46px;
-	justify-content: center;
 	background-color: #0496b2;
+	grid-area: equipmentID;
+
+	display: flex;
+	justify-content: center;
 	align-items: center;
-	vertical-align: top;
-	position: relative;
-	transform: translate(180px, 2px);
-	font-size: 24px;
-	z-index: 1;
+
+	h2 {
+		margin: 0;
+	}
 `;
 
 export const ShiftInfo = styled.div`
-	width: 180px;
 	text-overflow: ellipsis;
+	grid-area: name;
 `;
 
 export const EmpRole = styled.h2`
-	float: right;
-	transform: translate(-12px, -50px);
+	display: flex;
+	margin: 0.5rem;
+	align-self: end;
+	justify-content: flex-end;
+	text-align: right;
 	color: grey;
 	font-size: 17px;
-	position: relative;
-	z-index: -1;
+	z-index: 0;
+	grid-area: position;
 `;
 
 export const EmpListItemDiv = styled.div`
-	height: 92px;
+	width: 100%;
+	border-bottom: 2px solid var(--border-color);
+
+	display: grid;
+	grid-template-columns: 100px 1fr 48px;
+	grid-template-rows: 48px 48px;
+	grid-template-areas:
+		"name name equipmentID"
+		"labels position position";
+
 	&:hover ${UnassignBtn} {
 		display: block;
 		opacity: 1;
 	}
+
+	${({ disabled }) =>
+		disabled ? `background-color: var(--shader-grey);` : `cursor: pointer;`}
 `;
