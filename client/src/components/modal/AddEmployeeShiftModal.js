@@ -9,7 +9,7 @@ const StyledDiv = styled.div`
 	left: 0;
 	right: 0;
 	width: 40%;
-	height: 50%;
+	height: 80%;
 	margin: auto;
 	z-index: 100;
 	background: #3c4146;

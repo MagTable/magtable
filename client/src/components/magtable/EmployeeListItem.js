@@ -68,6 +68,7 @@ function EmployeeListItem({ employee: employeeShift }) {
 		canDrag: !employeeShift.assignedEquipment,
 		end: (item, monitor) => {
 			const dropResult = monitor.getDropResult();
+			console.log(dropResult);
 			if (item && dropResult) {
 				dispatch(
 					setEquipmentEmployee(
@@ -92,39 +93,39 @@ function EmployeeListItem({ employee: employeeShift }) {
 	}
 
 	return (
-		<EmpListItemDiv>
+		<EmpListItemDiv
+			ref={drag}
+			disabled={isDragging || employeeShift.assignedEquipment}
+		>
+			<ShiftInfo>
+				<EmpName>{employeeShift.name}</EmpName>
+				<Hours>
+					{employeeShift.startTime} - {employeeShift.endTime}
+				</Hours>
+			</ShiftInfo>
+
 			{employeeShift.assignedEquipment && (
 				<AssignedToWrap>
-					<UnassignBtn>X</UnassignBtn>
-					<h4>{employeeShift.assignedEquipment}</h4>
+					<UnassignBtn onClick={handleRemove}>X</UnassignBtn>
+					<h2>{employeeShift.assignedEquipment}</h2>
 				</AssignedToWrap>
 			)}
-			<EmpWrap
-				ref={drag}
-				disabled={isDragging || employeeShift.assignedEquipment}
-			>
-				<ShiftInfo>
-					<EmpName>{employeeShift.name}</EmpName>
-					<Hours>
-						{employeeShift.startTime} - {employeeShift.endTime}
-					</Hours>
-				</ShiftInfo>
 
-				<Labels>
-					{employeeShift.isGreen && (
-						<LabelWrapper type={"greenPass"}>
-							<LabelText>Green Pass</LabelText>
-						</LabelWrapper>
-					)}
+			<Labels>
+				{employeeShift.isGreen && (
+					<LabelWrapper type={"greenPass"}>
+						<LabelText>Green Pass</LabelText>
+					</LabelWrapper>
+				)}
 
-					{employeeShift.noAvop && (
-						<LabelWrapper type={"noAvop"}>
-							<LabelText>No AVOP</LabelText>
-						</LabelWrapper>
-					)}
-				</Labels>
-				<EmpRole>{employeeShift.description}</EmpRole>
-			</EmpWrap>
+				{employeeShift.noAvop && (
+					<LabelWrapper type={"noAvop"}>
+						<LabelText>No AVOP</LabelText>
+					</LabelWrapper>
+				)}
+			</Labels>
+
+			<EmpRole>{employeeShift.description}</EmpRole>
 		</EmpListItemDiv>
 	);
 }
