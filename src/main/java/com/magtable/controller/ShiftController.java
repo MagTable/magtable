@@ -1,7 +1,7 @@
 package com.magtable.controller;
 
 
-import com.magtable.model.CleanShift;
+import com.magtable.model.ShiftResponse;
 import com.magtable.model.ShiftList;
 import com.magtable.services.userServices.ErrorService;
 import com.magtable.services.w2wServices.ShiftScheduler;
@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.text.SimpleDateFormat;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 @RestController
 @RequestMapping("/shift")
@@ -45,12 +45,21 @@ public class ShiftController {
      */
     @GetMapping("/update")
     public ShiftList updateShifts() {
-        boolean update = true;
 
         ShiftScheduler shiftScheduler = ShiftScheduler.getInstance();
         ShiftList shiftList = new ShiftList(shiftScheduler.getShiftList());
 
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        //todo remove later
+        try {
+            FileInputStream fileInputStream = new FileInputStream(new File("./src/main/java/com/magtable/controller/shiftlist.ser"));
+            ObjectInputStream ois = new ObjectInputStream(fileInputStream);
+            shiftList = (ShiftList) ois.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //todo remove comments
+      /*  boolean update = true;
+
         String lastUpdated = shiftScheduler.getLastUpdated();
         String currentTime = sdf.format(new Date());
 
@@ -77,12 +86,12 @@ public class ShiftController {
                 throw errorService.sessionExpired();
             }
         }
-            ///update for UI
-            Calendar cal = Calendar.getInstance();
-            shiftScheduler.setLastUpdatedUI(String.format("%d:%02d",cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE)));
-
-        shiftList.setShifts(shiftScheduler.getShiftList());
-        shiftList.setLastUpdated(shiftScheduler.getLastUpdatedUI());
+        ///update for UI
+ **/
+        Calendar cal = Calendar.getInstance();
+        shiftScheduler.setLastUpdatedUI(String.format("%d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE)));
+        shiftList.setLastUpdated(String.format("%d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE)));
+        shiftScheduler.setShiftList(shiftList.getShifts());
         return shiftList;
     }
 
@@ -101,15 +110,15 @@ public class ShiftController {
      * @return the updatedShiftList with the added employee in the correct spot
      */
     @PostMapping("/add")
-    public ShiftList addShift(@RequestBody CleanShift cleanShift){
+    public ShiftList addShift(@RequestBody ShiftResponse cleanShift) {
         ShiftScheduler shiftScheduler = ShiftScheduler.getInstance();
         ShiftList shiftList = new ShiftList(shiftScheduler.getShiftList());
         //Arraylist to modify with the new shift
-        ArrayList<CleanShift> listShifts = shiftList.getShifts();
+        ArrayList<ShiftResponse> listShifts = shiftList.getShifts();
 
         //Finding where to insert the added user into
-        for(CleanShift shift : listShifts){
-            if(Integer.parseInt(shift.getStartTime()) >= Integer.parseInt(cleanShift.getStartTime())){
+        for (ShiftResponse shift : listShifts) {
+            if (Integer.parseInt(shift.getStartTime()) >= Integer.parseInt(cleanShift.getStartTime())) {
                 //insert the user into this part of the list
                 cleanShift.setId();
                 listShifts.add(listShifts.indexOf(shift), cleanShift);
