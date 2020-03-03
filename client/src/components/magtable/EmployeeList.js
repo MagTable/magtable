@@ -18,7 +18,8 @@ import {
 	MANAGEMENT_POSITIONS,
 	MECHANIC,
 	TECHNICIAN_POSITIONS,
-	TOWER_POSITIONS
+	TOWER_POSITIONS,
+	TRAINER_POSITIONS
 } from "../../actions/constants";
 
 /**
@@ -53,6 +54,8 @@ const EmployeeList = () => {
 	const [filterManagement, setFilterManagement] = useState(false);
 	// used to determine if the app filters out employees that are mechanics, default is false to show all employees
 	const [filterMechanic, setFilterMechanic] = useState(false);
+	// used to determine if the app filters out employees that are part of the training staff, default false to show all employees
+	const [filterTrainer, setFilterTrainer] = useState(false);
 
 	if (!loading) {
 		employeeShifts.shifts.forEach(emp => {
@@ -68,7 +71,8 @@ const EmployeeList = () => {
 		filterTech,
 		filterTower,
 		filterManagement,
-		filterMechanic
+		filterMechanic,
+		filterTrainer
 	];
 
 	const refreshEmployees = () => {
@@ -100,6 +104,10 @@ const EmployeeList = () => {
 	const filterMechanicEmployees = () => {
 		// toggle the mechanic filter
 		setFilterMechanic(!filterMechanic);
+	};
+	const filterTrainerEmployees = () => {
+		// toggle the trainer filter
+		setFilterTrainer(!filterTrainer);
 	};
 
 	// determine what filter is applied, then apply the filter and return corresponding boolean value
@@ -137,10 +145,13 @@ const EmployeeList = () => {
 			// if we don't want to see tower staff AND position is included in TOWER_POSITIONS, return false
 			return false;
 		} else if (filterManagement && MANAGEMENT_POSITIONS.includes(position)) {
-			// if we don't want to see management AND position is included in MANAGEMENT_POSISTIONS, return false
+			// if we don't want to see management AND position is included in MANAGEMENT_POSITIONS, return false
 			return false;
 		} else if (filterMechanic && position === MECHANIC) {
-			// if we don't want to see mechanics AND position is  a mechanic, return false
+			// if we don't want to see mechanics AND position is a mechanic, return false
+			return false;
+		} else if (filterTrainer && TRAINER_POSITIONS.includes(position)) {
+			// if we don't want to see trainers AND position is included in TRAINER_POSITIONS, return false
 			return false;
 		} else {
 			// we aren't filtering off anything, so show everything
@@ -162,6 +173,7 @@ const EmployeeList = () => {
 					filterTowerEmployees={filterTowerEmployees}
 					filterManagementEmployees={filterManagementEmployees}
 					filterMechanicEmployees={filterMechanicEmployees}
+					filterTrainerEmployees={filterTrainerEmployees}
 					refreshEmployees={refreshEmployees}
 				>
 					{({ openOverflow }) => (
