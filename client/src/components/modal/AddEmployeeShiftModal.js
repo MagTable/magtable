@@ -11,12 +11,12 @@ const StyledDiv = styled.div`
 `;
 
 const StyledSection = styled.section`
-	position: fixed;
+	position: absolute;
 	background: white;
 	width: 50%;
 	margin: auto;
 	padding: 10px;
-	z-index: 5;
+	z-index: 10;
 	top: 25%;
 	left: 25%;
 	border: 3px solid black;

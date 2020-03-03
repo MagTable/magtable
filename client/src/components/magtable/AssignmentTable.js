@@ -20,7 +20,6 @@ const AssignmentTable = () => {
 			<AssignmentContainer>
 				<EmployeeList />
 				<TruckList showAM={showAM} setShowAM={setShowAM} />
-				{/*<AddEmployeeShift showModal={showModal} setModal={setModal} />*/}
 				<MapsDiv>
 					<LocationMap />
 					<TowerMap showAM={showAM} />
