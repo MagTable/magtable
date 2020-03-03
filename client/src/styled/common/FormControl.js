@@ -94,3 +94,31 @@ export const ToggleLabelLeftNotice = styled(ToggleLabel)`
 export const ToggleLabelRightNotice = styled(ToggleLabel)`
 	transform: translate(-45px, 0);
 `;
+
+/**
+ * Text boxes for username and password.
+ */
+export const Select = styled.select`
+	margin-top: 20px;
+	background: transparent;
+
+	padding: 7px;
+
+	border: 0;
+	border-bottom: 2px solid black;
+
+	transition: border 0.3s ease-in-out;
+
+	${({ fit }) => fit && `width: calc(100% - 14px);`}
+	
+	${({ focus }) =>
+		focus &&
+		` 
+			border-color: #28aae1;
+	`}
+	${({ error }) =>
+		error &&
+		`
+			border-bottom: 2px solid red;
+	`}
+`;

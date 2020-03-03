@@ -355,6 +355,7 @@ export const Hours = styled.p`
 	margin-block-start: 0;
 	font-style: italic;
 	margin-bottom: 3px;
+	white-space: nowrap;
 `;
 
 export const LabelWrapper = styled.div`
@@ -398,7 +399,7 @@ export const AssignedToWrap = styled.div`
 	align-items: center;
 	vertical-align: top;
 	position: relative;
-	transform: translate(180px, -45px);
+	transform: translate(180px, 47px);
 	font-size: 24px;
 `;
 
@@ -414,4 +415,12 @@ export const EmpRole = styled.h2`
 	font-size: 17px;
 	position: relative;
 	z-index: -5;
+`;
+
+export const EmpListItemDiv = styled.div`
+	height: 92px;
+	&:hover ${UnassignBtn} {
+		display: block;
+		opacity: 1;
+	}
 `;
