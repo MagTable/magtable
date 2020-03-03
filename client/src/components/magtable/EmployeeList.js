@@ -173,7 +173,10 @@ const EmployeeList = () => {
 	function filterStartTimes() {
 		console.log(filteredEmployeeShifts);
 		filteredEmployeeShifts.forEach(emp => {
-			if (!filteredStartTimes.includes(emp.startTime)) {
+			if (
+				!filteredStartTimes.includes(emp.startTime) &&
+				timeFilter(emp.startTime)
+			) {
 				filteredStartTimes.push(emp.startTime); // add the start time if it's not already in the list
 			}
 		});
@@ -223,23 +226,22 @@ const EmployeeList = () => {
 					<EmployeeListDiv>
 						{filterEmployeeShifts()}
 						{filteredStartTimes.length > 0 ? (
-							filteredStartTimes.map(
-								startTime =>
-									timeFilter(startTime) && (
-										<div key={startTime}>
-											<StartTimeSeparator>{startTime}</StartTimeSeparator>
-											{filteredEmployeeShifts.map(
-												employee =>
-													employee.startTime === startTime && (
-														<EmployeeListItem
-															key={employee.id}
-															employee={employee}
-														/>
-													)
-											)}
-										</div>
-									)
-							)
+							filteredStartTimes.map(startTime => (
+								<div key={startTime}>
+									<StartTimeSeparator>
+										<h2>{startTime}</h2>
+									</StartTimeSeparator>
+									{filteredEmployeeShifts.map(
+										employee =>
+											employee.startTime === startTime && (
+												<EmployeeListItem
+													key={employee.id}
+													employee={employee}
+												/>
+											)
+									)}
+								</div>
+							))
 						) : (
 							<h1>No Employee Shifts...</h1>
 						)}
