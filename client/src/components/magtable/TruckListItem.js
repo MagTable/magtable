@@ -7,11 +7,14 @@ import {
 	TruckListItemLocation,
 	TruckNumberDiv,
 	TruckProblemsDiv,
-	TruckProblemsText
+	TruckProblemsText,
+	TruckStatusMessage
 } from "../../styled/magtable/ListContent";
 import { useDrop, useDrag } from "react-dnd";
 import {
+	CON,
 	DANGER,
+	GO,
 	MANAGEMENT_POSITIONS,
 	MECHANIC,
 	OJT,
@@ -242,43 +245,49 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 		}
 	];
 
+	const equipmentOperable =
+		assignment.equipment.status === GO || assignment.equipment.status === CON;
+
 	return (
 		<div ref={drop}>
-			<TruckListItemDiv>
+			<TruckListItemDiv disabled={!equipmentOperable}>
 				<TruckNumberDiv
 					ref={drag}
 					status={assignment.equipment.status}
 					isDragging={isDragging}
+					disabled={!equipmentOperable}
 				>
 					{assignment.equipment.id}
 				</TruckNumberDiv>
-				<TruckInfoDiv>
-					<TruckListItemEmployeeList>
-						{employeeShifts.map(elem => (
-							<TruckListItemEmployee
-								key={elem.assignmentIndex}
-								slot={elem.slot}
-								show={elem.show}
-								outlineType={getOutline(elem.assignmentIndex)}
-								warningBackground={getAssignmentWarning(elem.assignmentIndex)}
-							>
-								{elem.shift?.name}
-								{getAssignmentWarning(elem.assignmentIndex) && (
-									<IconButton
-										faClassName={"fa-exclamation-triangle"}
-										color={"orange"}
-										outlineType={"darkorange"}
-										toolTip={getAssignmentWarning(elem.assignmentIndex)}
-									/>
-								)}
-								{elem.canClear && (
-									<button onClick={() => handleClear(elem.shift.id)}>X</button>
-								)}
-							</TruckListItemEmployee>
-						))}
-					</TruckListItemEmployeeList>
-					<TruckListItemLocation>
-						<input
+				{equipmentOperable ? (
+					<TruckInfoDiv>
+						<TruckListItemEmployeeList>
+							{employeeShifts.map(elem => (
+								<TruckListItemEmployee
+									key={elem.assignmentIndex}
+									slot={elem.slot}
+									show={elem.show}
+									outlineType={getOutline(elem.assignmentIndex)}
+									warningBackground={getAssignmentWarning(elem.assignmentIndex)}
+								>
+									{elem.shift?.name}
+									{getAssignmentWarning(elem.assignmentIndex) && (
+										<IconButton
+											faClassName={"fa-exclamation-triangle"}
+											color={"orange"}
+											outlineType={"darkorange"}
+											toolTip={getAssignmentWarning(elem.assignmentIndex)}
+										/>
+									)}
+									{elem.canClear && (
+										<button onClick={() => handleClear(elem.shift.id)}>
+											X
+										</button>
+									)}
+								</TruckListItemEmployee>
+							))}
+						</TruckListItemEmployeeList>
+						<TruckListItemLocation
 							type="text"
 							value={
 								assignment.parkingLocation
@@ -291,8 +300,12 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 							style={{ width: "30px" }}
 							readOnly={true}
 						/>
-					</TruckListItemLocation>
-				</TruckInfoDiv>
+					</TruckInfoDiv>
+				) : (
+					<TruckStatusMessage>
+						Unavailable ({assignment.equipment.status})
+					</TruckStatusMessage>
+				)}
 			</TruckListItemDiv>
 			<TruckProblemsDiv noticeOpen={noticeOpen}>
 				{assignment.equipment.notice !== "" && (

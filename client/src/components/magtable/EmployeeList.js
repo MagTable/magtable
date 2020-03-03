@@ -138,7 +138,7 @@ const EmployeeList = () => {
 						<IconButton
 							faClassName="fa-bars"
 							onClick={openOverflow}
-							color={"white"}
+							color={"var(--header-text)"}
 							hoverColor={"grey"}
 						/>
 					)}

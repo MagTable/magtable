@@ -32,6 +32,12 @@ export const TOWER_POSITIONS = [
 	TOWER_TRAINER
 ];
 
+// truck status'
+export const GO = "GO";
+export const CON = "CON";
+export const OOS = "OOS";
+export const INOP = "INOP";
+
 // UI Hint Types
 export const DANGER = "DANGER";
 export const WARNING = "WARNING";

@@ -12,7 +12,6 @@ import { Button } from "../common/FormControl";
  * Wrapper div to hold the truck map and its title.
  **/
 export const TruckMapDiv = styled.div`
-	border: 2px solid var(--border-color);
 	display: flex;
 	flex-grow: 2.5;
 	flex-basis: 0;
@@ -33,19 +32,8 @@ export const ParkingLocation = styled.div`
 export const TowerMapDiv = styled.div`
 	display: flex;
 	flex-grow: 1;
-	min-height: 200px;
-`;
-
-/**
- * Wrapper div to hold the tower map div and its title.
- */
-export const TowerDiv = styled.div`
-	display: flex;
-	flex-direction: column;
-	flex-grow: 1;
+	min-height: 80px;
 	flex-basis: 0;
-	border: 2px solid var(--border-color);
-	height: 35%;
 `;
 
 /**

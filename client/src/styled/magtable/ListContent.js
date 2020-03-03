@@ -38,7 +38,7 @@ const getTruckColorCode = status => {
 			return "--context-red";
 		}
 		case "CON": {
-			return "--context-blue";
+			return "--context-orange";
 		}
 		case "OOS": {
 			return "--context-grey";
@@ -78,7 +78,7 @@ export const StartTimeSeparator = styled.div`
  * Holds the employee list and title for the list.
  */
 export const EmployeeListDivWrapper = styled(EmployeeListDiv)`
-	border: 2px solid var(--border-color);
+	border-right: 2px solid var(--border-color);
 `;
 
 /**
@@ -148,8 +148,7 @@ export const EmployeeLabelDiv = styled.div`
  * todo would like to set a max width on this - arran
  **/
 export const TruckListDiv = styled.div`
-	// border: 2px solid var(--border-color);
-	// height: calc(100vh - 73px);
+	border-right: 2px solid var(--border-color);
 	transition: all 0.15s ease-in-out;
 	min-width: 330px;
 	margin: 0;
@@ -161,15 +160,20 @@ export const TruckListDiv = styled.div`
 	overflow-x: hidden;
 `;
 
-export const TruckListDivWrapper = styled(TruckListDiv)`
-	border: 2px solid var(--border-color);
-`;
+export const TruckListDivWrapper = styled(TruckListDiv)``;
 
 export const TruckListItemDiv = styled.div`
 	transition: all 0.15s ease-in-out;
 	border-bottom: 1px solid var(--border-color);
-	height: 90px;
+	height: 55px;
 	display: flex;
+
+	${({ disabled }) =>
+		disabled &&
+		`
+		height: 40px;
+		background: var(--shader-grey);
+	`}
 `;
 
 export const TruckProblemsDiv = styled.div`
@@ -188,20 +192,37 @@ export const TruckProblemsText = styled.p`
 `;
 
 export const TruckNumberDiv = styled.div`
-	background: var(${({ status }) => getTruckColorCode(status)});
+	cursor: pointer;
 	display: flex;
-	min-width: 100px;
 	justify-content: center;
 	align-items: center;
+
+	border-right: 10px solid var(${({ status }) => getTruckColorCode(status)});
 	color: black;
+
+	min-width: 60px;
 	font-size: 40px;
+
 	${({ isDragging }) => isDragging && `opacity: 0.5;`}
+	${({ disabled }) =>
+		disabled &&
+		`
+		font-size: 25px;
+	`}
 `;
 
 export const TruckInfoDiv = styled.div`
 	display: flex;
 	flex-grow: 3;
 	justify-content: space-between;
+`;
+
+export const TruckStatusMessage = styled.h4`
+	width: 100%;
+	text-align: center;
+	background: var(--shader-grey);
+	margin: 0;
+	padding: 0.6rem 0;
 `;
 
 export const TruckListItemEmployee = styled.div`
@@ -224,10 +245,7 @@ export const TruckListItemEmployee = styled.div`
 	${({ outlineType }) =>
 		outlineType &&
 		`
-			// outline-width: 2px;
-			// outline-offset: -2px;
-			// outline-style: solid;
-			background: var(${getColor(outlineType)});
+		background: var(${getColor(outlineType)});
 	`}
 `;
 
@@ -240,13 +258,15 @@ export const TruckListItemEmployeeList = styled.div`
 	height: 100%;
 `;
 
-export const TruckListItemLocation = styled.p`
-	font-weight: bold;
-	align-self: center;
-	margin-right: 10px;
-	margin-left: 10px;
+export const TruckListItemLocation = styled.input`
+	height: calc(100% -2px);
 	flex-grow: 1;
 	flex-basis: 0;
+	border: 0;
+	border-left: 2px solid var(--border-color);
+	font-size: 1.5rem;
+	text-align: center;
+	font-family: "Noto Sans KR", sans-serif;
 `;
 
 export const TruckListButton = styled(Button)`
@@ -290,9 +310,6 @@ export const TowerListItemEmployee = styled.p`
 	${({ outlineType }) =>
 		outlineType &&
 		`
-			// outline-width: 2px;
-			// outline-offset: -2px;
-			// outline-style: solid;
 			background: var(${getColor(outlineType)});
 	`}
 `;

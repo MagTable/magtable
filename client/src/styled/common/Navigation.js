@@ -103,8 +103,8 @@ export const NavDiv = styled.div`
 /**
  * The header div of the page that contains the logo, navigation and possibly the title of the page.
  */
-export const HeaderDiv = styled.div`
-	background: var(--header);
+export const NavBar = styled.div`
+	background: var(--navbar);
 	display: flex;
 	justify-content: space-between;
 	height: 70px;
