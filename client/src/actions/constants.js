@@ -15,7 +15,7 @@ export const PRACTICAL_TRAINER = "Practical Trainer";
 export const TECHNICIAN = "Technician";
 export const OJT = "OJT";
 export const OJT_TOWER = "OJT-Tower";
-export const TOWER_TRAINER = "TOWER_TRAINER";
+export const TOWER_TRAINER = "Tower Trainer";
 export const MANAGEMENT_POSITIONS = [OPERATIONS_MANAGER, OPERATIONS_SUPERVISOR];
 export const TECHNICIAN_POSITIONS = [
 	OJT,

@@ -14,7 +14,12 @@ import EmployeeListItem from "./EmployeeListItem";
 import IconButton from "../common/IconButton";
 import { refreshEmployeeShifts } from "../../actions/magtable";
 import OverflowEmployee from "./OverflowEmployee";
-import { TECHNICIAN_POSITIONS, TOWER_POSITIONS } from "../../actions/constants";
+import {
+	MANAGEMENT_POSITIONS,
+	MECHANIC,
+	TECHNICIAN_POSITIONS,
+	TOWER_POSITIONS
+} from "../../actions/constants";
 
 /**
  * @date 2/19/2020
@@ -36,15 +41,18 @@ const EmployeeList = () => {
 	// employees are already sorted by time
 	const startTimes = [];
 
-	// used to determine if the app shows employees who start before noon, but after midnight, default false to show all times
+	// used to determine if the app filters out employees who start before noon, but after midnight, default false to show all times
 	const [filterAM, setFilterAM] = useState(false);
-	// used to determine if the app shows employees who start before midnight, but after noon, default false to show all times
+	// used to determine if the app filters out employees who start before midnight, but after noon, default false to show all times
 	const [filterPM, setFilterPM] = useState(false);
-	// used to determine if the app shows employees that are part of the technician staff, default true to show all employees
+	// used to determine if the app filters out employees that are part of the technician staff, default false to show all employees
 	const [filterTech, setFilterTech] = useState(false);
-	// used to determine if the app shows employees that are part of the tower staff, default true to show all employees
+	// used to determine if the app filters out employees that are part of the tower staff, default false to show all employees
 	const [filterTower, setFilterTower] = useState(false);
-	// used to determine if the app shows management, default is false to not show management
+	// used to determine if the app filters out management, default is false to not show management
+	const [filterManagement, setFilterManagement] = useState(false);
+	// used to determine if the app filters out employees that are mechanics, default is false to show all employees
+	const [filterMechanic, setFilterMechanic] = useState(false);
 
 	if (!loading) {
 		employeeShifts.shifts.forEach(emp => {
@@ -54,7 +62,14 @@ const EmployeeList = () => {
 		});
 	}
 
-	const activeFilters = [filterAM, filterPM, filterTech, filterTower];
+	const activeFilters = [
+		filterAM,
+		filterPM,
+		filterTech,
+		filterTower,
+		filterManagement,
+		filterMechanic
+	];
 
 	const refreshEmployees = () => {
 		// refresh employees upon clicking the button
@@ -78,26 +93,14 @@ const EmployeeList = () => {
 		// toggle the tower filter, no need to make sure that tech filter is off
 		setFilterTower(!filterTower);
 	};
-	// const showManagement = () => {
-	// 	// toggle the management filter
-	// 	setFilterManagement(!filterManagement);
-	// 	setOpen(false);
-	// };
-
-	function showFilterIcons() {
-		if (!filterAM) {
-			// if we aren't filtering AM shifts, show a sun
-		}
-		if (!filterPM) {
-			// if we aren't filtering PM shifts, show a moon
-		}
-		if (!filterTech) {
-			// if we aren't filtering technicians, show a gear
-		}
-		if (!filterTower) {
-			// if we aren't filtering tower staff, show a tower
-		}
-	}
+	const filterManagementEmployees = () => {
+		// toggle the management filter
+		setFilterManagement(!filterManagement);
+	};
+	const filterMechanicEmployees = () => {
+		// toggle the mechanic filter
+		setFilterMechanic(!filterMechanic);
+	};
 
 	// determine what filter is applied, then apply the filter and return corresponding boolean value
 	function timeFilter(startTime) {
@@ -128,10 +131,16 @@ const EmployeeList = () => {
 
 	function positionFilter(position) {
 		if (filterTech && TECHNICIAN_POSITIONS.includes(position)) {
-			// if we want to see technicians AND position is included in TECHNICIAN_POSITIONS, return true
+			// if we don't want to see technicians AND position is included in TECHNICIAN_POSITIONS, return false
 			return false;
 		} else if (filterTower && TOWER_POSITIONS.includes(position)) {
-			// if we want to see tower staff AND position is included in TOWER+POSITIONS, return true
+			// if we don't want to see tower staff AND position is included in TOWER_POSITIONS, return false
+			return false;
+		} else if (filterManagement && MANAGEMENT_POSITIONS.includes(position)) {
+			// if we don't want to see management AND position is included in MANAGEMENT_POSISTIONS, return false
+			return false;
+		} else if (filterMechanic && position === MECHANIC) {
+			// if we don't want to see mechanics AND position is  a mechanic, return false
 			return false;
 		} else {
 			// we aren't filtering off anything, so show everything
@@ -152,6 +161,8 @@ const EmployeeList = () => {
 					filterPMEmployees={filterPMEmployees}
 					filterTechEmployees={filterTechEmployees}
 					filterTowerEmployees={filterTowerEmployees}
+					filterManagementEmployees={filterManagementEmployees}
+					filterMechanicEmployees={filterMechanicEmployees}
 					refreshEmployees={refreshEmployees}
 				>
 					{({ openOverflow }) => (

@@ -42,7 +42,7 @@ export const OverflowMenuButton = styled.button`
 	position: relative;
 	width: 180px;
 	left: -30px;
-	top: 75px;
+	top: 100px;
 
 	:hover {
 		background: ${({ hoverColor }) => hoverColor || "#c7c7c7"};

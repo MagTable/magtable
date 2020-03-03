@@ -31,6 +31,8 @@ function OverflowEmployee({
 	filterPMEmployees,
 	filterTechEmployees,
 	filterTowerEmployees,
+	filterManagementEmployees,
+	filterMechanicEmployees,
 	refreshEmployees
 }) {
 	const dispatch = useDispatch();
@@ -72,6 +74,18 @@ function OverflowEmployee({
 							<FilterIcon className={"fas fa-check"} color={"green"} />
 						) : null}
 						Tower Staff
+					</OverflowMenuButton>
+					<OverflowMenuButton onClick={filterManagementEmployees}>
+						{activeFilters[4] ? (
+							<FilterIcon className={"fas fa-check"} color={"green"} />
+						) : null}
+						Management
+					</OverflowMenuButton>
+					<OverflowMenuButton onClick={filterMechanicEmployees}>
+						{activeFilters[5] ? (
+							<FilterIcon className={"fas fa-check"} color={"green"} />
+						) : null}
+						Mechanics
 					</OverflowMenuButton>
 					<OverflowMenuButton onClick={refreshEmployees}>
 						<FilterIcon className={"fas fa-sync"} />
