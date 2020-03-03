@@ -123,6 +123,7 @@ function OverflowEmployee({
 						</AddEmployeeShiftModal>
 						<OverflowMenuButton onClick={handleShow}>
 							Add Employee Shift
+							<FilterIcon className={"fas fa-user-plus"} />
 						</OverflowMenuButton>
 					</div>
 				</>
