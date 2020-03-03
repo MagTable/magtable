@@ -8,12 +8,6 @@ import {
 } from "../../styled/magtable/ListContent";
 import { useSelector } from "react-redux";
 import Switch from "react-switch";
-import {
-	ToggleLabelLeft,
-	ToggleLabelLeftNotice,
-	ToggleLabelRight,
-	ToggleLabelRightNotice
-} from "../../styled/common/FormControl";
 
 /**
  * @date 2020-02-17
@@ -40,34 +34,45 @@ function TruckList({ showAM, setShowAM }) {
 			<ListTitle>
 				<ListTitleText>Trucks</ListTitleText>
 				<TruckListManipDiv>
-					{/*<TruckListButton onClick={() => setNoticesOpen(!noticesOpen)}>*/}
-					{/*	Show Notices*/}
-					{/*</TruckListButton>*/}
-
 					<Switch
 						onChange={() => setNoticesOpen(!noticesOpen)}
-						checked={noticesOpen !== true}
-						offColor={"#161616"}
-						onColor={"#161616"}
-						onHandleColor={"#bfb8ad"}
-						offHandleColor={"#bfb8ad"}
-						checkedIcon={
-							<ToggleLabelLeftNotice>Show Notices</ToggleLabelLeftNotice>
-						}
+						checked={noticesOpen === true}
+						offColor={"#414244"}
+						onColor={"#187AD3"}
 						uncheckedIcon={
-							<ToggleLabelRightNotice>Hide Notices</ToggleLabelRightNotice>
+							<i
+								className={"fas fa-flag"}
+								style={{ padding: "6px 10px", color: "red" }}
+								data-tip={"Show Equipment Notices"}
+							/>
 						}
-						width={150}
+						checkedIcon={
+							<i
+								className={"fas fa-flag"}
+								style={{ padding: "6px 10px", color: "white" }}
+							/>
+						}
+						width={60}
 					/>
 
 					<Switch
 						onChange={() => setShowAM(!showAM)}
-						checked={showAM === true}
+						checked={showAM === false}
 						offColor={"#414244"}
 						onColor={"#414244"}
-						checkedIcon={<ToggleLabelLeft>AM</ToggleLabelLeft>}
-						uncheckedIcon={<ToggleLabelRight>PM</ToggleLabelRight>}
-						width={80}
+						uncheckedIcon={
+							<i
+								className={"fas fa-sun fa-lg"}
+								style={{ padding: "7px", color: "yellow" }}
+							/>
+						}
+						checkedIcon={
+							<i
+								className={"fas fa-moon fa-lg"}
+								style={{ padding: "7px", color: "lightblue" }}
+							/>
+						}
+						width={60}
 					/>
 				</TruckListManipDiv>
 			</ListTitle>

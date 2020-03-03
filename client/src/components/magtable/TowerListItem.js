@@ -4,7 +4,10 @@ import {
 	DeleteTowerAssignmentBtn,
 	TowerPositionDiv
 } from "../../styled/magtable/Maps";
-import { TowerListItemEmployee } from "../../styled/magtable/ListContent";
+import {
+	TowerListEmployeeMgmt,
+	TowerListItemEmployee
+} from "../../styled/magtable/ListContent";
 import { useDrop } from "react-dnd";
 import {
 	DANGER,
@@ -47,7 +50,7 @@ function TowerListItem({ assignment, showAM }) {
 			equipmentID: assignment.equipment.id,
 			equipmentSlotID: nextOpenSlot()
 		}),
-		canDrop: item => {
+		defaultCanDrop: item => {
 			setHoveredShiftDescription(item.shiftDescription);
 			return handleCanDrop(item);
 		},
@@ -212,21 +215,23 @@ function TowerListItem({ assignment, showAM }) {
 					warningBackground={getAssignmentWarning(elem.assignmentIndex)}
 				>
 					{elem.shift?.name}
-					{getAssignmentWarning(elem.assignmentIndex) && (
-						<IconButton
-							faClassName={"fa-exclamation-triangle"}
-							color={"orange"}
-							outlineType={"darkorange"}
-							toolTip={getAssignmentWarning(elem.assignmentIndex)}
-						/>
-					)}
-					{elem.canClear && (
-						<DeleteTowerAssignmentBtn
-							onClick={() => handleClear(elem.shift.id)}
-						>
-							X
-						</DeleteTowerAssignmentBtn>
-					)}
+					<TowerListEmployeeMgmt>
+						{getAssignmentWarning(elem.assignmentIndex) && (
+							<IconButton
+								faClassName={"fa-exclamation-triangle"}
+								color={"orange"}
+								outlineType={"darkorange"}
+								toolTip={getAssignmentWarning(elem.assignmentIndex)}
+							/>
+						)}
+						{elem.canClear && (
+							<DeleteTowerAssignmentBtn
+								onClick={() => handleClear(elem.shift.id)}
+							>
+								X
+							</DeleteTowerAssignmentBtn>
+						)}
+					</TowerListEmployeeMgmt>
 				</TowerListItemEmployee>
 			))}
 		</TowerPositionDiv>

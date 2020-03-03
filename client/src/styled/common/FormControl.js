@@ -87,10 +87,48 @@ export const ToggleLabelLeft = styled(ToggleLabel)`
 	padding-left: 20px;
 `;
 
-export const ToggleLabelLeftNotice = styled(ToggleLabel)`
-	padding-left: 65px;
+export const ToggleLabelLeftNotice = styled.h4`
+	margin: 0 10px;
+	width: 100%;
+	color: var(--title-bright);
+	font-family: "Noto Sans KR", sans-serif;
+	text-align center;
 `;
 
-export const ToggleLabelRightNotice = styled(ToggleLabel)`
-	transform: translate(-45px, 0);
+export const ToggleLabelRightNotice = styled.h4`
+	padding-right: 50px;
+	text-align: left;
+	margin: 0 0 0 0;
+	width: 100%;
+	color: var(--title-bright);
+	font-family: "Noto Sans KR", sans-serif;
+	text-align center;
+`;
+
+/**
+ * Text boxes for username and password.
+ */
+export const Select = styled.select`
+	margin-top: 20px;
+	background: transparent;
+
+	padding: 7px;
+
+	border: 0;
+	border-bottom: 2px solid black;
+
+	transition: border 0.3s ease-in-out;
+
+	${({ fit }) => fit && `width: calc(100% - 14px);`}
+	
+	${({ focus }) =>
+		focus &&
+		` 
+			border-color: #28aae1;
+	`}
+	${({ error }) =>
+		error &&
+		`
+			border-bottom: 2px solid red;
+	`}
 `;
