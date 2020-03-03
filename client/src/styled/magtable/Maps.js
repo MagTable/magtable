@@ -31,6 +31,16 @@ export const ParkingLocation = styled.div`
  */
 export const TowerMapDiv = styled.div`
 	display: flex;
+	// flex-grow: 1;
+	height: 130px;
+`;
+
+/**
+ * Wrapper div to hold the tower map div and its title.
+ */
+export const TowerDiv = styled.div`
+	display: flex;
+	flex-direction: column;
 	flex-grow: 1;
 	min-height: 80px;
 	flex-basis: 0;
@@ -105,5 +115,5 @@ export const AssignedEmployeeName = styled(EmployeeListItemName)`
  */
 export const DeleteTowerAssignmentBtn = styled(Button)`
 	width: fit-content;
-	margin-right: 20px;
+	margin-left: 5px;
 `;
