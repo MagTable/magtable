@@ -320,16 +320,21 @@ export const LabelWrapper = styled.div`
 		type === "greenPass" && `background-color: var(--context-green);`}
 	${({ type }) =>
 		type === "noAvop" && `background-color: var(--context-orange);`}
-	width: 23px;
-	height: 23px;
+		
+	width: 26px;
+	max-width: 26px;
 	transition: 0.3s ease-in-out;
 	position: relative;
 	z-index: 1;
+	padding: 3px;
+
+	:last-child {
+		border-top-right-radius: 5px;
+		border-bottom-right-radius: 5px;
+	}
 `;
 
 export const LabelText = styled.div`
-	margin-block-start: 0;
-	margin-block-end: 0;
 	margin: 0 5px;
 	width: 0px;
 	overflow: hidden;
@@ -339,15 +344,14 @@ export const LabelText = styled.div`
 `;
 
 export const Labels = styled.div`
-	width: 23px;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row:
 	justify-content: flex-end;
 	grid-area: labels;
 	:hover {
-		width: 100px;
 		${LabelWrapper}, ${LabelText} {
-			width: 100px;
+			width: 90px;
+			max-width: 90px;
 		}
 	}
 `;
@@ -391,7 +395,7 @@ export const EmpListItemDiv = styled.div`
 
 	display: grid;
 	grid-template-columns: 23px 1fr 48px;
-	grid-template-rows: 48px auto;
+	grid-template-rows: auto auto;
 	grid-template-areas:
 		"name name equipmentID"
 		"labels position position";
