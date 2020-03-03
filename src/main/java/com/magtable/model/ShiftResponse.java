@@ -14,7 +14,8 @@ public class ShiftResponse implements Serializable {
     private Boolean noAvop;
     private Boolean isGreen;
 
-    private static final AtomicInteger count = new AtomicInteger(0);
+    //todo change initial value (serialized List problem)
+    private static final AtomicInteger count = new AtomicInteger(200);
 
     public ShiftResponse() {
         this.id = count.incrementAndGet();
