@@ -67,7 +67,6 @@ function EmployeeListItem({ employee: employeeShift }) {
 		canDrag: !employeeShift.assignedEquipment,
 		end: (item, monitor) => {
 			const dropResult = monitor.getDropResult();
-			console.log(dropResult);
 			if (item && dropResult) {
 				dispatch(
 					setEquipmentEmployee(

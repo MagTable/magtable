@@ -15,7 +15,8 @@ import {
 	MANAGEMENT_POSITIONS,
 	MECHANIC,
 	TECHNICIAN_POSITIONS,
-	TOWER_POSITIONS
+	TOWER_POSITIONS,
+	TRAINER_POSITIONS
 } from "../../actions/constants";
 
 /**
@@ -50,6 +51,8 @@ const EmployeeList = () => {
 	const [filterManagement, setFilterManagement] = useState(false);
 	// used to determine if the app filters out employees that are mechanics, default is false to show all employees
 	const [filterMechanic, setFilterMechanic] = useState(false);
+	// used to determine if the app filters out employees that are part of the training staff, default false to show all employees
+	const [filterTrainer, setFilterTrainer] = useState(false);
 
 	if (!loading) {
 		employeeShifts.shifts.forEach(emp => {
@@ -65,7 +68,8 @@ const EmployeeList = () => {
 		filterTech,
 		filterTower,
 		filterManagement,
-		filterMechanic
+		filterMechanic,
+		filterTrainer
 	];
 
 	const refreshEmployees = () => {
@@ -97,6 +101,10 @@ const EmployeeList = () => {
 	const filterMechanicEmployees = () => {
 		// toggle the mechanic filter
 		setFilterMechanic(!filterMechanic);
+	};
+	const filterTrainerEmployees = () => {
+		// toggle the trainer filter
+		setFilterTrainer(!filterTrainer);
 	};
 
 	// determine what filter is applied, then apply the filter and return corresponding boolean value
@@ -134,15 +142,41 @@ const EmployeeList = () => {
 			// if we don't want to see tower staff AND position is included in TOWER_POSITIONS, return false
 			return false;
 		} else if (filterManagement && MANAGEMENT_POSITIONS.includes(position)) {
-			// if we don't want to see management AND position is included in MANAGEMENT_POSISTIONS, return false
+			// if we don't want to see management AND position is included in MANAGEMENT_POSITIONS, return false
 			return false;
 		} else if (filterMechanic && position === MECHANIC) {
-			// if we don't want to see mechanics AND position is  a mechanic, return false
+			// if we don't want to see mechanics AND position is a mechanic, return false
+			return false;
+		} else if (filterTrainer && TRAINER_POSITIONS.includes(position)) {
+			// if we don't want to see trainers AND position is included in TRAINER_POSITIONS, return false
 			return false;
 		} else {
 			// we aren't filtering off anything, so show everything
 			return true;
 		}
+	}
+
+	const filteredEmployeeShifts = []; // used to store the employee shifts not filtered out
+	const filteredStartTimes = []; // used to store the start times of the employees not filtered out
+
+	// fill a list of employee shifts where the position filters are applied
+	function filterEmployeeShifts() {
+		employeeShifts.shifts.forEach(emp => {
+			if (positionFilter(emp.description)) {
+				filteredEmployeeShifts.push(emp);
+			}
+		});
+		filterStartTimes(); // call function to update the start times of this filtered employee shifts
+	}
+
+	// fill a list of start times from the start times of the list of filtered employee shifts
+	function filterStartTimes() {
+		console.log(filteredEmployeeShifts);
+		filteredEmployeeShifts.forEach(emp => {
+			if (!filteredStartTimes.includes(emp.startTime)) {
+				filteredStartTimes.push(emp.startTime); // add the start time if it's not already in the list
+			}
+		});
 	}
 
 	return (
@@ -159,6 +193,7 @@ const EmployeeList = () => {
 					filterTowerEmployees={filterTowerEmployees}
 					filterManagementEmployees={filterManagementEmployees}
 					filterMechanicEmployees={filterMechanicEmployees}
+					filterTrainerEmployees={filterTrainerEmployees}
 					refreshEmployees={refreshEmployees}
 				>
 					{({ openOverflow }) => (
@@ -186,16 +221,16 @@ const EmployeeList = () => {
 					</EmployeeListRefreshInfo>
 
 					<EmployeeListDiv>
-						{startTimes.length > 0 ? (
-							startTimes.map(
+						{filterEmployeeShifts()}
+						{filteredStartTimes.length > 0 ? (
+							filteredStartTimes.map(
 								startTime =>
 									timeFilter(startTime) && (
 										<div key={startTime}>
 											<StartTimeSeparator>{startTime}</StartTimeSeparator>
 											{employeeShifts.shifts.map(
 												employee =>
-													employee.startTime === startTime &&
-													positionFilter(employee.description) && (
+													employee.startTime === startTime && (
 														<EmployeeListItem
 															key={employee.id}
 															employee={employee}
@@ -206,9 +241,7 @@ const EmployeeList = () => {
 									)
 							)
 						) : (
-							<h1>
-								No Employee Shifts... <br /> <small>update shift list</small>
-							</h1>
+							<h1>No Employee Shifts...</h1>
 						)}
 					</EmployeeListDiv>
 				</>
