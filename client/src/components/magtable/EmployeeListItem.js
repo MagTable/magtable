@@ -109,13 +109,30 @@ function EmployeeListItem({ employee: employeeShift }) {
 				</ShiftInfo>
 
 				<Labels>
-					<LabelWrapper>
-						<LabelText>Hello</LabelText>
-					</LabelWrapper>
-					<LabelWrapper>
-						<LabelText>Hello</LabelText>
-					</LabelWrapper>
+					{employeeShift.isGreen && (
+						<LabelWrapper type={"greenPass"}>
+							<LabelText>Green Pass</LabelText>
+						</LabelWrapper>
+					)}
+
+					{employeeShift.noAvop && (
+						<LabelWrapper type={"noAvop"}>
+							<LabelText>No AVOP</LabelText>
+						</LabelWrapper>
+					)}
 				</Labels>
+
+				{/*{employeeShift.isGreen && <Label type={"greenPass"}>Green Pass</Label>}*/}
+				{/*{employeeShift.noAvop && <Label type={"noAvop"}>No AVOP</Label>}*/}
+
+				{/*<Labels>*/}
+				{/*	<LabelWrapper>*/}
+				{/*		<LabelText>Hello</LabelText>*/}
+				{/*	</LabelWrapper>*/}
+				{/*	<LabelWrapper>*/}
+				{/*		<LabelText>Hello</LabelText>*/}
+				{/*	</LabelWrapper>*/}
+				{/*</Labels>*/}
 
 				<EmpRole>{employeeShift.description}</EmpRole>
 			</EmpWrap>
