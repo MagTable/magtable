@@ -1,7 +1,7 @@
 package com.magtable.services.w2wServices;
 
 
-import com.magtable.model.CleanShift;
+import com.magtable.model.ShiftResponse;
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -19,7 +19,7 @@ public class ShiftScheduler {
 
     //SID will have to be updated once and awhile
     private String SID = "32325584041A4";
-    private ArrayList<CleanShift> shiftList;
+    private ArrayList<ShiftResponse> shiftList;
     private static ShiftScheduler shiftScheduler;
     private String lastUpdatedUI;
     private String lastUpdated;
@@ -27,7 +27,7 @@ public class ShiftScheduler {
     /** CONSTRUCTOR **/
 
     private ShiftScheduler() {
-        shiftList = new ArrayList<CleanShift>();
+        shiftList = new ArrayList<ShiftResponse>();
     }
 
     //singleton get instance
@@ -39,7 +39,7 @@ public class ShiftScheduler {
     }
 
 
-    public ArrayList<CleanShift> getShiftList() {
+    public ArrayList<ShiftResponse> getShiftList() {
         return shiftList;
     }
 
@@ -114,7 +114,7 @@ public class ShiftScheduler {
             //iterating through the shift list
             while (!shifts.isEmpty()) {
 
-                CleanShift shift = new CleanShift(); //Creating a new shift
+                ShiftResponse shift = new ShiftResponse(); //Creating a new shift
 
                 String startTime = shifts.first().text();
                 shift.setStartTime(startTime.replace(":", ""));
