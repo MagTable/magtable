@@ -228,9 +228,7 @@ const EmployeeList = () => {
 						{filteredStartTimes.length > 0 ? (
 							filteredStartTimes.map(startTime => (
 								<div key={startTime}>
-									<StartTimeSeparator>
-										<h2>{startTime}</h2>
-									</StartTimeSeparator>
+									<StartTimeSeparator>{startTime}</StartTimeSeparator>
 									{filteredEmployeeShifts.map(
 										employee =>
 											employee.startTime === startTime && (
