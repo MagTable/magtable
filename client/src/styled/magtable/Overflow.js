@@ -11,7 +11,8 @@ import styled from "styled-components";
  **/
 export const OverflowMenu = styled.div`
 	position: relative;
-
+	top: 49px;
+	z-index: 10;
 	#arrow {
 		position: absolute;
 		width: 120px;
@@ -30,15 +31,12 @@ export const OverflowMenu = styled.div`
 export const OverflowMenuButton = styled.button`
 	z-index: 5;
 	padding: 0.5rem;
-
 	cursor: pointer;
 	border: 0;
 	background: ${({ color }) => color || "white"};
 	color: black;
 	text-align: left;
-
 	box-shadow: 2px 2px 3px #999;
-
 	position: relative;
 	width: 180px;
 	left: -50px;
