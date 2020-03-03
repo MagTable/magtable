@@ -331,7 +331,7 @@ export const TowerListEmployeeMgmt = styled.div`
 export const UnassignBtn = styled.button`
 	float: right;
 	position: absolute;
-	transform: translate(20px, -20px);
+	transform: translate(-23px, -24px);
 	border-radius: 30px;
 	width: 30px;
 	height: 30px;
@@ -341,12 +341,16 @@ export const UnassignBtn = styled.button`
 	opacity: 0;
 	transition: 0.2s ease-in-out;
 	cursor: pointer;
+	z-index: 1;
 `;
 
 export const EmpWrap = styled.div`
 	outline: 2px solid black;
 	outline-offset: -1px;
 	width: 227px;
+	transform: translateY(-45px);
+	position: relative;
+	z-index: 0;
 
 	&:hover ${UnassignBtn} {
 		display: block;
@@ -358,6 +362,7 @@ export const EmpWrap = styled.div`
 `;
 
 export const EmpName = styled.div`
+	width: 172px;
 	padding: 5px 0 0 5px;
 	margin-block-start: 0;
 	margin-block-end: 0;
@@ -372,13 +377,19 @@ export const Hours = styled.p`
 	margin-block-start: 0;
 	font-style: italic;
 	margin-bottom: 3px;
+	white-space: nowrap;
 `;
 
 export const LabelWrapper = styled.div`
-	background-color: #ffa5a5;
+	${({ type }) =>
+		type === "greenPass" && `background-color: var(--context-green);`}
+	${({ type }) =>
+		type === "noAvop" && `background-color: var(--context-orange);`}
 	width: 23px;
 	height: 23px;
 	transition: 0.3s ease-in-out;
+	position: relative;
+	z-index: 1;
 `;
 
 export const LabelText = styled.p`
@@ -394,7 +405,11 @@ export const LabelText = styled.p`
 
 export const Labels = styled.div`
 	width: 23px;
-
+	transform: translate(1px, 1px);
+	height: 46px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
 	:hover {
 		width: 100px;
 	}
@@ -415,8 +430,9 @@ export const AssignedToWrap = styled.div`
 	align-items: center;
 	vertical-align: top;
 	position: relative;
-	transform: translate(180px, -45px);
+	transform: translate(180px, 2px);
 	font-size: 24px;
+	z-index: 1;
 `;
 
 export const ShiftInfo = styled.div`
@@ -430,5 +446,13 @@ export const EmpRole = styled.h2`
 	color: grey;
 	font-size: 17px;
 	position: relative;
-	z-index: -5;
+	z-index: -1;
+`;
+
+export const EmpListItemDiv = styled.div`
+	height: 92px;
+	&:hover ${UnassignBtn} {
+		display: block;
+		opacity: 1;
+	}
 `;

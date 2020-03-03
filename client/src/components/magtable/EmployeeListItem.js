@@ -8,6 +8,7 @@ import {
 } from "../../actions/magtable";
 import {
 	AssignedToWrap,
+	EmpListItemDiv,
 	EmpName,
 	EmpRole,
 	EmpWrap,
@@ -91,34 +92,51 @@ function EmployeeListItem({ employee: employeeShift }) {
 	}
 
 	return (
-		<EmpWrap
-			ref={drag}
-			disabled={isDragging || employeeShift.assignedEquipment}
-		>
-			<ShiftInfo>
-				<EmpName>{employeeShift.name}</EmpName>
-				<Hours>
-					{employeeShift.startTime} - {employeeShift.endTime}
-				</Hours>
-			</ShiftInfo>
-
+		<EmpListItemDiv>
 			<AssignedToWrap>
 				<UnassignBtn>X</UnassignBtn>
 				{/*Todo replace me with the assigned truck number*/}
 			</AssignedToWrap>
+			<EmpWrap
+				ref={drag}
+				disabled={isDragging || employeeShift.assignedEquipment}
+			>
+				<ShiftInfo>
+					<EmpName>{employeeShift.name}</EmpName>
+					<Hours>
+						{employeeShift.startTime} - {employeeShift.endTime}
+					</Hours>
+				</ShiftInfo>
 
-			<Labels>
-				<LabelWrapper>
-					<LabelText>Hello</LabelText>
-				</LabelWrapper>
-				<LabelWrapper>
-					<LabelText>Hello</LabelText>
-				</LabelWrapper>
-			</Labels>
+				<Labels>
+					{employeeShift.isGreen && (
+						<LabelWrapper type={"greenPass"}>
+							<LabelText>Green Pass</LabelText>
+						</LabelWrapper>
+					)}
 
-			<EmpRole>{employeeShift.description}</EmpRole>
-		</EmpWrap>
+					{employeeShift.noAvop && (
+						<LabelWrapper type={"noAvop"}>
+							<LabelText>No AVOP</LabelText>
+						</LabelWrapper>
+					)}
+				</Labels>
 
+				{/*{employeeShift.isGreen && <Label type={"greenPass"}>Green Pass</Label>}*/}
+				{/*{employeeShift.noAvop && <Label type={"noAvop"}>No AVOP</Label>}*/}
+
+				{/*<Labels>*/}
+				{/*	<LabelWrapper>*/}
+				{/*		<LabelText>Hello</LabelText>*/}
+				{/*	</LabelWrapper>*/}
+				{/*	<LabelWrapper>*/}
+				{/*		<LabelText>Hello</LabelText>*/}
+				{/*	</LabelWrapper>*/}
+				{/*</Labels>*/}
+
+				<EmpRole>{employeeShift.description}</EmpRole>
+			</EmpWrap>
+		</EmpListItemDiv>
 		// 	<EmpWrap
 		// 		ref={drag}
 		// 		employee={employeeShift}

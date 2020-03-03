@@ -195,7 +195,8 @@ const EmployeeList = () => {
 							startTimes.map(
 								startTime =>
 									timeFilter(startTime) && (
-										<div key={startTime}>
+										<>
+											{/*// <div key={startTime}>*/}
 											<StartTimeSeparator>
 												<h2>{startTime}</h2>
 											</StartTimeSeparator>
@@ -209,7 +210,8 @@ const EmployeeList = () => {
 														/>
 													)
 											)}
-										</div>
+											{/*</div>*/}
+										</>
 									)
 							)
 						) : (

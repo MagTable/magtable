@@ -104,3 +104,31 @@ export const ToggleLabelRightNotice = styled.h4`
 	font-family: "Noto Sans KR", sans-serif;
 	text-align center;
 `;
+
+/**
+ * Text boxes for username and password.
+ */
+export const Select = styled.select`
+	margin-top: 20px;
+	background: transparent;
+
+	padding: 7px;
+
+	border: 0;
+	border-bottom: 2px solid black;
+
+	transition: border 0.3s ease-in-out;
+
+	${({ fit }) => fit && `width: calc(100% - 14px);`}
+	
+	${({ focus }) =>
+		focus &&
+		` 
+			border-color: #28aae1;
+	`}
+	${({ error }) =>
+		error &&
+		`
+			border-bottom: 2px solid red;
+	`}
+`;
