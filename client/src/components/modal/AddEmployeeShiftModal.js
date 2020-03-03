@@ -2,26 +2,29 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledDiv = styled.div`
-	margin: auto:
-  	width: 50%;
-  	padding: 10px;
-	height: 80%;
-	background: rgba(255, 255, 255);
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 500px;
+	height: 650px;
+	margin: auto;
+	z-index: 100;
+	background: #3c4146;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	${({ showHideClassName }) =>
 		showHideClassName ? `display: block;` : `display: none;`}
 `;
 
 const StyledSection = styled.section`
-	position: fixed;
-	background: white;
-	margin: auto;
-	z-index: 5;
-	top: 25%;
-	left: 25%;
-	border: 3px solid green;
-	justify-content: center;
-	align-items: center;
-	background: rgba(255, 255, 255);
+	background: #fff;
+	margin: 5%;
+	z-index: 100;
+	border: 3px solid black;
 `;
 
 /**
@@ -41,13 +44,13 @@ const StyledSection = styled.section`
  * @constructor
  */
 const AddEmployeeShiftModal = ({ handleClose, show, children }) => {
-	const showHideClassName = show ? true : false;
+	const showHideClassName = !!show;
 
 	return (
 		<StyledDiv showHideClassName={showHideClassName}>
 			<StyledSection className="modal-main">
 				{children}
-				<button onClick={handleClose}>Close</button>
+				<button onClick={handleClose}>X</button>
 			</StyledSection>
 		</StyledDiv>
 	);

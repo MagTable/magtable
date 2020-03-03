@@ -7,6 +7,8 @@ import TextInput from "../common/TextInput";
 import { ALL_POSITIONS } from "../../actions/constants";
 import SelectBox from "../common/SelectBox";
 import CheckBox from "../common/CheckBox";
+import styled from "styled-components";
+import { LoginBtn } from "../../styled/auth/Login";
 
 /**
  * @date 2/28/2020
@@ -21,6 +23,11 @@ import CheckBox from "../common/CheckBox";
  * @constructor
  * @returns {*} The AddEmployeeShift component.
  */
+
+const AddEmployeeDiv = styled.div`
+	width: 80%;
+	margin: auto;
+`;
 const AddEmployeeShift = () => {
 	const dispatch = useDispatch();
 
@@ -80,7 +87,7 @@ const AddEmployeeShift = () => {
 	const jobRoles = ALL_POSITIONS;
 
 	return (
-		<>
+		<AddEmployeeDiv>
 			<Formik
 				initialValues={{
 					name: "",
@@ -116,6 +123,7 @@ const AddEmployeeShift = () => {
 			>
 				{props => (
 					<Form>
+						<h2>Add Employee Shift</h2>
 						<Field name={"name"}>
 							{({ field }) => (
 								<TextInput
@@ -124,13 +132,13 @@ const AddEmployeeShift = () => {
 									touched={props.touched.name}
 									value={props.values.name}
 									label={"Employee Name"}
+									fit
 								/>
 							)}
 						</Field>
-						{/* todo style the select boxes and options. Make sure to include somewhere for Errors like TextInput has. */}
 						<SelectBox label="Start Time" name="startTime">
 							<option value="">Select a Start Time</option>
-							{shiftTimes.map((time, key) => {
+							{shiftTimes.map(time => {
 								return (
 									<option key={time} value={time}>
 										{time}
@@ -139,10 +147,9 @@ const AddEmployeeShift = () => {
 							})}
 						</SelectBox>
 						<br />
-						{/*/!* todo style the select boxes and options. Make sure to include somewhere for Errors like TextInput has.*!/*/}
 						<SelectBox label="End Time" name="endTime">
 							<option value="">Select a End Time</option>
-							{shiftTimes.map((time, key) => {
+							{shiftTimes.map(time => {
 								return (
 									<option key={time} value={time}>
 										{time}
@@ -151,10 +158,9 @@ const AddEmployeeShift = () => {
 							})}
 						</SelectBox>
 						<br />
-						{/*/!* todo style the select boxes and options. Make sure to include somewhere for Errors like TextInput has.*!/*/}
 						<SelectBox label="Position" name="description">
 							<option value="">Select a Role</option>
-							{jobRoles.map((role, key) => {
+							{jobRoles.map(role => {
 								return (
 									<option key={role} value={role}>
 										{role}
@@ -163,18 +169,14 @@ const AddEmployeeShift = () => {
 							})}
 						</SelectBox>
 						<br />
-						{/* todo style the checkboxes.*/}
 						<CheckBox name={"noAvop"}> No AVOP?</CheckBox>
-						<br />
-						{/* todo style the checkboxes. */}
 						<CheckBox name={"isGreen"}> Green Pass?</CheckBox>
 						<br />
-						{/* todo style the submit button. Maybe just make it exactly the same as our login one? */}
-						<button type="submit">Submit</button>
+						<LoginBtn type="submit">Submit</LoginBtn>
 					</Form>
 				)}
 			</Formik>
-		</>
+		</AddEmployeeDiv>
 	);
 };
 

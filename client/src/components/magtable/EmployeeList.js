@@ -152,7 +152,6 @@ const EmployeeList = () => {
 		<EmployeeListDivWrapper>
 			<ListTitle>
 				<ListTitleText>Employees</ListTitleText>
-
 				<OverflowEmployee
 					open={open}
 					setOpen={setOpen}
