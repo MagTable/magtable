@@ -65,16 +65,6 @@ export const EmployeeListDiv = styled.div`
 `;
 
 /**
- * Divides the list of available employees into sections based on start time.
- */
-export const StartTimeSeparator = styled.div`
-	display: flex;
-	background: var(--subsection-title-bg);
-	padding-left: 20px;
-	color: var(--light-text);
-`;
-
-/**
  * Holds the employee list and title for the list.
  */
 export const EmployeeListDivWrapper = styled(EmployeeListDiv)`
@@ -85,64 +75,12 @@ export const EmployeeListDivWrapper = styled(EmployeeListDiv)`
 /**
  * Holds the content div for an employee shift and the labels representing their abilities.
  */
-export const EmployeeListItemDiv = styled.div`
-	border-bottom: 2px solid var(--border-color);
-	min-height: 75px;
-	${({ disabled }) =>
-		disabled ? `background-color: var(--shader-grey);` : `cursor: pointer;`}
-`;
-
-/**
- * Used per employee shift, holds all pertinent information for the employee's shift.
- */
-export const EmployeeListItemContentDiv = styled.div`
-	display: inline-block;
-	margin-left: 10px;
-`;
-
-/**
- * The name of the employee being displayed in their shift's div.
- */
-export const EmployeeListItemName = styled.p`
-	margin-block-end: 0em;
-	font-weight: bold;
-`;
-
-/**
- * The time of the employees shift being represented in their shift div.
- */
-export const EmployeeListItemTime = styled.p`
-	margin-block-start: 0em;
-	margin-block-end: 0em;
-	font-style: italic;
-`;
-
-/**
- * The job description of the employee being represented in the employee's shift divs.
- */
-export const EmployeeListItemDesc = styled.p`
-	margin-block-start: 0em;
-	margin-block-end: 1em;
-	font-weight: bold;
-	color: var(--emphasis-grey);
-`;
-
-/**
- * A label representing the abilities of the employee, displayed in the employee's shift divs.
- */
-export const EmployeeLabelDiv = styled.div`
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border: 2px solid var(--border-color);
-    border-top: none;
-    width: 20px;
-    height: 20px;
-    float: right;
-    margin-right 2px;
-    ${({ type }) =>
-			type === "greenPass" && `background-color: var(--context-green);`}
-    ${({ type }) =>
-			type === "noAvop" && `background-color: var(--context-orange);`}
+export const EmployeeListRefreshInfo = styled.div`
+	border-bottom: 1px solid var(--border-color);
+	padding: 0.75rem;
+	h4 {
+		margin: 0;
+	}
 `;
 
 /**
@@ -326,23 +264,35 @@ export const TowerListEmployeeMgmt = styled.div`
 	margin-right: 15px;
 `;
 
-// -----------------------------------------------------------------------------------------------------------------------
-// For the new version of EmployeeListItem
-// -----------------------------------------------------------------------------------------------------------------------
+/*---------------------------------------------------------------------------
+ *  For the new version of EmployeeListItem
+ *---------------------------------------------------------------------------*/
+
+/**
+ * Divides the list of available employees into sections based on start time.
+ */
+export const StartTimeSeparator = styled.h2`
+	margin: 0;
+	padding: 0.75rem;
+	text-align: center;
+	border-bottom: 1px solid var(--border-color);
+	background: var(--header);
+`;
+
 export const UnassignBtn = styled.button`
-	float: right;
 	position: absolute;
-	transform: translate(-23px, -24px);
 	border-radius: 30px;
-	width: 30px;
-	height: 30px;
-	border: 2px solid grey;
-	overflow: hidden;
-	white-space: nowrap;
+	width: 20px;
+	height: 20px;
+	top: -10px;
+	left -10px;	
+	border: 0;
 	opacity: 0;
 	transition: 0.2s ease-in-out;
 	cursor: pointer;
 	z-index: 1;
+	background: red;
+	color: white;
 `;
 
 export const EmpWrap = styled.div``;
@@ -389,25 +339,21 @@ export const LabelText = styled.div`
 `;
 
 export const Labels = styled.div`
-	margin: 1px;
 	width: 23px;
-	height: 46px;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
 	grid-area: labels;
 	:hover {
 		width: 100px;
-	}
-	&:hover ${LabelWrapper} {
-		width: 100px;
-	}
-	&:hover ${LabelText} {
-		width: 100px;
+		${LabelWrapper}, ${LabelText} {
+			width: 100px;
+		}
 	}
 `;
 
 export const AssignedToWrap = styled.div`
+	position: relative;
 	background-color: #0496b2;
 	grid-area: equipmentID;
 
@@ -427,10 +373,12 @@ export const ShiftInfo = styled.div`
 
 export const EmpRole = styled.h2`
 	display: flex;
-	margin: 0.5rem;
 	align-self: end;
 	justify-content: flex-end;
+
+	margin: 0.25rem;
 	text-align: right;
+
 	color: grey;
 	font-size: 17px;
 	z-index: 0;
@@ -439,11 +387,11 @@ export const EmpRole = styled.h2`
 
 export const EmpListItemDiv = styled.div`
 	width: 100%;
-	border-bottom: 2px solid var(--border-color);
+	border-bottom: 1px solid var(--border-color);
 
 	display: grid;
-	grid-template-columns: 100px 1fr 48px;
-	grid-template-rows: 48px 48px;
+	grid-template-columns: 23px 1fr 48px;
+	grid-template-rows: 48px auto;
 	grid-template-areas:
 		"name name equipmentID"
 		"labels position position";

@@ -11,7 +11,6 @@ import {
 	EmpListItemDiv,
 	EmpName,
 	EmpRole,
-	EmpWrap,
 	Hours,
 	Labels,
 	LabelText,
@@ -68,7 +67,6 @@ function EmployeeListItem({ employee: employeeShift }) {
 		canDrag: !employeeShift.assignedEquipment,
 		end: (item, monitor) => {
 			const dropResult = monitor.getDropResult();
-			console.log(dropResult);
 			if (item && dropResult) {
 				dispatch(
 					setEquipmentEmployee(
@@ -106,7 +104,11 @@ function EmployeeListItem({ employee: employeeShift }) {
 
 			{employeeShift.assignedEquipment && (
 				<AssignedToWrap>
-					<UnassignBtn onClick={handleRemove}>X</UnassignBtn>
+					{canRemove && (
+						<UnassignBtn onClick={handleRemove}>
+							<i className="fas fa-times" />
+						</UnassignBtn>
+					)}
 					<h2>{employeeShift.assignedEquipment}</h2>
 				</AssignedToWrap>
 			)}

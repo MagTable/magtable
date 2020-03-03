@@ -3,10 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
 	EmployeeListDiv,
 	EmployeeListDivWrapper,
-	EmployeeListItemContentDiv,
-	EmployeeListItemDiv,
-	EmployeeListItemName,
-	EmployeeListItemTime,
+	EmployeeListRefreshInfo,
 	StartTimeSeparator
 } from "../../styled/magtable/ListContent";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
@@ -215,37 +212,37 @@ const EmployeeList = () => {
 
 			{!loading ? (
 				<>
-					<EmployeeListItemDiv>
-						<EmployeeListItemContentDiv>
-							<EmployeeListItemName>
-								{employeeShifts.scheduleDate}
-							</EmployeeListItemName>
-							<EmployeeListItemTime>
-								Last Updated:
+					<EmployeeListRefreshInfo>
+						<h4>
+							{employeeShifts.scheduleDate}
+							<br />
+							<small>
+								Last Updated at{"\t"}
 								{employeeShifts.lastUpdated}
-							</EmployeeListItemTime>
-						</EmployeeListItemContentDiv>
-					</EmployeeListItemDiv>
+							</small>
+						</h4>
+					</EmployeeListRefreshInfo>
 
 					<EmployeeListDiv>
 						{filterEmployeeShifts()}
 						{filteredStartTimes.length > 0 ? (
 							filteredStartTimes.map(startTime => (
-								<div key={startTime}>
-									<StartTimeSeparator>
-										<h2>{startTime}</h2>
-									</StartTimeSeparator>
-									{filteredEmployeeShifts.map(
-										employee =>
-											employee.startTime === startTime && (
-												<EmployeeListItem
-													key={employee.id}
-													employee={employee}
-												/>
-											)
-									)}
-								</div>
-							))
+										<div key={startTime}>
+											<StartTimeSeparator>
+												<h2>{startTime}</h2>
+											</StartTimeSeparator>
+											{filteredEmployeeShifts.map(
+												employee =>
+													employee.startTime === startTime && (
+														<EmployeeListItem
+															key={employee.id}
+															employee={employee}
+														/>
+													)
+											)}
+										</div>
+									)
+							)
 						) : (
 							<h1>No Employee Shifts...</h1>
 						)}
