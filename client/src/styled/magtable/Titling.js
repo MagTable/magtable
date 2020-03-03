@@ -13,7 +13,6 @@ export const ListTitle = styled.div`
 	background-color: var(--header);
 	color: var(--header-text);
 	display: flex;
-	position: sticky;
 	min-height: 50px;
 	align-items: center;
 	justify-content: space-between;

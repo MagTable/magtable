@@ -264,6 +264,7 @@ export const TruckListItemLocation = styled.input`
 	flex-grow: 1;
 	flex-basis: 0;
 	border: 0;
+	max-width: 80px;
 	border-left: 2px solid var(--border-color);
 	font-size: 1.5rem;
 	text-align: center;

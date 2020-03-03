@@ -5,15 +5,14 @@ import styled from "styled-components";
 
 const StyledErrorMessage = styled.div`
 	font-size: 12px;
-	color: var(--red-600);
+	color: red;
 	width: 400px;
 	margin-top: 0.25rem;
 	&:before {
-		content: "❌ ";
-		font-size: 10px;
+		font-size: 12px;
 	}
 	@media (prefers-color-scheme: dark) {
-		color: var(--red-300);
+		color: red;
 	}
 `;
 
@@ -22,7 +21,12 @@ const StyledLabel = styled.label`
 `;
 
 const StyledSelect = styled.select`
-	color: var(--blue);
+	position: relative;
+	display: block;
+	width: 100%;
+	margin: 0 auto;
+	font-size: 16px;
+	color: #60666d;
 `;
 
 const SelectBox = ({ label, ...props }) => {
