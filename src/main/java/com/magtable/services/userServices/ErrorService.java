@@ -1,5 +1,6 @@
 package com.magtable.services.userServices;
 
+import org.apache.tomcat.util.http.parser.HttpParser;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -142,8 +143,23 @@ public class ErrorService {
         return new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid Input");
     }
 
-
+    /**
+     * Message reporting that the session has expired.
+     * @return ResponseStatusException message.
+     */
     public ResponseStatusException sessionExpired() {
         return new ResponseStatusException(HttpStatus.FORBIDDEN, "Session Expired");
+    }
+
+    /**
+     * Message reporting that the record is invalid.
+     * @return ResponseStatusException message.
+     */
+    public ResponseStatusException invalidRecord() {
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Entry");
+    }
+
+    public ResponseStatusException magIdNotFound(int id) {
+        return new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Mag #%d Not Found.", id));
     }
 }
