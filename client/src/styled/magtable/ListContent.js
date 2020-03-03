@@ -396,7 +396,7 @@ export const LabelWrapper = styled.div`
 export const LabelText = styled.div`
 	margin-block-start: 0;
 	margin-block-end: 0;
-	margin: 0 5px 0 5px;
+	margin: 0 5px;
 	width: 0px;
 	overflow: hidden;
 	transition: 0.3s ease-in-out;
@@ -423,35 +423,31 @@ export const Labels = styled.div`
 `;
 
 export const AssignedToWrap = styled.div`
-	display: inline-flex;
-	width: 46px;
-	height: 46px;
-	justify-content: center;
 	background-color: #0496b2;
-	align-items: center;
-	vertical-align: top;
-	position: relative;
-	transform: translate(180px, 2px);
-	font-size: 24px;
-	z-index: 1;
 `;
 
 export const ShiftInfo = styled.div`
 	width: 180px;
 	text-overflow: ellipsis;
+	grid-area: name;
 `;
 
 export const EmpRole = styled.h2`
-	float: right;
-	transform: translate(-12px, -50px);
+	text-align: right;
 	color: grey;
 	font-size: 17px;
-	position: relative;
-	z-index: -1;
+	z-index: 0;
+	grid-area: position;
 `;
 
 export const EmpListItemDiv = styled.div`
 	height: 92px;
+	display: grid;
+
+	grid-template-areas:
+		"name assignmentID"
+		"labels position";
+
 	&:hover ${UnassignBtn} {
 		display: block;
 		opacity: 1;
