@@ -331,7 +331,7 @@ export const TowerListEmployeeMgmt = styled.div`
 export const UnassignBtn = styled.button`
 	float: right;
 	position: absolute;
-	transform: translate(20px, -20px);
+	transform: translate(-23px, -24px);
 	border-radius: 30px;
 	width: 30px;
 	height: 30px;
@@ -347,6 +347,9 @@ export const EmpWrap = styled.div`
 	outline: 2px solid black;
 	outline-offset: -1px;
 	width: 227px;
+	transform: translateY(-45px);
+	position: relative;
+	z-index: -5;
 
 	&:hover ${UnassignBtn} {
 		display: block;
@@ -416,8 +419,9 @@ export const AssignedToWrap = styled.div`
 	align-items: center;
 	vertical-align: top;
 	position: relative;
-	transform: translate(180px, 47px);
+	transform: translate(180px, 2px);
 	font-size: 24px;
+	z-index: -4;
 `;
 
 export const ShiftInfo = styled.div`
