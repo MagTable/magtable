@@ -227,22 +227,21 @@ const EmployeeList = () => {
 						{filterEmployeeShifts()}
 						{filteredStartTimes.length > 0 ? (
 							filteredStartTimes.map(startTime => (
-										<div key={startTime}>
-											<StartTimeSeparator>
-												<h2>{startTime}</h2>
-											</StartTimeSeparator>
-											{filteredEmployeeShifts.map(
-												employee =>
-													employee.startTime === startTime && (
-														<EmployeeListItem
-															key={employee.id}
-															employee={employee}
-														/>
-													)
-											)}
-										</div>
-									)
-							)
+								<div key={startTime}>
+									<StartTimeSeparator>
+										<h2>{startTime}</h2>
+									</StartTimeSeparator>
+									{filteredEmployeeShifts.map(
+										employee =>
+											employee.startTime === startTime && (
+												<EmployeeListItem
+													key={employee.id}
+													employee={employee}
+												/>
+											)
+									)}
+								</div>
+							))
 						) : (
 							<h1>No Employee Shifts...</h1>
 						)}
