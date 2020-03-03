@@ -6,7 +6,6 @@ import {
 	OverflowMenuButton
 } from "../../styled/magtable/Overflow";
 import { ClickCatcher } from "../../styled/common/ClickCatcher";
-import { useDispatch } from "react-redux";
 import AddEmployeeShift from "./AddEmployeeShift";
 import AddEmployeeShiftModal from "../modal/AddEmployeeShiftModal";
 
@@ -37,15 +36,9 @@ function OverflowEmployee({
 	filterMechanicEmployees,
 	refreshEmployees
 }) {
-	const dispatch = useDispatch();
-
 	const openOverflow = () => {
 		setOpen(true);
 	};
-
-	function handleClick() {
-		setOpen(false);
-	}
 
 	const [showModal, setModal] = useState(false);
 
@@ -58,65 +51,71 @@ function OverflowEmployee({
 				<>
 					<ClickCatcher onClick={() => setOpen(false)} />
 					<div id={"arrow"} />
-					<OverflowMenuButton onClick={filterAMEmployees}>
-						{activeFilters[0] ? (
-							<FilterIcon className={"fas fa-times"} color={"red"} />
-						) : (
-							<FilterIcon className={"fas fa-check"} color={"green"} />
-						)}
-						AM Employees
-					</OverflowMenuButton>
-					<OverflowMenuButton onClick={filterPMEmployees}>
-						{activeFilters[1] ? (
-							<FilterIcon className={"fas fa-times"} color={"red"} />
-						) : (
-							<FilterIcon className={"fas fa-check"} color={"green"} />
-						)}
-						PM Employees
-					</OverflowMenuButton>
-					<OverflowMenuButton onClick={filterTechEmployees}>
-						{activeFilters[2] ? (
-							<FilterIcon className={"fas fa-times"} color={"red"} />
-						) : (
-							<FilterIcon className={"fas fa-check"} color={"green"} />
-						)}
-						Technicians
-					</OverflowMenuButton>
-					<OverflowMenuButton onClick={filterTowerEmployees}>
-						{activeFilters[3] ? (
-							<FilterIcon className={"fas fa-times"} color={"red"} />
-						) : (
-							<FilterIcon className={"fas fa-check"} color={"green"} />
-						)}
-						Tower Staff
-					</OverflowMenuButton>
-					<OverflowMenuButton onClick={filterManagementEmployees}>
-						{activeFilters[4] ? (
-							<FilterIcon className={"fas fa-times"} color={"red"} />
-						) : (
-							<FilterIcon className={"fas fa-check"} color={"green"} />
-						)}
-						Management
-					</OverflowMenuButton>
-					<OverflowMenuButton onClick={filterMechanicEmployees}>
-						{activeFilters[5] ? (
-							<FilterIcon className={"fas fa-times"} color={"red"} />
-						) : (
-							<FilterIcon className={"fas fa-check"} color={"green"} />
-						)}
-						Mechanics
-					</OverflowMenuButton>
-					<OverflowMenuButton onClick={refreshEmployees}>
-						<FilterIcon className={"fas fa-sync"} />
-						Refresh Employees
-					</OverflowMenuButton>
-					<AddEmployeeShiftModal show={showModal} handleClose={handleClose}>
-						<AddEmployeeShift />
-					</AddEmployeeShiftModal>
-					<OverflowMenuButton onClick={handleShow}>
-						<FilterIcon className={"fas fa-user-plus"} />
-						Add Employee Shift
-					</OverflowMenuButton>
+					<div id={"container"}>
+						<OverflowMenuButton onClick={filterAMEmployees}>
+							{activeFilters[0] ? (
+								<FilterIcon className={"fas fa-times"} color={"red"} />
+							) : (
+								<FilterIcon className={"fas fa-check"} color={"green"} />
+							)}
+							AM Employees
+						</OverflowMenuButton>
+						<OverflowMenuButton onClick={filterPMEmployees}>
+							{activeFilters[1] ? (
+								<FilterIcon className={"fas fa-times"} color={"red"} />
+							) : (
+								<FilterIcon className={"fas fa-check"} color={"green"} />
+							)}
+							PM Employees
+						</OverflowMenuButton>
+						<OverflowMenuButton onClick={filterTechEmployees}>
+							{activeFilters[2] ? (
+								<FilterIcon className={"fas fa-times"} color={"red"} />
+							) : (
+								<FilterIcon className={"fas fa-check"} color={"green"} />
+							)}
+							Technicians
+						</OverflowMenuButton>
+						<OverflowMenuButton onClick={filterTowerEmployees}>
+							{activeFilters[3] ? (
+								<FilterIcon className={"fas fa-times"} color={"red"} />
+							) : (
+								<FilterIcon className={"fas fa-check"} color={"green"} />
+							)}
+							Tower Staff
+						</OverflowMenuButton>
+						<OverflowMenuButton onClick={filterManagementEmployees}>
+							{activeFilters[4] ? (
+								<FilterIcon className={"fas fa-times"} color={"red"} />
+							) : (
+								<FilterIcon className={"fas fa-check"} color={"green"} />
+							)}
+							Management
+						</OverflowMenuButton>
+						<OverflowMenuButton onClick={filterMechanicEmployees}>
+							{activeFilters[5] ? (
+								<FilterIcon className={"fas fa-times"} color={"red"} />
+							) : (
+								<FilterIcon className={"fas fa-check"} color={"green"} />
+							)}
+							Mechanics
+						</OverflowMenuButton>
+						<OverflowMenuButton
+							onClick={() => {
+								setOpen(false);
+								refreshEmployees();
+							}}
+						>
+							<FilterIcon className={"fas fa-sync"} />
+							Refresh Employees
+						</OverflowMenuButton>
+						<AddEmployeeShiftModal show={showModal} handleClose={handleClose}>
+							<AddEmployeeShift />
+						</AddEmployeeShiftModal>
+						<OverflowMenuButton onClick={handleShow}>
+							Add Employee Shift
+						</OverflowMenuButton>
+					</div>
 				</>
 			)}
 			{children({ openOverflow })}

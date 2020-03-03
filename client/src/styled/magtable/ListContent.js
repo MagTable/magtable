@@ -393,7 +393,7 @@ export const LabelWrapper = styled.div`
 	z-index: 1;
 `;
 
-export const LabelText = styled.p`
+export const LabelText = styled.div`
 	margin-block-start: 0;
 	margin-block-end: 0;
 	margin: 0 5px 0 5px;
