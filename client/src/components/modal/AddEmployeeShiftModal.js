@@ -4,7 +4,6 @@ import styled from "styled-components";
 const StyledDiv = styled.div`
 	margin: auto:
   	width: 50%;
-  	padding: 10px;
 	height: 80%;
 	background: rgba(255, 255, 255);
 	${({ showHideClassName }) =>
@@ -14,11 +13,13 @@ const StyledDiv = styled.div`
 const StyledSection = styled.section`
 	position: fixed;
 	background: white;
+	width: 50%;
 	margin: auto;
+	padding: 10px;
 	z-index: 5;
 	top: 25%;
 	left: 25%;
-	border: 3px solid green;
+	border: 3px solid black;
 	justify-content: center;
 	align-items: center;
 	background: rgba(255, 255, 255);
