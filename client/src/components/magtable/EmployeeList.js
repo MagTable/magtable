@@ -13,7 +13,6 @@ import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import EmployeeListItem from "./EmployeeListItem";
 import IconButton from "../common/IconButton";
 import { refreshEmployeeShifts } from "../../actions/magtable";
-import NewEmployeeListItem from "./NewEmployeeListItem";
 
 /**
  * @date 2/19/2020
@@ -75,7 +74,7 @@ const EmployeeList = () => {
 						{employeeShifts.shifts.map(
 							employee =>
 								employee.startTime === startTime && (
-									<NewEmployeeListItem key={employee.id} employee={employee} />
+									<EmployeeListItem key={employee.id} employee={employee} />
 								)
 						)}
 					</div>
@@ -89,10 +88,7 @@ const EmployeeList = () => {
 							{employeeShifts.shifts.map(
 								employee =>
 									employee.startTime === startTime && (
-										<NewEmployeeListItem
-											key={employee.id}
-											employee={employee}
-										/>
+										<EmployeeListItem key={employee.id} employee={employee} />
 									)
 							)}
 						</div>
