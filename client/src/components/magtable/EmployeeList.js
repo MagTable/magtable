@@ -159,6 +159,29 @@ const EmployeeList = () => {
 		}
 	}
 
+	const filteredEmployeeShifts = []; // used to store the employee shifts not filtered out
+	const filteredStartTimes = []; // used to store the start times of the employees not filtered out
+
+	// fill a list of employee shifts where the position filters are applied
+	function filterEmployeeShifts() {
+		employeeShifts.shifts.forEach(emp => {
+			if (positionFilter(emp.description)) {
+				filteredEmployeeShifts.push(emp);
+			}
+		});
+		filterStartTimes(); // call function to update the start times of this filtered employee shifts
+	}
+
+	// fill a list of start times from the start times of the list of filtered employee shifts
+	function filterStartTimes() {
+		console.log(filteredEmployeeShifts);
+		filteredEmployeeShifts.forEach(emp => {
+			if (!filteredStartTimes.includes(emp.startTime)) {
+				filteredStartTimes.push(emp.startTime); // add the start time if it's not already in the list
+			}
+		});
+	}
+
 	return (
 		<EmployeeListDivWrapper>
 			<ListTitle>
@@ -202,18 +225,18 @@ const EmployeeList = () => {
 					</EmployeeListItemDiv>
 
 					<EmployeeListDiv>
-						{startTimes.length > 0 ? (
-							startTimes.map(
+						{filterEmployeeShifts()}
+						{filteredStartTimes.length > 0 ? (
+							filteredStartTimes.map(
 								startTime =>
 									timeFilter(startTime) && (
 										<div key={startTime}>
 											<StartTimeSeparator>
 												<h2>{startTime}</h2>
 											</StartTimeSeparator>
-											{employeeShifts.shifts.map(
+											{filteredEmployeeShifts.map(
 												employee =>
-													employee.startTime === startTime &&
-													positionFilter(employee.description) && (
+													employee.startTime === startTime && (
 														<EmployeeListItem
 															key={employee.id}
 															employee={employee}
@@ -224,9 +247,7 @@ const EmployeeList = () => {
 									)
 							)
 						) : (
-							<h1>
-								No Employee Shifts... <br /> <small>update shift list</small>
-							</h1>
+							<h1>No Employee Shifts...</h1>
 						)}
 					</EmployeeListDiv>
 				</>
