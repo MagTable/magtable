@@ -13,16 +13,20 @@ import {
 	SET_SELECTED_APRON,
 	SET_TRUCK_LOCATION,
 	TOGGLE_BAY_LEAD,
-	REFRESH_EMPLOYEE_SHIFTS
+	REFRESH_EMPLOYEE_SHIFTS,
+	REFRESHING_EMPLOYEE_SHIFTS
 } from "../actions/constants";
+import { initialParkingLocations } from "../res/test_data/magtable";
 
 const initialState = {
 	assignments: [],
 	employeeShifts: [],
 	dailyMessages: "",
 	dailyMix: 40,
+	parkingLocations: initialParkingLocations,
 	selectedApron: EAST_APRON,
-	loading: true
+	loading: true,
+	shiftsLoading: true
 };
 
 export default function(state = initialState, action) {
@@ -48,7 +52,7 @@ export default function(state = initialState, action) {
 					assignment.equipment.id === payload.equipmentID
 						? {
 								...assignment,
-								parkingLocation: payload.parkingLocationID
+								parkingLocation: payload.parkingLocation
 						  }
 						: assignment
 				)
@@ -147,7 +151,8 @@ export default function(state = initialState, action) {
 				employeeShifts: payload.employeeShifts,
 				// dailyMessages: payload.dailyMessages,
 				// dailyMix: payload.dailyMix,
-				loading: false
+				loading: false,
+				shiftsLoading: false
 			};
 		case ADD_EMPLOYEE_SHIFT:
 			return {
@@ -164,11 +169,17 @@ export default function(state = initialState, action) {
 						: truck
 				)
 			};
+		case REFRESHING_EMPLOYEE_SHIFTS:
+			return {
+				...state,
+				employeeShifts: [],
+				shiftsLoading: true
+			};
 		case REFRESH_EMPLOYEE_SHIFTS:
 			return {
 				...state,
 				employeeShifts: payload.employeeShifts,
-				loading: false
+				shiftsLoading: false
 			};
 		default:
 			return state;

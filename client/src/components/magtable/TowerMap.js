@@ -1,6 +1,5 @@
 import React from "react";
-import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
-import { TowerDiv, TowerMapDiv } from "../../styled/magtable/Maps";
+import { TowerMapDiv } from "../../styled/magtable/Maps";
 import TowerListItem from "./TowerListItem";
 import { useSelector } from "react-redux";
 import { EAST_APRON, WEST_APRON } from "../../actions/constants";
@@ -41,24 +40,15 @@ function TowerMap({ showAM }) {
 	});
 
 	return (
-		<TowerDiv>
-			<ListTitle>
-				<ListTitleText>
-					{apron === EAST_APRON && "East Tower"}
-					{apron === WEST_APRON && "West Tower"}
-				</ListTitleText>
-			</ListTitle>
-			<TowerMapDiv>
-				{towerPositions.map(towerPosition => (
-					<TowerListItem
-						key={towerPosition.equipment.id}
-						assignment={towerPosition}
-						showAM={showAM}
-						shift
-					/>
-				))}
-			</TowerMapDiv>
-		</TowerDiv>
+		<TowerMapDiv>
+			{towerPositions.map(towerPosition => (
+				<TowerListItem
+					key={towerPosition.equipment.id}
+					assignment={towerPosition}
+					showAM={showAM}
+				/>
+			))}
+		</TowerMapDiv>
 	);
 }
 

@@ -37,9 +37,9 @@ INSERT INTO tower (towerID, position) VALUES (1013, 'WDA-Ice House');
 
 
 INSERT INTO truck (truckID, status, notice) VALUES  (6, 'GO', 'T4 Gauge not working; Burner won''t light; Tank Temp gauge read 60,,cold...OS S Cameron 02-26-20-');
-INSERT INTO truck (truckID, status, notice) VALUES  (8, 'CON', '');
+INSERT INTO truck (truckID, status, notice) VALUES  (8, 'CON', 'fjkdshfjkdhgjkfdhsuigjjhduisjgfhruidshfreuiahfuireh gfh sfudbauyg frheusig hruis ghruyesgure');
 INSERT INTO truck (truckID, status, notice) VALUES  (9, 'OOS', '');
-INSERT INTO truck (truckID, status, notice) VALUES  (14, 'INOP', '');
+INSERT INTO truck (truckID, status, notice) VALUES  (14, 'INOP', 'T4 Gauge not working; Burner won''t light; Tank Temp gauge read 60,,cold...OS S Cameron 02-26-20-');
 INSERT INTO truck (truckID, status, notice) VALUES  (15, 'GO', '');
 INSERT INTO truck (truckID, status, notice) VALUES  (16, 'GO', 'No radio in lower cab. Radio not working in upper cab.  // Panel P59 intermittent. 17-Feb-2020 JK116');
 INSERT INTO truck (truckID, status, notice) VALUES  (17, 'GO', '');

@@ -57,7 +57,7 @@ function EmployeeListItem({ employee: employeeShift }) {
 		} else {
 			setCanClear(false);
 		}
-	}, [assignment]);
+	}, [assignment, setCanClear, assignedSlotID]);
 
 	const [{ isDragging }, drag] = useDrag({
 		item: {
