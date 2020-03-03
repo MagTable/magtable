@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import logo from "../../res/Images/logo-placeholder.png";
-import { AeroLogo, HeaderDiv } from "../../styled/common/Navigation";
+import { AeroLogo, NavBar as NavBarDiv } from "../../styled/common/Navigation";
 import MenuPane from "./MenuPane";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -20,14 +20,14 @@ function NavBar() {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 	return (
-		<HeaderDiv>
+		<NavBarDiv>
 			<Link to={"/"}>
 				<AeroLogo src={logo} />
 			</Link>
 			{isAuthenticated && (
 				<MenuPane menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
 			)}
-		</HeaderDiv>
+		</NavBarDiv>
 	);
 }
 

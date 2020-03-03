@@ -12,7 +12,6 @@ import { Button } from "../common/FormControl";
  * Wrapper div to hold the truck map and its title.
  **/
 export const TruckMapDiv = styled.div`
-	border: 2px solid var(--border-color);
 	display: flex;
 	flex-grow: 2.5;
 	flex-basis: 0;
@@ -32,8 +31,8 @@ export const ParkingLocation = styled.div`
  */
 export const TowerMapDiv = styled.div`
 	display: flex;
-	flex-grow: 1;
-	min-height: 200px;
+	// flex-grow: 1;
+	height: 130px;
 `;
 
 /**
@@ -43,9 +42,8 @@ export const TowerDiv = styled.div`
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
+	min-height: 80px;
 	flex-basis: 0;
-	border: 2px solid var(--border-color);
-	height: 35%;
 `;
 
 /**
@@ -117,5 +115,5 @@ export const AssignedEmployeeName = styled(EmployeeListItemName)`
  */
 export const DeleteTowerAssignmentBtn = styled(Button)`
 	width: fit-content;
-	margin-right: 20px;
+	margin-left: 5px;
 `;

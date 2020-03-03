@@ -118,7 +118,7 @@ export const PadDiv = styled.div`
 	text-align: center;
 	outline: 2px solid black;
 	display: flex;
-	width: 95px;
+	width: 5rem;
 	flex-grow: 1.3;
 	flex-basis: 0;
 	font-size: x-large;
@@ -151,6 +151,7 @@ export const PadColumn = styled.div`
 `;
 
 export const MapWrapper = styled.div`
+	padding: 10px;
 	display: flex;
 	height: 100%;
 	width: 100%;

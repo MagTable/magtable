@@ -38,7 +38,7 @@ const getTruckColorCode = status => {
 			return "--context-red";
 		}
 		case "CON": {
-			return "--context-blue";
+			return "--context-orange";
 		}
 		case "OOS": {
 			return "--context-grey";
@@ -59,7 +59,7 @@ export const EmployeeListDiv = styled.div`
 	flex-grow: 1;
 	flex-direction: column;
 	flex-basis: 0;
-	min-width: 250px;
+	min-width: 180px;
 	overflow-y: auto;
 	overflow-x: hidden;
 `;
@@ -78,7 +78,8 @@ export const StartTimeSeparator = styled.div`
  * Holds the employee list and title for the list.
  */
 export const EmployeeListDivWrapper = styled(EmployeeListDiv)`
-	border: 2px solid var(--border-color);
+	border-right: 2px solid var(--border-color);
+	max-width: 234px;
 `;
 
 /**
@@ -148,8 +149,7 @@ export const EmployeeLabelDiv = styled.div`
  * todo would like to set a max width on this - arran
  **/
 export const TruckListDiv = styled.div`
-	// border: 2px solid var(--border-color);
-	// height: calc(100vh - 73px);
+	border-right: 2px solid var(--border-color);
 	transition: all 0.15s ease-in-out;
 	min-width: 330px;
 	margin: 0;
@@ -161,15 +161,20 @@ export const TruckListDiv = styled.div`
 	overflow-x: hidden;
 `;
 
-export const TruckListDivWrapper = styled(TruckListDiv)`
-	border: 2px solid var(--border-color);
-`;
+export const TruckListDivWrapper = styled(TruckListDiv)``;
 
 export const TruckListItemDiv = styled.div`
 	transition: all 0.15s ease-in-out;
 	border-bottom: 1px solid var(--border-color);
-	height: 90px;
+	height: 55px;
 	display: flex;
+
+	${({ disabled }) =>
+		disabled &&
+		`
+		height: 40px;
+		background: var(--shader-grey);
+	`}
 `;
 
 export const TruckProblemsDiv = styled.div`
@@ -188,20 +193,37 @@ export const TruckProblemsText = styled.p`
 `;
 
 export const TruckNumberDiv = styled.div`
-	background: var(${({ status }) => getTruckColorCode(status)});
+	cursor: pointer;
 	display: flex;
-	min-width: 100px;
 	justify-content: center;
 	align-items: center;
+
+	border-right: 10px solid var(${({ status }) => getTruckColorCode(status)});
 	color: black;
+
+	min-width: 60px;
 	font-size: 40px;
+
 	${({ isDragging }) => isDragging && `opacity: 0.5;`}
+	${({ disabled }) =>
+		disabled &&
+		`
+		font-size: 25px;
+	`}
 `;
 
 export const TruckInfoDiv = styled.div`
 	display: flex;
 	flex-grow: 3;
 	justify-content: space-between;
+`;
+
+export const TruckStatusMessage = styled.h4`
+	width: 100%;
+	text-align: center;
+	background: var(--shader-grey);
+	margin: 0;
+	padding: 0.6rem 0;
 `;
 
 export const TruckListItemEmployee = styled.div`
@@ -224,10 +246,7 @@ export const TruckListItemEmployee = styled.div`
 	${({ outlineType }) =>
 		outlineType &&
 		`
-			// outline-width: 2px;
-			// outline-offset: -2px;
-			// outline-style: solid;
-			background: var(${getColor(outlineType)});
+		background: var(${getColor(outlineType)});
 	`}
 `;
 
@@ -240,13 +259,15 @@ export const TruckListItemEmployeeList = styled.div`
 	height: 100%;
 `;
 
-export const TruckListItemLocation = styled.p`
-	font-weight: bold;
-	align-self: center;
-	margin-right: 10px;
-	margin-left: 10px;
+export const TruckListItemLocation = styled.input`
+	height: calc(100% -2px);
 	flex-grow: 1;
 	flex-basis: 0;
+	border: 0;
+	border-left: 2px solid var(--border-color);
+	font-size: 1.5rem;
+	text-align: center;
+	font-family: "Noto Sans KR", sans-serif;
 `;
 
 export const TruckListButton = styled(Button)`
@@ -290,9 +311,124 @@ export const TowerListItemEmployee = styled.p`
 	${({ outlineType }) =>
 		outlineType &&
 		`
-			// outline-width: 2px;
-			// outline-offset: -2px;
-			// outline-style: solid;
 			background: var(${getColor(outlineType)});
 	`}
+	
+	justify-content: space-between;
+	padding-left: 15px;
+`;
+
+export const TowerListEmployeeMgmt = styled.div`
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-right: 15px;
+`;
+
+// -----------------------------------------------------------------------------------------------------------------------
+// For the new version of EmployeeListItem
+// -----------------------------------------------------------------------------------------------------------------------
+export const UnassignBtn = styled.button`
+	float: right;
+	position: absolute;
+	transform: translate(20px, -20px);
+	border-radius: 30px;
+	width: 30px;
+	height: 30px;
+	border: 2px solid grey;
+	overflow: hidden;
+	white-space: nowrap;
+	opacity: 0;
+	transition: 0.2s ease-in-out;
+	cursor: pointer;
+`;
+
+export const EmpWrap = styled.div`
+	outline: 2px solid black;
+	outline-offset: -1px;
+	width: 227px;
+
+	&:hover ${UnassignBtn} {
+		display: block;
+		opacity: 1;
+	}
+
+	${({ disabled }) =>
+		disabled ? `background-color: var(--shader-grey);` : `cursor: pointer;`}
+`;
+
+export const EmpName = styled.div`
+	padding: 5px 0 0 5px;
+	margin-block-start: 0;
+	margin-block-end: 0;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	font-weight: bold;
+`;
+
+export const Hours = styled.p`
+	padding-left: 5px;
+	margin-block-start: 0;
+	font-style: italic;
+	margin-bottom: 3px;
+`;
+
+export const LabelWrapper = styled.div`
+	background-color: #ffa5a5;
+	width: 23px;
+	height: 23px;
+	transition: 0.3s ease-in-out;
+`;
+
+export const LabelText = styled.p`
+	margin-block-start: 0;
+	margin-block-end: 0;
+	margin: 0 5px 0 5px;
+	width: 0px;
+	overflow: hidden;
+	transition: 0.3s ease-in-out;
+	white-space: nowrap;
+	font-family: "Lato";
+`;
+
+export const Labels = styled.div`
+	width: 23px;
+
+	:hover {
+		width: 100px;
+	}
+	&:hover ${LabelWrapper} {
+		width: 100px;
+	}
+	&:hover ${LabelText} {
+		width: 100px;
+	}
+`;
+
+export const AssignedToWrap = styled.div`
+	display: inline-flex;
+	width: 46px;
+	height: 46px;
+	justify-content: center;
+	background-color: #0496b2;
+	align-items: center;
+	vertical-align: top;
+	position: relative;
+	transform: translate(180px, -45px);
+	font-size: 24px;
+`;
+
+export const ShiftInfo = styled.div`
+	width: 180px;
+	text-overflow: ellipsis;
+`;
+
+export const EmpRole = styled.h2`
+	float: right;
+	transform: translate(-12px, -50px);
+	color: grey;
+	font-size: 17px;
+	position: relative;
+	z-index: -5;
 `;

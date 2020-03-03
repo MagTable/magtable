@@ -47,6 +47,12 @@ export const ALL_POSITIONS = [
 	MECHANIC
 ];
 
+// truck status'
+export const GO = "GO";
+export const CON = "CON";
+export const OOS = "OOS";
+export const INOP = "INOP";
+
 // UI Hint Types
 export const DANGER = "DANGER";
 export const WARNING = "WARNING";
