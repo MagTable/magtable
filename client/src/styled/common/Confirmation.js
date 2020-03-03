@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ConfirmationBox = styled.div`
 	position: relative;
 
-	button {
+	#confirmButton {
 		z-index: 5;
 		padding: 0.5rem;
 
@@ -19,10 +19,14 @@ export const ConfirmationBox = styled.div`
 		width: 120px;
 		left: -45px;
 		top: 30px;
+		
+		
 
 		:hover {
 			background: ${({ hoverColor }) => hoverColor || "#d00"};
 		}
+		
+		
 	}
 
 	#arrow {

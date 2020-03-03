@@ -12,6 +12,9 @@ import {
 import { useSelector } from "react-redux";
 import ParkingLocation from "./ParkingLocation";
 import { CENTER, EAST, WEST } from "../../actions/constants";
+import {Button} from "../../styled/common/FormControl";
+import IconButton from "../common/IconButton";
+import Confirmation from "../common/Confirmation";
 
 /**
  * @date 2020-02-17
@@ -42,6 +45,16 @@ function LocationMap(props) {
 			<ListTitle>
 				<ListTitleText>Parking Locations</ListTitleText>
 				<ApronToggle />
+				<Confirmation
+					confirmationMessage={"Confirm Clear"}
+					action={() => {}}
+				>
+					{({ confirm }) => (
+						<Button onClick={confirm}>Clear All</Button>
+					)}
+				</Confirmation>
+
+				<Button>Publish</Button>
 			</ListTitle>
 			<MapWrapper>
 				{parkingLocations.map(
