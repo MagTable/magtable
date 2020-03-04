@@ -1,6 +1,5 @@
 package com.magtable.model;
 
-
 import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
 

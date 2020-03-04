@@ -18,6 +18,7 @@ import {
 } from "./constants";
 import axios from "axios";
 import { setAlert } from "./alert";
+import { logout } from "./auth";
 
 // todo update all async actions with API calls
 
@@ -224,6 +225,10 @@ export const getMagTable = () => async dispatch => {
 			}
 		});
 	} catch (err) {
+		if (err.response.status === 403) {
+			dispatch(logout());
+		}
+
 		console.log(err);
 	}
 };
