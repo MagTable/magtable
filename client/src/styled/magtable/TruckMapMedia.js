@@ -146,17 +146,25 @@ export const PadColumn = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	margin-bottom: 20px;
-	height: 90%;
+	height: 100%;
 `;
 
 export const MapWrapper = styled.div`
 	padding: 10px;
 	display: flex;
+	justify-content: space-between;
 	height: 100%;
 	width: 100%;
-	justify-content: space-around;
 	overflow-y: auto;
+	align-items: center;
+`;
+
+export const SafetyZoneWrapper = styled.div`
+	height: 100%;
+	width: 100%;
+
+	display: flex;
+	justify-content: space-around;
 	align-items: center;
 `;
 
@@ -179,6 +187,4 @@ export const NumberTop = styled(NumberLabel)`
 	text-align: center;
 `;
 
-export const ClearConfirmDiv = styled.div`
-	
-`;
+export const ClearConfirmDiv = styled.div``;

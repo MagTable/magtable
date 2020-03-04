@@ -34,6 +34,7 @@ function OverflowEmployee({
 	filterTowerEmployees,
 	filterManagementEmployees,
 	filterMechanicEmployees,
+	filterTrainerEmployees,
 	refreshEmployees
 }) {
 	const openOverflow = () => {

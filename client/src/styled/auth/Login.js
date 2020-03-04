@@ -36,7 +36,7 @@ export const LoginBlock = styled.div`
 	border-radius: 0.45rem;
 	margin-top: 90px;
 	background: white;
-    position: relative;
+	position: relative;
 	&:focus-within ${Background} {
 		filter: blur(15px);
 	}
@@ -45,7 +45,6 @@ export const LoginBlock = styled.div`
 		margin: 0 0 1rem 0;
 	}
 `;
-
 
 /**
  * The submit button to log in to the app

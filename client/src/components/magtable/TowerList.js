@@ -13,9 +13,9 @@ import { EAST_APRON, WEST_APRON } from "../../actions/constants";
 /**
  *
  * @constructor
- * @returns {*} The TowerMap component and sets the tower positions based on the selected Apron
+ * @returns {*} The TowerList component and sets the tower positions based on the selected Apron
  */
-function TowerMap({ showAM }) {
+function TowerList({ showAM }) {
 	const assignments = useSelector(state => state.magtable.assignments);
 	const apron = useSelector(state => state.magtable.selectedApron);
 
@@ -52,4 +52,4 @@ function TowerMap({ showAM }) {
 	);
 }
 
-export default React.memo(TowerMap);
+export default React.memo(TowerList);
