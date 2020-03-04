@@ -178,3 +178,7 @@ export const NumberTop = styled(NumberLabel)`
 	width: 100%;
 	text-align: center;
 `;
+
+export const ClearConfirmDiv = styled.div`
+	
+`;

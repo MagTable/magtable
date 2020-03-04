@@ -63,3 +63,12 @@ select:-webkit-autofill:focus {
   /*Remove autofill styling*/
   -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
+
+@keyframes loading-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

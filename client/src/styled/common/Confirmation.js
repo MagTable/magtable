@@ -5,6 +5,8 @@ export const ConfirmationBox = styled.div`
 
 	button {
 		z-index: 100;
+	#confirmButton {
+		z-index: 5;
 		padding: 0.5rem;
 
 		cursor: pointer;
