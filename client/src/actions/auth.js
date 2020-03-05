@@ -91,6 +91,10 @@ export const setUserPassword = ({
 	newPassword
 }) => async dispatch => {
 	try {
+		dispatch({
+			type: LOGGING_IN
+		});
+
 		const res = await axios.post(
 			"/password/reset",
 			{ username, password, newPassword },
