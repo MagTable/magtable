@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Button, DangerButton } from "../common/FormControl";
+import { DangerButton } from "../common/FormControl";
 import { DANGER, SUCCESS, WARNING } from "../../actions/constants";
 
 /**
@@ -169,6 +169,7 @@ export const TruckNumberDiv = styled.div`
 	${({ disabled }) =>
 		disabled &&
 		`
+		background: var(--context-orange-light);
 		font-size: 25px;
 	`}
 `;
@@ -185,9 +186,14 @@ export const TruckInfoDiv = styled.div`
 export const TruckStatusMessage = styled.h4`
 	width: 100%;
 	text-align: center;
-	background: var(--shader-grey);
+	background: var(--context-orange-light);
 	margin: 0;
 	padding: 0.6rem 0;
+	#status_code {
+		background: var(${({ status }) => getTruckColorCode(status)});
+		border-radius: 999px;
+		padding: 0.25rem;
+	}
 `;
 
 export const TruckListItemLocation = styled.input`

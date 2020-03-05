@@ -55,7 +55,7 @@ function ParkingLocationMap(props) {
 				{parkingLocations.map(
 					location =>
 						location.apron === selectedApron && (
-							<SafetyZoneWrapper>
+							<SafetyZoneWrapper key={location.id}>
 								<PadColumn>
 									<NumberTop>{location.composite}</NumberTop>
 									{location.east && (

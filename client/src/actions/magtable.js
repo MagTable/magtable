@@ -228,6 +228,7 @@ export const getMagTable = () => async dispatch => {
 		if (err.response.status === 403) {
 			dispatch(logout());
 		}
+		dispatch(setAlert("Session Expired", "warning"));
 
 		console.log(err);
 	}
@@ -286,6 +287,10 @@ export const refreshEmployeeShifts = () => async dispatch => {
 		}, 500);
 		dispatch(setAlert("Shifts Updated!", "success"));
 	} catch (err) {
+		if (err.response.status === 403) {
+			dispatch(logout());
+			dispatch(setAlert("Session Expired", "warning"));
+		}
 		console.log(err);
 	}
 };

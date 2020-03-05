@@ -12,7 +12,6 @@ import {
 	TruckNoticeDiv,
 	TruckProblemsText,
 	TruckStatusMessage,
-	UnassignBtn,
 	EquipmentListItemButton
 } from "../../styled/magtable/ListContent";
 import { useDrop, useDrag } from "react-dnd";
@@ -318,8 +317,9 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 						/>
 					</TruckInfoDiv>
 				) : (
-					<TruckStatusMessage>
-						Unavailable ({assignment.equipment.status})
+					<TruckStatusMessage status={assignment.equipment.status}>
+						{/*Unavailable{" "}*/}
+						<span id={"status_code"}>{assignment.equipment.status}</span>
 					</TruckStatusMessage>
 				)}
 			</TruckListItemDiv>

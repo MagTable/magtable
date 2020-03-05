@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { TowerTitle, TowerTitleText } from "../../styled/magtable/Titling";
-import {
-	DeleteTowerAssignmentBtn,
-	TowerPositionDiv
-} from "../../styled/magtable/Maps";
+import { TowerPositionDiv } from "../../styled/magtable/Maps";
 import {
 	EquipmentListItemEmployee,
 	EquipmentListItemEmployeeName,
@@ -224,7 +221,7 @@ function TowerListItem({ assignment, showAM }) {
 						{getAssignmentWarning(elem.assignmentIndex) && (
 							<IconButton
 								faClassName={"fa-exclamation-triangle"}
-								color={"orange"}
+								color={"var(--context-orange)"}
 								outlineType={"darkorange"}
 								toolTip={getAssignmentWarning(elem.assignmentIndex)}
 							/>
