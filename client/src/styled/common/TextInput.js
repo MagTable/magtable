@@ -3,15 +3,15 @@ import { Input } from "./FormControl";
 import PlaneBG from "../../res/Images/Plane_BG.jpg";
 
 export const BlurCover = styled.div`
-	background-color: rgba(255, 255, 255, .15);
-    ${({ blur }) =>
-	blur &&
-	` 
+	background-color: rgba(255, 255, 255, 0.15);
+	${({ blur }) =>
+		blur &&
+		` 
 		filter: blur(5px);
 	`}
-    height: 120%;
-    width: 120%;
-    transition: 0.5s ease-in-out;
+	height: 120%;
+	width: 120%;
+	transition: 0.5s ease-in-out;
 `;
 
 export const Background = styled.div`
@@ -21,7 +21,6 @@ export const Background = styled.div`
 	background-position: center;
 	width: calc(100vw + 20px);
 	transform: translate(-10px, -10px);
-	
 `;
 
 export const BGContainer = styled.div`

@@ -6,8 +6,12 @@ import { LoginBlock, LoginBtn } from "../../styled/auth/Login";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import TextInput from "../common/TextInput";
-import {Background, BGContainer, BlurCover} from "../../styled/common/TextInput";
-import {LoginLoadIcon, SpinningLoadIcon} from "../../styled/common/QualityOfLife";
+import {
+	Background,
+	BGContainer,
+	BlurCover
+} from "../../styled/common/TextInput";
+import { LoginLoadIcon } from "../../styled/common/QualityOfLife";
 
 /**
  * @date 2/10/2020
@@ -43,17 +47,13 @@ function Login() {
 	return (
 		<>
 			<BGContainer>
-
 				<BlurCover blur={blur}>
-					<Background/>
+					<Background />
 				</BlurCover>
-
-
-
 			</BGContainer>
 
 			<LoginBlock>
-				<LoginLoadIcon loading={loading}/>
+				<LoginLoadIcon loading={loading} />
 				<h1>MagTable</h1>
 				<Formik
 					initialValues={{

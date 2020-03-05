@@ -19,7 +19,7 @@ const AssignmentTable = () => {
 
 	useEffect(() => {
 		dispatch(getMagTable());
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<DndProvider backend={Backend}>
