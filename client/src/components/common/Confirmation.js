@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { ConfirmationBox } from "../../styled/common/Confirmation";
 import { ClickCatcher } from "../../styled/common/ClickCatcher";
-import {Button} from "../../styled/common/FormControl";
 
 /**
  * @date 2/17/2020
@@ -44,7 +43,9 @@ function Confirmation({
 				<>
 					<ClickCatcher onClick={() => setOpen(false)} />
 					<div id={"arrow"} />
-					<button id={"confirmButton"} onClick={handleClick}>{confirmationMessage}</button>
+					<button id={"confirmButton"} onClick={handleClick}>
+						{confirmationMessage}
+					</button>
 				</>
 			)}
 			{children({ confirm })}

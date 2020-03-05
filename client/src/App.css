@@ -13,6 +13,13 @@ html{
   --context-orange: #EAAB0E;
   --context-yellow: #FFE400;
 
+  --context-green-light: #00AD6E77;
+  --context-red-light: #E7253077;
+  --context-blue-light: #187AD377;
+  --context-grey-light: #b2b2b277;
+  --context-orange-light: #EAAB0E99;
+  --context-yellow-light: #FFE40077;
+
   --alert-warning: #ff990066;
 
   /*Used for separating elements between one another, for example, shading every second row of a table or directly opposing divs. */

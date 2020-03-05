@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Button } from "../common/FormControl";
+import { DangerButton } from "../common/FormControl";
 import { DANGER, SUCCESS, WARNING } from "../../actions/constants";
 
 /**
@@ -48,6 +48,27 @@ const getTruckColorCode = status => {
 		}
 	}
 };
+
+export const UnassignBtn = styled.button`
+	position: absolute;
+	border-radius: 30px;
+	width: 20px;
+	height: 20px;
+	top: -10px;
+	left -10px;	
+	border: 0;
+	opacity: 0;
+	transition: 0.2s ease-in-out;
+	cursor: pointer;
+	z-index: 1;
+	background: red;
+	color: white;
+	
+	:hover {
+		display: block;
+		opacity: 1;
+	}
+`;
 
 /**
  *    Holds the currently available employees and separator divs for start times.
@@ -103,9 +124,8 @@ export const TruckListDivWrapper = styled(TruckListDiv)``;
 
 export const TruckListItemDiv = styled.div`
 	transition: all 0.15s ease-in-out;
-	border-bottom: 1px solid var(--border-color);
-	height: 55px;
 	display: flex;
+	height: 60px;
 
 	${({ disabled }) =>
 		disabled &&
@@ -115,19 +135,21 @@ export const TruckListItemDiv = styled.div`
 	`}
 `;
 
-export const TruckProblemsDiv = styled.div`
-	transition: all 0.15s ease-in-out;
-	display: flex;
-	border-top: 1px solid var(--border-color);
+export const TruckNoticeDiv = styled.div`
+	overflow: hidden;
+	transition: all 0.25s ease-in-out;
 	max-height: ${({ noticeOpen }) => (noticeOpen ? "200px" : "0px")};
-	min-height: 0px;
-	border-top: none;
-	overflow: auto;
+	border-bottom: 1px solid var(--border-color);
 `;
 
 export const TruckProblemsText = styled.p`
-	padding-left: 20px;
-	padding-right: 20px;
+	margin: 0;
+	padding: 0.5rem;
+
+	overflow-wrap: break-word;
+	hyphens: auto;
+
+	border-top: 1px solid var(--border-color);
 `;
 
 export const TruckNumberDiv = styled.div`
@@ -140,12 +162,14 @@ export const TruckNumberDiv = styled.div`
 	color: black;
 
 	min-width: 60px;
-	font-size: 40px;
+	font-size: 30px;
+	font-weight: bold;
 
 	${({ isDragging }) => isDragging && `opacity: 0.5;`}
 	${({ disabled }) =>
 		disabled &&
 		`
+		background: var(--context-orange-light);
 		font-size: 25px;
 	`}
 `;
@@ -156,45 +180,20 @@ export const TruckInfoDiv = styled.div`
 	justify-content: space-between;
 `;
 
+/**
+ * Rendered instead of the employee slots for inop and oos trucks
+ */
 export const TruckStatusMessage = styled.h4`
 	width: 100%;
 	text-align: center;
-	background: var(--shader-grey);
+	background: var(--context-orange-light);
 	margin: 0;
 	padding: 0.6rem 0;
-`;
-
-export const TruckListItemEmployee = styled.div`
-	margin-block-start: 0em;
-	margin-block-end: 0em;
-	height: ${({ show }) => (show ? "50%" : "0%")};
-	background-color: var(${({ slot }) => (slot === 2 ? "--shader-grey" : "")});
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	overflow: hidden;
-	transition: height 0.15s ease-in-out;
-
-	${({ warningBackground }) =>
-		warningBackground &&
-		`
-		background: #ff990033;
-	`}
-
-	${({ outlineType }) =>
-		outlineType &&
-		`
-		background: var(${getColor(outlineType)});
-	`}
-`;
-
-export const TruckListItemEmployeeList = styled.div`
-	display: flex;
-	align-self: center;
-	flex-direction: column;
-	flex-grow: 4;
-	flex-basis: 0;
-	height: 100%;
+	#status_code {
+		background: var(${({ status }) => getTruckColorCode(status)});
+		border-radius: 999px;
+		padding: 0.25rem;
+	}
 `;
 
 export const TruckListItemLocation = styled.input`
@@ -209,59 +208,76 @@ export const TruckListItemLocation = styled.input`
 	font-family: "Noto Sans KR", sans-serif;
 `;
 
-export const TruckListButton = styled(Button)`
-	font-size: 18px;
-	margin-right: 9px;
-	width: auto;
-	white-space: nowrap;
-	padding: 3px;
-	background-color: rgb(65, 66, 68);
-	color: white;
-	padding: 5px;
-	border-radius: 20px;
-	:hover {
-		background: rgb(95, 96, 98) npm install react-switch;
-	}
-`;
-
 export const TruckListManipDiv = styled.div`
 	display: flex;
 	flex-direction: row;
 	margin-right: 3px;
 `;
 
-export const TowerListItemEmployee = styled.p`
-	margin-block-start: 0em;
-	margin-block-end: 0em;
-	height: ${({ show }) => (show ? "50%" : "0%")};
-	background-color: var(${({ slot }) => (slot === 2 ? "--shader-grey" : "")});
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	overflow: hidden;
-	transition: height 0.15s ease-in-out;
-
-	${({ warningBackground }) =>
-		warningBackground &&
-		`
-		background: #ff990033;
-	`}
-
-	${({ outlineType }) =>
-		outlineType &&
-		`
-			background: var(${getColor(outlineType)});
-	`}
-	
-	justify-content: space-between;
-	padding-left: 15px;
+export const EquipmentListItemButton = styled(DangerButton)`
+	transition: opacity 0.3s ease-in-out;
+	opacity: 0;
+	font-size: 13px;
+	color: white;
+	border-radius: 30px;
+	width: 20px;
+	height: 20px;
+	display: none;
+	:hover {
+		opacity: 1;
+		display: block;
+	}
 `;
 
-export const TowerListEmployeeMgmt = styled.div`
+export const EquipmentListItemEmployeeList = styled.div`
 	display: flex;
-	flex-direction: row;
+	align-self: center;
+	flex-direction: column;
+	flex-grow: 4;
+	flex-basis: 0;
+	height: 100%;
+	width: 100%;
+`;
+
+export const EquipmentListItemEmployee = styled.div`
+	display: grid;
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+	grid-template-columns: 1fr auto auto;
+	grid-template-areas: "name clearbutton warning";
+	   align-items: center;
+
+	transition: height 0.15s ease-in-out;
+	height: ${({ show }) => (show ? "50%" : "0%")};
+	overflow: hidden;
+
+	background-color: var(${({ slot }) => (slot === 2 ? "--shader-grey" : "")});
+	${({ warningBackground }) =>
+		warningBackground && `background: var(--context-orange-light);`}
+	${({ outlineType }) =>
+		outlineType && `background: var(${getColor(outlineType)});`}
+	&:hover ${EquipmentListItemButton} {
+		opacity: 1;
+		display: block;
+	}
+	
+`;
+
+export const EquipmentListItemEmployeeName = styled.div`
+	grid-area: name;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+`;
+export const EquipmentListItemEmployeeWarning = styled.div`
+	grid-area: warning;
+	display: flex;
 	align-items: center;
-	margin-right: 15px;
+`;
+export const EquipmentListItemEmployeeClearButton = styled.div`
+	grid-area: clearbutton;
+	display: flex;
+	align-items: center;
 `;
 
 /*---------------------------------------------------------------------------
@@ -279,24 +295,6 @@ export const StartTimeSeparator = styled.h2`
 	background: var(--header);
 `;
 
-export const UnassignBtn = styled.button`
-	position: absolute;
-	border-radius: 30px;
-	width: 20px;
-	height: 20px;
-	top: -10px;
-	left -10px;	
-	border: 0;
-	opacity: 0;
-	transition: 0.2s ease-in-out;
-	cursor: pointer;
-	z-index: 1;
-	background: red;
-	color: white;
-`;
-
-export const EmpWrap = styled.div``;
-
 export const EmpName = styled.div`
 	padding: 5px 0 0 5px;
 	margin-block-start: 0;
@@ -307,7 +305,7 @@ export const EmpName = styled.div`
 	font-weight: bold;
 `;
 
-export const Hours = styled.p`
+export const EmpHours = styled.p`
 	padding-left: 5px;
 	margin-block-start: 0;
 	font-style: italic;
@@ -320,16 +318,21 @@ export const LabelWrapper = styled.div`
 		type === "greenPass" && `background-color: var(--context-green);`}
 	${({ type }) =>
 		type === "noAvop" && `background-color: var(--context-orange);`}
-	width: 23px;
-	height: 23px;
+		
+	width: 26px;
+	max-width: 26px;
 	transition: 0.3s ease-in-out;
 	position: relative;
 	z-index: 1;
+	padding: 3px;
+
+	:last-child {
+		border-top-right-radius: 5px;
+		border-bottom-right-radius: 5px;
+	}
 `;
 
 export const LabelText = styled.div`
-	margin-block-start: 0;
-	margin-block-end: 0;
 	margin: 0 5px;
 	width: 0px;
 	overflow: hidden;
@@ -339,15 +342,14 @@ export const LabelText = styled.div`
 `;
 
 export const Labels = styled.div`
-	width: 23px;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row:
 	justify-content: flex-end;
 	grid-area: labels;
 	:hover {
-		width: 100px;
 		${LabelWrapper}, ${LabelText} {
-			width: 100px;
+			width: 90px;
+			max-width: 90px;
 		}
 	}
 `;
@@ -362,7 +364,14 @@ export const AssignedToWrap = styled.div`
 	align-items: center;
 
 	h2 {
+		overflow: hidden;
+		text-align: center;
 		margin: 0;
+		${({ isTower }) =>
+			isTower &&
+			`
+			font-size: 10px;
+		`}
 	}
 `;
 
@@ -391,7 +400,7 @@ export const EmpListItemDiv = styled.div`
 
 	display: grid;
 	grid-template-columns: 23px 1fr 48px;
-	grid-template-rows: 48px auto;
+	grid-template-rows: auto auto;
 	grid-template-areas:
 		"name name equipmentID"
 		"labels position position";

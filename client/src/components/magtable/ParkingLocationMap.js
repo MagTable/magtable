@@ -7,13 +7,13 @@ import {
 	NumberMiddle,
 	NumberTop,
 	PadColumn,
-	FakePadDiv
+	FakePadDiv,
+	SafetyZoneWrapper
 } from "../../styled/magtable/TruckMapMedia";
 import { useSelector } from "react-redux";
 import ParkingLocation from "./ParkingLocation";
 import { CENTER, EAST, WEST } from "../../actions/constants";
-import {Button} from "../../styled/common/FormControl";
-import IconButton from "../common/IconButton";
+import { Button } from "../../styled/common/FormControl";
 import Confirmation from "../common/Confirmation";
 
 /**
@@ -26,9 +26,9 @@ import Confirmation from "../common/Confirmation";
  *
  * @constructor
  * @param props
- * @returns {*} The LocationMap component
+ * @returns {*} The ParkingLocationMap component
  */
-function LocationMap(props) {
+function ParkingLocationMap(props) {
 	const selectedApron = useSelector(state => state.magtable.selectedApron);
 	const parkingLocations = useSelector(
 		state => state.magtable.parkingLocations
@@ -45,13 +45,8 @@ function LocationMap(props) {
 			<ListTitle>
 				<ListTitleText>Parking Locations</ListTitleText>
 				<ApronToggle />
-				<Confirmation
-					confirmationMessage={"Confirm Clear"}
-					action={() => {}}
-				>
-					{({ confirm }) => (
-						<Button onClick={confirm}>Clear All</Button>
-					)}
+				<Confirmation confirmationMessage={"Confirm Clear"} action={() => {}}>
+					{({ confirm }) => <Button onClick={confirm}>Clear All</Button>}
 				</Confirmation>
 
 				<Button>Publish</Button>
@@ -60,7 +55,7 @@ function LocationMap(props) {
 				{parkingLocations.map(
 					location =>
 						location.apron === selectedApron && (
-							<>
+							<SafetyZoneWrapper key={location.id}>
 								<PadColumn>
 									<NumberTop>{location.composite}</NumberTop>
 									{location.east && (
@@ -99,7 +94,7 @@ function LocationMap(props) {
 									{location.double && <FakePadDiv />}
 								</PadColumn>
 								<NumberMiddle>{location.right}</NumberMiddle>
-							</>
+							</SafetyZoneWrapper>
 						)
 				)}
 			</MapWrapper>
@@ -107,4 +102,4 @@ function LocationMap(props) {
 	);
 }
 
-export default LocationMap;
+export default ParkingLocationMap;

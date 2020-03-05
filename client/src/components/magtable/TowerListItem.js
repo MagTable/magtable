@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { TowerTitle, TowerTitleText } from "../../styled/magtable/Titling";
+import { TowerPositionDiv } from "../../styled/magtable/Maps";
 import {
-	DeleteTowerAssignmentBtn,
-	TowerPositionDiv
-} from "../../styled/magtable/Maps";
-import {
-	TowerListEmployeeMgmt,
-	TowerListItemEmployee
+	EquipmentListItemEmployee,
+	EquipmentListItemEmployeeName,
+	EquipmentListItemEmployeeWarning,
+	EquipmentListItemEmployeeClearButton,
+	EquipmentListItemButton
 } from "../../styled/magtable/ListContent";
 import { useDrop } from "react-dnd";
 import {
@@ -179,18 +179,18 @@ function TowerListItem({ assignment, showAM }) {
 			canClear: assignment.employeeShifts[0] && !assignment.employeeShifts[1]
 		},
 		{
-			assignmentIndex: 2,
-			shift: assignment.employeeShifts[2],
-			slot: 1,
-			show: !showAM,
-			canClear: assignment.employeeShifts[2] && !assignment.employeeShifts[3]
-		},
-		{
 			assignmentIndex: 1,
 			shift: assignment.employeeShifts[1],
 			slot: 2,
 			show: showAM,
 			canClear: assignment.employeeShifts[1]
+		},
+		{
+			assignmentIndex: 2,
+			shift: assignment.employeeShifts[2],
+			slot: 1,
+			show: !showAM,
+			canClear: assignment.employeeShifts[2] && !assignment.employeeShifts[3]
 		},
 		{
 			assignmentIndex: 3,
@@ -207,32 +207,36 @@ function TowerListItem({ assignment, showAM }) {
 				<TowerTitleText>{assignment.equipment.position}</TowerTitleText>
 			</TowerTitle>
 			{employeeShifts.map(elem => (
-				<TowerListItemEmployee
+				<EquipmentListItemEmployee
 					key={elem.assignmentIndex}
 					slot={elem.slot}
 					show={elem.show}
 					outlineType={getOutline(elem.assignmentIndex)}
 					warningBackground={getAssignmentWarning(elem.assignmentIndex)}
 				>
-					{elem.shift?.name}
-					<TowerListEmployeeMgmt>
+					<EquipmentListItemEmployeeName>
+						{elem.shift?.name}
+					</EquipmentListItemEmployeeName>
+					<EquipmentListItemEmployeeWarning>
 						{getAssignmentWarning(elem.assignmentIndex) && (
 							<IconButton
 								faClassName={"fa-exclamation-triangle"}
-								color={"orange"}
+								color={"var(--context-orange)"}
 								outlineType={"darkorange"}
 								toolTip={getAssignmentWarning(elem.assignmentIndex)}
 							/>
 						)}
+					</EquipmentListItemEmployeeWarning>
+					<EquipmentListItemEmployeeClearButton>
 						{elem.canClear && (
-							<DeleteTowerAssignmentBtn
+							<EquipmentListItemButton
 								onClick={() => handleClear(elem.shift.id)}
 							>
-								X
-							</DeleteTowerAssignmentBtn>
+								<i className="fas fa-times" />
+							</EquipmentListItemButton>
 						)}
-					</TowerListEmployeeMgmt>
-				</TowerListItemEmployee>
+					</EquipmentListItemEmployeeClearButton>
+				</EquipmentListItemEmployee>
 			))}
 		</TowerPositionDiv>
 	);

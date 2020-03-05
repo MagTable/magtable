@@ -2,7 +2,6 @@ import styled from "styled-components";
 import React from "react";
 import FadeIn from 'react-fade-in';
 
-
 /**
  * @date 2020-03-03
  * @author MJ Kochuk

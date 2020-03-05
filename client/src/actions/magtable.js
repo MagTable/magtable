@@ -3,21 +3,22 @@ import {
 	REMOVE_EQUIPMENT_EMPLOYEE,
 	SET_TRUCK_LOCATION,
 	REMOVE_TRUCK_LOCATION,
-	PUBLISH_TABLE,
-	ADD_BRIX_RECORD,
-	SET_DAILY_MIX,
-	ADD_DAILY_MESSAGE,
+	// PUBLISH_TABLE,
+	// ADD_BRIX_RECORD,
+	// SET_DAILY_MIX,
+	// ADD_DAILY_MESSAGE,
+	// REMOVE_DAILY_MESSAGE,
+	// TOGGLE_BAY_LEAD,
 	AXIOS_JSON_HEADER,
-	REMOVE_DAILY_MESSAGE,
 	SET_SELECTED_APRON,
 	GET_ASSIGNMENT_DATA,
 	ADD_EMPLOYEE_SHIFT,
-	TOGGLE_BAY_LEAD,
 	REFRESH_EMPLOYEE_SHIFTS,
 	REFRESHING_EMPLOYEE_SHIFTS
 } from "./constants";
 import axios from "axios";
 import { setAlert } from "./alert";
+import { logout } from "./auth";
 
 // todo update all async actions with API calls
 
@@ -224,6 +225,11 @@ export const getMagTable = () => async dispatch => {
 			}
 		});
 	} catch (err) {
+		if (err.response.status === 403) {
+			dispatch(logout());
+		}
+		dispatch(setAlert("Session Expired", "warning"));
+
 		console.log(err);
 	}
 };
@@ -251,7 +257,7 @@ export const addEmployeeShift = shiftData => async dispatch => {
 	}
 };
 
-/**
+/*
  * Toggles bay lead status of an assignment
  *
  * @param equipmentID equipmentID of assignment to toggle
@@ -281,6 +287,10 @@ export const refreshEmployeeShifts = () => async dispatch => {
 		}, 500);
 		dispatch(setAlert("Shifts Updated!", "success"));
 	} catch (err) {
+		if (err.response.status === 403) {
+			dispatch(logout());
+			dispatch(setAlert("Session Expired", "warning"));
+		}
 		console.log(err);
 	}
 };

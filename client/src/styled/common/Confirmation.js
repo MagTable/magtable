@@ -3,10 +3,9 @@ import styled from "styled-components";
 export const ConfirmationBox = styled.div`
 	position: relative;
 
-	button {
-		z-index: 100;
 	#confirmButton {
-		z-index: 5;
+		position: absolute;
+		z-index: 100;
 		padding: 0.5rem;
 
 		cursor: pointer;
@@ -17,10 +16,9 @@ export const ConfirmationBox = styled.div`
 
 		box-shadow: 2px 2px 3px #999;
 
-		position: absolute;
 		width: 120px;
-		left: -45px;
-		top: 30px;
+		left: calc(50% - 60px);
+		top: calc(100% + 0.5rem);
 
 		:hover {
 			background: ${({ hoverColor }) => hoverColor || "#d00"};
@@ -29,15 +27,14 @@ export const ConfirmationBox = styled.div`
 
 	#arrow {
 		position: absolute;
-		width: 120px;
-		left: 7px;
-		top: 25px;
 
 		width: 0;
 		height: 0;
+		left: calc(50% - 5px);
+		top: calc(100% + 0.5rem - 5px);
+
 		border-left: 5px solid transparent;
 		border-right: 5px solid transparent;
-
-		border-bottom: 5px solid ${({ color }) => color || "red"};
+		border-bottom: 5px solid ${({ color }) => color || `red`};
 	}
 `;

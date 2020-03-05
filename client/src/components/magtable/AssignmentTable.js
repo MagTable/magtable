@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { AssignmentContainer, MapsDiv } from "../../styled/magtable/Maps";
 import { DndProvider } from "react-dnd";
 import Backend from "react-dnd-html5-backend";
-import TowerMap from "./TowerMap";
-import LocationMap from "./LocationMap";
+import TowerMap from "./TowerList";
+import ParkingLocationMap from "./ParkingLocationMap";
 import EmployeeList from "./EmployeeList";
 import TruckList from "./TruckList";
-import AddEmployeeShift from "./AddEmployeeShift";
 
 /**
  * Placeholder component to assist in displaying routing
@@ -21,7 +20,7 @@ const AssignmentTable = () => {
 				<EmployeeList />
 				<TruckList showAM={showAM} setShowAM={setShowAM} />
 				<MapsDiv>
-					<LocationMap />
+					<ParkingLocationMap />
 					<TowerMap showAM={showAM} />
 				</MapsDiv>
 			</AssignmentContainer>

@@ -116,14 +116,14 @@ function OverflowEmployee({
 							}}
 						>
 							<FilterIcon className={"fas fa-sync"} />
-							Refresh Employees
+							Refresh
 						</OverflowMenuButton>
 						<AddEmployeeShiftModal show={showModal} handleClose={handleClose}>
 							<AddEmployeeShift />
 						</AddEmployeeShiftModal>
 						<OverflowMenuButton onClick={handleShow}>
-							Add Employee Shift
 							<FilterIcon className={"fas fa-user-plus"} />
+							Add Shift
 						</OverflowMenuButton>
 					</div>
 				</>

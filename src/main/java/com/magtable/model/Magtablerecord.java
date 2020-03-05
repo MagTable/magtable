@@ -1,5 +1,6 @@
 package com.magtable.model;
 
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;

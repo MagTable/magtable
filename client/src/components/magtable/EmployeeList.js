@@ -50,9 +50,9 @@ const EmployeeList = () => {
 	// used to determine if the app filters out management, default is false to not show management
 	const [filterManagement, setFilterManagement] = useState(false);
 	// used to determine if the app filters out employees that are mechanics, default is false to show all employees
-	const [filterMechanic, setFilterMechanic] = useState(false);
+	const [filterMechanic, setFilterMechanic] = useState(true);
 	// used to determine if the app filters out employees that are part of the training staff, default false to show all employees
-	const [filterTrainer, setFilterTrainer] = useState(false);
+	const [filterTrainer, setFilterTrainer] = useState(true);
 
 	if (!loading) {
 		employeeShifts.shifts.forEach(emp => {
@@ -171,7 +171,6 @@ const EmployeeList = () => {
 
 	// fill a list of start times from the start times of the list of filtered employee shifts
 	function filterStartTimes() {
-		console.log(filteredEmployeeShifts);
 		filteredEmployeeShifts.forEach(emp => {
 			if (
 				!filteredStartTimes.includes(emp.startTime) &&
@@ -228,9 +227,7 @@ const EmployeeList = () => {
 						{filteredStartTimes.length > 0 ? (
 							filteredStartTimes.map(startTime => (
 								<div key={startTime}>
-									<StartTimeSeparator>
-										<h2>{startTime}</h2>
-									</StartTimeSeparator>
+									<StartTimeSeparator>{startTime}</StartTimeSeparator>
 									{filteredEmployeeShifts.map(
 										employee =>
 											employee.startTime === startTime && (

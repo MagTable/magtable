@@ -7,7 +7,6 @@ import {
 	PadDiv,
 	PadDivHeader
 } from "../../styled/magtable/TruckMapMedia";
-import { useDispatch } from "react-redux";
 
 /**
  * @date 2/20/2020
