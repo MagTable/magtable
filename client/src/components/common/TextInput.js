@@ -17,6 +17,8 @@ import {
 function TextInput(props) {
 	const [focus, setFocus] = useState(false);
 
+		props.setBlurred(focus || props.blur);
+
 	return (
 		<TextInputContainer>
 			<StyledTextInput
