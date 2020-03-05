@@ -13,8 +13,6 @@ import {
 import store from "../store";
 
 import { setAlert } from "./alert";
-import { getRoles } from "./user";
-import { getMagTable } from "./magtable";
 
 window.addEventListener("storage", e => {
 	// whenever our token changes, log the user out.
@@ -37,10 +35,6 @@ export const loadUser = () => async dispatch => {
 			type: USER_LOADED,
 			payload: res.data // contains the user
 		});
-
-		// todo don't call forbidden routes for mechanics
-		dispatch(getRoles());
-		dispatch(getMagTable());
 	} catch (err) {
 		// this error is not necessary
 		// dispatch(setAlert(err.response?.data?.message, "danger"));

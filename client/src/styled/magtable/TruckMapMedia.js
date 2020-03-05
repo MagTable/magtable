@@ -119,6 +119,7 @@ export const PadDiv = styled.div`
 	outline: 2px solid var(--border-color);
 	display: flex;
 	width: 100%;
+	min-width: 65px;
 	max-width: 100px;
 	flex-grow: 1.3;
 	flex-basis: 0;
