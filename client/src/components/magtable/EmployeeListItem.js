@@ -11,7 +11,7 @@ import {
 	EmpListItemDiv,
 	EmpName,
 	EmpRole,
-	Hours,
+	EmpHours,
 	Labels,
 	LabelText,
 	LabelWrapper,
@@ -97,19 +97,23 @@ function EmployeeListItem({ employee: employeeShift }) {
 		>
 			<ShiftInfo>
 				<EmpName>{employeeShift.name}</EmpName>
-				<Hours>
+				<EmpHours>
 					{employeeShift.startTime} - {employeeShift.endTime}
-				</Hours>
+				</EmpHours>
 			</ShiftInfo>
 
 			{employeeShift.assignedEquipment && (
-				<AssignedToWrap>
+				<AssignedToWrap isTower={assignment.equipment.id >= 1000}>
 					{canRemove && (
 						<UnassignBtn onClick={handleRemove}>
 							<i className="fas fa-times" />
 						</UnassignBtn>
 					)}
-					<h2>{employeeShift.assignedEquipment}</h2>
+					<h2>
+						{assignment.equipment.position
+							? assignment.equipment.position
+							: employeeShift.assignedEquipment}
+					</h2>
 				</AssignedToWrap>
 			)}
 

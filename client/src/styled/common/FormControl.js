@@ -48,6 +48,14 @@ export const Button = styled.button`
 	}
 `;
 
+export const DangerButton = styled(Button)`
+	background: var(--context-red);
+
+	:hover {
+		background: darkred;
+	}
+`;
+
 /**
  * The submit button to log in to the app
  */

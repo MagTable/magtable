@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import {
+	EquipmentListItemEmployee,
+	EquipmentListItemEmployeeClearButton,
+	EquipmentListItemEmployeeName,
+	EquipmentListItemEmployeeWarning,
 	TruckInfoDiv,
 	TruckListItemDiv,
-	TruckListItemEmployee,
-	TruckListItemEmployeeList,
+	EquipmentListItemEmployeeList,
 	TruckListItemLocation,
 	TruckNumberDiv,
-	TruckProblemsDiv,
+	TruckNoticeDiv,
 	TruckProblemsText,
-	TruckStatusMessage
+	TruckStatusMessage,
+	UnassignBtn,
+	EquipmentListItemButton
 } from "../../styled/magtable/ListContent";
 import { useDrop, useDrag } from "react-dnd";
 import {
@@ -62,8 +67,12 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 	const [hoveredShiftDescription, setHoveredShiftDescription] = useState(null);
 	const dispatch = useDispatch();
 
+	const equipmentOperable =
+		assignment.equipment.status === GO || assignment.equipment.status === CON;
+
 	const [{ isDragging }, drag] = useDrag({
 		item: { type: SET_TRUCK_LOCATION, id: assignment.equipment.id },
+		canDrag: equipmentOperable,
 		end: (item, monitor) => {
 			const dropResult = monitor.getDropResult();
 			if (item && dropResult) {
@@ -125,6 +134,7 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 	};
 
 	const handleCanDrop = item => {
+		if (!equipmentOperable) return false;
 		// Logic to not allow more than 4 employees in a location.
 		// if the list of employeeShifts does not have any nulls, it's full
 		if (!assignment.employeeShifts.includes(null)) return false;
@@ -223,18 +233,18 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 			canClear: assignment.employeeShifts[0] && !assignment.employeeShifts[1]
 		},
 		{
-			assignmentIndex: 2,
-			shift: assignment.employeeShifts[2],
-			slot: 1,
-			show: !showAM,
-			canClear: assignment.employeeShifts[2] && !assignment.employeeShifts[3]
-		},
-		{
 			assignmentIndex: 1,
 			shift: assignment.employeeShifts[1],
 			slot: 2,
 			show: showAM,
 			canClear: assignment.employeeShifts[1]
+		},
+		{
+			assignmentIndex: 2,
+			shift: assignment.employeeShifts[2],
+			slot: 1,
+			show: !showAM,
+			canClear: assignment.employeeShifts[2] && !assignment.employeeShifts[3]
 		},
 		{
 			assignmentIndex: 3,
@@ -244,9 +254,6 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 			canClear: assignment.employeeShifts[3]
 		}
 	];
-
-	const equipmentOperable =
-		assignment.equipment.status === GO || assignment.equipment.status === CON;
 
 	return (
 		<div ref={drop}>
@@ -261,32 +268,41 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 				</TruckNumberDiv>
 				{equipmentOperable ? (
 					<TruckInfoDiv>
-						<TruckListItemEmployeeList>
+						<EquipmentListItemEmployeeList>
 							{employeeShifts.map(elem => (
-								<TruckListItemEmployee
+								<EquipmentListItemEmployee
 									key={elem.assignmentIndex}
+									index={elem.assignmentIndex}
 									slot={elem.slot}
 									show={elem.show}
 									outlineType={getOutline(elem.assignmentIndex)}
 									warningBackground={getAssignmentWarning(elem.assignmentIndex)}
 								>
-									{elem.shift?.name}
-									{getAssignmentWarning(elem.assignmentIndex) && (
-										<IconButton
-											faClassName={"fa-exclamation-triangle"}
-											color={"orange"}
-											outlineType={"darkorange"}
-											toolTip={getAssignmentWarning(elem.assignmentIndex)}
-										/>
-									)}
+									<EquipmentListItemEmployeeName>
+										{elem.shift?.name}
+									</EquipmentListItemEmployeeName>
+									<EquipmentListItemEmployeeWarning>
+										{getAssignmentWarning(elem.assignmentIndex) && (
+											<IconButton
+												faClassName={"fa-exclamation-triangle"}
+												color={"orange"}
+												outlineType={"darkorange"}
+												toolTip={getAssignmentWarning(elem.assignmentIndex)}
+											/>
+										)}
+									</EquipmentListItemEmployeeWarning>
 									{elem.canClear && (
-										<button onClick={() => handleClear(elem.shift.id)}>
-											X
-										</button>
+										<EquipmentListItemEmployeeClearButton>
+											<EquipmentListItemButton
+												onClick={() => handleClear(elem.shift.id)}
+											>
+												<i className="fas fa-times" />
+											</EquipmentListItemButton>
+										</EquipmentListItemEmployeeClearButton>
 									)}
-								</TruckListItemEmployee>
+								</EquipmentListItemEmployee>
 							))}
-						</TruckListItemEmployeeList>
+						</EquipmentListItemEmployeeList>
 						<TruckListItemLocation
 							type="text"
 							value={
@@ -307,11 +323,11 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 					</TruckStatusMessage>
 				)}
 			</TruckListItemDiv>
-			<TruckProblemsDiv noticeOpen={noticeOpen}>
+			<TruckNoticeDiv noticeOpen={noticeOpen}>
 				{assignment.equipment.notice !== "" && (
 					<TruckProblemsText>{assignment.equipment.notice}</TruckProblemsText>
 				)}
-			</TruckProblemsDiv>
+			</TruckNoticeDiv>
 		</div>
 	);
 }

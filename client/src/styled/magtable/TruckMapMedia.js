@@ -116,17 +116,17 @@ export const FullPadDropDiv = styled(PadDropDiv)`
 export const PadDiv = styled.div`
 	position: relative;
 	text-align: center;
-	outline: 2px solid black;
+	outline: 2px solid var(--border-color);
 	display: flex;
-	width: 5rem;
+	width: 100%;
+	max-width: 100px;
 	flex-grow: 1.3;
 	flex-basis: 0;
 	font-size: x-large;
 	font-family: "Noto Sans KR", sans-serif;
-	color: grey;
-	position: relative;
-	background: ${({ hoverColor }) => hoverColor && `${hoverColor};`};
+	color: var(--border-color);
 	margin-bottom: 0.5rem;
+	background: ${({ hoverColor }) => hoverColor};
 `;
 
 export const FakePadDiv = styled.div`
@@ -147,6 +147,7 @@ export const PadColumn = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	height: 100%;
+	width: 100%;
 `;
 
 export const MapWrapper = styled.div`
@@ -176,6 +177,7 @@ const NumberLabel = styled.div`
 
 export const NumberMiddle = styled(NumberLabel)`
 	height: 100%;
+	padding: 1rem;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
