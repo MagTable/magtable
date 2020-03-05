@@ -21,8 +21,8 @@ const StyledCheckBoxLabel = styled.label`
 	transition: color 200ms ease-in;
 	overflow: hidden;
 	&:before {
-		width: 10px;
-		height: 10px;
+		width: 100%;
+		height: 100%;
 		border-radius: 50%;
 		content: "";
 		background-color: #232f3d;
@@ -82,7 +82,6 @@ const StyledCheckBoxInput = styled.input`
 const CheckBox = ({ children, ...props }) => {
 	const [field, meta] = useField({ ...props, type: "checkbox" });
 
-	// this is a comment so I can push
 	return (
 		<StyledCheckBoxDiv>
 			<StyledCheckBoxInput {...field} {...props} type="checkbox" />
