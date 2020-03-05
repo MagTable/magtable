@@ -9,7 +9,7 @@ import {
 } from "../../styled/common/Navigation";
 import { BrowserView, MobileView } from "react-device-detect";
 import { useSelector } from "react-redux";
-import { SYSTEM_ADMINISTRATOR } from "../../actions/constants";
+import { MECHANIC, SYSTEM_ADMINISTRATOR } from "../../actions/constants";
 import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -43,6 +43,12 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 		<div>
 			<BrowserView>
 				<NavDiv>
+					<NavLink
+						active={pathname === "/truck/all" ? 1 : undefined}
+						to={"/truck/all"}
+					>
+						Truck Status
+					</NavLink>
 					<NavLink active={pathname === "/" ? 1 : undefined} to={"/"}>
 						Truck Assignment
 					</NavLink>
