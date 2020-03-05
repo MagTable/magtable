@@ -43,7 +43,7 @@ const StyledSection = styled.section`
 	background: #fff;
 	position: relative;
 	z-index: 100;
-	padding: 10px;
+	padding: 15px;
 	width: 50%;
 	margin: auto;
 	border: 3px solid black;
