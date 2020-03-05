@@ -11,7 +11,7 @@ const StyledDiv = styled.div`
 	height: 100%;
 	margin: auto;
 	z-index: 100;
-	background: #3c4146;
+	background: #3c414677;
 
 	display: flex;
 	justify-content: center;
@@ -44,9 +44,9 @@ const StyledSection = styled.section`
 	position: relative;
 	z-index: 100;
 	padding: 15px;
-	width: 50%;
-	margin: auto;
-	border: 3px solid black;
+	width: 40%;
+	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.06), 0 0 6px rgba(0, 0, 0, 0.23);
+	border-radius: 0.45rem;
 `;
 
 /**
@@ -69,7 +69,10 @@ const AddEmployeeShiftModal = ({ handleClose, show, children }) => {
 	const showHideClassName = !!show;
 
 	return (
-		<StyledDiv showHideClassName={showHideClassName} onClick={handleClose}>
+		<StyledDiv
+			showHideClassName={showHideClassName}
+			onClick={e => e.currentTarget === e.target && handleClose()}
+		>
 			<StyledSection className="modal-main">
 				{children}
 				<StyledButton onClick={handleClose}>X</StyledButton>
