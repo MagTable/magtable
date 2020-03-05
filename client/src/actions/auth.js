@@ -38,6 +38,7 @@ export const loadUser = () => async dispatch => {
 			payload: res.data // contains the user
 		});
 
+		// todo don't call forbidden routes for mechanics
 		dispatch(getRoles());
 		dispatch(getMagTable());
 	} catch (err) {

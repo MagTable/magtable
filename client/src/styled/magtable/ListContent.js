@@ -192,7 +192,7 @@ export const TruckStatusMessage = styled.h4`
 	#status_code {
 		background: var(${({ status }) => getTruckColorCode(status)});
 		border-radius: 999px;
-		padding: 0.25rem;
+		padding: 0.25rem 0.5rem;
 	}
 `;
 
