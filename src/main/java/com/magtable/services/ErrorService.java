@@ -1,4 +1,4 @@
-package com.magtable.services.userServices;
+package com.magtable.services;
 
 import org.apache.tomcat.util.http.parser.HttpParser;
 import org.springframework.http.HttpStatus;
@@ -161,5 +161,23 @@ public class ErrorService {
 
     public ResponseStatusException magIdNotFound(int id) {
         return new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Mag #%d Not Found.", id));
+    }
+
+    /**
+     * Message reporting that the trucks operational status is invalid
+     * @param status The invalid status
+     * @return ResponseStatusException message
+     */
+    public ResponseStatusException truckOPStatusInvalid(String status){
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Operational Status %s Not Found", status));
+    }
+
+    /**
+     * Message reporting that at truck already exists
+     * @param id the id of the truck
+     * @return ResponseStatusException message
+     */
+    public ResponseStatusException truckAlreadyExists(Integer id) {
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Truck : %d Already Exists", id));
     }
 }

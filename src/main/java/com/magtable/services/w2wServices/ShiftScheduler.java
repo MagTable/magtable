@@ -124,7 +124,6 @@ public class ShiftScheduler {
                 //getting the employee name
                 String name = shifts.next().next().first().text();
 
-                // todo remove unassigned
                 shift.setIsGreen(false);
                 if (name.contains("(GP)")) {
                     shift.setIsGreen(true);

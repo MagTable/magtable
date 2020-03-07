@@ -5,7 +5,7 @@ import com.magtable.model.SafeUser;
 import com.magtable.model.User;
 import com.magtable.repository.RoleRepository;
 import com.magtable.repository.UserRepository;
-import com.magtable.services.userServices.ErrorService;
+import com.magtable.services.ErrorService;
 import com.magtable.services.userServices.JwtUtil;
 import com.magtable.services.userServices.PasswordService;
 import com.magtable.services.userServices.ValidationService;
