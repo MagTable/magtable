@@ -13,8 +13,6 @@ import {
 import store from "../store";
 
 import { setAlert } from "./alert";
-import { getRoles } from "./user";
-import { getMagTable } from "./magtable";
 
 window.addEventListener("storage", e => {
 	// whenever our token changes, log the user out.
@@ -37,9 +35,6 @@ export const loadUser = () => async dispatch => {
 			type: USER_LOADED,
 			payload: res.data // contains the user
 		});
-
-		dispatch(getRoles());
-		dispatch(getMagTable());
 	} catch (err) {
 		// this error is not necessary
 		// dispatch(setAlert(err.response?.data?.message, "danger"));
@@ -91,6 +86,10 @@ export const setUserPassword = ({
 	newPassword
 }) => async dispatch => {
 	try {
+		dispatch({
+			type: LOGGING_IN
+		});
+
 		const res = await axios.post(
 			"/password/reset",
 			{ username, password, newPassword },

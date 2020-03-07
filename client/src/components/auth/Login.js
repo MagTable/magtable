@@ -6,7 +6,12 @@ import { LoginBlock, LoginBtn } from "../../styled/auth/Login";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import TextInput from "../common/TextInput";
-import { Background, BGContainer } from "../../styled/common/TextInput";
+import {
+	Background,
+	BGContainer,
+	BlurCover
+} from "../../styled/common/TextInput";
+import { LoginLoadIcon } from "../../styled/common/QualityOfLife";
 
 /**
  * @date 2/10/2020
@@ -22,6 +27,7 @@ import { Background, BGContainer } from "../../styled/common/TextInput";
 function Login() {
 	const [showPassword, setShowPassword] = useState(false);
 	const { isAuthenticated, loading, error } = useSelector(state => state.auth);
+	const [blur, setBlur] = useState(false);
 	const dispatch = useDispatch();
 	const history = useHistory(); // to allow us to redirect the user
 
@@ -41,9 +47,13 @@ function Login() {
 	return (
 		<>
 			<BGContainer>
-				<Background />
+				<BlurCover blur={blur}>
+					<Background />
+				</BlurCover>
 			</BGContainer>
+
 			<LoginBlock>
+				<LoginLoadIcon loading={loading} />
 				<h1>MagTable</h1>
 				<Formik
 					initialValues={{
@@ -69,6 +79,8 @@ function Login() {
 								{({ field }) => (
 									<TextInput
 										{...field}
+										blur={blur}
+										setBlurred={setBlur}
 										errors={props.errors.username}
 										touched={props.touched.username}
 										value={props.values.username}
@@ -81,6 +93,8 @@ function Login() {
 								{({ field }) => (
 									<TextInput
 										{...field}
+										blur={blur}
+										setBlurred={setBlur}
 										errors={props.errors.password}
 										touched={props.touched.password}
 										value={props.values.password}

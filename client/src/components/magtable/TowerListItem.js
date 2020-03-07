@@ -13,10 +13,10 @@ import {
 	DANGER,
 	MANAGEMENT_POSITIONS,
 	MECHANIC,
-	OJT,
 	OJT_TOWER,
 	SET_EQUIPMENT_EMPLOYEE,
 	SUCCESS,
+	TOWER_POSITIONS,
 	TECHNICIAN_POSITIONS,
 	WARNING
 } from "../../actions/constants";
@@ -50,7 +50,7 @@ function TowerListItem({ assignment, showAM }) {
 			equipmentID: assignment.equipment.id,
 			equipmentSlotID: nextOpenSlot()
 		}),
-		defaultCanDrop: item => {
+		canDrop: item => {
 			setHoveredShiftDescription(item.shiftDescription);
 			return handleCanDrop(item);
 		},
@@ -100,17 +100,13 @@ function TowerListItem({ assignment, showAM }) {
 		if (
 			isOver &&
 			canDrop &&
-			hoveredShiftDescription === OJT &&
+			hoveredShiftDescription === OJT_TOWER &&
 			(index === 0 || index === 2)
 		)
 			return WARNING;
 
 		// if hovered shift is not included in technician positions
-		if (
-			isOver &&
-			canDrop &&
-			!TECHNICIAN_POSITIONS.includes(hoveredShiftDescription)
-		)
+		if (isOver && canDrop && !TOWER_POSITIONS.includes(hoveredShiftDescription))
 			return WARNING;
 
 		if (isOver && canDrop) return SUCCESS;
@@ -137,6 +133,7 @@ function TowerListItem({ assignment, showAM }) {
 			return "Mechanic Assigned to Tower";
 		}
 
+		/* if OJT-Tower is assigned to primary without a secondary */
 		if (
 			(index === 0 || index === 2) &&
 			assignment.employeeShifts[index]?.description === OJT_TOWER &&
@@ -151,20 +148,6 @@ function TowerListItem({ assignment, showAM }) {
 			assignment.employeeShifts[index + 1]?.description === OJT_TOWER
 		) {
 			return "OJT Requires Qualified Secondary";
-		}
-
-		if (
-			assignment.employeeShifts[index]?.description === OJT_TOWER &&
-			!assignment.employeeShifts[index + 1]
-		) {
-			return true;
-		}
-
-		if (
-			assignment.employeeShifts[index]?.description === OJT_TOWER &&
-			assignment.employeeShifts[index + 1]?.description === OJT_TOWER
-		) {
-			return true;
 		}
 
 		return null;

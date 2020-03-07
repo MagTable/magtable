@@ -12,12 +12,12 @@ import { isMobile } from "react-device-detect";
  */
 export const UserListDiv = styled.div`
 	margin: auto;
-
-	${isMobile
-		? // Mobile rules
-		  `padding-top: 5px;`
-		: // Desktop Rules
-		  `width: min-content;`}
+	overflow-y: auto;
+	width: 40vw;
+	max-height: calc(100vh - 70px);
+	padding: 1rem;
+	${isMobile &&  // Mobile rules
+		`padding-top: 5px;`}
 `;
 
 export const UserListSection = styled.div`
@@ -40,7 +40,7 @@ export const UserListItem = styled.div`
 		  text-align: center;`
 		: // Desktop Rules
 		  `
-		  min-width: 230px;
+		  width: 100%;
 		  background-color: #f2faff;
 		  height: 40px;
 		  justify-content: center;
