@@ -116,11 +116,12 @@ export const FullPadDropDiv = styled(PadDropDiv)`
 export const PadDiv = styled.div`
 	position: relative;
 	text-align: center;
-	outline: 2px solid var(--border-color);
+	border: 2px solid var(--border-color);
 	display: flex;
 	width: 100%;
 	min-width: 65px;
 	max-width: 100px;
+	max-height: 130px;
 	flex-grow: 1.3;
 	flex-basis: 0;
 	font-size: x-large;
@@ -131,14 +132,12 @@ export const PadDiv = styled.div`
 `;
 
 export const FakePadDiv = styled.div`
-	width: 65px;
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: x-large;
-	font-family: "Noto Sans KR", sans-serif;
-	color: grey;
-	flex-grow: 1;
+	width: 100%;
+	min-width: 65px;
+	max-width: 100px;
+	max-height: 130px;
+	flex-grow: 1.3;
 	flex-basis: 0;
 `;
 
@@ -147,6 +146,7 @@ export const PadColumn = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	align-items: center;
 	height: 100%;
 	width: 100%;
 `;
@@ -156,7 +156,6 @@ export const MapWrapper = styled.div`
 	display: flex;
 	justify-content: space-between;
 	height: 100%;
-	width: 100%;
 	overflow-y: auto;
 	align-items: center;
 `;
@@ -164,10 +163,8 @@ export const MapWrapper = styled.div`
 export const SafetyZoneWrapper = styled.div`
 	height: 100%;
 	width: 100%;
-
 	display: flex;
-	justify-content: space-around;
-	align-items: center;
+	justify-content: center;
 `;
 
 const NumberLabel = styled.div`
@@ -178,7 +175,7 @@ const NumberLabel = styled.div`
 
 export const NumberMiddle = styled(NumberLabel)`
 	height: 100%;
-	padding: 1rem;
+	padding: 0 0.5rem;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
