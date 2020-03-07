@@ -4,7 +4,6 @@ import {
 	TruckIdDiv,
 	TruckManagementStatus
 } from "../../styled/trucks/TruckManagement";
-import { TruckStatusMessage } from "../../styled/magtable/ListContent";
 
 /**
  * @date 3/5/2020
