@@ -1,11 +1,12 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import TruckManagementItem from "./TruckManagementItem";
 import {
 	TruckManagementTitle,
 	TruckManagementWrapper,
 	TruckManagementListDiv
 } from "../../styled/trucks/TruckManagement";
+import { getMagTable } from "../../actions/magtable";
 
 /**
  * @date 3/5/2020
@@ -19,6 +20,12 @@ import {
  * @returns {*} The TruckManagement component
  */
 function TruckManagement() {
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(getMagTable());
+	}, [dispatch]);
+
 	const assignments = useSelector(state => state.magtable.assignments);
 
 	return (
