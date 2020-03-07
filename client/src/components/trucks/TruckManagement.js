@@ -1,5 +1,11 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
+import TruckManagementItem from "./TruckManagementItem";
+import {
+	TruckManagementTitle,
+	TruckManagementWrapper,
+	TruckManagementListDiv
+} from "../../styled/trucks/TruckManagement";
 
 /**
  * @date 3/5/2020
@@ -13,9 +19,21 @@ import { useDispatch, useSelector } from "react-redux";
  * @returns {*} The TruckManagement component
  */
 function TruckManagement() {
-	const dispatch = useDispatch();
+	const assignments = useSelector(state => state.magtable.assignments);
 
-	return "This is the page where we will be listing off the trucks for Mechanics to change the operational status and notice of trucks, as well as for the other users to be able to add and remove trucks from the database";
+	return (
+		<TruckManagementWrapper>
+			<TruckManagementTitle>Truck Status + Notices</TruckManagementTitle>
+			<TruckManagementListDiv>
+				{assignments.map(
+					assignment =>
+						assignment.equipment.id < 1000 && (
+							<TruckManagementItem assignment={assignment} />
+						)
+				)}
+			</TruckManagementListDiv>
+		</TruckManagementWrapper>
+	);
 }
 
 export default TruckManagement;
