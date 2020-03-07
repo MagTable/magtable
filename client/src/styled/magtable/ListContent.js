@@ -90,7 +90,8 @@ export const EmployeeListDiv = styled.div`
  */
 export const EmployeeListDivWrapper = styled(EmployeeListDiv)`
 	border-right: 2px solid var(--border-color);
-	max-width: 234px;
+	max-width: 300px;
+	min-width: 250px;
 `;
 
 /**
@@ -105,10 +106,8 @@ export const EmployeeListRefreshInfo = styled.div`
 `;
 
 /**
- * todo would like to set a max width on this - arran
  **/
 export const TruckListDiv = styled.div`
-	border-right: 2px solid var(--border-color);
 	transition: all 0.15s ease-in-out;
 	min-width: 330px;
 	margin: 0;
@@ -120,7 +119,11 @@ export const TruckListDiv = styled.div`
 	overflow-x: hidden;
 `;
 
-export const TruckListDivWrapper = styled(TruckListDiv)``;
+export const TruckListDivWrapper = styled(TruckListDiv)`
+	border-right: 2px solid var(--border-color);
+	max-width: 380px;
+	min-width: 340px;
+`;
 
 export const TruckListItemDiv = styled.div`
 	transition: all 0.15s ease-in-out;
