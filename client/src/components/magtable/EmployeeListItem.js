@@ -1,8 +1,4 @@
 import React, { useEffect, useState } from "react";
-import {
-	EmployeeLabelDiv as Label,
-	EmployeeListItemDesc
-} from "../../styled/magtable/ListContent";
 import { useDrag } from "react-dnd";
 import { SET_EQUIPMENT_EMPLOYEE } from "../../actions/constants";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,10 +7,16 @@ import {
 	setEquipmentEmployee
 } from "../../actions/magtable";
 import {
-	EmployeeListItemContentDiv,
-	EmployeeListItemDiv,
-	EmployeeListItemName,
-	EmployeeListItemTime
+	AssignedToWrap,
+	EmpListItemDiv,
+	EmpName,
+	EmpRole,
+	EmpHours,
+	Labels,
+	LabelText,
+	LabelWrapper,
+	ShiftInfo,
+	UnassignBtn
 } from "../../styled/magtable/ListContent";
 
 /**
@@ -54,7 +56,7 @@ function EmployeeListItem({ employee: employeeShift }) {
 		} else {
 			setCanClear(false);
 		}
-	}, [assignment]);
+	}, [assignment, setCanClear, assignedSlotID]);
 
 	const [{ isDragging }, drag] = useDrag({
 		item: {
@@ -89,27 +91,48 @@ function EmployeeListItem({ employee: employeeShift }) {
 	}
 
 	return (
-		<EmployeeListItemDiv
+		<EmpListItemDiv
 			ref={drag}
-			employee={employeeShift}
 			disabled={isDragging || employeeShift.assignedEquipment}
 		>
-			<EmployeeListItemContentDiv>
-				<EmployeeListItemName key={employeeShift.id}>
-					{employeeShift.name}
-				</EmployeeListItemName>
-				<EmployeeListItemTime>
+			<ShiftInfo>
+				<EmpName>{employeeShift.name}</EmpName>
+				<EmpHours>
 					{employeeShift.startTime} - {employeeShift.endTime}
-				</EmployeeListItemTime>
-				<EmployeeListItemDesc>{employeeShift.description}</EmployeeListItemDesc>
-			</EmployeeListItemContentDiv>
+				</EmpHours>
+			</ShiftInfo>
 
-			{employeeShift.isGreen && <Label type={"greenPass"}>Green Pass</Label>}
-			{employeeShift.noAvop && <Label type={"noAvop"}>No AVOP</Label>}
+			{employeeShift.assignedEquipment && (
+				<AssignedToWrap isTower={assignment.equipment.id >= 1000}>
+					{canRemove && (
+						<UnassignBtn onClick={handleRemove}>
+							<i className="fas fa-times" />
+						</UnassignBtn>
+					)}
+					<h2>
+						{assignment.equipment.position
+							? assignment.equipment.position
+							: employeeShift.assignedEquipment}
+					</h2>
+				</AssignedToWrap>
+			)}
 
-			{employeeShift.assignedEquipment}
-			{canRemove && <button onClick={() => handleRemove()}>X</button>}
-		</EmployeeListItemDiv>
+			<Labels>
+				{employeeShift.isGreen && (
+					<LabelWrapper type={"greenPass"}>
+						<LabelText>Green Pass</LabelText>
+					</LabelWrapper>
+				)}
+
+				{employeeShift.noAvop && (
+					<LabelWrapper type={"noAvop"}>
+						<LabelText>No AVOP</LabelText>
+					</LabelWrapper>
+				)}
+			</Labels>
+
+			<EmpRole>{employeeShift.description}</EmpRole>
+		</EmpListItemDiv>
 	);
 }
 

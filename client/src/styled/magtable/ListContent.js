@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Button } from "../common/FormControl";
+import { DangerButton } from "../common/FormControl";
 import { DANGER, SUCCESS, WARNING } from "../../actions/constants";
 
 /**
@@ -12,7 +12,7 @@ import { DANGER, SUCCESS, WARNING } from "../../actions/constants";
  * Provides the correct color code for an employee's label based on their abilities/role
  * @param type The codes representing an employees roles. Can be gp (Green pass), ts (Tower staff), ojt (On the job training) or bl (bay lead)
  */
-const getColor = type => {
+export const getColor = type => {
 	switch (type) {
 		case DANGER:
 			return "--context-red";
@@ -38,19 +38,41 @@ const getTruckColorCode = status => {
 			return "--context-red";
 		}
 		case "CON": {
-			return "--context-blue";
+			return "--context-orange";
 		}
 		case "OOS": {
 			return "--context-grey";
 		}
 		default: {
-			return "#fff"; // If an unknown tuck status is provided.
+			return "#fff"; // If an unknown truck status is provided.
 		}
 	}
 };
 
+export const UnassignBtn = styled.button`
+	position: absolute;
+	border-radius: 30px;
+	width: 20px;
+	height: 20px;
+	top: -10px;
+	left -10px;	
+	border: 0;
+	opacity: 0;
+	transition: 0.2s ease-in-out;
+	cursor: pointer;
+	z-index: 1;
+	background: red;
+	color: white;
+	
+	:hover {
+		display: block;
+		opacity: 1;
+	}
+`;
+
 /**
  *    Holds the currently available employees and separator divs for start times.
+ *    todo would like to set a max width on this - arran
  */
 export const EmployeeListDiv = styled.div`
 	margin: 0;
@@ -58,97 +80,35 @@ export const EmployeeListDiv = styled.div`
 	flex-grow: 1;
 	flex-direction: column;
 	flex-basis: 0;
-	min-width: 250px;
+	min-width: 180px;
 	overflow-y: auto;
 	overflow-x: hidden;
-`;
-
-/**
- * Divides the list of available employees into sections based on start time.
- */
-export const StartTimeSeparator = styled.div`
-	display: flex;
-	background: var(--subsection-title-bg);
-	padding-left: 20px;
-	color: var(--light-text);
 `;
 
 /**
  * Holds the employee list and title for the list.
  */
 export const EmployeeListDivWrapper = styled(EmployeeListDiv)`
-	border: 2px solid var(--border-color);
+	border-right: 2px solid var(--border-color);
+	max-width: 234px;
 `;
 
 /**
  * Holds the content div for an employee shift and the labels representing their abilities.
  */
-export const EmployeeListItemDiv = styled.div`
-	border-bottom: 2px solid var(--border-color);
-	min-height: 75px;
-	${({ disabled }) =>
-		disabled ? `background-color: var(--shader-grey);` : `cursor: pointer;`}
+export const EmployeeListRefreshInfo = styled.div`
+	border-bottom: 1px solid var(--border-color);
+	padding: 0.75rem;
+	h4 {
+		margin: 0;
+	}
 `;
 
 /**
- * Used per employee shift, holds all pertinent information for the employee's shift.
- */
-export const EmployeeListItemContentDiv = styled.div`
-	display: inline-block;
-	margin-left: 10px;
-`;
-
-/**
- * The name of the employee being displayed in their shift's div.
- */
-export const EmployeeListItemName = styled.p`
-	margin-block-end: 0em;
-	font-weight: bold;
-`;
-
-/**
- * The time of the employees shift being represented in their shift div.
- */
-export const EmployeeListItemTime = styled.p`
-	margin-block-start: 0em;
-	margin-block-end: 0em;
-	font-style: italic;
-`;
-
-/**
- * The job description of the employee being represented in the employee's shift divs.
- */
-export const EmployeeListItemDesc = styled.p`
-	margin-block-start: 0em;
-	margin-block-end: 1em;
-	font-weight: bold;
-	color: var(--emphasis-grey);
-`;
-
-/**
- * A label representing the abilities of the employee, displayed in the employee's shift divs.
- */
-export const EmployeeLabelDiv = styled.div`
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border: 2px solid var(--border-color);
-    border-top: none;
-    width: 20px;
-    height: 20px;
-    float: right;
-    margin-right 2px;
-    ${({ type }) =>
-			type === "greenPass" && `background-color: var(--context-green);`}
-    ${({ type }) =>
-			type === "noAvop" && `background-color: var(--context-orange);`}
-`;
-
-/**
- *
+ * todo would like to set a max width on this - arran
  **/
 export const TruckListDiv = styled.div`
-	// border: 2px solid var(--border-color);
-	// height: calc(100vh - 73px);
+	border-right: 2px solid var(--border-color);
 	transition: all 0.15s ease-in-out;
 	min-width: 330px;
 	margin: 0;
@@ -160,40 +120,58 @@ export const TruckListDiv = styled.div`
 	overflow-x: hidden;
 `;
 
-export const TruckListDivWrapper = styled(TruckListDiv)`
-	border: 2px solid var(--border-color);
-`;
+export const TruckListDivWrapper = styled(TruckListDiv)``;
 
 export const TruckListItemDiv = styled.div`
 	transition: all 0.15s ease-in-out;
-	border-bottom: 1px solid var(--border-color);
-	height: 90px;
 	display: flex;
+	height: 60px;
+
+	${({ disabled }) =>
+		disabled &&
+		`
+		height: 40px;
+		background: var(--shader-grey);
+	`}
 `;
 
-export const TruckProblemsDiv = styled.div`
-	transition: all 0.15s ease-in-out;
-	display: flex;
-	border-top: 1px solid var(--border-color);
+export const TruckNoticeDiv = styled.div`
+	overflow: hidden;
+	transition: all 0.25s ease-in-out;
 	max-height: ${({ noticeOpen }) => (noticeOpen ? "200px" : "0px")};
-	min-height: 0px;
-	border-top: none;
-	overflow: auto;
+	border-bottom: 1px solid var(--border-color);
 `;
 
 export const TruckProblemsText = styled.p`
-	padding-left: 20px;
-	padding-right: 20px;
+	margin: 0;
+	padding: 0.5rem;
+
+	overflow-wrap: break-word;
+	hyphens: auto;
+
+	border-top: 1px solid var(--border-color);
 `;
 
 export const TruckNumberDiv = styled.div`
-	background: var(${({ status }) => getTruckColorCode(status)});
+	cursor: pointer;
 	display: flex;
-	min-width: 100px;
 	justify-content: center;
 	align-items: center;
+
+	border-right: 10px solid var(${({ status }) => getTruckColorCode(status)});
 	color: black;
-	font-size: 40px;
+
+	min-width: 60px;
+	font-size: 30px;
+	font-weight: bold;
+
+	${({ isDragging }) => isDragging && `opacity: 0.5;`}
+	${({ disabled }) =>
+		disabled &&
+		`
+		background: var(--context-orange-light);
+		font-size: 25px;
+	`}
 `;
 
 export const TruckInfoDiv = styled.div`
@@ -202,65 +180,32 @@ export const TruckInfoDiv = styled.div`
 	justify-content: space-between;
 `;
 
-// todo can we change this to a div?
-export const TruckListItemEmployee = styled.p`
-	margin-block-start: 0em;
-	margin-block-end: 0em;
-	height: ${({ show }) => (show ? "50%" : "0%")};
-	background-color: var(${({ slot }) => (slot === 2 ? "--shader-grey" : "")});
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	overflow: hidden;
-	transition: height 0.15s ease-in-out;
-
-	${({ warningBackground }) =>
-		warningBackground &&
-		`
-		background: #ff990033;
-	`}
-
-	${({ outlineType }) =>
-		outlineType &&
-		`
-			// outline-width: 2px;
-			// outline-offset: -2px;
-			// outline-style: solid;
-			background: var(${getColor(outlineType)});
-	`}
+/**
+ * Rendered instead of the employee slots for inop and oos trucks
+ */
+export const TruckStatusMessage = styled.h4`
+	width: 100%;
+	text-align: center;
+	background: var(--context-orange-light);
+	margin: 0;
+	padding: 0.6rem 0;
+	#status_code {
+		background: var(${({ status }) => getTruckColorCode(status)});
+		border-radius: 999px;
+		padding: 0.25rem 0.5rem;
+	}
 `;
 
-export const TruckListItemEmployeeList = styled.div`
-	display: flex;
-	align-self: center;
-	flex-direction: column;
-	flex-grow: 4;
-	flex-basis: 0;
-	height: 100%;
-`;
-
-export const TruckListItemLocation = styled.p`
-	font-weight: bold;
-	align-self: center;
-	margin-right: 10px;
-	margin-left: 10px;
+export const TruckListItemLocation = styled.input`
+	height: calc(100% -2px);
 	flex-grow: 1;
 	flex-basis: 0;
-`;
-
-export const TruckListButton = styled(Button)`
-	font-size: 18px;
-	margin-right: 9px;
-	width: auto;
-	white-space: nowrap;
-	padding: 3px;
-	background-color: rgb(65, 66, 68);
-	color: white;
-	padding: 5px;
-	border-radius: 20px;
-	:hover {
-		background: rgb(95, 96, 98) npm install react-switch;
-	}
+	border: 0;
+	max-width: 80px;
+	border-left: 2px solid var(--border-color);
+	font-size: 1.5rem;
+	text-align: center;
+	font-family: "Noto Sans KR", sans-serif;
 `;
 
 export const TruckListManipDiv = styled.div`
@@ -269,29 +214,202 @@ export const TruckListManipDiv = styled.div`
 	margin-right: 3px;
 `;
 
-export const TowerListItemEmployee = styled.p`
-	margin-block-start: 0em;
-	margin-block-end: 0em;
+export const EquipmentListItemButton = styled(DangerButton)`
+	transition: opacity 0.3s ease-in-out;
+	opacity: 0;
+	font-size: 13px;
+	color: white;
+	border-radius: 30px;
+	width: 20px;
+	height: 20px;
+	display: none;
+	:hover {
+		opacity: 1;
+		display: block;
+	}
+`;
+
+export const EquipmentListItemEmployeeList = styled.div`
+	display: flex;
+	align-self: center;
+	flex-direction: column;
+	flex-grow: 4;
+	flex-basis: 0;
+	height: 100%;
+	width: 100%;
+`;
+
+export const EquipmentListItemEmployee = styled.div`
+	display: grid;
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+	grid-template-columns: 1fr auto auto;
+	grid-template-areas: "name clearbutton warning";
+	   align-items: center;
+
+	transition: height 0.15s ease-in-out;
 	height: ${({ show }) => (show ? "50%" : "0%")};
+	overflow: hidden;
+
 	background-color: var(${({ slot }) => (slot === 2 ? "--shader-grey" : "")});
+	${({ warningBackground }) =>
+		warningBackground && `background: var(--context-orange-light);`}
+	${({ outlineType }) =>
+		outlineType && `background: var(${getColor(outlineType)});`}
+	&:hover ${EquipmentListItemButton} {
+		opacity: 1;
+		display: block;
+	}
+	
+`;
+
+export const EquipmentListItemEmployeeName = styled.div`
+	grid-area: name;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+`;
+export const EquipmentListItemEmployeeWarning = styled.div`
+	grid-area: warning;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+`;
+export const EquipmentListItemEmployeeClearButton = styled.div`
+	grid-area: clearbutton;
+	display: flex;
+	align-items: center;
+`;
+
+/*---------------------------------------------------------------------------
+ *  For the new version of EmployeeListItem
+ *---------------------------------------------------------------------------*/
+
+/**
+ * Divides the list of available employees into sections based on start time.
+ */
+export const StartTimeSeparator = styled.h2`
+	margin: 0;
+	padding: 0.75rem;
+	text-align: center;
+	border-bottom: 1px solid var(--border-color);
+	background: var(--header);
+`;
+
+export const EmpName = styled.div`
+	padding: 5px 0 0 5px;
+	margin-block-start: 0;
+	margin-block-end: 0;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 	overflow: hidden;
-	transition: height 0.15s ease-in-out;
+	font-weight: bold;
+`;
 
-	${({ warningBackground }) =>
-		warningBackground &&
-		`
-		background: #ff990033;
-	`}
+export const EmpHours = styled.p`
+	padding-left: 5px;
+	margin-block-start: 0;
+	font-style: italic;
+	margin-bottom: 3px;
+	white-space: nowrap;
+`;
 
-	${({ outlineType }) =>
-		outlineType &&
-		`
-			// outline-width: 2px;
-			// outline-offset: -2px;
-			// outline-style: solid;
-			background: var(${getColor(outlineType)});
-	`}
+export const LabelWrapper = styled.div`
+	${({ type }) =>
+		type === "greenPass" && `background-color: var(--context-green);`}
+	${({ type }) =>
+		type === "noAvop" && `background-color: var(--context-orange);`}
+		
+	width: 26px;
+	max-width: 26px;
+	transition: 0.3s ease-in-out;
+	position: relative;
+	z-index: 1;
+	padding: 3px;
+
+	:last-child {
+		border-top-right-radius: 5px;
+		border-bottom-right-radius: 5px;
+	}
+`;
+
+export const LabelText = styled.div`
+	margin: 0 5px;
+	width: 0px;
+	overflow: hidden;
+	transition: 0.3s ease-in-out;
+	white-space: nowrap;
+	font-family: "Lato";
+`;
+
+export const Labels = styled.div`
+	display: flex;
+	flex-direction: row:
+	justify-content: flex-end;
+	grid-area: labels;
+	:hover {
+		${LabelWrapper}, ${LabelText} {
+			width: 90px;
+			max-width: 90px;
+		}
+	}
+`;
+
+export const AssignedToWrap = styled.div`
+	position: relative;
+	background-color: #0496b2;
+	grid-area: equipmentID;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	h2 {
+		overflow: hidden;
+		text-align: center;
+		margin: 0;
+		${({ isTower }) =>
+			isTower &&
+			`
+			font-size: 10px;
+		`}
+	}
+`;
+
+export const ShiftInfo = styled.div`
+	text-overflow: ellipsis;
+	grid-area: name;
+`;
+
+export const EmpRole = styled.h2`
+	display: flex;
+	align-self: end;
+	justify-content: flex-end;
+
+	margin: 0.25rem;
+	text-align: right;
+
+	color: grey;
+	font-size: 17px;
+	z-index: 0;
+	grid-area: position;
+`;
+
+export const EmpListItemDiv = styled.div`
+	width: 100%;
+	border-bottom: 1px solid var(--border-color);
+
+	display: grid;
+	grid-template-columns: 23px 1fr 48px;
+	grid-template-rows: auto auto;
+	grid-template-areas:
+		"name name equipmentID"
+		"labels position position";
+
+	&:hover ${UnassignBtn} {
+		display: block;
+		opacity: 1;
+	}
+
+	${({ disabled }) =>
+		disabled ? `background-color: var(--shader-grey);` : `cursor: pointer;`}
 `;

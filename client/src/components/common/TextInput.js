@@ -17,6 +17,11 @@ import {
 function TextInput(props) {
 	const [focus, setFocus] = useState(false);
 
+	// Todo MJ - find a way to determine if a prop exists and only blur when it does.
+	if (props.setBlurred) {
+		props.setBlurred(focus || props.blur);
+	}
+
 	return (
 		<TextInputContainer>
 			<StyledTextInput

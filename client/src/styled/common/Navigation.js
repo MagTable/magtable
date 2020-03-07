@@ -103,8 +103,8 @@ export const NavDiv = styled.div`
 /**
  * The header div of the page that contains the logo, navigation and possibly the title of the page.
  */
-export const HeaderDiv = styled.div`
-	background: var(--header);
+export const NavBar = styled.div`
+	background: var(--navbar);
 	display: flex;
 	justify-content: space-between;
 	height: 70px;
@@ -119,11 +119,17 @@ export const NavLink = styled(Link)`
 	color: var(--title-bright);
 	font-size: 20px;
 	padding-bottom: 0.5rem;
+
+	transition: color 0.25s ease-in-out;
+	transition: border 0.25s ease-in-out;
+	border-bottom: 2px solid #00000000;
+
 	${({ active }) =>
 		active &&
 		`
-		border-bottom: 2px solid var(--link-underline);
-	`}
+			border-bottom-color: var(--link-underline);
+			color: var(--link-underline);
+		`}
 	${isMobile
 		? // Mobile rules
 		  `width: 100vw;

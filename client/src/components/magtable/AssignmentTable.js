@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AssignmentContainer, MapsDiv } from "../../styled/magtable/Maps";
 import { DndProvider } from "react-dnd";
 import Backend from "react-dnd-html5-backend";
-import TowerMap from "./TowerMap";
-import TruckMap from "./TruckMap";
+import TowerMap from "./TowerList";
+import ParkingLocationMap from "./ParkingLocationMap";
 import EmployeeList from "./EmployeeList";
 import TruckList from "./TruckList";
+import { getMagTable } from "../../actions/magtable";
+import { useDispatch } from "react-redux";
 
 /**
  * Placeholder component to assist in displaying routing
@@ -13,15 +15,19 @@ import TruckList from "./TruckList";
  */
 const AssignmentTable = () => {
 	const [showAM, setShowAM] = useState(true);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(getMagTable());
+	}, [dispatch]);
 
 	return (
 		<DndProvider backend={Backend}>
 			<AssignmentContainer>
 				<EmployeeList />
 				<TruckList showAM={showAM} setShowAM={setShowAM} />
-
 				<MapsDiv>
-					<TruckMap />
+					<ParkingLocationMap />
 					<TowerMap showAM={showAM} />
 				</MapsDiv>
 			</AssignmentContainer>
