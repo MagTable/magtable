@@ -71,9 +71,20 @@ public class EquipmentController {
      */
     @PostMapping("/trucks/edit")
     public List<Truck> editTruck(@RequestBody Truck truck) {
+        if (!(truck.getStatus().equals("GO") || truck.getStatus().equals("CON")
+                || truck.getStatus().equals("OOS") || truck.getStatus().equals("INOP"))) {
+            errorService.truckOPStatusInvalid(truck.getStatus());
+        }
 
+        //checking if the truck exists
+        if(truckRepository.findById(truck.getID()) == null){
+            errorService.truckDoesntExists(truck.getID());
+        }
 
-        return null;
+        //saving the new truck
+        truckRepository.save(truck);
+
+        return truckRepository.findAll();
     }
 
     /**

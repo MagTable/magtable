@@ -180,4 +180,13 @@ public class ErrorService {
     public ResponseStatusException truckAlreadyExists(Integer id) {
         return new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Truck : %d Already Exists", id));
     }
+
+    /**
+     * Message reporting that at truck doesn't exists
+     * @param id the id of the truck
+     * @return ResponseStatusException message
+     */
+    public ResponseStatusException truckDoesntExists(Integer id) {
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Truck : %d Doesn't Exists", id));
+    }
 }
