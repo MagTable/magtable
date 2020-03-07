@@ -15,7 +15,9 @@ export const PRACTICAL_TRAINER = "Practical Trainer";
 export const TECHNICIAN = "Technician";
 export const OJT = "OJT";
 export const OJT_TOWER = "OJT-Tower";
-export const TOWER_TRAINER = "TOWER_TRAINER";
+export const TOWER_TRAINER = "Tower Trainer";
+export const TRAINER = "Trainer";
+export const TRAINER_POSITIONS = [TRAINER, TOWER_TRAINER, PRACTICAL_TRAINER];
 export const MANAGEMENT_POSITIONS = [OPERATIONS_MANAGER, OPERATIONS_SUPERVISOR];
 export const TECHNICIAN_POSITIONS = [
 	OJT,
@@ -32,6 +34,27 @@ export const TOWER_POSITIONS = [
 	TOWER_TRAINER
 ];
 
+export const ALL_POSITIONS = [
+	OPERATIONS_MANAGER,
+	OPERATIONS_SUPERVISOR,
+	CTM,
+	TOWER_SPOTTER,
+	ICEMAN,
+	ICEHOUSE,
+	BAY_LEAD,
+	PRACTICAL_TRAINER,
+	OJT,
+	OJT_TOWER,
+	TOWER_TRAINER,
+	MECHANIC
+];
+
+// truck status'
+export const GO = "GO";
+export const CON = "CON";
+export const OOS = "OOS";
+export const INOP = "INOP";
+
 // UI Hint Types
 export const DANGER = "DANGER";
 export const WARNING = "WARNING";
@@ -40,8 +63,14 @@ export const SUCCESS = "SUCCESS";
 export const EAST_APRON = "EDA";
 export const WEST_APRON = "WDA";
 
-export const AM = "am";
-export const PM = "pm";
+export const WEST = "W";
+export const EAST = "E";
+export const CENTER = "C";
+// export const LEFT = "left";
+// export const RIGHT = "right";
+
+// export const AM = "am";
+// export const PM = "pm";
 
 export const SET_ALERT = "SET_ALERT";
 export const REMOVE_ALERT = "REMOVE_ALERT";
@@ -65,7 +94,7 @@ export const CLEAR_ERROR = "CLEAR_ERROR";
 
 /* Assignment Table */
 export const SET_EQUIPMENT_EMPLOYEE = "SET_EQUIPMENT_EMPLOYEE";
-export const ADD_EQUIPMENT_EMPLOYEE = "ADD_EQUIPMENT_EMPLOYEE";
+// export const ADD_EQUIPMENT_EMPLOYEE = "ADD_EQUIPMENT_EMPLOYEE";
 export const REMOVE_EQUIPMENT_EMPLOYEE = "REMOVE_EQUIPMENT_EMPLOYEE";
 
 export const SET_TRUCK_LOCATION = "SET_TRUCK_LOCATION";

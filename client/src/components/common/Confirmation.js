@@ -43,7 +43,9 @@ function Confirmation({
 				<>
 					<ClickCatcher onClick={() => setOpen(false)} />
 					<div id={"arrow"} />
-					<button onClick={handleClick}>{confirmationMessage}</button>
+					<button id={"confirmButton"} onClick={handleClick}>
+						{confirmationMessage}
+					</button>
 				</>
 			)}
 			{children({ confirm })}

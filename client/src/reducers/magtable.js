@@ -16,12 +16,14 @@ import {
 	REFRESH_EMPLOYEE_SHIFTS,
 	REFRESHING_EMPLOYEE_SHIFTS
 } from "../actions/constants";
+import { initialParkingLocations } from "../res/test_data/magtable";
 
 const initialState = {
 	assignments: [],
 	employeeShifts: [],
 	dailyMessages: "",
 	dailyMix: 40,
+	parkingLocations: initialParkingLocations,
 	selectedApron: EAST_APRON,
 	loading: true,
 	shiftsLoading: true
@@ -50,7 +52,7 @@ export default function(state = initialState, action) {
 					assignment.equipment.id === payload.equipmentID
 						? {
 								...assignment,
-								parkingLocation: payload.parkingLocationID
+								parkingLocation: payload.parkingLocation
 						  }
 						: assignment
 				)

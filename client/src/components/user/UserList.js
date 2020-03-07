@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { getUsers } from "../../actions/user";
+import { getRoles, getUsers } from "../../actions/user";
 import { useDispatch, useSelector } from "react-redux";
 import { UserListDiv, UserListSection } from "../../styled/user/User";
 
@@ -16,6 +16,7 @@ const UserList = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
+		dispatch(getRoles());
 		dispatch(getUsers());
 	}, [dispatch]);
 
