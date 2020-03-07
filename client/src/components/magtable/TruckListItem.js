@@ -70,7 +70,11 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 		assignment.equipment.status === GO || assignment.equipment.status === CON;
 
 	const [{ isDragging }, drag] = useDrag({
-		item: { type: SET_TRUCK_LOCATION, id: assignment.equipment.id },
+		item: {
+			type: SET_TRUCK_LOCATION,
+			id: assignment.equipment.id,
+			toReassign: null
+		},
 		canDrag: equipmentOperable,
 		end: (item, monitor) => {
 			const dropResult = monitor.getDropResult();
@@ -96,7 +100,9 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 					);
 				}
 				if (dropResult.unassign) {
-					dropResult.unassign.forEach(id => dispatch(removeTruckLocation(id)));
+					dropResult.unassign.forEach(
+						id => id && dispatch(removeTruckLocation(id))
+					);
 				}
 			}
 		},
