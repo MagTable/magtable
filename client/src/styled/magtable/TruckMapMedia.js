@@ -7,15 +7,13 @@ import { UnassignBtn } from "./ListContent";
  * @module Styled
  */
 
-const padHeaderHeight = 30;
-
 /**
  * Header that contains parkinglocation code
  */
 export const PadDivHeader = styled.div`
 	grid-area: parking_code;
 	background: white;
-	border-bottom: 2px solid grey;
+	border-bottom: 2px solid var(--border-color);
 `;
 
 const PadDropDiv = styled.div``;
@@ -58,6 +56,7 @@ const leftTriangle = `
 
 export const HalfPadDropDiv = styled(PadDropDiv)`
 	position: relative;
+	font-size: 1.25rem;
 	z-index: 1;
 	${({ left, hover }) =>
 		left &&
@@ -65,27 +64,30 @@ export const HalfPadDropDiv = styled(PadDropDiv)`
 			grid-area: left_bay;
 			${hover && leftTriangle}
 		`}
+		
 	${({ right, hover }) =>
 		right &&
 		`
 			grid-area: right_bay;
 			${hover && rightTriangle}
 	`}
-	
-
 	${({ hover }) => hover && `background: var(--context-green-light);`}
+	${({ canDrop }) => !canDrop && `background: var(--context-red-light);`}
 `;
 
 export const FullPadDropDiv = styled(PadDropDiv)`
 	grid-area: 2 / 1 / span 1 / span 2;
 	height: 100%;
 	z-index: 1;
-	width: 100%;
 	font-size: 2rem;
 
 	${({ hover }) => hover && `background: var(--context-green-light);`}
+	${({ hover, canDrop }) =>
+		hover &&
+		!canDrop &&
+		`background: var(--context-red-light);`}
 
-	border-bottom: 2px solid grey;
+	border-bottom: 2px solid var(--border-color);
 `;
 
 const LocationAssignment = styled.div`
@@ -94,6 +96,9 @@ const LocationAssignment = styled.div`
 		display: block;
 		opacity: 1;
 	}
+	${({ hover }) => hover && `background: var(--context-green-light);`}
+	${({ isDragging }) =>
+		isDragging && `opacity: 0.5; background: var(--context-grey);`}
 `;
 
 export const CenterAssigned = styled(LocationAssignment)`

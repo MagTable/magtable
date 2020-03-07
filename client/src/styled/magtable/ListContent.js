@@ -61,7 +61,6 @@ export const UnassignBtn = styled.button`
 	border: 0;
 	opacity: 0;
 	transition: 0.2s ease-in-out;
-	transition-delay: 0.35s;
 	cursor: pointer;
 	z-index: 1;
 	background: var(--context-red);
