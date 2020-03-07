@@ -54,8 +54,8 @@ export const UnassignBtn = styled.button`
 	border-bottom-left-radius: 5px;
 	font-size: 0.7rem;
 	padding: 0;
-	width: 18px;
-	height: 18px;
+	width: 1rem;
+	height: 1rem;
 	top: 0;
 	right: 0;
 	border: 0;
