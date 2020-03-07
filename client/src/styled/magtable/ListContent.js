@@ -51,19 +51,22 @@ const getTruckColorCode = status => {
 
 export const UnassignBtn = styled.button`
 	position: absolute;
-	border-radius: 30px;
-	width: 20px;
-	height: 20px;
-	top: -10px;
-	left -10px;	
+	border-bottom-left-radius: 5px;
+	font-size: 0.7rem;
+	padding: 0;
+	width: 18px;
+	height: 18px;
+	top: 0;
+	right: 0;
 	border: 0;
 	opacity: 0;
 	transition: 0.2s ease-in-out;
+	transition-delay: 0.35s;
 	cursor: pointer;
 	z-index: 1;
-	background: red;
+	background: var(--context-red);
 	color: white;
-	
+
 	:hover {
 		display: block;
 		opacity: 1;
@@ -72,7 +75,6 @@ export const UnassignBtn = styled.button`
 
 /**
  *    Holds the currently available employees and separator divs for start times.
- *    todo would like to set a max width on this - arran
  */
 export const EmployeeListDiv = styled.div`
 	margin: 0;
@@ -248,7 +250,7 @@ export const EquipmentListItemEmployee = styled.div`
 	padding-right: 0.5rem;
 	grid-template-columns: 1fr auto auto;
 	grid-template-areas: "name clearbutton warning";
-	   align-items: center;
+ 	align-items: center;
 
 	transition: height 0.15s ease-in-out;
 	height: ${({ show }) => (show ? "50%" : "0%")};
