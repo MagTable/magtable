@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { UnassignBtn } from "./ListContent";
 
 /**
  * @date 2020-02-20
@@ -12,25 +13,12 @@ const padHeaderHeight = 30;
  * Header that contains parkinglocation code
  */
 export const PadDivHeader = styled.div`
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: ${padHeaderHeight}px;
+	grid-area: parking_code;
 	background: white;
 	border-bottom: 2px solid grey;
 `;
 
-const PadDropDiv = styled.div`
-	position: absolute;
-	height: calc(100% - ${padHeaderHeight}px);
-
-	top: ${padHeaderHeight}px;
-
-	display: flex;
-	align-items: center;
-	justify-content: center;
-`;
+const PadDropDiv = styled.div``;
 
 const rightTriangle = `
 	&:after {
@@ -43,7 +31,7 @@ const rightTriangle = `
 		
 		border-top: solid 10px transparent;
 		border-bottom: solid 10px transparent;
-		border-left: solid 10px var(--context-green);
+		border-left: solid 10px var(--context-green-light);
 		
 		transform: translateX(100%);
 		z-index: -1;
@@ -61,7 +49,7 @@ const leftTriangle = `
 		
 		border-top: solid 10px transparent;
 		border-bottom: solid 10px transparent;
-		border-right: solid 10px var(--context-green);
+		border-right: solid 10px var(--context-green-light);
 		
 		z-index: -1;
 		content: "";
@@ -69,45 +57,70 @@ const leftTriangle = `
 `;
 
 export const HalfPadDropDiv = styled(PadDropDiv)`
-	z-index: 2;
-	position: absolute;
-	width: 50%;
-	outline: 1px solid pink;
-	outline-offset: -3px;
-	height: 50px;
-	top: calc(100% - 50px);
-	
+	position: relative;
+	z-index: 1;
 	${({ left, hover }) =>
 		left &&
 		`
-			left: 0;
+			grid-area: left_bay;
 			${hover && leftTriangle}
 		`}
 	${({ right, hover }) =>
 		right &&
 		`
-			left: 50%;
+			grid-area: right_bay;
 			${hover && rightTriangle}
 	`}
 	
 
-	${({ hover }) => hover && `background: var(--context-green);`}
+	${({ hover }) => hover && `background: var(--context-green-light);`}
 `;
 
 export const FullPadDropDiv = styled(PadDropDiv)`
+	grid-area: 2 / 1 / span 1 / span 2;
+	height: 100%;
 	z-index: 1;
 	width: 100%;
 	font-size: 2rem;
 
-	${({ hover }) => hover && `background: var(--context-green);`}
-	span {
-		transform: translateY(-20px);
+	${({ hover }) => hover && `background: var(--context-green-light);`}
+
+	border-bottom: 2px solid grey;
+`;
+
+const LocationAssignment = styled.div`
+	position: relative;
+	:hover ${UnassignBtn} {
+		display: block;
+		opacity: 1;
 	}
-	hover: {
-		span {
-			transform: translateY(-20px);
-		}
-	}
+`;
+
+export const CenterAssigned = styled(LocationAssignment)`
+	display: inline-grid;
+	vertical-align: middle;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+`;
+export const LeftAssigned = styled(LocationAssignment)`
+	grid-area: left_assigned;
+
+	display: inline-grid;
+	vertical-align: middle;
+	align-items: center;
+
+	z-index: 2;
+	border-right: 1px solid var(--border-color);
+`;
+export const RightAssigned = styled(LocationAssignment)`
+	z-index: 2;
+	display: inline-grid;
+	vertical-align: middle;
+	border-left: 1px solid var(--border-color);
+	align-items: center;
+
+	grid-area: right_assigned;
 `;
 
 /**
@@ -117,18 +130,29 @@ export const PadDiv = styled.div`
 	position: relative;
 	text-align: center;
 	border: 2px solid var(--border-color);
-	display: flex;
 	width: 100%;
+
 	min-width: 65px;
 	max-width: 100px;
 	max-height: 130px;
+	min-height: 100px;
+
 	flex-grow: 1.3;
 	flex-basis: 0;
-	font-size: x-large;
+
+	font-size: 1.75rem;
 	font-family: "Noto Sans KR", sans-serif;
 	color: var(--border-color);
 	margin-bottom: 0.5rem;
 	background: ${({ hoverColor }) => hoverColor};
+
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: auto 1fr auto;
+	grid-template-areas:
+		"parking_code parking_code"
+		"left_assigned right_assigned"
+		"left_bay right_bay";
 `;
 
 export const FakePadDiv = styled.div`
