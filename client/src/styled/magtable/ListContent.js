@@ -137,12 +137,6 @@ export const TruckListItemDiv = styled.div`
 		height: 40px;
 		background: var(--shader-grey);
 	`}
-
-	${({ assigned }) =>
-		assigned &&
-		`
-			height: 40px;
-	`}
 `;
 
 export const TruckNoticeDiv = styled.div`
@@ -206,7 +200,7 @@ export const TruckNoticeIndicator = styled.i`
 		
 		font-size: 12px;	
 		bottom: 1px;
-	left: 1px;
+		left: 1px;
 	`}
 
 	${({ active }) =>
@@ -241,7 +235,7 @@ export const TruckNumberDiv = styled.div`
 	${({ assigned }) =>
 		assigned &&
 		`
-		background: var(--context-blue-light);
+		background: var(--context-grey-light);
 	`}
 	
 	:hover {

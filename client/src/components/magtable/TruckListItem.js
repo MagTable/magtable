@@ -276,10 +276,7 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 
 	return (
 		<div ref={drop}>
-			<TruckListItemDiv
-				disabled={!equipmentOperable}
-				assigned={assignment.parkingLocation}
-			>
+			<TruckListItemDiv disabled={!equipmentOperable}>
 				<TruckNumberDiv
 					ref={drag}
 					status={assignment.equipment.status}

@@ -18,6 +18,7 @@ import {
 	TOWER_POSITIONS,
 	TRAINER_POSITIONS
 } from "../../actions/constants";
+import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
 
 /**
  * @date 2/19/2020
@@ -240,12 +241,16 @@ const EmployeeList = () => {
 								</div>
 							))
 						) : (
-							<h1>No Employee Shifts...</h1>
+							<EmployeeListRefreshInfo>
+								No Employee Shifts Listed.
+							</EmployeeListRefreshInfo>
 						)}
 					</EmployeeListDiv>
 				</>
 			) : (
-				<h1>Loading Employee Shifts...</h1>
+				<SpinnerWrap>
+					<LoadingImg className="fas fa-circle-notch" />
+				</SpinnerWrap>
 			)}
 		</EmployeeListDivWrapper>
 	);
