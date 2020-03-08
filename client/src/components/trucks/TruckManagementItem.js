@@ -7,7 +7,7 @@ import {
 } from "../../styled/trucks/TruckManagement";
 import { useDispatch, useSelector } from "react-redux";
 import { editTruck } from "../../actions/truck";
-import { MECHANIC } from "../../actions/constants";
+import AddTruck from "./AddTruck";
 
 /**
  * @date 3/5/2020
@@ -39,23 +39,12 @@ function TruckManagementItem({ truck }) {
 
 	return (
 		<TruckManagementItemDiv>
-			<form>
-				<TruckIdDiv status={truck.status}>{truck.id}</TruckIdDiv>
-				{authUser?.role?.name === MECHANIC ? (
-					<>
-						<TruckManagementStatus>{truck.status}</TruckManagementStatus>
-						<NoticeBox value={editedTruck.notice} onChange={handleChange} />
-						<button type={"submit"} onClick={handleEdit}>
-							EDIT BUTTON
-						</button>
-					</>
-				) : (
-					<>
-						<TruckManagementStatus>{truck.status}</TruckManagementStatus>
-						{truck.notice}
-					</>
-				)}
-			</form>
+			<TruckIdDiv status={truck.status}>{truck.id}</TruckIdDiv>
+			<TruckManagementStatus>{truck.status}</TruckManagementStatus>
+			<NoticeBox value={editedTruck.notice} onChange={handleChange} />
+			<button type={"submit"} onClick={handleEdit}>
+				EDIT BUTTON
+			</button>
 		</TruckManagementItemDiv>
 	);
 }

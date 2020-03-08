@@ -14,7 +14,6 @@ import UserList from "./components/user/UserList";
 import AssignmentTable from "./components/magtable/AssignmentTable";
 import Alert from "./components/common/Alert";
 import NavBar from "./components/common/NavBar";
-import TruckManagement from "./components/trucks/TruckManagement";
 import TruckManagementLayout from "./components/trucks/TruckManagementLayout";
 
 function App() {
