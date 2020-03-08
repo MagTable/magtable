@@ -14,7 +14,8 @@ import {
 	SET_TRUCK_LOCATION,
 	TOGGLE_BAY_LEAD,
 	REFRESH_EMPLOYEE_SHIFTS,
-	REFRESHING_EMPLOYEE_SHIFTS
+	REFRESHING_EMPLOYEE_SHIFTS,
+	TOGGLE_AM_PM
 } from "../actions/constants";
 import { initialParkingLocations } from "../res/test_data/magtable";
 
@@ -26,7 +27,8 @@ const initialState = {
 	parkingLocations: initialParkingLocations,
 	selectedApron: EAST_APRON,
 	loading: true,
-	shiftsLoading: true
+	shiftsLoading: true,
+	showAM: true
 };
 
 export default function(state = initialState, action) {
@@ -180,6 +182,11 @@ export default function(state = initialState, action) {
 				...state,
 				employeeShifts: payload.employeeShifts,
 				shiftsLoading: false
+			};
+		case TOGGLE_AM_PM:
+			return {
+				...state,
+				showAM: !state.showAM
 			};
 		default:
 			return state;

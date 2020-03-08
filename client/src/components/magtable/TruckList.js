@@ -6,8 +6,9 @@ import {
 	TruckListDivWrapper,
 	TruckListManipDiv
 } from "../../styled/magtable/ListContent";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Switch from "react-switch";
+import { toggleAM } from "../../actions/magtable";
 
 /**
  * @date 2020-02-17
@@ -24,10 +25,16 @@ import Switch from "react-switch";
  * @constructor
  * @returns {*} The TruckList component
  */
-function TruckList({ showAM, setShowAM }) {
+function TruckList() {
 	const [noticesOpen, setNoticesOpen] = useState(false);
+	const dispatch = useDispatch();
 
 	const assignments = useSelector(state => state.magtable.assignments);
+	const showAM = useSelector(state => state.magtable.showAM);
+
+	const handleShiftToggle = () => {
+		dispatch(toggleAM());
+	};
 
 	return (
 		<TruckListDivWrapper>
@@ -56,7 +63,7 @@ function TruckList({ showAM, setShowAM }) {
 					/>
 
 					<Switch
-						onChange={() => setShowAM(!showAM)}
+						onChange={handleShiftToggle}
 						checked={showAM === false}
 						offColor={"#414244"}
 						onColor={"#414244"}

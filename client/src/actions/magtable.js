@@ -14,13 +14,20 @@ import {
 	GET_ASSIGNMENT_DATA,
 	ADD_EMPLOYEE_SHIFT,
 	REFRESH_EMPLOYEE_SHIFTS,
-	REFRESHING_EMPLOYEE_SHIFTS
+	REFRESHING_EMPLOYEE_SHIFTS,
+	TOGGLE_AM_PM
 } from "./constants";
 import axios from "axios";
 import { setAlert } from "./alert";
 import { logout } from "./auth";
 
 // todo update all async actions with API calls
+
+export const toggleAM = () => dispatch => {
+	dispatch({
+		type: TOGGLE_AM_PM
+	});
+};
 
 /**
  * Removes parkingLocation for a particular truck

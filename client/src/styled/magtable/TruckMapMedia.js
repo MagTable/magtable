@@ -3,7 +3,7 @@ import { UnassignBtn } from "./ListContent";
 
 /**
  * @date 2020-02-20
- * @author MJ Kochuk
+ * @author MJ Kochuk, Arran Woodruff
  * @module Styled
  */
 
@@ -58,6 +58,7 @@ export const HalfPadDropDiv = styled(PadDropDiv)`
 	position: relative;
 	font-size: 1.25rem;
 	z-index: 1;
+	transition: background 0.3s ease-in-out;
 	${({ left, hover }) =>
 		left &&
 		`
@@ -80,25 +81,51 @@ export const FullPadDropDiv = styled(PadDropDiv)`
 	height: 100%;
 	z-index: 1;
 	font-size: 2rem;
+	transition: background 0.3s ease, opacity 0.3s ease, color 0.3s ease,
+		outline-color 0.3s ease;
 
 	${({ hover }) => hover && `background: var(--context-green-light);`}
 	${({ hover, canDrop }) =>
 		hover &&
 		!canDrop &&
 		`background: var(--context-red-light);`}
-
-	border-bottom: 2px solid var(--border-color);
+		
+	outline: 4px solid transparent;
+	outline-offset: -4px;
+	${({ isBaylead }) =>
+		isBaylead &&
+		`
+			color: var(--context-blue);
+			outline-color: var(--context-blue-light);
+	`}
 `;
 
 const LocationAssignment = styled.div`
 	position: relative;
+	transition: background 0.3s ease-in-out, color 0.3s ease,
+		outline-color 0.3s ease;
+
 	:hover ${UnassignBtn} {
 		display: block;
 		opacity: 1;
 	}
 	${({ hover }) => hover && `background: var(--context-green-light);`}
 	${({ isDragging }) =>
-		isDragging && `opacity: 0.5; background: var(--context-grey);`}
+		isDragging &&
+		`opacity: 0.5; background: var(--context-grey);`}
+	
+	/* baylead styling */
+	outline: 4px solid transparent;
+	outline-offset: -4px;
+	${({ isBaylead }) =>
+		isBaylead &&
+		`
+			color: var(--context-blue);
+			outline-color: var(--context-blue-light);
+	`}
+
+	${({ hover, canDrop }) =>
+		hover && !canDrop && `background: var(--context-red-light);`}
 `;
 
 export const CenterAssigned = styled(LocationAssignment)`
