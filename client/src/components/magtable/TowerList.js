@@ -15,9 +15,10 @@ import { EAST_APRON, WEST_APRON } from "../../actions/constants";
  * @constructor
  * @returns {*} The TowerList component and sets the tower positions based on the selected Apron
  */
-function TowerList({ showAM }) {
+function TowerList() {
 	const assignments = useSelector(state => state.magtable.assignments);
 	const apron = useSelector(state => state.magtable.selectedApron);
+	const showAM = useSelector(state => state.magtable.showAM);
 
 	const towerPositions = assignments.filter(assignment => {
 		const equipmentID = assignment.equipment.id;

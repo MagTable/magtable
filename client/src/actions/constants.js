@@ -102,6 +102,7 @@ export const REMOVE_TRUCK_LOCATION = "REMOVE_TRUCK_LOCATION";
 export const TOGGLE_BAY_LEAD = "TOGGLE_BAY_LEAD";
 
 export const SET_SELECTED_APRON = "SET_SELECTED_APRON";
+export const TOGGLE_AM_PM = "TOGGLE_AM_PM";
 
 export const ADD_EMPLOYEE_SHIFT = "ADD_EMPLOYEE_SHIFT";
 export const GET_ASSIGNMENT_DATA = "GET_ASSIGNMENT_DATA"; // server will periodically update shift list on it's own, this would force a refresh

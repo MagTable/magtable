@@ -137,6 +137,12 @@ export const TruckListItemDiv = styled.div`
 		height: 40px;
 		background: var(--shader-grey);
 	`}
+
+	${({ assigned }) =>
+		assigned &&
+		`
+			height: 40px;
+	`}
 `;
 
 export const TruckNoticeDiv = styled.div`
@@ -156,11 +162,67 @@ export const TruckProblemsText = styled.p`
 	border-top: 1px solid var(--border-color);
 `;
 
+export const BrixButton = styled.i`
+	font-size: 15px;
+	transition: color 0.3s ease-in-out;
+	color: var(--context-blue-light);
+
+	position: absolute;
+	top: 3px;
+	left: 3px;
+
+	display: none;
+	opacity: 0;
+
+	:hover {
+		display: block;
+		opacity: 1;
+		color: var(--context-blue);
+	}
+
+	${({ disabled }) =>
+		disabled &&
+		`
+		// disabled truckListItems have a smaller height so the icon needs to be a bit smaller
+		
+		font-size: 12px;	
+		bottom: 1px;
+		left: 1px;
+	`}
+`;
+
+export const TruckNoticeIndicator = styled.i`
+	font-size: 15px;
+	transition: color 0.3s ease-in-out;
+	color: var(--context-orange-light);
+	position: absolute;
+	bottom: 3px;
+	left: 3px;
+
+	${({ disabled }) =>
+		disabled &&
+		`
+		// disabled truckListItems have a smaller height so the icon needs to be a bit smaller
+		
+		font-size: 12px;	
+		bottom: 1px;
+	left: 1px;
+	`}
+
+	${({ active }) =>
+		active &&
+		`
+		color: var(--context-orange);
+	`}
+`;
+
 export const TruckNumberDiv = styled.div`
 	cursor: pointer;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	position: relative;
+	transition: background 0.3s ease-in-out;
 
 	border-right: 10px solid var(${({ status }) => getTruckColorCode(status)});
 	color: black;
@@ -173,9 +235,21 @@ export const TruckNumberDiv = styled.div`
 	${({ disabled }) =>
 		disabled &&
 		`
-		background: var(--context-orange-light);
+		background: white;
 		font-size: 25px;
 	`}
+	${({ assigned }) =>
+		assigned &&
+		`
+		background: var(--context-blue-light);
+	`}
+	
+	:hover {
+		${BrixButton} {
+			display: block;
+			opacity: 1;
+		}	
+	}
 `;
 
 export const TruckInfoDiv = styled.div`
@@ -200,7 +274,8 @@ export const TruckStatusMessage = styled.h4`
 	}
 `;
 
-export const TruckListItemLocation = styled.input`
+export const TruckListItemLocation = styled.div`
+	position: relative;
 	height: calc(100% -2px);
 	flex-grow: 1;
 	flex-basis: 0;
@@ -210,6 +285,10 @@ export const TruckListItemLocation = styled.input`
 	font-size: 1.5rem;
 	text-align: center;
 	font-family: "Noto Sans KR", sans-serif;
+	&:hover ${UnassignBtn} {
+		display: block;
+		opacity: 1;
+	}
 `;
 
 export const TruckListManipDiv = styled.div`

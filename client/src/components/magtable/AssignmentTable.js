@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { AssignmentContainer, MapsDiv } from "../../styled/magtable/Maps";
 import { DndProvider } from "react-dnd";
 import Backend from "react-dnd-html5-backend";
@@ -14,7 +14,6 @@ import { useDispatch } from "react-redux";
  * @constructor
  */
 const AssignmentTable = () => {
-	const [showAM, setShowAM] = useState(true);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -25,10 +24,10 @@ const AssignmentTable = () => {
 		<DndProvider backend={Backend}>
 			<AssignmentContainer>
 				<EmployeeList />
-				<TruckList showAM={showAM} setShowAM={setShowAM} />
+				<TruckList />
 				<MapsDiv>
 					<ParkingLocationMap />
-					<TowerMap showAM={showAM} />
+					<TowerMap />
 				</MapsDiv>
 			</AssignmentContainer>
 		</DndProvider>

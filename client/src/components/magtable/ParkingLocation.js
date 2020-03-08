@@ -1,6 +1,6 @@
 import React from "react";
 import { useDrag, useDrop } from "react-dnd";
-import { SET_TRUCK_LOCATION } from "../../actions/constants";
+import { BAY_LEAD, SET_TRUCK_LOCATION } from "../../actions/constants";
 import {
 	CenterAssigned,
 	FullPadDropDiv,
@@ -12,7 +12,7 @@ import {
 } from "../../styled/magtable/TruckMapMedia";
 import { UnassignBtn } from "../../styled/magtable/ListContent";
 import { removeTruckLocation, setTruckLocation } from "../../actions/magtable";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 /**
  * @date 2/20/2020
@@ -31,6 +31,7 @@ import { useDispatch } from "react-redux";
  */
 function ParkingLocation({ parkingLocation, position, assignments }) {
 	const dispatch = useDispatch();
+	const showAM = useSelector(state => state.magtable.showAM);
 	const [{ isOver }, drop] = useDrop({
 		accept: SET_TRUCK_LOCATION,
 		collect: monitor => ({
@@ -87,6 +88,7 @@ function ParkingLocation({ parkingLocation, position, assignments }) {
 				parkingLocation={parkingLocation}
 				position={position}
 				handleClear={handleClear}
+				showAM={showAM}
 			/>
 			{leftAssignment && (
 				<LeftDragDiv
@@ -96,6 +98,7 @@ function ParkingLocation({ parkingLocation, position, assignments }) {
 					assignments={sortedAssignments}
 					defaultEquipmentID={defaultAssignment?.equipment.id}
 					handleClear={handleClear}
+					showAM={showAM}
 				/>
 			)}
 			{rightAssignment && (
@@ -106,6 +109,7 @@ function ParkingLocation({ parkingLocation, position, assignments }) {
 					assignments={sortedAssignments}
 					defaultEquipmentID={defaultAssignment?.equipment.id}
 					handleClear={handleClear}
+					showAM={showAM}
 				/>
 			)}
 			{/* if anything is assigned and the parking location has left or right bays
@@ -122,14 +126,12 @@ function ParkingLocation({ parkingLocation, position, assignments }) {
 							parkingLocation={parkingLocation}
 							position={position}
 							defaultEquipmentID={defaultAssignment?.equipment.id}
-							assignments={assignments}
 						/>
 						<RightHalfDropDiv
 							bay={parkingLocation.right}
 							parkingLocation={parkingLocation}
 							position={position}
 							defaultEquipmentID={defaultAssignment?.equipment.id}
-							assignments={assignments}
 						/>
 					</>
 				)}
@@ -143,7 +145,8 @@ function LeftDragDiv({
 	assignments,
 	bay,
 	handleClear,
-	defaultEquipmentID
+	defaultEquipmentID,
+	showAM
 }) {
 	const leftAssignment = assignments[1];
 	const rightAssignment = assignments[2];
@@ -193,11 +196,9 @@ function LeftDragDiv({
 		})
 	});
 
-	const [{ isOver }, drop] = useDrop({
+	const [{ isOver, canDrop }, drop] = useDrop({
 		accept: SET_TRUCK_LOCATION,
 		drop: item => {
-			console.log(item);
-
 			const toReassign = item.toReassign
 				? {
 						equipmentID: item.toReassign.equipmentID,
@@ -211,8 +212,6 @@ function LeftDragDiv({
 						position,
 						bay: parkingLocation.right
 				  };
-			console.log(toReassign);
-
 			return {
 				position,
 				parkingLocation,
@@ -224,14 +223,34 @@ function LeftDragDiv({
 				unassign: leftAssignment && [leftAssignment.equipment.id]
 			};
 		},
+		canDrop: item => {
+			let assignmentExists = true;
+
+			assignments.forEach(assignment => {
+				if (item.id === assignment?.equipment.id) assignmentExists = false;
+			});
+
+			return assignmentExists;
+		},
 		collect: monitor => ({
 			isOver: monitor.isOver(),
 			canDrop: monitor.canDrop()
 		})
 	});
 
+	const isBaylead =
+		(leftAssignment?.employeeShifts[0]?.description === BAY_LEAD && showAM) ||
+		(leftAssignment?.employeeShifts[2]?.description === BAY_LEAD && !showAM);
+
 	return (
-		<LeftAssigned left hover={isOver} ref={drop} isDragging={isDragging}>
+		<LeftAssigned
+			left
+			hover={isOver}
+			ref={drop}
+			isDragging={isDragging}
+			canDrop={canDrop}
+			isBaylead={isBaylead}
+		>
 			<UnassignBtn onClick={() => handleClear(leftAssignment.equipment.id)}>
 				<i className="fas fa-times" />
 			</UnassignBtn>
@@ -246,7 +265,8 @@ function RightDragDiv({
 	position,
 	assignments,
 	bay,
-	defaultEquipmentID
+	defaultEquipmentID,
+	showAM
 }) {
 	const leftAssignment = assignments[1];
 	const rightAssignment = assignments[2];
@@ -299,7 +319,6 @@ function RightDragDiv({
 	const [{ isOver, canDrop }, drop] = useDrop({
 		accept: SET_TRUCK_LOCATION,
 		drop: item => {
-			console.log(item);
 			const toReassign = item.toReassign
 				? {
 						equipmentID: item.toReassign.equipmentID,
@@ -313,7 +332,6 @@ function RightDragDiv({
 						position,
 						bay: parkingLocation.left
 				  };
-			console.log(toReassign);
 			return {
 				position,
 				parkingLocation,
@@ -326,15 +344,24 @@ function RightDragDiv({
 			};
 		},
 		canDrop: item => {
-			return assignments.forEach(assignment => {
-				if (item.equipmentID === assignment?.equipment.id) return false;
+			let assignmentExists = true;
+
+			assignments.forEach(assignment => {
+				if (item.id === assignment?.equipment.id) assignmentExists = false;
 			});
+
+			return assignmentExists;
 		},
 		collect: monitor => ({
 			isOver: monitor.isOver(),
 			canDrop: monitor.canDrop()
 		})
 	});
+
+	const isBaylead =
+		(rightAssignment?.employeeShifts[0]?.description === BAY_LEAD && showAM) ||
+		(rightAssignment?.employeeShifts[2]?.description === BAY_LEAD && !showAM);
+
 	return (
 		<RightAssigned
 			right
@@ -342,6 +369,7 @@ function RightDragDiv({
 			ref={drop}
 			canDrop={canDrop}
 			isDragging={isDragging}
+			isBaylead={isBaylead}
 		>
 			<UnassignBtn onClick={() => handleClear(rightAssignment.equipment.id)}>
 				<i className="fas fa-times" />
@@ -355,12 +383,11 @@ function FullDropDropDiv({
 	parkingLocation,
 	position,
 	assignments,
-	handleClear
+	handleClear,
+	showAM
 }) {
 	const dispatch = useDispatch();
 	const defaultAssignment = assignments[0];
-	const leftAssignment = assignments[1];
-	const rightAssignment = assignments[2];
 	const [{ isDragging }, drag] = useDrag({
 		item: { type: SET_TRUCK_LOCATION, id: assignments[0]?.equipment.id },
 		end: (item, monitor) => {
@@ -401,7 +428,6 @@ function FullDropDropDiv({
 	const [{ isOver, canDrop }, drop] = useDrop({
 		accept: SET_TRUCK_LOCATION,
 		drop: item => {
-			console.log(item);
 			const toReassign = item.toReassign
 				? {
 						equipmentID: item.toReassign.equipmentID,
@@ -415,7 +441,6 @@ function FullDropDropDiv({
 						position,
 						bay: parkingLocation.left
 				  };
-			console.log(toReassign);
 			return {
 				position,
 				parkingLocation,
@@ -436,11 +461,23 @@ function FullDropDropDiv({
 		})
 	});
 
+	const isBaylead =
+		(defaultAssignment?.employeeShifts[0]?.description === BAY_LEAD &&
+			showAM) ||
+		(defaultAssignment?.employeeShifts[2]?.description === BAY_LEAD && !showAM);
+
 	return (
-		<FullPadDropDiv ref={drop} hover={isOver} canDrop={canDrop}>
+		<FullPadDropDiv
+			ref={drop}
+			hover={isOver}
+			canDrop={canDrop}
+			isBaylead={isBaylead}
+		>
 			{assignments && assignments[0] && (
 				<CenterAssigned isDragging={isDragging}>
-					<UnassignBtn onClick={() => handleClear(assignments[0].equipment.id)}>
+					<UnassignBtn
+						onClick={() => handleClear(defaultAssignment.equipment.id)}
+					>
 						<i className="fas fa-times" />
 					</UnassignBtn>
 					<div ref={drag}>{assignments[0].equipment.id}</div>
@@ -454,16 +491,11 @@ function LeftHalfDropDiv({
 	bay,
 	parkingLocation,
 	position,
-	defaultEquipmentID,
-	assignments
+	defaultEquipmentID
 }) {
-	const leftAssignment = assignments[1];
-	const rightAssignment = assignments[2];
-
 	const [{ isOver, canDrop }, drop] = useDrop({
 		accept: SET_TRUCK_LOCATION,
 		drop: item => {
-			console.log(item);
 			const toReassign = item.toReassign
 				? {
 						equipmentID: item.toReassign.equipmentID,
@@ -475,9 +507,8 @@ function LeftHalfDropDiv({
 						equipmentID: defaultEquipmentID,
 						parkingLocation,
 						position,
-						bay: parkingLocation.left
+						bay: parkingLocation.right
 				  };
-			console.log(toReassign);
 			return {
 				position,
 				parkingLocation,
@@ -485,8 +516,7 @@ function LeftHalfDropDiv({
 				assign: {
 					equipmentID: item.id,
 					bay
-				},
-				unassign: rightAssignment && [rightAssignment.equipment.id]
+				}
 			};
 		},
 		canDrop: item => {
@@ -509,16 +539,11 @@ function RightHalfDropDiv({
 	bay,
 	parkingLocation,
 	position,
-	defaultEquipmentID,
-	assignments
+	defaultEquipmentID
 }) {
-	const leftAssignment = assignments[1];
-	const rightAssignment = assignments[2];
-
 	const [{ isOver, canDrop }, drop] = useDrop({
 		accept: SET_TRUCK_LOCATION,
 		drop: item => {
-			console.log(item);
 			const toReassign = item.toReassign
 				? {
 						equipmentID: item.toReassign.equipmentID,
@@ -532,7 +557,6 @@ function RightHalfDropDiv({
 						position,
 						bay: parkingLocation.left
 				  };
-			console.log(toReassign);
 			return {
 				position,
 				parkingLocation,
@@ -540,8 +564,7 @@ function RightHalfDropDiv({
 				assign: {
 					equipmentID: item.id,
 					bay
-				},
-				unassign: rightAssignment && [rightAssignment.equipment.id]
+				}
 			};
 		},
 		canDrop: item => {
