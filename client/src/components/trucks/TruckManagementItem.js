@@ -9,6 +9,7 @@ import {
 } from "../../styled/trucks/TruckManagement";
 import { useDispatch, useSelector } from "react-redux";
 import { editTruck } from "../../actions/truck";
+import AddTruck from "./AddTruck";
 import { SYSTEM_ADMINISTRATOR } from "../../actions/constants";
 
 /**
