@@ -30,6 +30,7 @@ const AddTruck = () => {
 	const truckStatuses = TRUCK_STATUSES;
 
 	//todo figure out formik text area and add it in at the bottom.
+	// also change the text input field into a number one purely unless API can parse the string to an int and we can keep easy consistency
 	return (
 		<Formik
 			initialValues={{
