@@ -47,7 +47,7 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 						active={pathname === "/truck/all" ? 1 : undefined}
 						to={"/truck/all"}
 					>
-						Truck Status
+						Manage Trucks
 					</NavLink>
 					<NavLink active={pathname === "/" ? 1 : undefined} to={"/"}>
 						Truck Assignment

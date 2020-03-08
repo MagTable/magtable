@@ -7,6 +7,7 @@ import {
 	TruckManagementListDiv
 } from "../../styled/trucks/TruckManagement";
 import { getMagTable } from "../../actions/magtable";
+import { getTrucks } from "../../actions/truck";
 
 /**
  * @date 3/5/2020
@@ -23,8 +24,12 @@ function TruckManagement() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(getMagTable());
+		dispatch(getTrucks());
 	}, [dispatch]);
+
+	const trucks = useSelector(state => state.trucks);
+
+	console.log(trucks);
 
 	const assignments = useSelector(state => state.magtable.assignments);
 
