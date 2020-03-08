@@ -3,7 +3,7 @@ package com.magtable.controller;
 
 import com.magtable.model.ShiftResponse;
 import com.magtable.model.ShiftList;
-import com.magtable.services.userServices.ErrorService;
+import com.magtable.services.ErrorService;
 import com.magtable.services.w2wServices.ShiftScheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,11 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
-import java.lang.reflect.Array;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 @RestController
 @RequestMapping("/shift")
