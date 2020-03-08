@@ -17,16 +17,14 @@ import {
  * @param props
  * @returns {*} The TruckManagementItem component
  */
-function TruckManagementItem({ assignment }) {
+function TruckManagementItem({ truck }) {
 	return (
 		<TruckManagementItemDiv>
-			<TruckIdDiv status={assignment.equipment.status}>
-				{assignment.equipment.id}
-			</TruckIdDiv>
-			<TruckManagementStatus>
-				{assignment.equipment.status}
-			</TruckManagementStatus>
-			{assignment.equipment.notice}
+			<TruckIdDiv status={truck.status}>{truck.id}</TruckIdDiv>
+			<TruckManagementStatus>{truck.status}</TruckManagementStatus>
+			{truck.notice}
+
+			<button type={"submit"}>EDIT BUTTON</button>
 		</TruckManagementItemDiv>
 	);
 }

@@ -1,6 +1,7 @@
 import { ADD_TRUCK, EDIT_TRUCK, GET_TRUCKS } from "../actions/constants";
 
 const initialState = {
+	truck: null,
 	trucks: [],
 	error: null,
 	loading: false

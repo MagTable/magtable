@@ -55,6 +55,8 @@ export const CON = "CON";
 export const OOS = "OOS";
 export const INOP = "INOP";
 
+export const TRUCK_STATUSES = [GO, CON, OOS, INOP];
+
 // UI Hint Types
 export const DANGER = "DANGER";
 export const WARNING = "WARNING";
