@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 /**
  * @date 3/5/2020
- * @author Tom Allcock
+ * @author Tom Allcock, MJ Kochuk
  * @module Styled
  */
 
@@ -61,6 +61,9 @@ export const TruckManagementItemDiv = styled.div`
 	height: 60px;
 `;
 
+/**
+ *
+ */
 export const TruckIdDiv = styled.div`
 	cursor: pointer;
 	display: flex;
@@ -84,4 +87,22 @@ export const TruckManagementStatus = styled.h4`
 		background: var(${({ status }) => getTruckColorCode(status)});
 		padding: 0.25rem 0.5rem;
 	}
+`;
+
+export const TruckMgmtWrap = styled.div`
+	width: 50%;
+`;
+
+/**
+ *
+ **/
+export const EditTruckWrap = styled(TruckMgmtWrap)``;
+
+/**
+ *
+ */
+export const AddTruckWrap = styled(TruckMgmtWrap)``;
+
+export const NoticeBox = styled.input`
+	width: auto;
 `;

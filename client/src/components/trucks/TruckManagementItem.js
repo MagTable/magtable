@@ -2,7 +2,8 @@ import React from "react";
 import {
 	TruckManagementItemDiv,
 	TruckIdDiv,
-	TruckManagementStatus
+	TruckManagementStatus,
+	NoticeBox
 } from "../../styled/trucks/TruckManagement";
 
 /**
@@ -22,7 +23,7 @@ function TruckManagementItem({ truck }) {
 		<TruckManagementItemDiv>
 			<TruckIdDiv status={truck.status}>{truck.id}</TruckIdDiv>
 			<TruckManagementStatus>{truck.status}</TruckManagementStatus>
-			{truck.notice}
+			<NoticeBox value={truck.notice} />
 
 			<button type={"submit"}>EDIT BUTTON</button>
 		</TruckManagementItemDiv>

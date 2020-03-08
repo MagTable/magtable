@@ -4,7 +4,8 @@ import TruckManagementItem from "./TruckManagementItem";
 import {
 	TruckManagementTitle,
 	TruckManagementWrapper,
-	TruckManagementListDiv
+	TruckManagementListDiv,
+	EditTruckWrap
 } from "../../styled/trucks/TruckManagement";
 
 /**
@@ -22,14 +23,16 @@ function TruckManagement() {
 	const trucks = useSelector(state => state.truck.trucks);
 
 	return (
-		<TruckManagementWrapper>
-			<TruckManagementTitle>Truck Status + Notices</TruckManagementTitle>
-			<TruckManagementListDiv>
-				{trucks.map(truck => (
-					<TruckManagementItem truck={truck} />
-				))}
-			</TruckManagementListDiv>
-		</TruckManagementWrapper>
+		<EditTruckWrap>
+			<TruckManagementWrapper>
+				<TruckManagementTitle>Truck Status + Notices</TruckManagementTitle>
+				<TruckManagementListDiv>
+					{trucks.map(truck => (
+						<TruckManagementItem truck={truck} />
+					))}
+				</TruckManagementListDiv>
+			</TruckManagementWrapper>
+		</EditTruckWrap>
 	);
 }
 
