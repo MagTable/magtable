@@ -9,6 +9,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Switch from "react-switch";
 import { toggleAM } from "../../actions/magtable";
+import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
 
 /**
  * @date 2020-02-17
@@ -31,6 +32,7 @@ function TruckList() {
 
 	const assignments = useSelector(state => state.magtable.assignments);
 	const showAM = useSelector(state => state.magtable.showAM);
+	const loading = useSelector(state => state.magtable.loading);
 
 	const handleShiftToggle = () => {
 		dispatch(toggleAM());
@@ -83,20 +85,26 @@ function TruckList() {
 					/>
 				</TruckListManipDiv>
 			</ListTitle>
-			<TruckListDiv>
-				{assignments.map(
-					assignment =>
-						assignment.equipment.id < 1000 && (
-							<TruckListItem
-								noticeOpen={noticesOpen}
-								key={assignment.equipment.id}
-								assignment={assignment}
-								showAM={showAM}
-								shift
-							/>
-						)
-				)}
-			</TruckListDiv>
+			{!loading ? (
+				<TruckListDiv>
+					{assignments.map(
+						assignment =>
+							assignment.equipment.id < 1000 && (
+								<TruckListItem
+									noticeOpen={noticesOpen}
+									key={assignment.equipment.id}
+									assignment={assignment}
+									showAM={showAM}
+									shift
+								/>
+							)
+					)}
+				</TruckListDiv>
+			) : (
+				<SpinnerWrap>
+					<LoadingImg className="fas fa-circle-notch" />
+				</SpinnerWrap>
+			)}
 		</TruckListDivWrapper>
 	);
 }

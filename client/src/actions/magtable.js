@@ -224,13 +224,15 @@ export const getMagTable = () => async dispatch => {
 		const truckRes = await axios.get("/equipment/truck/all");
 		const towerRes = await axios.get("/equipment/tower/all");
 
-		dispatch({
-			type: GET_ASSIGNMENT_DATA,
-			payload: {
-				employeeShifts: shiftRes.data,
-				equipment: [...truckRes.data, ...towerRes.data]
-			}
-		});
+		setTimeout(() => {
+			dispatch({
+				type: GET_ASSIGNMENT_DATA,
+				payload: {
+					employeeShifts: shiftRes.data,
+					equipment: [...truckRes.data, ...towerRes.data]
+				}
+			});
+		}, 500);
 	} catch (err) {
 		if (err.response.status === 403) {
 			dispatch(logout());
@@ -292,6 +294,7 @@ export const refreshEmployeeShifts = () => async dispatch => {
 				}
 			});
 		}, 500);
+
 		dispatch(setAlert("Shifts Updated!", "success"));
 	} catch (err) {
 		if (err.response.status === 403) {

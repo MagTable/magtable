@@ -61,12 +61,14 @@ export const login = ({ username, password }) => async dispatch => {
 		// destructure jwt from response data
 		const { jwt } = res.data;
 
-		dispatch({
-			type: LOGIN_SUCCESS,
-			payload: jwt
-		});
+		await setTimeout(() => {
+			dispatch({
+				type: LOGIN_SUCCESS,
+				payload: jwt
+			});
 
-		dispatch(loadUser());
+			dispatch(loadUser());
+		}, 750);
 	} catch (err) {
 		dispatch(setAlert(err.response?.data?.message, "danger"));
 
