@@ -3,11 +3,13 @@ import {
 	TruckManagementItemDiv,
 	TruckIdDiv,
 	TruckManagementStatus,
-	NoticeBox
+	NoticeBox,
+	EditTruckWrap,
+	AddTruckWrap
 } from "../../styled/trucks/TruckManagement";
 import { useDispatch, useSelector } from "react-redux";
 import { editTruck } from "../../actions/truck";
-import { MECHANIC } from "../../actions/constants";
+import { SYSTEM_ADMINISTRATOR } from "../../actions/constants";
 
 /**
  * @date 3/5/2020
@@ -23,39 +25,46 @@ import { MECHANIC } from "../../actions/constants";
  */
 function TruckManagementItem({ truck }) {
 	const dispatch = useDispatch();
-	const [editedTruck, setEditedTruck] = useState(truck);
+
+	//
+	const [editedNotice, setEditedNotice] = useState(truck.notice);
+	const [editedStatus, setEditedStatus] = useState(truck.status);
 
 	const authUser = useSelector(state => state.auth.user);
 
 	// when the notice is being changed, make sure to persist changes to the truck object
-	function handleChange(event) {
-		setEditedTruck(event.target.value);
+	function handleChangeNotice(event) {
+		setEditedNotice(event.target.value);
 	}
 
 	// send our edited truck to our actions to persist the edit to the backend
 	function handleEdit() {
+		const editedTruck = {
+			id: truck.id,
+			status: editedStatus,
+			notice: editedNotice
+		};
+		console.log(editedTruck);
 		dispatch(editTruck(editedTruck));
 	}
 
 	return (
 		<TruckManagementItemDiv>
-			<form>
-				<TruckIdDiv status={truck.status}>{truck.id}</TruckIdDiv>
-				{authUser?.role?.name === MECHANIC ? (
-					<>
-						<TruckManagementStatus>{truck.status}</TruckManagementStatus>
-						<NoticeBox value={editedTruck.notice} onChange={handleChange} />
-						<button type={"submit"} onClick={handleEdit}>
-							EDIT BUTTON
-						</button>
-					</>
-				) : (
-					<>
-						<TruckManagementStatus>{truck.status}</TruckManagementStatus>
-						{truck.notice}
-					</>
-				)}
-			</form>
+			<TruckIdDiv status={truck.status}>{truck.id}</TruckIdDiv>
+			{authUser?.role?.name === SYSTEM_ADMINISTRATOR ? (
+				<AddTruckWrap>
+					<TruckManagementStatus>{truck.status}</TruckManagementStatus>
+					<NoticeBox value={editedNotice} onChange={handleChangeNotice} />
+					<button onClick={handleEdit}>EDIT</button>
+					<button>REMOVE BUTTON</button>
+				</AddTruckWrap>
+			) : (
+				<EditTruckWrap>
+					<TruckManagementStatus>{truck.status}</TruckManagementStatus>
+					<NoticeBox value={editedNotice} onChange={handleChangeNotice} />
+					<button onClick={handleEdit}>EDIT</button>
+				</EditTruckWrap>
+			)}
 		</TruckManagementItemDiv>
 	);
 }
