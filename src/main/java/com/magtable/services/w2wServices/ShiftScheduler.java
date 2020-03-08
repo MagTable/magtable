@@ -101,7 +101,6 @@ public class ShiftScheduler {
 
                 Element link = doc.select("a").first();
                 ///wwforgotid.htm
-                System.out.println(link.attr("href"));
 
                 throw new HttpStatusException("Session Expired", 403, "\"https://www6.whentowork.com/cgi-bin/w2wFF.dll/empshiftlist.htm?SID=\" + SID + \"&UTF8=Y&date=\" + MONTH + \"/\" + DAY + \"/\" + YEAR");
             } catch (NullPointerException e) {
@@ -125,7 +124,6 @@ public class ShiftScheduler {
                 //getting the employee name
                 String name = shifts.next().next().first().text();
 
-                // todo remove unassigned
                 shift.setIsGreen(false);
                 if (name.contains("(GP)")) {
                     shift.setIsGreen(true);

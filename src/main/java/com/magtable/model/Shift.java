@@ -1,9 +1,6 @@
 package com.magtable.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -12,34 +9,57 @@ import java.sql.Timestamp;
 public class Shift implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    public Shift(){}
+
+    public Shift(ShiftResponse shiftResponse) {
+        this.description = shiftResponse.getDescription();
+        this.name = shiftResponse.getName();
+        this.startTime = new Timestamp(System.currentTimeMillis()); //todo Fix this part with David
+        this.endTime = new Timestamp(System.currentTimeMillis()); //todo Fix this part with David
+        this.noAvop = shiftResponse.getNoAvop();
+        this.isGreen = shiftResponse.getIsGreen();
+    }
+
     @Id
-    @Column(insertable = false, name = "shiftID", nullable = false)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(insertable = false, name = "shiftid", nullable = false)
+    private Integer shiftID;
+
+    @Column(name = "assignmentid")
+    private Integer assignmentID;
 
     @Column(name = "description")
     private String description;
 
-    @Column(name = "employeeName", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "startTime", nullable = false)
+    @Column(name = "starttime", nullable = false)
     private Timestamp startTime;
 
-    @Column(name = "endTime", nullable = false)
+    @Column(name = "endtime", nullable = false)
     private Timestamp endTime;
 
-    @Column(name = "noAvop", nullable = false)
+    @Column(name = "noavop", nullable = false)
     private Boolean noAvop;
 
-    @Column(name = "isGreen", nullable = false)
+    @Column(name = "isgreen", nullable = false)
     private Boolean isGreen;
 
-    public Integer getId() {
-        return id;
+    public Integer getShiftID() {
+        return shiftID;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setShiftID(Integer shiftID) {
+        this.shiftID = shiftID;
+    }
+
+    public Integer getAssignmentID() {
+        return assignmentID;
+    }
+
+    public void setAssignmentID(Integer assignmentID) {
+        this.assignmentID = assignmentID;
     }
 
     public String getDescription() {

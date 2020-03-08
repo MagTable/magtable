@@ -33,7 +33,7 @@ CREATE TABLE Truck
     status  VARCHAR(4),
     notice  VARCHAR(2000),
     PRIMARY KEY (TruckID),
-    CONSTRAINT CK_Truck_Status CHECK (status = 'OP' OR status = 'INOP' OR status = 'CON' OR status = 'OOS')
+    CONSTRAINT CK_Truck_Status CHECK (status = 'GO' OR status = 'INOP' OR status = 'CON' OR status = 'OOS')
 );
 
 CREATE TABLE Tower
@@ -45,9 +45,16 @@ CREATE TABLE Tower
 
 CREATE TABLE ParkingLocation
 (
-    id    INT(5)     NOT NULL,
-    apron VARCHAR(4) NOT NULL,
-    code  VARCHAR(4) NOT NULL,
+    id       INT(5)     NOT NULL,
+    apron    VARCHAR(4) NOT NULL,
+    phonetic CHAR(1)    NOT NULL,
+    east     BOOLEAN    NOT NULL,
+    center   BOOLEAN    NOT NULL,
+    west     BOOLEAN    NOT NULL,
+    `left`     INT(2),
+    `right`    INT(2),
+    composite INT(2),
+    `double` BOOLEAN,
     PRIMARY KEY (id)
 );
 

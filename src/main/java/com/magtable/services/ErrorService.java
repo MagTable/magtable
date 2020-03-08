@@ -1,5 +1,6 @@
-package com.magtable.services.userServices;
+package com.magtable.services;
 
+import org.apache.tomcat.util.http.parser.HttpParser;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -142,8 +143,50 @@ public class ErrorService {
         return new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid Input");
     }
 
-
+    /**
+     * Message reporting that the session has expired.
+     * @return ResponseStatusException message.
+     */
     public ResponseStatusException sessionExpired() {
         return new ResponseStatusException(HttpStatus.FORBIDDEN, "Session Expired");
+    }
+
+    /**
+     * Message reporting that the record is invalid.
+     * @return ResponseStatusException message.
+     */
+    public ResponseStatusException invalidRecord() {
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Entry");
+    }
+
+    public ResponseStatusException magIdNotFound(int id) {
+        return new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Mag #%d Not Found.", id));
+    }
+
+    /**
+     * Message reporting that the trucks operational status is invalid
+     * @param status The invalid status
+     * @return ResponseStatusException message
+     */
+    public ResponseStatusException truckOPStatusInvalid(String status){
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Operational Status %s Not Found", status));
+    }
+
+    /**
+     * Message reporting that at truck already exists
+     * @param id the id of the truck
+     * @return ResponseStatusException message
+     */
+    public ResponseStatusException truckAlreadyExists(Integer id) {
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Truck : %d Already Exists", id));
+    }
+
+    /**
+     * Message reporting that at truck doesn't exists
+     * @param id the id of the truck
+     * @return ResponseStatusException message
+     */
+    public ResponseStatusException truckDoesntExists(Integer id) {
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Truck : %d Doesn't Exists", id));
     }
 }
