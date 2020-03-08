@@ -28,7 +28,7 @@ function TruckManagement() {
 				<TruckManagementTitle>Truck Status + Notices</TruckManagementTitle>
 				<TruckManagementListDiv>
 					{trucks.map(truck => (
-						<TruckManagementItem truck={truck} />
+						<TruckManagementItem key={truck.id} truck={truck} />
 					))}
 				</TruckManagementListDiv>
 			</TruckManagementWrapper>
