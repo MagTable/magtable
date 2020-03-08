@@ -14,6 +14,8 @@ export const TruckMapDiv = styled.div`
 	flex-grow: 2.5;
 	flex-basis: 0;
 	flex-direction: column;
+	background: #f4f4f4;
+	user-select: none;
 `;
 
 /**

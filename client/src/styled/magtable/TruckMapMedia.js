@@ -14,6 +14,8 @@ export const PadDivHeader = styled.div`
 	grid-area: parking_code;
 	background: white;
 	border-bottom: 2px solid var(--border-color);
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
 `;
 
 const PadDropDiv = styled.div``;
@@ -163,6 +165,11 @@ export const PadDiv = styled.div`
 	text-align: center;
 	border: 2px solid var(--border-color);
 	width: 100%;
+	box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.16), 0 0 12px rgba(0, 0, 0, 0.33);
+	background: white;
+
+	border-bottom-right-radius: 20px;
+	border-bottom-left-radius: 20px;
 
 	min-width: 65px;
 	max-width: 100px;
