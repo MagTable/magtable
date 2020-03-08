@@ -81,7 +81,7 @@ function ParkingLocation({ parkingLocation, position, assignments }) {
 	];
 
 	return (
-		<PadDiv ref={drop}>
+		<PadDiv ref={drop} isOver={isOver}>
 			<PadDivHeader>{parkingLocation.phonetic + position}</PadDivHeader>
 			<FullDropDropDiv
 				assignments={sortedAssignments}

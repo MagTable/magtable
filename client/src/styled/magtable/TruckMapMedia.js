@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { UnassignBtn } from "./ListContent";
 
 /**
@@ -6,6 +6,20 @@ import { UnassignBtn } from "./ListContent";
  * @author MJ Kochuk, Arran Woodruff
  * @module Styled
  */
+
+const scrollIn = keyframes`
+	from {
+    // transform: scale(0);
+		transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  to {
+    // transform: scale(100%);
+		transform: translateY(0);
+    opacity: 1;
+  }
+`;
 
 /**
  * Header that contains parkinglocation code
@@ -100,6 +114,9 @@ export const FullPadDropDiv = styled(PadDropDiv)`
 			color: var(--context-blue);
 			outline-color: var(--context-blue-light);
 	`}
+
+	border-bottom-right-radius: 18px;
+	border-bottom-left-radius: 18px;
 `;
 
 const LocationAssignment = styled.div`
@@ -168,6 +185,7 @@ export const PadDiv = styled.div`
 	box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.16), 0 0 12px rgba(0, 0, 0, 0.33);
 	background: white;
 
+	transition: transform 0.3s ease-in-out;
 	border-bottom-right-radius: 20px;
 	border-bottom-left-radius: 20px;
 
@@ -182,7 +200,7 @@ export const PadDiv = styled.div`
 	font-size: 1.75rem;
 	font-family: "Noto Sans KR", sans-serif;
 	color: var(--border-color);
-	margin-bottom: 0.5rem;
+	margin-bottom: 0.75rem;
 	background: ${({ hoverColor }) => hoverColor};
 
 	display: grid;
@@ -192,6 +210,14 @@ export const PadDiv = styled.div`
 		"parking_code parking_code"
 		"left_assigned right_assigned"
 		"left_bay right_bay";
+
+	animation: ${scrollIn} 1s ease;
+
+	${({ isOver }) =>
+		isOver &&
+		`
+		transform: scale(1.1);
+	`}
 `;
 
 export const FakePadDiv = styled.div`
@@ -242,12 +268,14 @@ export const NumberMiddle = styled(NumberLabel)`
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+	animation: ${scrollIn} 0.5s ease;
 `;
 
 export const NumberTop = styled(NumberLabel)`
 	height: 40px;
 	width: 100%;
 	text-align: center;
+	animation: ${scrollIn} 0.5s ease;
 `;
 
 export const ClearConfirmDiv = styled.div``;
