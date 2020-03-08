@@ -8,7 +8,6 @@ import { TRUCK_STATUSES } from "../../actions/constants";
 import SelectBox from "../common/SelectBox";
 import styled from "styled-components";
 import { LoginBtn } from "../../styled/auth/Login";
-import truck from "../../reducers/truck";
 import { AddTruckWrap } from "../../styled/trucks/TruckManagement";
 
 /**
