@@ -60,6 +60,7 @@ export const setTruckLocation = (
 		payload: {
 			equipmentID,
 			parkingLocation: {
+				apron: parkingLocation.apron,
 				id: parkingLocation.id,
 				phonetic: parkingLocation.phonetic,
 				position,

@@ -32,15 +32,13 @@ export const PadDivHeader = styled.div`
 	border-top-left-radius: 10px;
 `;
 
-const PadDropDiv = styled.div``;
-
 const rightTriangle = `
 	&:after {
 		position: absolute;
 		
 		height: 0;
 		width: 0;
-		top: 25%;
+		top: 0;
 		right: 0;
 		
 		border-top: solid 10px transparent;
@@ -58,7 +56,7 @@ const leftTriangle = `
 		
 		height: 0;
 		width: 0;
-		top: 25%;
+		top: 0;
 		left: -10px;
 		
 		border-top: solid 10px transparent;
@@ -70,29 +68,29 @@ const leftTriangle = `
 	}
 `;
 
-export const HalfPadDropDiv = styled(PadDropDiv)`
+export const HalfPadDropDiv = styled.div`
 	position: relative;
 	font-size: 1.25rem;
 	z-index: 1;
 	transition: background 0.3s ease-in-out;
-	${({ left, hover }) =>
+	${({ left }) =>
 		left &&
 		`
 			grid-area: left_bay;
-			${hover && leftTriangle}
-		`}
+			border-bottom-left-radius: 18px;
+	`}
 		
-	${({ right, hover }) =>
+	${({ right }) =>
 		right &&
 		`
 			grid-area: right_bay;
-			${hover && rightTriangle}
+			border-bottom-right-radius: 18px;
 	`}
 	${({ hover }) => hover && `background: var(--context-green-light);`}
 	${({ canDrop }) => !canDrop && `background: var(--context-red-light);`}
 `;
 
-export const FullPadDropDiv = styled(PadDropDiv)`
+export const FullPadDropDiv = styled.div`
 	grid-area: 2 / 1 / span 1 / span 2;
 	height: 100%;
 	z-index: 1;
@@ -100,29 +98,44 @@ export const FullPadDropDiv = styled(PadDropDiv)`
 	transition: background 0.3s ease, opacity 0.3s ease, color 0.3s ease,
 		outline-color 0.3s ease;
 
-	${({ hover }) => hover && `background: var(--context-green-light);`}
+	border-bottom-right-radius: 18px;
+	border-bottom-left-radius: 18px;
+
+	${({ hover }) =>
+		hover &&
+		`
+		background: var(--context-green-light);
+	`}
 	${({ hover, canDrop }) =>
 		hover &&
 		!canDrop &&
-		`background: var(--context-red-light);`}
+		`
+		background: var(--context-red-light);
+	`}
 		
 	outline: 4px solid transparent;
 	outline-offset: -4px;
 	${({ isBaylead }) =>
 		isBaylead &&
 		`
-			color: var(--context-blue);
-			outline-color: var(--context-blue-light);
+			background: var(--context-blue-light);
 	`}
+`;
 
-	border-bottom-right-radius: 18px;
-	border-bottom-left-radius: 18px;
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 `;
 
 const LocationAssignment = styled.div`
 	position: relative;
 	transition: background 0.3s ease-in-out, color 0.3s ease,
 		outline-color 0.3s ease;
+	height: 100%;
 
 	:hover ${UnassignBtn} {
 		display: block;
@@ -131,7 +144,10 @@ const LocationAssignment = styled.div`
 	${({ hover }) => hover && `background: var(--context-green-light);`}
 	${({ isDragging }) =>
 		isDragging &&
-		`opacity: 0.5; background: var(--context-grey);`}
+		`
+			opacity: 0.5; 
+			background: var(--context-grey);
+		`}
 	
 	/* baylead styling */
 	outline: 4px solid transparent;
@@ -139,12 +155,15 @@ const LocationAssignment = styled.div`
 	${({ isBaylead }) =>
 		isBaylead &&
 		`
-			color: var(--context-blue);
-			outline-color: var(--context-blue-light);
+			background: var(--context-blue-light);
 	`}
 
 	${({ hover, canDrop }) =>
 		hover && !canDrop && `background: var(--context-red-light);`}
+		
+	div {
+		animation: 0.3s ${fadeIn} ease-out;
+	}
 `;
 
 export const CenterAssigned = styled(LocationAssignment)`
@@ -153,6 +172,8 @@ export const CenterAssigned = styled(LocationAssignment)`
 	align-items: center;
 	width: 100%;
 	height: 100%;
+	border-bottom-right-radius: 18px;
+	border-bottom-left-radius: 18px;
 `;
 export const LeftAssigned = styled(LocationAssignment)`
 	grid-area: left_assigned;
@@ -161,17 +182,22 @@ export const LeftAssigned = styled(LocationAssignment)`
 	vertical-align: middle;
 	align-items: center;
 
-	z-index: 2;
 	border-right: 1px solid var(--border-color);
+	border-bottom-left-radius: 18px;
+
+	z-index: 2;
 `;
 export const RightAssigned = styled(LocationAssignment)`
-	z-index: 2;
+	grid-area: right_assigned;
+
 	display: inline-grid;
 	vertical-align: middle;
-	border-left: 1px solid var(--border-color);
 	align-items: center;
 
-	grid-area: right_assigned;
+	border-left: 1px solid var(--border-color);
+	border-bottom-right-radius: 18px;
+
+	z-index: 2;
 `;
 
 /**

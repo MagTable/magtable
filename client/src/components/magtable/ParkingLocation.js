@@ -480,7 +480,9 @@ function FullDropDropDiv({
 					>
 						<i className="fas fa-times" />
 					</UnassignBtn>
-					<div ref={drag}>{assignments[0].equipment.id}</div>
+					{defaultAssignment && (
+						<div ref={drag}>{defaultAssignment.equipment.id}</div>
+					)}
 				</CenterAssigned>
 			)}
 		</FullPadDropDiv>
