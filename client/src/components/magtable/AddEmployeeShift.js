@@ -208,13 +208,11 @@ const AddEmployeeShift = ({ setShowModal }) => {
 							name="endTime"
 						>
 							<option value="" />
-							{shiftTimes.map(time => {
-								return (
-									<option key={time} value={time}>
-										{time}
-									</option>
-								);
-							})}
+							{shiftTimes.map(time => (
+								<option key={time} value={time}>
+									{time}
+								</option>
+							))}
 						</SelectBox>
 					</EndTimeDiv>
 					<PositionDiv>
