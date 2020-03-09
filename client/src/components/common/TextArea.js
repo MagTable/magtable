@@ -13,12 +13,19 @@ const TextArea = ({ label, ...props }) => {
 		<>
 			<StyledLabel htmlFor={props.id || props.name}>{label}</StyledLabel>
 			<br />
-			<textarea className="text-area" {...field} {...props} />
+			<textarea {...field} {...props} />
 			{meta.touched && meta.error ? (
 				<div className="error">{meta.error}</div>
 			) : null}
 		</>
 	);
+};
+
+TextArea.propTypes = {
+	id: PropTypes.string,
+	name: PropTypes.string,
+	errors: PropTypes.string,
+	touched: PropTypes.bool
 };
 
 export default TextArea;

@@ -9,6 +9,7 @@ import SelectBox from "../common/SelectBox";
 import { LoginBtn } from "../../styled/auth/Login";
 import { AddTruckWrap } from "../../styled/trucks/TruckManagement";
 import TextArea from "../common/TextArea";
+import CheckBox from "../common/CheckBox";
 
 /**
  * @date 3/08/2020
@@ -62,6 +63,7 @@ const AddTruck = () => {
 									{...field}
 									errors={props.errors.id}
 									touched={props.touched.id}
+									type={"number"}
 									value={props.values.id}
 									label={"Truck ID"}
 									fit
@@ -85,6 +87,8 @@ const AddTruck = () => {
 							placeholder="Any truck notices go here..."
 						/>
 						<br />
+						{/*todo checkbox for service vehicle or not?*/}
+						{/*<CheckBox name={"service"}>Service Vehicle?</CheckBox>*/}
 						<LoginBtn type="submit">Add Truck</LoginBtn>
 					</Form>
 				)}

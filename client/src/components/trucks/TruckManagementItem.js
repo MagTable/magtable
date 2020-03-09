@@ -3,7 +3,6 @@ import { NoticeBox } from "../../styled/trucks/TruckManagement";
 import { useDispatch, useSelector } from "react-redux";
 import { editTruck } from "../../actions/truck";
 import { TRUCK_STATUSES, SYSTEM_ADMINISTRATOR } from "../../actions/constants";
-import AddTruck from "./AddTruck";
 import {
 	TruckListItemDiv,
 	TruckNoticeIndicator,
@@ -15,7 +14,7 @@ import Confirmation from "../common/Confirmation";
 
 /**
  * @date 3/5/2020
- * @author Tom Allcock
+ * @author Tom Allcock, MJ Kochuk, Steven Wong
  * @module Component
  */
 
@@ -78,7 +77,7 @@ function TruckManagementItem({ truck }) {
 					<IconButton
 						faClassName="fas fa-edit"
 						onClick={handleEdit}
-						toolTip={"Delete Truck"}
+						toolTip={"Edit Truck"}
 						hoverColor={"blue"}
 					/>
 					<Confirmation
