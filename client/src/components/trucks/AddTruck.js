@@ -6,9 +6,9 @@ import { addTruck } from "../../actions/truck";
 import TextInput from "../common/TextInput";
 import { TRUCK_STATUSES } from "../../actions/constants";
 import SelectBox from "../common/SelectBox";
-import styled from "styled-components";
 import { LoginBtn } from "../../styled/auth/Login";
 import { AddTruckWrap } from "../../styled/trucks/TruckManagement";
+import TextArea from "../common/TextArea";
 
 /**
  * @date 3/08/2020
@@ -40,15 +40,17 @@ const AddTruck = () => {
 				}}
 				onSubmit={(values, { resetForm }) => {
 					dispatch(addTruck(values));
+					alert(JSON.stringify(values, null, 2));
 					resetForm();
 				}}
 				validationSchema={Yup.object().shape({
 					id: Yup.string()
-						.matches(/^[/d/d/d/d]$/, "Invalid Number")
+						.matches(/\d/, "Invalid Number")
 						.required("Required Field"),
 					status: Yup.string()
 						.oneOf(truckStatuses)
-						.required()
+						.required(),
+					notice: Yup.string().max(250, "Maximum Length is 250 Characters")
 				})}
 			>
 				{props => (
@@ -66,7 +68,7 @@ const AddTruck = () => {
 								/>
 							)}
 						</Field>
-						<SelectBox label="Truck Status" name="truckStatus">
+						<SelectBox label="Truck Status" name="status">
 							<option value="">Select a Truck Status</option>
 							{truckStatuses.map(status => {
 								return (
@@ -76,6 +78,12 @@ const AddTruck = () => {
 								);
 							})}
 						</SelectBox>
+						<TextArea
+							label="Notice"
+							name="notice"
+							rows="6"
+							placeholder="Any truck notices go here..."
+						/>
 						<br />
 						<LoginBtn type="submit">Add Truck</LoginBtn>
 					</Form>

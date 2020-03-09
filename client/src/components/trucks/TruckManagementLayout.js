@@ -18,7 +18,6 @@ const TruckManagementLayout = () => {
 	useEffect(() => {
 		dispatch(getTrucks());
 	}, [dispatch]);
-
 	return (
 		<DndProvider backend={Backend}>
 			<TruckMgmtWrap>

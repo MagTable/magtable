@@ -64,31 +64,32 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 					<NavLink to={"/logout"}>Log Out</NavLink>
 				</NavDiv>
 			</BrowserView>
-			<MobileView>
-				<NavDiv>
-					<MenuTip onClick={() => toggleMenu()}>
-						<MenuTipIcon open={menuOpen} className="fas fa-angle-down" />
-						Menu
-					</MenuTip>
-					<NavPane onClick={() => toggleMenu()} open={menuOpen}>
-						<NavLink to={"/"}>
-							<NavIcon className="fas fa-truck" />
-							Truck Assignment
-						</NavLink>
-						{/* System Administrators Only */}
-						{authUser?.role?.name === SYSTEM_ADMINISTRATOR && (
-							<NavLink to={"/user/all"}>
-								<NavIcon className="fas fa-users" />
-								Manage Users
-							</NavLink>
-						)}
-						<NavLink to={"/logout"}>
-							<NavIcon className="fas fa-logout" />
-							Log Out
-						</NavLink>
-					</NavPane>
-				</NavDiv>
-			</MobileView>
+			{/*No longer focusing on Mobile*/}
+			{/*<MobileView>*/}
+			{/*	<NavDiv>*/}
+			{/*		<MenuTip onClick={() => toggleMenu()}>*/}
+			{/*			<MenuTipIcon open={menuOpen} className="fas fa-angle-down" />*/}
+			{/*			Menu*/}
+			{/*		</MenuTip>*/}
+			{/*		<NavPane onClick={() => toggleMenu()} open={menuOpen}>*/}
+			{/*			<NavLink to={"/"}>*/}
+			{/*				<NavIcon className="fas fa-truck" />*/}
+			{/*				Truck Assignment*/}
+			{/*			</NavLink>*/}
+			{/*			/!* System Administrators Only *!/*/}
+			{/*			{authUser?.role?.name === SYSTEM_ADMINISTRATOR && (*/}
+			{/*				<NavLink to={"/user/all"}>*/}
+			{/*					<NavIcon className="fas fa-users" />*/}
+			{/*					Manage Users*/}
+			{/*				</NavLink>*/}
+			{/*			)}*/}
+			{/*			<NavLink to={"/logout"}>*/}
+			{/*				<NavIcon className="fas fa-logout" />*/}
+			{/*				Log Out*/}
+			{/*			</NavLink>*/}
+			{/*		</NavPane>*/}
+			{/*	</NavDiv>*/}
+			{/*</MobileView>*/}
 		</div>
 	);
 }
