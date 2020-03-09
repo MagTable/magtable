@@ -22,11 +22,6 @@ export const TruckManagementListDiv = styled.div`
 	max-height: calc(100vh - 120px);
 `;
 
-// export const TruckManagementItemDiv = styled.div`
-// 	display: flex;
-// 	height: 60px;
-// `;
-
 export const TruckMgmtDiv = styled.div`
 	width: 100%;
 `;

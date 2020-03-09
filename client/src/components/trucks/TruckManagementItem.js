@@ -10,6 +10,8 @@ import {
 	TruckNumberDiv
 } from "../../styled/magtable/ListContent";
 import { Button } from "../../styled/common/FormControl";
+import IconButton from "../common/IconButton";
+import Confirmation from "../common/Confirmation";
 
 /**
  * @date 3/5/2020
@@ -73,8 +75,25 @@ function TruckManagementItem({ truck }) {
 						))}
 					</select>
 					<NoticeBox value={editedNotice} onChange={handleChangeNotice} />
-					<Button onClick={handleEdit}>Edit</Button>
-					<Button>Remove</Button>
+					<IconButton
+						faClassName="fas fa-edit"
+						onClick={handleEdit}
+						toolTip={"Delete Truck"}
+						hoverColor={"blue"}
+					/>
+					<Confirmation
+						confirmationMessage={"Confirm Delete"}
+						action={() => {}}
+					>
+						{({ confirm }) => (
+							<IconButton
+								faClassName="fa-trash-alt"
+								onClick={confirm}
+								toolTip={"Delete Truck"}
+								hoverColor={"red"}
+							/>
+						)}
+					</Confirmation>
 				</>
 			) : (
 				<>
