@@ -70,7 +70,7 @@ export const addTruck = truck => async dispatch => {
 
 export const getTrucks = () => async dispatch => {
 	try {
-		const res = await axios.get("/equipment/truck/all");
+		const res = await axios.get("/equipment/trucks/all");
 
 		dispatch({
 			type: GET_TRUCKS,
