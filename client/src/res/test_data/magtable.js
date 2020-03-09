@@ -325,6 +325,7 @@ export const initialParkingLocations = [
 		center: false,
 		west: false,
 		left: 4,
+		right: "4", // todo - not do this
 		double: true
 	},
 	{

@@ -276,10 +276,7 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 
 	return (
 		<div ref={drop}>
-			<TruckListItemDiv
-				disabled={!equipmentOperable}
-				assigned={assignment.parkingLocation}
-			>
+			<TruckListItemDiv disabled={!equipmentOperable}>
 				<TruckNumberDiv
 					ref={drag}
 					status={assignment.equipment.status}
@@ -347,9 +344,13 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 									>
 										<i className="fas fa-times" />
 									</UnassignBtn>
-									{assignment.parkingLocation.phonetic +
-										assignment.parkingLocation.position +
-										assignment.parkingLocation.bay}
+									<span>
+										{assignment.parkingLocation.apron.substr(0, 1) +
+											"-" +
+											assignment.parkingLocation.phonetic +
+											assignment.parkingLocation.position +
+											assignment.parkingLocation.bay}
+									</span>
 								</>
 							)}
 						</TruckListItemLocation>

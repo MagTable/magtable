@@ -81,7 +81,7 @@ function ParkingLocation({ parkingLocation, position, assignments }) {
 	];
 
 	return (
-		<PadDiv ref={drop}>
+		<PadDiv ref={drop} isOver={isOver}>
 			<PadDivHeader>{parkingLocation.phonetic + position}</PadDivHeader>
 			<FullDropDropDiv
 				assignments={sortedAssignments}
@@ -480,7 +480,9 @@ function FullDropDropDiv({
 					>
 						<i className="fas fa-times" />
 					</UnassignBtn>
-					<div ref={drag}>{assignments[0].equipment.id}</div>
+					{defaultAssignment && (
+						<div ref={drag}>{defaultAssignment.equipment.id}</div>
+					)}
 				</CenterAssigned>
 			)}
 		</FullPadDropDiv>

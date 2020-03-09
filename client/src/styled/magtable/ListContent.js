@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { DangerButton } from "../common/FormControl";
 import { DANGER, SUCCESS, WARNING } from "../../actions/constants";
 
@@ -137,12 +137,6 @@ export const TruckListItemDiv = styled.div`
 		height: 40px;
 		background: var(--shader-grey);
 	`}
-
-	${({ assigned }) =>
-		assigned &&
-		`
-			height: 40px;
-	`}
 `;
 
 export const TruckNoticeDiv = styled.div`
@@ -206,7 +200,7 @@ export const TruckNoticeIndicator = styled.i`
 		
 		font-size: 12px;	
 		bottom: 1px;
-	left: 1px;
+		left: 1px;
 	`}
 
 	${({ active }) =>
@@ -241,7 +235,7 @@ export const TruckNumberDiv = styled.div`
 	${({ assigned }) =>
 		assigned &&
 		`
-		background: var(--context-blue-light);
+		background: var(--context-grey-light);
 	`}
 	
 	:hover {
@@ -274,20 +268,39 @@ export const TruckStatusMessage = styled.h4`
 	}
 `;
 
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
 export const TruckListItemLocation = styled.div`
 	position: relative;
-	height: calc(100% -2px);
-	flex-grow: 1;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-grow: 1.4;
 	flex-basis: 0;
-	border: 0;
+
 	max-width: 80px;
+
 	border-left: 2px solid var(--border-color);
+
 	font-size: 1.5rem;
 	text-align: center;
 	font-family: "Noto Sans KR", sans-serif;
+
 	&:hover ${UnassignBtn} {
 		display: block;
 		opacity: 1;
+	}
+
+	span {
+		animation: 0.3s ${fadeIn} ease-out;
 	}
 `;
 
@@ -397,13 +410,19 @@ export const EmpHours = styled.p`
 `;
 
 export const LabelWrapper = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
 	${({ type }) =>
-		type === "greenPass" && `background-color: var(--context-green);`}
+		type === "greenPass" && `background-color: var(--green-pass);`}
 	${({ type }) =>
-		type === "noAvop" && `background-color: var(--context-orange);`}
+		type === "noAvop" && `background-color: var(--no-avop);`}
 		
-	width: 26px;
-	max-width: 26px;
+	width: 13px;
+	max-width: 13px;
+	max-height: 15px;
+
 	transition: 0.3s ease-in-out;
 	position: relative;
 	z-index: 1;
@@ -416,12 +435,12 @@ export const LabelWrapper = styled.div`
 `;
 
 export const LabelText = styled.div`
-	margin: 0 5px;
 	width: 0px;
 	overflow: hidden;
 	transition: 0.3s ease-in-out;
 	white-space: nowrap;
-	font-family: "Lato";
+	font-family: "Noto Sans", sans-serif;
+	opacity: 0;
 `;
 
 export const Labels = styled.div`
@@ -429,10 +448,14 @@ export const Labels = styled.div`
 	flex-direction: row:
 	justify-content: flex-end;
 	grid-area: labels;
+	
 	:hover {
 		${LabelWrapper}, ${LabelText} {
 			width: 90px;
 			max-width: 90px;
+		}
+		${LabelText} {
+			opacity: 1;
 		}
 	}
 `;
@@ -482,11 +505,12 @@ export const EmpListItemDiv = styled.div`
 	border-bottom: 1px solid var(--border-color);
 
 	display: grid;
-	grid-template-columns: 23px 1fr 48px;
+	grid-template-columns: 50px 1fr 48px;
 	grid-template-rows: auto auto;
 	grid-template-areas:
 		"name name equipmentID"
 		"labels position position";
+	align-items: end;
 
 	&:hover ${UnassignBtn} {
 		display: block;

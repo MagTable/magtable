@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { UnassignBtn } from "./ListContent";
 
 /**
@@ -7,6 +7,20 @@ import { UnassignBtn } from "./ListContent";
  * @module Styled
  */
 
+const scrollIn = keyframes`
+	from {
+    // transform: scale(0);
+		transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  to {
+    // transform: scale(100%);
+		transform: translateY(0);
+    opacity: 1;
+  }
+`;
+
 /**
  * Header that contains parkinglocation code
  */
@@ -14,9 +28,9 @@ export const PadDivHeader = styled.div`
 	grid-area: parking_code;
 	background: white;
 	border-bottom: 2px solid var(--border-color);
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
 `;
-
-const PadDropDiv = styled.div``;
 
 const rightTriangle = `
 	&:after {
@@ -24,7 +38,7 @@ const rightTriangle = `
 		
 		height: 0;
 		width: 0;
-		top: 25%;
+		top: 0;
 		right: 0;
 		
 		border-top: solid 10px transparent;
@@ -42,7 +56,7 @@ const leftTriangle = `
 		
 		height: 0;
 		width: 0;
-		top: 25%;
+		top: 0;
 		left: -10px;
 		
 		border-top: solid 10px transparent;
@@ -54,29 +68,29 @@ const leftTriangle = `
 	}
 `;
 
-export const HalfPadDropDiv = styled(PadDropDiv)`
+export const HalfPadDropDiv = styled.div`
 	position: relative;
 	font-size: 1.25rem;
 	z-index: 1;
 	transition: background 0.3s ease-in-out;
-	${({ left, hover }) =>
+	${({ left }) =>
 		left &&
 		`
 			grid-area: left_bay;
-			${hover && leftTriangle}
-		`}
+			border-bottom-left-radius: 18px;
+	`}
 		
-	${({ right, hover }) =>
+	${({ right }) =>
 		right &&
 		`
 			grid-area: right_bay;
-			${hover && rightTriangle}
+			border-bottom-right-radius: 18px;
 	`}
 	${({ hover }) => hover && `background: var(--context-green-light);`}
 	${({ canDrop }) => !canDrop && `background: var(--context-red-light);`}
 `;
 
-export const FullPadDropDiv = styled(PadDropDiv)`
+export const FullPadDropDiv = styled.div`
 	grid-area: 2 / 1 / span 1 / span 2;
 	height: 100%;
 	z-index: 1;
@@ -84,26 +98,44 @@ export const FullPadDropDiv = styled(PadDropDiv)`
 	transition: background 0.3s ease, opacity 0.3s ease, color 0.3s ease,
 		outline-color 0.3s ease;
 
-	${({ hover }) => hover && `background: var(--context-green-light);`}
+	border-bottom-right-radius: 18px;
+	border-bottom-left-radius: 18px;
+
+	${({ hover }) =>
+		hover &&
+		`
+		background: var(--context-green-light);
+	`}
 	${({ hover, canDrop }) =>
 		hover &&
 		!canDrop &&
-		`background: var(--context-red-light);`}
+		`
+		background: var(--context-red-light);
+	`}
 		
 	outline: 4px solid transparent;
 	outline-offset: -4px;
 	${({ isBaylead }) =>
 		isBaylead &&
 		`
-			color: var(--context-blue);
-			outline-color: var(--context-blue-light);
+			background: var(--context-blue-light);
 	`}
+`;
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 `;
 
 const LocationAssignment = styled.div`
 	position: relative;
 	transition: background 0.3s ease-in-out, color 0.3s ease,
 		outline-color 0.3s ease;
+	height: 100%;
 
 	:hover ${UnassignBtn} {
 		display: block;
@@ -112,7 +144,10 @@ const LocationAssignment = styled.div`
 	${({ hover }) => hover && `background: var(--context-green-light);`}
 	${({ isDragging }) =>
 		isDragging &&
-		`opacity: 0.5; background: var(--context-grey);`}
+		`
+			opacity: 0.5; 
+			background: var(--context-grey);
+		`}
 	
 	/* baylead styling */
 	outline: 4px solid transparent;
@@ -120,12 +155,15 @@ const LocationAssignment = styled.div`
 	${({ isBaylead }) =>
 		isBaylead &&
 		`
-			color: var(--context-blue);
-			outline-color: var(--context-blue-light);
+			background: var(--context-blue-light);
 	`}
 
 	${({ hover, canDrop }) =>
 		hover && !canDrop && `background: var(--context-red-light);`}
+		
+	div {
+		animation: 0.3s ${fadeIn} ease-out;
+	}
 `;
 
 export const CenterAssigned = styled(LocationAssignment)`
@@ -134,6 +172,8 @@ export const CenterAssigned = styled(LocationAssignment)`
 	align-items: center;
 	width: 100%;
 	height: 100%;
+	border-bottom-right-radius: 18px;
+	border-bottom-left-radius: 18px;
 `;
 export const LeftAssigned = styled(LocationAssignment)`
 	grid-area: left_assigned;
@@ -142,17 +182,22 @@ export const LeftAssigned = styled(LocationAssignment)`
 	vertical-align: middle;
 	align-items: center;
 
-	z-index: 2;
 	border-right: 1px solid var(--border-color);
+	border-bottom-left-radius: 18px;
+
+	z-index: 2;
 `;
 export const RightAssigned = styled(LocationAssignment)`
-	z-index: 2;
+	grid-area: right_assigned;
+
 	display: inline-grid;
 	vertical-align: middle;
-	border-left: 1px solid var(--border-color);
 	align-items: center;
 
-	grid-area: right_assigned;
+	border-left: 1px solid var(--border-color);
+	border-bottom-right-radius: 18px;
+
+	z-index: 2;
 `;
 
 /**
@@ -163,6 +208,12 @@ export const PadDiv = styled.div`
 	text-align: center;
 	border: 2px solid var(--border-color);
 	width: 100%;
+	box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.16), 0 0 12px rgba(0, 0, 0, 0.33);
+	background: white;
+
+	transition: transform 0.3s ease-in-out;
+	border-bottom-right-radius: 20px;
+	border-bottom-left-radius: 20px;
 
 	min-width: 65px;
 	max-width: 100px;
@@ -175,7 +226,7 @@ export const PadDiv = styled.div`
 	font-size: 1.75rem;
 	font-family: "Noto Sans KR", sans-serif;
 	color: var(--border-color);
-	margin-bottom: 0.5rem;
+	margin-bottom: 0.75rem;
 	background: ${({ hoverColor }) => hoverColor};
 
 	display: grid;
@@ -185,6 +236,14 @@ export const PadDiv = styled.div`
 		"parking_code parking_code"
 		"left_assigned right_assigned"
 		"left_bay right_bay";
+
+	animation: ${scrollIn} 1s ease;
+
+	${({ isOver }) =>
+		isOver &&
+		`
+		transform: scale(1.1);
+	`}
 `;
 
 export const FakePadDiv = styled.div`
@@ -235,12 +294,14 @@ export const NumberMiddle = styled(NumberLabel)`
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+	animation: ${scrollIn} 0.5s ease;
 `;
 
 export const NumberTop = styled(NumberLabel)`
 	height: 40px;
 	width: 100%;
 	text-align: center;
+	animation: ${scrollIn} 0.5s ease;
 `;
 
 export const ClearConfirmDiv = styled.div``;

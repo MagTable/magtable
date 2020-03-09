@@ -8,6 +8,7 @@ import {
 	PERSONNEL_MANAGER,
 	SYSTEM_ADMINISTRATOR
 } from "../../actions/constants";
+import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
 
 /**
  * @date 2/10/2020
@@ -32,13 +33,17 @@ const PrivateRoute = ({
 	personnelManagerRoute,
 	...rest
 }) => {
-	// todo fix password reset name is undefined
 	// destructure necessary attributes from auth state
 	const { isAuthenticated, loading, user } = useSelector(state => state.auth);
 	const dispatch = useDispatch();
 
 	// this will prevent crashes and provide a waiting state. can be replaced with a spinner gif component in the future
-	if (loading) return <h1>Loading User...</h1>;
+	if (loading)
+		return (
+			<SpinnerWrap fullPage>
+				<LoadingImg className="fas fa-circle-notch" />
+			</SpinnerWrap>
+		);
 
 	if (!isAuthenticated) return <Redirect to={"/login"} />;
 

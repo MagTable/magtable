@@ -21,7 +21,11 @@ import { initialParkingLocations } from "../res/test_data/magtable";
 
 const initialState = {
 	assignments: [],
-	employeeShifts: [],
+	employeeShifts: {
+		scheduleDate: null,
+		lastUpdated: null,
+		shifts: []
+	},
 	dailyMessages: "",
 	dailyMix: 40,
 	parkingLocations: initialParkingLocations,
@@ -174,7 +178,6 @@ export default function(state = initialState, action) {
 		case REFRESHING_EMPLOYEE_SHIFTS:
 			return {
 				...state,
-				employeeShifts: [],
 				shiftsLoading: true
 			};
 		case REFRESH_EMPLOYEE_SHIFTS:

@@ -22,6 +22,9 @@ html{
 
   --alert-warning: #ff990066;
 
+  --green-pass: #00e445;
+  --no-avop: #e397e2;
+
   /*Used for separating elements between one another, for example, shading every second row of a table or directly opposing divs. */
   --shader-grey: #d6d6d6;
   --shader-blue: rgba(74, 74, 255, 0.31);
@@ -31,7 +34,6 @@ html{
   --section-title-bg: #615A57;
 
 
-  /*--navbar: #EADEDA;*/
   --navbar: #232f3e;
   --header: #e5eaef;
   --header-text: #333;
