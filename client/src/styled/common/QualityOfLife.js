@@ -28,6 +28,12 @@ export const SpinnerWrap = styled.div`
 	align-items: center;
 	height: 100%;
 	width: 100%;
+
+	${({ fullPage }) =>
+		fullPage &&
+		`
+		height: calc(100vh - 70px);
+	`}
 `;
 
 export const LoadingText = styled.p`

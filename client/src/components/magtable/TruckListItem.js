@@ -344,9 +344,13 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 									>
 										<i className="fas fa-times" />
 									</UnassignBtn>
-									{assignment.parkingLocation.phonetic +
-										assignment.parkingLocation.position +
-										assignment.parkingLocation.bay}
+									<span>
+										{assignment.parkingLocation.apron.substr(0, 1) +
+											"-" +
+											assignment.parkingLocation.phonetic +
+											assignment.parkingLocation.position +
+											assignment.parkingLocation.bay}
+									</span>
 								</>
 							)}
 						</TruckListItemLocation>
