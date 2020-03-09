@@ -17,7 +17,7 @@ const TruckManagementLayout = () => {
 
 	return (
 		<DndProvider backend={Backend}>
-			<TruckManagement />
+			{/*<TruckManagement />*/}
 			<AddTruck />
 		</DndProvider>
 	);
