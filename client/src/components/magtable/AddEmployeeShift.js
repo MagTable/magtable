@@ -224,13 +224,11 @@ const AddEmployeeShift = ({ setShowModal }) => {
 							name="description"
 						>
 							<option value="" />
-							{jobRoles.map(role => {
-								return (
-									<option key={role} value={role}>
-										{role}
-									</option>
-								);
-							})}
+							{jobRoles.map(role => (
+								<option key={role} value={role}>
+									{role}
+								</option>
+							))}
 						</SelectBox>
 					</PositionDiv>
 					<GreenPassDiv>
