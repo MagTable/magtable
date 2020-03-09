@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import {
-	TruckManagementItemDiv,
-	TruckIdDiv,
-	TruckManagementStatus,
-	NoticeBox
-} from "../../styled/trucks/TruckManagement";
+import { NoticeBox } from "../../styled/trucks/TruckManagement";
 import { useDispatch, useSelector } from "react-redux";
 import { editTruck } from "../../actions/truck";
 import AddTruck from "./AddTruck";
+import {
+	TruckListItemDiv,
+	TruckNoticeIndicator,
+	TruckNumberDiv
+} from "../../styled/magtable/ListContent";
+import { Button } from "../../styled/common/FormControl";
 
 /**
  * @date 3/5/2020
@@ -38,14 +39,14 @@ function TruckManagementItem({ truck }) {
 	}
 
 	return (
-		<TruckManagementItemDiv>
-			<TruckIdDiv status={truck.status}>{truck.id}</TruckIdDiv>
-			<TruckManagementStatus>{truck.status}</TruckManagementStatus>
+		<TruckListItemDiv>
+			<TruckNumberDiv status={truck.status}>{truck.id}</TruckNumberDiv>
+			<TruckNoticeIndicator>{truck.status}</TruckNoticeIndicator>
 			<NoticeBox value={editedTruck.notice} onChange={handleChange} />
-			<button type={"submit"} onClick={handleEdit}>
-				EDIT BUTTON
-			</button>
-		</TruckManagementItemDiv>
+			<Button type={"submit"} onClick={handleEdit}>
+				Edit
+			</Button>
+		</TruckListItemDiv>
 	);
 }
 

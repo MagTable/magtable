@@ -2,15 +2,16 @@ import React from "react";
 import { useSelector } from "react-redux";
 import TruckManagementItem from "./TruckManagementItem";
 import {
-	TruckManagementTitle,
 	TruckManagementWrapper,
 	TruckManagementListDiv,
-	EditTruckWrap
+	EditTruckWrap,
+	TruckMgmtDiv
 } from "../../styled/trucks/TruckManagement";
+import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 
 /**
  * @date 3/5/2020
- * @author Tom Allcock
+ * @author Tom Allcock, MJ Kochuk
  * @module Component
  */
 
@@ -24,14 +25,16 @@ function TruckManagement() {
 
 	return (
 		<EditTruckWrap>
-			<TruckManagementWrapper>
-				<TruckManagementTitle>Truck Status + Notices</TruckManagementTitle>
+			<TruckMgmtDiv>
+				<ListTitle>
+					<ListTitleText>Truck Status + Notices</ListTitleText>
+				</ListTitle>
 				<TruckManagementListDiv>
 					{trucks.map(truck => (
 						<TruckManagementItem key={truck.id} truck={truck} />
 					))}
 				</TruckManagementListDiv>
-			</TruckManagementWrapper>
+			</TruckMgmtDiv>
 		</EditTruckWrap>
 	);
 }

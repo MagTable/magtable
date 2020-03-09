@@ -7,6 +7,10 @@ import { DndProvider } from "react-dnd";
 import Backend from "react-dnd-html5-backend";
 import TruckManagement from "./TruckManagement";
 import AddTruck from "./AddTruck";
+import {
+	TruckMgmtDiv,
+	TruckMgmtWrap
+} from "../../styled/trucks/TruckManagement";
 
 const TruckManagementLayout = () => {
 	const dispatch = useDispatch();
@@ -17,8 +21,12 @@ const TruckManagementLayout = () => {
 
 	return (
 		<DndProvider backend={Backend}>
-			<TruckManagement />
-			<AddTruck />
+			<TruckMgmtWrap>
+				<TruckManagement />
+				<TruckMgmtDiv>
+					<AddTruck />
+				</TruckMgmtDiv>
+			</TruckMgmtWrap>
 		</DndProvider>
 	);
 };
