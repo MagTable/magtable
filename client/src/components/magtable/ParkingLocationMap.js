@@ -39,7 +39,6 @@ function ParkingLocationMap(props) {
 		)
 	);
 
-	// todo @mj help with unique key error here (added div messes up the map)
 	return (
 		<TruckMapDiv>
 			<ListTitle>
@@ -93,7 +92,9 @@ function ParkingLocationMap(props) {
 									)}
 									{location.double && <FakePadDiv />}
 								</PadColumn>
-								<NumberMiddle>{location.right}</NumberMiddle>
+								{!location.double && (
+									<NumberMiddle>{location.right}</NumberMiddle>
+								)}
 							</SafetyZoneWrapper>
 						)
 				)}
