@@ -94,7 +94,7 @@ export const FullPadDropDiv = styled.div`
 	grid-area: 2 / 1 / span 1 / span 2;
 	height: 100%;
 	z-index: 1;
-	font-size: 2rem;
+	font-size: 1.5rem;
 	transition: background 0.3s ease, opacity 0.3s ease, color 0.3s ease,
 		outline-color 0.3s ease;
 
@@ -223,7 +223,7 @@ export const PadDiv = styled.div`
 	flex-grow: 1.3;
 	flex-basis: 0;
 
-	font-size: 1.75rem;
+	font-size: 1.25rem;
 	font-family: "Noto Sans KR", sans-serif;
 	color: var(--border-color);
 	margin-bottom: 0.75rem;
@@ -298,7 +298,7 @@ export const NumberMiddle = styled(NumberLabel)`
 `;
 
 export const NumberTop = styled(NumberLabel)`
-	height: 40px;
+	height: 30px;
 	width: 100%;
 	text-align: center;
 	animation: ${scrollIn} 0.5s ease;

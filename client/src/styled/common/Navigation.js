@@ -46,7 +46,6 @@ export const NavIcon = styled.i`
 	width: 45px;
 	vertical-align: middle;
 	float: left;
-	// padding: 0px 0 10px 0;
 `;
 
 /**

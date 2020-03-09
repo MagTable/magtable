@@ -54,6 +54,7 @@ export const UnassignBtn = styled.button`
 	border-bottom-left-radius: 5px;
 	font-size: 0.7rem;
 	padding: 0;
+	text-align: center;
 	width: 1rem;
 	height: 1rem;
 	top: 0;
@@ -313,11 +314,13 @@ export const TruckListManipDiv = styled.div`
 export const EquipmentListItemButton = styled(DangerButton)`
 	transition: opacity 0.3s ease-in-out;
 	opacity: 0;
+	text-align: center;
+	padding: 0;
+	width: 1.25rem;
+	height: 1.25rem;
 	font-size: 13px;
 	color: white;
 	border-radius: 30px;
-	width: 20px;
-	height: 20px;
 	display: none;
 	:hover {
 		opacity: 1;
@@ -465,6 +468,7 @@ export const AssignedToWrap = styled.div`
 	background-color: #0496b2;
 	grid-area: equipmentID;
 
+	height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -491,9 +495,10 @@ export const EmpRole = styled.h2`
 	align-self: end;
 	justify-content: flex-end;
 
-	margin: 0.25rem;
+	margin: 0;
+	padding: 0 2px 5px 0;
 	text-align: right;
-
+	white-space: nowrap;
 	color: grey;
 	font-size: 17px;
 	z-index: 0;
