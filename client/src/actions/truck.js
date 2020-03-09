@@ -17,7 +17,11 @@ import {
  */
 export const editTruck = truck => async dispatch => {
 	try {
-		const res = await axios.post("/trucks/edit/", truck, AXIOS_JSON_HEADER);
+		const res = await axios.post(
+			"/equipment/trucks/edit/",
+			truck,
+			AXIOS_JSON_HEADER
+		);
 
 		//todo check payload to make sure it is what we want.
 		dispatch({
@@ -61,7 +65,7 @@ export const addTruck = truck => async dispatch => {
 
 export const getTrucks = () => async dispatch => {
 	try {
-		const res = await axios.get("/equipment/truck/all");
+		const res = await axios.get("/equipment/trucks/all");
 
 		dispatch({
 			type: GET_TRUCKS,
