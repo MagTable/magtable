@@ -65,7 +65,7 @@ const StyledSection = styled.section`
  * @returns {*}
  * @constructor
  */
-const AddEmployeeShiftModal = ({ handleClose, show, children }) => {
+const Modal = ({ handleClose, show, children }) => {
 	const showHideClassName = !!show;
 
 	return (
@@ -81,4 +81,4 @@ const AddEmployeeShiftModal = ({ handleClose, show, children }) => {
 	);
 };
 
-export default AddEmployeeShiftModal;
+export default Modal;

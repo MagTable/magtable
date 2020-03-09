@@ -54,12 +54,13 @@ const PrivateRoute = ({
 	}
 
 	// more checks for user role depending on the personnelManagerRoute boolean prop
+	// if not a personnel manager, or system administrator send the user to the truck page.
 	if (
 		personnelManagerRoute &&
 		user.role.name !== PERSONNEL_MANAGER &&
 		user.role.name !== SYSTEM_ADMINISTRATOR
 	) {
-		return <Redirect to="/" />;
+		return <Redirect to="/truck/all" />;
 	}
 
 	// lastly, ensure that a token exists in local storage. if not, logout and redirect to /login

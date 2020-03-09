@@ -13,7 +13,7 @@ public class Truck implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "truckID", insertable = false, nullable = false)
+    @Column(name = "truckid", insertable = false, nullable = false)
     private Integer id;
 
     @Column(name = "status", nullable = false)

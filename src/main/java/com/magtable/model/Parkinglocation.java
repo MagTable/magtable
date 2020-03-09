@@ -19,8 +19,27 @@ public class Parkinglocation implements Serializable {
     @Column(name = "apron", nullable = false)
     private String apron;
 
-    @Column(name = "code", nullable = false)
-    private String code;
+    @Column(name = "phonetic", nullable = false)
+    private String phonetic;
 
-    
+    @Column(name = "east", nullable = false)
+    private Boolean east;
+
+    @Column(name = "center", nullable = false)
+    private Boolean center;
+
+    @Column(name = "west", nullable = false)
+    private Boolean west;
+
+    @Column(name = "left", nullable = false)
+    private Integer left;
+
+    @Column(name = "right")
+    private Integer right;
+
+    @Column(name = "composite")
+    private Integer composite;
+
+    @Column(name = "double")
+    private Boolean plDouble;
 }

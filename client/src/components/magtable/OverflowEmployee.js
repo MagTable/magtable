@@ -7,7 +7,7 @@ import {
 } from "../../styled/magtable/Overflow";
 import { ClickCatcher } from "../../styled/common/ClickCatcher";
 import AddEmployeeShift from "./AddEmployeeShift";
-import AddEmployeeShiftModal from "../modal/AddEmployeeShiftModal";
+import Modal from "../modal/Modal";
 
 /**
  * @date 3/1/2020
@@ -118,9 +118,9 @@ function OverflowEmployee({
 							<FilterIcon className={"fas fa-sync"} />
 							Refresh
 						</OverflowMenuButton>
-						<AddEmployeeShiftModal show={showModal} handleClose={handleClose}>
+						<Modal show={showModal} handleClose={handleClose}>
 							<AddEmployeeShift />
-						</AddEmployeeShiftModal>
+						</Modal>
 						<OverflowMenuButton onClick={handleShow}>
 							<FilterIcon className={"fas fa-user-plus"} />
 							Add Shift

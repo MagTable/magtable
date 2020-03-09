@@ -55,6 +55,8 @@ export const CON = "CON";
 export const OOS = "OOS";
 export const INOP = "INOP";
 
+export const TRUCK_STATUSES = [GO, CON, OOS, INOP];
+
 // UI Hint Types
 export const DANGER = "DANGER";
 export const WARNING = "WARNING";
@@ -116,6 +118,10 @@ export const SET_DAILY_MIX = "SET_DAILY_MIX";
 export const ADD_BRIX_RECORD = "ADD_BRIX_RECORD";
 
 export const PUBLISH_TABLE = "PUBLISH_TABLE";
+
+export const EDIT_TRUCK = "EDIT_TRUCK";
+export const ADD_TRUCK = "ADD_TRUCK";
+export const GET_TRUCKS = "GET_TRUCKS";
 
 // standard axios config object for POST requests
 export const AXIOS_JSON_HEADER = {
