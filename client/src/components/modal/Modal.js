@@ -1,6 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
+/**
+ * @date 2/28/2020
+ * @author Steven Wong, Arran Woodruff
+ * @module Component
+ */
+
 const StyledDiv = styled.div`
 	position: fixed;
 	top: 0;
@@ -21,37 +27,42 @@ const StyledDiv = styled.div`
 `;
 
 const StyledButton = styled.button`
-	float: right;
 	position: absolute;
-	right: 0px;
-	top: 0px;
-	transform: translate(13px, -13px);
-	border-radius: 30px;
+	right: 0;
+	top: 0;
 	width: 30px;
 	height: 30px;
-	border: 2px solid grey;
-	overflow: hidden;
-	white-space: nowrap;
-	transition: 0.2s ease-in-out;
+	padding: 0;
+
+	border-top-right-radius: 0.45rem;
+	border-bottom-left-radius: 0.45rem;
+	border: 0;
+
 	cursor: pointer;
-	z-index: 1;
-	display: block;
-	opacity: 1;
+	text-align: center;
+
+	background: var(--context-red);
+	color: white;
+	i {
+		font-size: 135%;
+	}
+	:hover {
+		background: darkred;
+	}
 `;
 
 const StyledSection = styled.section`
 	background: #fff;
 	position: relative;
 	z-index: 100;
-	padding: 15px;
-	width: 40%;
+	padding: 2rem;
 	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.06), 0 0 6px rgba(0, 0, 0, 0.23);
 	border-radius: 0.45rem;
 `;
 
 /**
  * @date 3/01/2020
- * @author Steven Wong
+ * @author Steven Wong, Arran Woodruff
  * @module Component
  */
 
@@ -75,7 +86,9 @@ const Modal = ({ handleClose, show, children }) => {
 		>
 			<StyledSection className="modal-main">
 				{children}
-				<StyledButton onClick={handleClose}>X</StyledButton>
+				<StyledButton onClick={handleClose}>
+					<i className="fas fa-times" />
+				</StyledButton>
 			</StyledSection>
 		</StyledDiv>
 	);

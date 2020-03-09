@@ -12,7 +12,7 @@ import { LoginBtn } from "../../styled/auth/Login";
 
 /**
  * @date 2/28/2020
- * @author Steven Wong
+ * @author Steven Wong, Arran Woodruff
  * @module Component
  */
 
@@ -24,11 +24,56 @@ import { LoginBtn } from "../../styled/auth/Login";
  * @returns {*} The AddEmployeeShift component.
  */
 
-const AddEmployeeDiv = styled.div`
-	width: 80%;
-	margin: auto;
+const AddEmployeeForm = styled(Form)`
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-auto-rows: auto;
+	grid-gap: 1rem;
+	grid-template-areas:
+		"header header"
+		"name name"
+		"start end"
+		"position position"
+		"noavop green"
+		"submit submit";
 `;
-const AddEmployeeShift = () => {
+
+const Header = styled.h2`
+	margin: 0;
+	grid-area: header;
+`;
+
+const NameDiv = styled.div`
+	grid-area: name;
+`;
+
+const StartTimeDiv = styled.div`
+	grid-area: start;
+`;
+
+const EndTimeDiv = styled.div`
+	grid-area: end;
+`;
+
+const PositionDiv = styled.div`
+	grid-area: position;
+`;
+
+const SubmitDiv = styled.div`
+	grid-area: submit;
+`;
+
+const GreenPassDiv = styled.div`
+	grid-area: green;
+	min-width: 10rem;
+`;
+
+const NoAvopDiv = styled.div`
+	grid-area: noavop;
+	min-width: 10rem;
+`;
+
+const AddEmployeeShift = ({ setShowModal }) => {
 	const dispatch = useDispatch();
 
 	// All potential shift times going by every 30 minutes following 24hr format standards.
@@ -87,43 +132,44 @@ const AddEmployeeShift = () => {
 	const jobRoles = ALL_POSITIONS;
 
 	return (
-		<AddEmployeeDiv>
-			<Formik
-				initialValues={{
-					name: "",
-					startTime: "",
-					endTime: "",
-					description: "",
-					noAvop: false,
-					isGreen: false
-				}}
-				onSubmit={(values, { resetForm }) => {
-					dispatch(addEmployeeShift(values));
-					resetForm();
-				}}
-				validationSchema={Yup.object().shape({
-					name: Yup.string()
-						.matches(
-							/^(([A-za-z]+[\s]{1}[A-za-z]+)|([A-Za-z]+)|([A-za-z]+[\s]{1}[A-za-z]+[\s]{1}[A-za-z]+))$/,
-							"Invalid Characters"
-						)
-						.required("Required field")
-						.min(5, "Minimum Length is 5")
-						.max(20, "Maximum Length is 20"),
-					startTime: Yup.string()
-						.oneOf(shiftTimes)
-						.required("Required Start Time"),
-					endTime: Yup.string()
-						.oneOf(shiftTimes)
-						.required("Required End Time"),
-					description: Yup.string()
-						.oneOf(jobRoles)
-						.required("Required Position")
-				})}
-			>
-				{props => (
-					<Form>
-						<h2>Add Employee Shift</h2>
+		<Formik
+			initialValues={{
+				name: "",
+				startTime: "",
+				endTime: "",
+				description: "",
+				noAvop: false,
+				isGreen: false
+			}}
+			onSubmit={(values, { resetForm }) => {
+				dispatch(addEmployeeShift(values));
+				resetForm();
+				setShowModal(false);
+			}}
+			validationSchema={Yup.object().shape({
+				name: Yup.string()
+					.matches(
+						/^(([A-za-z]+[\s]{1}[A-za-z]+)|([A-Za-z]+)|([A-za-z]+[\s]{1}[A-za-z]+[\s]{1}[A-za-z]+))$/,
+						"Invalid Characters"
+					)
+					.required("Required field")
+					.min(5, "Minimum Length is 5")
+					.max(20, "Maximum Length is 20"),
+				startTime: Yup.string()
+					.oneOf(shiftTimes)
+					.required("Required"),
+				endTime: Yup.string()
+					.oneOf(shiftTimes)
+					.required("Required"),
+				description: Yup.string()
+					.oneOf(jobRoles)
+					.required("Required")
+			})}
+		>
+			{props => (
+				<AddEmployeeForm>
+					<Header>Add Employee Shift</Header>
+					<NameDiv>
 						<Field name={"name"}>
 							{({ field }) => (
 								<TextInput
@@ -136,8 +182,32 @@ const AddEmployeeShift = () => {
 								/>
 							)}
 						</Field>
-						<SelectBox label="Start Time" name="startTime">
-							<option value="">Select a Start Time</option>
+					</NameDiv>
+					<StartTimeDiv>
+						<SelectBox
+							errors={props.errors.startTime}
+							touched={props.touched.startTime}
+							value={props.values.startTime}
+							label="Start Time"
+							name="startTime"
+						>
+							<option value="" />
+							{shiftTimes.map(time => (
+								<option key={time} value={time}>
+									{time}
+								</option>
+							))}
+						</SelectBox>
+					</StartTimeDiv>
+					<EndTimeDiv>
+						<SelectBox
+							errors={props.errors.endTime}
+							touched={props.touched.endTime}
+							value={props.values.endTime}
+							label="End Time"
+							name="endTime"
+						>
+							<option value="" />
 							{shiftTimes.map(time => {
 								return (
 									<option key={time} value={time}>
@@ -146,20 +216,16 @@ const AddEmployeeShift = () => {
 								);
 							})}
 						</SelectBox>
-						<br />
-						<SelectBox label="End Time" name="endTime">
-							<option value="">Select a End Time</option>
-							{shiftTimes.map(time => {
-								return (
-									<option key={time} value={time}>
-										{time}
-									</option>
-								);
-							})}
-						</SelectBox>
-						<br />
-						<SelectBox label="Position" name="description">
-							<option value="">Select a Role</option>
+					</EndTimeDiv>
+					<PositionDiv>
+						<SelectBox
+							errors={props.errors.description}
+							touched={props.touched.description}
+							value={props.values.description}
+							label="Position"
+							name="description"
+						>
+							<option value="" />
 							{jobRoles.map(role => {
 								return (
 									<option key={role} value={role}>
@@ -168,15 +234,19 @@ const AddEmployeeShift = () => {
 								);
 							})}
 						</SelectBox>
-						<br />
+					</PositionDiv>
+					<GreenPassDiv>
 						<CheckBox name={"noAvop"}> No AVOP?</CheckBox>
+					</GreenPassDiv>
+					<NoAvopDiv>
 						<CheckBox name={"isGreen"}> Green Pass?</CheckBox>
-						<br />
+					</NoAvopDiv>
+					<SubmitDiv>
 						<LoginBtn type="submit">Submit</LoginBtn>
-					</Form>
-				)}
-			</Formik>
-		</AddEmployeeDiv>
+					</SubmitDiv>
+				</AddEmployeeForm>
+			)}
+		</Formik>
 	);
 };
 

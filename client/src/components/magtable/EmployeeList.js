@@ -36,7 +36,7 @@ const EmployeeList = () => {
 	const dispatch = useDispatch();
 	const employeeShifts = useSelector(state => state.magtable.employeeShifts); // get the employees
 	const loading = useSelector(state => state.magtable.shiftsLoading);
-	const [open, setOpen] = useState(false);
+	const [overflowOpen, setOverflowOpen] = useState(false);
 	// employees are already sorted by time
 	const startTimes = [];
 
@@ -187,8 +187,8 @@ const EmployeeList = () => {
 			<ListTitle>
 				<ListTitleText>Employees</ListTitleText>
 				<OverflowEmployee
-					open={open}
-					setOpen={setOpen}
+					open={overflowOpen}
+					setOpen={setOverflowOpen}
 					activeFilters={activeFilters}
 					filterAMEmployees={filterAMEmployees}
 					filterPMEmployees={filterPMEmployees}
