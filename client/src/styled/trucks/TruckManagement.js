@@ -19,7 +19,7 @@ export const TruckManagementListDiv = styled.div`
 	flex-basis: 0;
 	overflow-y: auto;
 	overflow-x: hidden;
-	max-height: calc(100vh - 70px);
+	max-height: calc(100vh - 120px);
 `;
 
 // export const TruckManagementItemDiv = styled.div`
