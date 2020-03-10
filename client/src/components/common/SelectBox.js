@@ -87,7 +87,7 @@ const SelectBox = ({ label, ...props }) => {
 		<SelectContainer>
 			<StyledLabel
 				error={props.errors && props.touched}
-				lifted={props.value.length > 0}
+				lifted={props?.value?.length > 0}
 				focus={focus}
 				htmlFor={props.id || props.name}
 			>
