@@ -296,6 +296,7 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 							active={localNoticeOpen}
 							disabled={!equipmentOperable}
 							className={"fas fa-exclamation-triangle"}
+							onClick={e => handleToggleLocalNotice(e)}
 						/>
 					)}
 				</TruckNumberDiv>

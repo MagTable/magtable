@@ -209,6 +209,10 @@ export const TruckNoticeIndicator = styled.i`
 		`
 		color: var(--context-orange);
 	`}
+	
+	:hover {
+		color: var(--context-orange);
+	}
 `;
 
 export const TruckNumberDiv = styled.div`
