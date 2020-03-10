@@ -2,10 +2,13 @@ package com.magtable.controller;
 
 import com.magtable.model.Tower;
 import com.magtable.model.Truck;
+import com.magtable.model.User;
 import com.magtable.repository.TowerRepository;
 import com.magtable.repository.TruckRepository;
 import com.magtable.services.ErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,7 +33,7 @@ public class EquipmentController {
      *
      * @return the list of trucks
      */
-    @GetMapping("/trucks/all")
+    @GetMapping("/truck/all")
     public List<Truck> getAllTrucks() {
         return truckRepository.findAll();
     }
@@ -43,7 +46,7 @@ public class EquipmentController {
      *
      * @return the updated list of trucks
      */
-    @PostMapping("/trucks/add")
+    @PostMapping("/truck/add")
     public List<Truck> addTruck(@RequestBody Truck truck) {
         // Trucks can only have the following 4 statuses
         if (!(truck.getStatus().equals("GO") || truck.getStatus().equals("CON")
@@ -69,7 +72,7 @@ public class EquipmentController {
      *
      * @return the updated list of trucks
      */
-    @PostMapping("/trucks/edit")
+    @PutMapping("/truck/edit")
     public List<Truck> editTruck(@RequestBody Truck truck) {
         if (!(truck.getStatus().equals("GO") || truck.getStatus().equals("CON")
                 || truck.getStatus().equals("OOS") || truck.getStatus().equals("INOP"))) {
@@ -94,16 +97,15 @@ public class EquipmentController {
      *
      * @return the updated list of trucks
      */
-    @DeleteMapping("trucks/delete")
-    public List<Truck> deleteTruck(@RequestBody Truck truck){
-        //checking if the truck exists
-        if(truckRepository.findById(truck.getID()) == null){
-            errorService.truckDoesntExists(truck.getID());
-        }
-        //deleteing the truck
+    @DeleteMapping("truck/delete/{id}")
+    public ResponseEntity deleteTruck(@PathVariable(value = "id") final int truckID){
+
+        Truck truck = truckRepository.findById(truckID).orElseThrow(() ->
+                errorService.truckDoesntExists(truckID));
+
         truckRepository.delete(truck);
 
-        return truckRepository.findAll();
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     /**
@@ -113,7 +115,7 @@ public class EquipmentController {
      *
      * @return the list of towers
      */
-    @GetMapping("/towers/all")
+    @GetMapping("/tower/all")
     public List<Tower> getAllTowers() {
         return towerRepository.findAll();
     }
