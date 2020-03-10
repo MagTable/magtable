@@ -70,7 +70,11 @@ const leftTriangle = `
 
 export const HalfPadDropDiv = styled.div`
 	position: relative;
-	font-size: 1.25rem;
+	font-size: 1.75rem;
+	@media (max-height: 770px) {
+		font-size: 1.5rem;
+	}
+	
 	z-index: 1;
 	transition: background 0.3s ease-in-out;
 	${({ left }) =>
@@ -94,7 +98,10 @@ export const FullPadDropDiv = styled.div`
 	grid-area: 2 / 1 / span 1 / span 2;
 	height: 100%;
 	z-index: 1;
-	font-size: 1.5rem;
+	font-size: 1.75rem;
+	@media (max-height: 770px) {
+		font-size: 1.5rem;
+	}
 	transition: background 0.3s ease, opacity 0.3s ease, color 0.3s ease,
 		outline-color 0.3s ease;
 
@@ -223,7 +230,11 @@ export const PadDiv = styled.div`
 	flex-grow: 1.3;
 	flex-basis: 0;
 
-	font-size: 1.25rem;
+	font-size: 1.75rem;
+	@media (max-height: 770px) {
+		font-size: 1.5rem;
+	}
+
 	font-family: "Noto Sans KR", sans-serif;
 	color: var(--border-color);
 	margin-bottom: 0.75rem;
