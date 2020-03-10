@@ -88,6 +88,25 @@ public class EquipmentController {
     }
 
     /**
+     * route           post /equipment/trucks/delete
+     * description     route to delete a truck
+     * access          System Admins, Mechanics
+     *
+     * @return the updated list of trucks
+     */
+    @DeleteMapping("trucks/delete")
+    public List<Truck> deleteTruck(@RequestBody Truck truck){
+        //checking if the truck exists
+        if(truckRepository.findById(truck.getID()) == null){
+            errorService.truckDoesntExists(truck.getID());
+        }
+        //deleteing the truck
+        truckRepository.delete(truck);
+
+        return truckRepository.findAll();
+    }
+
+    /**
      * route           GET /equipment/towers
      * description     route to fetch the towers from the database
      * access          Personnel Managers, System Admins
