@@ -44,10 +44,10 @@ public class EquipmentController {
      * description     route to add a truck to the database
      * access          System Admins
      *
-     * @return the updated list of trucks
+     * @return the added truck
      */
     @PostMapping("/truck/add")
-    public List<Truck> addTruck(@RequestBody Truck truck) {
+    public Truck addTruck(@RequestBody Truck truck) {
         // Trucks can only have the following 4 statuses
         if (!(truck.getStatus().equals("GO") || truck.getStatus().equals("CON")
                 || truck.getStatus().equals("OOS") || truck.getStatus().equals("INOP"))) {
@@ -61,8 +61,7 @@ public class EquipmentController {
         //saving the new truck
         truckRepository.save(truck);
 
-        //returning the updated truck list
-        return truckRepository.findAll();
+        return truck;
     }
 
     /**
@@ -70,10 +69,10 @@ public class EquipmentController {
      * description     route to edit the truck operational status/notices
      * access          System Admins, Mechanics
      *
-     * @return the updated list of trucks
+     * @return the edited Truck
      */
     @PutMapping("/truck/edit")
-    public List<Truck> editTruck(@RequestBody Truck truck) {
+    public Truck editTruck(@RequestBody Truck truck) {
         if (!(truck.getStatus().equals("GO") || truck.getStatus().equals("CON")
                 || truck.getStatus().equals("OOS") || truck.getStatus().equals("INOP"))) {
             errorService.truckOPStatusInvalid(truck.getStatus());
@@ -87,7 +86,7 @@ public class EquipmentController {
         //saving the new truck
         truckRepository.save(truck);
 
-        return truckRepository.findAll();
+         return truck;
     }
 
     /**
@@ -95,7 +94,7 @@ public class EquipmentController {
      * description     route to delete a truck
      * access          System Admins, Mechanics
      *
-     * @return the updated list of trucks
+     * @return A repsonse
      */
     @DeleteMapping("truck/delete/{id}")
     public ResponseEntity deleteTruck(@PathVariable(value = "id") final int truckID){
