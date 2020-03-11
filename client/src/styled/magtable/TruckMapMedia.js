@@ -232,7 +232,7 @@ export const PadDiv = styled.div`
 
 	font-size: 1.75rem;
 	@media (max-height: 770px) {
-		font-size: 1.5rem;
+		font-size: 1.2rem;
 	}
 
 	font-family: "Noto Sans KR", sans-serif;

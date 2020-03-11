@@ -325,10 +325,13 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 											/>
 										)}
 									</EquipmentListItemEmployeeWarning>
-									{elem.canClear && (
+									{elem.shift && (
 										<EquipmentListItemEmployeeClearButton>
 											<EquipmentListItemButton
-												onClick={() => handleClear(elem.shift.id)}
+												disabled={!elem.canClear}
+												onClick={() =>
+													elem.canClear && handleClear(elem.shift.id)
+												}
 											>
 												<i className="fas fa-times" />
 											</EquipmentListItemButton>

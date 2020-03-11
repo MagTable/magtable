@@ -37,7 +37,6 @@ export const TowerPositionDiv = styled.div`
 	outline: 2px solid var(--border-color);
 	outline-offset: -1px;
 	flex-direction: column;
-	height: 100%;
 `;
 
 /**
