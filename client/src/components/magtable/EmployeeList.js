@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
 	EmployeeListDiv,
@@ -36,6 +36,7 @@ const EmployeeList = () => {
 	const dispatch = useDispatch();
 	const employeeShifts = useSelector(state => state.magtable.employeeShifts); // get the employees
 	const loading = useSelector(state => state.magtable.shiftsLoading);
+	const showAM = useSelector(state => state.magtable.showAM);
 	const [overflowOpen, setOverflowOpen] = useState(false);
 	// employees are already sorted by time
 	const startTimes = [];
@@ -54,6 +55,14 @@ const EmployeeList = () => {
 	const [filterMechanic, setFilterMechanic] = useState(true);
 	// used to determine if the app filters out employees that are part of the training staff, default false to show all employees
 	const [filterTrainer, setFilterTrainer] = useState(true);
+
+	useEffect(() => {
+		if (showAM) {
+			filterPMEmployees();
+		} else {
+			filterAMEmployees();
+		}
+	}, [showAM]);
 
 	if (!loading) {
 		employeeShifts.shifts.forEach(emp => {
