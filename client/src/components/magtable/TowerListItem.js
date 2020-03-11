@@ -211,9 +211,10 @@ function TowerListItem({ assignment, showAM }) {
 						)}
 					</EquipmentListItemEmployeeWarning>
 					<EquipmentListItemEmployeeClearButton>
-						{elem.canClear && (
+						{elem.shift && (
 							<EquipmentListItemButton
-								onClick={() => handleClear(elem.shift.id)}
+								disabled={!elem.canClear}
+								onClick={() => elem.canClear && handleClear(elem.shift.id)}
 							>
 								<i className="fas fa-times" />
 							</EquipmentListItemButton>

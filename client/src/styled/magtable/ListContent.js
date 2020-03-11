@@ -71,6 +71,16 @@ export const UnassignBtn = styled.button`
 		display: block;
 		opacity: 1;
 	}
+
+	${({ disabled }) =>
+		disabled &&
+		`
+		background: var(--context-grey);
+		color: var(--header-text);
+		:hover {
+			background: var(--context-grey-light);
+		}
+	`}
 `;
 
 /**
@@ -330,6 +340,16 @@ export const EquipmentListItemButton = styled(DangerButton)`
 		opacity: 1;
 		display: block;
 	}
+
+	${({ disabled }) =>
+		disabled &&
+		`
+		background: var(--context-grey);
+		color: var(--header-text);
+		:hover {
+			background: var(--context-grey-light);
+		}
+	`}
 `;
 
 export const EquipmentListItemEmployeeList = styled.div`
@@ -346,8 +366,8 @@ export const EquipmentListItemEmployee = styled.div`
 	display: grid;
 	padding-left: 0.5rem;
 	padding-right: 0.5rem;
-	grid-template-columns: 1fr auto auto;
-	grid-template-areas: "name clearbutton warning";
+	grid-template-columns: 1fr auto 1.25rem;
+	grid-template-areas: "name warning clearbutton";
  	align-items: center;
 
 	transition: height 0.15s ease-in-out;
@@ -390,10 +410,9 @@ export const EquipmentListItemEmployeeClearButton = styled.div`
 /**
  * Divides the list of available employees into sections based on start time.
  */
-export const StartTimeSeparator = styled.h2`
+export const StartTimeSeparator = styled.h3`
 	margin: 0;
-	padding: 0.75rem;
-	text-align: center;
+	padding: 0.5rem 1rem;
 	border-bottom: 1px solid var(--border-color);
 	background: var(--header);
 `;
