@@ -3,7 +3,7 @@ import {
 	REMOVE_EQUIPMENT_EMPLOYEE,
 	SET_TRUCK_LOCATION,
 	REMOVE_TRUCK_LOCATION,
-	// PUBLISH_TABLE,
+	PUBLISH_TABLE,
 	// ADD_BRIX_RECORD,
 	// SET_DAILY_MIX,
 	// ADD_DAILY_MESSAGE,
@@ -107,21 +107,21 @@ export const setEquipmentEmployee = (
  * @param magtable magtable to publish
  * @returns API returns the saved state of the magtable
  */
-// const publishTable = magtable => async dispatch => {
-// 	try {
-// 		const res = await axios.post(
-// 			"/magtable/publish",
-// 			AXIOS_JSON_HEADER,
-// 			magtable
-// 		);
-// 		dispatch({
-// 			type: PUBLISH_TABLE,
-// 			payload: res.data
-// 		});
-// 	} catch (err) {
-// 		console.log(err);
-// 	}
-// };
+export const publishTable = magtable => async dispatch => {
+	try {
+		const res = await axios.post(
+			"/magtable/publish",
+			AXIOS_JSON_HEADER,
+			magtable
+		);
+		dispatch({
+			type: PUBLISH_TABLE,
+			payload: res.data
+		});
+	} catch (err) {
+		console.log(err);
+	}
+};
 
 /**
  * Saves a brix record to an assignment's brixRecords list

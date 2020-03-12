@@ -10,11 +10,12 @@ import {
 	FakePadDiv,
 	SafetyZoneWrapper
 } from "../../styled/magtable/TruckMapMedia";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ParkingLocation from "./ParkingLocation";
 import { CENTER, EAST, WEST } from "../../actions/constants";
 import { Button } from "../../styled/common/FormControl";
 import Confirmation from "../common/Confirmation";
+import { publishTable } from "../../actions/magtable";
 
 /**
  * @date 2020-02-17
@@ -29,6 +30,7 @@ import Confirmation from "../common/Confirmation";
  * @returns {*} The ParkingLocationMap component
  */
 function ParkingLocationMap(props) {
+	const dispatch = useDispatch();
 	const selectedApron = useSelector(state => state.magtable.selectedApron);
 	const parkingLocations = useSelector(
 		state => state.magtable.parkingLocations
@@ -39,6 +41,10 @@ function ParkingLocationMap(props) {
 		)
 	);
 
+	const handlePublish = () => {
+		dispatch(publishTable());
+	};
+
 	return (
 		<TruckMapDiv>
 			<ListTitle>
@@ -48,7 +54,7 @@ function ParkingLocationMap(props) {
 					{({ confirm }) => <Button onClick={confirm}>Clear All</Button>}
 				</Confirmation>
 
-				<Button>Publish</Button>
+				<button onClick={handlePublish}>Publish</button>
 			</ListTitle>
 			<MapWrapper>
 				{parkingLocations.map(

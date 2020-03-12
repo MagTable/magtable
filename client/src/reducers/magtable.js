@@ -115,7 +115,8 @@ export default function(state = initialState, action) {
 		case PUBLISH_TABLE:
 			return {
 				...state,
-				assignments: payload // server will echo the given assignments to verify changes were made properly
+				assignments: payload.assignments
+				// server will echo the given assignments to verify changes were made properly
 			};
 		case ADD_BRIX_RECORD:
 			return {
