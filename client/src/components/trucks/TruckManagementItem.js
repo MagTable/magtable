@@ -6,7 +6,8 @@ import { TRUCK_STATUSES, SYSTEM_ADMINISTRATOR } from "../../actions/constants";
 import {
 	TruckListItemDiv,
 	TruckNoticeIndicator,
-	TruckNumberDiv
+	TruckNumberDiv,
+	TruckStatusBox
 } from "../../styled/magtable/ListContent";
 import { Button } from "../../styled/common/FormControl";
 import IconButton from "../common/IconButton";
@@ -24,7 +25,7 @@ import Confirmation from "../common/Confirmation";
  * @param props
  * @returns {*} The TruckManagementItem component
  */
-function TruckManagementItem({ truck }) {
+function TruckManagementItem({ truck, setEditTruck }) {
 	const dispatch = useDispatch();
 
 	//
@@ -49,8 +50,10 @@ function TruckManagementItem({ truck }) {
 			status: editedStatus,
 			notice: editedNotice
 		};
-		console.log(editedTruck);
-		dispatch(editTruck(editedTruck));
+
+		setEditTruck(editedTruck);
+		// console.log(editedTruck);
+		// dispatch(editTruck(editedTruck));
 	}
 
 	function isSelected(truckStatus) {
@@ -66,14 +69,14 @@ function TruckManagementItem({ truck }) {
 			<TruckNumberDiv status={editedStatus}>{truck.id}</TruckNumberDiv>
 			{authUser?.role?.name === SYSTEM_ADMINISTRATOR ? (
 				<>
-					<select onChange={handleChangeStatus}>
-						{TRUCK_STATUSES.map(truckStatus => (
-							<option value={truckStatus} selected={isSelected(truckStatus)}>
-								{truckStatus}
-							</option>
-						))}
-					</select>
-					<NoticeBox value={editedNotice} onChange={handleChangeNotice} />
+					{/*<select onChange={handleChangeStatus}>*/}
+					{/*	{TRUCK_STATUSES.map(truckStatus => (*/}
+					{/*		<option value={truckStatus} selected={isSelected(truckStatus)}>*/}
+					{/*			{truckStatus}*/}
+					{/*		</option>*/}
+					{/*	))}*/}
+					{/*</select>*/}
+					<TruckStatusBox>{editedNotice}</TruckStatusBox>
 					<IconButton
 						faClassName="fas fa-edit"
 						onClick={handleEdit}
