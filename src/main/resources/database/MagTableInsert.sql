@@ -104,8 +104,8 @@ INSERT INTO parkinglocation (id, apron, phonetic, east, center, west, `left`) VA
 INSERT INTO magTableRecord (dailyMix, forecastLow, publishedBy, timePublished) VALUES (20, 5, 'Mustafa', '2020-02-22T04:00:00');
 
 -- Assignment
-INSERT INTO assignment (magID, parkingLocation) VALUES (1, 5);
-INSERT INTO assignment (magID, parkingLocation) VALUES (1, 10);
+INSERT INTO assignment (magID) VALUES (1);
+INSERT INTO assignment (magID) VALUES (1);
 INSERT INTO assignment (magID) VALUES (1);
 INSERT INTO assignment (magID) VALUES (1);
 

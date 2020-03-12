@@ -17,9 +17,6 @@ public class Assignment implements Serializable {
     @Column(name = "magid", nullable = false)
     private Integer magID;
 
-    @Column(name = "parkinglocation")
-    private Integer parkingLocation;
-
     public Integer getAssignmentID() {
         return assignmentID;
     }
@@ -36,11 +33,4 @@ public class Assignment implements Serializable {
         this.magID = magID;
     }
 
-    public Integer getParkingLocation() {
-        return parkingLocation;
-    }
-
-    public void setParkingLocation(Integer parkingLocation) {
-        this.parkingLocation = parkingLocation;
-    }
 }

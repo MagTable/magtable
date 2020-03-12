@@ -30,6 +30,14 @@ public class MtrController {
     @Autowired
     private BrixrecordRepository brixrecordRepository;
 
+    @Autowired
+    private PlassignmentRepository plassignmentRepository;
+
+    @Autowired
+    private TowerRepository towerRepository;
+
+    @Autowired
+    private TruckRepository truckRepository;
 
     @GetMapping("/new")
     public MagtablerecordResponse getMagtableRecordResponse() {
@@ -38,10 +46,12 @@ public class MtrController {
         System.out.println(mtr);
         magtablerecordRepository.save(mtr);
 
-        //Create then send the empty skeleton to front end making sure to assign the magID from database
-        MagtablerecordResponse mtrr = new MagtablerecordResponse();
-        mtrr.setMagID(mtr.getMagID());
+        long assignmentValue = 0;
+        assignmentValue += truckRepository.count();
+        assignmentValue += towerRepository.count();
 
+        //Create then send the empty skeleton to front end making sure to assign the magID from database
+        MagtablerecordResponse mtrr = new MagtablerecordResponse(mtr.getMagID(), assignmentValue);
         return mtrr;
     }
 
@@ -83,13 +93,17 @@ public class MtrController {
 
                 //Save the assignment
                 ass.setMagID(mtr.getMagID());
-                ass.setParkingLocation(ar.getParkingLocation());
                 assignmentRepository.save(ass);
 
                 //Save the equipment
                 Equipment equipment = new Equipment(ar.getEquipment());
                 equipment.setAssignmentID(ass.getAssignmentID());
                 equipmentRepository.save(equipment);
+
+                //Save the parkingLocation
+                PlAssignment pla = new PlAssignment(ar.getPlAssignment());
+                pla.setAssignmentID(ass.getAssignmentID());
+                plassignmentRepository.save(pla);
 
                 //Save the shifts
                 for (ShiftResponse sr:shifts) {
