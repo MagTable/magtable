@@ -4,10 +4,10 @@
     Created: February 21, 2020
     Description: Use Case two updated database scheme for MagTable.
  */
-DROP DATABASE IF EXISTS magtabledev;
-CREATE DATABASE magtabledev;
+DROP DATABASE IF EXISTS heroku_5d3f37e2c6237fd;
+CREATE DATABASE heroku_5d3f37e2c6237fd;
 
-USE magtabledev;
+USE heroku_5d3f37e2c6237fd;
 
 CREATE TABLE Role
 (
@@ -69,12 +69,12 @@ CREATE TABLE MagTableRecord
 );
 
 CREATE TABLE Assignment (
-    assignmentID INT(10)   NOT NULL AUTO_INCREMENT,
-    magID        INT(5)   NOT NULL,
-    parkingLocation   INT(5),
-    PRIMARY KEY (assignmentID),
-    CONSTRAINT FK_Mag_ID FOREIGN KEY (magID) REFERENCES MagTableRecord (magID) ON DELETE RESTRICT ON UPDATE RESTRICT,
-    CONSTRAINT FK_Location_ID FOREIGN KEY (parkingLocation) REFERENCES ParkingLocation (id) ON DELETE RESTRICT ON UPDATE RESTRICT
+                            assignmentID INT(10)   NOT NULL AUTO_INCREMENT,
+                            magID        INT(5)   NOT NULL,
+                            parkingLocation   INT(5),
+                            PRIMARY KEY (assignmentID),
+                            CONSTRAINT FK_Mag_ID FOREIGN KEY (magID) REFERENCES MagTableRecord (magID) ON DELETE RESTRICT ON UPDATE RESTRICT,
+                            CONSTRAINT FK_Location_ID FOREIGN KEY (parkingLocation) REFERENCES ParkingLocation (id) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
 CREATE TABLE Equipment
