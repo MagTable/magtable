@@ -141,13 +141,25 @@ export const TruckListItemDiv = styled.div`
 	transition: all 0.15s ease-in-out;
 	display: flex;
 	height: 60px;
-
+	width: 60%;
+	margin: auto;
+	border-bottom: 2px solid grey;
+	text-overflow: ellipsis;
 	${({ disabled }) =>
 		disabled &&
 		`
 		height: 40px;
 		background: var(--shader-grey);
 	`}
+`;
+
+export const TruckStatusBox = styled.div`
+	width: 100%;
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 `;
 
 export const TruckNoticeDiv = styled.div`
