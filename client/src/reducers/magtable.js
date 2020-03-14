@@ -15,7 +15,8 @@ import {
 	TOGGLE_BAY_LEAD,
 	REFRESH_EMPLOYEE_SHIFTS,
 	REFRESHING_EMPLOYEE_SHIFTS,
-	TOGGLE_AM_PM
+	TOGGLE_AM_PM,
+	CLEAR_TABLE
 } from "../actions/constants";
 import { initialParkingLocations } from "../res/test_data/magtable";
 
@@ -111,6 +112,15 @@ export default function(state = initialState, action) {
 							: shift
 					)
 				}
+			};
+		case CLEAR_TABLE:
+			return {
+				...state,
+				assignments: state.assignments.map(assignment => ({
+					...assignment,
+					employeeShifts: [null, null, null, null],
+					parkingLocation: null
+				}))
 			};
 		case PUBLISH_TABLE:
 			return {

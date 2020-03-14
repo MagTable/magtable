@@ -17,13 +17,13 @@ export const ListTitle = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	height: 50px;
+	padding: 0 1rem;
 `;
 
 /**
  * The text within the ListTitle div.
  */
 export const ListTitleText = styled.p`
-	padding-left: 20px;
 	width: 100%;
 	font-size: 20px;
 	font-family: "Noto Sans KR", sans-serif;

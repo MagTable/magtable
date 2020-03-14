@@ -15,7 +15,8 @@ import {
 	ADD_EMPLOYEE_SHIFT,
 	REFRESH_EMPLOYEE_SHIFTS,
 	REFRESHING_EMPLOYEE_SHIFTS,
-	TOGGLE_AM_PM
+	TOGGLE_AM_PM,
+	CLEAR_TABLE
 } from "./constants";
 import axios from "axios";
 import { setAlert } from "./alert";
@@ -121,6 +122,12 @@ export const publishTable = magtable => async dispatch => {
 	} catch (err) {
 		console.log(err);
 	}
+};
+
+export const clearTable = () => dispatch => {
+	dispatch({
+		type: CLEAR_TABLE
+	});
 };
 
 /**

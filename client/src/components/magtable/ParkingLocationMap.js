@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import { TruckMapDiv } from "../../styled/magtable/Maps";
-import ApronToggle from "./ApronToggle";
 import {
 	MapWrapper,
 	NumberMiddle,
@@ -10,12 +9,11 @@ import {
 	FakePadDiv,
 	SafetyZoneWrapper
 } from "../../styled/magtable/TruckMapMedia";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import ParkingLocation from "./ParkingLocation";
 import { CENTER, EAST, WEST } from "../../actions/constants";
-import { Button } from "../../styled/common/FormControl";
-import Confirmation from "../common/Confirmation";
-import { publishTable } from "../../actions/magtable";
+import IconButton from "../common/IconButton";
+import OverflowLocations from "./OverflowLocations";
 
 /**
  * @date 2020-02-17
@@ -30,7 +28,7 @@ import { publishTable } from "../../actions/magtable";
  * @returns {*} The ParkingLocationMap component
  */
 function ParkingLocationMap(props) {
-	const dispatch = useDispatch();
+	const [overflowOpen, setOverflowOpen] = useState(false);
 	const selectedApron = useSelector(state => state.magtable.selectedApron);
 	const parkingLocations = useSelector(
 		state => state.magtable.parkingLocations
@@ -41,20 +39,20 @@ function ParkingLocationMap(props) {
 		)
 	);
 
-	const handlePublish = () => {
-		dispatch(publishTable());
-	};
-
 	return (
 		<TruckMapDiv>
 			<ListTitle>
-				<ListTitleText>Parking Locations</ListTitleText>
-				<ApronToggle />
-				<Confirmation confirmationMessage={"Confirm Clear"} action={() => {}}>
-					{({ confirm }) => <Button onClick={confirm}>Clear All</Button>}
-				</Confirmation>
-
-				<button onClick={handlePublish}>Publish</button>
+				<ListTitleText>Parking Locations: {selectedApron}</ListTitleText>
+				<OverflowLocations open={overflowOpen} setOpen={setOverflowOpen}>
+					{({ openOverflow }) => (
+						<IconButton
+							faClassName="fa-bars fa-lg"
+							onClick={openOverflow}
+							color={"var(--header-text)"}
+							hoverColor={"grey"}
+						/>
+					)}
+				</OverflowLocations>
 			</ListTitle>
 			<MapWrapper>
 				{parkingLocations.map(

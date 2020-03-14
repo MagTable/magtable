@@ -29,6 +29,19 @@ export const Input = styled.input`
 	}
 `;
 
+export const DoubleClickConfirm = styled.div`
+	transition: background 0.3s ease-in-out;
+
+	${({ active, color }) =>
+			active &&
+			`
+			background: ${color} !important;
+	`}
+		:not(:last-child) {
+		border-bottom: 2px solid var(--context-grey);
+	}
+`;
+
 /**
  * The apps basic button.
  */
@@ -46,6 +59,8 @@ export const Button = styled.button`
 	:hover {
 		background: #bdbdbd;
 	}
+
+	${({ auto }) => auto && `width: auto;`}
 `;
 
 export const DangerButton = styled(Button)`
