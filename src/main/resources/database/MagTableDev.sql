@@ -102,9 +102,9 @@ CREATE TABLE Equipment
 
 CREATE TABLE Shift
 (
-    shiftID      INT(10) NOT NULL AUTO_INCREMENT,
+    shiftID      INT(10) NOT NULL AUTO_INCREMENT, #TODO Remove Auto Increment ( Inerts break with it)
     assignmentID INT(10) NOT NULL,
-    description  VARCHAR(20),
+    description  VARCHAR(30),
     name         VARCHAR(50),
     startTime    DATETIME,
     endTime      DATETIME,
@@ -112,6 +112,18 @@ CREATE TABLE Shift
     isGreen      BOOLEAN,
     PRIMARY KEY (shiftID),
     CONSTRAINT FK_Shift_Assignment FOREIGN KEY (assignmentID) REFERENCES Assignment (assignmentID) ON DELETE RESTRICT ON UPDATE RESTRICT
+);
+
+CREATE TABLE W2WShift
+(
+    shiftID      INT(10) NOT NULL AUTO_INCREMENT,
+    description  VARCHAR(30),
+    name         VARCHAR(50),
+    startTime    DATETIME,
+    endTime      DATETIME,
+    noAvop       BOOLEAN,
+    isGreen      BOOLEAN,
+    PRIMARY KEY (shiftID)
 );
 
 CREATE TABLE BrixRecord
