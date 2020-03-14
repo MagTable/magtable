@@ -273,87 +273,130 @@ export const initialDailyMessages = [
 
 export const initialDailyMix = 45;
 
+// {
+// 	id: 2,
+// 		apron: "EDA",
+// 	parkingLocations: {
+// default: "BE",
+// 		additional: {
+// 		left: "BE1",
+// 			right: "BE3"
+// 	}
+// }
+// },
+
 export const initialParkingLocations = [
 	{
 		id: 1,
-		apron: "EDA",
-		code: "AE",
-		parkingLocations: {}
+		apron: "WDA",
+		phonetic: "A",
+		east: true,
+		center: false,
+		west: true,
+		left: null,
+		right: 1
 	},
 	{
 		id: 2,
-		apron: "EDA",
-		code: "BE",
-		parkingLocations: {
-			left: "1",
-			right: "2"
-		}
+		apron: "WDA",
+		phonetic: "B",
+		east: true,
+		center: false,
+		west: true,
+		left: 1,
+		right: 2
 	},
-	{ id: 1, apron: "WDA", code: "AW1" },
-	{ id: 2, apron: "WDA", code: "AE1" },
-	{ id: 3, apron: "WDA", code: "BE" },
-	{ id: 4, apron: "WDA", code: "BE1" },
-	{ id: 5, apron: "WDA", code: "BE2" },
-	{ id: 6, apron: "WDA", code: "BW" },
-	{ id: 7, apron: "WDA", code: "BW1" },
-	{ id: 8, apron: "WDA", code: "BW2" },
-	{ id: 9, apron: "WDA", code: "CE" },
-	{ id: 10, apron: "WDA", code: "CE2" },
-	{ id: 11, apron: "WDA", code: "CE3" },
-	{ id: 12, apron: "WDA", code: "CW" },
-	{ id: 13, apron: "WDA", code: "CW2" },
-	{ id: 14, apron: "WDA", code: "CW3" },
-	{ id: 15, apron: "WDA", code: "D4" },
-	{ id: 16, apron: "WDA", code: "D4" },
-	{ id: 17, apron: "EDA", code: "AE1" },
-	{ id: 18, apron: "EDA", code: "AC1" },
-	{ id: 19, apron: "EDA", code: "AW1" },
-	{ id: 20, apron: "EDA", code: "BE" },
-	{ id: 21, apron: "EDA", code: "BE1" },
-	{ id: 22, apron: "EDA", code: "BE3" },
-	{ id: 23, apron: "EDA", code: "BC" },
-	{ id: 24, apron: "EDA", code: "BC1" },
-	{ id: 25, apron: "EDA", code: "BC3" },
-	{ id: 26, apron: "EDA", code: "BW" },
-	{ id: 27, apron: "EDA", code: "BW1" },
-	{ id: 28, apron: "EDA", code: "BW3" },
-	{ id: 29, apron: "EDA", code: "CE" },
-	{ id: 30, apron: "EDA", code: "CE3" },
-	{ id: 31, apron: "EDA", code: "CE4" },
-	{ id: 32, apron: "EDA", code: "CC" },
-	{ id: 33, apron: "EDA", code: "CC3" },
-	{ id: 34, apron: "EDA", code: "CC4" },
-	{ id: 35, apron: "EDA", code: "CW" },
-	{ id: 36, apron: "EDA", code: "CW3" },
-	{ id: 37, apron: "EDA", code: "CW4" },
-	{ id: 38, apron: "EDA", code: "DE" },
-	{ id: 39, apron: "EDA", code: "DE4" },
-	{ id: 40, apron: "EDA", code: "DE6" },
-	{ id: 41, apron: "EDA", code: "DC" },
-	{ id: 42, apron: "EDA", code: "DC4" },
-	{ id: 43, apron: "EDA", code: "DC6" },
-	{ id: 44, apron: "EDA", code: "DW" },
-	{ id: 45, apron: "EDA", code: "DW4" },
-	{ id: 46, apron: "EDA", code: "DW6" },
-	{ id: 47, apron: "EDA", code: "EE" },
-	{ id: 48, apron: "EDA", code: "EE6" },
-	{ id: 49, apron: "EDA", code: "EE7" },
-	{ id: 50, apron: "EDA", code: "EC" },
-	{ id: 51, apron: "EDA", code: "EC6" },
-	{ id: 52, apron: "EDA", code: "EC7" },
-	{ id: 53, apron: "EDA", code: "EW" },
-	{ id: 54, apron: "EDA", code: "EW6" },
-	{ id: 55, apron: "EDA", code: "EW7" },
-	{ id: 56, apron: "EDA", code: "FE" },
-	{ id: 57, apron: "EDA", code: "FE7" },
-	{ id: 58, apron: "EDA", code: "FE9" },
-	{ id: 59, apron: "EDA", code: "FC" },
-	{ id: 60, apron: "EDA", code: "FC7" },
-	{ id: 61, apron: "EDA", code: "FC9" },
-	{ id: 62, apron: "EDA", code: "FW" },
-	{ id: 63, apron: "EDA", code: "FW7" },
-	{ id: 64, apron: "EDA", code: "FW9" },
-	{ id: 65, apron: "EDA", code: "GE9" },
-	{ id: 66, apron: "EDA", code: "GC9" },
-	{ id: 67, apron: "EDA", code: "GW9" }
+	{
+		id: 3,
+		apron: "WDA",
+		phonetic: "C",
+		east: true,
+		center: false,
+		west: true,
+		left: 2,
+		right: 4,
+		composite: 3
+	},
+	{
+		id: 4,
+		apron: "WDA",
+		phonetic: "D",
+		east: true,
+		center: false,
+		west: false,
+		left: 4,
+		double: true
+	},
+	{
+		id: 5,
+		apron: "EDA",
+		phonetic: "A",
+		east: true,
+		center: true,
+		west: true,
+		left: null,
+		right: 1
+	},
+	{
+		id: 6,
+		apron: "EDA",
+		phonetic: "B",
+		east: true,
+		center: true,
+		west: true,
+		left: 1,
+		right: 3,
+		composite: 2
+	},
+	{
+		id: 7,
+		apron: "EDA",
+		phonetic: "C",
+		east: true,
+		center: true,
+		west: true,
+		left: 3,
+		right: 4
+	},
+	{
+		id: 8,
+		apron: "EDA",
+		phonetic: "D",
+		east: true,
+		center: true,
+		west: true,
+		left: 4,
+		right: 6,
+		composite: 5
+	},
+	{
+		id: 9,
+		apron: "EDA",
+		phonetic: "E",
+		east: true,
+		center: true,
+		west: true,
+		left: 6,
+		right: 7
+	},
+	{
+		id: 10,
+		apron: "EDA",
+		phonetic: "F",
+		east: true,
+		center: true,
+		west: true,
+		left: 7,
+		right: 9
+	},
+	{
+		id: 11,
+		apron: "EDA",
+		phonetic: "G",
+		east: true,
+		center: true,
+		west: true,
+		left: 9,
+		right: null
+	}
 ];

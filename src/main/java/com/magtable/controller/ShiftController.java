@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -48,6 +49,22 @@ public class ShiftController {
             FileInputStream fileInputStream = new FileInputStream(new File("./src/main/java/com/magtable/controller/shiftlist.ser"));
             ObjectInputStream ois = new ObjectInputStream(fileInputStream);
             shiftList = (ShiftList) ois.readObject();
+
+           /*ArrayList<ShiftResponse> tempList = shiftScheduler.getShiftList();
+
+           ShiftResponse temp = tempList.get(1);
+           temp.setNoAvop(true);
+           temp.setIsGreen(true);
+
+           temp = tempList.get(2);
+           temp.setName("This is a Really Really Long Name");
+           temp.setIsGreen(true);
+
+           FileOutputStream fos = new FileOutputStream(new File("./src/main/java/com/magtable/controller/shiftlist.ser"));
+           ObjectOutputStream oos = new ObjectOutputStream(fos);
+           shiftList.setShifts(tempList);
+           oos.writeObject(shiftList);*/
+
         } catch (Exception e) {
             e.printStackTrace();
         }

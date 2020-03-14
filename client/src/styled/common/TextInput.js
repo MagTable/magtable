@@ -1,5 +1,33 @@
 import styled from "styled-components";
 import { Input } from "./FormControl";
+import PlaneBG from "../../res/Images/Plane_BG.jpg";
+
+export const BlurCover = styled.div`
+	background-color: rgba(255, 255, 255, 0.15);
+	${({ blur }) =>
+		blur &&
+		` 
+		filter: blur(5px);
+	`}
+	height: 120%;
+	width: 120%;
+	transition: 0.5s ease-in-out;
+`;
+
+export const Background = styled.div`
+	background-image: url(${PlaneBG});
+	height: calc(100vh + 10px);
+	background-size: calc(100vw + 20px);
+	background-position: center;
+	width: calc(100vw + 20px);
+	transform: translate(-10px, -10px);
+`;
+
+export const BGContainer = styled.div`
+	overflow: hidden;
+	position: absolute;
+	z-index: -5;
+`;
 
 export const TextInputContainer = styled.div`
 	position: relative;
@@ -18,6 +46,10 @@ export const TextInput = styled(Input)`
 	border-bottom: 2px solid black;
 
 	transition: border 0.3s ease-in-out;
+	
+	${Background} {
+filter: blur(30px);
+}
 
 	${({ fit }) => fit && `width: calc(100% - 14px);`}
 	

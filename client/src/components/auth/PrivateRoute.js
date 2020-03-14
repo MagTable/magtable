@@ -32,6 +32,7 @@ const PrivateRoute = ({
 	personnelManagerRoute,
 	...rest
 }) => {
+	// todo fix password reset name is undefined
 	// destructure necessary attributes from auth state
 	const { isAuthenticated, loading, user } = useSelector(state => state.auth);
 	const dispatch = useDispatch();

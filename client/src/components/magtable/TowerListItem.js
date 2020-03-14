@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import { TowerTitle, TowerTitleText } from "../../styled/magtable/Titling";
+import { TowerPositionDiv } from "../../styled/magtable/Maps";
 import {
-	DeleteTowerAssignmentBtn,
-	TowerPositionDiv
-} from "../../styled/magtable/Maps";
-import { TowerListItemEmployee } from "../../styled/magtable/ListContent";
+	EquipmentListItemEmployee,
+	EquipmentListItemEmployeeName,
+	EquipmentListItemEmployeeWarning,
+	EquipmentListItemEmployeeClearButton,
+	EquipmentListItemButton
+} from "../../styled/magtable/ListContent";
 import { useDrop } from "react-dnd";
 import {
 	DANGER,
 	MANAGEMENT_POSITIONS,
 	MECHANIC,
-	OJT,
 	OJT_TOWER,
 	SET_EQUIPMENT_EMPLOYEE,
 	SUCCESS,
+	TOWER_POSITIONS,
 	TECHNICIAN_POSITIONS,
 	WARNING
 } from "../../actions/constants";
@@ -97,17 +100,13 @@ function TowerListItem({ assignment, showAM }) {
 		if (
 			isOver &&
 			canDrop &&
-			hoveredShiftDescription === OJT &&
+			hoveredShiftDescription === OJT_TOWER &&
 			(index === 0 || index === 2)
 		)
 			return WARNING;
 
 		// if hovered shift is not included in technician positions
-		if (
-			isOver &&
-			canDrop &&
-			!TECHNICIAN_POSITIONS.includes(hoveredShiftDescription)
-		)
+		if (isOver && canDrop && !TOWER_POSITIONS.includes(hoveredShiftDescription))
 			return WARNING;
 
 		if (isOver && canDrop) return SUCCESS;
@@ -134,6 +133,7 @@ function TowerListItem({ assignment, showAM }) {
 			return "Mechanic Assigned to Tower";
 		}
 
+		/* if OJT-Tower is assigned to primary without a secondary */
 		if (
 			(index === 0 || index === 2) &&
 			assignment.employeeShifts[index]?.description === OJT_TOWER &&
@@ -148,20 +148,6 @@ function TowerListItem({ assignment, showAM }) {
 			assignment.employeeShifts[index + 1]?.description === OJT_TOWER
 		) {
 			return "OJT Requires Qualified Secondary";
-		}
-
-		if (
-			assignment.employeeShifts[index]?.description === OJT_TOWER &&
-			!assignment.employeeShifts[index + 1]
-		) {
-			return true;
-		}
-
-		if (
-			assignment.employeeShifts[index]?.description === OJT_TOWER &&
-			assignment.employeeShifts[index + 1]?.description === OJT_TOWER
-		) {
-			return true;
 		}
 
 		return null;
@@ -176,18 +162,18 @@ function TowerListItem({ assignment, showAM }) {
 			canClear: assignment.employeeShifts[0] && !assignment.employeeShifts[1]
 		},
 		{
-			assignmentIndex: 2,
-			shift: assignment.employeeShifts[2],
-			slot: 1,
-			show: !showAM,
-			canClear: assignment.employeeShifts[2] && !assignment.employeeShifts[3]
-		},
-		{
 			assignmentIndex: 1,
 			shift: assignment.employeeShifts[1],
 			slot: 2,
 			show: showAM,
 			canClear: assignment.employeeShifts[1]
+		},
+		{
+			assignmentIndex: 2,
+			shift: assignment.employeeShifts[2],
+			slot: 1,
+			show: !showAM,
+			canClear: assignment.employeeShifts[2] && !assignment.employeeShifts[3]
 		},
 		{
 			assignmentIndex: 3,
@@ -204,30 +190,36 @@ function TowerListItem({ assignment, showAM }) {
 				<TowerTitleText>{assignment.equipment.position}</TowerTitleText>
 			</TowerTitle>
 			{employeeShifts.map(elem => (
-				<TowerListItemEmployee
+				<EquipmentListItemEmployee
 					key={elem.assignmentIndex}
 					slot={elem.slot}
 					show={elem.show}
 					outlineType={getOutline(elem.assignmentIndex)}
 					warningBackground={getAssignmentWarning(elem.assignmentIndex)}
 				>
-					{elem.shift?.name}
-					{getAssignmentWarning(elem.assignmentIndex) && (
-						<IconButton
-							faClassName={"fa-exclamation-triangle"}
-							color={"orange"}
-							outlineType={"darkorange"}
-							toolTip={getAssignmentWarning(elem.assignmentIndex)}
-						/>
-					)}
-					{elem.canClear && (
-						<DeleteTowerAssignmentBtn
-							onClick={() => handleClear(elem.shift.id)}
-						>
-							X
-						</DeleteTowerAssignmentBtn>
-					)}
-				</TowerListItemEmployee>
+					<EquipmentListItemEmployeeName>
+						{elem.shift?.name}
+					</EquipmentListItemEmployeeName>
+					<EquipmentListItemEmployeeWarning>
+						{getAssignmentWarning(elem.assignmentIndex) && (
+							<IconButton
+								faClassName={"fa-exclamation-triangle"}
+								color={"var(--context-orange)"}
+								outlineType={"darkorange"}
+								toolTip={getAssignmentWarning(elem.assignmentIndex)}
+							/>
+						)}
+					</EquipmentListItemEmployeeWarning>
+					<EquipmentListItemEmployeeClearButton>
+						{elem.canClear && (
+							<EquipmentListItemButton
+								onClick={() => handleClear(elem.shift.id)}
+							>
+								<i className="fas fa-times" />
+							</EquipmentListItemButton>
+						)}
+					</EquipmentListItemEmployeeClearButton>
+				</EquipmentListItemEmployee>
 			))}
 		</TowerPositionDiv>
 	);

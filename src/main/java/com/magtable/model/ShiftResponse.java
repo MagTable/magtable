@@ -1,10 +1,11 @@
 package com.magtable.model;
 
-
 import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ShiftResponse implements Serializable {
+
+    private static final long serialVersionUID = -8106437984727025966L;
 
     private int id;
     private String name;
@@ -16,7 +17,7 @@ public class ShiftResponse implements Serializable {
 
 
     //todo change initial value (serialized List problem)
-    private static final AtomicInteger count = new AtomicInteger(200);
+    private static final AtomicInteger count = new AtomicInteger(0);
 
     public ShiftResponse() {
         this.id = count.incrementAndGet();
@@ -77,5 +78,18 @@ public class ShiftResponse implements Serializable {
 
     public void setIsGreen(Boolean isGreen) {
         this.isGreen = isGreen;
+    }
+
+    @Override
+    public String toString() {
+        return "ShiftResponse{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", startTime='" + startTime + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", description='" + description + '\'' +
+                ", noAvop=" + noAvop +
+                ", isGreen=" + isGreen +
+                '}';
     }
 }
