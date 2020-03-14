@@ -9,7 +9,7 @@ public class ShiftList implements Serializable {
 
     private String scheduleDate;
     private static String lastUpdated;
-    private List<ShiftResponse> shifts;
+    private static List<ShiftResponse> shifts;
 
     public ShiftList(){}
 
