@@ -21,6 +21,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/shift")
@@ -172,10 +173,46 @@ public class ShiftController {
     @PostMapping("/add")
     public ShiftResponse addShift(@RequestBody ShiftResponse shiftResponse) {
 
+        //Converting the Json object to our database entity
+        W2WShift shift = new W2WShift(shiftResponse);
+
+        //Logic for converting "0400" to a timestamp
+        Calendar cal = Calendar.getInstance();
+        //months are 0 indexed so have to add one - January = 0
+        final int MONTH = cal.get(Calendar.MONTH) + 1;
+        final int DAY = cal.get(Calendar.DAY_OF_MONTH);
+        final int YEAR = cal.get(Calendar.YEAR);
+
+        StringBuilder sb = new StringBuilder(shiftResponse.getStartTime());
+        //Have to Pad a 0 to the front if its not a length of 4
+        if(sb.length() == 3){
+            sb.insert(0, "0");
+        }
+        sb.insert(2, ":");
+        String startTime = sb.toString();
+
+        sb = new StringBuilder(shiftResponse.getEndTime());
+        //Have to Pad a 0 to the front if its not a length of 4
+        if(sb.length() == 3){
+            sb.insert(0, "0");
+        }
+        sb.insert(2, ":");
+        String endTime = sb.toString();
 
 
+        shift.setStartTime(Timestamp.valueOf(YEAR + "-" + MONTH + "-" + DAY + " " +  startTime + ":" + "00"));
 
-        return null;
+        shift.setEndTime(Timestamp.valueOf(YEAR + "-" + MONTH + "-" + DAY + " " +  endTime + ":" + "00"));
+
+        shiftRepository.save(shift);
+
+        W2WShift savedShift = shiftRepository.findLastRecord();
+
+       // int id = savedShift.map(W2WShift::getId).get();
+
+        shiftResponse.setId(savedShift.getId());
+
+        return shiftResponse;
     }
 
 
