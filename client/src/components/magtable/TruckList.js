@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Switch from "react-switch";
 import { toggleAM } from "../../actions/magtable";
 import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
+import Modal from "../modal/Modal";
+import BrixManagement from "./BrixManagement";
 
 /**
  * @date 2020-02-17
@@ -34,10 +36,14 @@ function TruckList() {
 	const showAM = useSelector(state => state.magtable.showAM);
 	const loading = useSelector(state => state.magtable.loading);
 
+	const [showBrixModal, setShowBrixModal] = useState(false);
+
+	const handleClose = () => setShowBrixModal(false);
+	const handleShow = () => setShowBrixModal(true);
+
 	const handleShiftToggle = () => {
 		dispatch(toggleAM());
 	};
-
 	return (
 		<TruckListDivWrapper>
 			<ListTitle>
@@ -95,6 +101,7 @@ function TruckList() {
 									key={assignment.equipment.id}
 									assignment={assignment}
 									showAM={showAM}
+									openBrixModal={handleShow}
 									shift
 								/>
 							)
@@ -105,6 +112,9 @@ function TruckList() {
 					<LoadingImg className="fas fa-circle-notch" />
 				</SpinnerWrap>
 			)}
+			<Modal handleClose={handleClose} show={showBrixModal}>
+				<BrixManagement />
+			</Modal>
 		</TruckListDivWrapper>
 	);
 }

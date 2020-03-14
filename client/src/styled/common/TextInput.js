@@ -44,19 +44,22 @@ export const TextInput = styled(Input)`
 
 	border: 0;
 	border-bottom: 2px solid black;
-
+	position: relative;
+	z-index: 1;
 	transition: border 0.3s ease-in-out;
 	
 	${Background} {
-filter: blur(30px);
-}
+		filter: blur(30px);
+	}
+
+	${({ accentColor }) => accentColor && `color: ${accentColor};`}
 
 	${({ fit }) => fit && `width: calc(100% - 14px);`}
 	
-	${({ focus }) =>
+	${({ focus, accentColor }) =>
 		focus &&
 		` 
-			border-color: #28aae1;
+			border-color: ${accentColor || `#28aae1`};
 	`}
 	${({ error }) =>
 		error &&
@@ -73,26 +76,37 @@ export const TextInputIcon = styled.i`
 	cursor: pointer;
 	position: absolute;
 	z-index: 3;
+	width: 30px;
 	top: calc(100% - 25px);
-	left: calc(100% - 30px);
+	right: 0;
 	user-select: none;
+	transition: color 0.3s ease-in-out;
+
+	${({ focus, accentColor }) =>
+		focus &&
+		`
+			color: ${accentColor || ``};
+	`}
 `;
 
 export const TextInputLabel = styled.label`
 	user-select: none;
-	position: relative;
-	float: left;
-	top -30px;
+	position: absolute;
+	top: 30px;
 	left: 5px;
-	color: var(--input-label);
+	
+	${({ accentColor }) =>
+		accentColor ? `color: ${accentColor};` : `color: var(--input-label);`}
+	
 	cursor: text;
+	z-index: 0;
 	
 	transition: all 150ms cubic-bezier(0.4,0,0.2,1),opacity 150ms cubic-bezier(0.4,0,0.2,1);
 
-	${({ focus }) =>
+	${({ focus, accentColor }) =>
 		focus &&
 		`
-			color: #28aae1;
+			color: ${accentColor || `#28aae1`};
 	`}
 	
 	${({ lifted, focus }) =>

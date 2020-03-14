@@ -7,7 +7,7 @@ import styled from "styled-components";
  */
 
 /**
- * A block to hold the title for a section of the Mag Table eg. Employees, Trucks, Parking Locations, Tower.
+ * A block to hold the title for a section of the Mag Table.js eg. Employees, Trucks, Parking Locations, Tower.
  **/
 export const ListTitle = styled.div`
 	background-color: var(--header);

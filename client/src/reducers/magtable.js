@@ -16,7 +16,9 @@ import {
 	REFRESH_EMPLOYEE_SHIFTS,
 	REFRESHING_EMPLOYEE_SHIFTS,
 	TOGGLE_AM_PM,
-	CLEAR_TABLE
+	CLEAR_TABLE,
+	GET_BRIX_RECORDS,
+	FETCHING_BRIX_RECORDS
 } from "../actions/constants";
 import { initialParkingLocations } from "../res/test_data/magtable";
 
@@ -33,7 +35,9 @@ const initialState = {
 	selectedApron: EAST_APRON,
 	loading: true,
 	shiftsLoading: true,
-	showAM: true
+	showAM: true,
+	selectedBrixRecords: [],
+	brixRecordsLoading: true
 };
 
 export default function(state = initialState, action) {
@@ -131,14 +135,19 @@ export default function(state = initialState, action) {
 		case ADD_BRIX_RECORD:
 			return {
 				...state,
-				assignments: state.assignments.map(assignment =>
-					assignment.equipment.id === payload.equipmentID
-						? {
-								...assignment,
-								brixRecords: payload // update list of brixRecords from API
-						  }
-						: assignment
-				)
+				selectedBrixRecords: [payload, ...state.selectedBrixRecords]
+			};
+		case FETCHING_BRIX_RECORDS:
+			return {
+				...state,
+				selectedBrixRecords: [],
+				brixRecordsLoading: true
+			};
+		case GET_BRIX_RECORDS:
+			return {
+				...state,
+				selectedBrixRecords: [...payload, ...state.selectedBrixRecords],
+				brixRecordsLoading: false
 			};
 		case SET_DAILY_MIX:
 			return {
@@ -162,8 +171,7 @@ export default function(state = initialState, action) {
 				assignments: payload.equipment.map(elem => ({
 					equipment: elem,
 					employeeShifts: [null, null, null, null],
-					parkingLocation: null,
-					brixRecords: []
+					parkingLocation: null
 				})),
 				employeeShifts: payload.employeeShifts,
 				// dailyMessages: payload.dailyMessages,
