@@ -4,7 +4,6 @@ package com.magtable.controller;
 import com.magtable.model.ShiftResponse;
 import com.magtable.model.ShiftList;
 import com.magtable.model.W2WShift;
-import com.magtable.repository.ShiftRepository;
 import com.magtable.repository.W2WShiftRepository;
 import com.magtable.services.userServices.ErrorService;
 import org.jsoup.Jsoup;
@@ -20,9 +19,6 @@ import java.io.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/shift")
 public class ShiftController {
@@ -44,7 +40,7 @@ public class ShiftController {
      */
     @GetMapping("/all")
     public ShiftList getAllShifts() {
-        ShiftList shiftList = new ShiftList((ArrayList<W2WShift>) shiftRepository.findAll());
+        ShiftList shiftList = ShiftList.getInstance();
         return shiftList;
     }
 
@@ -77,7 +73,8 @@ public class ShiftController {
         shiftScheduler.setShiftList(shiftList.getShifts());
         return shiftList;*/
 
-        ShiftList shiftList = new ShiftList((ArrayList<W2WShift>) shiftRepository.findAll());
+        ShiftList shiftList = ShiftList.getInstance();
+        shiftList.updateShifts((ArrayList<W2WShift>) shiftRepository.findAll());
 
         Calendar cal = Calendar.getInstance();
         shiftList.setLastUpdated(String.format("%d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE)));
@@ -171,7 +168,7 @@ public class ShiftController {
      * @return the updatedShiftList with the added employee in the correct spot
      */
     @PostMapping("/add")
-    public ShiftResponse addShift(@RequestBody ShiftResponse shiftResponse) {
+    public ShiftList addShift(@RequestBody ShiftResponse shiftResponse) {
 
         //Converting the Json object to our database entity
         W2WShift shift = new W2WShift(shiftResponse);
@@ -203,16 +200,27 @@ public class ShiftController {
         shift.setStartTime(Timestamp.valueOf(YEAR + "-" + MONTH + "-" + DAY + " " +  startTime + ":" + "00"));
 
         shift.setEndTime(Timestamp.valueOf(YEAR + "-" + MONTH + "-" + DAY + " " +  endTime + ":" + "00"));
-
+        //saving the shift in the database
         shiftRepository.save(shift);
 
+        //fetching the ID of the shift
         W2WShift savedShift = shiftRepository.findLastRecord();
-
-       // int id = savedShift.map(W2WShift::getId).get();
-
         shiftResponse.setId(savedShift.getId());
 
-        return shiftResponse;
+        ShiftList shiftList = ShiftList.getInstance();
+
+        ArrayList<ShiftResponse> shifts = (ArrayList) shiftList.getShifts();
+
+
+        for (ShiftResponse shift1: shifts) {
+            if (Integer.parseInt(shift1.getStartTime()) >= Integer.parseInt(shiftResponse.getStartTime())) {
+                //insert the user into this part of the list
+                shifts.add(shifts.indexOf(shift1), shiftResponse);
+                break;
+            }
+        }
+
+        return shiftList;
     }
 
 
@@ -223,56 +231,4 @@ public class ShiftController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    //TODO PUT THIS IN IN PRODUCTION
-
-    /**
-     * * route           GET /shift/update
-     * * description     route to force a new fetch of W2W shift data
-     * * access          Personnel Managers, System Admins
-     * *
-     * * @return an OK status if routes were updated
-     *
-     @GetMapping("/update") public ShiftList updateShifts() {
-     boolean update = true;
-
-     ShiftScheduler shiftScheduler = ShiftScheduler.getInstance();
-     ShiftList shiftList = new ShiftList(shiftScheduler.getShiftList());
-
-     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-     String lastUpdated = shiftScheduler.getLastUpdated();
-     String currentTime = sdf.format(new Date());
-
-     if (lastUpdated != null) {
-     try {
-     // https://mkyong.com/java/how-to-calculate-date-time-difference-in-java/
-
-     Date d1 = sdf.parse(lastUpdated);
-     Date d2 = sdf.parse(currentTime);
-     long diff = d2.getTime() - d1.getTime();
-     long diffMinutes = diff / (60 * 1000) % 60;
-     if (diffMinutes < 10)
-     update = false;
-
-     } catch (Exception e) {
-     e.printStackTrace();
-     }
-     }
-     if (update) {
-     try {
-     shiftScheduler.updateShifts();
-     shiftList.setLastUpdated(shiftScheduler.getLastUpdated());
-     } catch (Exception e) {
-     throw errorService.sessionExpired();
-     }
-     }
-     ///update for UI
-     Calendar cal = Calendar.getInstance();
-     shiftScheduler.setLastUpdatedUI(String.format("%d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE)));
-
-     shiftList.setShifts(shiftScheduler.getShiftList());
-     shiftList.setLastUpdated(shiftScheduler.getLastUpdatedUI());
-     return shiftList;
-
-     }
-     **/
 }
