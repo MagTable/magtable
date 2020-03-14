@@ -5,7 +5,7 @@ import com.magtable.model.ShiftResponse;
 import com.magtable.model.ShiftList;
 import com.magtable.model.W2WShift;
 import com.magtable.repository.W2WShiftRepository;
-import com.magtable.services.userServices.ErrorService;
+import com.magtable.services.ErrorService;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
