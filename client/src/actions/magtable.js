@@ -4,7 +4,6 @@ import {
 	SET_TRUCK_LOCATION,
 	REMOVE_TRUCK_LOCATION,
 	PUBLISH_TABLE,
-	// ADD_BRIX_RECORD,
 	// SET_DAILY_MIX,
 	// ADD_DAILY_MESSAGE,
 	// REMOVE_DAILY_MESSAGE,
@@ -16,13 +15,14 @@ import {
 	REFRESH_EMPLOYEE_SHIFTS,
 	REFRESHING_EMPLOYEE_SHIFTS,
 	TOGGLE_AM_PM,
-	CLEAR_TABLE
+	CLEAR_TABLE,
+	ADD_BRIX_RECORD,
+	GET_BRIX_RECORDS,
+	FETCHING_BRIX_RECORDS
 } from "./constants";
 import axios from "axios";
 import { setAlert } from "./alert";
 import { logout } from "./auth";
-
-// todo update all async actions with API calls
 
 export const toggleAM = () => dispatch => {
 	dispatch({
@@ -133,25 +133,99 @@ export const clearTable = () => dispatch => {
 /**
  * Saves a brix record to an assignment's brixRecords list
  *
- * @param equipmentID equipmentID of assignment to add brixRecord to
+ * @param truckID id of truck the measurement is made for
  * @param brixRecord brixRecord to save to assignment
  * @returns API returns updated list of brix records for the assignment
  */
-// const addBrixRecord = (equipmentID, brixRecord) => async dispatch => {
-// 	try {
-// 		const res = await axios.put("/magtable/brix", AXIOS_JSON_HEADER, {
-// 			equipmentID,
-// 			brixRecord
-// 		});
-//
-// 		dispatch({
-// 			type: ADD_BRIX_RECORD,
-// 			payload: res.data
-// 		});
-// 	} catch (err) {
-// 		console.log(err);
-// 	}
-// };
+export const addBrixRecord = (truckID, brixRecord) => async dispatch => {
+	try {
+		// const res = await axios.put("/magtable/brix", AXIOS_JSON_HEADER, {
+		// 	truckID,
+		// 	brixRecord
+		// });
+		console.log(brixRecord);
+		dispatch({
+			type: ADD_BRIX_RECORD,
+			payload: brixRecord
+		});
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+/**
+ * gets the last x number of brix records for a particular deice truck
+ *
+ * @param truckID id of truck to retrieve records for
+ * @returns API returns a list of brix records for the requested truck
+ */
+export const getBrixRecords = truckID => async dispatch => {
+	try {
+		dispatch({
+			type: FETCHING_BRIX_RECORDS
+		});
+
+		const testRecords = [
+			{
+				id: 1,
+				nozzle: 23.5,
+				type1: 51.7,
+				type4: 33.2,
+				litersPurged: 87,
+				timeMeasured: new Date()
+			},
+			{
+				id: 2,
+				nozzle: 33.1,
+				type1: 50.7,
+				type4: 30.2,
+				litersPurged: 100,
+				timeMeasured: new Date()
+			},
+			{
+				id: 3,
+				nozzle: 23.5,
+				type1: 51.7,
+				type4: 33.2,
+				litersPurged: 87,
+				timeMeasured: new Date()
+			},
+			{
+				id: 4,
+				nozzle: 33.1,
+				type1: 50.7,
+				type4: 30.2,
+				litersPurged: 100,
+				timeMeasured: new Date()
+			},
+			{
+				id: 5,
+				nozzle: 23.5,
+				type1: 51.7,
+				type4: 33.2,
+				litersPurged: 87,
+				timeMeasured: new Date()
+			},
+			{
+				id: 6,
+				nozzle: 33.1,
+				type1: 50.7,
+				type4: 30.2,
+				litersPurged: 100,
+				timeMeasured: new Date()
+			}
+		];
+
+		setTimeout(() => {
+			dispatch({
+				type: GET_BRIX_RECORDS,
+				payload: testRecords
+			});
+		}, 1500);
+	} catch (err) {
+		console.error(err);
+	}
+};
 
 /**
  * Sets the daily mix to a given percentage

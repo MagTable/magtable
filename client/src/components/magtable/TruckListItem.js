@@ -34,6 +34,7 @@ import {
 } from "../../actions/constants";
 import { useDispatch } from "react-redux";
 import {
+	getBrixRecords,
 	removeEquipmentEmployee,
 	removeTruckLocation,
 	setTruckLocation
@@ -63,9 +64,10 @@ import IconButton from "../common/IconButton";
  * @param assignment the associated assignment object
  * @param noticeOpen dictates whether or not to render the truck's notices
  * @param showAM toggle to display am or pm shift slots
+ * @param openBrixModal boolean to toggle the brix management modal
  * @returns {*} The TruckListItem component
  */
-function TruckListItem({ assignment, noticeOpen, showAM }) {
+function TruckListItem({ assignment, noticeOpen, showAM, openBrixModal }) {
 	const [hoveredShiftDescription, setHoveredShiftDescription] = useState(null);
 	const [localNoticeOpen, setLocalNoticeOpen] = useState(false);
 	const dispatch = useDispatch();
@@ -274,6 +276,12 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 		}
 	];
 
+	const handleBrixClick = () => {
+		dispatch(getBrixRecords(assignment.equipment.id));
+
+		openBrixModal();
+	};
+
 	return (
 		<div ref={drop}>
 			<TruckListItemDiv disabled={!equipmentOperable}>
@@ -287,7 +295,7 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 				>
 					{assignment.equipment.id}
 					<BrixButton
-						onClick={() => console.log("brix")} // todo
+						onClick={handleBrixClick}
 						disabled={!equipmentOperable}
 						className={"fas fa-eye-dropper"}
 					/>
