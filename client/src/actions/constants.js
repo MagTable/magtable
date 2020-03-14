@@ -94,7 +94,7 @@ export const LOGOUT = "LOGOUT";
 export const LOGGING_IN = "LOGGING_IN";
 export const CLEAR_ERROR = "CLEAR_ERROR";
 
-/* Assignment Table */
+/* Assignment Table.js */
 export const SET_EQUIPMENT_EMPLOYEE = "SET_EQUIPMENT_EMPLOYEE";
 // export const ADD_EQUIPMENT_EMPLOYEE = "ADD_EQUIPMENT_EMPLOYEE";
 export const REMOVE_EQUIPMENT_EMPLOYEE = "REMOVE_EQUIPMENT_EMPLOYEE";
@@ -116,8 +116,11 @@ export const REMOVE_DAILY_MESSAGE = "REMOVE_DAILY_MESSAGE";
 
 export const SET_DAILY_MIX = "SET_DAILY_MIX";
 export const ADD_BRIX_RECORD = "ADD_BRIX_RECORD";
+export const FETCHING_BRIX_RECORDS = "FETCHING_BRIX_RECORDS";
+export const GET_BRIX_RECORDS = "GET_BRIX_RECORDS";
 
 export const PUBLISH_TABLE = "PUBLISH_TABLE";
+export const CLEAR_TABLE = "CLEAR_TABLE";
 
 export const EDIT_TRUCK = "EDIT_TRUCK";
 export const ADD_TRUCK = "ADD_TRUCK";

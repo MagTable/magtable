@@ -7,7 +7,7 @@ import styled from "styled-components";
  */
 
 /**
- * A block to hold the title for a section of the Mag Table eg. Employees, Trucks, Parking Locations, Tower.
+ * A block to hold the title for a section of the Mag Table.js eg. Employees, Trucks, Parking Locations, Tower.
  **/
 export const ListTitle = styled.div`
 	background-color: var(--header);
@@ -17,13 +17,13 @@ export const ListTitle = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	height: 50px;
+	padding: 0 1rem;
 `;
 
 /**
  * The text within the ListTitle div.
  */
 export const ListTitleText = styled.p`
-	padding-left: 20px;
 	width: 100%;
 	font-size: 20px;
 	font-family: "Noto Sans KR", sans-serif;

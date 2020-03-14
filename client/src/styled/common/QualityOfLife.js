@@ -19,6 +19,7 @@ export const LoadingImg = styled.i`
 	height: fit-content;
 	width: fit-content;
 	text-align: center;
+	margin: 1.5rem;
 `;
 
 export const SpinnerWrap = styled.div`

@@ -210,7 +210,7 @@ const EmployeeList = () => {
 				>
 					{({ openOverflow }) => (
 						<IconButton
-							faClassName="fa-bars"
+							faClassName="fa-bars fa-lg"
 							onClick={openOverflow}
 							color={"var(--header-text)"}
 							hoverColor={"grey"}
