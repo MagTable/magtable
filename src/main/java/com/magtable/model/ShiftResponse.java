@@ -1,8 +1,11 @@
 package com.magtable.model;
 
 import java.io.Serializable;
-import java.util.concurrent.atomic.AtomicInteger;
 
+
+/**
+ * Class for the response for a Shift Entity
+ */
 public class ShiftResponse implements Serializable {
 
     private static final long serialVersionUID = -8106437984727025966L;
@@ -15,20 +18,17 @@ public class ShiftResponse implements Serializable {
     private Boolean noAvop;
     private Boolean isGreen;
 
+    public ShiftResponse(){}
 
-    //todo change initial value (serialized List problem)
-    private static final AtomicInteger count = new AtomicInteger(0);
-
-    public ShiftResponse() {
-        this.id = count.incrementAndGet();
+    public ShiftResponse(W2WShift shift){
+        this.name = shift.getName();
+        this.description = shift.getDescription();
+        this.noAvop = shift.getNoAvop();
+        this.isGreen = shift.isGreen();
     }
 
     public int getId() {
         return id;
-    }
-
-    public void setId() {
-        this.id = count.incrementAndGet();
     }
 
     public String getName() {
