@@ -2,6 +2,7 @@ package com.magtable.controller;
 
 import com.magtable.model.*;
 import com.magtable.repository.UserRepository;
+import com.magtable.services.ErrorService;
 import com.magtable.services.userServices.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

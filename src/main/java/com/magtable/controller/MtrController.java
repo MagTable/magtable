@@ -2,11 +2,10 @@ package com.magtable.controller;
 
 import com.magtable.model.*;
 import com.magtable.repository.*;
-import com.magtable.services.userServices.ErrorService;
+import com.magtable.services.ErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 @RestController
