@@ -2,12 +2,14 @@ package com.magtable.model;
 
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.sql.Timestamp;
 
 @Entity
-public class W2W_Shift {
+public class W2WShift {
 
-    public W2W_Shift(){}
+    public W2WShift() {
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,14 +35,6 @@ public class W2W_Shift {
     private Boolean isGreen;
 
 
-    public Integer getID() {
-        return id;
-    }
-
-    public void setShiftID(Integer shiftID) {
-        this.id = shiftID;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -55,6 +49,30 @@ public class W2W_Shift {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Boolean getNoAvop() {
+        return noAvop;
+    }
+
+    public void setNoAvop(Boolean noAvop) {
+        this.noAvop = noAvop;
+    }
+
+    public Boolean isGreen() {
+        return isGreen;
+    }
+
+    public void setGreen(Boolean green) {
+        isGreen = green;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Timestamp getStartTime() {
@@ -73,19 +91,16 @@ public class W2W_Shift {
         this.endTime = endTime;
     }
 
-    public Boolean getNoAvop() {
-        return noAvop;
-    }
-
-    public void setNoAvop(Boolean noAvop) {
-        this.noAvop = noAvop;
-    }
-
-    public Boolean getGreen() {
-        return isGreen;
-    }
-
-    public void setGreen(Boolean green) {
-        isGreen = green;
+    @Override
+    public String toString() {
+        return "W2WShift{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", name='" + name + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", noAvop=" + noAvop +
+                ", isGreen=" + isGreen +
+                '}';
     }
 }
