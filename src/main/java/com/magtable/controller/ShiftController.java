@@ -44,7 +44,6 @@ public class ShiftController {
     @GetMapping("/all")
     public ShiftList getAllShifts() {
         ShiftList shiftList = new ShiftList((ArrayList<W2WShift>) shiftRepository.findAll());
-        Calendar cal = Calendar.getInstance();
         return shiftList;
     }
 
@@ -171,22 +170,10 @@ public class ShiftController {
      * @return the updatedShiftList with the added employee in the correct spot
      */
     @PostMapping("/add")
-    public ShiftRepository addShift(@RequestBody ShiftResponse cleanShift) {
-        /**ShiftScheduler shiftScheduler = ShiftScheduler.getInstance();
-         ShiftList shiftList = new ShiftList(shiftScheduler.getShiftList());
-         //Arraylist to modify with the new shift
-         ArrayList<ShiftResponse> listShifts = shiftList.getShifts();
+    public ShiftResponse addShift(@RequestBody ShiftResponse shiftResponse) {
 
-         //Finding where to insert the added user into
-         for (ShiftResponse shift : listShifts) {
-         if (Integer.parseInt(shift.getStartTime()) >= Integer.parseInt(cleanShift.getStartTime())) {
-         //insert the user into this part of the list
-         cleanShift.setId();
-         listShifts.add(listShifts.indexOf(shift), cleanShift);
-         break;
-         }
-         }
-         shiftList.setShifts(listShifts);**/
+
+
 
         return null;
     }

@@ -25,15 +25,17 @@ public class ShiftList implements Serializable {
 
             // 2020-03-13 04:00:00.0
             String startTimeStampString = shift.getStartTime().toString();
-            String[] splittedTime = startTimeStampString.split(" ");
-            String startTime = splittedTime[1].replace(":", "").substring(0,4);
+            String[] splitedTime = startTimeStampString.split(" ");
+            String startTime = splitedTime[1].replace(":", "").substring(0,4);
 
             String endTimeStampString = shift.getEndTime().toString();
-            splittedTime = endTimeStampString.split(" ");
-            String endTime = splittedTime[1].replace(":", "").substring(0,4);
+            splitedTime = endTimeStampString.split(" ");
+            String endTime = splitedTime[1].replace(":", "").substring(0,4);
 
             shiftResponse.setStartTime(startTime);
             shiftResponse.setEndTime(endTime);
+            shiftResponse.setId(shift.getId());
+
 
             shiftResponses.add(shiftResponse);
 

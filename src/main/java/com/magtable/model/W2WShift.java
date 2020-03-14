@@ -11,6 +11,15 @@ public class W2WShift {
     public W2WShift() {
     }
 
+    //Copy Constructor for converting a ShiftResponse into W2W entity
+    public W2WShift(ShiftResponse shiftResponse){
+        this.description = shiftResponse.getDescription();
+        this.name = shiftResponse.getName();
+        this.noAvop = shiftResponse.getNoAvop();
+        this.isGreen = shiftResponse.getIsGreen();
+
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(insertable = false, name = "shiftid", nullable = false)
