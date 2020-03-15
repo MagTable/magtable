@@ -18,6 +18,17 @@ public class MagtablerecordResponse implements Serializable {
 
     }
 
+    public MagtablerecordResponse(int magID, long numberOfAssignments) {
+        this.magID = magID;
+        this.dailyMix = 0;
+        this.forecastLow = 0;
+        this.publishedBy = "";
+        this.timePublished = new Timestamp(System.currentTimeMillis()); //todo Fix this part with David;
+        this.assignments = new ArrayList<>();
+        for (long i = 0; i < numberOfAssignments; i++) {
+            this.assignments.add(new AssignmentRecord(4));
+        }
+    }
 
     //Getters and Setters
 

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class AssignmentRecord implements Serializable {
     //Parameters
     private Integer magID;
-    private Integer parkingLocation;
+    private PlAssignment plAssignment;
     private Equipment equipment;
     private ArrayList<ShiftResponse> shifts;
     private ArrayList<Brixrecord> brixRecords;
@@ -14,6 +14,20 @@ public class AssignmentRecord implements Serializable {
     //Constructor
     public AssignmentRecord () {
 
+    }
+
+    //Number parameter indicates how many shifts.
+    //todo decide on how many brixrecords to be added
+    public AssignmentRecord(int shiftNumber) {
+        this.magID = 0;
+        this.plAssignment = new PlAssignment();
+        this.equipment = new Equipment();
+        this.shifts = new ArrayList<>();
+        this.brixRecords = new ArrayList<>();
+        for (int i = 0; i < shiftNumber; i++) {
+                this.shifts.add(new ShiftResponse());
+                this.brixRecords.add(new Brixrecord());
+        }
     }
 
     //Getters and Setters
@@ -26,12 +40,12 @@ public class AssignmentRecord implements Serializable {
         this.magID = magID;
     }
 
-    public Integer getParkingLocation() {
-        return parkingLocation;
+    public PlAssignment getPlAssignment() {
+        return plAssignment;
     }
 
-    public void setParkingLocation(Integer parkingLocation) {
-        this.parkingLocation = parkingLocation;
+    public void setPlAssignment(PlAssignment plAssignment) {
+        this.plAssignment = plAssignment;
     }
 
     public Equipment getEquipment() {
@@ -54,7 +68,7 @@ public class AssignmentRecord implements Serializable {
         return brixRecords;
     }
 
-    public void setBrixRecordsecord(ArrayList<Brixrecord> brixRecords) {
+    public void setBrixRecords(ArrayList<Brixrecord> brixRecords) {
         this.brixRecords = brixRecords;
     }
 }
