@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NoticeBox } from "../../styled/trucks/TruckManagement";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { TRUCK_STATUSES, SYSTEM_ADMINISTRATOR } from "../../actions/constants";
 import {
 	ManipTruckManipIconDiv,
@@ -12,6 +12,7 @@ import {
 import { Button } from "../../styled/common/FormControl";
 import IconButton from "../common/IconButton";
 import Confirmation from "../common/Confirmation";
+import { editTruck } from "../../actions/truck";
 
 /**
  * @date 3/5/2020
@@ -26,6 +27,8 @@ import Confirmation from "../common/Confirmation";
  * @returns {*} The TruckManagementItem component
  */
 function TruckManagementItem({ truck, setEditTruck }) {
+	const dispatch = useDispatch();
+
 	//
 	const [editedNotice, setEditedNotice] = useState(truck.notice);
 	const [editedStatus, setEditedStatus] = useState(truck.status);
@@ -40,6 +43,14 @@ function TruckManagementItem({ truck, setEditTruck }) {
 	// when the status is being changed, make sure it persists
 	function handleChangeStatus(event) {
 		setEditedStatus(event.target.value);
+
+		const editedTruck = {
+			id: truck.id,
+			status: editedStatus,
+			notice: editedNotice
+		};
+
+		dispatch(editTruck(editedTruck));
 	}
 
 	// send our edited truck to our actions to persist the edit to the backend
@@ -50,7 +61,7 @@ function TruckManagementItem({ truck, setEditTruck }) {
 			notice: editedNotice
 		};
 
-		setEditTruck(truck);
+		setEditTruck(editedTruck);
 		// console.log(editedTruck);
 		// dispatch(editTruck(editedTruck));
 	}
