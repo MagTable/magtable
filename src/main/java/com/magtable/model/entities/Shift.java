@@ -1,4 +1,6 @@
-package com.magtable.model;
+package com.magtable.model.entities;
+
+import com.magtable.model.api.ShiftResponse;
 
 import javax.persistence.*;
 import java.io.Serializable;

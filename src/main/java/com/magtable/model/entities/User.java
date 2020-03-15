@@ -1,4 +1,4 @@
-package com.magtable.model;
+package com.magtable.model.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;

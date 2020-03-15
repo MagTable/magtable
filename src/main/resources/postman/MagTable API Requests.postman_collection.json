@@ -467,13 +467,16 @@
 									{
 										"key": "Content-Type",
 										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
+										"type": "text",
+										"value": "application/json"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"username\": \"mustafa\",\n\t\"password\": \"password\"\n}"
+									"raw": "{\n\t\"username\": \"mustafa\",\n\t\"password\": \"password\"\n}",
+									"options": {
+										"raw": {}
+									}
 								},
 								"url": {
 									"raw": "localhost:8080/authenticate",
@@ -953,7 +956,17 @@
 				{
 					"name": "Update Shifts",
 					"request": {
-						"method": "POST",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
 						"header": [],
 						"url": {
 							"raw": "localhost:8080/shift/update",
@@ -964,6 +977,209 @@
 							"path": [
 								"shift",
 								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add shift",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": \"6\",\r\n        \"name\": \"David Ward\",\r\n        \"startTime\": 600,\r\n        \"endTime\": 1200,\r\n        \"description\": \"Technician\",\r\n        \"hasAvop\": false,\r\n        \"isGreen\": true\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/shift/add",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shift",
+								"add"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Equipment Requests",
+			"item": [
+				{
+					"name": "Get all Trucks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Towers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Truck",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\" : \"13\"\n\t\"status\": \"OOP\",\n\t\"notice\": \"This is a new truck!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/equipment/trucks/add",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"equipment",
+								"trucks",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Truck",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\" : 19,\n\t\"status\": \"GO\",\n\t\"notice\": \"This is an edited truck!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Truck",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"19\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/equipment/truck/delete/19",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"equipment",
+								"truck",
+								"delete",
+								"19"
 							]
 						}
 					},
