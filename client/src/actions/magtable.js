@@ -18,7 +18,8 @@ import {
 	CLEAR_TABLE,
 	ADD_BRIX_RECORD,
 	GET_BRIX_RECORDS,
-	FETCHING_BRIX_RECORDS
+	FETCHING_BRIX_RECORDS,
+	ADDING_BRIX_RECORD
 } from "./constants";
 import axios from "axios";
 import { setAlert } from "./alert";
@@ -139,15 +140,20 @@ export const clearTable = () => dispatch => {
  */
 export const addBrixRecord = (truckID, brixRecord) => async dispatch => {
 	try {
-		// const res = await axios.put("/magtable/brix", AXIOS_JSON_HEADER, {
-		// 	truckID,
-		// 	brixRecord
-		// });
-		console.log(brixRecord);
-		dispatch({
-			type: ADD_BRIX_RECORD,
-			payload: brixRecord
-		});
+		dispatch({ type: ADDING_BRIX_RECORD });
+		const res = await axios.post(
+			`/brix/${truckID}`,
+			{
+				...brixRecord
+			},
+			AXIOS_JSON_HEADER
+		);
+		setTimeout(() => {
+			dispatch({
+				type: ADD_BRIX_RECORD,
+				payload: { brixRecord: res.data, truckID }
+			});
+		}, 500);
 	} catch (err) {
 		console.log(err);
 	}
@@ -161,67 +167,71 @@ export const addBrixRecord = (truckID, brixRecord) => async dispatch => {
  */
 export const getBrixRecords = truckID => async dispatch => {
 	try {
+		console.log(truckID);
 		dispatch({
-			type: FETCHING_BRIX_RECORDS
+			type: FETCHING_BRIX_RECORDS,
+			payload: { truckID }
 		});
 
-		const testRecords = [
-			{
-				id: 1,
-				nozzle: 23.5,
-				type1: 51.7,
-				type4: 33.2,
-				litersPurged: 87,
-				timeMeasured: new Date()
-			},
-			{
-				id: 2,
-				nozzle: 33.1,
-				type1: 50.7,
-				type4: 30.2,
-				litersPurged: 100,
-				timeMeasured: new Date()
-			},
-			{
-				id: 3,
-				nozzle: 23.5,
-				type1: 51.7,
-				type4: 33.2,
-				litersPurged: 87,
-				timeMeasured: new Date()
-			},
-			{
-				id: 4,
-				nozzle: 33.1,
-				type1: 50.7,
-				type4: 30.2,
-				litersPurged: 100,
-				timeMeasured: new Date()
-			},
-			{
-				id: 5,
-				nozzle: 23.5,
-				type1: 51.7,
-				type4: 33.2,
-				litersPurged: 87,
-				timeMeasured: new Date()
-			},
-			{
-				id: 6,
-				nozzle: 33.1,
-				type1: 50.7,
-				type4: 30.2,
-				litersPurged: 100,
-				timeMeasured: new Date()
-			}
-		];
+		const res = await axios.get(`/brix/${truckID}`);
+
+		// const testRecords = [
+		// 	{
+		// 		id: 1,
+		// 		nozzle: 23.5,
+		// 		type1: 51.7,
+		// 		type4: 33.2,
+		// 		litersPurged: 87,
+		// 		timeMeasured: new Date()
+		// 	},
+		// 	{
+		// 		id: 2,
+		// 		nozzle: 33.1,
+		// 		type1: 50.7,
+		// 		type4: 30.2,
+		// 		litersPurged: 100,
+		// 		timeMeasured: new Date()
+		// 	},
+		// 	{
+		// 		id: 3,
+		// 		nozzle: 23.5,
+		// 		type1: 51.7,
+		// 		type4: 33.2,
+		// 		litersPurged: 87,
+		// 		timeMeasured: new Date()
+		// 	},
+		// 	{
+		// 		id: 4,
+		// 		nozzle: 33.1,
+		// 		type1: 50.7,
+		// 		type4: 30.2,
+		// 		litersPurged: 100,
+		// 		timeMeasured: new Date()
+		// 	},
+		// 	{
+		// 		id: 5,
+		// 		nozzle: 23.5,
+		// 		type1: 51.7,
+		// 		type4: 33.2,
+		// 		litersPurged: 87,
+		// 		timeMeasured: new Date()
+		// 	},
+		// 	{
+		// 		id: 6,
+		// 		nozzle: 33.1,
+		// 		type1: 50.7,
+		// 		type4: 30.2,
+		// 		litersPurged: 100,
+		// 		timeMeasured: new Date()
+		// 	}
+		// ];
 
 		setTimeout(() => {
 			dispatch({
 				type: GET_BRIX_RECORDS,
-				payload: testRecords
+				payload: { brixRecords: res.data, truckID }
 			});
-		}, 1500);
+		}, 500);
 	} catch (err) {
 		console.error(err);
 	}
@@ -327,15 +337,14 @@ export const getMagTable = () => async dispatch => {
 	//  will be updated once entire magtable is returned by api
 	try {
 		const shiftRes = await axios.get("/shift/all");
-		const truckRes = await axios.get("/equipment/truck/all");
-		const towerRes = await axios.get("/equipment/tower/all");
+		const equipmentRes = await axios.get("/equipment/all");
 
 		setTimeout(() => {
 			dispatch({
 				type: GET_ASSIGNMENT_DATA,
 				payload: {
 					employeeShifts: shiftRes.data,
-					equipment: [...truckRes.data, ...towerRes.data]
+					equipment: equipmentRes.data
 				}
 			});
 		}, 500);

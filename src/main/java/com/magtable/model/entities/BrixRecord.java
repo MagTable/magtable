@@ -1,9 +1,6 @@
 package com.magtable.model.entities;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity(name = "brixrecord")
@@ -18,6 +15,7 @@ public class BrixRecord {
 
     @Id
     @Column(name = "brixrecordid")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }

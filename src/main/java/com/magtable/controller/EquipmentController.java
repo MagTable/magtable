@@ -2,11 +2,10 @@ package com.magtable.controller;
 
 import com.magtable.model.entities.Equipment;
 import com.magtable.repository.EquipmentRepository;
-import com.magtable.services.ErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -18,19 +17,16 @@ public class EquipmentController {
     private EquipmentRepository equipmentRepository;
 
         /**
-     * route           GET /equipment/trucks
+     * route           GET /all
      * description     route to fetch the trucks from the database
      * access          Personnel Managers, System Admins
      *
      * @return the list of trucks
      */
-    @GetMapping("/truck/all")
-    public List<Equipment> getAllTrucks() {
+    @GetMapping("/all")
+    public List<Equipment> getAllEquipment() {
         return equipmentRepository.findAll();
     }
-
-
-
 
 
 //

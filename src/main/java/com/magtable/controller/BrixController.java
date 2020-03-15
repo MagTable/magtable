@@ -26,7 +26,9 @@ public class BrixController {
     @PostMapping("/{id}")
     public BrixRecord insertBrixRecord(@PathVariable(value= "id") Integer equipmentID, @RequestBody BrixRecord brixRecord) {
         brixRecord.setEquipmentID(equipmentID);
-        return brixRepository.save(brixRecord);
+        BrixRecord returnvalue = brixRepository.saveAndFlush(brixRecord);
+        System.out.println(returnvalue.getId());
+        return returnvalue;
     }
 
 }
