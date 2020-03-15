@@ -12,6 +12,7 @@ import Modal from "../modal/Modal";
 import { FilterIcon } from "../../styled/magtable/Overflow";
 import { Button } from "../../styled/common/FormControl";
 import EditTruck from "./EditTruck";
+import FadeIn from "react-fade-in";
 
 /**
  * @date 3/5/2020
@@ -52,13 +53,15 @@ function TruckManagement() {
 					</Button>
 				</ListTitle>
 				<TruckManagementListDiv>
-					{trucks.map(truck => (
-						<TruckManagementItem
-							key={truck.id}
-							truck={truck}
-							setEditTruck={setEditTruck}
-						/>
-					))}
+					<FadeIn>
+						{trucks.map(truck => (
+							<TruckManagementItem
+								key={truck.id}
+								truck={truck}
+								setEditTruck={setEditTruck}
+							/>
+						))}
+					</FadeIn>
 				</TruckManagementListDiv>
 			</TruckMgmtDiv>
 		</EditTruckWrap>

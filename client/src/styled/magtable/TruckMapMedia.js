@@ -26,7 +26,6 @@ const scrollIn = keyframes`
  */
 export const PadDivHeader = styled.div`
 	grid-area: parking_code;
-	background: white;
 	border-bottom: 2px solid var(--border-color);
 	border-top-right-radius: 10px;
 	border-top-left-radius: 10px;
