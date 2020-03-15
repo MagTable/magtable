@@ -36,6 +36,20 @@ CREATE TABLE Truck
     CONSTRAINT CK_Truck_Status CHECK (status = 'GO' OR status = 'INOP' OR status = 'CON' OR status = 'OOS')
 );
 
+CREATE TABLE BrixRecord
+(
+    brixRecordID    INT(5) NOT NULL AUTO_INCREMENT,
+    truckID         INT(5) NOT NULL,
+    nozzle          FLOAT(3),
+    type1           FLOAT(3),
+    type4           FLOAT(3),
+    litersPurged    INT(5),
+    timeMeasured    DATETIME,
+    PRIMARY KEY (BrixRecordID),
+    CONSTRAINT FK_BrixRecord_Assignment FOREIGN KEY (truckID) REFERENCES Truck (truckID) ON DELETE RESTRICT ON UPDATE RESTRICT,
+    CONSTRAINT CK_litersPurged CHECK (litersPurged >= 0 AND litersPurged <= 1000)
+);
+
 CREATE TABLE Tower
 (
     towerID  INT(5)      NOT NULL,
@@ -125,21 +139,6 @@ CREATE TABLE W2WShift
     isGreen      BOOLEAN,
     PRIMARY KEY (shiftID)
 );
-
-CREATE TABLE BrixRecord
-(
-    brixRecordID INT(5) NOT NULL AUTO_INCREMENT,
-    assignmentID INT(5) NOT NULL,
-    nozzle       FLOAT(3),
-    type1        FLOAT(3),
-    type4        FLOAT(3),
-    litersPurged INT(5),
-    timeMeasured DATETIME,
-    PRIMARY KEY (BrixRecordID),
-    CONSTRAINT FK_BrixRecord_Assignment FOREIGN KEY (assignmentID) REFERENCES Assignment (assignmentID) ON DELETE RESTRICT ON UPDATE RESTRICT,
-    CONSTRAINT CK_litersPurged CHECK (litersPurged >= 0 AND litersPurged <= 200)
-);
-
 
 
 # CREATE TABLE BrixChart (
