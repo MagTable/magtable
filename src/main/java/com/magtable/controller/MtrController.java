@@ -13,6 +13,12 @@ import java.util.ArrayList;
 @RequestMapping("/magtable")
 public class MtrController {
 
+    @Autowired
+    MagTableRecordRepository magTableRecordRepository;
+
+    @Autowired
+    AssignmentRepository assignmentRepository;
+
 
 
 
