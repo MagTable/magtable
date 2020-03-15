@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Objects;
 
-@Entity
+@Entity(name ="magtablerecord")
 public class MagTableRecord {
     private Integer id;
     private Integer dailyMix;
@@ -15,7 +15,7 @@ public class MagTableRecord {
     private Collection<Assignment> assignmentsByMagtableRecordId;
 
     @Id
-    @Column(name = "magtableRecordID", nullable = false)
+    @Column(name = "magtablerecordid", nullable = false)
     public Integer getId() {
         return id;
     }
@@ -25,7 +25,7 @@ public class MagTableRecord {
     }
 
     @Basic
-    @Column(name = "dailyMix", nullable = true)
+    @Column(name = "dailymix", nullable = true)
     public Integer getDailyMix() {
         return dailyMix;
     }
@@ -35,7 +35,7 @@ public class MagTableRecord {
     }
 
     @Basic
-    @Column(name = "forecastLow", nullable = true)
+    @Column(name = "forecastlow", nullable = true)
     public Integer getForecastLow() {
         return forecastLow;
     }
@@ -45,7 +45,7 @@ public class MagTableRecord {
     }
 
     @Basic
-    @Column(name = "publishedBy", nullable = true, length = 32)
+    @Column(name = "publishedby", nullable = true, length = 32)
     public String getPublishedBy() {
         return publishedBy;
     }
@@ -55,7 +55,7 @@ public class MagTableRecord {
     }
 
     @Basic
-    @Column(name = "timePublished", nullable = true)
+    @Column(name = "timepublished", nullable = true)
     public Timestamp getTimePublished() {
         return timePublished;
     }
@@ -90,4 +90,5 @@ public class MagTableRecord {
     public void setAssignmentsByMagtableRecordId(Collection<Assignment> assignmentsByMagtableRecordId) {
         this.assignmentsByMagtableRecordId = assignmentsByMagtableRecordId;
     }
+
 }

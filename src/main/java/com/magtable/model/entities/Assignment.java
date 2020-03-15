@@ -13,6 +13,7 @@ public class Assignment {
     private Collection<Shift> shiftsByAssignmentId;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "assignmentID", nullable = false)
     public Integer getId() {
         return id;
@@ -36,7 +37,7 @@ public class Assignment {
     }
 
     @ManyToOne
-    @JoinColumn(name = "magtableRecordID", referencedColumnName = "magtableRecordID", nullable = false)
+    @JoinColumn(name = "magtablerecordID", referencedColumnName = "magtableRecordID", nullable = false)
     public MagTableRecord getMagtablerecordByMagtableRecordId() {
         return magtablerecordByMagtableRecordId;
     }
