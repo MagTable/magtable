@@ -159,10 +159,15 @@ export default function(state = initialState, action) {
 		case GET_ASSIGNMENT_DATA:
 			return {
 				...state,
+				assignments: payload.equipment.map(elem => ({
+					equipment: elem,
+					employeeShifts: [null, null, null, null],
+					parkingLocation: null,
+					brixRecords: []
+				})),
 				employeeShifts: payload.employeeShifts,
-				assignments: payload.magtable.assignments,
-				timePublished: payload.magtable.timePublished,
-				dailyMix: payload.magtable.dailyMix,
+				// dailyMessages: payload.dailyMessages,
+				// dailyMix: payload.dailyMix,
 				loading: false,
 				shiftsLoading: false
 			};
