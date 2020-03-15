@@ -2,7 +2,7 @@ package com.magtable.controller;
 
 
 import com.magtable.model.api.ShiftResponse;
-import com.magtable.model.entities.ShiftList;
+import com.magtable.model.api.ShiftList;
 import com.magtable.model.entities.W2WShift;
 import com.magtable.repository.W2WShiftRepository;
 import com.magtable.services.ErrorService;
@@ -33,7 +33,7 @@ public class ShiftController {
 
     /**
      * route           GET /shift/get
-     * description     route to get all the shifts stored in server memory
+     * description     route to get all the shifts +stored in server memory
      * access          Personnel Mangers, System Admins
      *
      * @return A list of the W2W shifts
@@ -43,7 +43,6 @@ public class ShiftController {
         ShiftList shiftList = ShiftList.getInstance();
         return shiftList;
     }
-
     /**
      * Route  Get/update
      * description  route to pull from the W2W API

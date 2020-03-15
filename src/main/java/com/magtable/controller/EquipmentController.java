@@ -1,7 +1,5 @@
 package com.magtable.controller;
 
-import com.magtable.repository.TowerRepository;
-import com.magtable.repository.TruckRepository;
 import com.magtable.services.ErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

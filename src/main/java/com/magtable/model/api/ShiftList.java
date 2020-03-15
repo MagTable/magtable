@@ -1,6 +1,6 @@
-package com.magtable.model.entities;
+package com.magtable.model.api;
 
-import com.magtable.model.api.ShiftResponse;
+import com.magtable.model.entities.W2WShift;
 
 import java.io.Serializable;
 import java.util.ArrayList;
