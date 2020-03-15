@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-public class Magtablerecord {
+public class MagTableRecord {
     private Integer id;
     private Integer dailyMix;
     private Integer forecastLow;
@@ -69,7 +69,7 @@ public class Magtablerecord {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Magtablerecord that = (Magtablerecord) o;
+        MagTableRecord that = (MagTableRecord) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(dailyMix, that.dailyMix) &&
                 Objects.equals(forecastLow, that.forecastLow) &&
