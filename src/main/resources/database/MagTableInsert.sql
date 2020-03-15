@@ -5,7 +5,7 @@
     Description: Use Case two updated database inserts for the database.
  */
 
-use magtabledev;
+use heroku_5d3f37e2c6237fd;
 
 DELETE FROM BrixRecord;
 DELETE FROM Shift;

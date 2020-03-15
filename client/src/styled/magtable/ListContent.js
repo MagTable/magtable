@@ -137,10 +137,30 @@ export const TruckListDivWrapper = styled(TruckListDiv)`
 	min-width: 340px;
 `;
 
+export const ManipTruckManipIconDiv = styled.div`
+	width: auto;
+    align-items: center;
+    justify-items: end;
+    // display: none;
+    opacity: 0;
+    display: flex;
+    transition: 0.3s ease-in-out;
+`;
+
+
 export const TruckListItemDiv = styled.div`
 	transition: all 0.15s ease-in-out;
 	display: flex;
 	height: 60px;
+	width: 100%;
+	margin: auto;
+	border-bottom: 2px solid grey;
+	text-overflow: ellipsis;
+	&:hover ${ManipTruckManipIconDiv} {
+		// display: flex;
+		opacity: 1;
+		transition: 0.3s ease-in-out;
+	}
 
 	${({ disabled }) =>
 		disabled &&
@@ -148,6 +168,15 @@ export const TruckListItemDiv = styled.div`
 		height: 40px;
 		background: var(--shader-grey);
 	`}
+`;
+
+export const TruckStatusBox = styled.div`
+	width: 100%;
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 `;
 
 export const TruckNoticeDiv = styled.div`
@@ -320,11 +349,14 @@ export const TruckListItemLocation = styled.div`
 	}
 `;
 
+
 export const TruckListManipDiv = styled.div`
 	display: flex;
 	flex-direction: row;
 	margin-right: 3px;
 `;
+
+
 
 export const EquipmentListItemButton = styled(DangerButton)`
 	transition: opacity 0.3s ease-in-out;

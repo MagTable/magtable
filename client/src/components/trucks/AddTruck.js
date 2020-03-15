@@ -41,7 +41,6 @@ const AddTruck = () => {
 				}}
 				onSubmit={(values, { resetForm }) => {
 					dispatch(addTruck(values));
-					alert(JSON.stringify(values, null, 2));
 					resetForm();
 				}}
 				validationSchema={Yup.object().shape({
@@ -71,7 +70,7 @@ const AddTruck = () => {
 							)}
 						</Field>
 						<SelectBox label="Truck Status" name="status">
-							<option value="">Select a Truck Status</option>
+							<option value="" />
 							{truckStatuses.map(status => {
 								return (
 									<option key={status} value={status}>

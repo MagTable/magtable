@@ -70,6 +70,7 @@ const StyledSelect = styled.select`
 
 const SelectContainer = styled.div`
 	position: relative;
+	    width: -webkit-fill-available;
 `;
 
 const SelectBox = ({ label, ...props }) => {

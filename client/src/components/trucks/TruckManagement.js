@@ -11,6 +11,7 @@ import AddTruck from "./AddTruck";
 import Modal from "../modal/Modal";
 import { FilterIcon } from "../../styled/magtable/Overflow";
 import { Button } from "../../styled/common/FormControl";
+import EditTruck from "./EditTruck";
 
 /**
  * @date 3/5/2020
@@ -29,6 +30,7 @@ function TruckManagement() {
 	const [showModal, setModal] = useState(false);
 	const handleClose = () => setModal(false);
 	const handleShow = () => setModal(true);
+	const [editTruck, setEditTruck] = useState(null);
 
 	return (
 		<EditTruckWrap>
@@ -38,6 +40,12 @@ function TruckManagement() {
 					<Modal show={showModal} handleClose={handleClose}>
 						<AddTruck />
 					</Modal>
+					<Modal
+						show={editTruck !== null}
+						handleClose={() => setEditTruck(null)}
+					>
+						<EditTruck truck={editTruck} />
+					</Modal>
 					<Button onClick={handleShow}>
 						<FilterIcon className={"fas fa-plus"} />
 						Add Truck
@@ -45,7 +53,11 @@ function TruckManagement() {
 				</ListTitle>
 				<TruckManagementListDiv>
 					{trucks.map(truck => (
-						<TruckManagementItem key={truck.id} truck={truck} />
+						<TruckManagementItem
+							key={truck.id}
+							truck={truck}
+							setEditTruck={setEditTruck}
+						/>
 					))}
 				</TruckManagementListDiv>
 			</TruckMgmtDiv>
