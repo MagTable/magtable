@@ -104,11 +104,12 @@ function EmployeeListItem({ employee: employeeShift }) {
 
 			{employeeShift.assignedEquipment && (
 				<AssignedToWrap isTower={assignment.equipment.id >= 1000}>
-					{canRemove && (
-						<UnassignBtn onClick={handleRemove}>
-							<i className="fas fa-times" />
-						</UnassignBtn>
-					)}
+					<UnassignBtn
+						disabled={!canRemove}
+						onClick={() => canRemove && handleRemove()}
+					>
+						<i className="fas fa-times" />
+					</UnassignBtn>
 					<h2>
 						{assignment.equipment.position
 							? assignment.equipment.position

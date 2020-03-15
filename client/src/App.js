@@ -14,6 +14,7 @@ import UserList from "./components/user/UserList";
 import AssignmentTable from "./components/magtable/AssignmentTable";
 import Alert from "./components/common/Alert";
 import NavBar from "./components/common/NavBar";
+import TruckManagementLayout from "./components/trucks/TruckManagementLayout";
 
 function App() {
 	useEffect(() => {
@@ -32,6 +33,11 @@ function App() {
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/password/reset" component={PasswordReset} />
 
+					<PrivateRoute
+						exact
+						path="/truck/all"
+						component={TruckManagementLayout}
+					/>
 					<PrivateRoute
 						exact
 						path="/"

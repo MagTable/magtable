@@ -84,9 +84,8 @@ export const TextInputLabel = styled.label`
 	float: left;
 	top -30px;
 	left: 5px;
-	color: #aaa;
+	color: var(--input-label);
 	cursor: text;
-	width: 100%;
 	
 	transition: all 150ms cubic-bezier(0.4,0,0.2,1),opacity 150ms cubic-bezier(0.4,0,0.2,1);
 
@@ -99,7 +98,7 @@ export const TextInputLabel = styled.label`
 	${({ lifted, focus }) =>
 		(lifted || focus) &&
 		`
-			transform: scale(.75) translateY(-29px) translateX(-40px);
+			transform: scale(.75) translateY(-32px);
 	`}
 		
 	${({ error }) =>

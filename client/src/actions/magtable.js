@@ -3,7 +3,7 @@ import {
 	REMOVE_EQUIPMENT_EMPLOYEE,
 	SET_TRUCK_LOCATION,
 	REMOVE_TRUCK_LOCATION,
-	// PUBLISH_TABLE,
+	PUBLISH_TABLE,
 	// ADD_BRIX_RECORD,
 	// SET_DAILY_MIX,
 	// ADD_DAILY_MESSAGE,
@@ -14,13 +14,21 @@ import {
 	GET_ASSIGNMENT_DATA,
 	ADD_EMPLOYEE_SHIFT,
 	REFRESH_EMPLOYEE_SHIFTS,
-	REFRESHING_EMPLOYEE_SHIFTS
+	REFRESHING_EMPLOYEE_SHIFTS,
+	TOGGLE_AM_PM,
+	CLEAR_TABLE
 } from "./constants";
 import axios from "axios";
 import { setAlert } from "./alert";
 import { logout } from "./auth";
 
 // todo update all async actions with API calls
+
+export const toggleAM = () => dispatch => {
+	dispatch({
+		type: TOGGLE_AM_PM
+	});
+};
 
 /**
  * Removes parkingLocation for a particular truck
@@ -53,6 +61,7 @@ export const setTruckLocation = (
 		payload: {
 			equipmentID,
 			parkingLocation: {
+				apron: parkingLocation.apron,
 				id: parkingLocation.id,
 				phonetic: parkingLocation.phonetic,
 				position,
@@ -99,21 +108,27 @@ export const setEquipmentEmployee = (
  * @param magtable magtable to publish
  * @returns API returns the saved state of the magtable
  */
-// const publishTable = magtable => async dispatch => {
-// 	try {
-// 		const res = await axios.post(
-// 			"/magtable/publish",
-// 			AXIOS_JSON_HEADER,
-// 			magtable
-// 		);
-// 		dispatch({
-// 			type: PUBLISH_TABLE,
-// 			payload: res.data
-// 		});
-// 	} catch (err) {
-// 		console.log(err);
-// 	}
-// };
+export const publishTable = magtable => async dispatch => {
+	try {
+		const res = await axios.post(
+			"/magtable/publish",
+			AXIOS_JSON_HEADER,
+			magtable
+		);
+		dispatch({
+			type: PUBLISH_TABLE,
+			payload: res.data
+		});
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+export const clearTable = () => dispatch => {
+	dispatch({
+		type: CLEAR_TABLE
+	});
+};
 
 /**
  * Saves a brix record to an assignment's brixRecords list
@@ -210,20 +225,19 @@ export const setSelectedApron = apronCode => dispatch => {
  * @returns API returns the entire magtable object
  */
 export const getMagTable = () => async dispatch => {
-	// todo currently only equipment and shifts are returned here,
-	//  will be updated once entire magtable is returned by api
 	try {
+		const magtableRes = await axios.get("/magtable");
 		const shiftRes = await axios.get("/shift/all");
-		const truckRes = await axios.get("/equipment/truck/all");
-		const towerRes = await axios.get("/equipment/tower/all");
 
-		dispatch({
-			type: GET_ASSIGNMENT_DATA,
-			payload: {
-				employeeShifts: shiftRes.data,
-				equipment: [...truckRes.data, ...towerRes.data]
-			}
-		});
+		setTimeout(() => {
+			dispatch({
+				type: GET_ASSIGNMENT_DATA,
+				payload: {
+					employeeShifts: shiftRes.data,
+					magtable: magtableRes.data
+				}
+			});
+		}, 500);
 	} catch (err) {
 		if (err.response.status === 403) {
 			dispatch(logout());
@@ -285,6 +299,7 @@ export const refreshEmployeeShifts = () => async dispatch => {
 				}
 			});
 		}, 500);
+
 		dispatch(setAlert("Shifts Updated!", "success"));
 	} catch (err) {
 		if (err.response.status === 403) {

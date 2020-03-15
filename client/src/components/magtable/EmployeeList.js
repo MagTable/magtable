@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
 	EmployeeListDiv,
@@ -18,6 +18,7 @@ import {
 	TOWER_POSITIONS,
 	TRAINER_POSITIONS
 } from "../../actions/constants";
+import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
 
 /**
  * @date 2/19/2020
@@ -35,7 +36,8 @@ const EmployeeList = () => {
 	const dispatch = useDispatch();
 	const employeeShifts = useSelector(state => state.magtable.employeeShifts); // get the employees
 	const loading = useSelector(state => state.magtable.shiftsLoading);
-	const [open, setOpen] = useState(false);
+	const showAM = useSelector(state => state.magtable.showAM);
+	const [overflowOpen, setOverflowOpen] = useState(false);
 	// employees are already sorted by time
 	const startTimes = [];
 
@@ -53,6 +55,14 @@ const EmployeeList = () => {
 	const [filterMechanic, setFilterMechanic] = useState(true);
 	// used to determine if the app filters out employees that are part of the training staff, default false to show all employees
 	const [filterTrainer, setFilterTrainer] = useState(true);
+
+	useEffect(() => {
+		if (showAM) {
+			filterPMEmployees();
+		} else {
+			filterAMEmployees();
+		}
+	}, [showAM]);
 
 	if (!loading) {
 		employeeShifts.shifts.forEach(emp => {
@@ -186,8 +196,8 @@ const EmployeeList = () => {
 			<ListTitle>
 				<ListTitleText>Employees</ListTitleText>
 				<OverflowEmployee
-					open={open}
-					setOpen={setOpen}
+					open={overflowOpen}
+					setOpen={setOverflowOpen}
 					activeFilters={activeFilters}
 					filterAMEmployees={filterAMEmployees}
 					filterPMEmployees={filterPMEmployees}
@@ -200,7 +210,7 @@ const EmployeeList = () => {
 				>
 					{({ openOverflow }) => (
 						<IconButton
-							faClassName="fa-bars"
+							faClassName="fa-bars fa-lg"
 							onClick={openOverflow}
 							color={"var(--header-text)"}
 							hoverColor={"grey"}
@@ -240,12 +250,16 @@ const EmployeeList = () => {
 								</div>
 							))
 						) : (
-							<h1>No Employee Shifts...</h1>
+							<EmployeeListRefreshInfo>
+								No Employee Shifts Listed.
+							</EmployeeListRefreshInfo>
 						)}
 					</EmployeeListDiv>
 				</>
 			) : (
-				<h1>Loading Employee Shifts...</h1>
+				<SpinnerWrap>
+					<LoadingImg className="fas fa-circle-notch" />
+				</SpinnerWrap>
 			)}
 		</EmployeeListDivWrapper>
 	);

@@ -14,19 +14,26 @@ import {
 	SET_TRUCK_LOCATION,
 	TOGGLE_BAY_LEAD,
 	REFRESH_EMPLOYEE_SHIFTS,
-	REFRESHING_EMPLOYEE_SHIFTS
+	REFRESHING_EMPLOYEE_SHIFTS,
+	TOGGLE_AM_PM,
+	CLEAR_TABLE
 } from "../actions/constants";
 import { initialParkingLocations } from "../res/test_data/magtable";
 
 const initialState = {
 	assignments: [],
-	employeeShifts: [],
+	employeeShifts: {
+		scheduleDate: null,
+		lastUpdated: null,
+		shifts: []
+	},
 	dailyMessages: "",
 	dailyMix: 40,
 	parkingLocations: initialParkingLocations,
 	selectedApron: EAST_APRON,
 	loading: true,
-	shiftsLoading: true
+	shiftsLoading: true,
+	showAM: true
 };
 
 export default function(state = initialState, action) {
@@ -106,10 +113,20 @@ export default function(state = initialState, action) {
 					)
 				}
 			};
+		case CLEAR_TABLE:
+			return {
+				...state,
+				assignments: state.assignments.map(assignment => ({
+					...assignment,
+					employeeShifts: [null, null, null, null],
+					parkingLocation: null
+				}))
+			};
 		case PUBLISH_TABLE:
 			return {
 				...state,
-				assignments: payload // server will echo the given assignments to verify changes were made properly
+				assignments: payload.assignments
+				// server will echo the given assignments to verify changes were made properly
 			};
 		case ADD_BRIX_RECORD:
 			return {
@@ -142,15 +159,10 @@ export default function(state = initialState, action) {
 		case GET_ASSIGNMENT_DATA:
 			return {
 				...state,
-				assignments: payload.equipment.map(elem => ({
-					equipment: elem,
-					employeeShifts: [null, null, null, null],
-					parkingLocation: null,
-					brixRecords: []
-				})),
 				employeeShifts: payload.employeeShifts,
-				// dailyMessages: payload.dailyMessages,
-				// dailyMix: payload.dailyMix,
+				assignments: payload.magtable.assignments,
+				timePublished: payload.magtable.timePublished,
+				dailyMix: payload.magtable.dailyMix,
 				loading: false,
 				shiftsLoading: false
 			};
@@ -172,7 +184,6 @@ export default function(state = initialState, action) {
 		case REFRESHING_EMPLOYEE_SHIFTS:
 			return {
 				...state,
-				employeeShifts: [],
 				shiftsLoading: true
 			};
 		case REFRESH_EMPLOYEE_SHIFTS:
@@ -180,6 +191,11 @@ export default function(state = initialState, action) {
 				...state,
 				employeeShifts: payload.employeeShifts,
 				shiftsLoading: false
+			};
+		case TOGGLE_AM_PM:
+			return {
+				...state,
+				showAM: !state.showAM
 			};
 		default:
 			return state;

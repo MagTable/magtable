@@ -39,19 +39,32 @@ export const OverflowMenu = styled.div`
 `;
 
 export const OverflowMenuButton = styled.button`
+	transition: background 0.1s ease-in-out;
+
 	z-index: 100;
 	padding: 0.5rem;
-	width: 150px;
+	width: 160px;
 
 	cursor: pointer;
 	border: 0;
 	color: black;
 	text-align: left;
 
-	box-shadow: 2px 2px 3px #999;
+	:not(:last-child) {
+		border-bottom: 2px solid var(--context-grey);
+	}
+
+	font-family: "Nanum Gothic", sans-serif;
+	font-size: 15px;
+	font-weight: bold;
 
 	:hover {
 		background: ${({ hoverColor }) => hoverColor || "#c7c7c7"};
+	}
+
+	:disabled {
+		background: var(--context-grey-light);
+		cursor: wait;
 	}
 `;
 

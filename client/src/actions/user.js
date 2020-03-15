@@ -19,10 +19,14 @@ export const getUsers = () => async dispatch => {
 	try {
 		const res = await axios.get("/user/all");
 
-		dispatch({
-			type: GET_USERS,
-			payload: res.data
-		});
+		setTimeout(
+			() =>
+				dispatch({
+					type: GET_USERS,
+					payload: res.data
+				}),
+			500
+		);
 	} catch (err) {
 		dispatch(setAlert(err.response?.data?.message, "danger"));
 	}

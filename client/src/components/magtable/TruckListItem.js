@@ -12,7 +12,10 @@ import {
 	TruckNoticeDiv,
 	TruckProblemsText,
 	TruckStatusMessage,
-	EquipmentListItemButton
+	EquipmentListItemButton,
+	UnassignBtn,
+	TruckNoticeIndicator,
+	BrixButton
 } from "../../styled/magtable/ListContent";
 import { useDrop, useDrag } from "react-dnd";
 import {
@@ -64,14 +67,19 @@ import IconButton from "../common/IconButton";
  */
 function TruckListItem({ assignment, noticeOpen, showAM }) {
 	const [hoveredShiftDescription, setHoveredShiftDescription] = useState(null);
+	const [localNoticeOpen, setLocalNoticeOpen] = useState(false);
 	const dispatch = useDispatch();
 
 	const equipmentOperable =
 		assignment.equipment.status === GO || assignment.equipment.status === CON;
 
 	const [{ isDragging }, drag] = useDrag({
-		item: { type: SET_TRUCK_LOCATION, id: assignment.equipment.id },
-		canDrag: equipmentOperable,
+		item: {
+			type: SET_TRUCK_LOCATION,
+			id: assignment.equipment.id,
+			toReassign: null
+		},
+		canDrag: equipmentOperable && !assignment.parkingLocation,
 		end: (item, monitor) => {
 			const dropResult = monitor.getDropResult();
 			if (item && dropResult) {
@@ -96,7 +104,9 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 					);
 				}
 				if (dropResult.unassign) {
-					dropResult.unassign.forEach(id => dispatch(removeTruckLocation(id)));
+					dropResult.unassign.forEach(
+						id => id && dispatch(removeTruckLocation(id))
+					);
 				}
 			}
 		},
@@ -154,6 +164,16 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 
 	const handleClear = shiftID => {
 		dispatch(removeEquipmentEmployee(assignment.equipment.id, shiftID));
+	};
+
+	const handleToggleLocalNotice = e => {
+		if (e.currentTarget === e.target) {
+			assignment.equipment.notice && setLocalNoticeOpen(!localNoticeOpen);
+		}
+	};
+
+	const handleClearLocation = equipmentID => {
+		dispatch(removeTruckLocation(equipmentID));
 	};
 
 	function getOutline(index) {
@@ -260,10 +280,25 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 				<TruckNumberDiv
 					ref={drag}
 					status={assignment.equipment.status}
+					assigned={assignment.parkingLocation}
 					isDragging={isDragging}
 					disabled={!equipmentOperable}
+					onClick={e => handleToggleLocalNotice(e)}
 				>
 					{assignment.equipment.id}
+					<BrixButton
+						onClick={() => console.log("brix")} // todo
+						disabled={!equipmentOperable}
+						className={"fas fa-eye-dropper"}
+					/>
+					{assignment.equipment.notice && (
+						<TruckNoticeIndicator
+							active={localNoticeOpen}
+							disabled={!equipmentOperable}
+							className={"fas fa-exclamation-triangle"}
+							onClick={e => handleToggleLocalNotice(e)}
+						/>
+					)}
 				</TruckNumberDiv>
 				{equipmentOperable ? (
 					<TruckInfoDiv>
@@ -290,10 +325,13 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 											/>
 										)}
 									</EquipmentListItemEmployeeWarning>
-									{elem.canClear && (
+									{elem.shift && (
 										<EquipmentListItemEmployeeClearButton>
 											<EquipmentListItemButton
-												onClick={() => handleClear(elem.shift.id)}
+												disabled={!elem.canClear}
+												onClick={() =>
+													elem.canClear && handleClear(elem.shift.id)
+												}
 											>
 												<i className="fas fa-times" />
 											</EquipmentListItemButton>
@@ -302,19 +340,24 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 								</EquipmentListItemEmployee>
 							))}
 						</EquipmentListItemEmployeeList>
-						<TruckListItemLocation
-							type="text"
-							value={
-								assignment.parkingLocation
-									? assignment.parkingLocation.phonetic +
-									  assignment.parkingLocation.position +
-									  assignment.parkingLocation.bay
-									: ""
-							}
-							maxLength={3}
-							style={{ width: "30px" }}
-							readOnly={true}
-						/>
+						<TruckListItemLocation>
+							{assignment.parkingLocation && (
+								<>
+									<UnassignBtn
+										onClick={() => handleClearLocation(assignment.equipment.id)}
+									>
+										<i className="fas fa-times" />
+									</UnassignBtn>
+									<span>
+										{assignment.parkingLocation.apron.substr(0, 1) +
+											"-" +
+											assignment.parkingLocation.phonetic +
+											assignment.parkingLocation.position +
+											assignment.parkingLocation.bay}
+									</span>
+								</>
+							)}
+						</TruckListItemLocation>
 					</TruckInfoDiv>
 				) : (
 					<TruckStatusMessage status={assignment.equipment.status}>
@@ -323,7 +366,7 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 					</TruckStatusMessage>
 				)}
 			</TruckListItemDiv>
-			<TruckNoticeDiv noticeOpen={noticeOpen}>
+			<TruckNoticeDiv noticeOpen={noticeOpen || localNoticeOpen}>
 				{assignment.equipment.notice !== "" && (
 					<TruckProblemsText>{assignment.equipment.notice}</TruckProblemsText>
 				)}

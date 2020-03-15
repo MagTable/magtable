@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { DangerButton } from "../common/FormControl";
 import { DANGER, SUCCESS, WARNING } from "../../actions/constants";
 
@@ -51,28 +51,40 @@ const getTruckColorCode = status => {
 
 export const UnassignBtn = styled.button`
 	position: absolute;
-	border-radius: 30px;
-	width: 20px;
-	height: 20px;
-	top: -10px;
-	left -10px;	
+	border-bottom-left-radius: 5px;
+	font-size: 0.7rem;
+	padding: 0;
+	text-align: center;
+	width: 1rem;
+	height: 1rem;
+	top: 0;
+	right: 0;
 	border: 0;
 	opacity: 0;
 	transition: 0.2s ease-in-out;
 	cursor: pointer;
 	z-index: 1;
-	background: red;
+	background: var(--context-red);
 	color: white;
-	
+
 	:hover {
 		display: block;
 		opacity: 1;
 	}
+
+	${({ disabled }) =>
+		disabled &&
+		`
+		background: var(--context-grey);
+		color: var(--header-text);
+		:hover {
+			background: var(--context-grey-light);
+		}
+	`}
 `;
 
 /**
  *    Holds the currently available employees and separator divs for start times.
- *    todo would like to set a max width on this - arran
  */
 export const EmployeeListDiv = styled.div`
 	margin: 0;
@@ -155,11 +167,71 @@ export const TruckProblemsText = styled.p`
 	border-top: 1px solid var(--border-color);
 `;
 
+export const BrixButton = styled.i`
+	font-size: 15px;
+	transition: color 0.3s ease-in-out;
+	color: var(--context-blue-light);
+
+	position: absolute;
+	top: 3px;
+	left: 3px;
+
+	display: none;
+	opacity: 0;
+
+	:hover {
+		display: block;
+		opacity: 1;
+		color: var(--context-blue);
+	}
+
+	${({ disabled }) =>
+		disabled &&
+		`
+		// disabled truckListItems have a smaller height so the icon needs to be a bit smaller
+		
+		font-size: 12px;	
+		bottom: 1px;
+		left: 1px;
+	`}
+`;
+
+export const TruckNoticeIndicator = styled.i`
+	font-size: 15px;
+	transition: color 0.3s ease-in-out;
+	color: var(--context-orange-light);
+	position: absolute;
+	bottom: 3px;
+	left: 3px;
+
+	${({ disabled }) =>
+		disabled &&
+		`
+		// disabled truckListItems have a smaller height so the icon needs to be a bit smaller
+		
+		font-size: 12px;	
+		bottom: 1px;
+		left: 1px;
+	`}
+
+	${({ active }) =>
+		active &&
+		`
+		color: var(--context-orange);
+	`}
+	
+	:hover {
+		color: var(--context-orange);
+	}
+`;
+
 export const TruckNumberDiv = styled.div`
 	cursor: pointer;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	position: relative;
+	transition: background 0.3s ease-in-out;
 
 	border-right: 10px solid var(${({ status }) => getTruckColorCode(status)});
 	color: black;
@@ -172,9 +244,21 @@ export const TruckNumberDiv = styled.div`
 	${({ disabled }) =>
 		disabled &&
 		`
-		background: var(--context-orange-light);
+		background: white;
 		font-size: 25px;
 	`}
+	${({ assigned }) =>
+		assigned &&
+		`
+		background: var(--context-grey-light);
+	`}
+	
+	:hover {
+		${BrixButton} {
+			display: block;
+			opacity: 1;
+		}	
+	}
 `;
 
 export const TruckInfoDiv = styled.div`
@@ -199,16 +283,40 @@ export const TruckStatusMessage = styled.h4`
 	}
 `;
 
-export const TruckListItemLocation = styled.input`
-	height: calc(100% -2px);
-	flex-grow: 1;
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+export const TruckListItemLocation = styled.div`
+	position: relative;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-grow: 1.4;
 	flex-basis: 0;
-	border: 0;
+
 	max-width: 80px;
+
 	border-left: 2px solid var(--border-color);
+
 	font-size: 1.5rem;
 	text-align: center;
 	font-family: "Noto Sans KR", sans-serif;
+
+	&:hover ${UnassignBtn} {
+		display: block;
+		opacity: 1;
+	}
+
+	span {
+		animation: 0.3s ${fadeIn} ease-out;
+	}
 `;
 
 export const TruckListManipDiv = styled.div`
@@ -220,16 +328,28 @@ export const TruckListManipDiv = styled.div`
 export const EquipmentListItemButton = styled(DangerButton)`
 	transition: opacity 0.3s ease-in-out;
 	opacity: 0;
+	text-align: center;
+	padding: 0;
+	width: 1.25rem;
+	height: 1.25rem;
 	font-size: 13px;
 	color: white;
 	border-radius: 30px;
-	width: 20px;
-	height: 20px;
 	display: none;
 	:hover {
 		opacity: 1;
 		display: block;
 	}
+
+	${({ disabled }) =>
+		disabled &&
+		`
+		background: var(--context-grey);
+		color: var(--header-text);
+		:hover {
+			background: var(--context-grey-light);
+		}
+	`}
 `;
 
 export const EquipmentListItemEmployeeList = styled.div`
@@ -246,9 +366,9 @@ export const EquipmentListItemEmployee = styled.div`
 	display: grid;
 	padding-left: 0.5rem;
 	padding-right: 0.5rem;
-	grid-template-columns: 1fr auto auto;
-	grid-template-areas: "name clearbutton warning";
-	   align-items: center;
+	grid-template-columns: 1fr auto 1.25rem;
+	grid-template-areas: "name warning clearbutton";
+ 	align-items: center;
 
 	transition: height 0.15s ease-in-out;
 	height: ${({ show }) => (show ? "50%" : "0%")};
@@ -290,10 +410,9 @@ export const EquipmentListItemEmployeeClearButton = styled.div`
 /**
  * Divides the list of available employees into sections based on start time.
  */
-export const StartTimeSeparator = styled.h2`
+export const StartTimeSeparator = styled.h3`
 	margin: 0;
-	padding: 0.75rem;
-	text-align: center;
+	padding: 0.5rem 1rem;
 	border-bottom: 1px solid var(--border-color);
 	background: var(--header);
 `;
@@ -317,13 +436,19 @@ export const EmpHours = styled.p`
 `;
 
 export const LabelWrapper = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
 	${({ type }) =>
-		type === "greenPass" && `background-color: var(--context-green);`}
+		type === "greenPass" && `background-color: var(--green-pass);`}
 	${({ type }) =>
-		type === "noAvop" && `background-color: var(--context-orange);`}
+		type === "noAvop" && `background-color: var(--no-avop);`}
 		
-	width: 26px;
-	max-width: 26px;
+	width: 13px;
+	max-width: 13px;
+	max-height: 15px;
+
 	transition: 0.3s ease-in-out;
 	position: relative;
 	z-index: 1;
@@ -336,12 +461,12 @@ export const LabelWrapper = styled.div`
 `;
 
 export const LabelText = styled.div`
-	margin: 0 5px;
 	width: 0px;
 	overflow: hidden;
 	transition: 0.3s ease-in-out;
 	white-space: nowrap;
-	font-family: "Lato";
+	font-family: "Noto Sans", sans-serif;
+	opacity: 0;
 `;
 
 export const Labels = styled.div`
@@ -349,10 +474,14 @@ export const Labels = styled.div`
 	flex-direction: row:
 	justify-content: flex-end;
 	grid-area: labels;
+	
 	:hover {
 		${LabelWrapper}, ${LabelText} {
 			width: 90px;
 			max-width: 90px;
+		}
+		${LabelText} {
+			opacity: 1;
 		}
 	}
 `;
@@ -362,6 +491,7 @@ export const AssignedToWrap = styled.div`
 	background-color: #0496b2;
 	grid-area: equipmentID;
 
+	height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -388,9 +518,10 @@ export const EmpRole = styled.h2`
 	align-self: end;
 	justify-content: flex-end;
 
-	margin: 0.25rem;
+	margin: 0;
+	padding: 0 2px 5px 0;
 	text-align: right;
-
+	white-space: nowrap;
 	color: grey;
 	font-size: 17px;
 	z-index: 0;
@@ -402,11 +533,12 @@ export const EmpListItemDiv = styled.div`
 	border-bottom: 1px solid var(--border-color);
 
 	display: grid;
-	grid-template-columns: 23px 1fr 48px;
+	grid-template-columns: 50px 1fr 48px;
 	grid-template-rows: auto auto;
 	grid-template-areas:
 		"name name equipmentID"
 		"labels position position";
+	align-items: end;
 
 	&:hover ${UnassignBtn} {
 		display: block;

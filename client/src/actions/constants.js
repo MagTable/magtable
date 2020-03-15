@@ -55,6 +55,8 @@ export const CON = "CON";
 export const OOS = "OOS";
 export const INOP = "INOP";
 
+export const TRUCK_STATUSES = [GO, CON, OOS, INOP];
+
 // UI Hint Types
 export const DANGER = "DANGER";
 export const WARNING = "WARNING";
@@ -102,6 +104,7 @@ export const REMOVE_TRUCK_LOCATION = "REMOVE_TRUCK_LOCATION";
 export const TOGGLE_BAY_LEAD = "TOGGLE_BAY_LEAD";
 
 export const SET_SELECTED_APRON = "SET_SELECTED_APRON";
+export const TOGGLE_AM_PM = "TOGGLE_AM_PM";
 
 export const ADD_EMPLOYEE_SHIFT = "ADD_EMPLOYEE_SHIFT";
 export const GET_ASSIGNMENT_DATA = "GET_ASSIGNMENT_DATA"; // server will periodically update shift list on it's own, this would force a refresh
@@ -115,6 +118,11 @@ export const SET_DAILY_MIX = "SET_DAILY_MIX";
 export const ADD_BRIX_RECORD = "ADD_BRIX_RECORD";
 
 export const PUBLISH_TABLE = "PUBLISH_TABLE";
+export const CLEAR_TABLE = "CLEAR_TABLE";
+
+export const EDIT_TRUCK = "EDIT_TRUCK";
+export const ADD_TRUCK = "ADD_TRUCK";
+export const GET_TRUCKS = "GET_TRUCKS";
 
 // standard axios config object for POST requests
 export const AXIOS_JSON_HEADER = {
