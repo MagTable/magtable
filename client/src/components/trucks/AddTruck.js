@@ -9,7 +9,6 @@ import SelectBox from "../common/SelectBox";
 import { LoginBtn } from "../../styled/auth/Login";
 import { AddTruckWrap } from "../../styled/trucks/TruckManagement";
 import TextArea from "../common/TextArea";
-import CheckBox from "../common/CheckBox";
 
 /**
  * @date 3/08/2020

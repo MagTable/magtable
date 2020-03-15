@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { NoticeBox } from "../../styled/trucks/TruckManagement";
-import { useDispatch, useSelector } from "react-redux";
-import { editTruck } from "../../actions/truck";
+import { useSelector } from "react-redux";
 import { TRUCK_STATUSES, SYSTEM_ADMINISTRATOR } from "../../actions/constants";
 import {
 	ManipTruckManipIconDiv,
 	TruckListItemDiv,
-	TruckListManipDiv,
-	TruckNoticeIndicator,
+	TruckMgmtItemDiv,
 	TruckNumberDiv,
 	TruckStatusBox
 } from "../../styled/magtable/ListContent";
@@ -28,8 +26,6 @@ import Confirmation from "../common/Confirmation";
  * @returns {*} The TruckManagementItem component
  */
 function TruckManagementItem({ truck, setEditTruck }) {
-	const dispatch = useDispatch();
-
 	//
 	const [editedNotice, setEditedNotice] = useState(truck.notice);
 	const [editedStatus, setEditedStatus] = useState(truck.status);
@@ -54,7 +50,7 @@ function TruckManagementItem({ truck, setEditTruck }) {
 			notice: editedNotice
 		};
 
-		setEditTruck(editedTruck);
+		setEditTruck(truck);
 		// console.log(editedTruck);
 		// dispatch(editTruck(editedTruck));
 	}
@@ -68,7 +64,7 @@ function TruckManagementItem({ truck, setEditTruck }) {
 	}
 
 	return (
-		<TruckListItemDiv>
+		<TruckMgmtItemDiv>
 			<TruckNumberDiv status={editedStatus}>{truck.id}</TruckNumberDiv>
 			{authUser?.role?.name === SYSTEM_ADMINISTRATOR ? (
 				<>
@@ -115,7 +111,7 @@ function TruckManagementItem({ truck, setEditTruck }) {
 					<Button onClick={handleEdit}>Edit</Button>
 				</>
 			)}
-		</TruckListItemDiv>
+		</TruckMgmtItemDiv>
 	);
 }
 

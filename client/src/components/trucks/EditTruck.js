@@ -1,16 +1,13 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Field, Form, Formik } from "formik";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import { addTruck, editTruck } from "../../actions/truck";
-import TextInput from "../common/TextInput";
+import { editTruck } from "../../actions/truck";
 import { TRUCK_STATUSES } from "../../actions/constants";
 import SelectBox from "../common/SelectBox";
 import { LoginBtn } from "../../styled/auth/Login";
 import { AddTruckWrap } from "../../styled/trucks/TruckManagement";
 import TextArea from "../common/TextArea";
-import CheckBox from "../common/CheckBox";
-import { Input } from "../../styled/common/FormControl";
 
 /**
  * @date 3/08/2020
@@ -28,9 +25,8 @@ import { Input } from "../../styled/common/FormControl";
 const EditTruck = ({ truck }) => {
 	const truckStatuses = TRUCK_STATUSES;
 	const dispatch = useDispatch();
-	let editId, editNotice, editStatus;
 
-	if (truck === null) {
+	if (truck == null) {
 		truck = {
 			id: 5,
 			status: "",
@@ -38,8 +34,13 @@ const EditTruck = ({ truck }) => {
 		};
 	}
 
+	let editId = truck.id,
+		editNotice = truck.notice,
+		editStatus = truck.status;
+
 	// send our edited truck to our actions to persist the edit to the backend
 	function handleEdit() {
+		console.log("hello");
 		const editedTruck = {
 			id: editId,
 			status: editStatus,
@@ -49,6 +50,13 @@ const EditTruck = ({ truck }) => {
 		dispatch(editTruck(editedTruck));
 	}
 
+	function handleChangeOption(event) {
+		// editStatus = event.target.value;
+		console.log(event);
+	}
+
+	console.log(truck.status);
+
 	return (
 		<AddTruckWrap>
 			<Formik
@@ -57,7 +65,7 @@ const EditTruck = ({ truck }) => {
 					status: truck.status === null ? "" : truck.status,
 					notice: truck.notice === null ? "" : truck.notice
 				}}
-				onSubmit={() => handleEdit()}
+				onSubmit={() => console.log("hello")}
 				validationSchema={Yup.object().shape({
 					id: Yup.string()
 						.matches(/\d/, "Invalid Number")
@@ -70,43 +78,29 @@ const EditTruck = ({ truck }) => {
 			>
 				<Form>
 					<h2>Edit Truck</h2>
-					{/*Todo get the truck's ID editable, right now, this causes the page to be empty.*/}
-					{/*<Field name="id">*/}
-					{/*	<input value={truck.id} />*/}
-					{/*	/!*{({ field }) => (*!/*/}
-					{/*	/!*	<TextInput*!/*/}
-					{/*	/!*		{...field}*!/*/}
-					{/*	/!*		errors={props.errors.id}*!/*/}
-					{/*	/!*		touched={props.touched.id}*!/*/}
-					{/*	/!*		type={"number"}*!/*/}
-					{/*	/!*		value={props.values.id}*!/*/}
-					{/*	/!*		label={"Truck ID"}*!/*/}
-					{/*	/!*		fit*!/*/}
-					{/*	/!*	/>*!/*/}
-					{/*	/!*)}*!/*/}
-					{/*</Field>*/}
-
-					<SelectBox label="Truck Status" name="status">
-						<option value="" selected={truck.status}>
-							Select a Truck Status
-						</option>
+					<h3>Truck {truck.id}</h3>
+					<select label="Truck Status" name="status">
+						<option value="" />
 						{truckStatuses.map(truckStatus => {
-							return (
+							return truck.status === truckStatus ? (
+								<option key={truckStatus} value={truckStatus} selected={true}>
+									{truckStatus}
+								</option>
+							) : (
 								<option key={truckStatus} value={truckStatus}>
 									{truckStatus}
 								</option>
 							);
 						})}
-					</SelectBox>
+					</select>
 					<TextArea
 						label="Notice"
 						name="notice"
 						rows="6"
 						placeholder="Any truck notices go here..."
+						value={truck.notice}
 					/>
 					<br />
-					{/*todo checkbox for service vehicle or not?*/}
-					{/*<CheckBox name={"service"}>Service Vehicle?</CheckBox>*/}
 					<LoginBtn type="submit">Save</LoginBtn>
 				</Form>
 			</Formik>
