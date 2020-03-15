@@ -42,7 +42,6 @@ function TowerList() {
 		return null;
 	});
 
-	console.log(towerPositions);
 	return (
 		<TowerMapDiv>
 			{!loading ? (
