@@ -298,17 +298,44 @@ export const setSelectedApron = apronCode => dispatch => {
  *
  * @returns API returns the entire magtable object
  */
+// export const getMagTable = () => async dispatch => {
+// 	try {
+// 		const magtableRes = await axios.get("/magtable");
+// 		const shiftRes = await axios.get("/shift/all");
+//
+// 		setTimeout(() => {
+// 			dispatch({
+// 				type: GET_ASSIGNMENT_DATA,
+// 				payload: {
+// 					employeeShifts: shiftRes.data,
+// 					magtable: magtableRes.data
+// 				}
+// 			});
+// 		}, 500);
+// 	} catch (err) {
+// 		if (err.response.status === 403) {
+// 			dispatch(logout());
+// 		}
+// 		dispatch(setAlert("Session Expired", "warning"));
+//
+// 		console.log(err);
+// 	}
+// };
+
 export const getMagTable = () => async dispatch => {
+	// todo currently only equipment and shifts are returned here,
+	//  will be updated once entire magtable is returned by api
 	try {
-		const magtableRes = await axios.get("/magtable");
 		const shiftRes = await axios.get("/shift/all");
+		const truckRes = await axios.get("/equipment/truck/all");
+		const towerRes = await axios.get("/equipment/tower/all");
 
 		setTimeout(() => {
 			dispatch({
 				type: GET_ASSIGNMENT_DATA,
 				payload: {
 					employeeShifts: shiftRes.data,
-					magtable: magtableRes.data
+					equipment: [...truckRes.data, ...towerRes.data]
 				}
 			});
 		}, 500);

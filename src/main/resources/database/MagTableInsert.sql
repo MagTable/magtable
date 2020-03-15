@@ -130,7 +130,7 @@ INSERT INTO Equipment (equipmentID, type, status, notice, active) VALUES (1013, 
 # INSERT INTO shift (assignmentID, description, name, startTime, endTime, noAvop, isGreen) VALUES (4, 'Icehouse', 'Tower Spotter', '2020-02-22T04:00:00', '2020-02-22T16:00:00', FALSE, FALSE);
 #
 # -- BrixRecord
-# INSERT INTO brixRecord (assignmentID, nozzle, type1, type4, litersPurged, timeMeasured) VALUES (1, 23.5, 53.1, 32.4, 56, '2020-02-22T04:12:33');
+INSERT INTO brixRecord (equipmentID, nozzle, type1, type4, litersPurged, timeMeasured) VALUES (23, 23.5, 53.1, 32.4, 56, '2020-02-22T04:12:33');
 #
 # INSERT INTO brixRecord (assignmentID, nozzle, type1, type4, litersPurged, timeMeasured) VALUES (2, 21.2, 52.3, 32.4, 67, '2020-02-22T04:12:33');
 
