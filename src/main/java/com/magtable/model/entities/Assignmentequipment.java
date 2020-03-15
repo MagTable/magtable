@@ -4,11 +4,11 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class AssignmentEquipment {
+public class Assignmentequipment {
     private Integer id;
     private String status;
     private String notice;
-    private Assignment assignmentByAssignmentId;
+    private Equipment equipmentByEquipmentId;
 
     @Id
     @Column(name = "assignmentEquipmentID", nullable = false)
@@ -44,7 +44,7 @@ public class AssignmentEquipment {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AssignmentEquipment that = (AssignmentEquipment) o;
+        Assignmentequipment that = (Assignmentequipment) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(status, that.status) &&
                 Objects.equals(notice, that.notice);
@@ -56,12 +56,12 @@ public class AssignmentEquipment {
     }
 
     @ManyToOne
-    @JoinColumn(name = "assignmentID", referencedColumnName = "assignmentID", nullable = false)
-    public Assignment getAssignmentByAssignmentId() {
-        return assignmentByAssignmentId;
+    @JoinColumn(name = "equipmentID", referencedColumnName = "equipmentID", nullable = false)
+    public Equipment getEquipmentByEquipmentId() {
+        return equipmentByEquipmentId;
     }
 
-    public void setAssignmentByAssignmentId(Assignment assignmentByAssignmentId) {
-        this.assignmentByAssignmentId = assignmentByAssignmentId;
+    public void setEquipmentByEquipmentId(Equipment equipmentByEquipmentId) {
+        this.equipmentByEquipmentId = equipmentByEquipmentId;
     }
 }

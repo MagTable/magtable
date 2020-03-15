@@ -1,15 +1,17 @@
 package com.magtable.model.entities;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class AssignmentParkingLocation {
+public class Assignmentparkinglocation {
     private Integer id;
     private Integer parkingLocationId;
     private String position;
     private Integer bay;
-    private Assignment assignmentByAssignmentId;
 
     @Id
     @Column(name = "assignmentParkingLocationID", nullable = false)
@@ -55,7 +57,7 @@ public class AssignmentParkingLocation {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AssignmentParkingLocation that = (AssignmentParkingLocation) o;
+        Assignmentparkinglocation that = (Assignmentparkinglocation) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(parkingLocationId, that.parkingLocationId) &&
                 Objects.equals(position, that.position) &&
@@ -67,13 +69,6 @@ public class AssignmentParkingLocation {
         return Objects.hash(id, parkingLocationId, position, bay);
     }
 
-    @ManyToOne
-    @JoinColumn(name = "assignmentID", referencedColumnName = "assignmentID", nullable = false)
-    public Assignment getAssignmentByAssignmentId() {
-        return assignmentByAssignmentId;
-    }
 
-    public void setAssignmentByAssignmentId(Assignment assignmentByAssignmentId) {
-        this.assignmentByAssignmentId = assignmentByAssignmentId;
-    }
+
 }

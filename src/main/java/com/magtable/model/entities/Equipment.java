@@ -1,27 +1,26 @@
 package com.magtable.model.entities;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 public class Equipment {
-    private Integer id;
+    private Integer equipmentId;
     private String type;
     private String status;
     private String notice;
     private Boolean active;
+    private Collection<Brixrecord> brixrecordsByEquipmentId;
 
     @Id
     @Column(name = "equipmentID", nullable = false)
-    public Integer getId() {
-        return id;
+    public Integer getEquipmentId() {
+        return equipmentId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setEquipmentId(Integer equipmentId) {
+        this.equipmentId = equipmentId;
     }
 
     @Basic
@@ -69,7 +68,7 @@ public class Equipment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Equipment equipment = (Equipment) o;
-        return Objects.equals(id, equipment.id) &&
+        return Objects.equals(equipmentId, equipment.equipmentId) &&
                 Objects.equals(type, equipment.type) &&
                 Objects.equals(status, equipment.status) &&
                 Objects.equals(notice, equipment.notice) &&
@@ -78,6 +77,15 @@ public class Equipment {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type, status, notice, active);
+        return Objects.hash(equipmentId, type, status, notice, active);
+    }
+
+    @OneToMany
+    public Collection<Brixrecord> getBrixrecordsByEquipmentId() {
+        return brixrecordsByEquipmentId;
+    }
+
+    public void setBrixrecordsByEquipmentId(Collection<Brixrecord> brixrecordsByEquipmentId) {
+        this.brixrecordsByEquipmentId = brixrecordsByEquipmentId;
     }
 }

@@ -1,13 +1,16 @@
 package com.magtable.model.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 public class Assignment {
     private Integer id;
+    private MagTableRecord magtablerecordByMagtableRecordId;
+    private Collection<Assignmentequipment> assignmentequipmentsByAssignmentId;
+    private Collection<Assignmentparkinglocation> assignmentparkinglocationsByAssignmentId;
+    private Collection<Shift> shiftsByAssignmentId;
 
     @Id
     @Column(name = "assignmentID", nullable = false)
@@ -30,5 +33,43 @@ public class Assignment {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "magtableRecordID", referencedColumnName = "magtableRecordID", nullable = false)
+    public MagTableRecord getMagtablerecordByMagtableRecordId() {
+        return magtablerecordByMagtableRecordId;
+    }
+
+    public void setMagtablerecordByMagtableRecordId(MagTableRecord magtablerecordByMagtableRecordId) {
+        this.magtablerecordByMagtableRecordId = magtablerecordByMagtableRecordId;
+    }
+
+    //Also Works
+    @OneToMany
+    public Collection<Assignmentequipment> getAssignmentequipmentsByAssignmentId() {
+        return assignmentequipmentsByAssignmentId;
+    }
+
+    public void setAssignmentequipmentsByAssignmentId(Collection<Assignmentequipment> assignmentequipmentsByAssignmentId) {
+        this.assignmentequipmentsByAssignmentId = assignmentequipmentsByAssignmentId;
+    }
+
+    @OneToMany
+    public Collection<Assignmentparkinglocation> getAssignmentparkinglocationsByAssignmentId() {
+        return assignmentparkinglocationsByAssignmentId;
+    }
+
+    public void setAssignmentparkinglocationsByAssignmentId(Collection<Assignmentparkinglocation> assignmentparkinglocationsByAssignmentId) {
+        this.assignmentparkinglocationsByAssignmentId = assignmentparkinglocationsByAssignmentId;
+    }
+
+    @OneToMany
+    public Collection<Shift> getShiftsByAssignmentId() {
+        return shiftsByAssignmentId;
+    }
+
+    public void setShiftsByAssignmentId(Collection<Shift> shiftsByAssignmentId) {
+        this.shiftsByAssignmentId = shiftsByAssignmentId;
     }
 }

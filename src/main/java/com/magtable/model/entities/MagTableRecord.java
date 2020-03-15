@@ -1,10 +1,8 @@
 package com.magtable.model.entities;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -14,6 +12,7 @@ public class MagTableRecord {
     private Integer forecastLow;
     private String publishedBy;
     private Timestamp timePublished;
+    private Collection<Assignment> assignmentsByMagtableRecordId;
 
     @Id
     @Column(name = "magtableRecordID", nullable = false)
@@ -80,5 +79,15 @@ public class MagTableRecord {
     @Override
     public int hashCode() {
         return Objects.hash(id, dailyMix, forecastLow, publishedBy, timePublished);
+    }
+
+    //THIS ONE WORKS!
+    @OneToMany(mappedBy = "magtablerecordByMagtableRecordId")
+    public Collection<Assignment> getAssignmentsByMagtableRecordId() {
+        return assignmentsByMagtableRecordId;
+    }
+
+    public void setAssignmentsByMagtableRecordId(Collection<Assignment> assignmentsByMagtableRecordId) {
+        this.assignmentsByMagtableRecordId = assignmentsByMagtableRecordId;
     }
 }

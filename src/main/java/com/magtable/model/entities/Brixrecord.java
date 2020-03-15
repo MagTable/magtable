@@ -10,6 +10,7 @@ import java.util.Objects;
 @Entity
 public class Brixrecord {
     private Integer id;
+    private Integer equipmentId;
     private Double nozzle;
     private Double type1;
     private Double type4;
@@ -24,6 +25,16 @@ public class Brixrecord {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Basic
+    @Column(name = "equipmentID", nullable = false)
+    public Integer getEquipmentId() {
+        return equipmentId;
+    }
+
+    public void setEquipmentId(Integer equipmentId) {
+        this.equipmentId = equipmentId;
     }
 
     @Basic
@@ -82,6 +93,7 @@ public class Brixrecord {
         if (o == null || getClass() != o.getClass()) return false;
         Brixrecord that = (Brixrecord) o;
         return Objects.equals(id, that.id) &&
+                Objects.equals(equipmentId, that.equipmentId) &&
                 Objects.equals(nozzle, that.nozzle) &&
                 Objects.equals(type1, that.type1) &&
                 Objects.equals(type4, that.type4) &&
@@ -91,6 +103,6 @@ public class Brixrecord {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nozzle, type1, type4, litersPurged, timeMeasured);
+        return Objects.hash(id, equipmentId, nozzle, type1, type4, litersPurged, timeMeasured);
     }
 }
