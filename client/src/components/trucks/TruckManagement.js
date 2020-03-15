@@ -54,13 +54,15 @@ function TruckManagement() {
 				</ListTitle>
 				<TruckManagementListDiv>
 					<FadeIn>
-						{trucks.map(truck => (
-							<TruckManagementItem
-								key={truck.id}
-								truck={truck}
-								setEditTruck={setEditTruck}
-							/>
-						))}
+						<>
+							{trucks.map(truck => (
+								<TruckManagementItem
+									key={truck.id}
+									truck={truck}
+									setEditTruck={setEditTruck}
+								/>
+							))}
+						</>
 					</FadeIn>
 				</TruckManagementListDiv>
 			</TruckMgmtDiv>

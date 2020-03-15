@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 /**
  * @date 2/28/2020
- * @author Steven Wong, Arran Woodruff
+ * @author Steven Wong, Arran Woodruff, MJ Kochuk
  * @module Component
  */
 
