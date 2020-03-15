@@ -18,7 +18,8 @@ import {
 	TOGGLE_AM_PM,
 	CLEAR_TABLE,
 	GET_BRIX_RECORDS,
-	FETCHING_BRIX_RECORDS
+	FETCHING_BRIX_RECORDS,
+	ADDING_BRIX_RECORD
 } from "../actions/constants";
 import { initialParkingLocations } from "../res/test_data/magtable";
 
@@ -36,8 +37,12 @@ const initialState = {
 	loading: true,
 	shiftsLoading: true,
 	showAM: true,
-	selectedBrixRecords: [],
-	brixRecordsLoading: true
+	brix: {
+		selectedBrixRecords: [],
+		selectedTruckID: null,
+		loading: true,
+		addingBrixRecord: false
+	}
 };
 
 export default function(state = initialState, action) {
@@ -135,19 +140,43 @@ export default function(state = initialState, action) {
 		case ADD_BRIX_RECORD:
 			return {
 				...state,
-				selectedBrixRecords: [payload, ...state.selectedBrixRecords]
+				brix: {
+					...state.brix,
+					selectedBrixRecords: [
+						payload.brixRecord,
+						...state.brix.selectedBrixRecords
+					],
+					selectedTruckID: payload.truckID,
+					addingBrixRecord: false
+				}
+			};
+		case ADDING_BRIX_RECORD:
+			return {
+				...state,
+				brix: {
+					...state.brix,
+					addingBrixRecord: true
+				}
 			};
 		case FETCHING_BRIX_RECORDS:
 			return {
 				...state,
-				selectedBrixRecords: [],
-				brixRecordsLoading: true
+				brix: {
+					...state.brix,
+					selectedBrixRecords: [],
+					selectedTruckID: payload.truckID,
+					loading: true
+				}
 			};
 		case GET_BRIX_RECORDS:
 			return {
 				...state,
-				selectedBrixRecords: [...payload, ...state.selectedBrixRecords],
-				brixRecordsLoading: false
+				brix: {
+					...state.brix,
+					selectedBrixRecords: payload.brixRecords,
+					selectedTruckID: payload.truckID,
+					loading: false
+				}
 			};
 		case SET_DAILY_MIX:
 			return {

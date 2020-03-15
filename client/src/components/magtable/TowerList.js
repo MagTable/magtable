@@ -7,7 +7,7 @@ import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
 
 /**
  * @date 2020-02-19
- * @author MJ Kochuk, Steven Wong
+ * @author MJ Kochuk, Steven Wong, Arran Woodruff
  * @module Component
  */
 
@@ -42,6 +42,7 @@ function TowerList() {
 		return null;
 	});
 
+	console.log(towerPositions);
 	return (
 		<TowerMapDiv>
 			{!loading ? (

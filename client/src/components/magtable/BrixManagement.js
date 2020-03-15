@@ -17,13 +17,14 @@ import { addBrixRecord } from "../../actions/magtable";
 
 function BrixManagement() {
 	const dispatch = useDispatch();
-	const selectedBrixRecords = useSelector(
-		state => state.magtable.selectedBrixRecords
-	);
-	const brixRecordsLoading = useSelector(
-		state => state.magtable.brixRecordsLoading
-	);
+	const {
+		selectedBrixRecords,
+		selectedTruckID,
+		loading,
+		addingBrixRecord
+	} = useSelector(state => state.magtable.brix);
 	const getFormattedDate = date => {
+		date = new Date(date);
 		const months = [
 			"JAN",
 			"FEB",
@@ -44,12 +45,24 @@ function BrixManagement() {
 		const y = date.getFullYear().toString();
 		const h = date.getHours();
 		const min = date.getMinutes();
-		return d + "-" + m + "-" + y + "@" + h + ":" + min;
+		return (
+			d +
+			"-" +
+			m +
+			"-" +
+			y +
+			"@" +
+			h.toString().padStart(2, "0") +
+			":" +
+			min.toString().padStart(2, "0")
+		);
 	};
 
 	return (
 		<BrixWrapper>
-			<BrixWrapperTitle>Brix Management</BrixWrapperTitle>
+			<BrixWrapperTitle>
+				Brix Management - MAG{selectedTruckID}
+			</BrixWrapperTitle>
 			<Formik
 				initialValues={{
 					nozzle: "30.3",
@@ -59,8 +72,7 @@ function BrixManagement() {
 					timeMeasured: new Date()
 				}}
 				onSubmit={(values, { resetForm }) => {
-					console.log(values);
-					dispatch(addBrixRecord(5, { id: Math.random(), ...values }));
+					dispatch(addBrixRecord(selectedTruckID, { ...values }));
 					resetForm();
 				}}
 				validationSchema={Yup.object().shape({
@@ -153,7 +165,15 @@ function BrixManagement() {
 							)}
 						</Field>
 						<div id={"submit"}>
-							<OkButton type={"submit"}>Submit</OkButton>
+							<OkButton disabled={addingBrixRecord} type={"submit"}>
+								{addingBrixRecord ? (
+									<SpinnerWrap>
+										<LoadingImg small className="fas fa-circle-notch" />
+									</SpinnerWrap>
+								) : (
+									"Submit"
+								)}
+							</OkButton>
 						</div>
 					</BrixForm>
 				)}
@@ -164,7 +184,7 @@ function BrixManagement() {
 			{/*</div>*/}
 			<BrixTableTitle>Previous Records</BrixTableTitle>
 			<BrixTableWrapper>
-				{brixRecordsLoading ? (
+				{loading ? (
 					<SpinnerWrap>
 						<LoadingImg className="fas fa-circle-notch" />
 					</SpinnerWrap>

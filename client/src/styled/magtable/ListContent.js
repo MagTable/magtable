@@ -139,14 +139,13 @@ export const TruckListDivWrapper = styled(TruckListDiv)`
 
 export const ManipTruckManipIconDiv = styled.div`
 	width: auto;
-    align-items: center;
-    justify-items: end;
-    // display: none;
-    opacity: 0;
-    display: flex;
-    transition: 0.3s ease-in-out;
+	align-items: center;
+	justify-items: end;
+	// display: none;
+	opacity: 0;
+	display: flex;
+	transition: 0.3s ease-in-out;
 `;
-
 
 export const TruckListItemDiv = styled.div`
 	transition: all 0.15s ease-in-out;
@@ -349,14 +348,11 @@ export const TruckListItemLocation = styled.div`
 	}
 `;
 
-
 export const TruckListManipDiv = styled.div`
 	display: flex;
 	flex-direction: row;
 	margin-right: 3px;
 `;
-
-
 
 export const EquipmentListItemButton = styled(DangerButton)`
 	transition: opacity 0.3s ease-in-out;
