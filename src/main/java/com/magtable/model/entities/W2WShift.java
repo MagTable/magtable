@@ -1,32 +1,30 @@
-package com.magtable.model;
+package com.magtable.model.entities;
+
+
+import com.magtable.model.api.ShiftResponse;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.sql.Timestamp;
 
-@Table(name = "shift")
 @Entity
-public class Shift implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class W2WShift {
 
-    public Shift(){}
+    public W2WShift() {
+    }
 
-    public Shift(ShiftResponse shiftResponse) {
+    //Copy Constructor for converting a ShiftResponse into W2W entity
+    public W2WShift(ShiftResponse shiftResponse){
         this.description = shiftResponse.getDescription();
         this.name = shiftResponse.getName();
-        this.startTime = new Timestamp(System.currentTimeMillis()); //todo Fix this part with David
-        this.endTime = new Timestamp(System.currentTimeMillis()); //todo Fix this part with David
         this.noAvop = shiftResponse.getNoAvop();
         this.isGreen = shiftResponse.getIsGreen();
+
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(insertable = false, name = "shiftid", nullable = false)
-    private Integer shiftID;
-
-    @Column(name = "assignmentid")
-    private Integer assignmentID;
+    private Integer id;
 
     @Column(name = "description")
     private String description;
@@ -46,21 +44,6 @@ public class Shift implements Serializable {
     @Column(name = "isgreen", nullable = false)
     private Boolean isGreen;
 
-    public Integer getShiftID() {
-        return shiftID;
-    }
-
-    public void setShiftID(Integer shiftID) {
-        this.shiftID = shiftID;
-    }
-
-    public Integer getAssignmentID() {
-        return assignmentID;
-    }
-
-    public void setAssignmentID(Integer assignmentID) {
-        this.assignmentID = assignmentID;
-    }
 
     public String getDescription() {
         return description;
@@ -76,6 +59,30 @@ public class Shift implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Boolean getNoAvop() {
+        return noAvop;
+    }
+
+    public void setNoAvop(Boolean noAvop) {
+        this.noAvop = noAvop;
+    }
+
+    public Boolean isGreen() {
+        return isGreen;
+    }
+
+    public void setGreen(Boolean green) {
+        isGreen = green;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Timestamp getStartTime() {
@@ -94,19 +101,16 @@ public class Shift implements Serializable {
         this.endTime = endTime;
     }
 
-    public Boolean getNoAvop() {
-        return noAvop;
-    }
-
-    public void setNoAvop(Boolean noAvop) {
-        this.noAvop = noAvop;
-    }
-
-    public Boolean getIsGreen() {
-        return isGreen;
-    }
-
-    public void setIsGreen(Boolean isGreen) {
-        this.isGreen = isGreen;
+    @Override
+    public String toString() {
+        return "W2WShift{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", name='" + name + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", noAvop=" + noAvop +
+                ", isGreen=" + isGreen +
+                '}';
     }
 }

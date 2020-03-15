@@ -1,8 +1,5 @@
 package com.magtable.controller;
 
-import com.magtable.model.Tower;
-import com.magtable.model.Truck;
-import com.magtable.model.User;
 import com.magtable.repository.TowerRepository;
 import com.magtable.repository.TruckRepository;
 import com.magtable.services.ErrorService;

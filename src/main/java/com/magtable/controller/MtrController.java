@@ -1,6 +1,7 @@
 package com.magtable.controller;
 
-import com.magtable.model.*;
+import com.magtable.model.api.ShiftResponse;
+import com.magtable.model.entities.Shift;
 import com.magtable.repository.*;
 import com.magtable.services.ErrorService;
 import org.springframework.beans.factory.annotation.Autowired;

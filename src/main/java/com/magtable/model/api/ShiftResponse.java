@@ -1,4 +1,6 @@
-package com.magtable.model;
+package com.magtable.model.api;
+
+import com.magtable.model.entities.W2WShift;
 
 import java.io.Serializable;
 

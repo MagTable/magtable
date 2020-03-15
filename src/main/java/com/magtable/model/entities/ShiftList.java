@@ -1,4 +1,6 @@
-package com.magtable.model;
+package com.magtable.model.entities;
+
+import com.magtable.model.api.ShiftResponse;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -32,7 +34,6 @@ public class ShiftList implements Serializable {
         //ShiftTimes need to be sent as a 0400 or 1600 to the front end (Client uses 24hr times)
         for (W2WShift shift : list) {
             ShiftResponse shiftResponse = new ShiftResponse(shift);
-
             // 2020-03-13 04:00:00.0
             String startTimeStampString = shift.getStartTime().toString();
             String[] splitedTime = startTimeStampString.split(" ");

@@ -1,9 +1,9 @@
 package com.magtable.controller;
 
 
-import com.magtable.model.ShiftResponse;
-import com.magtable.model.ShiftList;
-import com.magtable.model.W2WShift;
+import com.magtable.model.api.ShiftResponse;
+import com.magtable.model.entities.ShiftList;
+import com.magtable.model.entities.W2WShift;
 import com.magtable.repository.W2WShiftRepository;
 import com.magtable.services.ErrorService;
 import org.jsoup.Jsoup;
@@ -185,6 +185,7 @@ public class ShiftController {
         if(sb.length() == 3){
             sb.insert(0, "0");
         }
+
         sb.insert(2, ":");
         String startTime = sb.toString();
 

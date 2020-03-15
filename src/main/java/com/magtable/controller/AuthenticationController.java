@@ -1,6 +1,10 @@
 package com.magtable.controller;
 
-import com.magtable.model.*;
+import com.magtable.model.api.AuthenticationRequest;
+import com.magtable.model.api.AuthenticationResponse;
+import com.magtable.model.api.MagUserDetails;
+import com.magtable.model.api.SafeUser;
+import com.magtable.model.entities.User;
 import com.magtable.repository.UserRepository;
 import com.magtable.services.ErrorService;
 import com.magtable.services.userServices.*;

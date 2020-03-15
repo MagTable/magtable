@@ -1,6 +1,6 @@
 package com.magtable.repository;
 
-import com.magtable.model.User;
+import com.magtable.model.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
