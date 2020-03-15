@@ -18,6 +18,16 @@ public class MagtablerecordResponse implements Serializable {
 
     }
 
+    public MagtablerecordResponse(Magtablerecord magtablerecord){
+        this.magID = magtablerecord.getMagID();
+        this.dailyMix = magtablerecord.getDailyMix();
+        this.forecastLow = magtablerecord.getForecastLow();
+        this.publishedBy = magtablerecord.getPublishedBY();
+        this.timePublished = magtablerecord.getTimePublished();
+        this.assignments = new ArrayList<>();
+
+    }
+
     public MagtablerecordResponse(int magID, long numberOfAssignments) {
         this.magID = magID;
         this.dailyMix = 0;

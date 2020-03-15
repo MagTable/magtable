@@ -39,20 +39,35 @@ public class MtrController {
     @Autowired
     private TruckRepository truckRepository;
 
-    @GetMapping("/new")
-    public MagtablerecordResponse getMagtableRecordResponse() {
-        //Create a magtablerecord and input it into the database in order to create the base magID.
-        Magtablerecord mtr = new Magtablerecord();
-        System.out.println(mtr);
-        magtablerecordRepository.save(mtr);
+    /**
+     * Route to get the most recent mag table
+     * @return
+     */
+    @GetMapping()
+    public MagtablerecordResponse getMagTable() {
 
         long assignmentValue = 0;
         assignmentValue += truckRepository.count();
         assignmentValue += towerRepository.count();
 
-        //Create then send the empty skeleton to front end making sure to assign the magID from database
-        MagtablerecordResponse mtrr = new MagtablerecordResponse(mtr.getMagID(), assignmentValue);
-        return mtrr;
+        //if we have no records in the database -> create a new one
+        if(magtablerecordRepository.count() == 0){
+            //Create a magtablerecord and input it into the database in order to create the base magID.
+            Magtablerecord mtr = new Magtablerecord();
+            magtablerecordRepository.save(mtr);
+
+
+
+            //Create then send the empty skeleton to front end making sure to assign the magID from database
+            MagtablerecordResponse mtrr = new MagtablerecordResponse(mtr.getMagID(), assignmentValue);
+            return mtrr;
+        }
+
+        Magtablerecord magtablerecord = magtablerecordRepository.findMostRecent();
+
+
+        return new MagtablerecordResponse(magtablerecord);
+
     }
 
     @PostMapping("/publish")
