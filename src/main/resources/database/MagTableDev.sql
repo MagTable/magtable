@@ -9,14 +9,14 @@ CREATE DATABASE magtabledev;
 
 USE magtabledev;
 
-CREATE TABLE Role
+CREATE TABLE role
 (
     roleID   INT(1)      NOT NULL,
     rolename VARCHAR(25) NOT NULL,
     PRIMARY KEY (roleID)
 );
 
-CREATE TABLE User
+CREATE TABLE user
 (
     userID    INT(5)      NOT NULL AUTO_INCREMENT,
     `role`    INT(2)      NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE User
     CONSTRAINT FK_User_Role FOREIGN KEY (`role`) REFERENCES `Role` (`roleID`) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
-CREATE TABLE Truck
+CREATE TABLE truck
 (
     truckID INT(5) NOT NULL,
     status  VARCHAR(4),
@@ -36,14 +36,14 @@ CREATE TABLE Truck
     CONSTRAINT CK_Truck_Status CHECK (status = 'GO' OR status = 'INOP' OR status = 'CON' OR status = 'OOS')
 );
 
-CREATE TABLE Tower
+CREATE TABLE tower
 (
     towerID  INT(5)      NOT NULL,
     position VARCHAR(25) NOT NULL,
     PRIMARY KEY (towerID)
 );
 
-CREATE TABLE ParkingLocation
+CREATE TABLE parkingLocation
 (
     id        INT(5)     NOT NULL,
     apron     VARCHAR(4) NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE ParkingLocation
     PRIMARY KEY (id)
 );
 
-CREATE TABLE MagTableRecord
+CREATE TABLE magTableRecord
 (
     magID         INT(5) NOT NULL AUTO_INCREMENT,
     dailyMix      INT(2),
@@ -68,7 +68,7 @@ CREATE TABLE MagTableRecord
     PRIMARY KEY (magID)
 );
 
-CREATE TABLE Assignment
+CREATE TABLE assignment
 (
     assignmentID    INT(10) NOT NULL AUTO_INCREMENT,
     magID           INT(5)  NOT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE Assignment
     CONSTRAINT FK_Mag_ID FOREIGN KEY (magID) REFERENCES MagTableRecord (magID) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
-CREATE TABLE PlAssignment
+CREATE TABLE plAssignment
 (
     plAssignmentID INT(10) NOT NULL AUTO_INCREMENT,
     assignmentID   INT(10) NOT NULL,
@@ -89,7 +89,7 @@ CREATE TABLE PlAssignment
 );
 
 
-CREATE TABLE Equipment
+CREATE TABLE equipment
 (
     equipmentID  INT(10) NOT NULL AUTO_INCREMENT,
     id           INT(5)  NOT NULL,
@@ -100,7 +100,7 @@ CREATE TABLE Equipment
     CONSTRAINT FK_Equipment_Assignment FOREIGN KEY (assignmentID) REFERENCES Assignment (assignmentID) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
-CREATE TABLE Shift
+CREATE TABLE shift
 (
     shiftID      INT(10) NOT NULL AUTO_INCREMENT, #TODO Remove Auto Increment ( Inerts break with it)
     assignmentID INT(10) NOT NULL,
@@ -114,7 +114,7 @@ CREATE TABLE Shift
     CONSTRAINT FK_Shift_Assignment FOREIGN KEY (assignmentID) REFERENCES Assignment (assignmentID) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
-CREATE TABLE W2WShift
+CREATE TABLE w2wShift
 (
     shiftID      INT(10) NOT NULL AUTO_INCREMENT,
     description  VARCHAR(30),
@@ -126,7 +126,7 @@ CREATE TABLE W2WShift
     PRIMARY KEY (shiftID)
 );
 
-CREATE TABLE BrixRecord
+CREATE TABLE brixRecord
 (
     brixRecordID INT(5) NOT NULL AUTO_INCREMENT,
     assignmentID INT(5) NOT NULL,
