@@ -1,13 +1,9 @@
 package com.magtable.controller;
 
-import com.magtable.model.api.ShiftResponse;
-import com.magtable.model.entities.Shift;
+import com.magtable.model.entities.MagTableRecord;
 import com.magtable.repository.*;
-import com.magtable.services.ErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/magtable")
@@ -18,6 +14,24 @@ public class MtrController {
 
     @Autowired
     AssignmentRepository assignmentRepository;
+
+    @GetMapping("")
+    public MagTableRecord getMagTable(){
+
+        MagTableRecord magTableRecord = magTableRecordRepository.findMostRecent();
+
+        if(magTableRecord == null){
+            //Create a new empty one
+            magTableRecord = new MagTableRecord();
+
+
+
+        }
+
+        return magTableRecord;
+
+
+    }
 
 
 
