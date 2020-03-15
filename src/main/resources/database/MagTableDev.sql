@@ -9,14 +9,14 @@ CREATE DATABASE magtabledev;
 
 USE magtabledev;
 
-CREATE TABLE role
+CREATE TABLE Role
 (
     roleID   INT(1)      NOT NULL,
     rolename VARCHAR(25) NOT NULL,
     PRIMARY KEY (roleID)
 );
 
-CREATE TABLE user
+CREATE TABLE User
 (
     userID    INT(5)      NOT NULL AUTO_INCREMENT,
     `role`    INT(2)      NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE user
     CONSTRAINT FK_User_Role FOREIGN KEY (`role`) REFERENCES `Role` (`roleID`) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
-CREATE TABLE truck
+CREATE TABLE Truck
 (
     truckID INT(5) NOT NULL,
     status  VARCHAR(4),
@@ -57,7 +57,7 @@ CREATE TABLE Tower
     PRIMARY KEY (towerID)
 );
 
-CREATE TABLE parkingLocation
+CREATE TABLE ParkingLocation
 (
     id        INT(5)     NOT NULL,
     apron     VARCHAR(4) NOT NULL,
@@ -72,7 +72,7 @@ CREATE TABLE parkingLocation
     PRIMARY KEY (id)
 );
 
-CREATE TABLE magTableRecord
+CREATE TABLE MagTableRecord
 (
     magID         INT(5) NOT NULL AUTO_INCREMENT,
     dailyMix      INT(2),
@@ -82,7 +82,7 @@ CREATE TABLE magTableRecord
     PRIMARY KEY (magID)
 );
 
-CREATE TABLE assignment
+CREATE TABLE Assignment
 (
     assignmentID    INT(10) NOT NULL AUTO_INCREMENT,
     magID           INT(5)  NOT NULL,
@@ -90,7 +90,7 @@ CREATE TABLE assignment
     CONSTRAINT FK_Mag_ID FOREIGN KEY (magID) REFERENCES MagTableRecord (magID) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
-CREATE TABLE plAssignment
+CREATE TABLE PlAssignment
 (
     plAssignmentID INT(10) NOT NULL AUTO_INCREMENT,
     assignmentID   INT(10) NOT NULL,
@@ -103,7 +103,7 @@ CREATE TABLE plAssignment
 );
 
 
-CREATE TABLE equipment
+CREATE TABLE Equipment
 (
     equipmentID  INT(10) NOT NULL AUTO_INCREMENT,
     id           INT(5)  NOT NULL,
@@ -114,7 +114,7 @@ CREATE TABLE equipment
     CONSTRAINT FK_Equipment_Assignment FOREIGN KEY (assignmentID) REFERENCES Assignment (assignmentID) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
-CREATE TABLE shift
+CREATE TABLE Shift
 (
     shiftID      INT(10) NOT NULL AUTO_INCREMENT, #TODO Remove Auto Increment ( Inerts break with it)
     assignmentID INT(10) NOT NULL,
