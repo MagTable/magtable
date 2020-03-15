@@ -36,7 +36,21 @@ CREATE TABLE truck
     CONSTRAINT CK_Truck_Status CHECK (status = 'GO' OR status = 'INOP' OR status = 'CON' OR status = 'OOS')
 );
 
-CREATE TABLE tower
+CREATE TABLE BrixRecord
+(
+    brixRecordID    INT(5) NOT NULL AUTO_INCREMENT,
+    truckID         INT(5) NOT NULL,
+    nozzle          FLOAT(3),
+    type1           FLOAT(3),
+    type4           FLOAT(3),
+    litersPurged    INT(5),
+    timeMeasured    DATETIME,
+    PRIMARY KEY (BrixRecordID),
+    CONSTRAINT FK_BrixRecord_Assignment FOREIGN KEY (truckID) REFERENCES Truck (truckID) ON DELETE RESTRICT ON UPDATE RESTRICT,
+    CONSTRAINT CK_litersPurged CHECK (litersPurged >= 0 AND litersPurged <= 1000)
+);
+
+CREATE TABLE Tower
 (
     towerID  INT(5)      NOT NULL,
     position VARCHAR(25) NOT NULL,
@@ -114,7 +128,7 @@ CREATE TABLE shift
     CONSTRAINT FK_Shift_Assignment FOREIGN KEY (assignmentID) REFERENCES Assignment (assignmentID) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
-CREATE TABLE w2wShift
+CREATE TABLE W2WShift
 (
     shiftID      INT(10) NOT NULL AUTO_INCREMENT,
     description  VARCHAR(30),
@@ -125,21 +139,6 @@ CREATE TABLE w2wShift
     isGreen      BOOLEAN,
     PRIMARY KEY (shiftID)
 );
-
-CREATE TABLE brixRecord
-(
-    brixRecordID INT(5) NOT NULL AUTO_INCREMENT,
-    assignmentID INT(5) NOT NULL,
-    nozzle       FLOAT(3),
-    type1        FLOAT(3),
-    type4        FLOAT(3),
-    litersPurged INT(5),
-    timeMeasured DATETIME,
-    PRIMARY KEY (BrixRecordID),
-    CONSTRAINT FK_BrixRecord_Assignment FOREIGN KEY (assignmentID) REFERENCES Assignment (assignmentID) ON DELETE RESTRICT ON UPDATE RESTRICT,
-    CONSTRAINT CK_litersPurged CHECK (litersPurged >= 0 AND litersPurged <= 200)
-);
-
 
 
 # CREATE TABLE BrixChart (

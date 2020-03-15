@@ -1,8 +1,8 @@
 package com.magtable.controller;
 
 
-import com.magtable.model.ShiftList;
 import com.magtable.model.ShiftResponse;
+import com.magtable.model.ShiftList;
 import com.magtable.model.W2WShift;
 import com.magtable.repository.W2WShiftRepository;
 import com.magtable.services.ErrorService;
@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
+import java.io.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
