@@ -14,7 +14,7 @@ public class Assignmentparkinglocation {
     private Integer bay;
 
     @Id
-    @Column(name = "assignmentParkingLocationID")
+    @Column(name = "assignmentparkinglocationid")
     public Integer getAssignmentParkingLocationId() {
         return assignmentParkingLocationId;
     }
@@ -24,7 +24,7 @@ public class Assignmentparkinglocation {
     }
 
     @Basic
-    @Column(name = "parkingLocationID", nullable = true)
+    @Column(name = "parkinglocationid")
     public Integer getParkingLocationId() {
         return parkingLocationId;
     }
@@ -34,7 +34,7 @@ public class Assignmentparkinglocation {
     }
 
     @Basic
-    @Column(name = "position", nullable = true, length = 6)
+    @Column(name = "position", length = 6)
     public String getPosition() {
         return position;
     }
@@ -44,7 +44,7 @@ public class Assignmentparkinglocation {
     }
 
     @Basic
-    @Column(name = "bay", nullable = true)
+    @Column(name = "bay")
     public Integer getBay() {
         return bay;
     }

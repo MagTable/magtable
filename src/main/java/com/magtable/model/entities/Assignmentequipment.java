@@ -1,6 +1,8 @@
 package com.magtable.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -8,29 +10,28 @@ import java.util.Objects;
 
 @Entity
 public class Assignmentequipment {
-    private Integer assignmentEquipmentId;
+    private Integer id;
     private String status;
     private String notice;
     private Equipment equipmentByEquipmentId;
-    private MagtableRecord magTableRecord;
-    private Assignmentparkinglocation assignmentparkinglocationByAssignmentParkingLocationId;
-    private Collection<Shift> shiftsByAssignmentEquipmentId;
+    private Magtablerecord magtableRecord;
+    private Assignmentparkinglocation assignmentParkingLocation;
+    private Collection<Shift> shifts;
 
     @Id
-    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "assignmentequipmentID", nullable = false)
-    public Integer getAssignmentEquipmentId() {
-        return assignmentEquipmentId;
+    @Column(name = "assignmentequipmentid", nullable = false)
+    public Integer getId() {
+        return id;
     }
 
-    public void setAssignmentEquipmentId(Integer assignmentEquipmentId) {
-        this.assignmentEquipmentId = assignmentEquipmentId;
+    public void setId(Integer assignmentEquipmentId) {
+        this.id = assignmentEquipmentId;
     }
 
     @JsonIgnore
     @Basic
-    @Column(name = "status", nullable = true, length = 4)
+    @Column(name = "status", length = 4)
     public String getStatus() {
         return status;
     }
@@ -41,7 +42,7 @@ public class Assignmentequipment {
 
     @JsonIgnore
     @Basic
-    @Column(name = "notice", nullable = true, length = 2000)
+    @Column(name = "notice", length = 2000)
     public String getNotice() {
         return notice;
     }
@@ -55,25 +56,25 @@ public class Assignmentequipment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Assignmentequipment that = (Assignmentequipment) o;
-        return Objects.equals(assignmentEquipmentId, that.assignmentEquipmentId) &&
+        return Objects.equals(id, that.id) &&
                 Objects.equals(status, that.status) &&
                 Objects.equals(notice, that.notice);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(assignmentEquipmentId, status, notice);
+        return Objects.hash(id, status, notice);
     }
 
-    @JsonIgnore
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "magtablerecordid", referencedColumnName = "magtablerecordid")
-    public MagtableRecord getMagTableRecord() {
-        return magTableRecord;
+    public Magtablerecord getMagtableRecord() {
+        return magtableRecord;
     }
 
-    public void setMagTableRecord(MagtableRecord magtablerecordByMagtableRecordId) {
-        this.magTableRecord = magtablerecordByMagtableRecordId;
+    public void setMagtableRecord(Magtablerecord magtablerecordByMagtableRecordId) {
+        this.magtableRecord = magtablerecordByMagtableRecordId;
     }
 
     @ManyToOne
@@ -88,21 +89,22 @@ public class Assignmentequipment {
 
 
     @ManyToOne
-    @JoinColumn(name = "assignmentparkinglocationID", referencedColumnName = "assignmentParkingLocationID", nullable = false)
-    public Assignmentparkinglocation getAssignmentparkinglocationByAssignmentParkingLocationId() {
-        return assignmentparkinglocationByAssignmentParkingLocationId;
+    @JoinColumn(name = "assignmentparkinglocationid", referencedColumnName = "assignmentparkinglocationid", nullable = false)
+    public Assignmentparkinglocation getAssignmentParkingLocation() {
+        return assignmentParkingLocation;
     }
 
-    public void setAssignmentparkinglocationByAssignmentParkingLocationId(Assignmentparkinglocation assignmentparkinglocationByAssignmentParkingLocationId) {
-        this.assignmentparkinglocationByAssignmentParkingLocationId = assignmentparkinglocationByAssignmentParkingLocationId;
+    public void setAssignmentParkingLocation(Assignmentparkinglocation assignmentparkinglocationByAssignmentParkingLocationId) {
+        this.assignmentParkingLocation = assignmentparkinglocationByAssignmentParkingLocationId;
     }
 
-    @OneToMany(cascade = CascadeType.ALL)
-    public Collection<Shift> getShiftsByAssignmentEquipmentId() {
-        return shiftsByAssignmentEquipmentId;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "assignmentequipmentByAssignmentEquipmentId", cascade = CascadeType.ALL)
+    public Collection<Shift> getShifts() {
+        return shifts;
     }
 
-    public void setShiftsByAssignmentEquipmentId(Collection<Shift> shiftsByAssignmentEquipmentId) {
-        this.shiftsByAssignmentEquipmentId = shiftsByAssignmentEquipmentId;
+    public void setShifts(Collection<Shift> shiftsByAssignmentEquipmentId) {
+        this.shifts = shiftsByAssignmentEquipmentId;
     }
 }

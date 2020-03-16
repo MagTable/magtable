@@ -1,6 +1,6 @@
 package com.magtable.model.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -29,7 +29,7 @@ public class Shift {
     }
 
     @Basic
-    @Column(name = "description", nullable = true, length = 30)
+    @Column(name = "description", length = 30)
     public String getDescription() {
         return description;
     }
@@ -39,7 +39,7 @@ public class Shift {
     }
 
     @Basic
-    @Column(name = "name", nullable = true, length = 50)
+    @Column(name = "name", length = 50)
     public String getName() {
         return name;
     }
@@ -49,7 +49,7 @@ public class Shift {
     }
 
     @Basic
-    @Column(name = "starttime", nullable = true)
+    @Column(name = "starttime")
     public Timestamp getStartTime() {
         return startTime;
     }
@@ -59,7 +59,7 @@ public class Shift {
     }
 
     @Basic
-    @Column(name = "endtime", nullable = true)
+    @Column(name = "endtime")
     public Timestamp getEndTime() {
         return endTime;
     }
@@ -69,7 +69,7 @@ public class Shift {
     }
 
     @Basic
-    @Column(name = "noavop", nullable = true)
+    @Column(name = "noavop")
     public Boolean getNoAvop() {
         return noAvop;
     }
@@ -79,7 +79,7 @@ public class Shift {
     }
 
     @Basic
-    @Column(name = "isgreen", nullable = true)
+    @Column(name = "isgreen")
     public Boolean getIsGreen() {
         return isGreen;
     }
@@ -107,9 +107,9 @@ public class Shift {
         return Objects.hash(shiftId, description, name, startTime, endTime, noAvop, isGreen);
     }
 
-    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "assignmentequipmentID", referencedColumnName = "assignmentEquipmentID", nullable = false)
+    @JsonBackReference
+    @JoinColumn(name = "assignmentequipmentID", referencedColumnName = "assignmentequipmentID")
     public Assignmentequipment getAssignmentequipmentByAssignmentEquipmentId() {
         return assignmentequipmentByAssignmentEquipmentId;
     }

@@ -1,13 +1,15 @@
 package com.magtable.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Objects;
 
-@Entity(name = "magtablerecord")
-public class MagtableRecord {
-    private Integer magtableRecordId;
+@Entity
+public class Magtablerecord {
+    private Integer id;
     private Integer dailyMix;
     private Integer forecastLow;
     private String publishedBy;
@@ -16,17 +18,17 @@ public class MagtableRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "magtablerecordID", nullable = false)
-    public Integer getMagtableRecordId() {
-        return magtableRecordId;
+    @Column(name = "magtablerecordid", nullable = false)
+    public Integer getId() {
+        return id;
     }
 
-    public void setMagtableRecordId(Integer magtableRecordId) {
-        this.magtableRecordId = magtableRecordId;
+    public void setId(Integer magtableRecordId) {
+        this.id = magtableRecordId;
     }
 
     @Basic
-    @Column(name = "dailymix", nullable = true)
+    @Column(name = "dailymix")
     public Integer getDailyMix() {
         return dailyMix;
     }
@@ -36,7 +38,7 @@ public class MagtableRecord {
     }
 
     @Basic
-    @Column(name = "forecastlow", nullable = true)
+    @Column(name = "forecastlow")
     public Integer getForecastLow() {
         return forecastLow;
     }
@@ -46,7 +48,7 @@ public class MagtableRecord {
     }
 
     @Basic
-    @Column(name = "publishedby", nullable = true, length = 32)
+    @Column(name = "publishedby", length = 32)
     public String getPublishedBy() {
         return publishedBy;
     }
@@ -56,7 +58,7 @@ public class MagtableRecord {
     }
 
     @Basic
-    @Column(name = "timepublished", nullable = true)
+    @Column(name = "timepublished")
     public Timestamp getTimePublished() {
         return timePublished;
     }
@@ -69,8 +71,8 @@ public class MagtableRecord {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MagtableRecord that = (MagtableRecord) o;
-        return Objects.equals(magtableRecordId, that.magtableRecordId) &&
+        Magtablerecord that = (Magtablerecord) o;
+        return Objects.equals(id, that.id) &&
                 Objects.equals(dailyMix, that.dailyMix) &&
                 Objects.equals(forecastLow, that.forecastLow) &&
                 Objects.equals(publishedBy, that.publishedBy) &&
@@ -79,16 +81,17 @@ public class MagtableRecord {
 
     @Override
     public int hashCode() {
-        return Objects.hash(magtableRecordId, dailyMix, forecastLow, publishedBy, timePublished);
+        return Objects.hash(id, dailyMix, forecastLow, publishedBy, timePublished);
     }
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @OneToMany(mappedBy = "magtableRecord", cascade = CascadeType.ALL)
     public Collection<Assignmentequipment> getAssignments() {
         return assignments;
     }
 
-    public void setAssignments(Collection<Assignmentequipment> assignments) {
-        this.assignments = assignments;
+    public void setAssignments(Collection<Assignmentequipment> assignmentequipmentsByMagtableRecordId) {
+        this.assignments = assignmentequipmentsByMagtableRecordId;
     }
 
 

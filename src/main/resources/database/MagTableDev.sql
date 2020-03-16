@@ -76,7 +76,7 @@ CREATE TABLE AssignmentEquipment
 (
     assignmentEquipmentID  INT(10) NOT NULL AUTO_INCREMENT,
     equipmentID  INT(5)  NOT NULL,
-    magtableRecordID    INT(5),  #TODO nuilllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+    magtableRecordID    INT(5) NOT NULL,
     assignmentParkingLocationID INT(10),
     status       VARCHAR(4),
     notice       VARCHAR(2000),
@@ -89,7 +89,7 @@ CREATE TABLE AssignmentEquipment
 
 CREATE TABLE Shift
 (
-    shiftID      INT(10) NOT NULL,
+    shiftID      INT(10) NOT NULL AUTO_INCREMENT, -- todo w2w unique ids
     assignmentEquipmentID  INT(10) NOT NULL,
     description  VARCHAR(30),
     name         VARCHAR(50),

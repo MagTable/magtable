@@ -2,7 +2,7 @@ package com.magtable.controller;
 
 import com.magtable.model.entities.Assignmentequipment;
 import com.magtable.model.entities.Equipment;
-import com.magtable.model.entities.MagtableRecord;
+import com.magtable.model.entities.Magtablerecord;
 import com.magtable.model.entities.Shift;
 import com.magtable.repository.AssignmentEquipmentRepository;
 import com.magtable.repository.EquipmentRepository;
@@ -26,13 +26,14 @@ public class MtrController {
     AssignmentEquipmentRepository assignmentEquipmentRepository;
 
     @GetMapping("")
-    public MagtableRecord getMagTable() {
+    public Magtablerecord getMagTable() {
 
-        MagtableRecord magtableRecord = magTableRecordRepository.findMostRecent();
+        Magtablerecord magtableRecord = magTableRecordRepository.findMostRecent();
+
 
         if (magtableRecord == null) {
-
-            magtableRecord = new MagtableRecord(); //making a blank mtr
+            System.out.println("fuck u intellij");
+            magtableRecord = new Magtablerecord(); //making a blank mtr
 
             ArrayList<Equipment> equipmentList = (ArrayList<Equipment>) equipmentRepository.findAll();
             ArrayList<Assignmentequipment> assignmentequipmentList = new ArrayList<>();
@@ -45,14 +46,14 @@ public class MtrController {
 
             for (Equipment equipment : equipmentList) {
 
-                if(!equipment.getActive()){
+                if (!equipment.getActive()) {
                     continue;
                 }
 
                 Assignmentequipment assignmentequipment = new Assignmentequipment();
                 assignmentequipment.setEquipmentByEquipmentId(equipment);
-                assignmentequipment.setAssignmentparkinglocationByAssignmentParkingLocationId(null);
-                assignmentequipment.setShiftsByAssignmentEquipmentId(shiftList);
+                assignmentequipment.setAssignmentParkingLocation(null);
+                assignmentequipment.setShifts(shiftList);
 
                 assignmentequipmentList.add(assignmentequipment);
 
@@ -68,10 +69,10 @@ public class MtrController {
 
 
     @PostMapping("")
-    public MagtableRecord publishMagTable(@RequestBody MagtableRecord magtableRecord){
+    public Magtablerecord publishMagTable(@RequestBody Magtablerecord magtableRecord) {
 
-
-            magTableRecordRepository.save(magtableRecord);
+        System.out.println(magtableRecord.getAssignments());
+        magTableRecordRepository.save(magtableRecord);
 
 
         return magtableRecord;
