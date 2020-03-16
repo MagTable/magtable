@@ -63,6 +63,7 @@ const EditTruck = ({ truck }) => {
 		<AddTruckWrap>
 			<Formik
 				initialValues={{
+					id: truck.id,
 					status: truck.status,
 					notice: truck.notice.text
 				}}
@@ -77,29 +78,39 @@ const EditTruck = ({ truck }) => {
 					notice: Yup.string().max(250, "Maximum Length is 250 Characters")
 				})}
 			>
-				<Form>
-					<h2>Edit Truck</h2>
-					<h3>Truck {truck.id}</h3>
-					<SelectBox label="Truck Status" name="status">
-						<option value={truck.status} />
-						{truckStatuses.map(status => {
-							return (
-								<option key={status} value={status}>
-									{status}
-								</option>
-							);
-						})}
-					</SelectBox>
-					<TextArea
-						label="Notice"
-						name="notice"
-						rows="6"
-						placeholder="Any truck notices go here..."
-						value={truck.notice}
-					/>
-					<br />
-					<LoginBtn type="submit">Save</LoginBtn>
-				</Form>
+				{props => (
+					<Form>
+						<h2>Edit Truck</h2>
+						{/*<h3>Truck {truck.id}</h3>*/}
+						<TextInput
+							errors={props.errors.id}
+							touched={props.touched.id}
+							value={"Truck #" + truck.id}
+							disabled
+							fit
+						/>
+						<SelectBox label="Truck Status" name="status">
+							<option value={truck.status} />
+							{/*{truckStatuses.map(status => {*/}
+							{/*	return (*/}
+							{/*		<option key={status} value={status}>*/}
+							{/*			{status}*/}
+							{/*		</option>*/}
+							{/*	);*/}
+							{/*})}*/}
+						</SelectBox>
+						<br />
+						<TextArea
+							label="Notice"
+							name="notice"
+							rows="6"
+							placeholder="Any truck notices go here..."
+							value={truck.notice}
+						/>
+						<br />
+						<LoginBtn type="submit">Save</LoginBtn>
+					</Form>
+				)}
 			</Formik>
 		</AddTruckWrap>
 	);
