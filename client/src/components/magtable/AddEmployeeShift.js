@@ -149,7 +149,7 @@ const AddEmployeeShift = ({ setShowModal }) => {
 			validationSchema={Yup.object().shape({
 				name: Yup.string()
 					.matches(
-						/^(([A-za-z]+[\s]{1}[A-za-z]+)|([A-Za-z]+)|([A-za-z]+[\s]{1}[A-za-z]+[\s]{1}[A-za-z]+))$/,
+						/^[a-zA-Z][a-zA-Z ]+((['-][a-zA-Z ])?[a-zA-Z ]*)*$/,
 						"Invalid Characters"
 					)
 					.required("Required field")

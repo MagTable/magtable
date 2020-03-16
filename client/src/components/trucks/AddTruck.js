@@ -51,6 +51,9 @@ const AddTruck = () => {
 					status: Yup.string()
 						.oneOf(truckStatuses)
 						.required(),
+					type: Yup.string()
+						.oneOf(vehicleTypes)
+						.required(),
 					notice: Yup.string().max(250, "Maximum Length is 250 Characters")
 				})}
 			>
@@ -63,7 +66,7 @@ const AddTruck = () => {
 									{...field}
 									errors={props.errors.id}
 									touched={props.touched.id}
-									type={"number"}
+									type="number"
 									value={props.values.id}
 									label={"Truck ID"}
 									fit
