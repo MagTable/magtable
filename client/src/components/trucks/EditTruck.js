@@ -36,36 +36,13 @@ const EditTruck = ({ truck }) => {
 		};
 	}
 
-	let editId = truck.id,
-		editNotice = truck.notice,
-		editStatus = truck.status;
-
-	// send our edited truck to our actions to persist the edit to the backend
-	function handleEdit() {
-		console.log("hello");
-		const editedTruck = {
-			id: editId,
-			status: editStatus,
-			notice: editNotice
-		};
-		console.log(editedTruck);
-		dispatch(editTruck(editedTruck));
-	}
-
-	function handleChangeOption(event) {
-		// editStatus = event.target.value;
-		console.log(event);
-	}
-
-	console.log(truck.status);
-
 	return (
 		<AddTruckWrap>
 			<Formik
 				initialValues={{
 					id: truck.id,
 					status: truck.status,
-					notice: truck.notice.text
+					notice: truck.notice
 				}}
 				onSubmit={(values, { resetForm }) => {
 					console.log(values);
@@ -85,19 +62,19 @@ const EditTruck = ({ truck }) => {
 						<TextInput
 							errors={props.errors.id}
 							touched={props.touched.id}
-							value={"Truck #" + truck.id}
+							value={truck.id}
 							disabled
 							fit
 						/>
 						<SelectBox label="Truck Status" name="status">
-							<option value={truck.status} />
-							{/*{truckStatuses.map(status => {*/}
-							{/*	return (*/}
-							{/*		<option key={status} value={status}>*/}
-							{/*			{status}*/}
-							{/*		</option>*/}
-							{/*	);*/}
-							{/*})}*/}
+							<option value={truck.status}>{truck.status}</option>
+							{truckStatuses.map(status => {
+								return (
+									<option key={status} value={status}>
+										{status}
+									</option>
+								);
+							})}
 						</SelectBox>
 						<br />
 						<TextArea
