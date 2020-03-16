@@ -57,6 +57,12 @@ export const INOP = "INOP";
 
 export const TRUCK_STATUSES = [GO, CON, OOS, INOP];
 
+// vehicle types
+export const ICE = "Deice Vehicle";
+export const SVV = "Service Vehicle";
+
+export const VEHICLE_TYPES = [ICE, SVV];
+
 // UI Hint Types
 export const DANGER = "DANGER";
 export const WARNING = "WARNING";
