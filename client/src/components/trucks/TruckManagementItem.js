@@ -31,7 +31,7 @@ function TruckManagementItem({ truck, setEditTruck }) {
 
 	//
 	const [editedNotice, setEditedNotice] = useState(truck.equipment.notice);
-	const [editedStatus, setEditedStatus] = useState(truck.equipment.status);
+	// const [editedStatus, setEditedStatus] = useState(truck.equipment.status);
 
 	const authUser = useSelector(state => state.auth.user);
 
@@ -41,36 +41,36 @@ function TruckManagementItem({ truck, setEditTruck }) {
 	}
 
 	// when the status is being changed, make sure it persists
-	function handleChangeStatus(event) {
-		setEditedStatus(event.target.value);
-
-		const editedTruck = {
-			id: truck.equipment.id,
-			status: editedStatus,
-			notice: editedNotice
-		};
-
-		dispatch(editTruck(editedTruck));
-	}
+	// function handleChangeStatus(event) {
+	// 	setEditedStatus(event.target.value);
+	//
+	// 	const editedTruck = {
+	// 		id: truck.equipment.id,
+	// 		status: truck.equipment.status,
+	// 		notice: editedNotice
+	// 	};
+	//
+	// 	dispatch(editTruck(editedTruck));
+	// }
 
 	// send our edited truck to our actions to persist the edit to the backend
 	function handleEdit() {
 		const editedTruck = {
 			id: truck.equipment.id,
-			status: editedStatus,
+			status: truck.equipment.status,
 			notice: editedNotice
 		};
 
 		setEditTruck(editedTruck);
 	}
 
-	function isSelected(truckStatus) {
-		if (truckStatus === editedStatus) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+	// function isSelected(truckStatus) {
+	// 	if (truckStatus === editedStatus) {
+	// 		return true;
+	// 	} else {
+	// 		return false;
+	// 	}
+	// }
 
 	const handleDelete = id => {
 		dispatch(deleteTruck(id));
@@ -78,7 +78,7 @@ function TruckManagementItem({ truck, setEditTruck }) {
 
 	return (
 		<TruckMgmtItemDiv>
-			<TruckNumberDiv status={editedStatus}>
+			<TruckNumberDiv status={truck.equipment.status}>
 				{truck.equipment.id}
 			</TruckNumberDiv>
 			{authUser?.role?.name === SYSTEM_ADMINISTRATOR ? (
@@ -114,17 +114,18 @@ function TruckManagementItem({ truck, setEditTruck }) {
 					</ManipTruckManipIconDiv>
 				</>
 			) : (
-				<>
-					<select onChange={handleChangeStatus}>
-						{TRUCK_STATUSES.map(truckStatus => (
-							<option value={truckStatus} selected={isSelected(truckStatus)}>
-								{truckStatus}
-							</option>
-						))}
-					</select>
-					<NoticeBox value={editedNotice} onChange={handleChangeNotice} />
-					<Button onClick={handleEdit}>Edit</Button>
-				</>
+				<h2>hi</h2>
+				// <>
+				// 	<select onChange={handleChangeStatus}>
+				// 		{TRUCK_STATUSES.map(truckStatus => (
+				// 			<option value={truckStatus} selected={isSelected(truckStatus)}>
+				// 				{truckStatus}
+				// 			</option>
+				// 		))}
+				// 	</select>
+				// 	<NoticeBox value={editedNotice} onChange={handleChangeNotice} />
+				// 	<Button onClick={handleEdit}>Edit</Button>
+				// </>
 			)}
 		</TruckMgmtItemDiv>
 	);

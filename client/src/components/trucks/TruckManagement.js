@@ -55,16 +55,18 @@ function TruckManagement() {
 				<TruckManagementListDiv>
 					<FadeIn>
 						<>
-							{assignments.map(
-								truck =>
-									truck.equipment.id < 1000 && (
-										<TruckManagementItem
-											key={truck.id}
-											truck={truck}
-											setEditTruck={setEditTruck}
-										/>
-									)
-							)}
+							{assignments
+								.sort()
+								.map(
+									truck =>
+										truck.equipment.id < 1000 && (
+											<TruckManagementItem
+												key={truck.equipment.id}
+												truck={truck}
+												setEditTruck={setEditTruck}
+											/>
+										)
+								)}
 						</>
 					</FadeIn>
 				</TruckManagementListDiv>
