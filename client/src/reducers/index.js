@@ -4,9 +4,17 @@ import alert from "./alert";
 import auth from "./auth";
 import magtable from "./magtable";
 import truck from "./truck";
+import brix from "./brix";
 import { LOGOUT } from "../actions/constants";
 
-const appReducer = combineReducers({ user, alert, auth, magtable, truck });
+const appReducer = combineReducers({
+	user,
+	alert,
+	auth,
+	magtable,
+	truck,
+	brix
+});
 
 // this is explained by Dan Abramov here: https://stackoverflow.com/questions/35622588/how-to-reset-the-state-of-a-redux-store
 const rootReducer = (state, action) => {

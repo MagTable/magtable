@@ -13,7 +13,7 @@ import { Field, Formik } from "formik";
 import TextInput from "../common/TextInput";
 import { OkButton } from "../../styled/common/FormControl";
 import * as Yup from "yup";
-import { addBrixRecord } from "../../actions/magtable";
+import { addBrixRecord } from "../../actions/brix";
 
 function BrixManagement() {
 	const dispatch = useDispatch();
@@ -22,7 +22,7 @@ function BrixManagement() {
 		selectedTruckID,
 		loading,
 		addingBrixRecord
-	} = useSelector(state => state.magtable.brix);
+	} = useSelector(state => state.brix);
 	const getFormattedDate = date => {
 		date = new Date(date);
 		const months = [
@@ -178,10 +178,6 @@ function BrixManagement() {
 					</BrixForm>
 				)}
 			</Formik>
-			{/*<div id={"date"}>*/}
-			{/*	<TextInput type={"date"} value={""} />*/}
-			{/*	<TextInput type={"time"} value={""} />*/}
-			{/*</div>*/}
 			<BrixTableTitle>Previous Records</BrixTableTitle>
 			<BrixTableWrapper>
 				{loading ? (
@@ -191,11 +187,11 @@ function BrixManagement() {
 				) : (
 					<Table>
 						<colgroup>
-							<col width={"35%"} />
+							<col width={"30%"} />
 							<col width={"15%"} />
 							<col width={"15%"} />
 							<col width={"15%"} />
-							<col width={"20%"} />
+							<col width={"25%"} />
 						</colgroup>
 						<Thead>
 							<Tr>

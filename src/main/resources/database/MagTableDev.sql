@@ -4,10 +4,10 @@
     Created: February 21, 2020
     Description: Use Case two updated database scheme for MagTable.
  */
-DROP DATABASE IF EXISTS heroku_5d3f37e2c6237fd;
-CREATE DATABASE heroku_5d3f37e2c6237fd;
+DROP DATABASE IF EXISTS magtabledev;
+CREATE DATABASE magtabledev;
 
-USE heroku_5d3f37e2c6237fd;
+USE magtabledev;
 
 CREATE TABLE Role
 (
@@ -22,77 +22,81 @@ CREATE TABLE User
     `role`    INT(2)      NOT NULL,
     username  VARCHAR(32) UNIQUE,
     password  VARCHAR(60) NULL NULL,
-    resetflag boolean DEFAULT true,
+    resetflag BOOLEAN DEFAULT true,
     PRIMARY KEY (userID),
     CONSTRAINT FK_User_Role FOREIGN KEY (`role`) REFERENCES `Role` (`roleID`) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
-
-CREATE TABLE Truck
-(
-    truckID INT(5) NOT NULL,
-    status  VARCHAR(4),
-    notice  VARCHAR(2000),
-    PRIMARY KEY (TruckID),
-    CONSTRAINT CK_Truck_Status CHECK (status = 'GO' OR status = 'INOP' OR status = 'CON' OR status = 'OOS')
-);
-
-CREATE TABLE Tower
-(
-    towerID  INT(5)      NOT NULL,
-    position VARCHAR(25) NOT NULL,
-    PRIMARY KEY (towerID)
-);
-
-CREATE TABLE ParkingLocation
-(
-    id       INT(5)     NOT NULL,
-    apron    VARCHAR(4) NOT NULL,
-    phonetic CHAR(1)    NOT NULL,
-    east     BOOLEAN    NOT NULL,
-    center   BOOLEAN    NOT NULL,
-    west     BOOLEAN    NOT NULL,
-    `left`     INT(2),
-    `right`    INT(2),
-    composite INT(2),
-    `double` BOOLEAN,
-    PRIMARY KEY (id)
-);
-
 CREATE TABLE MagTableRecord
 (
-    magID         INT(5) NOT NULL AUTO_INCREMENT,
-    dailyMix      INT(2),
-    forecastLow    INT(2),
-    publishedBY   VARCHAR(32),
-    timePublished DATETIME,
-    PRIMARY KEY (magID)
+    magtableRecordID    INT(5) NOT NULL AUTO_INCREMENT,
+    dailyMix            INT(2),
+    forecastLow         INT(2),
+    publishedBy         VARCHAR(32),
+    timePublished       DATETIME,
+    PRIMARY KEY (magtableRecordID)
 );
 
-CREATE TABLE Assignment (
-                            assignmentID INT(10)   NOT NULL AUTO_INCREMENT,
-                            magID        INT(5)   NOT NULL,
-                            parkingLocation   INT(5),
-                            PRIMARY KEY (assignmentID),
-                            CONSTRAINT FK_Mag_ID FOREIGN KEY (magID) REFERENCES MagTableRecord (magID) ON DELETE RESTRICT ON UPDATE RESTRICT,
-                            CONSTRAINT FK_Location_ID FOREIGN KEY (parkingLocation) REFERENCES ParkingLocation (id) ON DELETE RESTRICT ON UPDATE RESTRICT
+CREATE TABLE Assignment
+(
+    assignmentID        INT(10) NOT NULL AUTO_INCREMENT,
+    magtableRecordID    INT(5)  NOT NULL,
+    PRIMARY KEY (assignmentID),
+    CONSTRAINT FK_Mag_ID FOREIGN KEY (magtableRecordID) REFERENCES MagTableRecord (magtableRecordID) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
 CREATE TABLE Equipment
 (
-    equipmentID  INT(10) NOT NULL AUTO_INCREMENT,
-    id           INT(5)  NOT NULL,
+    equipmentID     INT(5)          NOT NULL,
+    type            VARCHAR(25)     NOT NULL,   -- tower description / truck type
+    status          VARCHAR(4),     -- truck operational status
+    notice          VARCHAR(2000),  -- truck operational notices
+    active          BOOLEAN,
+    PRIMARY KEY (equipmentID)
+);
+
+CREATE TABLE BrixRecord
+(
+    brixRecordID        INT(5) NOT NULL AUTO_INCREMENT,
+    equipmentID         INT(5) NOT NULL,
+    nozzle              FLOAT(3),
+    type1               FLOAT(3),
+    type4               FLOAT(3),
+    litersPurged        INT(5),
+    timeMeasured        DATETIME,
+    PRIMARY KEY (BrixRecordID),
+    CONSTRAINT FK_BrixRecord_Assignment FOREIGN KEY (equipmentID) REFERENCES Equipment (equipmentID) ON DELETE RESTRICT ON UPDATE RESTRICT,
+    CONSTRAINT CK_equipment_truck CHECK (equipmentID >= 0 AND equipmentID <= 1000), -- must be a truck
+    CONSTRAINT CK_litersPurged CHECK (litersPurged >= 0 AND litersPurged <= 1000)
+);
+
+CREATE TABLE AssignmentEquipment
+(
+    assignmentEquipmentID  INT(10) NOT NULL AUTO_INCREMENT,
     assignmentID INT(10) NOT NULL,
+    equipmentID  INT(5)  NOT NULL,
     status       VARCHAR(4),
     notice       VARCHAR(2000),
-    PRIMARY KEY (equipmentID),
-    CONSTRAINT FK_Equipment_Assignment FOREIGN KEY (assignmentID) REFERENCES Assignment (assignmentID) ON DELETE RESTRICT ON UPDATE RESTRICT
+    PRIMARY KEY (assignmentEquipmentID),
+    CONSTRAINT FK_Equipment_Assignment FOREIGN KEY (assignmentID) REFERENCES Assignment (assignmentID) ON DELETE RESTRICT ON UPDATE RESTRICT,
+    CONSTRAINT FK_Truck FOREIGN KEY (equipmentID) REFERENCES Equipment (equipmentID) ON DELETE RESTRICT ON UPDATE RESTRICT
+);
+
+CREATE TABLE AssignmentParkingLocation
+(
+    assignmentParkingLocationID INT(10) NOT NULL AUTO_INCREMENT,
+    assignmentID                INT(10) NOT NULL,
+    parkingLocationID           INT(5),
+    position                    VARCHAR(6),
+    bay                         INT(2),
+    PRIMARY KEY (assignmentParkingLocationID),
+    CONSTRAINT FK_PLA_Assignment FOREIGN KEY (assignmentID) REFERENCES Assignment (assignmentID) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
 CREATE TABLE Shift
 (
-    shiftID      INT(10) NOT NULL AUTO_INCREMENT,
+    shiftID      INT(10) NOT NULL,
     assignmentID INT(10) NOT NULL,
-    description  VARCHAR(20),
+    description  VARCHAR(30),
     name         VARCHAR(50),
     startTime    DATETIME,
     endTime      DATETIME,
@@ -102,27 +106,25 @@ CREATE TABLE Shift
     CONSTRAINT FK_Shift_Assignment FOREIGN KEY (assignmentID) REFERENCES Assignment (assignmentID) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
-CREATE TABLE BrixRecord
+CREATE TABLE W2WShift
 (
-    brixRecordID INT(5) NOT NULL AUTO_INCREMENT,
-    assignmentID INT(5) NOT NULL,
-    nozzle       FLOAT(3),
-    type1        FLOAT(3),
-    type4        FLOAT(3),
-    litersPurged INT(5),
-    timeMeasured DATETIME,
-    PRIMARY KEY (BrixRecordID),
-    CONSTRAINT FK_BrixRecord_Assignment FOREIGN KEY (assignmentID) REFERENCES Assignment (assignmentID) ON DELETE RESTRICT ON UPDATE RESTRICT,
-    CONSTRAINT CK_litersPurged CHECK (litersPurged >= 0 AND litersPurged <= 200)
+    shiftID      INT(10) NOT NULL AUTO_INCREMENT,
+    description  VARCHAR(30),
+    name         VARCHAR(50),
+    startTime    DATETIME,
+    endTime      DATETIME,
+    noAvop       BOOLEAN,
+    isGreen      BOOLEAN,
+    PRIMARY KEY (shiftID)
 );
 
-
-
-# CREATE TABLE BrixChart (
-#     brixChartID         INT(5)   NOT NULL AUTO_INCREMENT,
-#     recommendedDailyMix INT(2)   NOT NULL,
-#     brix                FLOAT(3) NOT NULL,
-#     freezingPoint       INT(2)   NOT NULL,
-#     concentration       FLOAT(3) NOT NULL,
-#     PRIMARY KEY (brixChartID)
-# );
+CREATE TABLE BrixChart
+(
+    brixChartID    INT(5) NOT NULL AUTO_INCREMENT,
+    brix           FLOAT(3),
+    concentration  FLOAT(3),
+    freezepoint    INT(2),
+    lout           INT(2),
+    recommendedmix INT(2),
+    PRIMARY KEY (brixChartID)
+);

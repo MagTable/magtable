@@ -15,11 +15,7 @@ import {
 	REFRESH_EMPLOYEE_SHIFTS,
 	REFRESHING_EMPLOYEE_SHIFTS,
 	TOGGLE_AM_PM,
-	CLEAR_TABLE,
-	ADD_BRIX_RECORD,
-	GET_BRIX_RECORDS,
-	FETCHING_BRIX_RECORDS,
-	ADDING_BRIX_RECORD
+	CLEAR_TABLE
 } from "./constants";
 import axios from "axios";
 import { setAlert } from "./alert";
@@ -130,124 +126,6 @@ export const clearTable = () => dispatch => {
 		type: CLEAR_TABLE
 	});
 };
-
-/**
- * Saves a brix record to an assignment's brixRecords list
- *
- * @param truckID id of truck the measurement is made for
- * @param brixRecord brixRecord to save to assignment
- * @returns API returns updated list of brix records for the assignment
- */
-export const addBrixRecord = (truckID, brixRecord) => async dispatch => {
-	try {
-		dispatch({ type: ADDING_BRIX_RECORD });
-		const res = await axios.post(
-			`/brix/${truckID}`,
-			{
-				...brixRecord
-			},
-			AXIOS_JSON_HEADER
-		);
-		setTimeout(() => {
-			dispatch({
-				type: ADD_BRIX_RECORD,
-				payload: { brixRecord: res.data, truckID }
-			});
-		}, 500);
-	} catch (err) {
-		console.log(err);
-	}
-};
-
-/**
- * gets the last x number of brix records for a particular deice truck
- *
- * @param truckID id of truck to retrieve records for
- * @returns API returns a list of brix records for the requested truck
- */
-export const getBrixRecords = truckID => async dispatch => {
-	try {
-		console.log(truckID);
-		dispatch({
-			type: FETCHING_BRIX_RECORDS,
-			payload: { truckID }
-		});
-
-		const res = await axios.get(`/brix/${truckID}`);
-
-		// const testRecords = [
-		// 	{
-		// 		id: 1,
-		// 		nozzle: 23.5,
-		// 		type1: 51.7,
-		// 		type4: 33.2,
-		// 		litersPurged: 87,
-		// 		timeMeasured: new Date()
-		// 	},
-		// 	{
-		// 		id: 2,
-		// 		nozzle: 33.1,
-		// 		type1: 50.7,
-		// 		type4: 30.2,
-		// 		litersPurged: 100,
-		// 		timeMeasured: new Date()
-		// 	},
-		// 	{
-		// 		id: 3,
-		// 		nozzle: 23.5,
-		// 		type1: 51.7,
-		// 		type4: 33.2,
-		// 		litersPurged: 87,
-		// 		timeMeasured: new Date()
-		// 	},
-		// 	{
-		// 		id: 4,
-		// 		nozzle: 33.1,
-		// 		type1: 50.7,
-		// 		type4: 30.2,
-		// 		litersPurged: 100,
-		// 		timeMeasured: new Date()
-		// 	},
-		// 	{
-		// 		id: 5,
-		// 		nozzle: 23.5,
-		// 		type1: 51.7,
-		// 		type4: 33.2,
-		// 		litersPurged: 87,
-		// 		timeMeasured: new Date()
-		// 	},
-		// 	{
-		// 		id: 6,
-		// 		nozzle: 33.1,
-		// 		type1: 50.7,
-		// 		type4: 30.2,
-		// 		litersPurged: 100,
-		// 		timeMeasured: new Date()
-		// 	}
-		// ];
-
-		setTimeout(() => {
-			dispatch({
-				type: GET_BRIX_RECORDS,
-				payload: { brixRecords: res.data, truckID }
-			});
-		}, 500);
-	} catch (err) {
-		console.error(err);
-	}
-};
-
-/**
- * Sets the daily mix to a given percentage
- *
- * @param dailyMix dailyMix to set
- */
-// const setDailyMix = dailyMix => dispatch => {
-// 	dispatch({
-// 		type: SET_DAILY_MIX,
-// 		payload: dailyMix
-// 	});
-// };
 
 /**
  * Adds a daily message to the magtable

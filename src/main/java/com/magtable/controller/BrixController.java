@@ -1,6 +1,8 @@
 package com.magtable.controller;
 
+import com.magtable.model.entities.BrixChartRecord;
 import com.magtable.model.entities.BrixRecord;
+import com.magtable.repository.BrixChartRepository;
 import com.magtable.repository.BrixRepository;
 import com.magtable.services.ErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,9 @@ public class BrixController {
     private BrixRepository brixRepository;
 
     @Autowired
+    private BrixChartRepository brixChartRepository;
+
+    @Autowired
     public ErrorService errorService;
 
     @GetMapping("/{id}")
@@ -24,9 +29,13 @@ public class BrixController {
     }
 
     @PostMapping("/{id}")
-    public BrixRecord insertBrixRecord(@PathVariable(value= "id") Integer equipmentID, @RequestBody BrixRecord brixRecord) {
+    public BrixRecord insertBrixRecord(@PathVariable(value = "id") Integer equipmentID, @RequestBody BrixRecord brixRecord) {
         brixRecord.setEquipmentID(equipmentID);
         return brixRepository.saveAndFlush(brixRecord);
     }
 
+    @GetMapping("/chart")
+    public List<BrixChartRecord> getBrixChart() {
+        return brixChartRepository.findAll();
+    }
 }

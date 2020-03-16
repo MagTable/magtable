@@ -34,11 +34,11 @@ import {
 } from "../../actions/constants";
 import { useDispatch } from "react-redux";
 import {
-	getBrixRecords,
 	removeEquipmentEmployee,
 	removeTruckLocation,
 	setTruckLocation
 } from "../../actions/magtable";
+import { getBrixRecords } from "../../actions/brix";
 import IconButton from "../common/IconButton";
 
 /**

@@ -1,5 +1,4 @@
 import {
-	ADD_BRIX_RECORD,
 	ADD_DAILY_MESSAGE,
 	ADD_EMPLOYEE_SHIFT,
 	EAST_APRON,
@@ -8,7 +7,6 @@ import {
 	REMOVE_DAILY_MESSAGE,
 	REMOVE_EQUIPMENT_EMPLOYEE,
 	REMOVE_TRUCK_LOCATION,
-	SET_DAILY_MIX,
 	SET_EQUIPMENT_EMPLOYEE,
 	SET_SELECTED_APRON,
 	SET_TRUCK_LOCATION,
@@ -16,10 +14,7 @@ import {
 	REFRESH_EMPLOYEE_SHIFTS,
 	REFRESHING_EMPLOYEE_SHIFTS,
 	TOGGLE_AM_PM,
-	CLEAR_TABLE,
-	GET_BRIX_RECORDS,
-	FETCHING_BRIX_RECORDS,
-	ADDING_BRIX_RECORD
+	CLEAR_TABLE
 } from "../actions/constants";
 import { initialParkingLocations } from "../res/test_data/magtable";
 
@@ -36,13 +31,7 @@ const initialState = {
 	selectedApron: EAST_APRON,
 	loading: true,
 	shiftsLoading: true,
-	showAM: true,
-	brix: {
-		selectedBrixRecords: [],
-		selectedTruckID: null,
-		loading: true,
-		addingBrixRecord: false
-	}
+	showAM: true
 };
 
 export default function(state = initialState, action) {
@@ -136,52 +125,6 @@ export default function(state = initialState, action) {
 				...state,
 				assignments: payload.assignments
 				// server will echo the given assignments to verify changes were made properly
-			};
-		case ADD_BRIX_RECORD:
-			return {
-				...state,
-				brix: {
-					...state.brix,
-					selectedBrixRecords: [
-						payload.brixRecord,
-						...state.brix.selectedBrixRecords
-					],
-					selectedTruckID: payload.truckID,
-					addingBrixRecord: false
-				}
-			};
-		case ADDING_BRIX_RECORD:
-			return {
-				...state,
-				brix: {
-					...state.brix,
-					addingBrixRecord: true
-				}
-			};
-		case FETCHING_BRIX_RECORDS:
-			return {
-				...state,
-				brix: {
-					...state.brix,
-					selectedBrixRecords: [],
-					selectedTruckID: payload.truckID,
-					loading: true
-				}
-			};
-		case GET_BRIX_RECORDS:
-			return {
-				...state,
-				brix: {
-					...state.brix,
-					selectedBrixRecords: payload.brixRecords,
-					selectedTruckID: payload.truckID,
-					loading: false
-				}
-			};
-		case SET_DAILY_MIX:
-			return {
-				...state,
-				dailyMix: payload
 			};
 		case REMOVE_DAILY_MESSAGE: // API request for these actions will probably just return all daily messages after addition or deletion
 		case ADD_DAILY_MESSAGE:

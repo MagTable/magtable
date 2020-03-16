@@ -17,6 +17,7 @@ import store from "../store";
 
 import { setAlert } from "./alert";
 import { getMagTable } from "./magtable";
+import { getBrixChart } from "./brix";
 
 window.addEventListener("storage", e => {
 	// whenever our token changes, log the user out.
@@ -46,6 +47,7 @@ export const loadUser = () => async dispatch => {
 
 		if (magtableRoles.includes(user.role.name)) {
 			dispatch(getMagTable());
+			dispatch(getBrixChart());
 		}
 	} catch (err) {
 		dispatch({
