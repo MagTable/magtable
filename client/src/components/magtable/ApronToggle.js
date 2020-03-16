@@ -1,7 +1,6 @@
 import React from "react";
 import { setSelectedApron } from "../../actions/magtable";
 import { useDispatch, useSelector } from "react-redux";
-import { TruckListManipDiv } from "../../styled/magtable/ListContent";
 import Switch from "react-switch";
 import {
 	ToggleLabelLeft,
