@@ -26,6 +26,8 @@ const EditTruck = ({ truck }) => {
 	const truckStatuses = TRUCK_STATUSES;
 	const dispatch = useDispatch();
 
+	console.log({ truck });
+
 	if (truck == null) {
 		truck = {
 			id: 5,
@@ -66,9 +68,9 @@ const EditTruck = ({ truck }) => {
 				}}
 				onSubmit={(values, { resetForm }) => {
 					console.log(values);
+					// handleEdit();
 					resetForm();
 				}}
-				// onSubmit={handleEdit}
 				validationSchema={Yup.object().shape({
 					status: Yup.string().oneOf(truckStatuses),
 					// .required(),
@@ -78,33 +80,23 @@ const EditTruck = ({ truck }) => {
 				<Form>
 					<h2>Edit Truck</h2>
 					<h3>Truck {truck.id}</h3>
-					<select label="Truck Status" name="status" value={truck.status}>
-						{truckStatuses.map(truckStatus => {
-							return truck.status === truckStatus ? (
-								<option key={truckStatus} value={truckStatus} selected={true}>
-									{truckStatus}
-								</option>
-							) : (
-								<option key={truckStatus} value={truckStatus}>
-									{truckStatus}
+					<SelectBox label="Truck Status" name="status">
+						<option value={truck.status} />
+						{truckStatuses.map(status => {
+							return (
+								<option key={status} value={status}>
+									{status}
 								</option>
 							);
 						})}
-					</select>
-
-					<Field name="notice">
-						{({ field }) => (
-							<TextArea
-								{...field}
-								label="Notice"
-								name="notice"
-								rows="6"
-								placeholder="Any truck notices go here..."
-								value={truck.notice}
-							/>
-						)}
-					</Field>
-
+					</SelectBox>
+					<TextArea
+						label="Notice"
+						name="notice"
+						rows="6"
+						placeholder="Any truck notices go here..."
+						value={truck.notice}
+					/>
 					<br />
 					<LoginBtn type="submit">Save</LoginBtn>
 				</Form>
