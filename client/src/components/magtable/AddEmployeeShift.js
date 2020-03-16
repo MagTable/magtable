@@ -1,14 +1,14 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Field, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import { addEmployeeShift } from "../../actions/magtable";
-import TextInput from "../common/TextInput";
 import { ALL_POSITIONS } from "../../actions/constants";
 import SelectBox from "../common/SelectBox";
 import CheckBox from "../common/CheckBox";
 import styled from "styled-components";
 import { LoginBtn } from "../../styled/auth/Login";
+import Input from "../common/Input";
 
 /**
  * @date 2/28/2020
@@ -170,18 +170,15 @@ const AddEmployeeShift = ({ setShowModal }) => {
 				<AddEmployeeForm>
 					<Header>Add Employee Shift</Header>
 					<NameDiv>
-						<Field name={"name"}>
-							{({ field }) => (
-								<TextInput
-									{...field}
-									errors={props.errors.name}
-									touched={props.touched.name}
-									value={props.values.name}
-									label={"Employee Name"}
-									fit
-								/>
-							)}
-						</Field>
+						<Input
+							errors={props.errors.name}
+							touched={props.touched.name}
+							value={props.values.name}
+							name="name"
+							label="Employee Name"
+							type="text"
+							fit
+						/>
 					</NameDiv>
 					<StartTimeDiv>
 						<SelectBox

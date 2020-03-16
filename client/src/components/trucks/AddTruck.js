@@ -1,15 +1,14 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Field, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import { addTruck } from "../../actions/truck";
-import TextInput from "../common/TextInput";
 import { TRUCK_STATUSES, VEHICLE_TYPES } from "../../actions/constants";
 import SelectBox from "../common/SelectBox";
 import { LoginBtn } from "../../styled/auth/Login";
-import { AddTruckWrap } from "../../styled/trucks/TruckManagement";
 import TextArea from "../common/TextArea";
 import styled from "styled-components";
+import Input from "../common/Input";
+import { addTruck } from "../../actions/truck";
 
 /**
  * @date 3/08/2020
@@ -67,6 +66,7 @@ const AddTruck = () => {
 	const dispatch = useDispatch();
 	const truckStatuses = TRUCK_STATUSES;
 	const vehicleTypes = VEHICLE_TYPES;
+	console.log(vehicleTypes);
 
 	//todo figure out formik text area and add it in at the bottom.
 	// also change the text input field into a number one purely unless API can parse the string to an int and we can keep easy consistency
@@ -90,7 +90,7 @@ const AddTruck = () => {
 					.oneOf(truckStatuses)
 					.required("Required Status"),
 				type: Yup.string()
-					.oneOf(vehicleTypes)
+					.oneOf(vehicleTypes.map(type => type.id))
 					.required("Required Type"),
 				notice: Yup.string().max(250, "Maximum Length is 250 Characters")
 			})}
@@ -99,19 +99,15 @@ const AddTruck = () => {
 				<AddTruckForm>
 					<Header>Add Trucks</Header>
 					<IdDiv>
-						<Field name="id">
-							{({ field }) => (
-								<TextInput
-									{...field}
-									errors={props.errors.id}
-									touched={props.touched.id}
-									type="number"
-									value={props.values.id}
-									label={"Truck ID"}
-									fit
-								/>
-							)}
-						</Field>
+						<Input
+							errors={props.errors.id}
+							touched={props.touched.id}
+							value={props.values.id}
+							name="id"
+							type="number"
+							label="Truck ID"
+							fit
+						/>
 					</IdDiv>
 					<StatusDiv>
 						<SelectBox
@@ -142,8 +138,8 @@ const AddTruck = () => {
 							<option value="" />
 							{vehicleTypes.map(type => {
 								return (
-									<option key={type} value={type}>
-										{type}
+									<option key={type.id} value={type.id}>
+										{type.value}
 									</option>
 								);
 							})}

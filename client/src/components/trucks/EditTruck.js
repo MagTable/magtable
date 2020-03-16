@@ -6,10 +6,9 @@ import { editTruck } from "../../actions/truck";
 import { TRUCK_STATUSES } from "../../actions/constants";
 import SelectBox from "../common/SelectBox";
 import { LoginBtn } from "../../styled/auth/Login";
-import { AddTruckWrap } from "../../styled/trucks/TruckManagement";
 import TextArea from "../common/TextArea";
-import TextInput from "../common/TextInput";
 import styled from "styled-components";
+import Input from "../common/Input";
 
 /**
  * @date 3/08/2020
@@ -92,12 +91,13 @@ const EditTruck = ({ truck }) => {
 				<EditTruckForm>
 					<Header>Edit Truck {truck.id}</Header>
 					<IdDiv>
-						<TextInput
+						<Input
 							errors={props.errors.id}
 							touched={props.touched.id}
 							value={props.values.id}
+							name="id"
 							type="number"
-							label={"Truck ID"}
+							label="Truck ID"
 							disabled
 							fit
 						/>
