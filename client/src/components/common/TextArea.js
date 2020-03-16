@@ -16,6 +16,7 @@ const StyledLabel = styled.label`
 `;
 
 const StyledTextArea = styled.textarea`
+	width: 100%;
 	width: -webkit-fill-available;
 	font-family: "Nanum Gothic", sans-serif;
 	min-height: 200px;
