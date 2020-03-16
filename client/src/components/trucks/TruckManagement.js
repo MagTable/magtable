@@ -4,7 +4,8 @@ import TruckManagementItem from "./TruckManagementItem";
 import {
 	TruckManagementListDiv,
 	EditTruckWrap,
-	TruckMgmtDiv
+	TruckMgmtDiv,
+	AddTruckBtn
 } from "../../styled/trucks/TruckManagement";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import AddTruck from "./AddTruck";
@@ -47,10 +48,10 @@ function TruckManagement() {
 					>
 						<EditTruck truck={editTruck} />
 					</Modal>
-					<Button onClick={handleShow}>
+					<AddTruckBtn onClick={handleShow}>
 						<FilterIcon className={"fas fa-plus"} />
 						Add Truck
-					</Button>
+					</AddTruckBtn>
 				</ListTitle>
 				<TruckManagementListDiv>
 					<FadeIn>

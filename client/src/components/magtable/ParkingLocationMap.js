@@ -8,7 +8,9 @@ import {
 	NumberTop,
 	PadColumn,
 	FakePadDiv,
-	SafetyZoneWrapper
+	SafetyZoneWrapper,
+	MagTableManipDiv,
+	MagTableManipBtn
 } from "../../styled/magtable/TruckMapMedia";
 import { useSelector } from "react-redux";
 import ParkingLocation from "./ParkingLocation";
@@ -44,11 +46,16 @@ function ParkingLocationMap(props) {
 			<ListTitle>
 				<ListTitleText>Parking Locations</ListTitleText>
 				<ApronToggle />
-				<Confirmation confirmationMessage={"Confirm Clear"} action={() => {}}>
-					{({ confirm }) => <Button onClick={confirm}>Clear All</Button>}
-				</Confirmation>
 
-				<Button>Publish</Button>
+				<MagTableManipDiv>
+					<Confirmation confirmationMessage={"Confirm Clear"} action={() => {}}>
+						{({ confirm }) => (
+							<MagTableManipBtn onClick={confirm}>Clear All</MagTableManipBtn>
+						)}
+					</Confirmation>
+
+					<MagTableManipBtn>Publish</MagTableManipBtn>
+				</MagTableManipDiv>
 			</ListTitle>
 			<MapWrapper>
 				{parkingLocations.map(
