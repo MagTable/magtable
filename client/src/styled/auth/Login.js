@@ -50,8 +50,8 @@ export const LoginBlock = styled.div`
  * The submit button to log in to the app
  */
 export const LoginBtn = styled(OkButton)`
+	color: black;
 	margin: auto;
 	margin-top: 10px;
 	padding: 10px;
-	color: black;
 `;
