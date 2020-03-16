@@ -6,6 +6,8 @@ import com.magtable.repository.TowerRepository;
 import com.magtable.repository.TruckRepository;
 import com.magtable.services.ErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,7 +32,7 @@ public class EquipmentController {
      *
      * @return the list of trucks
      */
-    @GetMapping("/trucks/all")
+    @GetMapping("/truck/all")
     public List<Truck> getAllTrucks() {
         return truckRepository.findAll();
     }
@@ -41,10 +43,10 @@ public class EquipmentController {
      * description     route to add a truck to the database
      * access          System Admins
      *
-     * @return the updated list of trucks
+     * @return the added truck
      */
-    @PostMapping("/trucks/add")
-    public List<Truck> addTruck(@RequestBody Truck truck) {
+    @PostMapping("/truck/add")
+    public Truck addTruck(@RequestBody Truck truck) {
         // Trucks can only have the following 4 statuses
         if (!(truck.getStatus().equals("GO") || truck.getStatus().equals("CON")
                 || truck.getStatus().equals("OOS") || truck.getStatus().equals("INOP"))) {
@@ -58,8 +60,7 @@ public class EquipmentController {
         //saving the new truck
         truckRepository.save(truck);
 
-        //returning the updated truck list
-        return truckRepository.findAll();
+        return truck;
     }
 
     /**
@@ -67,10 +68,10 @@ public class EquipmentController {
      * description     route to edit the truck operational status/notices
      * access          System Admins, Mechanics
      *
-     * @return the updated list of trucks
+     * @return the edited Truck
      */
-    @PostMapping("/trucks/edit")
-    public List<Truck> editTruck(@RequestBody Truck truck) {
+    @PutMapping("/truck/edit")
+    public Truck editTruck(@RequestBody Truck truck) {
         if (!(truck.getStatus().equals("GO") || truck.getStatus().equals("CON")
                 || truck.getStatus().equals("OOS") || truck.getStatus().equals("INOP"))) {
             errorService.truckOPStatusInvalid(truck.getStatus());
@@ -84,7 +85,25 @@ public class EquipmentController {
         //saving the new truck
         truckRepository.save(truck);
 
-        return truckRepository.findAll();
+         return truck;
+    }
+
+    /**
+     * route           post /equipment/trucks/delete
+     * description     route to delete a truck
+     * access          System Admins, Mechanics
+     *
+     * @return A repsonse
+     */
+    @DeleteMapping("truck/delete/{id}")
+    public ResponseEntity deleteTruck(@PathVariable(value = "id") final int truckID){
+
+        Truck truck = truckRepository.findById(truckID).orElseThrow(() ->
+                errorService.truckDoesntExists(truckID));
+
+        truckRepository.delete(truck);
+
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     /**
@@ -94,7 +113,7 @@ public class EquipmentController {
      *
      * @return the list of towers
      */
-    @GetMapping("/towers/all")
+    @GetMapping("/tower/all")
     public List<Tower> getAllTowers() {
         return towerRepository.findAll();
     }

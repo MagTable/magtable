@@ -9,11 +9,6 @@ import TruckManagement from "./TruckManagement";
 import { TruckMgmtWrap } from "../../styled/trucks/TruckManagement";
 
 const TruckManagementLayout = () => {
-	const dispatch = useDispatch();
-
-	useEffect(() => {
-		dispatch(getTrucks());
-	}, [dispatch]);
 	return (
 		<DndProvider backend={Backend}>
 			<TruckMgmtWrap>

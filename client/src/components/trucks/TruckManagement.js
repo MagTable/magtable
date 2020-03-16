@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import TruckManagementItem from "./TruckManagementItem";
 import {
 	TruckManagementListDiv,
@@ -11,9 +11,10 @@ import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import AddTruck from "./AddTruck";
 import Modal from "../modal/Modal";
 import { FilterIcon } from "../../styled/magtable/Overflow";
-import { Button } from "../../styled/common/FormControl";
 import EditTruck from "./EditTruck";
 import FadeIn from "react-fade-in";
+import { getMagTable } from "../../actions/magtable";
+import { getTrucks } from "../../actions/truck";
 
 /**
  * @date 3/5/2020
@@ -27,7 +28,7 @@ import FadeIn from "react-fade-in";
  * @returns {*} The TruckManagement component
  */
 function TruckManagement() {
-	const trucks = useSelector(state => state.truck.trucks);
+	const assignments = useSelector(state => state.magtable.assignments);
 	// Next 3 lines of code are for the Add Truck Modal
 	const [showModal, setModal] = useState(false);
 	const handleClose = () => setModal(false);
@@ -56,13 +57,16 @@ function TruckManagement() {
 				<TruckManagementListDiv>
 					<FadeIn>
 						<>
-							{trucks.map(truck => (
-								<TruckManagementItem
-									key={truck.id}
-									truck={truck}
-									setEditTruck={setEditTruck}
-								/>
-							))}
+							{assignments.map(
+								truck =>
+									truck.equipment.id < 1000 && (
+										<TruckManagementItem
+											key={truck.id}
+											truck={truck}
+											setEditTruck={setEditTruck}
+										/>
+									)
+							)}
 						</>
 					</FadeIn>
 				</TruckManagementListDiv>

@@ -74,11 +74,6 @@ export const WEST_APRON = "WDA";
 export const WEST = "W";
 export const EAST = "E";
 export const CENTER = "C";
-// export const LEFT = "left";
-// export const RIGHT = "right";
-
-// export const AM = "am";
-// export const PM = "pm";
 
 export const SET_ALERT = "SET_ALERT";
 export const REMOVE_ALERT = "REMOVE_ALERT";
@@ -127,7 +122,7 @@ export const PUBLISH_TABLE = "PUBLISH_TABLE";
 
 export const EDIT_TRUCK = "EDIT_TRUCK";
 export const ADD_TRUCK = "ADD_TRUCK";
-export const GET_TRUCKS = "GET_TRUCKS";
+export const DELETE_TRUCK = "DELETE_TRUCK";
 
 // standard axios config object for POST requests
 export const AXIOS_JSON_HEADER = {

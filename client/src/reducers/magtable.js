@@ -15,7 +15,11 @@ import {
 	TOGGLE_BAY_LEAD,
 	REFRESH_EMPLOYEE_SHIFTS,
 	REFRESHING_EMPLOYEE_SHIFTS,
-	TOGGLE_AM_PM
+	TOGGLE_AM_PM,
+	ADD_TRUCK,
+	EDIT_TRUCK,
+	GET_TRUCKS,
+	DELETE_TRUCK
 } from "../actions/constants";
 import { initialParkingLocations } from "../res/test_data/magtable";
 
@@ -190,6 +194,28 @@ export default function(state = initialState, action) {
 			return {
 				...state,
 				showAM: !state.showAM
+			};
+		case ADD_TRUCK:
+			return {
+				...state,
+				equipment: [...state.equipment, payload],
+				loading: false
+			};
+		case EDIT_TRUCK:
+			return {
+				...state,
+				equipment: state.magtable.assignment.equipment.filter(
+					truck => truck.id !== payload
+				),
+				loading: false
+			};
+		case DELETE_TRUCK:
+			return {
+				...state,
+				assignment: state.magtable.assignment.equipment.filter(
+					truck => truck.id !== payload
+				),
+				loading: false
 			};
 		default:
 			return state;

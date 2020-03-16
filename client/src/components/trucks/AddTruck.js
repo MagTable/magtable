@@ -4,7 +4,7 @@ import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { addTruck } from "../../actions/truck";
 import TextInput from "../common/TextInput";
-import { TRUCK_STATUSES } from "../../actions/constants";
+import { TRUCK_STATUSES, VEHICLE_TYPES } from "../../actions/constants";
 import SelectBox from "../common/SelectBox";
 import { LoginBtn } from "../../styled/auth/Login";
 import { AddTruckWrap } from "../../styled/trucks/TruckManagement";
@@ -27,6 +27,7 @@ import TextArea from "../common/TextArea";
 const AddTruck = () => {
 	const dispatch = useDispatch();
 	const truckStatuses = TRUCK_STATUSES;
+	const vehicleTypes = VEHICLE_TYPES;
 
 	//todo figure out formik text area and add it in at the bottom.
 	// also change the text input field into a number one purely unless API can parse the string to an int and we can keep easy consistency
@@ -36,6 +37,7 @@ const AddTruck = () => {
 				initialValues={{
 					id: "",
 					status: "",
+					type: "",
 					notice: ""
 				}}
 				onSubmit={(values, { resetForm }) => {
@@ -74,6 +76,16 @@ const AddTruck = () => {
 								return (
 									<option key={status} value={status}>
 										{status}
+									</option>
+								);
+							})}
+						</SelectBox>
+						<SelectBox label="Truck Type" name="type">
+							<option value="" />
+							{vehicleTypes.map(type => {
+								return (
+									<option key={type} value={type}>
+										{type}
 									</option>
 								);
 							})}

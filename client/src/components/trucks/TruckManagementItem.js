@@ -30,8 +30,8 @@ function TruckManagementItem({ truck, setEditTruck }) {
 	const dispatch = useDispatch();
 
 	//
-	const [editedNotice, setEditedNotice] = useState(truck.notice);
-	const [editedStatus, setEditedStatus] = useState(truck.status);
+	const [editedNotice, setEditedNotice] = useState(truck.equipment.notice);
+	const [editedStatus, setEditedStatus] = useState(truck.equipment.status);
 
 	const authUser = useSelector(state => state.auth.user);
 
@@ -45,7 +45,7 @@ function TruckManagementItem({ truck, setEditTruck }) {
 		setEditedStatus(event.target.value);
 
 		const editedTruck = {
-			id: truck.id,
+			id: truck.equipment.id,
 			status: editedStatus,
 			notice: editedNotice
 		};
@@ -56,14 +56,12 @@ function TruckManagementItem({ truck, setEditTruck }) {
 	// send our edited truck to our actions to persist the edit to the backend
 	function handleEdit() {
 		const editedTruck = {
-			id: truck.id,
+			id: truck.equipment.id,
 			status: editedStatus,
 			notice: editedNotice
 		};
 
 		setEditTruck(editedTruck);
-		// console.log(editedTruck);
-		// dispatch(editTruck(editedTruck));
 	}
 
 	function isSelected(truckStatus) {
@@ -76,7 +74,9 @@ function TruckManagementItem({ truck, setEditTruck }) {
 
 	return (
 		<TruckMgmtItemDiv>
-			<TruckNumberDiv status={editedStatus}>{truck.id}</TruckNumberDiv>
+			<TruckNumberDiv status={editedStatus}>
+				{truck.equipment.id}
+			</TruckNumberDiv>
 			{authUser?.role?.name === SYSTEM_ADMINISTRATOR ? (
 				<>
 					{/*<select onChange={handleChangeStatus}>*/}

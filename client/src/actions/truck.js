@@ -3,8 +3,8 @@ import { setAlert } from "./alert";
 import {
 	ADD_TRUCK,
 	AXIOS_JSON_HEADER,
-	EDIT_TRUCK,
-	GET_TRUCKS
+	DELETE_TRUCK,
+	EDIT_TRUCK
 } from "./constants";
 
 /**
@@ -17,8 +17,8 @@ import {
  */
 export const editTruck = truck => async dispatch => {
 	try {
-		const res = await axios.post(
-			"/equipment/trucks/edit/",
+		const res = await axios.put(
+			"/equipment/truck/edit/",
 			truck,
 			AXIOS_JSON_HEADER
 		);
@@ -48,7 +48,7 @@ export const editTruck = truck => async dispatch => {
 export const addTruck = truck => async dispatch => {
 	try {
 		const res = await axios.post(
-			"/equipment/trucks/add/",
+			"/equipment/truck/add/",
 			truck,
 			AXIOS_JSON_HEADER
 		);
@@ -68,14 +68,16 @@ export const addTruck = truck => async dispatch => {
 	}
 };
 
-export const getTrucks = () => async dispatch => {
+export const deleteTruck = id => async dispatch => {
 	try {
-		const res = await axios.get("/equipment/trucks/all");
+		const res = await axios.delete(`/equipment/truck/delete/${id}`);
 
 		dispatch({
-			type: GET_TRUCKS,
-			payload: res.data
+			type: DELETE_TRUCK,
+			payload: id
 		});
+
+		dispatch(setAlert(`Truck "${id}" Was Deleted Successfully.`, "success"));
 	} catch (err) {
 		dispatch(setAlert(err.response?.data?.message, "danger"));
 	}

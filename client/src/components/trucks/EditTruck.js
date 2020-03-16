@@ -26,8 +26,6 @@ const EditTruck = ({ truck }) => {
 	const truckStatuses = TRUCK_STATUSES;
 	const dispatch = useDispatch();
 
-	console.log({ truck });
-
 	if (truck == null) {
 		truck = {
 			id: 0,
@@ -48,6 +46,7 @@ const EditTruck = ({ truck }) => {
 				onSubmit={(values, { resetForm }) => {
 					console.log(values);
 					// handleEdit();
+					dispatch(editTruck(values));
 					resetForm();
 				}}
 				validationSchema={Yup.object().shape({
