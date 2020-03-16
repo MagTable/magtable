@@ -30,7 +30,7 @@ const EditTruck = ({ truck }) => {
 
 	if (truck == null) {
 		truck = {
-			id: 5,
+			id: 0,
 			status: "",
 			notice: ""
 		};
@@ -39,6 +39,7 @@ const EditTruck = ({ truck }) => {
 	return (
 		<AddTruckWrap>
 			<Formik
+				enableReinitialize={true}
 				initialValues={{
 					id: truck.id,
 					status: truck.status,
@@ -63,11 +64,12 @@ const EditTruck = ({ truck }) => {
 							errors={props.errors.id}
 							touched={props.touched.id}
 							value={truck.id}
+							type={"number"}
 							disabled
 							fit
 						/>
 						<SelectBox label="Truck Status" name="status">
-							<option value={truck.status}>{truck.status}</option>
+							<option value="">{truck.status}</option>
 							{truckStatuses.map(status => {
 								return (
 									<option key={status} value={status}>
