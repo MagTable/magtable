@@ -1,5 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import { UnassignBtn } from "./ListContent";
+import { Button } from "../common/FormControl";
 
 /**
  * @date 2020-02-20
@@ -279,3 +280,15 @@ export const NumberTop = styled(NumberLabel)`
 `;
 
 export const ClearConfirmDiv = styled.div``;
+
+export const MagTableManipDiv = styled.div`
+	display: grid;
+	grid-template-columns: 100px 100px;
+	grid-column-gap: 10px;
+	margin: 10px;
+`;
+
+export const MagTableManipBtn = styled(Button)`
+	border-radius: 20px;
+	height: 28px;
+`;

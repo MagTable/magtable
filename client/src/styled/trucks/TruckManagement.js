@@ -1,14 +1,11 @@
 import styled from "styled-components";
+import { Button } from "../common/FormControl";
 
 /**
  * @date 3/5/2020
  * @author MJ Kochuk
  * @module Styled
  */
-
-export const TruckManagementWrapper = styled.div`
-	border-right: 2px solid var(--border-color);
-`;
 
 export const TruckManagementListDiv = styled.div`
 	transition: all 0.15s ease-in-out;
@@ -54,4 +51,11 @@ export const NoticeBox = styled.input`
 export const TruckMgmtWrap = styled.div`
 	display: flex;
 	flex-direction: row;
+`;
+
+export const AddTruckBtn = styled(Button)`
+	width: 165px;
+	margin-right: 30px;
+	border-radius: 20px;
+	height: 28px;
 `;
