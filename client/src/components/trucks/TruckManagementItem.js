@@ -12,7 +12,7 @@ import {
 import { Button } from "../../styled/common/FormControl";
 import IconButton from "../common/IconButton";
 import Confirmation from "../common/Confirmation";
-import { editTruck } from "../../actions/truck";
+import { deleteTruck, editTruck } from "../../actions/truck";
 
 /**
  * @date 3/5/2020
@@ -72,6 +72,10 @@ function TruckManagementItem({ truck, setEditTruck }) {
 		}
 	}
 
+	const handleDelete = id => {
+		dispatch(deleteTruck(id));
+	};
+
 	return (
 		<TruckMgmtItemDiv>
 			<TruckNumberDiv status={editedStatus}>
@@ -96,7 +100,7 @@ function TruckManagementItem({ truck, setEditTruck }) {
 						/>
 						<Confirmation
 							confirmationMessage={"Confirm Delete"}
-							action={() => {}}
+							action={() => handleDelete(truck.equipment.id)}
 						>
 							{({ confirm }) => (
 								<IconButton

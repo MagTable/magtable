@@ -45,7 +45,7 @@ const EditTruck = ({ truck }) => {
 				}}
 				onSubmit={(values, { resetForm }) => {
 					// handleEdit();
-					// dispatch(editTruck(values));
+					dispatch(editTruck(values));
 					alert(JSON.stringify(values, null, 2));
 					resetForm();
 				}}

@@ -198,13 +198,21 @@ export default function(state = initialState, action) {
 		case ADD_TRUCK:
 			return {
 				...state,
-				equipment: [...state.equipment, payload],
+				assignments: [
+					...state.assignments,
+					{
+						equipment: payload,
+						employeeShifts: [null, null, null, null],
+						parkingLocation: null,
+						brixRecords: []
+					}
+				],
 				loading: false
 			};
 		case EDIT_TRUCK:
 			return {
 				...state,
-				equipment: state.magtable.assignment.equipment.filter(
+				assignments: state.magtable.assignment.filter(
 					truck => truck.id !== payload
 				),
 				loading: false
@@ -212,7 +220,7 @@ export default function(state = initialState, action) {
 		case DELETE_TRUCK:
 			return {
 				...state,
-				assignment: state.magtable.assignment.equipment.filter(
+				assignments: state.magtable.assignment.equipment.filter(
 					truck => truck.id !== payload
 				),
 				loading: false

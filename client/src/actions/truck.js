@@ -11,7 +11,7 @@ import {
  *
  * Edit's the selected trucks information. This can be anything from the truck status to the notice information.
  *
- * POST /truck/edit
+ * PUT /truck/edit
  * Dispatch Type: EDIT_TRUCK
  * Dispatch Payload: res.data
  */
@@ -60,7 +60,7 @@ export const addTruck = truck => async dispatch => {
 		});
 
 		dispatch(
-			setAlert(`Truck "${truck.id}" Was Updated Successfully.`, "success")
+			setAlert(`Truck "${truck.id}" Was Added Successfully.`, "success")
 		);
 	} catch (err) {
 		console.log(err);
@@ -70,11 +70,11 @@ export const addTruck = truck => async dispatch => {
 
 export const deleteTruck = id => async dispatch => {
 	try {
-		const res = await axios.delete(`/equipment/truck/delete/${id}`);
+		await axios.delete(`/equipment/truck/delete/${id}`);
 
 		dispatch({
 			type: DELETE_TRUCK,
-			payload: res.id
+			payload: id
 		});
 
 		dispatch(setAlert(`Truck "${id}" Was Deleted Successfully.`, "success"));

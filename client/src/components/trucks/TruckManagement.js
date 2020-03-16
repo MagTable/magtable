@@ -13,8 +13,6 @@ import Modal from "../modal/Modal";
 import { FilterIcon } from "../../styled/magtable/Overflow";
 import EditTruck from "./EditTruck";
 import FadeIn from "react-fade-in";
-import { getMagTable } from "../../actions/magtable";
-import { getTrucks } from "../../actions/truck";
 
 /**
  * @date 3/5/2020
