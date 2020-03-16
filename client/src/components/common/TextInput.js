@@ -47,7 +47,7 @@ function TextInput(props) {
 
 			<TextInputLabel
 				error={props.errors && props.touched}
-				lifted={props.value.length > 0}
+				lifted={props.value.length > 0 || props.value > 0}
 				focus={focus}
 				htmlFor={props.label}
 			>

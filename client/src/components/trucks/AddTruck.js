@@ -9,6 +9,7 @@ import SelectBox from "../common/SelectBox";
 import { LoginBtn } from "../../styled/auth/Login";
 import { AddTruckWrap } from "../../styled/trucks/TruckManagement";
 import TextArea from "../common/TextArea";
+import styled from "styled-components";
 
 /**
  * @date 3/08/2020
@@ -24,6 +25,44 @@ import TextArea from "../common/TextArea";
  * @returns {*} The AddTruck component.
  */
 
+const AddTruckForm = styled(Form)`
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-auto-rows: auto;
+	grid-gap: 1rem;
+	grid-template-areas:
+		"header header"
+		"id id"
+		"status type"
+		"notice notice"
+		"submit submit";
+`;
+
+const Header = styled.h2`
+	margin: 0;
+	grid-area: header;
+`;
+
+const IdDiv = styled.div`
+	grid-area: id;
+`;
+
+const StatusDiv = styled.div`
+	grid-area: status;
+`;
+
+const TypeDiv = styled.div`
+	grid-area: type;
+`;
+
+const NoticeDiv = styled.div`
+	grid-area: notice;
+`;
+
+const SubmitDiv = styled.div`
+	grid-area: submit;
+`;
+
 const AddTruck = () => {
 	const dispatch = useDispatch();
 	const truckStatuses = TRUCK_STATUSES;
@@ -32,34 +71,34 @@ const AddTruck = () => {
 	//todo figure out formik text area and add it in at the bottom.
 	// also change the text input field into a number one purely unless API can parse the string to an int and we can keep easy consistency
 	return (
-		<AddTruckWrap>
-			<Formik
-				initialValues={{
-					id: "",
-					status: "",
-					type: "",
-					notice: ""
-				}}
-				onSubmit={(values, { resetForm }) => {
-					dispatch(addTruck(values));
-					resetForm();
-				}}
-				validationSchema={Yup.object().shape({
-					id: Yup.string()
-						.matches(/\d/, "Invalid Number")
-						.required("Required Field"),
-					status: Yup.string()
-						.oneOf(truckStatuses)
-						.required(),
-					type: Yup.string()
-						.oneOf(vehicleTypes)
-						.required(),
-					notice: Yup.string().max(250, "Maximum Length is 250 Characters")
-				})}
-			>
-				{props => (
-					<Form>
-						<h2>Add Trucks</h2>
+		<Formik
+			initialValues={{
+				id: "",
+				status: "",
+				type: "",
+				notice: ""
+			}}
+			onSubmit={(values, { resetForm }) => {
+				dispatch(addTruck(values));
+				resetForm();
+			}}
+			validationSchema={Yup.object().shape({
+				id: Yup.string()
+					.matches(/\d/, "Invalid Number")
+					.required("Required ID"),
+				status: Yup.string()
+					.oneOf(truckStatuses)
+					.required("Required Status"),
+				type: Yup.string()
+					.oneOf(vehicleTypes)
+					.required("Required Type"),
+				notice: Yup.string().max(250, "Maximum Length is 250 Characters")
+			})}
+		>
+			{props => (
+				<AddTruckForm>
+					<Header>Add Trucks</Header>
+					<IdDiv>
 						<Field name="id">
 							{({ field }) => (
 								<TextInput
@@ -73,7 +112,15 @@ const AddTruck = () => {
 								/>
 							)}
 						</Field>
-						<SelectBox label="Truck Status" name="status">
+					</IdDiv>
+					<StatusDiv>
+						<SelectBox
+							errors={props.errors.status}
+							touched={props.touched.status}
+							value={props.values.status}
+							label="Truck Status"
+							name="status"
+						>
 							<option value="" />
 							{truckStatuses.map(status => {
 								return (
@@ -83,7 +130,15 @@ const AddTruck = () => {
 								);
 							})}
 						</SelectBox>
-						<SelectBox label="Truck Type" name="type">
+					</StatusDiv>
+					<TypeDiv>
+						<SelectBox
+							errors={props.errors.type}
+							touched={props.touched.type}
+							value={props.values.type}
+							label="Truck Type"
+							name="type"
+						>
 							<option value="" />
 							{vehicleTypes.map(type => {
 								return (
@@ -93,20 +148,21 @@ const AddTruck = () => {
 								);
 							})}
 						</SelectBox>
+					</TypeDiv>
+					<NoticeDiv>
 						<TextArea
 							label="Notice"
 							name="notice"
 							rows="6"
 							placeholder="Any truck notices go here..."
 						/>
-						<br />
-						{/*todo checkbox for service vehicle or not?*/}
-						{/*<CheckBox name={"service"}>Service Vehicle?</CheckBox>*/}
+					</NoticeDiv>
+					<SubmitDiv>
 						<LoginBtn type="submit">Add Truck</LoginBtn>
-					</Form>
-				)}
-			</Formik>
-		</AddTruckWrap>
+					</SubmitDiv>
+				</AddTruckForm>
+			)}
+		</Formik>
 	);
 };
 
