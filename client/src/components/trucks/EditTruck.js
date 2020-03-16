@@ -56,13 +56,13 @@ const EditTruck = ({ truck }) => {
 			>
 				{props => (
 					<Form>
-						<h2>Edit Truck</h2>
+						<h2>Edit Truck {truck.id}</h2>
 						{/*<h3>Truck {truck.id}</h3>*/}
 						<TextInput
 							errors={props.errors.id}
 							touched={props.touched.id}
-							value={truck.id}
-							type={"number"}
+							value={props.values.id}
+							type="number"
 							disabled
 							fit
 						/>
