@@ -9,7 +9,6 @@ use magtabledev;
 
 DELETE FROM BrixRecord;
 DELETE FROM Shift;
-DELETE FROM Assignment;
 DELETE FROM MagTableRecord;
 DELETE FROM Equipment;
 DELETE FROM `User`;
@@ -32,7 +31,7 @@ INSERT INTO `user` (role, username, password,resetflag) VALUES (2, 'david', '$2a
 INSERT INTO `user` (role, username, password, resetflag) VALUES (3, 'steven', '$2a$10$p5Z.PzEZm2J6ikfp9T4lFeW6hdRjDQUfTdfqOiKK5xHRsd2C9GqKK', false);
 
 -- SERVICE VEHICLES
-INSERT INTO Equipment (equipmentID, type, status, notice, active) values (1 , 'SVV', 'GO', '', true);
+INSERT INTO Equipment (equipmentID, type, status, notice, active) values (1 , 'SVV', 'GO', '', false);
 INSERT INTO Equipment (equipmentID, type, status, notice, active) values (2 , 'SVV', 'GO', '', true);
 INSERT INTO Equipment (equipmentID, type, status, notice, active) values (3 , 'SVV', 'GO', '', true);
 INSERT INTO Equipment (equipmentID, type, status, notice, active) values (7 , 'SVV', 'INOP', 'Nozzle Swapped with 36', true);

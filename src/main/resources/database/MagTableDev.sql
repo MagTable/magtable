@@ -36,14 +36,6 @@ CREATE TABLE MagTableRecord
     PRIMARY KEY (magtableRecordID)
 );
 
-CREATE TABLE Assignment
-(
-    assignmentID        INT(10) NOT NULL AUTO_INCREMENT,
-    magtableRecordID    INT(5)  NOT NULL,
-    PRIMARY KEY (assignmentID),
-    CONSTRAINT FK_Mag_ID FOREIGN KEY (magtableRecordID) REFERENCES MagTableRecord (magtableRecordID) ON DELETE RESTRICT ON UPDATE RESTRICT
-);
-
 CREATE TABLE Equipment
 (
     equipmentID     INT(5)          NOT NULL,
@@ -53,6 +45,8 @@ CREATE TABLE Equipment
     active          BOOLEAN,
     PRIMARY KEY (equipmentID)
 );
+
+
 
 CREATE TABLE BrixRecord
 (
@@ -69,33 +63,34 @@ CREATE TABLE BrixRecord
     CONSTRAINT CK_litersPurged CHECK (litersPurged >= 0 AND litersPurged <= 1000)
 );
 
-CREATE TABLE AssignmentEquipment
-(
-    assignmentEquipmentID  INT(10) NOT NULL AUTO_INCREMENT,
-    assignmentID INT(10) NOT NULL,
-    equipmentID  INT(5)  NOT NULL,
-    status       VARCHAR(4),
-    notice       VARCHAR(2000),
-    PRIMARY KEY (assignmentEquipmentID),
-    CONSTRAINT FK_Equipment_Assignment FOREIGN KEY (assignmentID) REFERENCES Assignment (assignmentID) ON DELETE RESTRICT ON UPDATE RESTRICT,
-    CONSTRAINT FK_Truck FOREIGN KEY (equipmentID) REFERENCES Equipment (equipmentID) ON DELETE RESTRICT ON UPDATE RESTRICT
-);
-
 CREATE TABLE AssignmentParkingLocation
 (
     assignmentParkingLocationID INT(10) NOT NULL AUTO_INCREMENT,
-    assignmentID                INT(10) NOT NULL,
     parkingLocationID           INT(5),
     position                    VARCHAR(6),
     bay                         INT(2),
-    PRIMARY KEY (assignmentParkingLocationID),
-    CONSTRAINT FK_PLA_Assignment FOREIGN KEY (assignmentID) REFERENCES Assignment (assignmentID) ON DELETE RESTRICT ON UPDATE RESTRICT
+    PRIMARY KEY (assignmentParkingLocationID)
+);
+
+CREATE TABLE AssignmentEquipment
+(
+    assignmentEquipmentID  INT(10) NOT NULL AUTO_INCREMENT,
+    equipmentID  INT(5)  NOT NULL,
+    magtableRecordID    INT(5),  #TODO nuilllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+    assignmentParkingLocationID INT(10),
+    status       VARCHAR(4),
+    notice       VARCHAR(2000),
+    PRIMARY KEY (assignmentEquipmentID),
+    CONSTRAINT FK_Mag_ID FOREIGN KEY (magtableRecordID) REFERENCES MagTableRecord (magtableRecordID) ON DELETE RESTRICT ON UPDATE RESTRICT,
+    CONSTRAINT FK_EQUIPMENT FOREIGN KEY (equipmentID) REFERENCES Equipment (equipmentID) ON DELETE RESTRICT ON UPDATE RESTRICT,
+    CONSTRAINT FK_PLLOC FOREIGN KEY (assignmentParkingLocationID) REFERENCES assignmentparkinglocation (assignmentParkingLocationID) ON DELETE RESTRICT ON UPDATE RESTRICT
+
 );
 
 CREATE TABLE Shift
 (
     shiftID      INT(10) NOT NULL,
-    assignmentID INT(10) NOT NULL,
+    assignmentEquipmentID  INT(10) NOT NULL,
     description  VARCHAR(30),
     name         VARCHAR(50),
     startTime    DATETIME,
@@ -103,7 +98,7 @@ CREATE TABLE Shift
     noAvop       BOOLEAN,
     isGreen      BOOLEAN,
     PRIMARY KEY (shiftID),
-    CONSTRAINT FK_Shift_Assignment FOREIGN KEY (assignmentID) REFERENCES Assignment (assignmentID) ON DELETE RESTRICT ON UPDATE RESTRICT
+    CONSTRAINT FK_ShiftEquip FOREIGN KEY (assignmentEquipmentID) REFERENCES AssignmentEquipment (assignmentEquipmentID) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
 CREATE TABLE W2WShift
@@ -117,6 +112,8 @@ CREATE TABLE W2WShift
     isGreen      BOOLEAN,
     PRIMARY KEY (shiftID)
 );
+
+
 
 
 # CREATE TABLE BrixChart (

@@ -1,7 +1,11 @@
 package com.magtable.model.entities;
 
-import javax.persistence.*;
-import java.util.Collection;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
@@ -11,7 +15,6 @@ public class Equipment {
     private String status;
     private String notice;
     private Boolean active;
-    private Collection<Brixrecord> brixrecordsByEquipmentId;
 
     @Id
     @Column(name = "equipmentID", nullable = false)
@@ -53,6 +56,7 @@ public class Equipment {
         this.notice = notice;
     }
 
+    @JsonIgnore
     @Basic
     @Column(name = "active", nullable = true)
     public Boolean getActive() {
@@ -78,14 +82,5 @@ public class Equipment {
     @Override
     public int hashCode() {
         return Objects.hash(equipmentId, type, status, notice, active);
-    }
-
-    @OneToMany
-    public Collection<Brixrecord> getBrixrecordsByEquipmentId() {
-        return brixrecordsByEquipmentId;
-    }
-
-    public void setBrixrecordsByEquipmentId(Collection<Brixrecord> brixrecordsByEquipmentId) {
-        this.brixrecordsByEquipmentId = brixrecordsByEquipmentId;
     }
 }

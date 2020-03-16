@@ -1,8 +1,12 @@
 package com.magtable.controller;
 
-import com.magtable.model.entities.Assignment;
-import com.magtable.model.entities.MagTableRecord;
-import com.magtable.repository.*;
+import com.magtable.model.entities.Assignmentequipment;
+import com.magtable.model.entities.Equipment;
+import com.magtable.model.entities.MagtableRecord;
+import com.magtable.model.entities.Shift;
+import com.magtable.repository.AssignmentEquipmentRepository;
+import com.magtable.repository.EquipmentRepository;
+import com.magtable.repository.MagTableRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,44 +20,61 @@ public class MtrController {
     MagTableRecordRepository magTableRecordRepository;
 
     @Autowired
-    AssignmentRepository assignmentRepository;
-
-    @Autowired
     EquipmentRepository equipmentRepository;
 
+    @Autowired
+    AssignmentEquipmentRepository assignmentEquipmentRepository;
+
     @GetMapping("")
-    public MagTableRecord getMagTable(){
+    public MagtableRecord getMagTable() {
 
-        MagTableRecord magTableRecord = magTableRecordRepository.findMostRecent();
+        MagtableRecord magtableRecord = magTableRecordRepository.findMostRecent();
 
-        if(magTableRecord == null){
-            //Create a new empty one
-            magTableRecord = new MagTableRecord();
-            //first one ever so Id will be 1
-            magTableRecord.setId(1);
+        if (magtableRecord == null) {
 
-            ArrayList<Assignment> assignments = new ArrayList<>();
-            long equipmentLength = equipmentRepository.count();
-            magTableRecordRepository.save(magTableRecord);
+            magtableRecord = new MagtableRecord(); //making a blank mtr
 
-            for(long i = 0; i < equipmentLength; i++){
-                Assignment assignment = new Assignment();
-                assignments.add(assignment);
-                assignment.setMagtablerecordByMagtableRecordId(magTableRecord);
-                assignmentRepository.save(assignment);
+            ArrayList<Equipment> equipmentList = (ArrayList<Equipment>) equipmentRepository.findAll();
+            ArrayList<Assignmentequipment> assignmentequipmentList = new ArrayList<>();
+
+            ArrayList<Shift> shiftList = new ArrayList<>(4);
+            shiftList.add(null);
+            shiftList.add(null);
+            shiftList.add(null);
+            shiftList.add(null);
+
+            for (Equipment equipment : equipmentList) {
+
+                if(!equipment.getActive()){
+                    continue;
+                }
+
+                Assignmentequipment assignmentequipment = new Assignmentequipment();
+                assignmentequipment.setEquipmentByEquipmentId(equipment);
+                assignmentequipment.setAssignmentparkinglocationByAssignmentParkingLocationId(null);
+                assignmentequipment.setShiftsByAssignmentEquipmentId(shiftList);
+
+                assignmentequipmentList.add(assignmentequipment);
+
             }
 
-
+            magtableRecord.setAssignments(assignmentequipmentList);
 
         }
 
-        return magTableRecord;
 
-
+        return magtableRecord;
     }
 
 
+    @PostMapping("")
+    public MagtableRecord publishMagTable(@RequestBody MagtableRecord magtableRecord){
 
 
+            magTableRecordRepository.save(magtableRecord);
+
+
+        return magtableRecord;
+    }
 
 }
