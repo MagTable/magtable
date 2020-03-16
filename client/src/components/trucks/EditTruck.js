@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Field, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import { addTruck, editTruck } from "../../actions/truck";
+import { editTruck } from "../../actions/truck";
 import { TRUCK_STATUSES } from "../../actions/constants";
 import SelectBox from "../common/SelectBox";
 import { LoginBtn } from "../../styled/auth/Login";
@@ -44,14 +44,13 @@ const EditTruck = ({ truck }) => {
 					notice: truck.notice
 				}}
 				onSubmit={(values, { resetForm }) => {
-					// handleEdit();
 					dispatch(editTruck(values));
-					alert(JSON.stringify(values, null, 2));
 					resetForm();
 				}}
 				validationSchema={Yup.object().shape({
-					status: Yup.string().oneOf(truckStatuses),
-					// .required(),
+					status: Yup.string()
+						.oneOf(truckStatuses)
+						.required(),
 					notice: Yup.string().max(250, "Maximum Length is 250 Characters")
 				})}
 			>

@@ -212,16 +212,16 @@ export default function(state = initialState, action) {
 		case EDIT_TRUCK:
 			return {
 				...state,
-				assignments: state.magtable.assignment.filter(
-					truck => truck.id !== payload
+				assignments: state.assignments.filter(
+					truck => truck.equipment.id !== payload
 				),
 				loading: false
 			};
 		case DELETE_TRUCK:
 			return {
 				...state,
-				assignments: state.magtable.assignment.equipment.filter(
-					truck => truck.id !== payload
+				assignments: state.assignments.filter(
+					truck => truck.equipment.id !== payload
 				),
 				loading: false
 			};

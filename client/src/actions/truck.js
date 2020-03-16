@@ -23,7 +23,6 @@ export const editTruck = truck => async dispatch => {
 			AXIOS_JSON_HEADER
 		);
 
-		//todo check payload to make sure it is what we want.
 		dispatch({
 			type: EDIT_TRUCK,
 			payload: res.data
@@ -63,7 +62,6 @@ export const addTruck = truck => async dispatch => {
 			setAlert(`Truck "${truck.id}" Was Added Successfully.`, "success")
 		);
 	} catch (err) {
-		console.log(err);
 		dispatch(setAlert(err.response?.data?.message, "danger"));
 	}
 };
