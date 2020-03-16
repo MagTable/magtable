@@ -5,23 +5,24 @@ import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Objects;
 
-@Entity(name ="magtablerecord")
-public class MagTableRecord {
-    private Integer id;
+@Entity(name = "magtablerecord")
+public class MagtableRecord {
+    private Integer magtableRecordId;
     private Integer dailyMix;
     private Integer forecastLow;
     private String publishedBy;
     private Timestamp timePublished;
-    private Collection<Assignment> assignmentsByMagtableRecordId;
+    private Collection<Assignmentequipment> assignments;
 
     @Id
-    @Column(name = "magtablerecordid", nullable = false)
-    public Integer getId() {
-        return id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "magtablerecordID", nullable = false)
+    public Integer getMagtableRecordId() {
+        return magtableRecordId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setMagtableRecordId(Integer magtableRecordId) {
+        this.magtableRecordId = magtableRecordId;
     }
 
     @Basic
@@ -68,8 +69,8 @@ public class MagTableRecord {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MagTableRecord that = (MagTableRecord) o;
-        return Objects.equals(id, that.id) &&
+        MagtableRecord that = (MagtableRecord) o;
+        return Objects.equals(magtableRecordId, that.magtableRecordId) &&
                 Objects.equals(dailyMix, that.dailyMix) &&
                 Objects.equals(forecastLow, that.forecastLow) &&
                 Objects.equals(publishedBy, that.publishedBy) &&
@@ -78,17 +79,17 @@ public class MagTableRecord {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, dailyMix, forecastLow, publishedBy, timePublished);
+        return Objects.hash(magtableRecordId, dailyMix, forecastLow, publishedBy, timePublished);
     }
 
-    //THIS ONE WORKS!
-    @OneToMany(mappedBy = "magtablerecordByMagtableRecordId")
-    public Collection<Assignment> getAssignmentsByMagtableRecordId() {
-        return assignmentsByMagtableRecordId;
+    @OneToMany(cascade = CascadeType.ALL)
+    public Collection<Assignmentequipment> getAssignments() {
+        return assignments;
     }
 
-    public void setAssignmentsByMagtableRecordId(Collection<Assignment> assignmentsByMagtableRecordId) {
-        this.assignmentsByMagtableRecordId = assignmentsByMagtableRecordId;
+    public void setAssignments(Collection<Assignmentequipment> assignments) {
+        this.assignments = assignments;
     }
+
 
 }
