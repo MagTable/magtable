@@ -44,9 +44,9 @@ const EditTruck = ({ truck }) => {
 					notice: truck.notice
 				}}
 				onSubmit={(values, { resetForm }) => {
-					console.log(values);
 					// handleEdit();
-					dispatch(editTruck(values));
+					// dispatch(editTruck(values));
+					alert(JSON.stringify(values, null, 2));
 					resetForm();
 				}}
 				validationSchema={Yup.object().shape({
@@ -68,7 +68,6 @@ const EditTruck = ({ truck }) => {
 							fit
 						/>
 						<SelectBox label="Truck Status" name="status">
-							<option value="">{truck.status}</option>
 							{truckStatuses.map(status => {
 								return (
 									<option key={status} value={status}>
@@ -83,7 +82,6 @@ const EditTruck = ({ truck }) => {
 							name="notice"
 							rows="6"
 							placeholder="Any truck notices go here..."
-							value={truck.notice}
 						/>
 						<br />
 						<LoginBtn type="submit">Save</LoginBtn>

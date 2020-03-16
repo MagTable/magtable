@@ -74,7 +74,7 @@ export const deleteTruck = id => async dispatch => {
 
 		dispatch({
 			type: DELETE_TRUCK,
-			payload: id
+			payload: res.id
 		});
 
 		dispatch(setAlert(`Truck "${id}" Was Deleted Successfully.`, "success"));
