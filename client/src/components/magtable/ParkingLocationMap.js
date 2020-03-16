@@ -15,7 +15,6 @@ import {
 import { useSelector } from "react-redux";
 import ParkingLocation from "./ParkingLocation";
 import { CENTER, EAST, WEST } from "../../actions/constants";
-import { Button } from "../../styled/common/FormControl";
 import Confirmation from "../common/Confirmation";
 
 /**

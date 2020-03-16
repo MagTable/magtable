@@ -18,7 +18,6 @@ import {
 	TOGGLE_AM_PM,
 	ADD_TRUCK,
 	EDIT_TRUCK,
-	GET_TRUCKS,
 	DELETE_TRUCK
 } from "../actions/constants";
 import { initialParkingLocations } from "../res/test_data/magtable";
