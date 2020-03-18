@@ -187,7 +187,7 @@ function TowerListItem({ assignment, showAM }) {
 	return (
 		<TowerPositionDiv ref={drop}>
 			<TowerTitle>
-				<TowerTitleText>{assignment.equipment.position}</TowerTitleText>
+				<TowerTitleText>{assignment.equipment.type}</TowerTitleText>
 			</TowerTitle>
 			{employeeShifts.map(elem => (
 				<EquipmentListItemEmployee

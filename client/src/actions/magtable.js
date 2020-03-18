@@ -110,11 +110,9 @@ export const setEquipmentEmployee = (
  */
 export const publishTable = magtable => async dispatch => {
 	try {
-		const res = await axios.post(
-			"/magtable/publish",
-			AXIOS_JSON_HEADER,
-			magtable
-		);
+		console.log(magtable);
+		const res = await axios.post("/magtable", AXIOS_JSON_HEADER, magtable);
+
 		dispatch({
 			type: PUBLISH_TABLE,
 			payload: res.data

@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @Entity
 public class Equipment {
-    private Integer equipmentId;
+    private Integer id;
     private String type;
     private String status;
     private String notice;
@@ -18,12 +18,12 @@ public class Equipment {
 
     @Id
     @Column(name = "equipmentID", nullable = false)
-    public Integer getEquipmentId() {
-        return equipmentId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setEquipmentId(Integer equipmentId) {
-        this.equipmentId = equipmentId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Basic
@@ -37,7 +37,7 @@ public class Equipment {
     }
 
     @Basic
-    @Column(name = "status", nullable = true, length = 4)
+    @Column(name = "status", length = 4)
     public String getStatus() {
         return status;
     }
@@ -47,7 +47,7 @@ public class Equipment {
     }
 
     @Basic
-    @Column(name = "notice", nullable = true, length = 2000)
+    @Column(name = "notice", length = 2000)
     public String getNotice() {
         return notice;
     }
@@ -58,7 +58,7 @@ public class Equipment {
 
     @JsonIgnore
     @Basic
-    @Column(name = "active", nullable = true)
+    @Column(name = "active")
     public Boolean getActive() {
         return active;
     }
@@ -72,7 +72,7 @@ public class Equipment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Equipment equipment = (Equipment) o;
-        return Objects.equals(equipmentId, equipment.equipmentId) &&
+        return Objects.equals(id, equipment.id) &&
                 Objects.equals(type, equipment.type) &&
                 Objects.equals(status, equipment.status) &&
                 Objects.equals(notice, equipment.notice) &&
@@ -81,6 +81,6 @@ public class Equipment {
 
     @Override
     public int hashCode() {
-        return Objects.hash(equipmentId, type, status, notice, active);
+        return Objects.hash(id, type, status, notice, active);
     }
 }

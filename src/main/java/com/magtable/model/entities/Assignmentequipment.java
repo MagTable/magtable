@@ -13,10 +13,10 @@ public class Assignmentequipment {
     private Integer id;
     private String status;
     private String notice;
-    private Equipment equipmentByEquipmentId;
+    private Equipment equipment;
     private Magtablerecord magtableRecord;
     private Assignmentparkinglocation assignmentParkingLocation;
-    private Collection<Shift> shifts;
+    private Collection<Shift> employeeShifts;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -79,32 +79,32 @@ public class Assignmentequipment {
 
     @ManyToOne
     @JoinColumn(name = "equipmentID", referencedColumnName = "equipmentID", nullable = false)
-    public Equipment getEquipmentByEquipmentId() {
-        return equipmentByEquipmentId;
+    public Equipment getEquipment() {
+        return equipment;
     }
 
-    public void setEquipmentByEquipmentId(Equipment equipmentByEquipmentId) {
-        this.equipmentByEquipmentId = equipmentByEquipmentId;
+    public void setEquipment(Equipment equipment) {
+        this.equipment = equipment;
     }
 
 
     @ManyToOne
-    @JoinColumn(name = "assignmentparkinglocationid", referencedColumnName = "assignmentparkinglocationid", nullable = false)
+    @JoinColumn(name = "assignmentparkinglocationid", referencedColumnName = "assignmentparkinglocationid")
     public Assignmentparkinglocation getAssignmentParkingLocation() {
         return assignmentParkingLocation;
     }
 
-    public void setAssignmentParkingLocation(Assignmentparkinglocation assignmentparkinglocationByAssignmentParkingLocationId) {
-        this.assignmentParkingLocation = assignmentparkinglocationByAssignmentParkingLocationId;
+    public void setAssignmentParkingLocation(Assignmentparkinglocation assignmentParkingLocation) {
+        this.assignmentParkingLocation = assignmentParkingLocation;
     }
 
     @JsonManagedReference
     @OneToMany(mappedBy = "assignmentequipmentByAssignmentEquipmentId", cascade = CascadeType.ALL)
-    public Collection<Shift> getShifts() {
-        return shifts;
+    public Collection<Shift> getEmployeeShifts() {
+        return employeeShifts;
     }
 
-    public void setShifts(Collection<Shift> shiftsByAssignmentEquipmentId) {
-        this.shifts = shiftsByAssignmentEquipmentId;
+    public void setEmployeeShifts(Collection<Shift> employeeShifts) {
+        this.employeeShifts = employeeShifts;
     }
 }

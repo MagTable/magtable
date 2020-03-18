@@ -8,19 +8,19 @@ import java.util.Objects;
 
 @Entity
 public class Assignmentparkinglocation {
-    private Integer assignmentParkingLocationId;
+    private Integer id;
     private Integer parkingLocationId;
     private String position;
     private Integer bay;
 
     @Id
     @Column(name = "assignmentparkinglocationid")
-    public Integer getAssignmentParkingLocationId() {
-        return assignmentParkingLocationId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setAssignmentParkingLocationId(Integer assignmentParkingLocationId) {
-        this.assignmentParkingLocationId = assignmentParkingLocationId;
+    public void setId(Integer assignmentParkingLocationId) {
+        this.id = assignmentParkingLocationId;
     }
 
     @Basic
@@ -58,7 +58,7 @@ public class Assignmentparkinglocation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Assignmentparkinglocation that = (Assignmentparkinglocation) o;
-        return Objects.equals(assignmentParkingLocationId, that.assignmentParkingLocationId) &&
+        return Objects.equals(id, that.id) &&
                 Objects.equals(parkingLocationId, that.parkingLocationId) &&
                 Objects.equals(position, that.position) &&
                 Objects.equals(bay, that.bay);
@@ -66,6 +66,6 @@ public class Assignmentparkinglocation {
 
     @Override
     public int hashCode() {
-        return Objects.hash(assignmentParkingLocationId, parkingLocationId, position, bay);
+        return Objects.hash(id, parkingLocationId, position, bay);
     }
 }

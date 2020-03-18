@@ -30,9 +30,7 @@ public class MtrController {
 
         Magtablerecord magtableRecord = magTableRecordRepository.findMostRecent();
 
-
         if (magtableRecord == null) {
-            System.out.println("fuck u intellij");
             magtableRecord = new Magtablerecord(); //making a blank mtr
 
             ArrayList<Equipment> equipmentList = (ArrayList<Equipment>) equipmentRepository.findAll();
@@ -51,9 +49,9 @@ public class MtrController {
                 }
 
                 Assignmentequipment assignmentequipment = new Assignmentequipment();
-                assignmentequipment.setEquipmentByEquipmentId(equipment);
+                assignmentequipment.setEquipment(equipment);
                 assignmentequipment.setAssignmentParkingLocation(null);
-                assignmentequipment.setShifts(shiftList);
+                assignmentequipment.setEmployeeShifts(shiftList);
 
                 assignmentequipmentList.add(assignmentequipment);
 
@@ -70,11 +68,7 @@ public class MtrController {
 
     @PostMapping("")
     public Magtablerecord publishMagTable(@RequestBody Magtablerecord magtableRecord) {
-
-        System.out.println(magtableRecord.getAssignments());
         magTableRecordRepository.save(magtableRecord);
-
-
         return magtableRecord;
     }
 

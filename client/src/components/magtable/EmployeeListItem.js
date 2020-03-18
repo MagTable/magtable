@@ -111,8 +111,8 @@ function EmployeeListItem({ employee: employeeShift }) {
 						<i className="fas fa-times" />
 					</UnassignBtn>
 					<h2>
-						{assignment.equipment.position
-							? assignment.equipment.position
+						{assignment.equipment.type
+							? assignment.equipment.type
 							: employeeShift.assignedEquipment}
 					</h2>
 				</AssignedToWrap>
