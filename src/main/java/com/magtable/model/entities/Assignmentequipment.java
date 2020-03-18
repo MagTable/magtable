@@ -99,7 +99,7 @@ public class Assignmentequipment {
     }
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "assignmentequipmentByAssignmentEquipmentId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "assignmentEquipment", cascade = CascadeType.ALL)
     public Collection<Shift> getEmployeeShifts() {
         return employeeShifts;
     }

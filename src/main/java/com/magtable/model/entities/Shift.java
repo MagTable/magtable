@@ -8,24 +8,24 @@ import java.util.Objects;
 
 @Entity
 public class Shift {
-    private Integer shiftId;
+    private Integer id;
     private String description;
     private String name;
     private Timestamp startTime;
     private Timestamp endTime;
     private Boolean noAvop;
     private Boolean isGreen;
-    private Assignmentequipment assignmentequipmentByAssignmentEquipmentId;
+    private Assignmentequipment assignmentEquipment;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //TODO LOGIC TO MAKE SURE SHIFTID = W2W SHIFT ID
     @Column(name = "shiftID", nullable = false)
-    public Integer getShiftId() {
-        return shiftId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setShiftId(Integer shiftId) {
-        this.shiftId = shiftId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Basic
@@ -93,7 +93,7 @@ public class Shift {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Shift shift = (Shift) o;
-        return Objects.equals(shiftId, shift.shiftId) &&
+        return Objects.equals(id, shift.id) &&
                 Objects.equals(description, shift.description) &&
                 Objects.equals(name, shift.name) &&
                 Objects.equals(startTime, shift.startTime) &&
@@ -104,17 +104,17 @@ public class Shift {
 
     @Override
     public int hashCode() {
-        return Objects.hash(shiftId, description, name, startTime, endTime, noAvop, isGreen);
+        return Objects.hash(id, description, name, startTime, endTime, noAvop, isGreen);
     }
 
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "assignmentequipmentID", referencedColumnName = "assignmentequipmentID")
-    public Assignmentequipment getAssignmentequipmentByAssignmentEquipmentId() {
-        return assignmentequipmentByAssignmentEquipmentId;
+    public Assignmentequipment getAssignmentEquipment() {
+        return assignmentEquipment;
     }
 
-    public void setAssignmentequipmentByAssignmentEquipmentId(Assignmentequipment assignmentequipmentByAssignmentEquipmentId) {
-        this.assignmentequipmentByAssignmentEquipmentId = assignmentequipmentByAssignmentEquipmentId;
+    public void setAssignmentEquipment(Assignmentequipment assignmentEquipment) {
+        this.assignmentEquipment = assignmentEquipment;
     }
 }
