@@ -100,7 +100,7 @@ public class Assignmentequipment {
     }
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "assignmentEquipment", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "assignmentEquipment", cascade = CascadeType.MERGE)
     public Collection<Shift> getEmployeeShifts() {
         return employeeShifts;
     }
