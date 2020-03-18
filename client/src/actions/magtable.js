@@ -106,12 +106,14 @@ export const setEquipmentEmployee = (
  * Sends the current state of the magtable to the API for persistance
  *
  * @param magtable magtable to publish
+ * @param publishedBy username of logged in user who called publish function
  * @returns API returns the saved state of the magtable
  */
-export const publishTable = magtable => async dispatch => {
+export const publishTable = (magtable, publishedBy) => async dispatch => {
 	try {
-		console.log(magtable);
-		const res = await axios.post("/magtable", AXIOS_JSON_HEADER, magtable);
+		const { assignments, dailyMix, forecastLow } = magtable;
+		const data = { assignments, dailyMix, forecastLow, publishedBy };
+		const res = await axios.post("/magtable", data, AXIOS_JSON_HEADER);
 
 		dispatch({
 			type: PUBLISH_TABLE,
