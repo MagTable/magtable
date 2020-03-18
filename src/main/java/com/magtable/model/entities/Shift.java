@@ -10,6 +10,8 @@ import java.util.Objects;
 public class Shift {
     private Integer id;
     private String description;
+    private String timeOfDay;
+    private Boolean isPrimary;
     private String name;
     private Timestamp startTime;
     private Timestamp endTime;
@@ -17,8 +19,7 @@ public class Shift {
     private Boolean isGreen;
     private Assignmentequipment assignmentEquipment;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //TODO LOGIC TO MAKE SURE SHIFTID = W2W SHIFT ID
+    @Id //TODO LOGIC TO MAKE SURE SHIFTID = W2W SHIFT ID
     @Column(name = "shiftID", nullable = false)
     public Integer getId() {
         return id;
@@ -86,6 +87,27 @@ public class Shift {
 
     public void setIsGreen(Boolean isGreen) {
         this.isGreen = isGreen;
+    }
+
+
+    @Basic
+    @Column(name = "timeofday")
+    public String getTimeOfDay() {
+        return timeOfDay;
+    }
+
+    public void setTimeOfDay(String timeOfDay) {
+        this.timeOfDay = timeOfDay;
+    }
+
+    @Basic
+    @Column(name = "isprimary")
+    public Boolean getIsPrimary() {
+        return isPrimary;
+    }
+
+    public void setIsPrimary(Boolean primary) {
+        isPrimary = primary;
     }
 
     @Override

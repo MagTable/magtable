@@ -32,7 +32,7 @@ CREATE TABLE MagTableRecord
     dailyMix            INT(2),
     forecastLow         INT(2),
     publishedBy         VARCHAR(32),
-    timePublished       DATETIME,
+    timePublished       DATETIME DEFAULT NOW(),
     PRIMARY KEY (magtableRecordID)
 );
 
@@ -89,16 +89,21 @@ CREATE TABLE AssignmentEquipment
 
 CREATE TABLE Shift
 (
-    shiftID      INT(10) NOT NULL AUTO_INCREMENT, -- todo w2w unique ids
+    shiftID      INT(10) NOT NULL, -- todo w2w unique ids
     assignmentEquipmentID  INT(10) NOT NULL,
+    timeOfDay    VARCHAR(2),
+    isPrimary    BOOLEAN,
     description  VARCHAR(30),
     name         VARCHAR(50),
     startTime    DATETIME,
     endTime      DATETIME,
     noAvop       BOOLEAN,
     isGreen      BOOLEAN,
-    PRIMARY KEY (shiftID),
-    CONSTRAINT FK_ShiftEquip FOREIGN KEY (assignmentEquipmentID) REFERENCES AssignmentEquipment (assignmentEquipmentID) ON DELETE RESTRICT ON UPDATE RESTRICT
+    PRIMARY KEY (shiftID, assignmentEquipmentID),
+    CONSTRAINT FK_ShiftEquip FOREIGN KEY (assignmentEquipmentID) REFERENCES AssignmentEquipment (assignmentEquipmentID) ON DELETE RESTRICT ON UPDATE RESTRICT,
+    CONSTRAINT fk_timeofday CHECK(timeOfDay = 'PM' OR timeOfDay = 'AM')
+
+
 );
 
 CREATE TABLE W2WShift

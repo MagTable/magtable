@@ -68,8 +68,24 @@ public class MtrController {
 
     @PostMapping("")
     public Magtablerecord publishMagTable(@RequestBody Magtablerecord magtableRecord) {
-        magTableRecordRepository.save(magtableRecord);
-        return magtableRecord;
+
+        ArrayList<Assignmentequipment> tempList = new ArrayList<>(magtableRecord.getAssignments());
+
+        for(Assignmentequipment assignmentequipment : tempList){
+            ArrayList<Shift> empShift = (ArrayList<Shift>) assignmentequipment.getEmployeeShifts();
+
+            try{
+                empShift.remove(null);
+                empShift.remove(null);
+                empShift.remove(null);
+                empShift.remove(null);
+            }catch (Exception e){}
+
+            System.out.println(empShift);
+        }
+
+
+        return magTableRecordRepository.save(magtableRecord);
     }
 
 }

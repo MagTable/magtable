@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -19,6 +20,7 @@ public class Assignmentequipment {
     private Collection<Shift> employeeShifts;
 
     @Id
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "assignmentequipmentid", nullable = false)
     public Integer getId() {
@@ -86,7 +88,6 @@ public class Assignmentequipment {
     public void setEquipment(Equipment equipment) {
         this.equipment = equipment;
     }
-
 
     @ManyToOne
     @JoinColumn(name = "assignmentparkinglocationid", referencedColumnName = "assignmentparkinglocationid")

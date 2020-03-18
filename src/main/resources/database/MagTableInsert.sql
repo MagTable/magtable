@@ -10,6 +10,7 @@ use magtabledev;
 DELETE FROM BrixRecord;
 DELETE FROM Shift;
 DELETE FROM MagTableRecord;
+DELETE FROM assignmentequipment;
 DELETE FROM Equipment;
 DELETE FROM `User`;
 DELETE FROM Role;
