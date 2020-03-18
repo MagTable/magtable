@@ -1,7 +1,6 @@
 package com.magtable.controller;
 
 
-import com.magtable.model.api.ShiftResponse;
 import com.magtable.model.api.ShiftList;
 import com.magtable.model.entities.W2WShift;
 import com.magtable.repository.W2WShiftRepository;
@@ -16,9 +15,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+
 @RestController
 @RequestMapping("/shift")
 public class ShiftController {
@@ -29,7 +28,7 @@ public class ShiftController {
     private ErrorService errorService;
 
     @Autowired
-    private W2WShiftRepository shiftRepository;
+    private W2WShiftRepository w2wShiftRepository;
 
     /**
      * route           GET /shift/get
@@ -41,8 +40,10 @@ public class ShiftController {
     @GetMapping("/all")
     public ShiftList getAllShifts() {
         ShiftList shiftList = ShiftList.getInstance();
+        shiftList.updateShifts((ArrayList<W2WShift>) w2wShiftRepository.findAll());
         return shiftList;
     }
+
     /**
      * Route  Get/update
      * description  route to pull from the W2W API
@@ -59,21 +60,8 @@ public class ShiftController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        /*ShiftScheduler shiftScheduler = ShiftScheduler.getInstance();
-        try {
-            FileInputStream fileInputStream = new FileInputStream(new File("./src/main/java/com/magtable/controller/shiftlist.ser"));
-            ObjectInputStream ois = new ObjectInputStream(fileInputStream);
-            shiftList = (ShiftList) ois.readObject();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        shiftScheduler.setShiftList(shiftList.getShifts());
-        return shiftList;*/
-
         ShiftList shiftList = ShiftList.getInstance();
-        shiftList.updateShifts((ArrayList<W2WShift>) shiftRepository.findAll());
+        shiftList.updateShifts((ArrayList<W2WShift>)w2wShiftRepository.findAll());
 
         Calendar cal = Calendar.getInstance();
         shiftList.setLastUpdated(String.format("%d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE)));
@@ -83,10 +71,14 @@ public class ShiftController {
     }
 
 
+    /**
+     * //todo method comment
+     * @throws Exception
+     */
     private void APIPull() throws Exception {
 
         //Deleting Everything in the Current repo
-        shiftRepository.deleteAll();
+        w2wShiftRepository.deleteAll();
 
         Calendar cal = Calendar.getInstance();
         //months are 0 indexed so have to add one - January = 0
@@ -113,48 +105,39 @@ public class ShiftController {
 
             W2WShift shift = new W2WShift(); //Creating a new shift
 
+
             String startTime = shifts.first().text();
-            shift.setStartTime(Timestamp.valueOf(YEAR + "-" + MONTH + "-" + DAY + " " + startTime + ":" + "00"));
+            shift.setStartTime(startTime.replace(":", ""));
 
             String endTime = shifts.next().first().text();
-
-
-            //Have to split the endtime and startTime in order to get the Integer Values
-            String[] splittedEndTime = endTime.split(":");
-            String[] splittledStartTime = startTime.split(":");
-
-            //Need to make Assumptions for end time.
-            //A Shift that starts in the PM and ends in the AM will be considered to have rolled over on date.
-            int nextDay = DAY + 1;
-            if (Integer.parseInt(splittedEndTime[0]) < 12 && Integer.parseInt(splittledStartTime[0]) >= 12) {
-                shift.setEndTime(Timestamp.valueOf(YEAR + "-" + MONTH + "-" + nextDay + " " + endTime + ":" + "00"));
-            } else {
-                shift.setEndTime(Timestamp.valueOf(YEAR + "-" + MONTH + "-" + DAY + " " + endTime + ":" + "00"));
-            }
+            shift.setEndTime(endTime.replace(":", ""));
 
             //getting the employee name
             String name = shifts.next().next().first().text();
 
-            shift.setGreen(false);
-            if (name.contains("(GP)")) {
-                shift.setGreen(true);
+            if (name.equals("(Unassigned)")) { //0iq
+               // continue;
             }
 
-            shift.setNoAvop(false);
-            if (name.contains("(NAV)")) {
-                shift.setNoAvop(true);
-            }
+            System.out.println(name.contains("(GP)"));
+
+            boolean isGreen = name.contains("(GP)");
+            shift.setIsGreen(isGreen);
+
+            boolean noAvop = name.contains("(NAV)");
+            shift.setNoAvop(noAvop);
 
             shift.setName(name.replace("(GP)", "").replace("(NAV)", ""));
 
-            //Getting the assignment
-            String[] splittedAssignment = shifts.next().next().next().first().text().split(" - ");
-            shift.setDescription(splittedAssignment[1]);
+            //Getting the description
+            //input is "800 - description"
+            String[] splitDescription = shifts.next().next().next().first().text().split(" - ");
+            shift.setDescription(splitDescription[1]);
 
             shifts.remove(0); //Always removing the top-most shift
-            if (!name.equals("(Unassigned)")) {
-                shiftRepository.save(shift);
-            }
+
+            w2wShiftRepository.save(shift);
+
 
         }
     }
@@ -166,61 +149,70 @@ public class ShiftController {
      *
      * @return the updatedShiftList with the added employee in the correct spot
      */
+
+    //TODO REWORK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //TODO REWORK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //TODO REWORK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //TODO REWORK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //TODO REWORK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     @PostMapping("/add")
-    public ShiftList addShift(@RequestBody ShiftResponse shiftResponse) {
-
-        //Converting the Json object to our database entity
-        W2WShift shift = new W2WShift(shiftResponse);
-
-        //Logic for converting "0400" to a timestamp
-        Calendar cal = Calendar.getInstance();
-        //months are 0 indexed so have to add one - January = 0
-        final int MONTH = cal.get(Calendar.MONTH) + 1;
-        final int DAY = cal.get(Calendar.DAY_OF_MONTH);
-        final int YEAR = cal.get(Calendar.YEAR);
-
-        StringBuilder sb = new StringBuilder(shiftResponse.getStartTime());
-        //Have to Pad a 0 to the front if its not a length of 4
-        if(sb.length() == 3){
-            sb.insert(0, "0");
-        }
-
-        sb.insert(2, ":");
-        String startTime = sb.toString();
-
-        sb = new StringBuilder(shiftResponse.getEndTime());
-        //Have to Pad a 0 to the front if its not a length of 4
-        if(sb.length() == 3){
-            sb.insert(0, "0");
-        }
-        sb.insert(2, ":");
-        String endTime = sb.toString();
-
-
-        shift.setStartTime(Timestamp.valueOf(YEAR + "-" + MONTH + "-" + DAY + " " +  startTime + ":" + "00"));
-
-        shift.setEndTime(Timestamp.valueOf(YEAR + "-" + MONTH + "-" + DAY + " " +  endTime + ":" + "00"));
-        //saving the shift in the database
-        shiftRepository.save(shift);
-
-        //fetching the ID of the shift
-        W2WShift savedShift = shiftRepository.findLastRecord();
-        shiftResponse.setId(savedShift.getId());
-
-        ShiftList shiftList = ShiftList.getInstance();
-
-        ArrayList<ShiftResponse> shifts = (ArrayList) shiftList.getShifts();
-
-
-        for (ShiftResponse shift1: shifts) {
-            if (Integer.parseInt(shift1.getStartTime()) >= Integer.parseInt(shiftResponse.getStartTime())) {
-                //insert the user into this part of the list
-                shifts.add(shifts.indexOf(shift1), shiftResponse);
-                break;
-            }
-        }
-
-        return shiftList;
+    public ShiftList addShift(@RequestBody W2WShift shiftResponse) {
+//
+//        //Converting the Json object to our database entity
+//        W2WShift shift = new W2WShift(shiftResponse);
+//
+//        //Logic for converting "0400" to a timestamp
+//        Calendar cal = Calendar.getInstance();
+//        //months are 0 indexed so have to add one - January = 0
+//        final int MONTH = cal.get(Calendar.MONTH) + 1;
+//        final int DAY = cal.get(Calendar.DAY_OF_MONTH);
+//        final int YEAR = cal.get(Calendar.YEAR);
+//
+//
+//
+//        StringBuilder sb = new StringBuilder(shiftResponse.getStartTime());
+//        //Have to Pad a 0 to the front if its not a length of 4
+//        if (sb.length() == 3) {
+//            sb.insert(0, "0");
+//        }
+//
+//        sb.insert(2, ":");
+//        String startTime = sb.toString();
+//
+//        sb = new StringBuilder(shiftResponse.getEndTime());
+//        //Have to Pad a 0 to the front if its not a length of 4
+//        if (sb.length() == 3) {
+//            sb.insert(0, "0");
+//        }
+//        sb.insert(2, ":");
+//        String endTime = sb.toString();
+//
+//
+//        // shift.setStartTime(Date.valueOf(YEAR + "-" + MONTH + "-" + DAY + " " +  startTime + ":" + "00"));
+//
+//        //  shift.setEndTime(Date.valueOf(YEAR + "-" + MONTH + "-" + DAY + " " +  endTime + ":" + "00"));
+//        //saving the shift in the database
+//        shiftRepository.save(shift);
+//
+//        //fetching the ID of the shift
+//        W2WShift savedShift = shiftRepository.findLastRecord();
+//        shiftResponse.setId(savedShift.getId());
+//
+//        ShiftList shiftList = ShiftList.getInstance();
+//
+//        ArrayList<ShiftResponse> shifts = (ArrayList) shiftList.getShifts();
+//
+//
+//        for (ShiftResponse shift1 : shifts) {
+//            if (Integer.parseInt(shift1.getStartTime()) >= Integer.parseInt(shiftResponse.getStartTime())) {
+//                //insert the user into this part of the list
+//                shifts.add(shifts.indexOf(shift1), shiftResponse);
+//                break;
+//            }
+//        }
+//
+//        return shiftList;
+        return null;
     }
 
 

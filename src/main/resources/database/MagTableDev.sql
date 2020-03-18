@@ -95,8 +95,8 @@ CREATE TABLE Shift
     isPrimary    BOOLEAN,
     description  VARCHAR(30),
     name         VARCHAR(50),
-    startTime    DATETIME,
-    endTime      DATETIME,
+    startTime    VARCHAR(4),
+    endTime      VARCHAR(4),
     noAvop       BOOLEAN,
     isGreen      BOOLEAN,
     PRIMARY KEY (shiftID, assignmentEquipmentID),
@@ -111,13 +111,12 @@ CREATE TABLE W2WShift
     shiftID      INT(10) NOT NULL AUTO_INCREMENT,
     description  VARCHAR(30),
     name         VARCHAR(50),
-    startTime    DATETIME,
-    endTime      DATETIME,
+    startTime    VARCHAR(4),
+    endTime      VARCHAR(4),
     noAvop       BOOLEAN,
     isGreen      BOOLEAN,
     PRIMARY KEY (shiftID)
 );
-
 
 
 

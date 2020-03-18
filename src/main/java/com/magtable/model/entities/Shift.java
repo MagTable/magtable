@@ -1,9 +1,11 @@
 package com.magtable.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -13,8 +15,8 @@ public class Shift {
     private String timeOfDay;
     private Boolean isPrimary;
     private String name;
-    private Timestamp startTime;
-    private Timestamp endTime;
+    private String startTime;
+    private String endTime;
     private Boolean noAvop;
     private Boolean isGreen;
     private Assignmentequipment assignmentEquipment;
@@ -51,21 +53,21 @@ public class Shift {
 
     @Basic
     @Column(name = "starttime")
-    public Timestamp getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Timestamp startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
     @Basic
     @Column(name = "endtime")
-    public Timestamp getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Timestamp endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 

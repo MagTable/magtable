@@ -11,7 +11,7 @@ public class ShiftList implements Serializable {
 
     private String scheduleDate;
     private String lastUpdated;
-    private List<ShiftResponse> shifts;
+    private List<W2WShift> shifts;
     private static ShiftList shiftList;
 
     public static ShiftList getInstance() {
@@ -28,42 +28,18 @@ public class ShiftList implements Serializable {
     public void updateShifts(ArrayList<W2WShift> list) {
         Calendar cal = Calendar.getInstance();
         this.scheduleDate = String.format("%d/%d/%d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DATE));
-
-        ArrayList<ShiftResponse> shiftResponses = new ArrayList<>();
-
-        //ShiftTimes need to be sent as a 0400 or 1600 to the front end (Client uses 24hr times)
-        for (W2WShift shift : list) {
-            ShiftResponse shiftResponse = new ShiftResponse(shift);
-            // 2020-03-13 04:00:00.0
-            String startTimeStampString = shift.getStartTime().toString();
-            String[] splitedTime = startTimeStampString.split(" ");
-            String startTime = splitedTime[1].replace(":", "").substring(0, 4);
-
-            String endTimeStampString = shift.getEndTime().toString();
-            splitedTime = endTimeStampString.split(" ");
-            String endTime = splitedTime[1].replace(":", "").substring(0, 4);
-
-            shiftResponse.setStartTime(startTime);
-            shiftResponse.setEndTime(endTime);
-            shiftResponse.setId(shift.getId());
-
-
-            shiftResponses.add(shiftResponse);
-
-        }
-
-        this.shifts = shiftResponses;
+        shifts = list;
     }
 
     public String getScheduleDate() {
         return scheduleDate;
     }
 
-    public List<ShiftResponse> getShifts() {
+    public List<W2WShift> getShifts() {
         return shifts;
     }
 
-    public void setShifts(List<ShiftResponse> shifts) {
+    public void setShifts(List<W2WShift> shifts) {
         this.shifts = shifts;
     }
 
