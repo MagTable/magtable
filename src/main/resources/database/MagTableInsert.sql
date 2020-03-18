@@ -9,12 +9,12 @@ use magtabledev;
 
 DELETE FROM BrixRecord;
 DELETE FROM Shift;
+DELETE FROM assignmentequipment;
 DELETE FROM MagTableRecord;
 DELETE FROM Equipment;
 DELETE FROM `User`;
 DELETE FROM Role;
-
-
+DELETE FROM assignmentparkinglocation;
 
 /*
  These inserts are inorder to set up the database in terms of dependencies. When data about assignments and shifts
@@ -133,3 +133,80 @@ INSERT INTO Equipment (equipmentID, type, status, notice, active) VALUES (1013, 
 #
 # INSERT INTO brixRecord (assignmentID, nozzle, type1, type4, litersPurged, timeMeasured) VALUES (2, 21.2, 52.3, 32.4, 67, '2020-02-22T04:12:33');
 
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (1 , 'E', null);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (1 , 'W', null);
+
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (2 , 'E', null);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (2 , 'E', 1);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (2 , 'E', 2);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (2 , 'W', null);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (2 , 'W', 1);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (2 , 'W', 2);
+
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (3 , 'E', null);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (3 , 'E', 2);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (3 , 'E', 4);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (3 , 'W', null);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (3 , 'W', 2);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (3 , 'W', 4);
+
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (4 , 'E', 4);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (4 , 'E', 4);
+
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (5 , 'E', null);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (5 , 'C', null);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (5 , 'W', null);
+
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (6 , 'E', null);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (6 , 'E', 1);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (6 , 'E', 3);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (6 , 'C', null);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (6 , 'C', 1);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (6 , 'C', 3);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (6 , 'W', null);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (6 , 'W', 1);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (6 , 'W', 3);
+
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (7 , 'E', null);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (7 , 'E', 3);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (7 , 'E', 4);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (7 , 'C', null);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (7 , 'C', 3);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (7 , 'C', 4);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (7 , 'W', null);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (7 , 'W', 3);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (7 , 'W', 4);
+
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (8 , 'E', null);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (8 , 'E', 4);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (8 , 'E', 6);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (8 , 'C', null);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (8 , 'C', 4);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (8 , 'C', 6);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (8 , 'W', null);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (8 , 'W', 4);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (8 , 'W', 6);
+
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (9 , 'E', null);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (9 , 'E', 6);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (9 , 'E', 7);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (9 , 'C', null);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (9 , 'C', 6);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (9 , 'C', 7);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (9 , 'W', null);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (9 , 'W', 6);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (9 , 'W', 7);
+
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (10 , 'E', null);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (10 , 'E', 7);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (10 , 'E', 9);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (10 , 'C', null);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (10 , 'C', 7);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (10 , 'C', 9);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (10 , 'W', null);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (10 , 'W', 7);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (10 , 'W', 9);
+
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (11 , 'E', null);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (11 , 'C', null);
+INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (11 , 'W', null);

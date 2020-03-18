@@ -68,8 +68,7 @@ public class MtrController {
 
     @PostMapping("")
     public Magtablerecord publishMagTable(@RequestBody Magtablerecord magtableRecord) {
-        magTableRecordRepository.save(magtableRecord);
-        return magtableRecord;
+        return magTableRecordRepository.save(magtableRecord);
     }
 
 }
