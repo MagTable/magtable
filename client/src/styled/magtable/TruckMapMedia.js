@@ -1,5 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import { UnassignBtn } from "./ListContent";
+import { Button } from "../common/FormControl";
 
 /**
  * @date 2020-02-20
@@ -26,46 +27,9 @@ const scrollIn = keyframes`
  */
 export const PadDivHeader = styled.div`
 	grid-area: parking_code;
-	background: white;
 	border-bottom: 2px solid var(--border-color);
 	border-top-right-radius: 10px;
 	border-top-left-radius: 10px;
-`;
-
-const rightTriangle = `
-	&:after {
-		position: absolute;
-		
-		height: 0;
-		width: 0;
-		top: 0;
-		right: 0;
-		
-		border-top: solid 10px transparent;
-		border-bottom: solid 10px transparent;
-		border-left: solid 10px var(--context-green-light);
-		
-		transform: translateX(100%);
-		z-index: -1;
-		content: "";
-	}
-`;
-const leftTriangle = `
-	&:after {
-		position: absolute;
-		
-		height: 0;
-		width: 0;
-		top: 0;
-		left: -10px;
-		
-		border-top: solid 10px transparent;
-		border-bottom: solid 10px transparent;
-		border-right: solid 10px var(--context-green-light);
-		
-		z-index: -1;
-		content: "";
-	}
 `;
 
 export const HalfPadDropDiv = styled.div`
@@ -316,3 +280,15 @@ export const NumberTop = styled(NumberLabel)`
 `;
 
 export const ClearConfirmDiv = styled.div``;
+
+export const MagTableManipDiv = styled.div`
+	display: grid;
+	grid-template-columns: 100px 100px;
+	grid-column-gap: 10px;
+	margin: 10px;
+`;
+
+export const MagTableManipBtn = styled(Button)`
+	border-radius: 20px;
+	height: 28px;
+`;

@@ -57,6 +57,12 @@ export const INOP = "INOP";
 
 export const TRUCK_STATUSES = [GO, CON, OOS, INOP];
 
+// vehicle types
+export const ICE = { id: "ICE", value: "Deice Vehicle" };
+export const SVV = { id: "SVV", value: "Service Vehicle" };
+
+export const VEHICLE_TYPES = [ICE, SVV];
+
 // UI Hint Types
 export const DANGER = "DANGER";
 export const WARNING = "WARNING";
@@ -68,11 +74,6 @@ export const WEST_APRON = "WDA";
 export const WEST = "W";
 export const EAST = "E";
 export const CENTER = "C";
-// export const LEFT = "left";
-// export const RIGHT = "right";
-
-// export const AM = "am";
-// export const PM = "pm";
 
 export const SET_ALERT = "SET_ALERT";
 export const REMOVE_ALERT = "REMOVE_ALERT";
@@ -124,7 +125,7 @@ export const CLEAR_TABLE = "CLEAR_TABLE";
 
 export const EDIT_TRUCK = "EDIT_TRUCK";
 export const ADD_TRUCK = "ADD_TRUCK";
-export const GET_TRUCKS = "GET_TRUCKS";
+export const DELETE_TRUCK = "DELETE_TRUCK";
 
 // standard axios config object for POST requests
 export const AXIOS_JSON_HEADER = {

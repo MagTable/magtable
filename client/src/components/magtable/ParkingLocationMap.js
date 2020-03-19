@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import { TruckMapDiv } from "../../styled/magtable/Maps";
+import ApronToggle from "./ApronToggle";
 import {
 	MapWrapper,
 	NumberMiddle,
 	NumberTop,
 	PadColumn,
 	FakePadDiv,
-	SafetyZoneWrapper
+	SafetyZoneWrapper,
+	MagTableManipDiv,
+	MagTableManipBtn
 } from "../../styled/magtable/TruckMapMedia";
 import { useSelector } from "react-redux";
 import ParkingLocation from "./ParkingLocation";
 import { CENTER, EAST, WEST } from "../../actions/constants";
-import IconButton from "../common/IconButton";
-import OverflowLocations from "./OverflowLocations";
+import Confirmation from "../common/Confirmation";
 
 /**
  * @date 2020-02-17
@@ -28,7 +30,6 @@ import OverflowLocations from "./OverflowLocations";
  * @returns {*} The ParkingLocationMap component
  */
 function ParkingLocationMap(props) {
-	const [overflowOpen, setOverflowOpen] = useState(false);
 	const selectedApron = useSelector(state => state.magtable.selectedApron);
 	const parkingLocations = useSelector(
 		state => state.magtable.parkingLocations
@@ -42,17 +43,18 @@ function ParkingLocationMap(props) {
 	return (
 		<TruckMapDiv>
 			<ListTitle>
-				<ListTitleText>Parking Locations: {selectedApron}</ListTitleText>
-				<OverflowLocations open={overflowOpen} setOpen={setOverflowOpen}>
-					{({ openOverflow }) => (
-						<IconButton
-							faClassName="fa-bars fa-lg"
-							onClick={openOverflow}
-							color={"var(--header-text)"}
-							hoverColor={"grey"}
-						/>
-					)}
-				</OverflowLocations>
+				<ListTitleText>Parking Locations</ListTitleText>
+				<ApronToggle />
+
+				<MagTableManipDiv>
+					<Confirmation confirmationMessage={"Confirm Clear"} action={() => {}}>
+						{({ confirm }) => (
+							<MagTableManipBtn onClick={confirm}>Clear All</MagTableManipBtn>
+						)}
+					</Confirmation>
+
+					<MagTableManipBtn>Publish</MagTableManipBtn>
+				</MagTableManipDiv>
 			</ListTitle>
 			<MapWrapper>
 				{parkingLocations.map(

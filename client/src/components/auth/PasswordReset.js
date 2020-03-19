@@ -4,9 +4,9 @@ import { Redirect } from "react-router-dom";
 
 import { setUserPassword } from "../../actions/auth";
 import { LoginBlock, LoginBtn } from "../../styled/auth/Login";
-import { Field, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import TextInput from "../common/TextInput";
+import Input from "../common/Input";
 
 /**
  * @date 2/10/2020
@@ -63,64 +63,49 @@ function ResetPassword() {
 				{props => (
 					<Form>
 						<h2>Password Reset</h2>
-						<Field name={"username"}>
-							{({ field }) => (
-								<TextInput
-									{...field}
-									label={"Username"}
-									labelLifted={true}
-									disabled
-									fit
-								/>
-							)}
-						</Field>
-
-						{/*See Formik Documentation*/}
-
-						<Field name={"newPassword"}>
-							{({ field }) => (
-								<TextInput
-									{...field}
-									errors={props.errors.newPassword}
-									touched={props.touched.newPassword}
-									value={props.values.newPassword}
-									label={"New Password"}
-									type={showNewPassword ? "text" : "password"}
-									icon={{
-										action: () => setShowNewPassword(!showNewPassword),
-										iconClass: showNewPassword
-											? "fa-eye-slash fa-lg"
-											: "fa-eye fa-lg",
-										toolTip: showNewPassword ? "Hide Password" : "Show Password"
-									}}
-									fit
-								/>
-							)}
-						</Field>
-
-						<Field name={"confirmNewPassword"}>
-							{({ field }) => (
-								<TextInput
-									{...field}
-									errors={props.errors?.confirmNewPassword}
-									touched={props.touched?.confirmNewPassword}
-									value={props.values.confirmNewPassword}
-									label={"Confirm New Password"}
-									type={showConfirmNewPassword ? "text" : "password"}
-									icon={{
-										action: () =>
-											setShowConfirmNewPassword(!showConfirmNewPassword),
-										iconClass: showConfirmNewPassword
-											? "fa-eye-slash fa-lg"
-											: "fa-eye fa-lg",
-										toolTip: showConfirmNewPassword
-											? "Hide Password"
-											: "Show Password"
-									}}
-									fit
-								/>
-							)}
-						</Field>
+						<Input
+							label="Username"
+							name="username"
+							type="text"
+							value={props.values.username}
+							disabled
+							fit
+						/>
+						<Input
+							errors={props.errors.newPassword}
+							touched={props.touched.newPassword}
+							value={props.values.newPassword}
+							label="New Password"
+							name="newPassword"
+							type={showNewPassword ? "text" : "password"}
+							icon={{
+								action: () => setShowNewPassword(!showNewPassword),
+								iconClass: showNewPassword
+									? "fa-eye-slash fa-lg"
+									: "fa-eye fa-lg",
+								toolTip: showNewPassword ? "Hide Password" : "Show Password"
+							}}
+							fit
+						/>
+						<Input
+							errors={props.errors?.confirmNewPassword}
+							touched={props.touched?.confirmNewPassword}
+							value={props.values.confirmNewPassword}
+							label="Confirm New Password"
+							name="confirmNewPassword"
+							type={showConfirmNewPassword ? "text" : "password"}
+							icon={{
+								action: () =>
+									setShowConfirmNewPassword(!showConfirmNewPassword),
+								iconClass: showConfirmNewPassword
+									? "fa-eye-slash fa-lg"
+									: "fa-eye fa-lg",
+								toolTip: showConfirmNewPassword
+									? "Hide Password"
+									: "Show Password"
+							}}
+							fit
+						/>
 
 						<LoginBtn type="submit" disabled={loading}>
 							Reset

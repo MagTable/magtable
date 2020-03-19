@@ -1,16 +1,14 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Field, Form, Formik } from "formik";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import { addTruck, editTruck } from "../../actions/truck";
-import TextInput from "../common/TextInput";
+import { editTruck } from "../../actions/truck";
 import { TRUCK_STATUSES } from "../../actions/constants";
 import SelectBox from "../common/SelectBox";
 import { LoginBtn } from "../../styled/auth/Login";
-import { AddTruckWrap } from "../../styled/trucks/TruckManagement";
 import TextArea from "../common/TextArea";
-import CheckBox from "../common/CheckBox";
-import { Input } from "../../styled/common/FormControl";
+import styled from "styled-components";
+import Input from "../common/Input";
 
 /**
  * @date 3/08/2020
@@ -20,97 +18,121 @@ import { Input } from "../../styled/common/FormControl";
 
 /**
  * For editing a truck in the manage trucks page.
- *
  * @constructor
  * @returns {*} The AddTruck component.
  */
 
+const EditTruckForm = styled(Form)`
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-auto-rows: auto;
+	grid-gap: 1rem;
+	grid-template-areas:
+		"header header"
+		"id id"
+		"status status"
+		"notice notice"
+		"submit submit";
+`;
+
+const Header = styled.h2`
+	margin: 0;
+	grid-area: header;
+`;
+
+const IdDiv = styled.div`
+	grid-area: id;
+`;
+
+const StatusDiv = styled.div`
+	grid-area: status;
+`;
+
+const NoticeDiv = styled.div`
+	grid-area: notice;
+`;
+
+const SubmitDiv = styled.div`
+	grid-area: submit;
+`;
+
 const EditTruck = ({ truck }) => {
 	const truckStatuses = TRUCK_STATUSES;
 	const dispatch = useDispatch();
-	let editId, editNotice, editStatus;
 
-	if (truck === null) {
+	if (truck == null) {
 		truck = {
-			id: 5,
+			id: 0,
 			status: "",
 			notice: ""
 		};
 	}
 
-	// send our edited truck to our actions to persist the edit to the backend
-	function handleEdit() {
-		const editedTruck = {
-			id: editId,
-			status: editStatus,
-			notice: editNotice
-		};
-		console.log(editedTruck);
-		dispatch(editTruck(editedTruck));
-	}
-
 	return (
-		<AddTruckWrap>
-			<Formik
-				initialValues={{
-					id: truck.id === null ? "" : truck.id,
-					status: truck.status === null ? "" : truck.status,
-					notice: truck.notice === null ? "" : truck.notice
-				}}
-				onSubmit={() => handleEdit()}
-				validationSchema={Yup.object().shape({
-					id: Yup.string()
-						.matches(/\d/, "Invalid Number")
-						.required("Required Field"),
-					status: Yup.string()
-						.oneOf(truckStatuses)
-						.required(),
-					notice: Yup.string().max(250, "Maximum Length is 250 Characters")
-				})}
-			>
-				<Form>
-					<h2>Edit Truck</h2>
-					{/*Todo get the truck's ID editable, right now, this causes the page to be empty.*/}
-					{/*<Field name="id">*/}
-					{/*	<input value={truck.id} />*/}
-					{/*	/!*{({ field }) => (*!/*/}
-					{/*	/!*	<TextInput*!/*/}
-					{/*	/!*		{...field}*!/*/}
-					{/*	/!*		errors={props.errors.id}*!/*/}
-					{/*	/!*		touched={props.touched.id}*!/*/}
-					{/*	/!*		type={"number"}*!/*/}
-					{/*	/!*		value={props.values.id}*!/*/}
-					{/*	/!*		label={"Truck ID"}*!/*/}
-					{/*	/!*		fit*!/*/}
-					{/*	/!*	/>*!/*/}
-					{/*	/!*)}*!/*/}
-					{/*</Field>*/}
-
-					<SelectBox label="Truck Status" name="status">
-						<option value="" selected={truck.status}>
-							Select a Truck Status
-						</option>
-						{truckStatuses.map(truckStatus => {
-							return (
-								<option key={truckStatus} value={truckStatus}>
-									{truckStatus}
-								</option>
-							);
-						})}
-					</SelectBox>
-					<TextArea
-						label="Notice"
-						name="notice"
-						rows="6"
-						placeholder="Any truck notices go here..."
-					/>
-					<br />
-					{/*todo checkbox for service vehicle or not?*/}
-					{/*<CheckBox name={"service"}>Service Vehicle?</CheckBox>*/}
-					<LoginBtn type="submit">Save</LoginBtn>
-				</Form>
-			</Formik>
-		</AddTruckWrap>
+		<Formik
+			enableReinitialize={true}
+			initialValues={{
+				id: truck.id,
+				status: truck.status,
+				notice: truck.notice
+			}}
+			onSubmit={(values, { resetForm }) => {
+				dispatch(editTruck(values));
+				resetForm();
+			}}
+			validationSchema={Yup.object().shape({
+				status: Yup.string()
+					.oneOf(truckStatuses)
+					.required(),
+				notice: Yup.string().max(250, "Maximum Length is 250 Characters")
+			})}
+		>
+			{props => (
+				<EditTruckForm>
+					<Header>Edit Truck {truck.id}</Header>
+					<IdDiv>
+						<Input
+							errors={props.errors.id}
+							touched={props.touched.id}
+							value={props.values.id}
+							name="id"
+							type="number"
+							label="Truck ID"
+							disabled
+							fit
+						/>
+					</IdDiv>
+					<StatusDiv>
+						<SelectBox
+							errors={props.errors.status}
+							touched={props.touched.status}
+							value={props.values.status}
+							label="Truck Status"
+							name="status"
+						>
+							{truckStatuses.map(status => {
+								return (
+									<option key={status} value={status}>
+										{status}
+									</option>
+								);
+							})}
+						</SelectBox>
+					</StatusDiv>
+					<NoticeDiv>
+						<TextArea
+							label="Notice"
+							name="notice"
+							rows="6"
+							placeholder="Any truck notices go here..."
+						/>
+					</NoticeDiv>
+					<SubmitDiv>
+						<LoginBtn type="submit">Save</LoginBtn>
+					</SubmitDiv>
+				</EditTruckForm>
+			)}
+		</Formik>
 	);
 };
 

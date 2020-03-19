@@ -4,14 +4,15 @@ import TruckManagementItem from "./TruckManagementItem";
 import {
 	TruckManagementListDiv,
 	EditTruckWrap,
-	TruckMgmtDiv
+	TruckMgmtDiv,
+	AddTruckBtn
 } from "../../styled/trucks/TruckManagement";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import AddTruck from "./AddTruck";
 import Modal from "../modal/Modal";
 import { FilterIcon } from "../../styled/magtable/Overflow";
-import { Button } from "../../styled/common/FormControl";
 import EditTruck from "./EditTruck";
+import FadeIn from "react-fade-in";
 
 /**
  * @date 3/5/2020
@@ -25,7 +26,7 @@ import EditTruck from "./EditTruck";
  * @returns {*} The TruckManagement component
  */
 function TruckManagement() {
-	const trucks = useSelector(state => state.truck.trucks);
+	const assignments = useSelector(state => state.magtable.assignments);
 	// Next 3 lines of code are for the Add Truck Modal
 	const [showModal, setModal] = useState(false);
 	const handleClose = () => setModal(false);
@@ -46,19 +47,26 @@ function TruckManagement() {
 					>
 						<EditTruck truck={editTruck} />
 					</Modal>
-					<Button onClick={handleShow}>
+					<AddTruckBtn onClick={handleShow}>
 						<FilterIcon className={"fas fa-plus"} />
 						Add Truck
-					</Button>
+					</AddTruckBtn>
 				</ListTitle>
 				<TruckManagementListDiv>
-					{trucks.map(truck => (
-						<TruckManagementItem
-							key={truck.id}
-							truck={truck}
-							setEditTruck={setEditTruck}
-						/>
-					))}
+					<FadeIn>
+						<>
+							{assignments.map(
+								truck =>
+									truck.equipment.id < 1000 && (
+										<TruckManagementItem
+											key={truck.equipment.id}
+											truck={truck}
+											setEditTruck={setEditTruck}
+										/>
+									)
+							)}
+						</>
+					</FadeIn>
 				</TruckManagementListDiv>
 			</TruckMgmtDiv>
 		</EditTruckWrap>

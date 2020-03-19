@@ -3,15 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { clearAuthError, login } from "../../actions/auth";
 import { LoginBlock, LoginBtn } from "../../styled/auth/Login";
-import { Field, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import TextInput from "../common/TextInput";
 import {
 	Background,
 	BGContainer,
 	BlurCover
 } from "../../styled/common/TextInput";
 import { LoginLoadIcon } from "../../styled/common/QualityOfLife";
+import Input from "../common/Input";
 
 /**
  * @date 2/10/2020
@@ -74,46 +74,36 @@ function Login() {
 				>
 					{props => (
 						<Form>
-							{/*See Formik Documentation*/}
-							<Field name={"username"}>
-								{({ field }) => (
-									<TextInput
-										{...field}
-										blur={blur}
-										setBlurred={setBlur}
-										errors={props.errors.username}
-										touched={props.touched.username}
-										value={props.values.username}
-										label={"Username"}
-										fit
-									/>
-								)}
-							</Field>
-							<Field name={"password"}>
-								{({ field }) => (
-									<TextInput
-										{...field}
-										blur={blur}
-										setBlurred={setBlur}
-										errors={props.errors.password}
-										touched={props.touched.password}
-										value={props.values.password}
-										label={"Password"}
-										type={showPassword ? "text" : "password"}
-										icon={{
-											action: () => setShowPassword(!showPassword),
-											iconClass: showPassword
-												? "fa-eye-slash fa-lg"
-												: "fa-eye fa-lg",
-											toolTip: showPassword ? "Hide Password" : "Show Password"
-										}}
-										fit
-									/>
-								)}
-							</Field>
-
+							<Input
+								blur={blur}
+								setBlurred={setBlur}
+								errors={props.errors.username}
+								touched={props.touched.username}
+								value={props.values.username}
+								label="Username"
+								name="username"
+								type="text"
+								fit
+							/>
+							<Input
+								blur={blur}
+								setBlurred={setBlur}
+								errors={props.errors.password}
+								touched={props.touched.password}
+								value={props.values.password}
+								label="Password"
+								name="password"
+								type={showPassword ? "text" : "password"}
+								icon={{
+									action: () => setShowPassword(!showPassword),
+									iconClass: showPassword
+										? "fa-eye-slash fa-lg"
+										: "fa-eye fa-lg",
+									toolTip: showPassword ? "Hide Password" : "Show Password"
+								}}
+								fit
+							/>
 							<br />
-
 							<LoginBtn type="submit" disabled={loading}>
 								Login
 							</LoginBtn>
