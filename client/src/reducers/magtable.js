@@ -214,10 +214,8 @@ export default function(state = initialState, action) {
 				assignments: state.assignments.map(truck =>
 					truck.equipment.id === payload.id
 						? {
-								equipment: payload,
-								employeeShifts: [null, null, null, null],
-								parkingLocation: null,
-								brixRecords: []
+								...truck,
+								equipment: payload
 						  }
 						: truck
 				),
