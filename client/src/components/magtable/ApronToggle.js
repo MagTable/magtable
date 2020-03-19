@@ -23,19 +23,17 @@ const ApronToggle = () => {
 	}
 
 	return (
-		<TruckListManipDiv>
-			<label>
-				<Switch
-					onChange={() => handleClick()}
-					checked={selectedApron === EAST_APRON}
-					offColor={"#414244"}
-					onColor={"#414244"}
-					checkedIcon={<ToggleLabelLeft>East</ToggleLabelLeft>}
-					uncheckedIcon={<ToggleLabelRight>West</ToggleLabelRight>}
-					width={80}
-				/>
-			</label>
-		</TruckListManipDiv>
+		<label>
+			<Switch
+				onChange={() => handleClick()}
+				checked={selectedApron === EAST_APRON}
+				offColor={"#414244"}
+				onColor={"#414244"}
+				checkedIcon={<ToggleLabelLeft>East</ToggleLabelLeft>}
+				uncheckedIcon={<ToggleLabelRight>West</ToggleLabelRight>}
+				width={80}
+			/>
+		</label>
 	);
 };
 
