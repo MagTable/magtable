@@ -89,16 +89,11 @@ export const removeEquipmentEmployee = (equipmentID, shiftID) => dispatch => {
  *
  * @param equipmentID equipmentID of equipment assignment to modify
  * @param shift shift to add to assignment employeeShifts
- * @param equipmentSlotID index of assignment employeeShift to set
  */
-export const setEquipmentEmployee = (
-	equipmentID,
-	shift,
-	equipmentSlotID
-) => dispatch => {
+export const setEquipmentEmployee = (equipmentID, shift) => dispatch => {
 	dispatch({
 		type: SET_EQUIPMENT_EMPLOYEE,
-		payload: { equipmentID, shift, equipmentSlotID }
+		payload: { equipmentID, shift }
 	});
 };
 

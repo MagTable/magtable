@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TowerTitle, TowerTitleText } from "../../styled/magtable/Titling";
 import { TowerPositionDiv } from "../../styled/magtable/Maps";
 import {
@@ -18,7 +18,9 @@ import {
 	SUCCESS,
 	TOWER_POSITIONS,
 	TECHNICIAN_POSITIONS,
-	WARNING
+	WARNING,
+	AM,
+	PM
 } from "../../actions/constants";
 import { removeEquipmentEmployee } from "../../actions/magtable";
 import { useDispatch } from "react-redux";
@@ -39,7 +41,28 @@ import IconButton from "../common/IconButton";
  */
 function TowerListItem({ assignment, showAM }) {
 	const [hoveredShiftDescription, setHoveredShiftDescription] = useState(null);
+	const [shifts, setShifts] = useState({});
+	const { amPrimary, amSecondary, pmPrimary, pmSecondary } = shifts;
+
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		const amPrimary = assignment.employeeShifts.find(
+			shift => shift.timeOfDay === AM && shift.isPrimary
+		);
+		const amSecondary = assignment.employeeShifts.find(
+			shift => shift.timeOfDay === AM && !shift.isPrimary
+		);
+
+		const pmPrimary = assignment.employeeShifts.find(
+			shift => shift.timeOfDay === PM && shift.isPrimary
+		);
+		const pmSecondary = assignment.employeeShifts.find(
+			shift => shift.timeOfDay === PM && !shift.isPrimary
+		);
+
+		setShifts({ amPrimary, amSecondary, pmPrimary, pmSecondary });
+	}, [assignment]);
 
 	/*
 	 * Drop component that accepts only SET_EQUIPMENT_EMPLOYEE draggables.
@@ -48,7 +71,7 @@ function TowerListItem({ assignment, showAM }) {
 		accept: SET_EQUIPMENT_EMPLOYEE,
 		drop: () => ({
 			equipmentID: assignment.equipment.id,
-			equipmentSlotID: nextOpenSlot()
+			newShiftAttributes: newShiftAttributes()
 		}),
 		canDrop: item => {
 			setHoveredShiftDescription(item.shiftDescription);
@@ -60,29 +83,37 @@ function TowerListItem({ assignment, showAM }) {
 		})
 	});
 
-	const nextOpenSlot = () => {
-		if (showAM === true) {
-			// if we're showing AM, if the [0] slot is taken, fill in [1], otherwise fill in [0]
-			return assignment.employeeShifts[0] ? 1 : 0;
+	const newShiftAttributes = () => {
+		const newShiftAttributes = {};
+
+		newShiftAttributes.timeOfDay = showAM ? AM : PM;
+
+		if (showAM) {
+			newShiftAttributes.isPrimary = !amPrimary;
+		} else {
+			// PM case
+			newShiftAttributes.isPrimary = !pmPrimary;
 		}
-		if (showAM === false) {
-			// if we're showing PM, if the [2] slot is taken, fill in [3], otherwise fill in [2]
-			return assignment.employeeShifts[2] ? 3 : 2;
-		}
+
+		return newShiftAttributes;
 	};
 
 	const handleCanDrop = item => {
 		// Logic to not allow more than 4 employees in a location.
-		if (!assignment.employeeShifts.includes(null)) return false;
+		if (assignment.employeeShifts.length >= 4) return false;
+
 		// make sure the employee isn't already assigned here
 		if (assignment.employeeShifts.find(shift => shift?.id === item.id))
 			return false;
 
+		// if AM secondary slot is filled, then AM is full
 		if (showAM === true) {
-			return !assignment.employeeShifts[1];
+			return !amSecondary;
 		}
+
+		// if PM secondary slot is filled, then PM is full
 		if (showAM === false) {
-			return !assignment.employeeShifts[3];
+			return !pmSecondary;
 		}
 	};
 
@@ -91,7 +122,8 @@ function TowerListItem({ assignment, showAM }) {
 	};
 
 	function getOutline(index) {
-		if (index !== nextOpenSlot()) return null;
+		const primaryDrop = index % 2 === 0; // even indexes are primaries
+		if (primaryDrop !== newShiftAttributes().isPrimary) return null;
 
 		// if can't drop, danger
 		if (isOver && !canDrop) return DANGER;
@@ -112,116 +144,135 @@ function TowerListItem({ assignment, showAM }) {
 		if (isOver && canDrop) return SUCCESS;
 	}
 
-	function getAssignmentWarning(index) {
-		if (
-			TECHNICIAN_POSITIONS.includes(
-				assignment.employeeShifts[index]?.description
-			)
-		) {
-			return "Truck Staff Assigned to Tower";
-		}
+	function setAssignmentWarnings() {
+		Object.values(shifts).forEach(shift => {
+			if (!shift) return;
 
-		if (
-			MANAGEMENT_POSITIONS.includes(
-				assignment.employeeShifts[index]?.description
-			)
-		) {
-			return "Management Assigned to Tower";
-		}
+			if (TECHNICIAN_POSITIONS.includes(shift.description)) {
+				console.log("HI");
+				shift.warning = "Technician Assigned to Truck";
+				return;
+			}
 
-		if (MECHANIC.includes(assignment.employeeShifts[index]?.description)) {
-			return "Mechanic Assigned to Tower";
-		}
+			if (MANAGEMENT_POSITIONS.includes(shift.description)) {
+				shift.warning = "Management Assigned to Truck";
+				return;
+			}
+			if (shift.description === MECHANIC) {
+				shift.warning = "Mechanic Assigned to Truck";
+				return;
+			}
 
-		/* if OJT-Tower is assigned to primary without a secondary */
-		if (
-			(index === 0 || index === 2) &&
-			assignment.employeeShifts[index]?.description === OJT_TOWER &&
-			!assignment.employeeShifts[index + 1]
-		) {
-			return "OJT Requires Qualified Secondary";
-		}
+			const isPrimary = shift.isPrimary;
+			const isUnqualified = shift.description === OJT_TOWER;
+			let noSecondary;
+			let unqualifiedSecondary;
 
-		if (
-			(index === 0 || index === 2) &&
-			assignment.employeeShifts[index]?.description === OJT_TOWER &&
-			assignment.employeeShifts[index + 1]?.description === OJT_TOWER
-		) {
-			return "OJT Requires Qualified Secondary";
-		}
+			// set time of day-dependent booleans
+			if (shift.timeOfDay === AM) {
+				noSecondary = !amSecondary;
+				unqualifiedSecondary =
+					!TOWER_POSITIONS.includes(amSecondary?.description) &&
+					amSecondary?.description !== OJT_TOWER;
+			} else {
+				noSecondary = !pmSecondary;
+				unqualifiedSecondary =
+					!TOWER_POSITIONS.includes(pmSecondary?.description) &&
+					amSecondary?.description !== OJT_TOWER;
+			}
 
-		return null;
+			// final boolean expression to determine OJT warning
+			if (isPrimary && isUnqualified && (noSecondary || unqualifiedSecondary)) {
+				shift.warning = "OJT Tower Requires Qualified Secondary";
+				return;
+			}
+
+			// if no warning, clear warning attribute
+			shift.warning = null;
+		});
 	}
+	setAssignmentWarnings();
 
-	const employeeShifts = [
-		{
-			assignmentIndex: 0,
-			shift: assignment.employeeShifts[0],
-			slot: 1,
-			show: showAM,
-			canClear: assignment.employeeShifts[0] && !assignment.employeeShifts[1]
-		},
-		{
-			assignmentIndex: 1,
-			shift: assignment.employeeShifts[1],
-			slot: 2,
-			show: showAM,
-			canClear: assignment.employeeShifts[1]
-		},
-		{
-			assignmentIndex: 2,
-			shift: assignment.employeeShifts[2],
-			slot: 1,
-			show: !showAM,
-			canClear: assignment.employeeShifts[2] && !assignment.employeeShifts[3]
-		},
-		{
-			assignmentIndex: 3,
-			shift: assignment.employeeShifts[3],
-			slot: 2,
-			show: !showAM,
-			canClear: assignment.employeeShifts[3]
-		}
-	];
+	function setCanClear() {
+		Object.values(shifts).forEach(shift => {
+			if (!shift) return;
+
+			if (showAM) {
+				shift.canClear = (shift.isPrimary && !amSecondary) || !shift.isPrimary;
+			} else {
+				shift.canClear = (shift.isPrimary && !pmSecondary) || !shift.isPrimary;
+			}
+		});
+	}
+	setCanClear();
+
+	const currentPrimary = showAM ? amPrimary : pmPrimary;
+	const currentSecondary = showAM ? amSecondary : pmSecondary;
+	console.log(currentSecondary);
 
 	return (
 		<TowerPositionDiv ref={drop}>
 			<TowerTitle>
 				<TowerTitleText>{assignment.equipment.type}</TowerTitleText>
 			</TowerTitle>
-			{employeeShifts.map(elem => (
-				<EquipmentListItemEmployee
-					key={elem.assignmentIndex}
-					slot={elem.slot}
-					show={elem.show}
-					outlineType={getOutline(elem.assignmentIndex)}
-					warningBackground={getAssignmentWarning(elem.assignmentIndex)}
-				>
-					<EquipmentListItemEmployeeName>
-						{elem.shift?.name}
-					</EquipmentListItemEmployeeName>
-					<EquipmentListItemEmployeeWarning>
-						{getAssignmentWarning(elem.assignmentIndex) && (
-							<IconButton
-								faClassName={"fa-exclamation-triangle"}
-								color={"var(--context-orange)"}
-								outlineType={"darkorange"}
-								toolTip={getAssignmentWarning(elem.assignmentIndex)}
-							/>
-						)}
-					</EquipmentListItemEmployeeWarning>
+			{/* PRIMARY */}
+			<EquipmentListItemEmployee outlineType={getOutline(0)}>
+				<EquipmentListItemEmployeeName show={showAM} offPosition={150}>
+					{amPrimary?.name}
+				</EquipmentListItemEmployeeName>
+				<EquipmentListItemEmployeeName show={!showAM} offPosition={-150}>
+					{pmPrimary?.name}
+				</EquipmentListItemEmployeeName>
+				<EquipmentListItemEmployeeWarning>
+					{currentPrimary?.warning && (
+						<IconButton
+							faClassName={"fa-exclamation-triangle"}
+							color={"orange"}
+							outlineType={"darkorange"}
+							toolTip={currentPrimary?.warning}
+						/>
+					)}
+				</EquipmentListItemEmployeeWarning>
+				{currentPrimary && (
 					<EquipmentListItemEmployeeClearButton>
-						{elem.shift && (
-							<EquipmentListItemButton
-								disabled={!elem.canClear}
-								onClick={() => elem.canClear && handleClear(elem.shift.id)}
-							>
-								<i className="fas fa-times" />
-							</EquipmentListItemButton>
-						)}
+						<EquipmentListItemButton
+							disabled={!currentPrimary.canClear}
+							onClick={() => handleClear(currentPrimary.id)}
+						>
+							<i className="fas fa-times" />
+						</EquipmentListItemButton>
 					</EquipmentListItemEmployeeClearButton>
-				</EquipmentListItemEmployee>
-			))}
+				)}
+			</EquipmentListItemEmployee>
+			{/* SECONDARY */}
+			<EquipmentListItemEmployee darken outlineType={getOutline(1)}>
+				<EquipmentListItemEmployeeName show={showAM} offPosition={150}>
+					{amSecondary?.name}
+				</EquipmentListItemEmployeeName>
+				<EquipmentListItemEmployeeName show={!showAM} offPosition={-150}>
+					{pmSecondary?.name}
+				</EquipmentListItemEmployeeName>
+				<EquipmentListItemEmployeeWarning>
+					{currentSecondary?.warning && (
+						<IconButton
+							faClassName={"fa-exclamation-triangle"}
+							color={"orange"}
+							outlineType={"darkorange"}
+							toolTip={currentSecondary?.warning}
+						/>
+					)}
+				</EquipmentListItemEmployeeWarning>
+				{currentSecondary && (
+					<EquipmentListItemEmployeeClearButton>
+						<EquipmentListItemButton
+							disabled={!currentSecondary.canClear}
+							onClick={() => handleClear(currentSecondary.id)}
+						>
+							<i className="fas fa-times" />
+						</EquipmentListItemButton>
+					</EquipmentListItemEmployeeClearButton>
+				)}
+			</EquipmentListItemEmployee>
 		</TowerPositionDiv>
 	);
 }

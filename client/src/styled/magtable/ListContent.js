@@ -15,11 +15,11 @@ import { DANGER, SUCCESS, WARNING } from "../../actions/constants";
 export const getColor = type => {
 	switch (type) {
 		case DANGER:
-			return "--context-red";
+			return "--context-red-light";
 		case WARNING:
 			return "--alert-warning";
 		case SUCCESS:
-			return "--context-green";
+			return "--context-green-light";
 		default:
 			return "#fff";
 	}
@@ -369,21 +369,20 @@ export const EquipmentListItemEmployee = styled.div`
 	grid-template-columns: 1fr auto 1.25rem;
 	grid-template-areas: "name warning clearbutton";
  	align-items: center;
+ 	height: 50%;
 
 	transition: height 0.15s ease-in-out;
-	height: ${({ show }) => (show ? "50%" : "0%")};
 	overflow: hidden;
 
-	background-color: var(${({ slot }) => (slot === 2 ? "--shader-grey" : "")});
-	${({ warningBackground }) =>
-		warningBackground && `background: var(--context-orange-light);`}
+	${({ darken }) => darken && "background-color: var(--shader-grey);"}
+	
 	${({ outlineType }) =>
 		outlineType && `background: var(${getColor(outlineType)});`}
+		
 	&:hover ${EquipmentListItemButton} {
 		opacity: 1;
 		display: block;
 	}
-	
 `;
 
 export const EquipmentListItemEmployeeName = styled.div`
@@ -391,6 +390,16 @@ export const EquipmentListItemEmployeeName = styled.div`
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+	transition: transform 0.5s ease;
+	transform: translateX(0);
+	${({ show, offPosition }) =>
+		show
+			? `
+			transform : translateY(0);	
+		`
+			: `
+			transform : translateY(${offPosition}%);
+		`}
 `;
 export const EquipmentListItemEmployeeWarning = styled.div`
 	grid-area: warning;

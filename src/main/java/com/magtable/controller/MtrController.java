@@ -37,10 +37,6 @@ public class MtrController {
             ArrayList<Assignmentequipment> assignmentequipmentList = new ArrayList<>();
 
             ArrayList<Shift> shiftList = new ArrayList<>(4);
-            shiftList.add(null);
-            shiftList.add(null);
-            shiftList.add(null);
-            shiftList.add(null);
 
             for (Equipment equipment : equipmentList) {
 
@@ -68,23 +64,6 @@ public class MtrController {
 
     @PostMapping("")
     public Magtablerecord publishMagTable(@RequestBody Magtablerecord magtableRecord) {
-
-        ArrayList<Assignmentequipment> tempList = new ArrayList<>(magtableRecord.getAssignments());
-
-        for(Assignmentequipment assignmentequipment : tempList){
-            ArrayList<Shift> empShift = (ArrayList<Shift>) assignmentequipment.getEmployeeShifts();
-
-            try{
-                empShift.remove(null);
-                empShift.remove(null);
-                empShift.remove(null);
-                empShift.remove(null);
-            }catch (Exception e){}
-
-            System.out.println(empShift);
-        }
-
-
         return magTableRecordRepository.save(magtableRecord);
     }
 

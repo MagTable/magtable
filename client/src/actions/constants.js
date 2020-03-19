@@ -23,7 +23,8 @@ export const TECHNICIAN_POSITIONS = [
 	OJT,
 	BAY_LEAD,
 	PRACTICAL_TRAINER,
-	TECHNICIAN
+	TECHNICIAN,
+	TRAINER
 ];
 export const TOWER_POSITIONS = [
 	CTM,
@@ -37,15 +38,17 @@ export const TOWER_POSITIONS = [
 export const ALL_POSITIONS = [
 	OPERATIONS_MANAGER,
 	OPERATIONS_SUPERVISOR,
+	TOWER_TRAINER,
 	CTM,
 	TOWER_SPOTTER,
 	ICEMAN,
 	ICEHOUSE,
-	BAY_LEAD,
-	PRACTICAL_TRAINER,
-	OJT,
 	OJT_TOWER,
-	TOWER_TRAINER,
+	TRAINER,
+	PRACTICAL_TRAINER,
+	BAY_LEAD,
+	TECHNICIAN,
+	OJT,
 	MECHANIC
 ];
 
@@ -71,8 +74,8 @@ export const CENTER = "C";
 // export const LEFT = "left";
 // export const RIGHT = "right";
 
-// export const AM = "am";
-// export const PM = "pm";
+export const AM = "AM";
+export const PM = "PM";
 
 export const SET_ALERT = "SET_ALERT";
 export const REMOVE_ALERT = "REMOVE_ALERT";

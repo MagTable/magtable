@@ -35,6 +35,7 @@ import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
 const EmployeeList = () => {
 	const dispatch = useDispatch();
 	const employeeShifts = useSelector(state => state.magtable.employeeShifts); // get the employees
+	const assignments = useSelector(state => state.magtable.assignments);
 	const loading = useSelector(state => state.magtable.shiftsLoading);
 	const showAM = useSelector(state => state.magtable.showAM);
 	const [overflowOpen, setOverflowOpen] = useState(false);
@@ -239,11 +240,18 @@ const EmployeeList = () => {
 								<div key={startTime}>
 									<StartTimeSeparator>{startTime}</StartTimeSeparator>
 									{filteredEmployeeShifts.map(
-										employee =>
-											employee.startTime === startTime && (
+										shift =>
+											shift.startTime === startTime && (
 												<EmployeeListItem
-													key={employee.id}
-													employee={employee}
+													key={shift.id}
+													employeeShift={shift}
+													assignment={assignments.find(
+														assignment =>
+															assignment.employeeShifts.filter(
+																assignmentShift =>
+																	assignmentShift.id === shift.id
+															).length > 0
+													)}
 												/>
 											)
 									)}

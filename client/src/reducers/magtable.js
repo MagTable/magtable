@@ -74,20 +74,12 @@ export default function(state = initialState, action) {
 					assignment.equipment.id === payload.equipmentID
 						? {
 								...assignment,
-								employeeShifts: assignment.employeeShifts.map(shift =>
-									shift?.id === payload.shiftID ? null : shift
+								employeeShifts: assignment.employeeShifts.filter(
+									shift => shift?.id !== payload.shiftID
 								)
 						  }
 						: assignment
-				),
-				employeeShifts: {
-					...state.employeeShifts,
-					shifts: state.employeeShifts.shifts.map(shift =>
-						shift.id === payload.shiftID
-							? { ...shift, assignedEquipment: null }
-							: shift
-					)
-				}
+				)
 			};
 		case SET_EQUIPMENT_EMPLOYEE: // if assignment needs to be created
 			// replaces the modified assignment in the assignments list
@@ -98,20 +90,10 @@ export default function(state = initialState, action) {
 					assignment.equipment.id === payload.equipmentID
 						? {
 								...assignment,
-								employeeShifts: assignment.employeeShifts.map((shift, i) =>
-									i === payload.equipmentSlotID ? payload.shift : shift
-								)
+								employeeShifts: [...assignment.employeeShifts, payload.shift]
 						  }
 						: assignment
-				),
-				employeeShifts: {
-					...state.employeeShifts,
-					shifts: state.employeeShifts.shifts.map(shift =>
-						shift.id === payload.shift.id
-							? { ...shift, assignedEquipment: payload.equipmentID }
-							: shift
-					)
-				}
+				)
 			};
 		case CLEAR_TABLE:
 			return {
