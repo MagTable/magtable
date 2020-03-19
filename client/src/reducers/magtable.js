@@ -205,7 +205,7 @@ export default function(state = initialState, action) {
 						parkingLocation: null,
 						brixRecords: []
 					}
-				],
+				].sort((a, b) => a.equipment.id - b.equipment.id),
 				loading: false
 			};
 		case EDIT_TRUCK:

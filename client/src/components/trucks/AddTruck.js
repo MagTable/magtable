@@ -66,7 +66,6 @@ const AddTruck = () => {
 	const dispatch = useDispatch();
 	const truckStatuses = TRUCK_STATUSES;
 	const vehicleTypes = VEHICLE_TYPES;
-	console.log(vehicleTypes);
 
 	//todo figure out formik text area and add it in at the bottom.
 	// also change the text input field into a number one purely unless API can parse the string to an int and we can keep easy consistency
