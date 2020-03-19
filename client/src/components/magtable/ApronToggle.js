@@ -32,6 +32,7 @@ const ApronToggle = () => {
 					onColor={"#414244"}
 					checkedIcon={<ToggleLabelLeft>East</ToggleLabelLeft>}
 					uncheckedIcon={<ToggleLabelRight>West</ToggleLabelRight>}
+					width={80}
 				/>
 			</label>
 		</TruckListManipDiv>
