@@ -5,24 +5,23 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-public class Assignmentequipment {
+public class Assignment {
     private Integer id;
     private String status;
     private String notice;
     private Equipment equipment;
-    private Magtablerecord magtableRecord;
-    private Assignmentparkinglocation assignmentParkingLocation;
+    private MagtableRecord magtableRecord;
+    private ParkingLocation parkingLocation;
     private Collection<Shift> employeeShifts;
 
     @Id
     @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "assignmentequipmentid", nullable = false)
+    @Column(name = "assignmentid", nullable = false)
     public Integer getId() {
         return id;
     }
@@ -57,7 +56,7 @@ public class Assignmentequipment {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Assignmentequipment that = (Assignmentequipment) o;
+        Assignment that = (Assignment) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(status, that.status) &&
                 Objects.equals(notice, that.notice);
@@ -71,12 +70,12 @@ public class Assignmentequipment {
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "magtablerecordid", referencedColumnName = "magtablerecordid")
-    public Magtablerecord getMagtableRecord() {
+    public MagtableRecord getMagtableRecord() {
         return magtableRecord;
     }
 
-    public void setMagtableRecord(Magtablerecord magtablerecordByMagtableRecordId) {
-        this.magtableRecord = magtablerecordByMagtableRecordId;
+    public void setMagtableRecord(MagtableRecord magtableRecordByMagtableRecordId) {
+        this.magtableRecord = magtableRecordByMagtableRecordId;
     }
 
     @ManyToOne
@@ -90,17 +89,17 @@ public class Assignmentequipment {
     }
 
     @ManyToOne
-    @JoinColumn(name = "assignmentparkinglocationid", referencedColumnName = "assignmentparkinglocationid")
-    public Assignmentparkinglocation getAssignmentParkingLocation() {
-        return assignmentParkingLocation;
+    @JoinColumn(name = "assignmentparkinglocationID", referencedColumnName = "parkinglocationID")
+    public ParkingLocation getParkingLocation() {
+        return parkingLocation;
     }
 
-    public void setAssignmentParkingLocation(Assignmentparkinglocation assignmentParkingLocation) {
-        this.assignmentParkingLocation = assignmentParkingLocation;
+    public void setParkingLocation(ParkingLocation assignmentParkingLocation) {
+        this.parkingLocation = assignmentParkingLocation;
     }
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "assignmentEquipment", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "assignment", cascade = CascadeType.ALL)
     public Collection<Shift> getEmployeeShifts() {
         return employeeShifts;
     }

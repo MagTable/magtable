@@ -1,11 +1,8 @@
 package com.magtable.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -19,7 +16,7 @@ public class Shift {
     private String endTime;
     private Boolean noAvop;
     private Boolean isGreen;
-    private Assignmentequipment assignmentEquipment;
+    private Assignment assignment;
 
     @Id //TODO LOGIC TO MAKE SURE SHIFTID = W2W SHIFT ID
     @Column(name = "shiftID", nullable = false)
@@ -133,12 +130,12 @@ public class Shift {
 
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name = "assignmentequipmentID", referencedColumnName = "assignmentequipmentID")
-    public Assignmentequipment getAssignmentEquipment() {
-        return assignmentEquipment;
+    @JoinColumn(name = "assignmentID", referencedColumnName = "assignmentID")
+    public Assignment getAssignment() {
+        return assignment;
     }
 
-    public void setAssignmentEquipment(Assignmentequipment assignmentEquipment) {
-        this.assignmentEquipment = assignmentEquipment;
+    public void setAssignment(Assignment assignmentEquipment) {
+        this.assignment = assignmentEquipment;
     }
 }

@@ -7,14 +7,14 @@ import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Objects;
 
-@Entity
-public class Magtablerecord {
+@Entity(name = "magtablerecord")
+public class MagtableRecord {
     private Integer id;
     private Integer dailyMix;
     private Integer forecastLow;
     private String publishedBy;
     private Timestamp timePublished;
-    private Collection<Assignmentequipment> assignments;
+    private Collection<Assignment> assignments;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -71,7 +71,7 @@ public class Magtablerecord {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Magtablerecord that = (Magtablerecord) o;
+        MagtableRecord that = (MagtableRecord) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(dailyMix, that.dailyMix) &&
                 Objects.equals(forecastLow, that.forecastLow) &&
@@ -86,12 +86,12 @@ public class Magtablerecord {
 
     @JsonManagedReference
     @OneToMany(mappedBy = "magtableRecord", cascade = CascadeType.ALL)
-    public Collection<Assignmentequipment> getAssignments() {
+    public Collection<Assignment> getAssignments() {
         return assignments;
     }
 
-    public void setAssignments(Collection<Assignmentequipment> assignmentequipmentsByMagtableRecordId) {
-        this.assignments = assignmentequipmentsByMagtableRecordId;
+    public void setAssignments(Collection<Assignment> assignments) {
+        this.assignments = assignments;
     }
 
 
