@@ -9,13 +9,13 @@ use magtabledev;
 
 DELETE FROM BrixRecord;
 DELETE FROM Shift;
-DELETE FROM assignmentequipment;
+DELETE FROM assignment;
 DELETE FROM MagTableRecord;
-DELETE FROM assignmentequipment;
+DELETE FROM assignment;
 DELETE FROM Equipment;
 DELETE FROM `User`;
 DELETE FROM Role;
-DELETE FROM assignmentparkinglocation;
+DELETE FROM parkingLocation;
 
 /*
  These inserts are inorder to set up the database in terms of dependencies. When data about assignments and shifts
@@ -134,80 +134,81 @@ INSERT INTO Equipment (equipmentID, type, status, notice, active) VALUES (1013, 
 #
 # INSERT INTO brixRecord (assignmentID, nozzle, type1, type4, litersPurged, timeMeasured) VALUES (2, 21.2, 52.3, 32.4, 67, '2020-02-22T04:12:33');
 
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (1 , 'E', null);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (1 , 'W', null);
+INSERT INTO parkinglocation (zoneID,apron,phonetic, position, bay) values (1 ,'WDA', 'A', 'E', null);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (1 ,'WDA', 'A', 'W', null);
 
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (2 , 'E', null);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (2 , 'E', 1);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (2 , 'E', 2);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (2 , 'W', null);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (2 , 'W', 1);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (2 , 'W', 2);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (2 ,'WDA', 'B', 'E', null);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (2 ,'WDA', 'B', 'E', 1);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (2 ,'WDA', 'B', 'E', 2);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (2 ,'WDA', 'B', 'W', null);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (2 ,'WDA', 'B', 'W', 1);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (2 ,'WDA', 'B', 'W', 2);
 
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (3 , 'E', null);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (3 , 'E', 2);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (3 , 'E', 4);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (3 , 'W', null);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (3 , 'W', 2);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (3 , 'W', 4);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (3 ,'WDA', 'C', 'E', null);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (3 ,'WDA', 'C', 'E', 2);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (3 ,'WDA', 'C', 'E', 4);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (3 ,'WDA', 'C', 'W', null);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (3 ,'WDA', 'C', 'W', 2);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (3 ,'WDA', 'C', 'W', 4);
 
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (4 , 'E', 4);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (4 , 'E', 4);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (4 ,'WDA', 'D', 'E', 4);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (4 ,'WDA', 'D', 'E', 4);
 
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (5 , 'E', null);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (5 , 'C', null);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (5 , 'W', null);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (5 ,'EDA', 'A', 'E', null);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (5 ,'EDA', 'A', 'C', null);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (5 ,'EDA', 'A', 'W', null);
 
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (6 , 'E', null);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (6 , 'E', 1);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (6 , 'E', 3);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (6 , 'C', null);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (6 , 'C', 1);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (6 , 'C', 3);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (6 , 'W', null);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (6 , 'W', 1);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (6 , 'W', 3);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (6 ,'EDA', 'B', 'E', null);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (6 ,'EDA', 'B', 'E', 1);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (6 ,'EDA', 'B', 'E', 3);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (6 ,'EDA', 'B', 'C', null);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (6 ,'EDA', 'B', 'C', 1);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (6 ,'EDA', 'B', 'C', 3);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (6 ,'EDA', 'B', 'W', null);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (6 ,'EDA', 'B', 'W', 1);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (6 ,'EDA', 'B', 'W', 3);
 
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (7 , 'E', null);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (7 , 'E', 3);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (7 , 'E', 4);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (7 , 'C', null);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (7 , 'C', 3);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (7 , 'C', 4);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (7 , 'W', null);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (7 , 'W', 3);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (7 , 'W', 4);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (7 ,'EDA', 'C', 'E', null);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (7 ,'EDA', 'C', 'E', 3);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (7 ,'EDA', 'C', 'E', 4);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (7 ,'EDA', 'C', 'C', null);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (7 ,'EDA', 'C', 'C', 3);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (7 ,'EDA', 'C', 'C', 4);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (7 ,'EDA', 'C', 'W', null);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (7 ,'EDA', 'C', 'W', 3);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (7 ,'EDA', 'C', 'W', 4);
 
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (8 , 'E', null);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (8 , 'E', 4);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (8 , 'E', 6);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (8 , 'C', null);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (8 , 'C', 4);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (8 , 'C', 6);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (8 , 'W', null);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (8 , 'W', 4);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (8 , 'W', 6);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (8 ,'EDA', 'D', 'E', null);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (8 ,'EDA', 'D', 'E', 4);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (8 ,'EDA', 'D', 'E', 6);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (8 ,'EDA', 'D', 'C', null);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (8 ,'EDA', 'D', 'C', 4);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (8 ,'EDA', 'D', 'C', 6);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (8 ,'EDA', 'D', 'W', null);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (8 ,'EDA', 'D', 'W', 4);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (8 ,'EDA', 'D', 'W', 6);
 
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (9 , 'E', null);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (9 , 'E', 6);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (9 , 'E', 7);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (9 , 'C', null);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (9 , 'C', 6);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (9 , 'C', 7);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (9 , 'W', null);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (9 , 'W', 6);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (9 , 'W', 7);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (9 ,'EDA', 'E', 'E', null);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (9 ,'EDA', 'E', 'E', 6);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (9 ,'EDA', 'E', 'E', 7);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (9 ,'EDA', 'E', 'C', null);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (9 ,'EDA', 'E', 'C', 6);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (9 ,'EDA', 'E', 'C', 7);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (9 ,'EDA', 'E', 'W', null);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (9 ,'EDA', 'E', 'W', 6);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (9 ,'EDA', 'E', 'W', 7);
 
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (10 , 'E', null);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (10 , 'E', 7);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (10 , 'E', 9);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (10 , 'C', null);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (10 , 'C', 7);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (10 , 'C', 9);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (10 , 'W', null);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (10 , 'W', 7);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (10 , 'W', 9);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (10 ,'EDA','F', 'E', null);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (10 ,'EDA','F', 'E', 7);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (10 ,'EDA','F', 'E', 9);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (10 ,'EDA','F', 'C', null);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (10 ,'EDA','F', 'C', 7);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (10 ,'EDA','F', 'C', 9);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (10 ,'EDA','F', 'W', null);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (10 ,'EDA','F', 'W', 7);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (10 ,'EDA','F', 'W', 9);
 
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (11 , 'E', null);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (11 , 'C', null);
-INSERT INTO assignmentparkinglocation (parkingLocationID, position, bay) values (11 , 'W', null);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (11 ,'EDA','G', 'E', null);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (11 ,'EDA','G', 'C', null);
+INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (11 ,'EDA','G', 'W', null);
+

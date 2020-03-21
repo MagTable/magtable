@@ -63,34 +63,36 @@ CREATE TABLE BrixRecord
     CONSTRAINT CK_litersPurged CHECK (litersPurged >= 0 AND litersPurged <= 1000)
 );
 
-CREATE TABLE AssignmentParkingLocation
+CREATE TABLE ParkingLocation
 (
-    assignmentParkingLocationID INT(10) NOT NULL AUTO_INCREMENT,
-    parkingLocationID           INT(5),
+    parkingLocationID INT(10) NOT NULL AUTO_INCREMENT,
+    zoneID           INT(5),
+    phonetic         varchar(1),
+    apron            varchar(4),
     position                    VARCHAR(6),
     bay                         INT(2),
-    PRIMARY KEY (assignmentParkingLocationID)
+    PRIMARY KEY (parkingLocationID)
 );
 
-CREATE TABLE AssignmentEquipment
+CREATE TABLE Assignment
 (
-    assignmentEquipmentID  INT(10) NOT NULL AUTO_INCREMENT,
+    assignmentID  INT(10) NOT NULL AUTO_INCREMENT,
     equipmentID  INT(5)  NOT NULL,
     magtableRecordID    INT(5) NOT NULL,
     assignmentParkingLocationID INT(10),
     status       VARCHAR(4),
     notice       VARCHAR(2000),
-    PRIMARY KEY (assignmentEquipmentID),
+    PRIMARY KEY (assignmentID),
     CONSTRAINT FK_Mag_ID FOREIGN KEY (magtableRecordID) REFERENCES MagTableRecord (magtableRecordID) ON DELETE RESTRICT ON UPDATE RESTRICT,
     CONSTRAINT FK_EQUIPMENT FOREIGN KEY (equipmentID) REFERENCES Equipment (equipmentID) ON DELETE RESTRICT ON UPDATE RESTRICT,
-    CONSTRAINT FK_PLLOC FOREIGN KEY (assignmentParkingLocationID) REFERENCES assignmentparkinglocation (assignmentParkingLocationID) ON DELETE RESTRICT ON UPDATE RESTRICT
+    CONSTRAINT FK_PLLOC FOREIGN KEY (assignmentParkingLocationID) REFERENCES ParkingLocation (parkingLocationID) ON DELETE RESTRICT ON UPDATE RESTRICT
 
 );
 
 CREATE TABLE Shift
 (
     shiftID      INT(10) NOT NULL, -- todo w2w unique ids
-    assignmentEquipmentID  INT(10) NOT NULL,
+    assignmentID  INT(10) NOT NULL,
     timeOfDay    VARCHAR(2),
     isPrimary    BOOLEAN,
     description  VARCHAR(30),
@@ -99,8 +101,8 @@ CREATE TABLE Shift
     endTime      VARCHAR(4),
     noAvop       BOOLEAN,
     isGreen      BOOLEAN,
-    PRIMARY KEY (shiftID, assignmentEquipmentID),
-    CONSTRAINT FK_ShiftEquip FOREIGN KEY (assignmentEquipmentID) REFERENCES AssignmentEquipment (assignmentEquipmentID) ON DELETE RESTRICT ON UPDATE RESTRICT,
+    PRIMARY KEY (shiftID, assignmentID),
+    CONSTRAINT FK_ShiftEquip FOREIGN KEY (assignmentID) REFERENCES Assignment (assignmentID) ON DELETE RESTRICT ON UPDATE RESTRICT,
     CONSTRAINT fk_timeofday CHECK(timeOfDay = 'PM' OR timeOfDay = 'AM')
 
 
