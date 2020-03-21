@@ -88,7 +88,7 @@ public class Assignment {
         this.equipment = equipment;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "assignmentparkinglocationID", referencedColumnName = "parkinglocationID")
     public ParkingLocation getParkingLocation() {
         return parkingLocation;

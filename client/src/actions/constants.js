@@ -122,6 +122,7 @@ export const ADD_BRIX_RECORD = "ADD_BRIX_RECORD";
 
 export const PUBLISH_TABLE = "PUBLISH_TABLE";
 export const CLEAR_TABLE = "CLEAR_TABLE";
+export const GET_PARKING_LOCATIONS = "GET_PARKING_LOCATIONS";
 
 export const EDIT_TRUCK = "EDIT_TRUCK";
 export const ADD_TRUCK = "ADD_TRUCK";

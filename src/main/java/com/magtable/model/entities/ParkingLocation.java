@@ -9,7 +9,7 @@ import java.util.Objects;
 @Entity(name = "parkinglocation")
 public class ParkingLocation {
     private Integer id;
-    private Integer zoneId;
+    private Integer zoneID;
     private String phonetic;
     private String apron;
     private String position;
@@ -27,12 +27,12 @@ public class ParkingLocation {
 
     @Basic
     @Column(name = "zoneID", nullable = true)
-    public Integer getZoneId() {
-        return zoneId;
+    public Integer getZoneID() {
+        return zoneID;
     }
 
-    public void setZoneId(Integer zoneId) {
-        this.zoneId = zoneId;
+    public void setZoneID(Integer zoneId) {
+        this.zoneID = zoneId;
     }
 
     @Basic
@@ -81,7 +81,7 @@ public class ParkingLocation {
         if (o == null || getClass() != o.getClass()) return false;
         ParkingLocation that = (ParkingLocation) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(zoneId, that.zoneId) &&
+                Objects.equals(zoneID, that.zoneID) &&
                 Objects.equals(phonetic, that.phonetic) &&
                 Objects.equals(apron, that.apron) &&
                 Objects.equals(position, that.position) &&
@@ -90,6 +90,6 @@ public class ParkingLocation {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, zoneId, phonetic, apron, position, bay);
+        return Objects.hash(id, zoneID, phonetic, apron, position, bay);
     }
 }

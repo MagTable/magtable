@@ -149,7 +149,6 @@ function TowerListItem({ assignment, showAM }) {
 			if (!shift) return;
 
 			if (TECHNICIAN_POSITIONS.includes(shift.description)) {
-				console.log("HI");
 				shift.warning = "Technician Assigned to Truck";
 				return;
 			}
@@ -208,7 +207,6 @@ function TowerListItem({ assignment, showAM }) {
 
 	const currentPrimary = showAM ? amPrimary : pmPrimary;
 	const currentSecondary = showAM ? amSecondary : pmSecondary;
-	console.log(currentSecondary);
 
 	return (
 		<TowerPositionDiv ref={drop}>

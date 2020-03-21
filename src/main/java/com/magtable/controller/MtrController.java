@@ -1,16 +1,15 @@
 package com.magtable.controller;
 
-import com.magtable.model.entities.Assignment;
-import com.magtable.model.entities.Equipment;
-import com.magtable.model.entities.MagtableRecord;
-import com.magtable.model.entities.Shift;
+import com.magtable.model.entities.*;
 import com.magtable.repository.AssignmentRepository;
 import com.magtable.repository.EquipmentRepository;
 import com.magtable.repository.MagTableRecordRepository;
+import com.magtable.repository.ParkingLocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/magtable")
@@ -24,6 +23,9 @@ public class MtrController {
 
     @Autowired
     AssignmentRepository assignmentRepository;
+
+    @Autowired
+    ParkingLocationRepository parkingLocationRepository;
 
     @GetMapping("")
     public MagtableRecord getMagTable() {
@@ -65,6 +67,11 @@ public class MtrController {
     @PostMapping("")
     public MagtableRecord publishMagTable(@RequestBody MagtableRecord magtableRecord) {
         return magTableRecordRepository.save(magtableRecord);
+    }
+
+    @GetMapping("/parkingLocation/all")
+    public List<ParkingLocation> getParkingLocations() {
+        return parkingLocationRepository.findAll();
     }
 
 }

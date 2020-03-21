@@ -30,9 +30,7 @@ import OverflowLocations from "./OverflowLocations";
 function ParkingLocationMap(props) {
 	const [overflowOpen, setOverflowOpen] = useState(false);
 	const selectedApron = useSelector(state => state.magtable.selectedApron);
-	const parkingLocations = useSelector(
-		state => state.magtable.parkingLocations
-	);
+	const parkingZones = useSelector(state => state.magtable.parkingZones);
 	const assignmentsWithLocation = useSelector(state =>
 		state.magtable.assignments.filter(
 			assignment => !!assignment.parkingLocation
@@ -55,7 +53,7 @@ function ParkingLocationMap(props) {
 				</OverflowLocations>
 			</ListTitle>
 			<MapWrapper>
-				{parkingLocations.map(
+				{parkingZones.map(
 					location =>
 						location.apron === selectedApron && (
 							<SafetyZoneWrapper key={location.id}>
@@ -67,7 +65,7 @@ function ParkingLocationMap(props) {
 											position={EAST}
 											assignments={assignmentsWithLocation.filter(
 												assignment =>
-													assignment.parkingLocation.id === location.id &&
+													assignment.parkingLocation.zoneID === location.id &&
 													assignment.parkingLocation.position === EAST
 											)}
 										/>
@@ -78,7 +76,7 @@ function ParkingLocationMap(props) {
 											position={CENTER}
 											assignments={assignmentsWithLocation.filter(
 												assignment =>
-													assignment.parkingLocation.id === location.id &&
+													assignment.parkingLocation.zoneID === location.id &&
 													assignment.parkingLocation.position === CENTER
 											)}
 										/>
@@ -89,7 +87,7 @@ function ParkingLocationMap(props) {
 											position={WEST}
 											assignments={assignmentsWithLocation.filter(
 												assignment =>
-													assignment.parkingLocation.id === location.id &&
+													assignment.parkingLocation.zoneID === location.id &&
 													assignment.parkingLocation.position === WEST
 											)}
 										/>

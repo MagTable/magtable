@@ -116,7 +116,7 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 						)
 					);
 				}
-				if (dropResult.reassign) {
+				if (dropResult.reassign.equipmentID) {
 					dispatch(
 						setTruckLocation(
 							dropResult.parkingLocation,
@@ -126,7 +126,7 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 						)
 					);
 				}
-				if (dropResult.unassign) {
+				if (dropResult.unassign?.length > 0) {
 					dropResult.unassign.forEach(
 						id => id && dispatch(removeTruckLocation(id))
 					);
@@ -401,7 +401,7 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 											"-" +
 											assignment.parkingLocation.phonetic +
 											assignment.parkingLocation.position +
-											assignment.parkingLocation.bay}
+											(assignment.parkingLocation.bay || "")}
 									</span>
 								</>
 							)}

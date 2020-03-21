@@ -16,11 +16,13 @@ import {
 	REFRESH_EMPLOYEE_SHIFTS,
 	REFRESHING_EMPLOYEE_SHIFTS,
 	TOGGLE_AM_PM,
-	CLEAR_TABLE
+	CLEAR_TABLE,
+	GET_PARKING_LOCATIONS
 } from "./constants";
 import axios from "axios";
 import { setAlert } from "./alert";
 import { logout } from "./auth";
+import store from "../store";
 
 // todo update all async actions with API calls
 
@@ -56,13 +58,36 @@ export const setTruckLocation = (
 	equipmentID,
 	bay
 ) => dispatch => {
+	const state = store.getState();
+	let parkingLocationID;
+	console.log(parkingLocation);
+
+	if (!bay) {
+		parkingLocationID = state.magtable.parkingLocations.find(
+			location =>
+				location.position === position &&
+				location.bay === null &&
+				location.apron === parkingLocation.apron &&
+				location.zoneID === parkingLocation.id
+		).id;
+	} else {
+		parkingLocationID = state.magtable.parkingLocations.find(
+			location =>
+				location.position === position &&
+				location.bay === bay &&
+				location.apron === parkingLocation.apron &&
+				location.zoneID === parkingLocation.id
+		).id;
+	}
+
 	dispatch({
 		type: SET_TRUCK_LOCATION,
 		payload: {
 			equipmentID,
 			parkingLocation: {
+				id: parkingLocationID,
 				apron: parkingLocation.apron,
-				id: parkingLocation.id,
+				zoneID: parkingLocation.id,
 				phonetic: parkingLocation.phonetic,
 				position,
 				bay
@@ -98,7 +123,7 @@ export const setEquipmentEmployee = (equipmentID, shift) => dispatch => {
 };
 
 /**
- * Sends the current state of the magtable to the API for persistance
+ * Sends the current state of the magtable to the API for persistence
  *
  * @param magtable magtable to publish
  * @param publishedBy username of logged in user who called publish function
@@ -114,7 +139,10 @@ export const publishTable = (magtable, publishedBy) => async dispatch => {
 			type: PUBLISH_TABLE,
 			payload: res.data
 		});
+
+		dispatch(setAlert("Publish Successful", "success"));
 	} catch (err) {
+		dispatch(setAlert(err.response.data.message, "warning"));
 		console.log(err);
 	}
 };
@@ -241,6 +269,17 @@ export const getMagTable = () => async dispatch => {
 
 		console.log(err);
 	}
+};
+
+export const getParkingLocations = () => async dispatch => {
+	try {
+		const res = await axios.get("/magtable/parkingLocation/all");
+
+		dispatch({
+			type: GET_PARKING_LOCATIONS,
+			payload: res.data
+		});
+	} catch (err) {}
 };
 
 /**

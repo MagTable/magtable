@@ -16,9 +16,10 @@ import {
 	REFRESH_EMPLOYEE_SHIFTS,
 	REFRESHING_EMPLOYEE_SHIFTS,
 	TOGGLE_AM_PM,
-	CLEAR_TABLE
+	CLEAR_TABLE,
+	GET_PARKING_LOCATIONS
 } from "../actions/constants";
-import { initialParkingLocations } from "../res/test_data/magtable";
+import { ParkingZones } from "../res/test_data/magtable";
 
 const initialState = {
 	assignments: [],
@@ -29,11 +30,12 @@ const initialState = {
 	},
 	dailyMessages: "",
 	dailyMix: 40,
-	parkingLocations: initialParkingLocations,
 	selectedApron: EAST_APRON,
 	loading: true,
 	shiftsLoading: true,
-	showAM: true
+	showAM: true,
+	parkingZones: ParkingZones,
+	parkingLocations: []
 };
 
 export default function(state = initialState, action) {
@@ -147,6 +149,11 @@ export default function(state = initialState, action) {
 				dailyMix: payload.magtable.dailyMix,
 				loading: false,
 				shiftsLoading: false
+			};
+		case GET_PARKING_LOCATIONS:
+			return {
+				...state,
+				parkingLocations: payload
 			};
 		case ADD_EMPLOYEE_SHIFT:
 			return {

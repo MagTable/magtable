@@ -449,7 +449,7 @@ function FullDropDropDiv({
 					equipmentID: item.id,
 					bay: ""
 				},
-				unassign: [defaultAssignment?.equipment.id]
+				unassign: defaultAssignment && [defaultAssignment?.equipment.id]
 			};
 		},
 		canDrop: item => {
