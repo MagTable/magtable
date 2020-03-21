@@ -61,7 +61,7 @@ public class ShiftController {
             e.printStackTrace();
         }
         ShiftList shiftList = ShiftList.getInstance();
-        shiftList.updateShifts((ArrayList<W2WShift>)w2wShiftRepository.findAll());
+        shiftList.updateShifts((ArrayList<W2WShift>) w2wShiftRepository.findAll());
 
         Calendar cal = Calendar.getInstance();
         shiftList.setLastUpdated(String.format("%d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE)));
@@ -73,6 +73,7 @@ public class ShiftController {
 
     /**
      * //todo method comment
+     *
      * @throws Exception
      */
     private void APIPull() throws Exception {
@@ -92,7 +93,7 @@ public class ShiftController {
         //getting the html from the page
         doc = null;
         try {
-            doc = Jsoup.connect("https://www6.whentowork.com/cgi-bin/w2wFF.dll/empshiftlist.htm?SID=" + SID + "&UTF8=Y&date=" + MONTH + "/" + DAY + "/" + YEAR).get();
+              doc = Jsoup.connect("https://www6.whentowork.com/cgi-bin/w2wFF.dll/empshiftlist.htm?SID=" + SID + "&UTF8=Y&date=" + MONTH + "/" + DAY + "/" + YEAR).get();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -115,10 +116,6 @@ public class ShiftController {
             //getting the employee name
             String name = shifts.next().next().first().text();
 
-            if (name.equals("(Unassigned)")) { //0iq
-               // continue;
-            }
-
             System.out.println(name.contains("(GP)"));
 
             boolean isGreen = name.contains("(GP)");
@@ -136,7 +133,9 @@ public class ShiftController {
 
             shifts.remove(0); //Always removing the top-most shift
 
-            w2wShiftRepository.save(shift);
+            if (!name.equals("(Unassigned)")) {
+                w2wShiftRepository.save(shift);
+            }
 
 
         }
@@ -149,70 +148,12 @@ public class ShiftController {
      *
      * @return the updatedShiftList with the added employee in the correct spot
      */
-
-    //TODO REWORK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //TODO REWORK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //TODO REWORK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //TODO REWORK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //TODO REWORK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     @PostMapping("/add")
     public ShiftList addShift(@RequestBody W2WShift shiftResponse) {
-//
-//        //Converting the Json object to our database entity
-//        W2WShift shift = new W2WShift(shiftResponse);
-//
-//        //Logic for converting "0400" to a timestamp
-//        Calendar cal = Calendar.getInstance();
-//        //months are 0 indexed so have to add one - January = 0
-//        final int MONTH = cal.get(Calendar.MONTH) + 1;
-//        final int DAY = cal.get(Calendar.DAY_OF_MONTH);
-//        final int YEAR = cal.get(Calendar.YEAR);
-//
-//
-//
-//        StringBuilder sb = new StringBuilder(shiftResponse.getStartTime());
-//        //Have to Pad a 0 to the front if its not a length of 4
-//        if (sb.length() == 3) {
-//            sb.insert(0, "0");
-//        }
-//
-//        sb.insert(2, ":");
-//        String startTime = sb.toString();
-//
-//        sb = new StringBuilder(shiftResponse.getEndTime());
-//        //Have to Pad a 0 to the front if its not a length of 4
-//        if (sb.length() == 3) {
-//            sb.insert(0, "0");
-//        }
-//        sb.insert(2, ":");
-//        String endTime = sb.toString();
-//
-//
-//        // shift.setStartTime(Date.valueOf(YEAR + "-" + MONTH + "-" + DAY + " " +  startTime + ":" + "00"));
-//
-//        //  shift.setEndTime(Date.valueOf(YEAR + "-" + MONTH + "-" + DAY + " " +  endTime + ":" + "00"));
-//        //saving the shift in the database
-//        shiftRepository.save(shift);
-//
-//        //fetching the ID of the shift
-//        W2WShift savedShift = shiftRepository.findLastRecord();
-//        shiftResponse.setId(savedShift.getId());
-//
-//        ShiftList shiftList = ShiftList.getInstance();
-//
-//        ArrayList<ShiftResponse> shifts = (ArrayList) shiftList.getShifts();
-//
-//
-//        for (ShiftResponse shift1 : shifts) {
-//            if (Integer.parseInt(shift1.getStartTime()) >= Integer.parseInt(shiftResponse.getStartTime())) {
-//                //insert the user into this part of the list
-//                shifts.add(shifts.indexOf(shift1), shiftResponse);
-//                break;
-//            }
-//        }
-//
-//        return shiftList;
-        return null;
+        w2wShiftRepository.save(shiftResponse);
+        ShiftList shiftList = ShiftList.getInstance();
+        shiftList.updateShifts((ArrayList<W2WShift>) w2wShiftRepository.findAll());
+        return shiftList;
     }
 
 
