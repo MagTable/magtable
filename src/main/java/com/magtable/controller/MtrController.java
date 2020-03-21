@@ -1,10 +1,10 @@
 package com.magtable.controller;
 
-import com.magtable.model.entities.Assignmentequipment;
+import com.magtable.model.entities.Assignment;
 import com.magtable.model.entities.Equipment;
-import com.magtable.model.entities.Magtablerecord;
+import com.magtable.model.entities.MagtableRecord;
 import com.magtable.model.entities.Shift;
-import com.magtable.repository.AssignmentEquipmentRepository;
+import com.magtable.repository.AssignmentRepository;
 import com.magtable.repository.EquipmentRepository;
 import com.magtable.repository.MagTableRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,18 +23,18 @@ public class MtrController {
     EquipmentRepository equipmentRepository;
 
     @Autowired
-    AssignmentEquipmentRepository assignmentEquipmentRepository;
+    AssignmentRepository assignmentRepository;
 
     @GetMapping("")
-    public Magtablerecord getMagTable() {
+    public MagtableRecord getMagTable() {
 
-        Magtablerecord magtableRecord = magTableRecordRepository.findMostRecent();
+        MagtableRecord magtableRecord = magTableRecordRepository.findMostRecent();
 
         if (magtableRecord == null) {
-            magtableRecord = new Magtablerecord(); //making a blank mtr
+            magtableRecord = new MagtableRecord(); //making a blank mtr
 
             ArrayList<Equipment> equipmentList = (ArrayList<Equipment>) equipmentRepository.findAll();
-            ArrayList<Assignmentequipment> assignmentequipmentList = new ArrayList<>();
+            ArrayList<Assignment> assignmentList = new ArrayList<>();
 
             ArrayList<Shift> shiftList = new ArrayList<>(4);
 
@@ -44,16 +44,16 @@ public class MtrController {
                     continue;
                 }
 
-                Assignmentequipment assignmentequipment = new Assignmentequipment();
-                assignmentequipment.setEquipment(equipment);
-                assignmentequipment.setAssignmentParkingLocation(null);
-                assignmentequipment.setEmployeeShifts(shiftList);
+                Assignment assignment = new Assignment();
+                assignment.setEquipment(equipment);
+                assignment.setParkingLocation(null);
+                assignment.setEmployeeShifts(shiftList);
 
-                assignmentequipmentList.add(assignmentequipment);
+                assignmentList.add(assignment);
 
             }
 
-            magtableRecord.setAssignments(assignmentequipmentList);
+            magtableRecord.setAssignments(assignmentList);
 
         }
 
@@ -63,7 +63,7 @@ public class MtrController {
 
 
     @PostMapping("")
-    public Magtablerecord publishMagTable(@RequestBody Magtablerecord magtableRecord) {
+    public MagtableRecord publishMagTable(@RequestBody MagtableRecord magtableRecord) {
         return magTableRecordRepository.save(magtableRecord);
     }
 
