@@ -5,7 +5,6 @@ import { editTruck } from "../../actions/truck";
 import { TRUCK_STATUSES, SYSTEM_ADMINISTRATOR } from "../../actions/constants";
 import {
 	TruckListItemDiv,
-	TruckNoticeIndicator,
 	TruckNumberDiv
 } from "../../styled/magtable/ListContent";
 import { Button } from "../../styled/common/FormControl";

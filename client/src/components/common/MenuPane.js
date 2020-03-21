@@ -1,15 +1,8 @@
 import React from "react";
-import {
-	MenuTip,
-	MenuTipIcon,
-	NavDiv,
-	NavIcon,
-	NavLink,
-	NavPane
-} from "../../styled/common/Navigation";
-import { BrowserView, MobileView } from "react-device-detect";
+import { NavDiv, NavLink } from "../../styled/common/Navigation";
+import { BrowserView } from "react-device-detect";
 import { useSelector } from "react-redux";
-import { MECHANIC, SYSTEM_ADMINISTRATOR } from "../../actions/constants";
+import { SYSTEM_ADMINISTRATOR } from "../../actions/constants";
 import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 

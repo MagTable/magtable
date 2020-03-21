@@ -32,42 +32,6 @@ export const PadDivHeader = styled.div`
 	border-top-left-radius: 10px;
 `;
 
-const rightTriangle = `
-	&:after {
-		position: absolute;
-		
-		height: 0;
-		width: 0;
-		top: 0;
-		right: 0;
-		
-		border-top: solid 10px transparent;
-		border-bottom: solid 10px transparent;
-		border-left: solid 10px var(--context-green-light);
-		
-		transform: translateX(100%);
-		z-index: -1;
-		content: "";
-	}
-`;
-const leftTriangle = `
-	&:after {
-		position: absolute;
-		
-		height: 0;
-		width: 0;
-		top: 0;
-		left: -10px;
-		
-		border-top: solid 10px transparent;
-		border-bottom: solid 10px transparent;
-		border-right: solid 10px var(--context-green-light);
-		
-		z-index: -1;
-		content: "";
-	}
-`;
-
 export const HalfPadDropDiv = styled.div`
 	position: relative;
 	font-size: 1.75rem;

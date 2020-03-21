@@ -55,7 +55,7 @@ function EmployeeListItem({ employeeShift, assignment }) {
 		}
 
 		setCanClear(true);
-	}, [assignment]);
+	}, [assignment, employeeShift.isPrimary, employeeShift.timeOfDay]);
 
 	const [{ isDragging }, drag] = useDrag({
 		item: {

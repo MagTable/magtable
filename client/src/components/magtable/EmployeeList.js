@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
 	EmployeeListDiv,
@@ -57,6 +57,18 @@ const EmployeeList = () => {
 	// used to determine if the app filters out employees that are part of the training staff, default false to show all employees
 	const [filterTrainer, setFilterTrainer] = useState(true);
 
+	const filterAMEmployees = useCallback(() => {
+		// toggle AM filter while making sure the PM filter is off
+		setFilterAM(!filterAM);
+		setFilterPM(false);
+	}, [filterAM]);
+
+	const filterPMEmployees = useCallback(() => {
+		// toggle PM filter while making sure the AM filter is off
+		setFilterPM(!filterPM);
+		setFilterAM(false);
+	}, [filterPM]);
+
 	useEffect(() => {
 		if (showAM) {
 			filterPMEmployees();
@@ -87,16 +99,7 @@ const EmployeeList = () => {
 		// refresh employees upon clicking the button
 		dispatch(refreshEmployeeShifts());
 	};
-	const filterAMEmployees = () => {
-		// toggle AM filter while making sure the PM filter is off
-		setFilterAM(!filterAM);
-		setFilterPM(false);
-	};
-	const filterPMEmployees = () => {
-		// toggle PM filter while making sure the AM filter is off
-		setFilterPM(!filterPM);
-		setFilterAM(false);
-	};
+
 	const filterTechEmployees = () => {
 		// toggle the tech filter, no need to make sure that tower filter is off
 		setFilterTech(!filterTech);
