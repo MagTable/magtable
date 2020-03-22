@@ -56,7 +56,6 @@ public class Equipment {
         this.notice = notice;
     }
 
-    @JsonIgnore
     @Basic
     @Column(name = "active")
     public Boolean getActive() {
