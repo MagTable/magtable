@@ -62,9 +62,12 @@ public class EquipmentController {
         validationService.truckStatus(equipment);
         validationService.truckType(equipment);
 
+
         Equipment truck = equipmentRepository.findById(equipment.getId()).orElseThrow(() ->
                 errorService.truckDoesntExists(equipment.getId()));
 
+
+        equipment.setActive(truck.getActive()); //Need this otherwise its null
         return equipmentRepository.save(equipment);
 
     }
@@ -79,15 +82,29 @@ public class EquipmentController {
     @PostMapping("truck/add")
     public Equipment addTruck(@RequestBody Equipment equipment) {
 
-        ///TODO ADD AN ASSIGNMENT TO THE CURRENT MAGTABLE WHEN ADDING A TRUCK
-        //todo check if active on already exists?
+
+        if(equipmentRepository.findById(equipment.getId()).isPresent()){
+           throw errorService.truckAlreadyExists(equipment.getId());
+        }
         validationService.truckId(equipment.getId());
         validationService.truckStatus(equipment);
         validationService.truckType(equipment);
 
+        equipment.setActive(true);
+        equipment = equipmentRepository.save(equipment);
+
+        if(magTableRecordRepository.findMostRecent() != null){
+            //making a new assignment
+            Assignment assignment = new Assignment();
+            assignment.setEquipment(equipment);
+            assignment.setMagtableRecord(magTableRecordRepository.findMostRecent());
+
+            assignmentRepository.save(assignment);
+        }
 
 
-        return equipmentRepository.save(equipment);
+
+        return equipment;
 
 
     }
