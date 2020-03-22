@@ -60,7 +60,6 @@ export const setTruckLocation = (
 ) => dispatch => {
 	const state = store.getState();
 	let parkingLocationID;
-	console.log(parkingLocation);
 
 	if (!bay) {
 		parkingLocationID = state.magtable.parkingLocations.find(

@@ -32,7 +32,7 @@ CREATE TABLE MagTableRecord
     dailyMix            INT(2),
     forecastLow         INT(2),
     publishedBy         VARCHAR(32),
-    timePublished       DATETIME DEFAULT NOW(),
+    timePublished       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (magtableRecordID)
 );
 

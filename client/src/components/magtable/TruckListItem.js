@@ -116,7 +116,7 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 						)
 					);
 				}
-				if (dropResult.reassign.equipmentID) {
+				if (dropResult.reassign) {
 					dispatch(
 						setTruckLocation(
 							dropResult.parkingLocation,

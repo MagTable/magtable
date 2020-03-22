@@ -29,9 +29,7 @@ public class MtrController {
 
     @GetMapping("")
     public MagtableRecord getMagTable() {
-
         MagtableRecord magtableRecord = magTableRecordRepository.findMostRecent();
-
         if (magtableRecord == null) {
             magtableRecord = new MagtableRecord(); //making a blank mtr
 
@@ -58,8 +56,6 @@ public class MtrController {
             magtableRecord.setAssignments(assignmentList);
 
         }
-
-
         return magtableRecord;
     }
 

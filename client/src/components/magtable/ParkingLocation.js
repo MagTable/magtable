@@ -444,7 +444,7 @@ function FullDropDropDiv({
 			return {
 				position,
 				parkingLocation,
-				reassign: toReassign,
+				reassign: toReassign.equipmentID ? toReassign : null,
 				assign: {
 					equipmentID: item.id,
 					bay: ""

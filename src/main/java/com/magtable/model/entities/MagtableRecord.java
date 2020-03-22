@@ -58,7 +58,7 @@ public class MagtableRecord {
     }
 
     @Basic
-    @Column(name = "timepublished")
+    @Column(name = "timepublished", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     public Timestamp getTimePublished() {
         return timePublished;
     }
