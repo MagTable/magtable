@@ -8,6 +8,8 @@ import {
 import { ClickCatcher } from "../../styled/common/ClickCatcher";
 import AddEmployeeShift from "./AddEmployeeShift";
 import Modal from "../modal/Modal";
+import { useSelector } from "react-redux";
+import { SYSTEM_ADMINISTRATOR } from "../../actions/constants";
 
 /**
  * @date 3/1/2020
@@ -42,6 +44,7 @@ function OverflowEmployee({
 	};
 
 	const [showModal, setShowModal] = useState(false);
+	const authRole = useSelector(state => state.auth.user.role.name);
 
 	const handleClose = () => setShowModal(false);
 	const handleShow = () => setShowModal(true);
@@ -109,15 +112,17 @@ function OverflowEmployee({
 							)}
 							Trainers
 						</OverflowMenuButton>
-						<OverflowMenuButton
-							onClick={() => {
-								setOpen(false);
-								refreshEmployees();
-							}}
-						>
-							<FilterIcon className={"fas fa-sync"} />
-							Refresh
-						</OverflowMenuButton>
+						{authRole === SYSTEM_ADMINISTRATOR && (
+							<OverflowMenuButton
+								onClick={() => {
+									setOpen(false);
+									refreshEmployees();
+								}}
+							>
+								<FilterIcon className={"fas fa-sync"} />
+								Refresh
+							</OverflowMenuButton>
+						)}
 						<Modal show={showModal} handleClose={handleClose}>
 							<AddEmployeeShift setShowModal={setShowModal} />
 						</Modal>

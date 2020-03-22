@@ -4,7 +4,7 @@ import {
 	EmployeeListDiv,
 	EmployeeListDivWrapper,
 	EmployeeListRefreshInfo,
-	StartTimeSeparator
+	ListSeparator
 } from "../../styled/magtable/ListContent";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import EmployeeListItem from "./EmployeeListItem";
@@ -241,7 +241,7 @@ const EmployeeList = () => {
 						{filteredStartTimes.length > 0 ? (
 							filteredStartTimes.map(startTime => (
 								<div key={startTime}>
-									<StartTimeSeparator>{startTime}</StartTimeSeparator>
+									<ListSeparator>{startTime}</ListSeparator>
 									{filteredEmployeeShifts.map(
 										shift =>
 											shift.startTime === startTime && (

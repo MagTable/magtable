@@ -149,16 +149,16 @@ function TowerListItem({ assignment, showAM }) {
 			if (!shift) return;
 
 			if (TECHNICIAN_POSITIONS.includes(shift.description)) {
-				shift.warning = "Technician Assigned to Truck";
+				shift.warning = "Technician Assigned to Tower";
 				return;
 			}
 
 			if (MANAGEMENT_POSITIONS.includes(shift.description)) {
-				shift.warning = "Management Assigned to Truck";
+				shift.warning = "Management Assigned to Tower";
 				return;
 			}
 			if (shift.description === MECHANIC) {
-				shift.warning = "Mechanic Assigned to Truck";
+				shift.warning = "Mechanic Assigned to Tower";
 				return;
 			}
 

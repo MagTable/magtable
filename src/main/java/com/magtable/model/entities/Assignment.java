@@ -30,7 +30,6 @@ public class Assignment {
         this.id = assignmentEquipmentId;
     }
 
-    @JsonIgnore
     @Basic
     @Column(name = "status", length = 4)
     public String getStatus() {
@@ -41,7 +40,6 @@ public class Assignment {
         this.status = status;
     }
 
-    @JsonIgnore
     @Basic
     @Column(name = "notice", length = 2000)
     public String getNotice() {
