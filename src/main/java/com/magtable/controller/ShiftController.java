@@ -93,8 +93,7 @@ public class ShiftController {
         //getting the html from the page
         doc = null;
         try {
-            doc = Jsoup.connect("https://www6.whentowork.com/cgi-bin/w2wFF.dll/empshiftlist.htm?SID=32325584041A4&UTF8=Y&date=03/01/2020").get(); //TODO CHANGE
-             // doc = Jsoup.connect("https://www6.whentowork.com/cgi-bin/w2wFF.dll/empshiftlist.htm?SID=" + SID + "&UTF8=Y&date=" + MONTH + "/" + DAY + "/" + YEAR).get();
+              doc = Jsoup.connect("https://www6.whentowork.com/cgi-bin/w2wFF.dll/empshiftlist.htm?SID=" + SID + "&UTF8=Y&date=" + MONTH + "/" + DAY + "/" + YEAR).get();
         } catch (IOException e) {
             e.printStackTrace();
         }
