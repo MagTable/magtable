@@ -26,7 +26,7 @@ const AddUser = ({ role }) => {
 			validationSchema={Yup.object().shape({
 				username: Yup.string()
 					.matches(/^[a-zA-Z0-9]+$/, "Invalid Characters")
-					.required("Required field")
+					.required("Username Required")
 					.min(5, "Minimum Username Length is 5")
 					.max(15, "Maximum Username Length is 15")
 			})}

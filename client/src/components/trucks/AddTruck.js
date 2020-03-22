@@ -83,14 +83,17 @@ const AddTruck = () => {
 			}}
 			validationSchema={Yup.object().shape({
 				id: Yup.string()
-					.matches(/\d/, "Invalid Number")
-					.required("Required ID"),
+					.matches(
+						/^([0-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9])$/,
+						"Invalid Number"
+					)
+					.required("ID Required"),
 				status: Yup.string()
 					.oneOf(truckStatuses)
-					.required("Required Status"),
+					.required("Status Required"),
 				type: Yup.string()
 					.oneOf(vehicleTypes.map(type => type.id))
-					.required("Required Type"),
+					.required("Type Required"),
 				notice: Yup.string().max(250, "Maximum Length is 250 Characters")
 			})}
 		>

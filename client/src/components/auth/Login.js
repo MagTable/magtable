@@ -66,10 +66,10 @@ function Login() {
 					validationSchema={Yup.object().shape({
 						username: Yup.string()
 							.matches(/^[a-zA-Z0-9]+$/, "Invalid Characters")
-							.required("Required field")
+							.required("Username Required")
 							.min(5, "Minimum Length is 5")
 							.max(15, "Maximum Length is 15"),
-						password: Yup.string().required("Required Field")
+						password: Yup.string().required("Password Required")
 					})}
 				>
 					{props => (

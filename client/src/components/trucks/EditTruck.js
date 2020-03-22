@@ -76,14 +76,13 @@ const EditTruck = ({ truck }) => {
 				status: truck.status,
 				notice: truck.notice
 			}}
-			onSubmit={(values, { resetForm }) => {
+			onSubmit={values => {
 				dispatch(editTruck(values));
-				resetForm();
 			}}
 			validationSchema={Yup.object().shape({
 				status: Yup.string()
 					.oneOf(truckStatuses)
-					.required(),
+					.required("Truck Status Required"),
 				notice: Yup.string().max(250, "Maximum Length is 250 Characters")
 			})}
 		>
