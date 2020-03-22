@@ -393,6 +393,7 @@ function FullDropDropDiv({
 		end: (item, monitor) => {
 			const dropResult = monitor.getDropResult();
 			if (item && dropResult) {
+				console.log(dropResult);
 				if (dropResult.assign) {
 					dispatch(
 						setTruckLocation(
@@ -427,24 +428,11 @@ function FullDropDropDiv({
 
 	const [{ isOver, canDrop }, drop] = useDrop({
 		accept: SET_TRUCK_LOCATION,
+		// this used to have a reassign object but after review, it was deemed unnecessary and was causing bugs so it was removed
 		drop: item => {
-			const toReassign = item.toReassign
-				? {
-						equipmentID: item.toReassign.equipmentID,
-						parkingLocation: item.toReassign.parkingLocation,
-						position: item.toReassign.position,
-						bay: ""
-				  }
-				: {
-						equipmentID: defaultAssignment?.equipment.id,
-						parkingLocation,
-						position,
-						bay: parkingLocation.left
-				  };
 			return {
 				position,
 				parkingLocation,
-				reassign: toReassign.equipmentID ? toReassign : null,
 				assign: {
 					equipmentID: item.id,
 					bay: ""

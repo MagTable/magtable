@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDrag } from "react-dnd";
-import { AM, PM, SET_EQUIPMENT_EMPLOYEE } from "../../actions/constants";
+import { SET_EQUIPMENT_EMPLOYEE } from "../../actions/constants";
 import { useDispatch } from "react-redux";
-import {
-	removeEquipmentEmployee,
-	setEquipmentEmployee
-} from "../../actions/magtable";
+import { setEquipmentEmployee } from "../../actions/magtable";
 import {
 	AssignedToWrap,
 	EmpListItemDiv,
@@ -15,13 +12,12 @@ import {
 	Labels,
 	LabelText,
 	LabelWrapper,
-	ShiftInfo,
-	UnassignBtn
+	ShiftInfo
 } from "../../styled/magtable/ListContent";
 
 /**
  * @date 2020-02-19
- * @author MJ Kochuk
+ * @author MJ Kochuk, Arran Woodruff
  * @module Component
  */
 
@@ -33,29 +29,6 @@ import {
  */
 function EmployeeListItem({ employeeShift, assignment }) {
 	const dispatch = useDispatch();
-
-	const [canClear, setCanClear] = useState(false);
-
-	useEffect(() => {
-		const amSecondary = assignment?.employeeShifts.find(
-			shift => shift.timeOfDay === AM && !shift.isPrimary
-		);
-
-		const pmSecondary = assignment?.employeeShifts.find(
-			shift => shift.timeOfDay === PM && !shift.isPrimary
-		);
-
-		if (employeeShift.isPrimary) {
-			if (employeeShift.timeOfDay === AM) {
-				setCanClear(!!amSecondary);
-			} else {
-				setCanClear(!!pmSecondary);
-			}
-			return;
-		}
-
-		setCanClear(true);
-	}, [assignment, employeeShift.isPrimary, employeeShift.timeOfDay]);
 
 	const [{ isDragging }, drag] = useDrag({
 		item: {
@@ -80,19 +53,17 @@ function EmployeeListItem({ employeeShift, assignment }) {
 		})
 	});
 
-	function handleRemove() {
-		dispatch(
-			removeEquipmentEmployee(assignment.equipment.id, employeeShift.id)
-		);
-	}
+	// not needed unless we readd remove assignment to this component
+	// function handleRemove() {
+	// 	dispatch(
+	// 		removeEquipmentEmployee(assignment.equipment.id, employeeShift.id)
+	// 	);
+	// }
 
 	const assignedToTower = assignment?.equipment.id >= 1000;
 
 	return (
-		<EmpListItemDiv
-			ref={drag}
-			disabled={isDragging || employeeShift.assignedEquipment}
-		>
+		<EmpListItemDiv ref={drag} disabled={isDragging || assignment}>
 			<ShiftInfo>
 				<EmpName>{employeeShift.name}</EmpName>
 				<EmpHours>
@@ -102,12 +73,14 @@ function EmployeeListItem({ employeeShift, assignment }) {
 
 			{assignment && (
 				<AssignedToWrap isTower={assignedToTower}>
-					<UnassignBtn
-						disabled={!canClear}
-						onClick={() => canClear && handleRemove()}
-					>
-						<i className="fas fa-times" />
-					</UnassignBtn>
+					{/* Difficult to determine 'canClear' currently, disabled until fix is decided*/}
+
+					{/*<UnassignBtn*/}
+					{/*	disabled={!canClear}*/}
+					{/*	onClick={() => canClear && handleRemove()}*/}
+					{/*>*/}
+					{/*	<i className="fas fa-times" />*/}
+					{/*</UnassignBtn>*/}
 					<h2>
 						{assignedToTower
 							? assignment.equipment.type

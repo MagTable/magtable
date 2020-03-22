@@ -132,6 +132,14 @@ export const publishTable = (magtable, publishedBy) => async dispatch => {
 	try {
 		const { assignments, dailyMix, forecastLow } = magtable;
 		const data = { assignments, dailyMix, forecastLow, publishedBy };
+
+		assignments.map(assignment => {
+			const equipment = assignment.equipment;
+			assignment.status = equipment.status;
+			assignment.notice = equipment.notice;
+			return assignment;
+		});
+
 		const res = await axios.post("/magtable", data, AXIOS_JSON_HEADER);
 
 		dispatch({

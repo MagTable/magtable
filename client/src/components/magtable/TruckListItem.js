@@ -20,13 +20,16 @@ import {
 import { useDrop, useDrag } from "react-dnd";
 import {
 	AM,
+	BAY_LEAD,
 	CON,
 	DANGER,
+	DEICE_TRUCK,
 	GO,
 	MANAGEMENT_POSITIONS,
 	MECHANIC,
 	OJT,
 	PM,
+	SERVICE_VEHICLE,
 	SET_EQUIPMENT_EMPLOYEE,
 	SET_TRUCK_LOCATION,
 	SUCCESS,
@@ -221,12 +224,24 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 			return WARNING;
 
 		// if hovered shift is not included in technician positions
-		if (
-			isOver &&
-			canDrop &&
-			!TECHNICIAN_POSITIONS.includes(hoveredShiftDescription)
-		) {
-			return WARNING;
+		// warn for non-managers in service vehicles
+		// warn for non-technicians in trucks
+		if (assignment.equipment.type === DEICE_TRUCK) {
+			if (
+				isOver &&
+				canDrop &&
+				!TECHNICIAN_POSITIONS.includes(hoveredShiftDescription)
+			) {
+				return WARNING;
+			}
+		} else if (assignment.equipment.type === SERVICE_VEHICLE) {
+			if (
+				isOver &&
+				canDrop &&
+				!MANAGEMENT_POSITIONS.includes(hoveredShiftDescription)
+			) {
+				return WARNING;
+			}
 		}
 
 		if (isOver && canDrop) return SUCCESS;
@@ -235,16 +250,40 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 	function setAssignmentWarnings() {
 		Object.values(shifts).forEach(shift => {
 			if (!shift) return;
+
 			if (TOWER_POSITIONS.includes(shift.description)) {
-				shift.warning = "Tower Staff Assigned to Truck";
+				if (assignment.equipment.type === DEICE_TRUCK) {
+					shift.warning = "Tower Staff Assigned to Truck";
+				} else if (assignment.equipment.type === SERVICE_VEHICLE) {
+					shift.warning = "Tower Staff Assigned to Service Vehicle";
+				}
 				return;
 			}
-			if (MANAGEMENT_POSITIONS.includes(shift.description)) {
-				shift.warning = "Management Assigned to Truck";
+
+			if (
+				MANAGEMENT_POSITIONS.includes(shift.description) &&
+				assignment.equipment.type !== SERVICE_VEHICLE
+			) {
+				if (assignment.equipment.type === DEICE_TRUCK) {
+					shift.warning = "Management Assigned to Truck";
+				}
 				return;
 			}
+
 			if (shift.description === MECHANIC) {
-				shift.warning = "Mechanic Assigned to Truck";
+				if (assignment.equipment.type === DEICE_TRUCK) {
+					shift.warning = "Mechanic Assigned to Truck";
+				} else if (assignment.equipment.type === SERVICE_VEHICLE) {
+					shift.warning = "Mechanic Assigned to Service Vehicle";
+				}
+				return;
+			}
+
+			if (
+				assignment.equipment.type === SERVICE_VEHICLE &&
+				!MANAGEMENT_POSITIONS.includes(shift.description)
+			) {
+				shift.warning = "Non-Management Assigned to Service Vehicle";
 				return;
 			}
 
@@ -324,7 +363,14 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 					<TruckInfoDiv>
 						<EquipmentListItemEmployeeList>
 							{/* PRIMARY */}
-							<EquipmentListItemEmployee outlineType={getOutline(0)}>
+							<EquipmentListItemEmployee
+								isBaylead={
+									showAM
+										? amPrimary?.description === BAY_LEAD
+										: pmPrimary?.description === BAY_LEAD
+								}
+								outlineType={getOutline(0)}
+							>
 								<EquipmentListItemEmployeeName show={showAM} offPosition={150}>
 									{amPrimary?.name}
 								</EquipmentListItemEmployeeName>
@@ -356,7 +402,15 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 								)}
 							</EquipmentListItemEmployee>
 							{/* SECONDARY */}
-							<EquipmentListItemEmployee darken outlineType={getOutline(1)}>
+							<EquipmentListItemEmployee
+								isBaylead={
+									showAM
+										? amSecondary?.description === BAY_LEAD
+										: pmSecondary?.description === BAY_LEAD
+								}
+								darken
+								outlineType={getOutline(1)}
+							>
 								<EquipmentListItemEmployeeName show={showAM} offPosition={150}>
 									{amSecondary?.name}
 								</EquipmentListItemEmployeeName>

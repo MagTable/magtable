@@ -373,7 +373,14 @@ export const EquipmentListItemEmployee = styled.div`
 
 	transition: height 0.15s ease-in-out;
 	overflow: hidden;
-
+	
+	${({ isBaylead }) =>
+		isBaylead &&
+		`
+		color: var(--context-blue); 
+		font-weight: bold;
+	`}
+	
 	${({ darken }) => darken && "background-color: var(--shader-grey);"}
 	
 	${({ outlineType }) =>
@@ -390,7 +397,7 @@ export const EquipmentListItemEmployeeName = styled.div`
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-	transition: transform 0.5s ease;
+	transition: transform 0.3s ease;
 	transform: translateX(0);
 	${({ show, offPosition }) =>
 		show
@@ -419,7 +426,7 @@ export const EquipmentListItemEmployeeClearButton = styled.div`
 /**
  * Divides the list of available employees into sections based on start time.
  */
-export const StartTimeSeparator = styled.h3`
+export const ListSeparator = styled.h3`
 	margin: 0;
 	padding: 0.5rem 1rem;
 	border-bottom: 1px solid var(--border-color);
