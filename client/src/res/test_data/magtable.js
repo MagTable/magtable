@@ -285,7 +285,7 @@ export const initialDailyMix = 45;
 // }
 // },
 
-export const initialParkingLocations = [
+export const ParkingZones = [
 	{
 		id: 1,
 		apron: "WDA",
@@ -325,6 +325,7 @@ export const initialParkingLocations = [
 		center: false,
 		west: false,
 		left: 4,
+		right: "4", // todo - not do this
 		double: true
 	},
 	{

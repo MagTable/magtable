@@ -8,7 +8,7 @@ html{
   /*Context colors - for items that have an action or have meaning other than just style.*/
   --context-green: #00AD6E;
   --context-red: #E72530;
-  --context-blue: #187AD3;
+  --context-blue: #009dd3;
   --context-grey: #b2b2b2;
   --context-orange: #EAAB0E;
   --context-yellow: #FFE400;
@@ -22,6 +22,9 @@ html{
 
   --alert-warning: #ff990066;
 
+  --green-pass: #00e445;
+  --no-avop: #e397e2;
+
   /*Used for separating elements between one another, for example, shading every second row of a table or directly opposing divs. */
   --shader-grey: #d6d6d6;
   --shader-blue: rgba(74, 74, 255, 0.31);
@@ -31,7 +34,6 @@ html{
   --section-title-bg: #615A57;
 
 
-  /*--navbar: #EADEDA;*/
   --navbar: #232f3e;
   --header: #e5eaef;
   --header-text: #333;
@@ -40,7 +42,7 @@ html{
   --title-bright: #FFFFFF;
 
   --link-underline: #f8991d;
-
+  --input-label: #aaa;
   --title-dark: #5cdb95;
 
 }

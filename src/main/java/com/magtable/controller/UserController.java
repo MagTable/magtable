@@ -1,8 +1,8 @@
 package com.magtable.controller;
 
-import com.magtable.model.Role;
-import com.magtable.model.SafeUser;
-import com.magtable.model.User;
+import com.magtable.model.entities.Role;
+import com.magtable.model.api.SafeUser;
+import com.magtable.model.entities.User;
 import com.magtable.repository.RoleRepository;
 import com.magtable.repository.UserRepository;
 import com.magtable.services.ErrorService;

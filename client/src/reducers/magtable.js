@@ -14,19 +14,28 @@ import {
 	SET_TRUCK_LOCATION,
 	TOGGLE_BAY_LEAD,
 	REFRESH_EMPLOYEE_SHIFTS,
-	REFRESHING_EMPLOYEE_SHIFTS
+	REFRESHING_EMPLOYEE_SHIFTS,
+	TOGGLE_AM_PM,
+	CLEAR_TABLE,
+	GET_PARKING_LOCATIONS
 } from "../actions/constants";
-import { initialParkingLocations } from "../res/test_data/magtable";
+import { ParkingZones } from "../res/test_data/magtable";
 
 const initialState = {
 	assignments: [],
-	employeeShifts: [],
+	employeeShifts: {
+		scheduleDate: null,
+		lastUpdated: null,
+		shifts: []
+	},
 	dailyMessages: "",
 	dailyMix: 40,
-	parkingLocations: initialParkingLocations,
 	selectedApron: EAST_APRON,
 	loading: true,
-	shiftsLoading: true
+	shiftsLoading: true,
+	showAM: true,
+	parkingZones: ParkingZones,
+	parkingLocations: []
 };
 
 export default function(state = initialState, action) {
@@ -67,20 +76,12 @@ export default function(state = initialState, action) {
 					assignment.equipment.id === payload.equipmentID
 						? {
 								...assignment,
-								employeeShifts: assignment.employeeShifts.map(shift =>
-									shift?.id === payload.shiftID ? null : shift
+								employeeShifts: assignment.employeeShifts.filter(
+									shift => shift?.id !== payload.shiftID
 								)
 						  }
 						: assignment
-				),
-				employeeShifts: {
-					...state.employeeShifts,
-					shifts: state.employeeShifts.shifts.map(shift =>
-						shift.id === payload.shiftID
-							? { ...shift, assignedEquipment: null }
-							: shift
-					)
-				}
+				)
 			};
 		case SET_EQUIPMENT_EMPLOYEE: // if assignment needs to be created
 			// replaces the modified assignment in the assignments list
@@ -91,25 +92,25 @@ export default function(state = initialState, action) {
 					assignment.equipment.id === payload.equipmentID
 						? {
 								...assignment,
-								employeeShifts: assignment.employeeShifts.map((shift, i) =>
-									i === payload.equipmentSlotID ? payload.shift : shift
-								)
+								employeeShifts: [...assignment.employeeShifts, payload.shift]
 						  }
 						: assignment
-				),
-				employeeShifts: {
-					...state.employeeShifts,
-					shifts: state.employeeShifts.shifts.map(shift =>
-						shift.id === payload.shift.id
-							? { ...shift, assignedEquipment: payload.equipmentID }
-							: shift
-					)
-				}
+				)
+			};
+		case CLEAR_TABLE:
+			return {
+				...state,
+				assignments: state.assignments.map(assignment => ({
+					...assignment,
+					employeeShifts: [null, null, null, null],
+					parkingLocation: null
+				}))
 			};
 		case PUBLISH_TABLE:
 			return {
 				...state,
-				assignments: payload // server will echo the given assignments to verify changes were made properly
+				assignments: payload.assignments
+				// server will echo the given assignments to verify changes were made properly
 			};
 		case ADD_BRIX_RECORD:
 			return {
@@ -142,17 +143,17 @@ export default function(state = initialState, action) {
 		case GET_ASSIGNMENT_DATA:
 			return {
 				...state,
-				assignments: payload.equipment.map(elem => ({
-					equipment: elem,
-					employeeShifts: [null, null, null, null],
-					parkingLocation: null,
-					brixRecords: []
-				})),
 				employeeShifts: payload.employeeShifts,
-				// dailyMessages: payload.dailyMessages,
-				// dailyMix: payload.dailyMix,
+				assignments: payload.magtable.assignments,
+				timePublished: payload.magtable.timePublished,
+				dailyMix: payload.magtable.dailyMix,
 				loading: false,
 				shiftsLoading: false
+			};
+		case GET_PARKING_LOCATIONS:
+			return {
+				...state,
+				parkingLocations: payload
 			};
 		case ADD_EMPLOYEE_SHIFT:
 			return {
@@ -172,7 +173,6 @@ export default function(state = initialState, action) {
 		case REFRESHING_EMPLOYEE_SHIFTS:
 			return {
 				...state,
-				employeeShifts: [],
 				shiftsLoading: true
 			};
 		case REFRESH_EMPLOYEE_SHIFTS:
@@ -180,6 +180,11 @@ export default function(state = initialState, action) {
 				...state,
 				employeeShifts: payload.employeeShifts,
 				shiftsLoading: false
+			};
+		case TOGGLE_AM_PM:
+			return {
+				...state,
+				showAM: !state.showAM
 			};
 		default:
 			return state;

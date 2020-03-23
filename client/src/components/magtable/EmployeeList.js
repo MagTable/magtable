@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
 	EmployeeListDiv,
 	EmployeeListDivWrapper,
 	EmployeeListRefreshInfo,
-	StartTimeSeparator
+	ListSeparator
 } from "../../styled/magtable/ListContent";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import EmployeeListItem from "./EmployeeListItem";
@@ -18,6 +18,7 @@ import {
 	TOWER_POSITIONS,
 	TRAINER_POSITIONS
 } from "../../actions/constants";
+import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
 
 /**
  * @date 2/19/2020
@@ -34,8 +35,10 @@ import {
 const EmployeeList = () => {
 	const dispatch = useDispatch();
 	const employeeShifts = useSelector(state => state.magtable.employeeShifts); // get the employees
+	const assignments = useSelector(state => state.magtable.assignments);
 	const loading = useSelector(state => state.magtable.shiftsLoading);
-	const [open, setOpen] = useState(false);
+	const showAM = useSelector(state => state.magtable.showAM);
+	const [overflowOpen, setOverflowOpen] = useState(false);
 	// employees are already sorted by time
 	const startTimes = [];
 
@@ -53,6 +56,26 @@ const EmployeeList = () => {
 	const [filterMechanic, setFilterMechanic] = useState(true);
 	// used to determine if the app filters out employees that are part of the training staff, default false to show all employees
 	const [filterTrainer, setFilterTrainer] = useState(true);
+
+	const filterAMEmployees = useCallback(() => {
+		// toggle AM filter while making sure the PM filter is off
+		setFilterAM(!filterAM);
+		setFilterPM(false);
+	}, [filterAM]);
+
+	const filterPMEmployees = useCallback(() => {
+		// toggle PM filter while making sure the AM filter is off
+		setFilterPM(!filterPM);
+		setFilterAM(false);
+	}, [filterPM]);
+
+	useEffect(() => {
+		if (showAM) {
+			filterPMEmployees();
+		} else {
+			filterAMEmployees();
+		}
+	}, [showAM]);
 
 	if (!loading) {
 		employeeShifts.shifts.forEach(emp => {
@@ -76,16 +99,7 @@ const EmployeeList = () => {
 		// refresh employees upon clicking the button
 		dispatch(refreshEmployeeShifts());
 	};
-	const filterAMEmployees = () => {
-		// toggle AM filter while making sure the PM filter is off
-		setFilterAM(!filterAM);
-		setFilterPM(false);
-	};
-	const filterPMEmployees = () => {
-		// toggle PM filter while making sure the AM filter is off
-		setFilterPM(!filterPM);
-		setFilterAM(false);
-	};
+
 	const filterTechEmployees = () => {
 		// toggle the tech filter, no need to make sure that tower filter is off
 		setFilterTech(!filterTech);
@@ -186,8 +200,8 @@ const EmployeeList = () => {
 			<ListTitle>
 				<ListTitleText>Employees</ListTitleText>
 				<OverflowEmployee
-					open={open}
-					setOpen={setOpen}
+					open={overflowOpen}
+					setOpen={setOverflowOpen}
 					activeFilters={activeFilters}
 					filterAMEmployees={filterAMEmployees}
 					filterPMEmployees={filterPMEmployees}
@@ -200,7 +214,7 @@ const EmployeeList = () => {
 				>
 					{({ openOverflow }) => (
 						<IconButton
-							faClassName="fa-bars"
+							faClassName="fa-bars fa-lg"
 							onClick={openOverflow}
 							color={"var(--header-text)"}
 							hoverColor={"grey"}
@@ -227,25 +241,36 @@ const EmployeeList = () => {
 						{filteredStartTimes.length > 0 ? (
 							filteredStartTimes.map(startTime => (
 								<div key={startTime}>
-									<StartTimeSeparator>{startTime}</StartTimeSeparator>
+									<ListSeparator>{startTime}</ListSeparator>
 									{filteredEmployeeShifts.map(
-										employee =>
-											employee.startTime === startTime && (
+										shift =>
+											shift.startTime === startTime && (
 												<EmployeeListItem
-													key={employee.id}
-													employee={employee}
+													key={shift.id}
+													employeeShift={shift}
+													assignment={assignments.find(
+														assignment =>
+															assignment.employeeShifts.filter(
+																assignmentShift =>
+																	assignmentShift.id === shift.id
+															).length > 0
+													)}
 												/>
 											)
 									)}
 								</div>
 							))
 						) : (
-							<h1>No Employee Shifts...</h1>
+							<EmployeeListRefreshInfo>
+								No Employee Shifts Listed.
+							</EmployeeListRefreshInfo>
 						)}
 					</EmployeeListDiv>
 				</>
 			) : (
-				<h1>Loading Employee Shifts...</h1>
+				<SpinnerWrap>
+					<LoadingImg className="fas fa-circle-notch" />
+				</SpinnerWrap>
 			)}
 		</EmployeeListDivWrapper>
 	);

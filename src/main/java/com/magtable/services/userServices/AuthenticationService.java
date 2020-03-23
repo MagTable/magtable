@@ -1,7 +1,7 @@
 package com.magtable.services.userServices;
 
-import com.magtable.model.AuthenticationRequest;
-import com.magtable.model.User;
+import com.magtable.model.api.AuthenticationRequest;
+import com.magtable.model.entities.User;
 import com.magtable.repository.UserRepository;
 import com.magtable.services.ErrorService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -35,7 +35,6 @@ function TextInput(props) {
 				fit={props.fit}
 			/>
 
-			{/* br + float:right takes the eye icon out of the same row as the input to avoid resizing the login block */}
 			<br />
 
 			{props.icon && (

@@ -1,13 +1,6 @@
 import React from "react";
-import {
-	MenuTip,
-	MenuTipIcon,
-	NavDiv,
-	NavIcon,
-	NavLink,
-	NavPane
-} from "../../styled/common/Navigation";
-import { BrowserView, MobileView } from "react-device-detect";
+import { NavDiv, NavLink } from "../../styled/common/Navigation";
+import { BrowserView } from "react-device-detect";
 import { useSelector } from "react-redux";
 import { SYSTEM_ADMINISTRATOR } from "../../actions/constants";
 import { useLocation } from "react-router-dom";
@@ -43,6 +36,12 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 		<div>
 			<BrowserView>
 				<NavDiv>
+					<NavLink
+						active={pathname === "/truck/all" ? 1 : undefined}
+						to={"/truck/all"}
+					>
+						Manage Trucks
+					</NavLink>
 					<NavLink active={pathname === "/" ? 1 : undefined} to={"/"}>
 						Truck Assignment
 					</NavLink>
@@ -58,31 +57,32 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 					<NavLink to={"/logout"}>Log Out</NavLink>
 				</NavDiv>
 			</BrowserView>
-			<MobileView>
-				<NavDiv>
-					<MenuTip onClick={() => toggleMenu()}>
-						<MenuTipIcon open={menuOpen} className="fas fa-angle-down" />
-						Menu
-					</MenuTip>
-					<NavPane onClick={() => toggleMenu()} open={menuOpen}>
-						<NavLink to={"/"}>
-							<NavIcon className="fas fa-truck" />
-							Truck Assignment
-						</NavLink>
-						{/* System Administrators Only */}
-						{authUser?.role?.name === SYSTEM_ADMINISTRATOR && (
-							<NavLink to={"/user/all"}>
-								<NavIcon className="fas fa-users" />
-								Manage Users
-							</NavLink>
-						)}
-						<NavLink to={"/logout"}>
-							<NavIcon className="fas fa-logout" />
-							Log Out
-						</NavLink>
-					</NavPane>
-				</NavDiv>
-			</MobileView>
+			{/*No longer focusing on Mobile*/}
+			{/*<MobileView>*/}
+			{/*	<NavDiv>*/}
+			{/*		<MenuTip onClick={() => toggleMenu()}>*/}
+			{/*			<MenuTipIcon open={menuOpen} className="fas fa-angle-down" />*/}
+			{/*			Menu*/}
+			{/*		</MenuTip>*/}
+			{/*		<NavPane onClick={() => toggleMenu()} open={menuOpen}>*/}
+			{/*			<NavLink to={"/"}>*/}
+			{/*				<NavIcon className="fas fa-truck" />*/}
+			{/*				Truck Assignment*/}
+			{/*			</NavLink>*/}
+			{/*			/!* System Administrators Only *!/*/}
+			{/*			{authUser?.role?.name === SYSTEM_ADMINISTRATOR && (*/}
+			{/*				<NavLink to={"/user/all"}>*/}
+			{/*					<NavIcon className="fas fa-users" />*/}
+			{/*					Manage Users*/}
+			{/*				</NavLink>*/}
+			{/*			)}*/}
+			{/*			<NavLink to={"/logout"}>*/}
+			{/*				<NavIcon className="fas fa-logout" />*/}
+			{/*				Log Out*/}
+			{/*			</NavLink>*/}
+			{/*		</NavPane>*/}
+			{/*	</NavDiv>*/}
+			{/*</MobileView>*/}
 		</div>
 	);
 }

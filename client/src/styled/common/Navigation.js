@@ -46,7 +46,6 @@ export const NavIcon = styled.i`
 	width: 45px;
 	vertical-align: middle;
 	float: left;
-	// padding: 0px 0 10px 0;
 `;
 
 /**
@@ -120,10 +119,12 @@ export const NavLink = styled(Link)`
 	font-size: 20px;
 	padding-bottom: 0.5rem;
 
-	transition: color 0.25s ease-in-out;
-	transition: border 0.25s ease-in-out;
+	transition: color 0.25s ease-in-out, border 0.25s ease-in-out;
 	border-bottom: 2px solid #00000000;
 
+	:hover {
+		color: var(--link-underline);
+	}
 	${({ active }) =>
 		active &&
 		`

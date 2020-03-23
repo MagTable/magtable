@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 /**
  * @date 2020-02-17
- * @author MJ Kochuk
+ * @author MJ Kochuk, Arran Woodruff
  * @module Styled
  */
 
@@ -14,6 +14,8 @@ export const TruckMapDiv = styled.div`
 	flex-grow: 2.5;
 	flex-basis: 0;
 	flex-direction: column;
+	background: #f4f4f4;
+	user-select: none;
 `;
 
 /**
@@ -32,9 +34,9 @@ export const TowerPositionDiv = styled.div`
 	display: flex;
 	flex-grow: 1;
 	flex-basis: 0;
-	border: 2px solid grey;
+	outline: 2px solid var(--border-color);
+	outline-offset: -1px;
 	flex-direction: column;
-	height: 100%;
 `;
 
 /**

@@ -189,4 +189,29 @@ public class ErrorService {
     public ResponseStatusException truckDoesntExists(Integer id) {
         return new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Truck : %d Doesn't Exists", id));
     }
+
+    /**
+     *Error Service for generic errors TEMPORARY Should be used with a //todo
+     *
+     */
+    public ResponseStatusException notYetImplemented(){
+        return new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "ErrorSerivce Not Yet Implemented");
+    }
+
+    /**
+     * Message reporting that a truck id is not valid
+     * @return ResponseStatusException message
+     */
+    public ResponseStatusException invalidTruckId() {
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Truck ids must be between 1 and 1000"));
+    }
+
+    /**
+     * Message reporting that a truck status is not valid
+     * @param type the invalid type
+     * @return ResponseStatusException message
+     */
+    public ResponseStatusException invalidTruckType(String type) {
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("%s is not a valid type", type));
+    }
 }

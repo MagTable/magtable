@@ -23,6 +23,17 @@ export const LoadingImg = styled.i`
 
 export const SpinnerWrap = styled.div`
 	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+
+	${({ fullPage }) =>
+		fullPage &&
+		`
+		height: calc(100vh - 70px);
+	`}
 `;
 
 export const LoadingText = styled.p`
@@ -57,9 +68,10 @@ export function SpinningLoadIcon() {
 	);
 }
 
+/**
+ * @return {null}
+ */
 export function LoginLoadIcon({ loading }) {
-	if (!loading) return null;
-
 	if (loading) {
 		return (
 			<LoginLoader>
@@ -72,4 +84,6 @@ export function LoginLoadIcon({ loading }) {
 			</LoginLoader>
 		);
 	}
+
+	return null;
 }

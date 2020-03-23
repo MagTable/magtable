@@ -17,13 +17,13 @@ export const ListTitle = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	height: 50px;
+	padding: 0 1rem;
 `;
 
 /**
  * The text within the ListTitle div.
  */
 export const ListTitleText = styled.p`
-	padding-left: 20px;
 	width: 100%;
 	font-size: 20px;
 	font-family: "Noto Sans KR", sans-serif;
@@ -36,7 +36,7 @@ export const ListTitleText = styled.p`
 /**
  * Title div specific to the tower, since the tower map contains roles that need titles.
  */
-export const TowerTitle = styled(ListTitle)`
+export const TowerTitle = styled.div`
 	background-color: var(--header);
 	justify-content: center;
 	border-bottom: 1px solid var(--border-color);
@@ -48,5 +48,9 @@ export const TowerTitle = styled(ListTitle)`
 export const TowerTitleText = styled(ListTitleText)`
 	color: var(--sub-header-text);
 	width: fit-content;
-	padding-left: 0px;
+	padding: 0.5rem;
+
+	@media (max-height: 770px) {
+		font-size: 1.2rem;
+	}
 `;

@@ -3,6 +3,7 @@ import { TowerMapDiv } from "../../styled/magtable/Maps";
 import TowerListItem from "./TowerListItem";
 import { useSelector } from "react-redux";
 import { EAST_APRON, WEST_APRON } from "../../actions/constants";
+import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
 
 /**
  * @date 2020-02-19
@@ -15,9 +16,11 @@ import { EAST_APRON, WEST_APRON } from "../../actions/constants";
  * @constructor
  * @returns {*} The TowerList component and sets the tower positions based on the selected Apron
  */
-function TowerList({ showAM }) {
+function TowerList() {
 	const assignments = useSelector(state => state.magtable.assignments);
 	const apron = useSelector(state => state.magtable.selectedApron);
+	const showAM = useSelector(state => state.magtable.showAM);
+	const loading = useSelector(state => state.magtable.loading);
 
 	const towerPositions = assignments.filter(assignment => {
 		const equipmentID = assignment.equipment.id;
@@ -41,13 +44,19 @@ function TowerList({ showAM }) {
 
 	return (
 		<TowerMapDiv>
-			{towerPositions.map(towerPosition => (
-				<TowerListItem
-					key={towerPosition.equipment.id}
-					assignment={towerPosition}
-					showAM={showAM}
-				/>
-			))}
+			{!loading ? (
+				towerPositions.map(towerPosition => (
+					<TowerListItem
+						key={towerPosition.equipment.id}
+						assignment={towerPosition}
+						showAM={showAM}
+					/>
+				))
+			) : (
+				<SpinnerWrap>
+					<LoadingImg className="fas fa-circle-notch" />
+				</SpinnerWrap>
+			)}
 		</TowerMapDiv>
 	);
 }

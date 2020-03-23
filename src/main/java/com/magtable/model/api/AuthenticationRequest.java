@@ -1,4 +1,4 @@
-package com.magtable.model;
+package com.magtable.model.api;
 
 import java.io.Serializable;
 

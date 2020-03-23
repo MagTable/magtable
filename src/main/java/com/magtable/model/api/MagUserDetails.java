@@ -1,5 +1,6 @@
-package com.magtable.model;
+package com.magtable.model.api;
 
+import com.magtable.model.entities.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

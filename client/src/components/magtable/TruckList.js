@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import TruckListItem from "../magtable/TruckListItem";
 import {
+	ListSeparator,
 	TruckListDiv,
 	TruckListDivWrapper,
 	TruckListManipDiv
 } from "../../styled/magtable/ListContent";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Switch from "react-switch";
+import { toggleAM } from "../../actions/magtable";
+import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
+import { DEICE_TRUCK, SERVICE_VEHICLE } from "../../actions/constants";
 
 /**
  * @date 2020-02-17
@@ -24,10 +28,30 @@ import Switch from "react-switch";
  * @constructor
  * @returns {*} The TruckList component
  */
-function TruckList({ showAM, setShowAM }) {
+function TruckList() {
 	const [noticesOpen, setNoticesOpen] = useState(false);
+	const dispatch = useDispatch();
 
-	const assignments = useSelector(state => state.magtable.assignments);
+	const assignments = useSelector(state =>
+		state.magtable.assignments.filter(assignment => assignment.equipment.active)
+	);
+	const showAM = useSelector(state => state.magtable.showAM);
+	const loading = useSelector(state => state.magtable.loading);
+
+	const handleShiftToggle = () => {
+		dispatch(toggleAM());
+	};
+
+	const truckAssignments = assignments.filter(
+		assignment =>
+			assignment.equipment.id < 1000 &&
+			assignment.equipment.type === DEICE_TRUCK
+	);
+	const serviceVehicleAssignments = assignments.filter(
+		assignment =>
+			assignment.equipment.id < 1000 &&
+			assignment.equipment.type === SERVICE_VEHICLE
+	);
 
 	return (
 		<TruckListDivWrapper>
@@ -56,7 +80,7 @@ function TruckList({ showAM, setShowAM }) {
 					/>
 
 					<Switch
-						onChange={() => setShowAM(!showAM)}
+						onChange={handleShiftToggle}
 						checked={showAM === false}
 						offColor={"#414244"}
 						onColor={"#414244"}
@@ -76,20 +100,35 @@ function TruckList({ showAM, setShowAM }) {
 					/>
 				</TruckListManipDiv>
 			</ListTitle>
-			<TruckListDiv>
-				{assignments.map(
-					assignment =>
-						assignment.equipment.id < 1000 && (
-							<TruckListItem
-								noticeOpen={noticesOpen}
-								key={assignment.equipment.id}
-								assignment={assignment}
-								showAM={showAM}
-								shift
-							/>
-						)
-				)}
-			</TruckListDiv>
+			{!loading ? (
+				<TruckListDiv>
+					<ListSeparator>Service Vehicles</ListSeparator>
+					{serviceVehicleAssignments.map(assignment => (
+						<TruckListItem
+							noticeOpen={noticesOpen}
+							key={assignment.equipment.id}
+							assignment={assignment}
+							showAM={showAM}
+							shift
+						/>
+					))}
+					<ListSeparator>Deice Trucks</ListSeparator>
+
+					{truckAssignments.map(assignment => (
+						<TruckListItem
+							noticeOpen={noticesOpen}
+							key={assignment.equipment.id}
+							assignment={assignment}
+							showAM={showAM}
+							shift
+						/>
+					))}
+				</TruckListDiv>
+			) : (
+				<SpinnerWrap>
+					<LoadingImg className="fas fa-circle-notch" />
+				</SpinnerWrap>
+			)}
 		</TruckListDivWrapper>
 	);
 }

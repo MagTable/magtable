@@ -1,11 +1,13 @@
 package com.magtable.controller;
 
-import com.magtable.model.Tower;
-import com.magtable.model.Truck;
-import com.magtable.model.User;
-import com.magtable.repository.TowerRepository;
-import com.magtable.repository.TruckRepository;
+import com.magtable.model.entities.Assignment;
+import com.magtable.model.entities.Equipment;
+import com.magtable.model.entities.User;
+import com.magtable.repository.AssignmentRepository;
+import com.magtable.repository.EquipmentRepository;
+import com.magtable.repository.MagTableRecordRepository;
 import com.magtable.services.ErrorService;
+import com.magtable.services.equipmentServices.EquipmentValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,13 +20,20 @@ import java.util.List;
 public class EquipmentController {
 
     @Autowired
-    private TruckRepository truckRepository;
-
-    @Autowired
-    private TowerRepository towerRepository;
+    private EquipmentRepository equipmentRepository;
 
     @Autowired
     private ErrorService errorService;
+
+    @Autowired
+    private EquipmentValidationService validationService;
+
+    @Autowired
+    private MagTableRecordRepository magTableRecordRepository;
+
+    @Autowired
+    private AssignmentRepository assignmentRepository;
+
 
     /**
      * route           GET /equipment/trucks
@@ -34,10 +43,34 @@ public class EquipmentController {
      * @return the list of trucks
      */
     @GetMapping("/truck/all")
-    public List<Truck> getAllTrucks() {
-        return truckRepository.findAll();
+    public List<Equipment> getAllTrucks() {
+        return equipmentRepository.findAllTrucks();
     }
 
+
+    /**
+     * route          PUT /equipment/truck/edit
+     * description     route to edit the truck operational status/notices
+     * access          System Admins, Mechanics
+     *
+     * @return the edited Truck
+     */
+    @PutMapping("/truck/edit")
+    public Equipment editTruck(@RequestBody Equipment equipment) {
+
+        validationService.truckId(equipment.getId());
+        validationService.truckStatus(equipment);
+        validationService.truckType(equipment);
+
+
+        Equipment truck = equipmentRepository.findById(equipment.getId()).orElseThrow(() ->
+                errorService.truckDoesntExists(equipment.getId()));
+
+
+        equipment.setActive(truck.getActive()); //Need this otherwise its null
+        return equipmentRepository.save(equipment);
+
+    }
 
     /**
      * route           post /equipment/truck/add
@@ -46,78 +79,58 @@ public class EquipmentController {
      *
      * @return the added truck
      */
-    @PostMapping("/truck/add")
-    public Truck addTruck(@RequestBody Truck truck) {
-        // Trucks can only have the following 4 statuses
-        if (!(truck.getStatus().equals("GO") || truck.getStatus().equals("CON")
-                || truck.getStatus().equals("OOS") || truck.getStatus().equals("INOP"))) {
-            errorService.truckOPStatusInvalid(truck.getStatus());
+    @PostMapping("truck/add")
+    public Equipment addTruck(@RequestBody Equipment equipment) {
+
+
+        if(equipmentRepository.findById(equipment.getId()).isPresent()){
+           throw errorService.truckAlreadyExists(equipment.getId());
         }
-        //checking if the truck exists
-        if(truckRepository.findById(truck.getID()) != null){
-            errorService.truckAlreadyExists(truck.getID());
+        validationService.truckId(equipment.getId());
+        validationService.truckStatus(equipment);
+        validationService.truckType(equipment);
+
+        equipment.setActive(true);
+        equipment = equipmentRepository.save(equipment);
+
+        if(magTableRecordRepository.findMostRecent() != null){
+            //making a new assignment
+            Assignment assignment = new Assignment();
+            assignment.setEquipment(equipment);
+            assignment.setMagtableRecord(magTableRecordRepository.findMostRecent());
+
+            assignmentRepository.save(assignment);
         }
 
-        //saving the new truck
-        truckRepository.save(truck);
 
-        return truck;
+
+        return equipment;
+
+
     }
 
     /**
-     * route           post /equipment/truck/edit
-     * description     route to edit the truck operational status/notices
-     * access          System Admins, Mechanics
-     *
-     * @return the edited Truck
-     */
-    @PutMapping("/truck/edit")
-    public Truck editTruck(@RequestBody Truck truck) {
-        if (!(truck.getStatus().equals("GO") || truck.getStatus().equals("CON")
-                || truck.getStatus().equals("OOS") || truck.getStatus().equals("INOP"))) {
-            errorService.truckOPStatusInvalid(truck.getStatus());
-        }
-
-        //checking if the truck exists
-        if(truckRepository.findById(truck.getID()) == null){
-            errorService.truckDoesntExists(truck.getID());
-        }
-
-        //saving the new truck
-        truckRepository.save(truck);
-
-         return truck;
-    }
-
-    /**
-     * route           post /equipment/trucks/delete
+     * route           PUT /equipment/trucks/deactivate
      * description     route to delete a truck
      * access          System Admins, Mechanics
      *
-     * @return A repsonse
+     * @return An OK response if the truck was deleted
      */
-    @DeleteMapping("truck/delete/{id}")
-    public ResponseEntity deleteTruck(@PathVariable(value = "id") final int truckID){
+    @PutMapping("truck/deactivate/{id}")
+    public ResponseEntity deactivateTruck(@PathVariable(value = "id") final int truckID){
 
-        Truck truck = truckRepository.findById(truckID).orElseThrow(() ->
+        Equipment truck = equipmentRepository.findById(truckID).orElseThrow(() ->
                 errorService.truckDoesntExists(truckID));
 
-        truckRepository.delete(truck);
+        truck.setActive(false);
+
+        equipmentRepository.save(truck);
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    /**
-     * route           GET /equipment/towers
-     * description     route to fetch the towers from the database
-     * access          Personnel Managers, System Admins
-     *
-     * @return the list of towers
-     */
-    @GetMapping("/tower/all")
-    public List<Tower> getAllTowers() {
-        return towerRepository.findAll();
-    }
+
+
 
 
 }
