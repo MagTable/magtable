@@ -43,18 +43,17 @@ function ParkingLocationMap(props) {
 	return (
 		<TruckMapDiv>
 			<ListTitle>
-				<ListTitleText>Parking Locations</ListTitleText>
-				<ApronToggle />
-
-				<MagTableManipDiv>
-					<Confirmation confirmationMessage={"Confirm Clear"} action={() => {}}>
-						{({ confirm }) => (
-							<MagTableManipBtn onClick={confirm}>Clear All</MagTableManipBtn>
-						)}
-					</Confirmation>
-
-					<MagTableManipBtn>Publish</MagTableManipBtn>
-				</MagTableManipDiv>
+				<ListTitleText>Parking Locations: {selectedApron}</ListTitleText>
+				<OverflowLocations open={overflowOpen} setOpen={setOverflowOpen}>
+					{({ openOverflow }) => (
+						<IconButton
+							faClassName="fa-bars fa-lg"
+							onClick={openOverflow}
+							color={"var(--header-text)"}
+							hoverColor={"grey"}
+						/>
+					)}
+				</OverflowLocations>
 			</ListTitle>
 			<MapWrapper>
 				{parkingZones.map(

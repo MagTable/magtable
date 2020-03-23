@@ -15,7 +15,6 @@ import {
 	TOGGLE_BAY_LEAD,
 	REFRESH_EMPLOYEE_SHIFTS,
 	REFRESHING_EMPLOYEE_SHIFTS,
-	TOGGLE_AM_PM,
 	CLEAR_TABLE,
 	GET_PARKING_LOCATIONS,
 	TOGGLE_AM_PM,
@@ -23,6 +22,7 @@ import {
 	EDIT_TRUCK,
 	DELETE_TRUCK
 } from "../actions/constants";
+import { ParkingZones } from "../res/test_data/magtable";
 
 const initialState = {
 	assignments: [],
