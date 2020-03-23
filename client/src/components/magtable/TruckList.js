@@ -49,6 +49,17 @@ function TruckList() {
 		dispatch(toggleAM());
 	};
 
+	const truckAssignments = assignments.filter(
+		assignment =>
+			assignment.equipment.id < 1000 &&
+			assignment.equipment.type === DEICE_TRUCK
+	);
+	const serviceVehicleAssignments = assignments.filter(
+		assignment =>
+			assignment.equipment.id < 1000 &&
+			assignment.equipment.type === SERVICE_VEHICLE
+	);
+
 	return (
 		<TruckListDivWrapper>
 			<ListTitle>
@@ -102,6 +113,7 @@ function TruckList() {
 					{serviceVehicleAssignments.map(assignment => (
 						<TruckListItem
 							noticeOpen={noticesOpen}
+							openBrixModal={handleShow}
 							key={assignment.equipment.id}
 							assignment={assignment}
 							showAM={showAM}

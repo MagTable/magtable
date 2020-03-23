@@ -1,6 +1,10 @@
 import React, { useState } from "react";
-import logo from "../../res/Images/NoTextLogo.svg";
-import { AeroLogo, NavBar as NavBarDiv } from "../../styled/common/Navigation";
+import logo from "../../res/Images/logo-placeholder.png";
+import {
+	AeroLogo,
+	NavBar as NavBarDiv,
+	NavLink
+} from "../../styled/common/Navigation";
 import MenuPane from "./MenuPane";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -46,7 +50,7 @@ function NavBar() {
 			<Link to={"/"}>
 				<AeroLogo src={logo} />
 			</Link>
-			//todo @arran wrong file
+			<NavLink>//todo @arran wrong file</NavLink>
 			<NavLink>Updated: {weatherDate.toLocaleDateString()}</NavLink>
 			<NavLink>Forecast Low: {forecastLow}</NavLink>
 
