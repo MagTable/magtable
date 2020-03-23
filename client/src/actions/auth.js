@@ -16,6 +16,7 @@ import {
 import store from "../store";
 
 import { setAlert } from "./alert";
+import { getBrixChart } from "./brix";
 import { getMagTable, getParkingLocations } from "./magtable";
 
 window.addEventListener("storage", e => {
@@ -46,6 +47,7 @@ export const loadUser = () => async dispatch => {
 
 		if (magtableRoles.includes(user.role.name)) {
 			dispatch(getMagTable());
+			dispatch(getBrixChart());
 			dispatch(getParkingLocations());
 		}
 	} catch (err) {

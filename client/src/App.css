@@ -2,6 +2,7 @@ html{
   /*background-color: #E9E9E9;*/
   font-family: 'Karla', sans-serif;
   --border-color: #474747;
+  --border-color-light: #47474777;
 
   /* Common across all pages */
 
@@ -21,7 +22,7 @@ html{
   --context-yellow-light: #FFE40077;
 
   --alert-warning: #ff990066;
-
+  --modal-bg: #fff;
   --green-pass: #00e445;
   --no-avop: #e397e2;
 
@@ -33,7 +34,6 @@ html{
 
   --section-title-bg: #615A57;
 
-
   --navbar: #232f3e;
   --header: #e5eaef;
   --header-text: #333;
@@ -44,6 +44,10 @@ html{
   --link-underline: #f8991d;
   --input-label: #aaa;
   --title-dark: #5cdb95;
+
+  --nozzle: #ffe900;
+  --type1: orange;
+  --type4: green;
 
 }
 ::selection {

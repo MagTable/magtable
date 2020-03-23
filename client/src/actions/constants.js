@@ -64,6 +64,12 @@ export const DEICE_TRUCK = "ICE";
 
 export const TRUCK_STATUSES = [GO, CON, OOS, INOP];
 
+// vehicle types
+export const ICE = { id: "ICE", value: "Deice Vehicle" };
+export const SVV = { id: "SVV", value: "Service Vehicle" };
+
+export const VEHICLE_TYPES = [ICE, SVV];
+
 // UI Hint Types
 export const DANGER = "DANGER";
 export const WARNING = "WARNING";
@@ -101,7 +107,7 @@ export const LOGOUT = "LOGOUT";
 export const LOGGING_IN = "LOGGING_IN";
 export const CLEAR_ERROR = "CLEAR_ERROR";
 
-/* Assignment Table */
+/* Assignment Table.js */
 export const SET_EQUIPMENT_EMPLOYEE = "SET_EQUIPMENT_EMPLOYEE";
 // export const ADD_EQUIPMENT_EMPLOYEE = "ADD_EQUIPMENT_EMPLOYEE";
 export const REMOVE_EQUIPMENT_EMPLOYEE = "REMOVE_EQUIPMENT_EMPLOYEE";
@@ -123,6 +129,10 @@ export const REMOVE_DAILY_MESSAGE = "REMOVE_DAILY_MESSAGE";
 
 export const SET_DAILY_MIX = "SET_DAILY_MIX";
 export const ADD_BRIX_RECORD = "ADD_BRIX_RECORD";
+export const ADDING_BRIX_RECORD = "ADDING_BRIX_RECORD";
+export const FETCHING_BRIX_RECORDS = "FETCHING_BRIX_RECORDS";
+export const GET_BRIX_RECORDS = "GET_BRIX_RECORDS";
+export const GET_BRIX_CHART = "GET_BRIX_CHART";
 
 export const PUBLISH_TABLE = "PUBLISH_TABLE";
 export const CLEAR_TABLE = "CLEAR_TABLE";
@@ -130,7 +140,7 @@ export const GET_PARKING_LOCATIONS = "GET_PARKING_LOCATIONS";
 
 export const EDIT_TRUCK = "EDIT_TRUCK";
 export const ADD_TRUCK = "ADD_TRUCK";
-export const GET_TRUCKS = "GET_TRUCKS";
+export const DELETE_TRUCK = "DELETE_TRUCK";
 
 // standard axios config object for POST requests
 export const AXIOS_JSON_HEADER = {

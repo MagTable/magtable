@@ -116,8 +116,6 @@ public class ShiftController {
             //getting the employee name
             String name = shifts.next().next().first().text();
 
-            System.out.println(name.contains("(GP)"));
-
             boolean isGreen = name.contains("(GP)");
             shift.setIsGreen(isGreen);
 
@@ -129,7 +127,12 @@ public class ShiftController {
             //Getting the description
             //input is "800 - description"
             String[] splitDescription = shifts.next().next().next().first().text().split(" - ");
-            shift.setDescription(splitDescription[1]);
+
+            try {
+                shift.setDescription(splitDescription[1]);
+            }catch (ArrayIndexOutOfBoundsException e){
+                shift.setDescription("On Call"); //On Call shifts have no '-' for us to split for
+            }
 
             shifts.remove(0); //Always removing the top-most shift
 

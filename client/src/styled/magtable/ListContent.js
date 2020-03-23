@@ -137,10 +137,28 @@ export const TruckListDivWrapper = styled(TruckListDiv)`
 	min-width: 340px;
 `;
 
+export const ManipTruckManipIconDiv = styled.div`
+	width: auto;
+	align-items: center;
+	justify-items: end;
+	// display: none;
+	opacity: 0;
+	display: flex;
+	transition: 0.3s ease-in-out;
+`;
+
 export const TruckListItemDiv = styled.div`
 	transition: all 0.15s ease-in-out;
 	display: flex;
 	height: 60px;
+	width: 100%;
+	margin: auto;
+	text-overflow: ellipsis;
+	&:hover ${ManipTruckManipIconDiv} {
+		// display: flex;
+		opacity: 1;
+		transition: 0.3s ease-in-out;
+	}
 
 	${({ disabled }) =>
 		disabled &&
@@ -148,6 +166,22 @@ export const TruckListItemDiv = styled.div`
 		height: 40px;
 		background: var(--shader-grey);
 	`}
+`;
+
+export const TruckMgmtItemDiv = styled(TruckListItemDiv)`
+	border-bottom: 2px solid grey;
+	height: 40px;
+`;
+
+export const TruckStatusBox = styled.div`
+	width: 100%;
+	display: block;
+	align-self: center;
+	align-items: center;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	padding-left: 5px;
 `;
 
 export const TruckNoticeDiv = styled.div`
@@ -169,7 +203,7 @@ export const TruckProblemsText = styled.p`
 
 export const BrixButton = styled.i`
 	font-size: 15px;
-	transition: color 0.3s ease-in-out;
+	transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
 	color: var(--context-blue-light);
 
 	position: absolute;
@@ -183,6 +217,7 @@ export const BrixButton = styled.i`
 		display: block;
 		opacity: 1;
 		color: var(--context-blue);
+		transform: scale(1.15);
 	}
 
 	${({ disabled }) =>
@@ -320,9 +355,10 @@ export const TruckListItemLocation = styled.div`
 `;
 
 export const TruckListManipDiv = styled.div`
-	display: flex;
-	flex-direction: row;
-	margin-right: 3px;
+	display: grid;
+	grid-template-columns: 60px 60px;
+	grid-column-gap: 10px;
+	margin: 10px;
 `;
 
 export const EquipmentListItemButton = styled(DangerButton)`

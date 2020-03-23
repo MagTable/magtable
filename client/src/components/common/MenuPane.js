@@ -21,13 +21,14 @@ import PropTypes from "prop-types";
  * @returns {*} The MenuPane component
  */
 function MenuPane({ menuOpen, setMenuOpen }) {
-	function toggleMenu() {
-		if (menuOpen) {
-			setMenuOpen(false);
-		} else {
-			setMenuOpen(true);
-		}
-	}
+	// Used for mobile, commented until we're ready to work on mobile.
+	// function toggleMenu() {
+	// 	if (menuOpen) {
+	// 		setMenuOpen(false);
+	// 	} else {
+	// 		setMenuOpen(true);
+	// 	}
+	// }
 
 	const authUser = useSelector(state => state.auth.user);
 	const { pathname } = useLocation();

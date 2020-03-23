@@ -98,6 +98,8 @@ public class EquipmentController {
             Assignment assignment = new Assignment();
             assignment.setEquipment(equipment);
             assignment.setMagtableRecord(magTableRecordRepository.findMostRecent());
+            assignment.setStatus(equipment.getStatus());
+            assignment.setNotice(equipment.getNotice());
 
             assignmentRepository.save(assignment);
         }

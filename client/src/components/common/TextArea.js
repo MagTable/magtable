@@ -1,19 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useField } from "formik";
 import styled from "styled-components";
+
+//todo Who made this originally? Please replace __UNKNOWN__ with your name!!
+
+/**
+ * @date 2/28/2020
+ * @author Steven Wong, MJ Kochuk
+ * @module Component
+ */
 
 const StyledLabel = styled.label`
 	margin-top: 1rem;
 `;
 
+const StyledTextArea = styled.textarea`
+	width: 100%;
+	width: -webkit-fill-available;
+	font-family: "Nanum Gothic", sans-serif;
+	min-height: 200px;
+`;
+
 const TextArea = ({ label, ...props }) => {
+	const [focus, setFocus] = useState(false);
 	const [field, meta] = useField(props);
+
+	field.onBlur = () => {
+		setFocus(false);
+	};
+	field.onFocus = () => {
+		setFocus(true);
+	};
 	return (
 		<>
-			<StyledLabel htmlFor={props.id || props.name}>{label}</StyledLabel>
+			<StyledLabel
+				error={props.errors && props.touched}
+				lifted={props?.value?.length > 0}
+				focus={focus}
+				htmlFor={props.id || props.name}
+			>
+				{(props.touched && props.errors) || label}
+			</StyledLabel>
 			<br />
-			<textarea {...field} {...props} />
+			<StyledTextArea {...field} {...props} />
 			{meta.touched && meta.error ? (
 				<div className="error">{meta.error}</div>
 			) : null}

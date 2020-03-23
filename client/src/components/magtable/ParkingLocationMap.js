@@ -7,11 +7,14 @@ import {
 	NumberTop,
 	PadColumn,
 	FakePadDiv,
-	SafetyZoneWrapper
+	SafetyZoneWrapper,
+	MagTableManipDiv,
+	MagTableManipBtn
 } from "../../styled/magtable/TruckMapMedia";
 import { useSelector } from "react-redux";
 import ParkingLocation from "./ParkingLocation";
 import { CENTER, EAST, WEST } from "../../actions/constants";
+import Confirmation from "../common/Confirmation";
 import IconButton from "../common/IconButton";
 import OverflowLocations from "./OverflowLocations";
 

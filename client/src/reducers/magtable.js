@@ -1,5 +1,4 @@
 import {
-	ADD_BRIX_RECORD,
 	ADD_DAILY_MESSAGE,
 	ADD_EMPLOYEE_SHIFT,
 	EAST_APRON,
@@ -8,16 +7,18 @@ import {
 	REMOVE_DAILY_MESSAGE,
 	REMOVE_EQUIPMENT_EMPLOYEE,
 	REMOVE_TRUCK_LOCATION,
-	SET_DAILY_MIX,
 	SET_EQUIPMENT_EMPLOYEE,
 	SET_SELECTED_APRON,
 	SET_TRUCK_LOCATION,
 	TOGGLE_BAY_LEAD,
 	REFRESH_EMPLOYEE_SHIFTS,
 	REFRESHING_EMPLOYEE_SHIFTS,
-	TOGGLE_AM_PM,
 	CLEAR_TABLE,
-	GET_PARKING_LOCATIONS
+	GET_PARKING_LOCATIONS,
+	TOGGLE_AM_PM,
+	ADD_TRUCK,
+	EDIT_TRUCK,
+	DELETE_TRUCK
 } from "../actions/constants";
 import { ParkingZones } from "../res/test_data/magtable";
 
@@ -112,23 +113,6 @@ export default function(state = initialState, action) {
 				assignments: payload.assignments
 				// server will echo the given assignments to verify changes were made properly
 			};
-		case ADD_BRIX_RECORD:
-			return {
-				...state,
-				assignments: state.assignments.map(assignment =>
-					assignment.equipment.id === payload.equipmentID
-						? {
-								...assignment,
-								brixRecords: payload // update list of brixRecords from API
-						  }
-						: assignment
-				)
-			};
-		case SET_DAILY_MIX:
-			return {
-				...state,
-				dailyMix: payload
-			};
 		case REMOVE_DAILY_MESSAGE: // API request for these actions will probably just return all daily messages after addition or deletion
 		case ADD_DAILY_MESSAGE:
 			return {
@@ -185,6 +169,41 @@ export default function(state = initialState, action) {
 			return {
 				...state,
 				showAM: !state.showAM
+			};
+		case ADD_TRUCK:
+			return {
+				...state,
+				assignments: [
+					...state.assignments,
+					{
+						equipment: payload,
+						employeeShifts: [],
+						parkingLocation: null,
+						brixRecords: []
+					}
+				].sort((a, b) => a.equipment.id - b.equipment.id),
+				loading: false
+			};
+		case EDIT_TRUCK:
+			return {
+				...state,
+				assignments: state.assignments.map(truck =>
+					truck.equipment.id === payload.id
+						? {
+								...truck,
+								equipment: payload
+						  }
+						: truck
+				),
+				loading: false
+			};
+		case DELETE_TRUCK:
+			return {
+				...state,
+				assignments: state.assignments.filter(
+					truck => truck.equipment.id !== payload
+				),
+				loading: false
 			};
 		default:
 			return state;

@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 /**
  * @date 2/28/2020
- * @author Steven Wong, Arran Woodruff
+ * @author Steven Wong, Arran Woodruff, MJ Kochuk
  * @module Component
  */
 
@@ -14,7 +14,7 @@ const StyledLabel = styled.label`
 	position: relative;
 	float: left;
 	top 30px;
-	left: 5px;
+	// left: 5px;
 	color: var(--input-label);
 	cursor: text;
 	z-index: 0;
@@ -70,6 +70,7 @@ const StyledSelect = styled.select`
 
 const SelectContainer = styled.div`
 	position: relative;
+	width: -webkit-fill-available;
 `;
 
 const SelectBox = ({ label, ...props }) => {
