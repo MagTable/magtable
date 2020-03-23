@@ -46,7 +46,8 @@ export const DoubleClickConfirm = styled.div`
  * The apps basic button.
  */
 export const Button = styled.button`
-	background-color: #dadada;
+	background-color: #414244;
+	color: white;
 	outline: none;
 	border: 0;
 	cursor: pointer;

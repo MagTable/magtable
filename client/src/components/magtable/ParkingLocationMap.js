@@ -7,11 +7,14 @@ import {
 	NumberTop,
 	PadColumn,
 	FakePadDiv,
-	SafetyZoneWrapper
+	SafetyZoneWrapper,
+	MagTableManipDiv,
+	MagTableManipBtn
 } from "../../styled/magtable/TruckMapMedia";
 import { useSelector } from "react-redux";
 import ParkingLocation from "./ParkingLocation";
 import { CENTER, EAST, WEST } from "../../actions/constants";
+import Confirmation from "../common/Confirmation";
 import IconButton from "../common/IconButton";
 import OverflowLocations from "./OverflowLocations";
 
@@ -40,17 +43,18 @@ function ParkingLocationMap(props) {
 	return (
 		<TruckMapDiv>
 			<ListTitle>
-				<ListTitleText>Parking Locations: {selectedApron}</ListTitleText>
-				<OverflowLocations open={overflowOpen} setOpen={setOverflowOpen}>
-					{({ openOverflow }) => (
-						<IconButton
-							faClassName="fa-bars fa-lg"
-							onClick={openOverflow}
-							color={"var(--header-text)"}
-							hoverColor={"grey"}
-						/>
-					)}
-				</OverflowLocations>
+				<ListTitleText>Parking Locations</ListTitleText>
+				<ApronToggle />
+
+				<MagTableManipDiv>
+					<Confirmation confirmationMessage={"Confirm Clear"} action={() => {}}>
+						{({ confirm }) => (
+							<MagTableManipBtn onClick={confirm}>Clear All</MagTableManipBtn>
+						)}
+					</Confirmation>
+
+					<MagTableManipBtn>Publish</MagTableManipBtn>
+				</MagTableManipDiv>
 			</ListTitle>
 			<MapWrapper>
 				{parkingZones.map(

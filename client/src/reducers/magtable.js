@@ -17,9 +17,12 @@ import {
 	REFRESHING_EMPLOYEE_SHIFTS,
 	TOGGLE_AM_PM,
 	CLEAR_TABLE,
-	GET_PARKING_LOCATIONS
+	GET_PARKING_LOCATIONS,
+	TOGGLE_AM_PM,
+	ADD_TRUCK,
+	EDIT_TRUCK,
+	DELETE_TRUCK
 } from "../actions/constants";
-import { ParkingZones } from "../res/test_data/magtable";
 
 const initialState = {
 	assignments: [],
@@ -185,6 +188,41 @@ export default function(state = initialState, action) {
 			return {
 				...state,
 				showAM: !state.showAM
+			};
+		case ADD_TRUCK:
+			return {
+				...state,
+				assignments: [
+					...state.assignments,
+					{
+						equipment: payload,
+						employeeShifts: [null, null, null, null],
+						parkingLocation: null,
+						brixRecords: []
+					}
+				].sort((a, b) => a.equipment.id - b.equipment.id),
+				loading: false
+			};
+		case EDIT_TRUCK:
+			return {
+				...state,
+				assignments: state.assignments.map(truck =>
+					truck.equipment.id === payload.id
+						? {
+								...truck,
+								equipment: payload
+						  }
+						: truck
+				),
+				loading: false
+			};
+		case DELETE_TRUCK:
+			return {
+				...state,
+				assignments: state.assignments.filter(
+					truck => truck.equipment.id !== payload
+				),
+				loading: false
 			};
 		default:
 			return state;

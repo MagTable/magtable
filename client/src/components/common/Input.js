@@ -2,10 +2,17 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import {
 	TextInput as StyledTextInput,
-	TextInputLabel,
 	TextInputIcon,
 	TextInputContainer
 } from "../../styled/common/TextInput";
+import { useField } from "formik";
+import styled from "styled-components";
+
+/**
+ * @date 2/28/2020
+ * @author Steven Wong, Arran Woodruff, MJ Kochuk
+ * @module Component
+ */
 
 /**
  * Standard component for text input, has support for labels, errors, and IconButtons
@@ -14,29 +21,47 @@ import {
  * @returns {*} The TextInput Component
  * @constructor
  */
-function TextInput(props) {
-	const [focus, setFocus] = useState(false);
 
-	// Todo MJ - find a way to determine if a prop exists and only blur when it does.
+const StyledLabel = styled.label`
+	user-select: none;
+	position: relative;
+	float: left;
+	top 45px;
+	left: 5px;
+	color: var(--input-label);
+	cursor: text;
+	z-index: 0;
+	
+	transition: all 150ms cubic-bezier(0.4,0,0.2,1),opacity 150ms cubic-bezier(0.4,0,0.2,1);
+
+	${({ focus }) =>
+		focus &&
+		`
+			color: #28aae1;
+	`}
+	
+	${({ lifted, focus }) =>
+		(lifted || focus) &&
+		`
+			transform: scale(.75) translateY(-40px) ;
+	`}
+		
+	${({ error }) =>
+		error &&
+		`
+			color: red;
+	`}
+`;
+
+const Input = ({ label, ...props }) => {
+	const [focus, setFocus] = useState(false);
+	const [field] = useField(props);
+
 	if (props.setBlurred) {
 		props.setBlurred(focus || props.blur);
 	}
-
 	return (
 		<TextInputContainer>
-			<StyledTextInput
-				{...props}
-				error={props.errors && props.touched}
-				type={props.type || "text"}
-				onFocus={() => setFocus(true)}
-				onBlur={() => setFocus(false)}
-				focus={focus}
-				id={props.label}
-				fit={props.fit}
-			/>
-
-			<br />
-
 			{props.icon && (
 				<TextInputIcon
 					className={"fas " + props.icon?.iconClass}
@@ -44,20 +69,28 @@ function TextInput(props) {
 					toolTip={props.icon?.toolTip}
 				/>
 			)}
-
-			<TextInputLabel
+			<StyledLabel
 				error={props.errors && props.touched}
 				lifted={props?.value?.length > 0 || props?.value > 0}
 				focus={focus}
-				htmlFor={props.label}
+				htmlFor={props.id || props.name}
 			>
-				{(props.touched && props.errors) || props.label}
-			</TextInputLabel>
+				{(props.touched && props.errors) || label}
+			</StyledLabel>
+			<StyledTextInput
+				{...field}
+				{...props}
+				onFocus={() => setFocus(true)}
+				onBlur={() => setFocus(false)}
+				focus={focus}
+				id={label}
+				fit={props.fit}
+			/>
 		</TextInputContainer>
 	);
-}
+};
 
-TextInput.propTypes = {
+Input.propTypes = {
 	errors: PropTypes.string,
 	touched: PropTypes.bool,
 	value: PropTypes.string,
@@ -69,4 +102,4 @@ TextInput.propTypes = {
 	fit: PropTypes.bool
 };
 
-export default TextInput;
+export default Input;

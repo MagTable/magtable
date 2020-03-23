@@ -28,7 +28,7 @@ export const BGContainer = styled.div`
  * The container immediately surrounding the login elements, provides style and input positioning.
  */
 export const LoginBlock = styled.div`
-	max-width: 350px;
+	max-width: 488px;
 	height: auto;
 	padding: 2rem;
 	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.06), 0 0 6px rgba(0, 0, 0, 0.23);
@@ -50,7 +50,9 @@ export const LoginBlock = styled.div`
  * The submit button to log in to the app
  */
 export const LoginBtn = styled(OkButton)`
+	color: black;
 	margin: auto;
 	margin-top: 10px;
 	padding: 10px;
+	border-radius: 0.45rem;
 `;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../../res/Images/logo-placeholder.png";
+import logo from "../../res/Images/NoTextLogo.svg";
 import { AeroLogo, NavBar as NavBarDiv } from "../../styled/common/Navigation";
 import MenuPane from "./MenuPane";
 import { Link } from "react-router-dom";

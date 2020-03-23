@@ -64,6 +64,12 @@ export const DEICE_TRUCK = "ICE";
 
 export const TRUCK_STATUSES = [GO, CON, OOS, INOP];
 
+// vehicle types
+export const ICE = { id: "ICE", value: "Deice Vehicle" };
+export const SVV = { id: "SVV", value: "Service Vehicle" };
+
+export const VEHICLE_TYPES = [ICE, SVV];
+
 // UI Hint Types
 export const DANGER = "DANGER";
 export const WARNING = "WARNING";
@@ -130,7 +136,7 @@ export const GET_PARKING_LOCATIONS = "GET_PARKING_LOCATIONS";
 
 export const EDIT_TRUCK = "EDIT_TRUCK";
 export const ADD_TRUCK = "ADD_TRUCK";
-export const GET_TRUCKS = "GET_TRUCKS";
+export const DELETE_TRUCK = "DELETE_TRUCK";
 
 // standard axios config object for POST requests
 export const AXIOS_JSON_HEADER = {

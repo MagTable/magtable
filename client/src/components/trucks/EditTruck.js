@@ -2,29 +2,27 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import { TRUCK_STATUSES, VEHICLE_TYPES } from "../../actions/constants";
+import { editTruck } from "../../actions/truck";
+import { TRUCK_STATUSES } from "../../actions/constants";
 import SelectBox from "../common/SelectBox";
 import { LoginBtn } from "../../styled/auth/Login";
 import TextArea from "../common/TextArea";
 import styled from "styled-components";
 import Input from "../common/Input";
-import { addTruck } from "../../actions/truck";
 
 /**
  * @date 3/08/2020
- * @author Steven Wong
+ * @author MJ Kochuk, Steven Wong, Tom Allcock
  * @module Component
  */
 
 /**
- *
- * Handles the rendering of the form to add a Truck to the current list of trucks..
- *
+ * For editing a truck in the manage trucks page.
  * @constructor
  * @returns {*} The AddTruck component.
  */
 
-const AddTruckForm = styled(Form)`
+const EditTruckForm = styled(Form)`
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-auto-rows: auto;
@@ -32,7 +30,7 @@ const AddTruckForm = styled(Form)`
 	grid-template-areas:
 		"header header"
 		"id id"
-		"status type"
+		"status status"
 		"notice notice"
 		"submit submit";
 `;
@@ -50,10 +48,6 @@ const StatusDiv = styled.div`
 	grid-area: status;
 `;
 
-const TypeDiv = styled.div`
-	grid-area: type;
-`;
-
 const NoticeDiv = styled.div`
 	grid-area: notice;
 `;
@@ -62,44 +56,39 @@ const SubmitDiv = styled.div`
 	grid-area: submit;
 `;
 
-const AddTruck = () => {
-	const dispatch = useDispatch();
+const EditTruck = ({ truck }) => {
 	const truckStatuses = TRUCK_STATUSES;
-	const vehicleTypes = VEHICLE_TYPES;
+	const dispatch = useDispatch();
 
-	//todo figure out formik text area and add it in at the bottom.
-	// also change the text input field into a number one purely unless API can parse the string to an int and we can keep easy consistency
+	if (truck == null) {
+		truck = {
+			id: 0,
+			status: "",
+			notice: ""
+		};
+	}
+
 	return (
 		<Formik
+			enableReinitialize={true}
 			initialValues={{
-				id: "",
-				status: "",
-				type: "",
-				notice: ""
+				id: truck.id,
+				status: truck.status,
+				notice: truck.notice
 			}}
-			onSubmit={(values, { resetForm }) => {
-				dispatch(addTruck(values));
-				resetForm();
+			onSubmit={values => {
+				dispatch(editTruck(values));
 			}}
 			validationSchema={Yup.object().shape({
-				id: Yup.string()
-					.matches(
-						/^([0-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9])$/,
-						"Invalid Number"
-					)
-					.required("ID Required"),
 				status: Yup.string()
 					.oneOf(truckStatuses)
-					.required("Status Required"),
-				type: Yup.string()
-					.oneOf(vehicleTypes.map(type => type.id))
-					.required("Type Required"),
+					.required("Truck Status Required"),
 				notice: Yup.string().max(250, "Maximum Length is 250 Characters")
 			})}
 		>
 			{props => (
-				<AddTruckForm>
-					<Header>Add Trucks</Header>
+				<EditTruckForm>
+					<Header>Edit Truck {truck.id}</Header>
 					<IdDiv>
 						<Input
 							errors={props.errors.id}
@@ -108,6 +97,7 @@ const AddTruck = () => {
 							name="id"
 							type="number"
 							label="Truck ID"
+							disabled
 							fit
 						/>
 					</IdDiv>
@@ -119,7 +109,6 @@ const AddTruck = () => {
 							label="Truck Status"
 							name="status"
 						>
-							<option value="" />
 							{truckStatuses.map(status => {
 								return (
 									<option key={status} value={status}>
@@ -129,24 +118,6 @@ const AddTruck = () => {
 							})}
 						</SelectBox>
 					</StatusDiv>
-					<TypeDiv>
-						<SelectBox
-							errors={props.errors.type}
-							touched={props.touched.type}
-							value={props.values.type}
-							label="Truck Type"
-							name="type"
-						>
-							<option value="" />
-							{vehicleTypes.map(type => {
-								return (
-									<option key={type.id} value={type.id}>
-										{type.value}
-									</option>
-								);
-							})}
-						</SelectBox>
-					</TypeDiv>
 					<NoticeDiv>
 						<TextArea
 							label="Notice"
@@ -156,12 +127,12 @@ const AddTruck = () => {
 						/>
 					</NoticeDiv>
 					<SubmitDiv>
-						<LoginBtn type="submit">Add Truck</LoginBtn>
+						<LoginBtn type="submit">Save</LoginBtn>
 					</SubmitDiv>
-				</AddTruckForm>
+				</EditTruckForm>
 			)}
 		</Formik>
 	);
 };
 
-export default AddTruck;
+export default EditTruck;

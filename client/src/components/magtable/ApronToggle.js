@@ -1,7 +1,6 @@
 import React from "react";
 import { setSelectedApron } from "../../actions/magtable";
 import { useDispatch, useSelector } from "react-redux";
-import { TruckListManipDiv } from "../../styled/magtable/ListContent";
 import Switch from "react-switch";
 import {
 	ToggleLabelLeft,
@@ -23,18 +22,17 @@ const ApronToggle = () => {
 	}
 
 	return (
-		<TruckListManipDiv>
-			<label>
-				<Switch
-					onChange={() => handleClick()}
-					checked={selectedApron === EAST_APRON}
-					offColor={"#414244"}
-					onColor={"#414244"}
-					checkedIcon={<ToggleLabelLeft>East</ToggleLabelLeft>}
-					uncheckedIcon={<ToggleLabelRight>West</ToggleLabelRight>}
-				/>
-			</label>
-		</TruckListManipDiv>
+		<label>
+			<Switch
+				onChange={() => handleClick()}
+				checked={selectedApron === EAST_APRON}
+				offColor={"#414244"}
+				onColor={"#414244"}
+				checkedIcon={<ToggleLabelLeft>East</ToggleLabelLeft>}
+				uncheckedIcon={<ToggleLabelRight>West</ToggleLabelRight>}
+				width={80}
+			/>
+		</label>
 	);
 };
 
