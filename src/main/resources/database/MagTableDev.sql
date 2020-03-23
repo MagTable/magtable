@@ -120,13 +120,13 @@ CREATE TABLE W2WShift
     PRIMARY KEY (shiftID)
 );
 
-
-
-# CREATE TABLE BrixChart (
-#     brixChartID         INT(5)   NOT NULL AUTO_INCREMENT,
-#     recommendedDailyMix INT(2)   NOT NULL,
-#     brix                FLOAT(3) NOT NULL,
-#     freezingPoint       INT(2)   NOT NULL,
-#     concentration       FLOAT(3) NOT NULL,
-#     PRIMARY KEY (brixChartID)
-# );
+CREATE TABLE BrixChart
+(
+    brixChartID    INT(5) NOT NULL AUTO_INCREMENT,
+    brix           FLOAT(3),
+    concentration  FLOAT(3),
+    freezepoint    INT(2),
+    lout           INT(2),
+    recommendedmix INT(2),
+    PRIMARY KEY (brixChartID)
+);

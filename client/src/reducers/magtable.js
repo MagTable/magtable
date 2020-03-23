@@ -1,5 +1,4 @@
 import {
-	ADD_BRIX_RECORD,
 	ADD_DAILY_MESSAGE,
 	ADD_EMPLOYEE_SHIFT,
 	EAST_APRON,
@@ -8,7 +7,6 @@ import {
 	REMOVE_DAILY_MESSAGE,
 	REMOVE_EQUIPMENT_EMPLOYEE,
 	REMOVE_TRUCK_LOCATION,
-	SET_DAILY_MIX,
 	SET_EQUIPMENT_EMPLOYEE,
 	SET_SELECTED_APRON,
 	SET_TRUCK_LOCATION,
@@ -115,23 +113,6 @@ export default function(state = initialState, action) {
 				assignments: payload.assignments
 				// server will echo the given assignments to verify changes were made properly
 			};
-		case ADD_BRIX_RECORD:
-			return {
-				...state,
-				assignments: state.assignments.map(assignment =>
-					assignment.equipment.id === payload.equipmentID
-						? {
-								...assignment,
-								brixRecords: payload // update list of brixRecords from API
-						  }
-						: assignment
-				)
-			};
-		case SET_DAILY_MIX:
-			return {
-				...state,
-				dailyMix: payload
-			};
 		case REMOVE_DAILY_MESSAGE: // API request for these actions will probably just return all daily messages after addition or deletion
 		case ADD_DAILY_MESSAGE:
 			return {
@@ -146,10 +127,14 @@ export default function(state = initialState, action) {
 		case GET_ASSIGNMENT_DATA:
 			return {
 				...state,
+				assignments: payload.equipment.map(elem => ({
+					equipment: elem,
+					employeeShifts: [null, null, null, null],
+					parkingLocation: null
+				})),
 				employeeShifts: payload.employeeShifts,
-				assignments: payload.magtable.assignments,
-				timePublished: payload.magtable.timePublished,
-				dailyMix: payload.magtable.dailyMix,
+				// dailyMessages: payload.dailyMessages,
+				// dailyMix: payload.dailyMix,
 				loading: false,
 				shiftsLoading: false
 			};

@@ -4,7 +4,6 @@ import {
 	SET_TRUCK_LOCATION,
 	REMOVE_TRUCK_LOCATION,
 	PUBLISH_TABLE,
-	// ADD_BRIX_RECORD,
 	// SET_DAILY_MIX,
 	// ADD_DAILY_MESSAGE,
 	// REMOVE_DAILY_MESSAGE,
@@ -23,8 +22,6 @@ import axios from "axios";
 import { setAlert } from "./alert";
 import { logout } from "./auth";
 import store from "../store";
-
-// todo update all async actions with API calls
 
 export const toggleAM = () => dispatch => {
 	dispatch({
@@ -159,41 +156,6 @@ export const clearTable = () => dispatch => {
 		type: CLEAR_TABLE
 	});
 };
-
-/**
- * Saves a brix record to an assignment's brixRecords list
- *
- * @param equipmentID equipmentID of assignment to add brixRecord to
- * @param brixRecord brixRecord to save to assignment
- * @returns API returns updated list of brix records for the assignment
- */
-// const addBrixRecord = (equipmentID, brixRecord) => async dispatch => {
-// 	try {
-// 		const res = await axios.put("/magtable/brix", AXIOS_JSON_HEADER, {
-// 			equipmentID,
-// 			brixRecord
-// 		});
-//
-// 		dispatch({
-// 			type: ADD_BRIX_RECORD,
-// 			payload: res.data
-// 		});
-// 	} catch (err) {
-// 		console.log(err);
-// 	}
-// };
-
-/**
- * Sets the daily mix to a given percentage
- *
- * @param dailyMix dailyMix to set
- */
-// const setDailyMix = dailyMix => dispatch => {
-// 	dispatch({
-// 		type: SET_DAILY_MIX,
-// 		payload: dailyMix
-// 	});
-// };
 
 /**
  * Adds a daily message to the magtable

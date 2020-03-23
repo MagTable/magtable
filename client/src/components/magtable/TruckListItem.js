@@ -43,6 +43,7 @@ import {
 	removeTruckLocation,
 	setTruckLocation
 } from "../../actions/magtable";
+import { getBrixRecords } from "../../actions/brix";
 import IconButton from "../common/IconButton";
 
 /**
@@ -68,9 +69,10 @@ import IconButton from "../common/IconButton";
  * @param assignment the associated assignment object
  * @param noticeOpen dictates whether or not to render the truck's notices
  * @param showAM toggle to display am or pm shift slots
+ * @param openBrixModal boolean to toggle the brix management modal
  * @returns {*} The TruckListItem component
  */
-function TruckListItem({ assignment, noticeOpen, showAM }) {
+function TruckListItem({ assignment, noticeOpen, showAM, openBrixModal }) {
 	const [hoveredShiftDescription, setHoveredShiftDescription] = useState(null);
 	const [localNoticeOpen, setLocalNoticeOpen] = useState(false);
 	const [shifts, setShifts] = useState({});
@@ -333,6 +335,12 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 	const currentPrimary = showAM ? amPrimary : pmPrimary;
 	const currentSecondary = showAM ? amSecondary : pmSecondary;
 
+	const handleBrixClick = () => {
+		dispatch(getBrixRecords(assignment.equipment.id));
+
+		openBrixModal();
+	};
+
 	return (
 		<div ref={drop}>
 			<TruckListItemDiv disabled={!equipmentOperable}>
@@ -346,7 +354,7 @@ function TruckListItem({ assignment, noticeOpen, showAM }) {
 				>
 					{assignment.equipment.id}
 					<BrixButton
-						onClick={() => console.log("brix")} // todo
+						onClick={handleBrixClick}
 						disabled={!equipmentOperable}
 						className={"fas fa-eye-dropper"}
 					/>

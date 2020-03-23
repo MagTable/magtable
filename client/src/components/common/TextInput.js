@@ -23,7 +23,7 @@ function TextInput(props) {
 	}
 
 	return (
-		<TextInputContainer>
+		<TextInputContainer id={props.id || null}>
 			<StyledTextInput
 				{...props}
 				error={props.errors && props.touched}
@@ -31,25 +31,25 @@ function TextInput(props) {
 				onFocus={() => setFocus(true)}
 				onBlur={() => setFocus(false)}
 				focus={focus}
-				id={props.label}
 				fit={props.fit}
+				accentColor={props.accentColor}
 			/>
-
-			<br />
-
 			{props.icon && (
 				<TextInputIcon
 					className={"fas " + props.icon?.iconClass}
 					onClick={props.icon?.action}
 					toolTip={props.icon?.toolTip}
+					focus={focus}
+					accentColor={props.accentColor}
 				/>
 			)}
 
 			<TextInputLabel
 				error={props.errors && props.touched}
-				lifted={props?.value?.length > 0 || props?.value > 0}
+				lifted={props.value.toString().length > 0}
 				focus={focus}
 				htmlFor={props.label}
+				accentColor={props.accentColor}
 			>
 				{(props.touched && props.errors) || props.label}
 			</TextInputLabel>

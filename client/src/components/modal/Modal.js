@@ -52,7 +52,7 @@ const StyledButton = styled.button`
 `;
 
 const StyledSection = styled.section`
-	background: #fff;
+	background: var(--modal-bg);
 	position: relative;
 	z-index: 100;
 	width: 50%;

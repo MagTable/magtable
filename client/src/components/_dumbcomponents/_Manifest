@@ -1,4 +1,4 @@
-dummyTrucks.js - contains a bunch of truck objects in an array for the purpose of testing the Mag Table truck list.
+dummyTrucks.js - contains a bunch of truck objects in an array for the purpose of testing the Mag Table.js truck list.
 
 TowerList.jss - the "map" that holds the different positions available to be filled for the tower.
 

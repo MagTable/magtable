@@ -203,7 +203,7 @@ export const TruckProblemsText = styled.p`
 
 export const BrixButton = styled.i`
 	font-size: 15px;
-	transition: color 0.3s ease-in-out;
+	transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
 	color: var(--context-blue-light);
 
 	position: absolute;
@@ -217,6 +217,7 @@ export const BrixButton = styled.i`
 		display: block;
 		opacity: 1;
 		color: var(--context-blue);
+		transform: scale(1.15);
 	}
 
 	${({ disabled }) =>
@@ -353,9 +354,6 @@ export const TruckListItemLocation = styled.div`
 	}
 `;
 
-/**
- *
- */
 export const TruckListManipDiv = styled.div`
 	display: grid;
 	grid-template-columns: 60px 60px;
