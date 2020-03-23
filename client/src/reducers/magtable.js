@@ -103,7 +103,7 @@ export default function(state = initialState, action) {
 				...state,
 				assignments: state.assignments.map(assignment => ({
 					...assignment,
-					employeeShifts: [null, null, null, null],
+					employeeShifts: [],
 					parkingLocation: null
 				}))
 			};

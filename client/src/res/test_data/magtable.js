@@ -285,6 +285,13 @@ export const initialDailyMix = 45;
 // }
 // },
 
+/*
+ * @future developers, if you're looking for bugs,
+ * this script and the DB table 'ParkingLocation' need to match up to a degree
+ *
+ * if they don't match, you'll get an error in /actions/magtable
+ * */
+
 export const ParkingZones = [
 	{
 		id: 1,
@@ -303,8 +310,8 @@ export const ParkingZones = [
 		east: true,
 		center: false,
 		west: true,
-		left: 1,
-		right: 2
+		left: "1",
+		right: "2"
 	},
 	{
 		id: 3,
@@ -313,8 +320,8 @@ export const ParkingZones = [
 		east: true,
 		center: false,
 		west: true,
-		left: 2,
-		right: 4,
+		left: "2",
+		right: "4",
 		composite: 3
 	},
 	{
@@ -324,8 +331,8 @@ export const ParkingZones = [
 		east: true,
 		center: false,
 		west: false,
-		left: 4,
-		right: "4", // todo - not do this
+		left: "4A",
+		right: "4B",
 		double: true
 	},
 	{
@@ -345,8 +352,8 @@ export const ParkingZones = [
 		east: true,
 		center: true,
 		west: true,
-		left: 1,
-		right: 3,
+		left: "1",
+		right: "3",
 		composite: 2
 	},
 	{
@@ -356,8 +363,8 @@ export const ParkingZones = [
 		east: true,
 		center: true,
 		west: true,
-		left: 3,
-		right: 4
+		left: "3",
+		right: "4"
 	},
 	{
 		id: 8,
@@ -366,8 +373,8 @@ export const ParkingZones = [
 		east: true,
 		center: true,
 		west: true,
-		left: 4,
-		right: 6,
+		left: "4",
+		right: "6",
 		composite: 5
 	},
 	{
@@ -377,8 +384,8 @@ export const ParkingZones = [
 		east: true,
 		center: true,
 		west: true,
-		left: 6,
-		right: 7
+		left: "6",
+		right: "7"
 	},
 	{
 		id: 10,
@@ -387,8 +394,8 @@ export const ParkingZones = [
 		east: true,
 		center: true,
 		west: true,
-		left: 7,
-		right: 9
+		left: "7",
+		right: "9"
 	},
 	{
 		id: 11,
@@ -397,7 +404,7 @@ export const ParkingZones = [
 		east: true,
 		center: true,
 		west: true,
-		left: 9,
+		left: "9",
 		right: null
 	}
 ];

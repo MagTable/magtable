@@ -13,7 +13,7 @@ public class ParkingLocation {
     private String phonetic;
     private String apron;
     private String position;
-    private Integer bay;
+    private String bay;
 
     @Id
     @Column(name = "parkinglocationID", nullable = false)
@@ -67,11 +67,11 @@ public class ParkingLocation {
 
     @Basic
     @Column(name = "bay", nullable = true)
-    public Integer getBay() {
+    public String getBay() {
         return bay;
     }
 
-    public void setBay(Integer bay) {
+    public void setBay(String bay) {
         this.bay = bay;
     }
 
