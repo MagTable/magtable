@@ -16,6 +16,7 @@ DELETE FROM Equipment;
 DELETE FROM `User`;
 DELETE FROM Role;
 DELETE FROM parkingLocation;
+DELETE FROM BrixChart;
 
 /*
  These inserts are inorder to set up the database in terms of dependencies. When data about assignments and shifts
