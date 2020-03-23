@@ -196,7 +196,7 @@ export default function(state = initialState, action) {
 					...state.assignments,
 					{
 						equipment: payload,
-						employeeShifts: [null, null, null, null],
+						employeeShifts: [],
 						parkingLocation: null,
 						brixRecords: []
 					}

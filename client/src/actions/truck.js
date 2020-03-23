@@ -68,7 +68,7 @@ export const addTruck = truck => async dispatch => {
 
 export const deleteTruck = id => async dispatch => {
 	try {
-		await axios.delete(`/equipment/truck/deactivate/${id}`);
+		await axios.put(`/equipment/truck/deactivate/${id}`);
 
 		dispatch({
 			type: DELETE_TRUCK,
