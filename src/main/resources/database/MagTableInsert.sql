@@ -1,6 +1,6 @@
 /*
     Program Name: MagTableInsert
-    Author: Mustafa Al Khaldi
+    Author: Mustafa Al Khaldi, David Ward, Arran Woodruff
     Created: March 23, 2020
     Description: Use Case two updated database inserts for the database.
  */
