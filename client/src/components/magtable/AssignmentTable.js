@@ -1,4 +1,11 @@
 import React from "react";
+import { AssignmentContainer, MapsDiv } from "../../styled/magtable/Maps";
+import { DndProvider } from "react-dnd";
+import Backend from "react-dnd-html5-backend";
+import TowerMap from "./TowerList";
+import ParkingLocationMap from "./ParkingLocationMap";
+import EmployeeList from "./EmployeeList";
+import TruckList from "./TruckList";
 
 /**
  * Placeholder component to assist in displaying routing
@@ -6,11 +13,16 @@ import React from "react";
  */
 const AssignmentTable = () => {
 	return (
-		<div>
-			<h1>
-				Assignment Table <br /> <small>Coming Soon!</small>
-			</h1>
-		</div>
+		<DndProvider backend={Backend}>
+			<AssignmentContainer>
+				<EmployeeList />
+				<TruckList />
+				<MapsDiv>
+					<ParkingLocationMap />
+					<TowerMap />
+				</MapsDiv>
+			</AssignmentContainer>
+		</DndProvider>
 	);
 };
 

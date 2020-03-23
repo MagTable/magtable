@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
-import { getUsers } from "../../actions/user";
+import { getRoles, getUsers } from "../../actions/user";
 import { useDispatch, useSelector } from "react-redux";
 import { UserListDiv, UserListSection } from "../../styled/user/User";
 
 import AddUser from "./AddUser";
 import UserListItem from "./UserListItem";
+import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
 
 /**
  * Handles rendering of user CRUD components
@@ -16,6 +17,7 @@ const UserList = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
+		dispatch(getRoles());
 		dispatch(getUsers());
 	}, [dispatch]);
 
@@ -23,7 +25,12 @@ const UserList = () => {
 	const usersLoading = useSelector(state => state.user.loading);
 	const roles = useSelector(state => state.user.roles);
 
-	if (usersLoading) return <h1>Loading...</h1>; // todo replace with spinner
+	if (usersLoading)
+		return (
+			<SpinnerWrap fullPage>
+				<LoadingImg className="fas fa-circle-notch" />
+			</SpinnerWrap>
+		);
 
 	// set flags for each empty role
 	roles.forEach(role => {

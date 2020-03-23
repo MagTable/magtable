@@ -6,6 +6,12 @@ import { LoginBlock, LoginBtn } from "../../styled/auth/Login";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import TextInput from "../common/TextInput";
+import {
+	Background,
+	BGContainer,
+	BlurCover
+} from "../../styled/common/TextInput";
+import { LoginLoadIcon } from "../../styled/common/QualityOfLife";
 
 /**
  * @date 2/10/2020
@@ -21,6 +27,7 @@ import TextInput from "../common/TextInput";
 function Login() {
 	const [showPassword, setShowPassword] = useState(false);
 	const { isAuthenticated, loading, error } = useSelector(state => state.auth);
+	const [blur, setBlur] = useState(false);
 	const dispatch = useDispatch();
 	const history = useHistory(); // to allow us to redirect the user
 
@@ -38,70 +45,83 @@ function Login() {
 	} // don't show the page until we know user is not authenticated
 
 	return (
-		<LoginBlock>
-			<h1>MagTable</h1>
-			<Formik
-				initialValues={{
-					username: "mustafa",
-					password: ""
-				}}
-				onSubmit={values => {
-					dispatch(login(values));
-				}}
-				validationSchema={Yup.object().shape({
-					username: Yup.string()
-						.matches(/^[a-zA-Z0-9]+$/, "Invalid Characters")
-						.required("Required field")
-						.min(5, "Minimum Length is 5")
-						.max(15, "Maximum Length is 15"),
-					password: Yup.string().required("Required Field")
-				})}
-			>
-				{props => (
-					<Form>
-						{/*See Formik Documentation*/}
-						<Field name={"username"}>
-							{({ field }) => (
-								<TextInput
-									{...field}
-									errors={props.errors.username}
-									touched={props.touched.username}
-									value={props.values.username}
-									label={"Username"}
-									fit
-								/>
-							)}
-						</Field>
-						<Field name={"password"}>
-							{({ field }) => (
-								<TextInput
-									{...field}
-									errors={props.errors.password}
-									touched={props.touched.password}
-									value={props.values.password}
-									label={"Password"}
-									type={showPassword ? "text" : "password"}
-									icon={{
-										action: () => setShowPassword(!showPassword),
-										iconClass: showPassword
-											? "fa-eye-slash fa-lg"
-											: "fa-eye fa-lg",
-										toolTip: showPassword ? "Hide Password" : "Show Password"
-									}}
-									fit
-								/>
-							)}
-						</Field>
+		<>
+			<BGContainer>
+				<BlurCover blur={blur}>
+					<Background />
+				</BlurCover>
+			</BGContainer>
 
-						<br />
+			<LoginBlock>
+				<LoginLoadIcon loading={loading} />
+				<h1>MagTable</h1>
+				<Formik
+					initialValues={{
+						username: "mustafa",
+						password: "password"
+					}}
+					onSubmit={values => {
+						dispatch(login(values));
+					}}
+					validationSchema={Yup.object().shape({
+						username: Yup.string()
+							.matches(/^[a-zA-Z0-9]+$/, "Invalid Characters")
+							.required("Required field")
+							.min(5, "Minimum Length is 5")
+							.max(15, "Maximum Length is 15"),
+						password: Yup.string().required("Required Field")
+					})}
+				>
+					{props => (
+						<Form>
+							{/*See Formik Documentation*/}
+							<Field name={"username"}>
+								{({ field }) => (
+									<TextInput
+										{...field}
+										blur={blur}
+										setBlurred={setBlur}
+										errors={props.errors.username}
+										touched={props.touched.username}
+										value={props.values.username}
+										label={"Username"}
+										fit
+									/>
+								)}
+							</Field>
+							<Field name={"password"}>
+								{({ field }) => (
+									<TextInput
+										{...field}
+										blur={blur}
+										setBlurred={setBlur}
+										errors={props.errors.password}
+										touched={props.touched.password}
+										value={props.values.password}
+										label={"Password"}
+										type={showPassword ? "text" : "password"}
+										icon={{
+											action: () => setShowPassword(!showPassword),
+											iconClass: showPassword
+												? "fa-eye-slash fa-lg"
+												: "fa-eye fa-lg",
+											toolTip: showPassword ? "Hide Password" : "Show Password"
+										}}
+										fit
+									/>
+								)}
+							</Field>
 
-						<LoginBtn type="submit" disabled={loading}>
-							Login
-						</LoginBtn>
-					</Form>
-				)}
-			</Formik>
-		</LoginBlock>
+							<br />
+
+							<LoginBtn type="submit" disabled={loading}>
+								Login
+							</LoginBtn>
+						</Form>
+					)}
+				</Formik>
+			</LoginBlock>
+		</>
 	);
 }
 

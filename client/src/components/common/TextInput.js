@@ -17,6 +17,11 @@ import {
 function TextInput(props) {
 	const [focus, setFocus] = useState(false);
 
+	// Todo MJ - find a way to determine if a prop exists and only blur when it does.
+	if (props.setBlurred) {
+		props.setBlurred(focus || props.blur);
+	}
+
 	return (
 		<TextInputContainer>
 			<StyledTextInput
@@ -30,7 +35,6 @@ function TextInput(props) {
 				fit={props.fit}
 			/>
 
-			{/* br + float:right takes the eye icon out of the same row as the input to avoid resizing the login block */}
 			<br />
 
 			{props.icon && (

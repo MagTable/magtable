@@ -1,5 +1,6 @@
 package com.magtable.services;
 
+import org.apache.tomcat.util.http.parser.HttpParser;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -140,5 +141,77 @@ public class ErrorService {
      */
     public ResponseStatusException invalidInput() {
         return new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid Input");
+    }
+
+    /**
+     * Message reporting that the session has expired.
+     * @return ResponseStatusException message.
+     */
+    public ResponseStatusException sessionExpired() {
+        return new ResponseStatusException(HttpStatus.FORBIDDEN, "Session Expired");
+    }
+
+    /**
+     * Message reporting that the record is invalid.
+     * @return ResponseStatusException message.
+     */
+    public ResponseStatusException invalidRecord() {
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Entry");
+    }
+
+    public ResponseStatusException magIdNotFound(int id) {
+        return new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Mag #%d Not Found.", id));
+    }
+
+    /**
+     * Message reporting that the trucks operational status is invalid
+     * @param status The invalid status
+     * @return ResponseStatusException message
+     */
+    public ResponseStatusException truckOPStatusInvalid(String status){
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Operational Status %s Not Found", status));
+    }
+
+    /**
+     * Message reporting that at truck already exists
+     * @param id the id of the truck
+     * @return ResponseStatusException message
+     */
+    public ResponseStatusException truckAlreadyExists(Integer id) {
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Truck : %d Already Exists", id));
+    }
+
+    /**
+     * Message reporting that at truck doesn't exists
+     * @param id the id of the truck
+     * @return ResponseStatusException message
+     */
+    public ResponseStatusException truckDoesntExists(Integer id) {
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Truck : %d Doesn't Exists", id));
+    }
+
+    /**
+     *Error Service for generic errors TEMPORARY Should be used with a //todo
+     *
+     */
+    public ResponseStatusException notYetImplemented(){
+        return new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "ErrorSerivce Not Yet Implemented");
+    }
+
+    /**
+     * Message reporting that a truck id is not valid
+     * @return ResponseStatusException message
+     */
+    public ResponseStatusException invalidTruckId() {
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Truck ids must be between 1 and 1000"));
+    }
+
+    /**
+     * Message reporting that a truck status is not valid
+     * @param type the invalid type
+     * @return ResponseStatusException message
+     */
+    public ResponseStatusException invalidTruckType(String type) {
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("%s is not a valid type", type));
     }
 }

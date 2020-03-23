@@ -1,12 +1,51 @@
-.App {
-  text-align: center;
-}
-
 html{
   /*background-color: #E9E9E9;*/
   font-family: 'Karla', sans-serif;
-}
+  --border-color: #474747;
 
+  /* Common across all pages */
+
+  /*Context colors - for items that have an action or have meaning other than just style.*/
+  --context-green: #00AD6E;
+  --context-red: #E72530;
+  --context-blue: #009dd3;
+  --context-grey: #b2b2b2;
+  --context-orange: #EAAB0E;
+  --context-yellow: #FFE400;
+
+  --context-green-light: #00AD6E77;
+  --context-red-light: #E7253077;
+  --context-blue-light: #187AD377;
+  --context-grey-light: #b2b2b277;
+  --context-orange-light: #EAAB0E99;
+  --context-yellow-light: #FFE40077;
+
+  --alert-warning: #ff990066;
+
+  --green-pass: #00e445;
+  --no-avop: #e397e2;
+
+  /*Used for separating elements between one another, for example, shading every second row of a table or directly opposing divs. */
+  --shader-grey: #d6d6d6;
+  --shader-blue: rgba(74, 74, 255, 0.31);
+
+  --emphasis-grey: #575757;
+
+  --section-title-bg: #615A57;
+
+
+  --navbar: #232f3e;
+  --header: #e5eaef;
+  --header-text: #333;
+  --sub-header: white;
+  --sub-header-text: #333;
+  --title-bright: #FFFFFF;
+
+  --link-underline: #f8991d;
+  --input-label: #aaa;
+  --title-dark: #5cdb95;
+
+}
 ::selection {
   background: #28aae1;
 }
@@ -18,54 +57,6 @@ input:focus{
 .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.example-enter {
-  opacity: 0.01;
-}
-
-.example-enter.example-enter-active {
-  opacity: 1;
-  transition: opacity 500ms ease-in;
-}
-
-.example-leave {
-  opacity: 1;
-}
-
-.example-leave.example-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 /* AUTO FILL STYLING*/
@@ -82,13 +73,11 @@ select:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
-
-/* HELPER CLASSES */
-
-.text-green {
-  color: #0b0;
-}
-
-.m-0 {
-  margin: 0;
+@keyframes loading-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

@@ -1,13 +1,16 @@
 package com.magtable.controller;
 
-import com.magtable.model.*;
+import com.magtable.model.api.AuthenticationRequest;
+import com.magtable.model.api.AuthenticationResponse;
+import com.magtable.model.api.MagUserDetails;
+import com.magtable.model.api.SafeUser;
+import com.magtable.model.entities.User;
 import com.magtable.repository.UserRepository;
-import com.magtable.services.*;
+import com.magtable.services.ErrorService;
+import com.magtable.services.userServices.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
 

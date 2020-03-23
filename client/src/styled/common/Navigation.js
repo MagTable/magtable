@@ -46,7 +46,6 @@ export const NavIcon = styled.i`
 	width: 45px;
 	vertical-align: middle;
 	float: left;
-	// padding: 0px 0 10px 0;
 `;
 
 /**
@@ -103,12 +102,12 @@ export const NavDiv = styled.div`
 /**
  * The header div of the page that contains the logo, navigation and possibly the title of the page.
  */
-export const HeaderDiv = styled.div`
-	background: #474747;
+export const NavBar = styled.div`
+	background: var(--navbar);
 	display: flex;
 	justify-content: space-between;
 	height: 70px;
-	border-bottom: 2px solid #dedede;
+	// border-bottom: 2px solid #dedede;
 `;
 
 /**
@@ -116,14 +115,22 @@ export const HeaderDiv = styled.div`
  */
 export const NavLink = styled(Link)`
 	text-decoration: none;
-	color: #eee;
+	color: var(--title-bright);
 	font-size: 20px;
 	padding-bottom: 0.5rem;
+
+	transition: color 0.25s ease-in-out, border 0.25s ease-in-out;
+	border-bottom: 2px solid #00000000;
+
+	:hover {
+		color: var(--link-underline);
+	}
 	${({ active }) =>
 		active &&
 		`
-		border-bottom: 2px solid #28aae1;
-	`}
+			border-bottom-color: var(--link-underline);
+			color: var(--link-underline);
+		`}
 	${isMobile
 		? // Mobile rules
 		  `width: 100vw;

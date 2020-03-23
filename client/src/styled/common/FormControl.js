@@ -29,6 +29,19 @@ export const Input = styled.input`
 	}
 `;
 
+export const DoubleClickConfirm = styled.div`
+	transition: background 0.3s ease-in-out;
+
+	${({ active, color }) =>
+			active &&
+			`
+			background: ${color} !important;
+	`}
+		:not(:last-child) {
+		border-bottom: 2px solid var(--context-grey);
+	}
+`;
+
 /**
  * The apps basic button.
  */
@@ -46,6 +59,16 @@ export const Button = styled.button`
 	:hover {
 		background: #bdbdbd;
 	}
+
+	${({ auto }) => auto && `width: auto;`}
+`;
+
+export const DangerButton = styled(Button)`
+	background: var(--context-red);
+
+	:hover {
+		background: darkred;
+	}
 `;
 
 /**
@@ -57,4 +80,78 @@ export const OkButton = styled(Button)`
 	:hover {
 		background: #80c9ff;
 	}
+`;
+
+/**
+ * The on / off state labels for toggles.
+ */
+const ToggleLabel = styled.div`
+	display: flex;
+	justify-self: center;
+	align-self: center;
+	justify-content: center;
+	align-content: center;
+	color: var(--title-bright);
+	font-family: "Noto Sans KR", sans-serif;
+	white-space: nowrap;
+`;
+
+/**
+ * The label for a toggle, specific to the right side.
+ */
+export const ToggleLabelRight = styled(ToggleLabel)`
+	padding-right: 20px;
+`;
+
+/**
+ * The label for a toggle, specific to the left side.
+ */
+export const ToggleLabelLeft = styled(ToggleLabel)`
+	padding-left: 20px;
+`;
+
+export const ToggleLabelLeftNotice = styled.h4`
+	margin: 0 10px;
+	width: 100%;
+	color: var(--title-bright);
+	font-family: "Noto Sans KR", sans-serif;
+	text-align center;
+`;
+
+export const ToggleLabelRightNotice = styled.h4`
+	padding-right: 50px;
+	text-align: left;
+	margin: 0 0 0 0;
+	width: 100%;
+	color: var(--title-bright);
+	font-family: "Noto Sans KR", sans-serif;
+	text-align center;
+`;
+
+/**
+ * Text boxes for username and password.
+ */
+export const Select = styled.select`
+	margin-top: 20px;
+	background: transparent;
+
+	padding: 7px;
+
+	border: 0;
+	border-bottom: 2px solid black;
+
+	transition: border 0.3s ease-in-out;
+
+	${({ fit }) => fit && `width: calc(100% - 14px);`}
+	
+	${({ focus }) =>
+		focus &&
+		` 
+			border-color: #28aae1;
+	`}
+	${({ error }) =>
+		error &&
+		`
+			border-bottom: 2px solid red;
+	`}
 `;

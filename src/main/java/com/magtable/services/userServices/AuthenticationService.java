@@ -1,16 +1,15 @@
-package com.magtable.services;
+package com.magtable.services.userServices;
 
-import com.magtable.model.AuthenticationRequest;
-import com.magtable.model.User;
+import com.magtable.model.api.AuthenticationRequest;
+import com.magtable.model.entities.User;
 import com.magtable.repository.UserRepository;
+import com.magtable.services.ErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class AuthenticationService {

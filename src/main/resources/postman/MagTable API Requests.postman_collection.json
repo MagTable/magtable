@@ -282,7 +282,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"username\": \"new_user\",\r\n    \"password\": \"password\",\r\n    \"role\": 3\r\n}\r\n"
+									"raw": "{\r\n\t\"username\": \"hashed_user\",\r\n    \"password\": \"password\",\r\n    \"role\": 3\r\n}\r\n"
 								},
 								"url": {
 									"raw": "localhost:8080/user/add",
@@ -467,13 +467,16 @@
 									{
 										"key": "Content-Type",
 										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
+										"type": "text",
+										"value": "application/json"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"username\": \"mustafa\",\n\t\"password\": \"password\"\n}"
+									"raw": "{\n\t\"username\": \"mustafa\",\n\t\"password\": \"password\"\n}",
+									"options": {
+										"raw": {}
+									}
 								},
 								"url": {
 									"raw": "localhost:8080/authenticate",
@@ -924,6 +927,331 @@
 					],
 					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "ShiftRequests",
+			"item": [
+				{
+					"name": "GET Shifts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/shift/update",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shift",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Shifts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/shift/update",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shift",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add shift",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\": \"David Ward\",\r\n        \"startTime\": \"0400\",\r\n        \"endTime\": \"1200\",\r\n        \"description\": \"Technician\",\r\n        \"noAvop\": false,\r\n        \"isGreen\": true\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/shift/add",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shift",
+								"add"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Equipment Requests",
+			"item": [
+				{
+					"name": "Get all Trucks",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/equipment/truck/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"equipment",
+								"truck",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Truck",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\" : 19,\n\t\"type\": \"ICE\",\n\t\"status\": \"OOS\",\n\t\"notice\": \"This is a new truck!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/equipment/truck/add",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"equipment",
+								"truck",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Truck",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\" : 8,\n\t\"type\" : \"SVV\",\n\t\"status\": \"INOP\",\n\t\"notice\": \"This is an edited truck!\",\n\t\"active\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/equipment/truck/edit",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"equipment",
+								"truck",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Truck",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"19\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/equipment/truck/delete/19",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"equipment",
+								"truck",
+								"delete",
+								"19"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Publish",
+			"item": [
+				{
+					"name": "Get Magtable",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/magtable",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"magtable"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Publish Magtable",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": null,\n    \"dailyMix\": null,\n    \"forecastLow\": null,\n    \"publishedBy\": null,\n    \"timePublished\": null,\n    \"assignments\": [\n        {\n            \"equipment\": {\n                \"id\": 2,\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"status\": \"INOP\" ,\n            \"notice\": \"aalsdkasldkh\",\n            \"parkingLocation\": {\n            \"id\": 5,\n            \"apron\": \"EDA\"\n            },\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 3,\n                \"type\": \"SVV\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 6,\n                \"type\": \"ICE\",\n                \"status\": \"CON\",\n                \"notice\": \"T4 Gauge not working; Burner won't light; Tank Temp gauge read 60,,cold...OS S Cameron 02-26-20-\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 7,\n                \"type\": \"SVV\",\n                \"status\": \"INOP\",\n                \"notice\": \"Nozzle Swapped with 36\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 8,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 9,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 10,\n                \"type\": \"SVV\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 11,\n                \"type\": \"SVV\",\n                \"status\": \"CON\",\n                \"notice\": \"at menzies escorting mag 30\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 13,\n                \"type\": \"SVV\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 14,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 15,\n                \"type\": \"ICE\",\n                \"status\": \"CON\",\n                \"notice\": \"contains mag 30s nozzle  /No charger in bucket blower inop due to screen issue\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 16,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 17,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 18,\n                \"type\": \"ICE\",\n                \"status\": \"INOP\",\n                \"notice\": \"drives in Hydrostatic only, shifter for D and R broken / Intermittent Spraying and main engine repeatedly dies.\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 19,\n                \"type\": \"ICE\",\n                \"status\": \"CON\",\n                \"notice\": \"T4 Gauge not working; Burner won't light; Tank Temp gauge read 60,,cold...OS S Cameron 02-26-20-\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 20,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 21,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 22,\n                \"type\": \"ICE\",\n                \"status\": \"CON\",\n                \"notice\": \"No radio in lower cab. Radio not working in upper cab.  // Panel P59 intermittent. 17-Feb-2020 JK116\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 23,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 24,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 25,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 26,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 27,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 28,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 29,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 30,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 31,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 32,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 33,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 34,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 35,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 36,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 37,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 38,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 39,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 40,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 41,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 42,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 43,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 44,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 45,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 46,\n                \"type\": \"ICE\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 99,\n                \"type\": \"SVV\",\n                \"status\": \"GO\",\n                \"notice\": \"\"\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 1000,\n                \"type\": \"Tower Spotter\",\n                \"status\": null,\n                \"notice\": null\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 1001,\n                \"type\": \"EDA CTM\",\n                \"status\": null,\n                \"notice\": null\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 1002,\n                \"type\": \"EDA Iceman\",\n                \"status\": null,\n                \"notice\": null\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 1003,\n                \"type\": \"EDA Icehouse\",\n                \"status\": null,\n                \"notice\": null\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 1011,\n                \"type\": \"WDA CTM\",\n                \"status\": null,\n                \"notice\": null\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 1012,\n                \"type\": \"WDA Iceman\",\n                \"status\": null,\n                \"notice\": null\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        },\n        {\n            \"equipment\": {\n                \"id\": 1013,\n                \"type\": \"WDA Icehouse\",\n                \"status\": null,\n                \"notice\": null\n            },\n            \"assignmentParkingLocation\": null,\n            \"employeeShifts\": []\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/magtable",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"magtable"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}

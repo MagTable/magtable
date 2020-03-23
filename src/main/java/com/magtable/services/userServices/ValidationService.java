@@ -1,4 +1,6 @@
-package com.magtable.services;
+package com.magtable.services.userServices;
+
+import com.magtable.services.ErrorService;
 
 public class ValidationService<E> {
 

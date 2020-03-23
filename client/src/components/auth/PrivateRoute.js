@@ -8,6 +8,7 @@ import {
 	PERSONNEL_MANAGER,
 	SYSTEM_ADMINISTRATOR
 } from "../../actions/constants";
+import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
 
 /**
  * @date 2/10/2020
@@ -37,7 +38,14 @@ const PrivateRoute = ({
 	const dispatch = useDispatch();
 
 	// this will prevent crashes and provide a waiting state. can be replaced with a spinner gif component in the future
-	if (loading) return <h1>Loading User...</h1>;
+	if (loading)
+		return (
+			<SpinnerWrap fullPage>
+				<LoadingImg className="fas fa-circle-notch" />
+			</SpinnerWrap>
+		);
+
+	if (!isAuthenticated) return <Redirect to={"/login"} />;
 
 	// if the private route has been declared as an admin route via the adminRoute boolean prop,
 	// we check the user's role and redirect if it's not sufficient
@@ -46,12 +54,13 @@ const PrivateRoute = ({
 	}
 
 	// more checks for user role depending on the personnelManagerRoute boolean prop
+	// if not a personnel manager, or system administrator send the user to the truck page.
 	if (
 		personnelManagerRoute &&
 		user.role.name !== PERSONNEL_MANAGER &&
 		user.role.name !== SYSTEM_ADMINISTRATOR
 	) {
-		return <Redirect to="/" />;
+		return <Redirect to="/truck/all" />;
 	}
 
 	// lastly, ensure that a token exists in local storage. if not, logout and redirect to /login

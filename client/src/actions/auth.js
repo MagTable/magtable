@@ -7,13 +7,16 @@ import {
 	LOGOUT,
 	LOGGING_IN,
 	CLEAR_ERROR,
-	AXIOS_JSON_HEADER
+	AXIOS_JSON_HEADER,
+	SYSTEM_ADMINISTRATOR,
+	PERSONNEL_MANAGER,
+	MECHANIC
 } from "./constants";
 
 import store from "../store";
 
 import { setAlert } from "./alert";
-import { getRoles } from "./user";
+import { getMagTable, getParkingLocations } from "./magtable";
 
 window.addEventListener("storage", e => {
 	// whenever our token changes, log the user out.
@@ -32,16 +35,20 @@ export const loadUser = () => async dispatch => {
 	try {
 		const res = await axios.get("/authenticate");
 
+		const user = res.data;
+
 		dispatch({
 			type: USER_LOADED,
-			payload: res.data // contains the user
+			payload: user
 		});
 
-		dispatch(getRoles());
-	} catch (err) {
-		// this error is not necessary
-		// dispatch(setAlert(err.response?.data?.message, "danger"));
+		const magtableRoles = [SYSTEM_ADMINISTRATOR, PERSONNEL_MANAGER, MECHANIC];
 
+		if (magtableRoles.includes(user.role.name)) {
+			dispatch(getMagTable());
+			dispatch(getParkingLocations());
+		}
+	} catch (err) {
 		dispatch({
 			type: AUTH_ERROR
 		});
@@ -64,12 +71,14 @@ export const login = ({ username, password }) => async dispatch => {
 		// destructure jwt from response data
 		const { jwt } = res.data;
 
-		dispatch({
-			type: LOGIN_SUCCESS,
-			payload: jwt
-		});
+		await setTimeout(() => {
+			dispatch({
+				type: LOGIN_SUCCESS,
+				payload: jwt
+			});
 
-		dispatch(loadUser());
+			dispatch(loadUser());
+		}, 750);
 	} catch (err) {
 		dispatch(setAlert(err.response?.data?.message, "danger"));
 
@@ -89,6 +98,10 @@ export const setUserPassword = ({
 	newPassword
 }) => async dispatch => {
 	try {
+		dispatch({
+			type: LOGGING_IN
+		});
+
 		const res = await axios.post(
 			"/password/reset",
 			{ username, password, newPassword },

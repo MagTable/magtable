@@ -1,8 +1,9 @@
-package com.magtable.services;
+package com.magtable.services.userServices;
 
-import com.magtable.model.MagUserDetails;
-import com.magtable.model.User;
+import com.magtable.model.api.MagUserDetails;
+import com.magtable.model.entities.User;
 import com.magtable.repository.UserRepository;
+import com.magtable.services.ErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
