@@ -12,6 +12,7 @@ import {
 } from "../../styled/common/TextInput";
 import { LoginLoadIcon } from "../../styled/common/QualityOfLife";
 import Input from "../common/Input";
+import PlaneLoader from "../common/PlaneLoader";
 
 /**
  * @date 2/10/2020
@@ -54,7 +55,7 @@ function Login() {
 
 			<LoginBlock>
 				<LoginLoadIcon loading={loading} />
-				<h1>MagTable</h1>
+				<PlaneLoader />
 				<Formik
 					initialValues={{
 						username: "mustafa",
