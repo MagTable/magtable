@@ -147,14 +147,19 @@ export const publishTable = (magtable, publishedBy) => async dispatch => {
 		dispatch(setAlert("Publish Successful", "success"));
 	} catch (err) {
 		dispatch(setAlert(err.response.data.message, "warning"));
-		console.log(err);
 	}
 };
 
 export const clearTable = () => dispatch => {
-	dispatch({
-		type: CLEAR_TABLE
-	});
+	try {
+		dispatch({
+			type: CLEAR_TABLE
+		});
+
+		dispatch(setAlert("Table Cleared Successful", "success"));
+	} catch (err) {
+		dispatch(setAlert(err.response.data.message, "warning"));
+	}
 };
 
 /**
@@ -270,7 +275,7 @@ export const addEmployeeShift = shiftData => async dispatch => {
 			setAlert(`Employee "${shiftData.name}" Added Successfully.`, "success")
 		);
 	} catch (err) {
-		console.log(err);
+		dispatch(setAlert(err.response.data.message, "warning"));
 	}
 };
 

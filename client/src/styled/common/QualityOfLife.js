@@ -19,6 +19,8 @@ export const LoadingImg = styled.i`
 	width: fit-content;
 	text-align: center;
 	margin: 1.5rem;
+	-webkit-transform: scaleY(-1);
+	transform: scaleY(-1);
 
 	${({ small }) =>
 		small &&

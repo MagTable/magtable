@@ -43,7 +43,7 @@ const UserListItem = ({ user }) => {
 						>
 							{({ confirm }) => (
 								<IconButton
-									faClassName="fa-trash-alt fa-2x"
+									faClassName="fa-user-minus fa-2x"
 									onClick={confirm}
 									toolTip={"Delete User"}
 									hoverColor={"red"}
