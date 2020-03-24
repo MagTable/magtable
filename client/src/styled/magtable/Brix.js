@@ -1,5 +1,20 @@
 import styled, { keyframes } from "styled-components";
 import { Form } from "formik";
+import { DANGER, SUCCESS, WARNING } from "../../actions/constants";
+
+export const getColor = type => {
+	console.log(type);
+	switch (type) {
+		case DANGER:
+			return "--context-red";
+		case WARNING:
+			return "--alert-warning";
+		case SUCCESS:
+			return "--context-blue";
+		default:
+			return "--navbar";
+	}
+};
 
 export const BrixWrapper = styled.div`
 	display: grid;
@@ -97,4 +112,51 @@ export const BrixTableWrapper = styled.div`
 
 export const BrixTableTitle = styled.h3`
 	grid-area: table-title;
+`;
+
+export const WeatherDataWrapper = styled.div`
+	background: var(--navbar-light);
+	padding: 0.75rem;
+	max-height: 100%;
+	overflow: hidden;
+	border-radius: 0.5rem;
+	color: var(--title-bright);
+
+	transition: box-shadow 0.5s ease-in-out;
+	display: flex; // to display horizontally
+
+	box-shadow: inset 0 0 25px 5px var(--context-green);
+
+	${({ status }) =>
+		status &&
+		`
+			box-shadow: inset 0 0 25px 5px var(${getColor(status)});
+	`}
+
+	h3 {
+		margin: 0;
+		position: relative;
+
+		padding-right: 2rem;
+	}
+`;
+
+export const DailyMixButtons = styled.div`
+	display: flex;
+	flex-direction: column;
+
+	height: 2rem;
+
+	position: absolute;
+	right: 10px;
+	top: calc(50% - 1rem);
+
+	i {
+		cursor: pointer;
+		transition: color 0.25s ease-in-out;
+
+		:hover {
+			color: var(--shader-grey);
+		}
+	}
 `;

@@ -6,10 +6,12 @@ import {
 	FETCHING_BRIX_RECORDS,
 	ADDING_BRIX_RECORD,
 	GET_BRIX_CHART,
-	GET_WEATHER
+	GET_WEATHER,
+	DECREMENT_DAILY_MIX,
+	INCREMENT_DAILY_MIX
 } from "./constants";
 import axios from "axios";
-import { setAlert } from "./alert";
+import { sampleWeather } from "../res/test_data/magtable";
 
 /**
  * Saves a brix record to an assignment's brixRecords list
@@ -80,13 +82,27 @@ export const getBrixChart = () => async dispatch => {
 export const getWeather = () => async dispatch => {
 	try {
 		// const res = await axios.get(
-		// 	"http://api.openweathermap.org/data/2.5/forecast?id=5913490&APPID=ae895e97d569b50fd4fa9a56923734cd&units=metric",
-		// 	{ crossdomain: true }
+		// 	"http://api.openweathermap.org/data/2.5/forecast?id=5913490&APPID=ae895e97d569b50fd4fa9a56923734cd&units=metric"
 		// );
+		const weather = sampleWeather;
 
+		let date;
+		date = new Date(0);
+		date.setUTCSeconds(weather.list[0].dt);
+
+		let forecastLow;
+		forecastLow = 1000; // higher than realistic
+		weather.list.slice(0, 8).forEach(elem => {
+			if (elem.main.temp < forecastLow) forecastLow = elem.main.temp;
+		});
+		forecastLow = parseInt(forecastLow);
+
+		let currentTemperature = weather.list[0].main.temp;
+
+		console.log(date, forecastLow, currentTemperature);
 		dispatch({
-			type: GET_WEATHER
-			// payload: res.data
+			type: GET_WEATHER,
+			payload: { date, forecastLow, currentTemperature }
 		});
 	} catch (err) {}
 };
@@ -96,9 +112,21 @@ export const getWeather = () => async dispatch => {
  *
  * @param dailyMix dailyMix to set
  */
-// const setDailyMix = dailyMix => dispatch => {
-// 	dispatch({
-// 		type: SET_DAILY_MIX,
-// 		payload: dailyMix
-// 	});
-// };
+export const setDailyMix = dailyMix => dispatch => {
+	dispatch({
+		type: SET_DAILY_MIX,
+		payload: dailyMix
+	});
+};
+
+export const incrementDailyMix = () => dispatch => {
+	dispatch({
+		type: INCREMENT_DAILY_MIX
+	});
+};
+
+export const decrementDailyMix = () => dispatch => {
+	dispatch({
+		type: DECREMENT_DAILY_MIX
+	});
+};

@@ -30,7 +30,6 @@ const initialState = {
 		shifts: []
 	},
 	dailyMessages: "",
-	dailyMix: 40,
 	selectedApron: EAST_APRON,
 	loading: true,
 	shiftsLoading: true,

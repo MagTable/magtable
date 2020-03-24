@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { isMobile } from "react-device-detect";
 
 /**
  * @date 2020-02-05
@@ -89,14 +88,11 @@ export const NavPane = styled.div`
  * Holds the individual links in the navigation menu / bar.
  */
 export const NavDiv = styled.div`
-	${isMobile
-		? // Mobile rules
-		  "padding: 20px 0px 20px 20px;" +
-		  "width: 110px;" +
-		  "overflow: hidden;" +
-		  "transition: all 0.2s ease-in-out;"
-		: // Desktop Rules
-		  "display: flex;"}
+	height: 100%;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `;
 
 /**
@@ -106,6 +102,7 @@ export const NavBar = styled.div`
 	background: var(--navbar);
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	height: 70px;
 `;
 
@@ -116,6 +113,8 @@ export const NavLink = styled(Link)`
 	text-decoration: none;
 	color: var(--title-bright);
 	font-size: 20px;
+
+	margin-right: 2rem;
 	padding-bottom: 0.5rem;
 
 	transition: color 0.25s ease-in-out, border 0.25s ease-in-out;
@@ -130,14 +129,4 @@ export const NavLink = styled(Link)`
 			border-bottom-color: var(--link-underline);
 			color: var(--link-underline);
 		`}
-	${isMobile
-		? // Mobile rules
-		  `width: 100vw;
-		  cursor: pointer;
-		  padding: 20px 0px 20px 0px;
-		  text-align: center;
-		  border-bottom: 2px solid #DADADA;`
-		: // Desktop Rules
-		  `margin-right: 50px; 
-		  padding-top: 20px;`}
 `;

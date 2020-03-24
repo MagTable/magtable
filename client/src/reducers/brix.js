@@ -1,11 +1,12 @@
-import { sampleWeather } from "../res/test_data/magtable";
 import {
 	ADD_BRIX_RECORD,
 	ADDING_BRIX_RECORD,
+	DECREMENT_DAILY_MIX,
 	FETCHING_BRIX_RECORDS,
 	GET_BRIX_CHART,
 	GET_BRIX_RECORDS,
 	GET_WEATHER,
+	INCREMENT_DAILY_MIX,
 	SET_DAILY_MIX
 } from "../actions/constants";
 
@@ -15,21 +16,32 @@ const initialState = {
 	loading: true,
 	addingBrixRecord: false,
 	brixChart: [],
+	dailyMix: null,
 	weather: {
-		data: null,
+		date: null,
+		forecastLow: null,
+		currentTemperature: null,
 		loading: true
 	}
 };
+
+const MIX_STEP = 5;
+const MIX_MAX = 75;
+const MIX_MIN = 5;
 
 export default function(state = initialState, action) {
 	const { type, payload } = action;
 
 	switch (type) {
 		case GET_WEATHER:
+			const { date, forecastLow, currentTemperature } = payload;
+
 			return {
 				...state,
 				weather: {
-					data: sampleWeather,
+					date,
+					forecastLow,
+					currentTemperature,
 					loading: false
 				}
 			};
@@ -68,6 +80,20 @@ export default function(state = initialState, action) {
 			return {
 				...state,
 				dailyMix: payload
+			};
+		case INCREMENT_DAILY_MIX:
+			if (state.dailyMix + MIX_STEP > MIX_MAX) return state;
+
+			return {
+				...state,
+				dailyMix: state.dailyMix + MIX_STEP
+			};
+		case DECREMENT_DAILY_MIX:
+			if (state.dailyMix - MIX_STEP < MIX_MIN) return state;
+
+			return {
+				...state,
+				dailyMix: state.dailyMix - MIX_STEP
 			};
 		default:
 			return state;
