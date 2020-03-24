@@ -22,11 +22,11 @@ const flyIn = keyframes`
 
 const slide = keyframes`
     from {
-            transform: translatex(-330px);
+            transform: translate(-330px, -40px);
     }
     
     to {
-            transform: translateX(14px);
+            transform: translate(14px, -40px);
     }
 `;
 
@@ -49,13 +49,14 @@ export const PlaneImg = styled(NoTextLogo)`
 `;
 
 export const LogoText = styled.p`
-	font-size: 71px;
+	font-size: 100px;
 
 	animation: ${slide} 1s ease;
 	-webkit-animation-delay: 2s;
 	animation-delay: 0.7s;
 	animation-fill-mode: forwards;
-	transform: translateX(-320px);
+	transform: translate(-320px, 50px);
+	font-family: "Bebas Neue", cursive;
 `;
 
 export const TextHolder = styled.div`
