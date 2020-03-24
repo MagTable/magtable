@@ -152,18 +152,18 @@ const AddEmployeeShift = ({ setShowModal }) => {
 						/^[a-zA-Z][a-zA-Z ]+((['-][a-zA-Z ])?[a-zA-Z ]*)*$/,
 						"Invalid Characters"
 					)
-					.required("Required Name")
+					.required("Name Required")
 					.min(5, "Minimum Length is 5")
 					.max(20, "Maximum Length is 20"),
 				startTime: Yup.string()
 					.oneOf(shiftTimes)
-					.required("Required Start Time"),
+					.required("Start Time Required"),
 				endTime: Yup.string()
 					.oneOf(shiftTimes)
-					.required("Required End Time"),
+					.required("End Time Required"),
 				description: Yup.string()
 					.oneOf(jobRoles)
-					.required("Required Role")
+					.required("Role Required")
 			})}
 		>
 			{props => (

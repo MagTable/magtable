@@ -1,5 +1,4 @@
 import {
-	ADD_BRIX_RECORD,
 	ADD_DAILY_MESSAGE,
 	ADD_EMPLOYEE_SHIFT,
 	EAST_APRON,
@@ -8,20 +7,20 @@ import {
 	REMOVE_DAILY_MESSAGE,
 	REMOVE_EQUIPMENT_EMPLOYEE,
 	REMOVE_TRUCK_LOCATION,
-	SET_DAILY_MIX,
 	SET_EQUIPMENT_EMPLOYEE,
 	SET_SELECTED_APRON,
 	SET_TRUCK_LOCATION,
 	TOGGLE_BAY_LEAD,
 	REFRESH_EMPLOYEE_SHIFTS,
 	REFRESHING_EMPLOYEE_SHIFTS,
+	CLEAR_TABLE,
+	GET_PARKING_LOCATIONS,
 	TOGGLE_AM_PM,
 	ADD_TRUCK,
 	EDIT_TRUCK,
-	DELETE_TRUCK,
-	CLEAR_TABLE
+	DELETE_TRUCK
 } from "../actions/constants";
-import { initialParkingLocations } from "../res/test_data/magtable";
+import { ParkingZones } from "../res/test_data/magtable";
 
 const initialState = {
 	assignments: [],
@@ -32,11 +31,12 @@ const initialState = {
 	},
 	dailyMessages: "",
 	dailyMix: 40,
-	parkingLocations: initialParkingLocations,
 	selectedApron: EAST_APRON,
 	loading: true,
 	shiftsLoading: true,
-	showAM: true
+	showAM: true,
+	parkingZones: ParkingZones,
+	parkingLocations: []
 };
 
 export default function(state = initialState, action) {
@@ -77,20 +77,12 @@ export default function(state = initialState, action) {
 					assignment.equipment.id === payload.equipmentID
 						? {
 								...assignment,
-								employeeShifts: assignment.employeeShifts.map(shift =>
-									shift?.id === payload.shiftID ? null : shift
+								employeeShifts: assignment.employeeShifts.filter(
+									shift => shift?.id !== payload.shiftID
 								)
 						  }
 						: assignment
-				),
-				employeeShifts: {
-					...state.employeeShifts,
-					shifts: state.employeeShifts.shifts.map(shift =>
-						shift.id === payload.shiftID
-							? { ...shift, assignedEquipment: null }
-							: shift
-					)
-				}
+				)
 			};
 		case SET_EQUIPMENT_EMPLOYEE: // if assignment needs to be created
 			// replaces the modified assignment in the assignments list
@@ -101,27 +93,17 @@ export default function(state = initialState, action) {
 					assignment.equipment.id === payload.equipmentID
 						? {
 								...assignment,
-								employeeShifts: assignment.employeeShifts.map((shift, i) =>
-									i === payload.equipmentSlotID ? payload.shift : shift
-								)
+								employeeShifts: [...assignment.employeeShifts, payload.shift]
 						  }
 						: assignment
-				),
-				employeeShifts: {
-					...state.employeeShifts,
-					shifts: state.employeeShifts.shifts.map(shift =>
-						shift.id === payload.shift.id
-							? { ...shift, assignedEquipment: payload.equipmentID }
-							: shift
-					)
-				}
+				)
 			};
 		case CLEAR_TABLE:
 			return {
 				...state,
 				assignments: state.assignments.map(assignment => ({
 					...assignment,
-					employeeShifts: [null, null, null, null],
+					employeeShifts: [],
 					parkingLocation: null
 				}))
 			};
@@ -130,23 +112,6 @@ export default function(state = initialState, action) {
 				...state,
 				assignments: payload.assignments
 				// server will echo the given assignments to verify changes were made properly
-			};
-		case ADD_BRIX_RECORD:
-			return {
-				...state,
-				assignments: state.assignments.map(assignment =>
-					assignment.equipment.id === payload.equipmentID
-						? {
-								...assignment,
-								brixRecords: payload // update list of brixRecords from API
-						  }
-						: assignment
-				)
-			};
-		case SET_DAILY_MIX:
-			return {
-				...state,
-				dailyMix: payload
 			};
 		case REMOVE_DAILY_MESSAGE: // API request for these actions will probably just return all daily messages after addition or deletion
 		case ADD_DAILY_MESSAGE:
@@ -162,17 +127,17 @@ export default function(state = initialState, action) {
 		case GET_ASSIGNMENT_DATA:
 			return {
 				...state,
-				assignments: payload.equipment.map(elem => ({
-					equipment: elem,
-					employeeShifts: [null, null, null, null],
-					parkingLocation: null,
-					brixRecords: []
-				})),
 				employeeShifts: payload.employeeShifts,
-				// dailyMessages: payload.dailyMessages,
-				// dailyMix: payload.dailyMix,
+				assignments: payload.magtable.assignments,
+				timePublished: payload.magtable.timePublished,
+				dailyMix: payload.magtable.dailyMix,
 				loading: false,
 				shiftsLoading: false
+			};
+		case GET_PARKING_LOCATIONS:
+			return {
+				...state,
+				parkingLocations: payload
 			};
 		case ADD_EMPLOYEE_SHIFT:
 			return {
@@ -212,7 +177,7 @@ export default function(state = initialState, action) {
 					...state.assignments,
 					{
 						equipment: payload,
-						employeeShifts: [null, null, null, null],
+						employeeShifts: [],
 						parkingLocation: null,
 						brixRecords: []
 					}

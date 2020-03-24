@@ -23,7 +23,8 @@ export const TECHNICIAN_POSITIONS = [
 	OJT,
 	BAY_LEAD,
 	PRACTICAL_TRAINER,
-	TECHNICIAN
+	TECHNICIAN,
+	TRAINER
 ];
 export const TOWER_POSITIONS = [
 	CTM,
@@ -37,15 +38,17 @@ export const TOWER_POSITIONS = [
 export const ALL_POSITIONS = [
 	OPERATIONS_MANAGER,
 	OPERATIONS_SUPERVISOR,
+	TOWER_TRAINER,
 	CTM,
 	TOWER_SPOTTER,
 	ICEMAN,
 	ICEHOUSE,
-	BAY_LEAD,
-	PRACTICAL_TRAINER,
-	OJT,
 	OJT_TOWER,
-	TOWER_TRAINER,
+	TRAINER,
+	PRACTICAL_TRAINER,
+	BAY_LEAD,
+	TECHNICIAN,
+	OJT,
 	MECHANIC
 ];
 
@@ -54,6 +57,10 @@ export const GO = "GO";
 export const CON = "CON";
 export const OOS = "OOS";
 export const INOP = "INOP";
+
+// truck types
+export const SERVICE_VEHICLE = "SVV";
+export const DEICE_TRUCK = "ICE";
 
 export const TRUCK_STATUSES = [GO, CON, OOS, INOP];
 
@@ -74,6 +81,11 @@ export const WEST_APRON = "WDA";
 export const WEST = "W";
 export const EAST = "E";
 export const CENTER = "C";
+// export const LEFT = "left";
+// export const RIGHT = "right";
+
+export const AM = "AM";
+export const PM = "PM";
 
 export const SET_ALERT = "SET_ALERT";
 export const REMOVE_ALERT = "REMOVE_ALERT";
@@ -117,11 +129,15 @@ export const REMOVE_DAILY_MESSAGE = "REMOVE_DAILY_MESSAGE";
 
 export const SET_DAILY_MIX = "SET_DAILY_MIX";
 export const ADD_BRIX_RECORD = "ADD_BRIX_RECORD";
+export const ADDING_BRIX_RECORD = "ADDING_BRIX_RECORD";
 export const FETCHING_BRIX_RECORDS = "FETCHING_BRIX_RECORDS";
 export const GET_BRIX_RECORDS = "GET_BRIX_RECORDS";
+export const GET_BRIX_CHART = "GET_BRIX_CHART";
+export const GET_WEATHER = "GET_WEATHER";
 
 export const PUBLISH_TABLE = "PUBLISH_TABLE";
 export const CLEAR_TABLE = "CLEAR_TABLE";
+export const GET_PARKING_LOCATIONS = "GET_PARKING_LOCATIONS";
 
 export const EDIT_TRUCK = "EDIT_TRUCK";
 export const ADD_TRUCK = "ADD_TRUCK";

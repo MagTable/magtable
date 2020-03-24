@@ -26,7 +26,7 @@ const AddUser = ({ role }) => {
 			validationSchema={Yup.object().shape({
 				username: Yup.string()
 					.matches(/^[a-zA-Z0-9]+$/, "Invalid Characters")
-					.required("Required field")
+					.required("Username Required")
 					.min(5, "Minimum Username Length is 5")
 					.max(15, "Maximum Username Length is 15")
 			})}
@@ -40,10 +40,12 @@ const AddUser = ({ role }) => {
 						label={"Add a New " + role.name}
 						type="text"
 						name="username"
+						data-lpignore="true"
 						icon={{
-							iconClass: "fa-plus fa-lg text-green",
+							iconClass: "fa-plus fa-2x",
 							action: () => props.submitForm(),
-							toolTip: "New " + role.name
+							toolTip: "New " + role.name,
+							hoverColor: "green"
 						}}
 						fit
 					/>

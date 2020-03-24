@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDrag } from "react-dnd";
 import { SET_EQUIPMENT_EMPLOYEE } from "../../actions/constants";
-import { useDispatch, useSelector } from "react-redux";
-import {
-	removeEquipmentEmployee,
-	setEquipmentEmployee
-} from "../../actions/magtable";
+import { useDispatch } from "react-redux";
+import { setEquipmentEmployee } from "../../actions/magtable";
 import {
 	AssignedToWrap,
 	EmpListItemDiv,
@@ -15,13 +12,12 @@ import {
 	Labels,
 	LabelText,
 	LabelWrapper,
-	ShiftInfo,
-	UnassignBtn
+	ShiftInfo
 } from "../../styled/magtable/ListContent";
 
 /**
  * @date 2020-02-19
- * @author MJ Kochuk
+ * @author MJ Kochuk, Arran Woodruff
  * @module Component
  */
 
@@ -31,32 +27,8 @@ import {
  * @param props
  * @returns {*} The EmployeeListItem component
  */
-function EmployeeListItem({ employee: employeeShift }) {
+function EmployeeListItem({ employeeShift, assignment }) {
 	const dispatch = useDispatch();
-
-	const [assignedSlotID, setAssignedSlotID] = useState();
-	const [canRemove, setCanClear] = useState(false);
-
-	const assignment = useSelector(state =>
-		state.magtable.assignments.find(
-			assignment => assignment.equipment.id === employeeShift.assignedEquipment
-		)
-	);
-
-	useEffect(() => {
-		// if there's no assignment, you can't clear
-		if (assignment) {
-			setCanClear(true);
-			// if there's an assignment and the assigned slot is a primary
-			// and the associated secondary slot is filled, you can't clear
-			if (assignedSlotID === 0 && assignment.employeeShifts[assignedSlotID + 1])
-				setCanClear(false);
-			if (assignedSlotID === 2 && assignment.employeeShifts[assignedSlotID + 1])
-				setCanClear(false);
-		} else {
-			setCanClear(false);
-		}
-	}, [assignment, setCanClear, assignedSlotID]);
 
 	const [{ isDragging }, drag] = useDrag({
 		item: {
@@ -64,19 +36,16 @@ function EmployeeListItem({ employee: employeeShift }) {
 			id: employeeShift.id,
 			shiftDescription: employeeShift.description
 		},
-		canDrag: !employeeShift.assignedEquipment,
+		canDrag: !assignment,
 		end: (item, monitor) => {
 			const dropResult = monitor.getDropResult();
 			if (item && dropResult) {
 				dispatch(
-					setEquipmentEmployee(
-						dropResult.equipmentID,
-						employeeShift,
-						dropResult.equipmentSlotID
-					)
+					setEquipmentEmployee(dropResult.equipmentID, {
+						...employeeShift,
+						...dropResult.newShiftAttributes
+					})
 				);
-				setAssignedSlotID(dropResult.equipmentSlotID);
-				setCanClear(true);
 			}
 		},
 		collect: monitor => ({
@@ -84,17 +53,17 @@ function EmployeeListItem({ employee: employeeShift }) {
 		})
 	});
 
-	function handleRemove() {
-		dispatch(
-			removeEquipmentEmployee(employeeShift.assignedEquipment, employeeShift.id)
-		);
-	}
+	// not needed unless we readd remove assignment to this component
+	// function handleRemove() {
+	// 	dispatch(
+	// 		removeEquipmentEmployee(assignment.equipment.id, employeeShift.id)
+	// 	);
+	// }
+
+	const assignedToTower = assignment?.equipment.id >= 1000;
 
 	return (
-		<EmpListItemDiv
-			ref={drag}
-			disabled={isDragging || employeeShift.assignedEquipment}
-		>
+		<EmpListItemDiv ref={drag} disabled={isDragging || assignment}>
 			<ShiftInfo>
 				<EmpName>{employeeShift.name}</EmpName>
 				<EmpHours>
@@ -102,18 +71,20 @@ function EmployeeListItem({ employee: employeeShift }) {
 				</EmpHours>
 			</ShiftInfo>
 
-			{employeeShift.assignedEquipment && (
-				<AssignedToWrap isTower={assignment.equipment.id >= 1000}>
-					<UnassignBtn
-						disabled={!canRemove}
-						onClick={() => canRemove && handleRemove()}
-					>
-						<i className="fas fa-times" />
-					</UnassignBtn>
+			{assignment && (
+				<AssignedToWrap isTower={assignedToTower}>
+					{/* Difficult to determine 'canClear' currently, disabled until fix is decided*/}
+
+					{/*<UnassignBtn*/}
+					{/*	disabled={!canClear}*/}
+					{/*	onClick={() => canClear && handleRemove()}*/}
+					{/*>*/}
+					{/*	<i className="fas fa-times" />*/}
+					{/*</UnassignBtn>*/}
 					<h2>
-						{assignment.equipment.position
-							? assignment.equipment.position
-							: employeeShift.assignedEquipment}
+						{assignedToTower
+							? assignment.equipment.type
+							: assignment?.equipment.id}
 					</h2>
 				</AssignedToWrap>
 			)}
@@ -137,4 +108,4 @@ function EmployeeListItem({ employee: employeeShift }) {
 	);
 }
 
-export default EmployeeListItem;
+export default React.memo(EmployeeListItem);

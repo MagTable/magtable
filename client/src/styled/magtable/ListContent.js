@@ -15,11 +15,11 @@ import { DANGER, SUCCESS, WARNING } from "../../actions/constants";
 export const getColor = type => {
 	switch (type) {
 		case DANGER:
-			return "--context-red";
+			return "--context-red-light";
 		case WARNING:
 			return "--alert-warning";
 		case SUCCESS:
-			return "--context-green";
+			return "--context-green-light";
 		default:
 			return "#fff";
 	}
@@ -170,7 +170,7 @@ export const TruckListItemDiv = styled.div`
 
 export const TruckMgmtItemDiv = styled(TruckListItemDiv)`
 	border-bottom: 2px solid grey;
-	height: 40px;
+	height: 50px;
 `;
 
 export const TruckStatusBox = styled.div`
@@ -354,9 +354,6 @@ export const TruckListItemLocation = styled.div`
 	}
 `;
 
-/**
- *
- */
 export const TruckListManipDiv = styled.div`
 	display: grid;
 	grid-template-columns: 60px 60px;
@@ -408,21 +405,27 @@ export const EquipmentListItemEmployee = styled.div`
 	grid-template-columns: 1fr auto 1.25rem;
 	grid-template-areas: "name warning clearbutton";
  	align-items: center;
+ 	height: 50%;
 
 	transition: height 0.15s ease-in-out;
-	height: ${({ show }) => (show ? "50%" : "0%")};
 	overflow: hidden;
-
-	background-color: var(${({ slot }) => (slot === 2 ? "--shader-grey" : "")});
-	${({ warningBackground }) =>
-		warningBackground && `background: var(--context-orange-light);`}
+	
+	${({ isBaylead }) =>
+		isBaylead &&
+		`
+		color: var(--context-blue); 
+		font-weight: bold;
+	`}
+	
+	${({ darken }) => darken && "background-color: var(--shader-grey);"}
+	
 	${({ outlineType }) =>
 		outlineType && `background: var(${getColor(outlineType)});`}
+		
 	&:hover ${EquipmentListItemButton} {
 		opacity: 1;
 		display: block;
 	}
-	
 `;
 
 export const EquipmentListItemEmployeeName = styled.div`
@@ -430,6 +433,16 @@ export const EquipmentListItemEmployeeName = styled.div`
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+	transition: transform 0.3s ease;
+	transform: translateX(0);
+	${({ show, offPosition }) =>
+		show
+			? `
+			transform : translateY(0);	
+		`
+			: `
+			transform : translateY(${offPosition}%);
+		`}
 `;
 export const EquipmentListItemEmployeeWarning = styled.div`
 	grid-area: warning;
@@ -449,7 +462,7 @@ export const EquipmentListItemEmployeeClearButton = styled.div`
 /**
  * Divides the list of available employees into sections based on start time.
  */
-export const StartTimeSeparator = styled.h3`
+export const ListSeparator = styled.h3`
 	margin: 0;
 	padding: 0.5rem 1rem;
 	border-bottom: 1px solid var(--border-color);

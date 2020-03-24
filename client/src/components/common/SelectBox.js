@@ -14,7 +14,7 @@ const StyledLabel = styled.label`
 	position: relative;
 	float: left;
 	top 30px;
-	left: 5px;
+	// left: 5px;
 	color: var(--input-label);
 	cursor: text;
 	z-index: 0;

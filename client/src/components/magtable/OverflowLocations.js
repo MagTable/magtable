@@ -45,6 +45,8 @@ function OverflowLocations({ children, color, hoverColor, open, setOpen }) {
 
 	const dispatch = useDispatch();
 	const selectedApron = useSelector(state => state.magtable.selectedApron);
+	const magtable = useSelector(state => state.magtable);
+	const authUsername = useSelector(state => state.auth.user.username);
 
 	const openOverflow = () => {
 		setOpen(true);
@@ -67,7 +69,7 @@ function OverflowLocations({ children, color, hoverColor, open, setOpen }) {
 				setPublishDisabled(false);
 			}, CONFIRMATION_DELAY);
 		} else {
-			dispatch(publishTable());
+			dispatch(publishTable(magtable, authUsername));
 
 			setPublishDisabled(false);
 			setPublishConfirmation(false);

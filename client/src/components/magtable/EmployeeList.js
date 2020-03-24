@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
 	EmployeeListDiv,
 	EmployeeListDivWrapper,
 	EmployeeListRefreshInfo,
-	StartTimeSeparator
+	ListSeparator
 } from "../../styled/magtable/ListContent";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import EmployeeListItem from "./EmployeeListItem";
@@ -35,6 +35,7 @@ import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
 const EmployeeList = () => {
 	const dispatch = useDispatch();
 	const employeeShifts = useSelector(state => state.magtable.employeeShifts); // get the employees
+	const assignments = useSelector(state => state.magtable.assignments);
 	const loading = useSelector(state => state.magtable.shiftsLoading);
 	const showAM = useSelector(state => state.magtable.showAM);
 	const [overflowOpen, setOverflowOpen] = useState(false);
@@ -55,6 +56,18 @@ const EmployeeList = () => {
 	const [filterMechanic, setFilterMechanic] = useState(true);
 	// used to determine if the app filters out employees that are part of the training staff, default false to show all employees
 	const [filterTrainer, setFilterTrainer] = useState(true);
+
+	const filterAMEmployees = useCallback(() => {
+		// toggle AM filter while making sure the PM filter is off
+		setFilterAM(!filterAM);
+		setFilterPM(false);
+	}, [filterAM]);
+
+	const filterPMEmployees = useCallback(() => {
+		// toggle PM filter while making sure the AM filter is off
+		setFilterPM(!filterPM);
+		setFilterAM(false);
+	}, [filterPM]);
 
 	useEffect(() => {
 		if (showAM) {
@@ -86,16 +99,7 @@ const EmployeeList = () => {
 		// refresh employees upon clicking the button
 		dispatch(refreshEmployeeShifts());
 	};
-	const filterAMEmployees = () => {
-		// toggle AM filter while making sure the PM filter is off
-		setFilterAM(!filterAM);
-		setFilterPM(false);
-	};
-	const filterPMEmployees = () => {
-		// toggle PM filter while making sure the AM filter is off
-		setFilterPM(!filterPM);
-		setFilterAM(false);
-	};
+
 	const filterTechEmployees = () => {
 		// toggle the tech filter, no need to make sure that tower filter is off
 		setFilterTech(!filterTech);
@@ -237,13 +241,20 @@ const EmployeeList = () => {
 						{filteredStartTimes.length > 0 ? (
 							filteredStartTimes.map(startTime => (
 								<div key={startTime}>
-									<StartTimeSeparator>{startTime}</StartTimeSeparator>
+									<ListSeparator>{startTime}</ListSeparator>
 									{filteredEmployeeShifts.map(
-										employee =>
-											employee.startTime === startTime && (
+										shift =>
+											shift.startTime === startTime && (
 												<EmployeeListItem
-													key={employee.id}
-													employee={employee}
+													key={shift.id}
+													employeeShift={shift}
+													assignment={assignments.find(
+														assignment =>
+															assignment.employeeShifts.filter(
+																assignmentShift =>
+																	assignmentShift.id === shift.id
+															).length > 0
+													)}
 												/>
 											)
 									)}

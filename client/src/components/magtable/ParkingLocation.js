@@ -1,6 +1,6 @@
 import React from "react";
 import { useDrag, useDrop } from "react-dnd";
-import { BAY_LEAD, SET_TRUCK_LOCATION } from "../../actions/constants";
+import { AM, BAY_LEAD, PM, SET_TRUCK_LOCATION } from "../../actions/constants";
 import {
 	CenterAssigned,
 	FullPadDropDiv,
@@ -84,6 +84,7 @@ function ParkingLocation({ parkingLocation, position, assignments }) {
 		<PadDiv ref={drop} isOver={isOver}>
 			<PadDivHeader>{parkingLocation.phonetic + position}</PadDivHeader>
 			<FullDropDropDiv
+				double={parkingLocation.double}
 				assignments={sortedAssignments}
 				parkingLocation={parkingLocation}
 				position={position}
@@ -238,9 +239,16 @@ function LeftDragDiv({
 		})
 	});
 
-	const isBaylead =
-		(leftAssignment?.employeeShifts[0]?.description === BAY_LEAD && showAM) ||
-		(leftAssignment?.employeeShifts[2]?.description === BAY_LEAD && !showAM);
+	const amBaylead =
+		leftAssignment?.employeeShifts.filter(
+			shift => shift.description === BAY_LEAD && shift.timeOfDay === AM
+		).length > 0;
+	const pmBaylead =
+		leftAssignment?.employeeShifts.filter(
+			shift => shift.description === BAY_LEAD && shift.timeOfDay === PM
+		).length > 0;
+
+	const isBaylead = (amBaylead && showAM) || (pmBaylead && !showAM);
 
 	return (
 		<LeftAssigned
@@ -358,9 +366,16 @@ function RightDragDiv({
 		})
 	});
 
-	const isBaylead =
-		(rightAssignment?.employeeShifts[0]?.description === BAY_LEAD && showAM) ||
-		(rightAssignment?.employeeShifts[2]?.description === BAY_LEAD && !showAM);
+	const amBaylead =
+		rightAssignment?.employeeShifts.filter(
+			shift => shift.description === BAY_LEAD && shift.timeOfDay === AM
+		).length > 0;
+	const pmBaylead =
+		rightAssignment?.employeeShifts.filter(
+			shift => shift.description === BAY_LEAD && shift.timeOfDay === PM
+		).length > 0;
+
+	const isBaylead = (amBaylead && showAM) || (pmBaylead && !showAM);
 
 	return (
 		<RightAssigned
@@ -380,6 +395,7 @@ function RightDragDiv({
 }
 
 function FullDropDropDiv({
+	double,
 	parkingLocation,
 	position,
 	assignments,
@@ -427,29 +443,16 @@ function FullDropDropDiv({
 
 	const [{ isOver, canDrop }, drop] = useDrop({
 		accept: SET_TRUCK_LOCATION,
+		// this used to have a reassign object but after review, it was deemed unnecessary and was causing bugs so it was removed
 		drop: item => {
-			const toReassign = item.toReassign
-				? {
-						equipmentID: item.toReassign.equipmentID,
-						parkingLocation: item.toReassign.parkingLocation,
-						position: item.toReassign.position,
-						bay: ""
-				  }
-				: {
-						equipmentID: defaultAssignment?.equipment.id,
-						parkingLocation,
-						position,
-						bay: parkingLocation.left
-				  };
 			return {
 				position,
 				parkingLocation,
-				reassign: toReassign,
 				assign: {
 					equipmentID: item.id,
-					bay: ""
+					bay: double ? parkingLocation.left : "" // double parking locations have default bays instead of empty strings
 				},
-				unassign: [defaultAssignment?.equipment.id]
+				unassign: defaultAssignment && [defaultAssignment?.equipment.id]
 			};
 		},
 		canDrop: item => {
@@ -461,10 +464,16 @@ function FullDropDropDiv({
 		})
 	});
 
-	const isBaylead =
-		(defaultAssignment?.employeeShifts[0]?.description === BAY_LEAD &&
-			showAM) ||
-		(defaultAssignment?.employeeShifts[2]?.description === BAY_LEAD && !showAM);
+	const amBaylead =
+		defaultAssignment?.employeeShifts.filter(
+			shift => shift.description === BAY_LEAD && shift.timeOfDay === AM
+		).length > 0;
+	const pmBaylead =
+		defaultAssignment?.employeeShifts.filter(
+			shift => shift.description === BAY_LEAD && shift.timeOfDay === PM
+		).length > 0;
+
+	const isBaylead = (amBaylead && showAM) || (pmBaylead && !showAM);
 
 	return (
 		<FullPadDropDiv

@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import { TruckMapDiv } from "../../styled/magtable/Maps";
-import ApronToggle from "./ApronToggle";
 import {
 	MapWrapper,
 	NumberMiddle,
@@ -16,6 +15,8 @@ import { useSelector } from "react-redux";
 import ParkingLocation from "./ParkingLocation";
 import { CENTER, EAST, WEST } from "../../actions/constants";
 import Confirmation from "../common/Confirmation";
+import IconButton from "../common/IconButton";
+import OverflowLocations from "./OverflowLocations";
 
 /**
  * @date 2020-02-17
@@ -30,10 +31,9 @@ import Confirmation from "../common/Confirmation";
  * @returns {*} The ParkingLocationMap component
  */
 function ParkingLocationMap(props) {
+	const [overflowOpen, setOverflowOpen] = useState(false);
 	const selectedApron = useSelector(state => state.magtable.selectedApron);
-	const parkingLocations = useSelector(
-		state => state.magtable.parkingLocations
-	);
+	const parkingZones = useSelector(state => state.magtable.parkingZones);
 	const assignmentsWithLocation = useSelector(state =>
 		state.magtable.assignments.filter(
 			assignment => !!assignment.parkingLocation
@@ -43,21 +43,20 @@ function ParkingLocationMap(props) {
 	return (
 		<TruckMapDiv>
 			<ListTitle>
-				<ListTitleText>Parking Locations</ListTitleText>
-				<ApronToggle />
-
-				<MagTableManipDiv>
-					<Confirmation confirmationMessage={"Confirm Clear"} action={() => {}}>
-						{({ confirm }) => (
-							<MagTableManipBtn onClick={confirm}>Clear All</MagTableManipBtn>
-						)}
-					</Confirmation>
-
-					<MagTableManipBtn>Publish</MagTableManipBtn>
-				</MagTableManipDiv>
+				<ListTitleText>Parking Locations: {selectedApron}</ListTitleText>
+				<OverflowLocations open={overflowOpen} setOpen={setOverflowOpen}>
+					{({ openOverflow }) => (
+						<IconButton
+							faClassName="fa-bars fa-lg"
+							onClick={openOverflow}
+							color={"var(--header-text)"}
+							hoverColor={"grey"}
+						/>
+					)}
+				</OverflowLocations>
 			</ListTitle>
 			<MapWrapper>
-				{parkingLocations.map(
+				{parkingZones.map(
 					location =>
 						location.apron === selectedApron && (
 							<SafetyZoneWrapper key={location.id}>
@@ -69,7 +68,7 @@ function ParkingLocationMap(props) {
 											position={EAST}
 											assignments={assignmentsWithLocation.filter(
 												assignment =>
-													assignment.parkingLocation.id === location.id &&
+													assignment.parkingLocation.zoneID === location.id &&
 													assignment.parkingLocation.position === EAST
 											)}
 										/>
@@ -80,7 +79,7 @@ function ParkingLocationMap(props) {
 											position={CENTER}
 											assignments={assignmentsWithLocation.filter(
 												assignment =>
-													assignment.parkingLocation.id === location.id &&
+													assignment.parkingLocation.zoneID === location.id &&
 													assignment.parkingLocation.position === CENTER
 											)}
 										/>
@@ -91,7 +90,7 @@ function ParkingLocationMap(props) {
 											position={WEST}
 											assignments={assignmentsWithLocation.filter(
 												assignment =>
-													assignment.parkingLocation.id === location.id &&
+													assignment.parkingLocation.zoneID === location.id &&
 													assignment.parkingLocation.position === WEST
 											)}
 										/>

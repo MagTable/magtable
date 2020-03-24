@@ -15,11 +15,17 @@ import FadeIn from "react-fade-in";
 
 export const LoadingImg = styled.i`
 	animation: loading-spin infinite 1s linear;
-	font-size: 40px;
 	height: fit-content;
 	width: fit-content;
 	text-align: center;
 	margin: 1.5rem;
+
+	${({ small }) =>
+		small &&
+		`
+		font-size: 22px;
+		margin: 0;
+	`}
 `;
 
 export const SpinnerWrap = styled.div`

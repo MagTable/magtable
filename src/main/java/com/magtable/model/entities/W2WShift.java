@@ -1,23 +1,13 @@
-package com.magtable.model;
+package com.magtable.model.entities;
+
 
 
 import javax.persistence.*;
-import java.sql.Time;
-import java.sql.Timestamp;
 
 @Entity
 public class W2WShift {
 
     public W2WShift() {
-    }
-
-    //Copy Constructor for converting a ShiftResponse into W2W entity
-    public W2WShift(ShiftResponse shiftResponse){
-        this.description = shiftResponse.getDescription();
-        this.name = shiftResponse.getName();
-        this.noAvop = shiftResponse.getNoAvop();
-        this.isGreen = shiftResponse.getIsGreen();
-
     }
 
     @Id
@@ -32,10 +22,10 @@ public class W2WShift {
     private String name;
 
     @Column(name = "starttime", nullable = false)
-    private Timestamp startTime;
+    private String startTime;
 
     @Column(name = "endtime", nullable = false)
-    private Timestamp endTime;
+    private String endTime;
 
     @Column(name = "noavop", nullable = false)
     private Boolean noAvop;
@@ -68,11 +58,11 @@ public class W2WShift {
         this.noAvop = noAvop;
     }
 
-    public Boolean isGreen() {
+    public Boolean getIsGreen() {
         return isGreen;
     }
 
-    public void setGreen(Boolean green) {
+    public void setIsGreen(Boolean green) {
         isGreen = green;
     }
 
@@ -84,19 +74,19 @@ public class W2WShift {
         this.id = id;
     }
 
-    public Timestamp getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Timestamp startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public Timestamp getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Timestamp endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 

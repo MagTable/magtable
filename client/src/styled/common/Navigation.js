@@ -107,7 +107,6 @@ export const NavBar = styled.div`
 	display: flex;
 	justify-content: space-between;
 	height: 70px;
-	// border-bottom: 2px solid #dedede;
 `;
 
 /**

@@ -1,4 +1,7 @@
-package com.magtable.model;
+package com.magtable.model.api;
+
+import com.magtable.model.entities.Role;
+import com.magtable.model.entities.User;
 
 import java.io.Serializable;
 

@@ -12,6 +12,7 @@ import {
 } from "../../styled/common/TextInput";
 import { LoginLoadIcon } from "../../styled/common/QualityOfLife";
 import Input from "../common/Input";
+import PlaneLoader from "../common/PlaneLoader";
 
 /**
  * @date 2/10/2020
@@ -54,7 +55,7 @@ function Login() {
 
 			<LoginBlock>
 				<LoginLoadIcon loading={loading} />
-				<h1>MagTable</h1>
+				<PlaneLoader />
 				<Formik
 					initialValues={{
 						username: "mustafa",
@@ -66,10 +67,10 @@ function Login() {
 					validationSchema={Yup.object().shape({
 						username: Yup.string()
 							.matches(/^[a-zA-Z0-9]+$/, "Invalid Characters")
-							.required("Required field")
+							.required("Username Required")
 							.min(5, "Minimum Length is 5")
 							.max(15, "Maximum Length is 15"),
-						password: Yup.string().required("Required Field")
+						password: Yup.string().required("Password Required")
 					})}
 				>
 					{props => (

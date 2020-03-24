@@ -68,14 +68,16 @@ export const addTruck = truck => async dispatch => {
 
 export const deleteTruck = id => async dispatch => {
 	try {
-		await axios.delete(`/equipment/truck/delete/${id}`);
+		await axios.put(`/equipment/truck/deactivate/${id}`);
 
 		dispatch({
 			type: DELETE_TRUCK,
 			payload: id
 		});
 
-		dispatch(setAlert(`Truck "${id}" Was Deleted Successfully.`, "success"));
+		dispatch(
+			setAlert(`Truck "${id}" Was Deactivated Successfully.`, "success")
+		);
 	} catch (err) {
 		dispatch(setAlert(err.response?.data?.message, "danger"));
 	}

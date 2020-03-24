@@ -16,13 +16,12 @@ import {
 	REFRESHING_EMPLOYEE_SHIFTS,
 	TOGGLE_AM_PM,
 	CLEAR_TABLE,
-	ADD_BRIX_RECORD,
-	GET_BRIX_RECORDS,
-	FETCHING_BRIX_RECORDS
+	GET_PARKING_LOCATIONS
 } from "./constants";
 import axios from "axios";
 import { setAlert } from "./alert";
 import { logout } from "./auth";
+import store from "../store";
 
 export const toggleAM = () => dispatch => {
 	dispatch({
@@ -56,13 +55,35 @@ export const setTruckLocation = (
 	equipmentID,
 	bay
 ) => dispatch => {
+	const state = store.getState();
+	let parkingLocationID;
+
+	if (!bay) {
+		parkingLocationID = state.magtable.parkingLocations.find(
+			location =>
+				location.position === position &&
+				location.bay === null &&
+				location.apron === parkingLocation.apron &&
+				location.zoneID === parkingLocation.id
+		).id;
+	} else {
+		parkingLocationID = state.magtable.parkingLocations.find(
+			location =>
+				location.position === position &&
+				location.bay === bay &&
+				location.apron === parkingLocation.apron &&
+				location.zoneID === parkingLocation.id
+		).id;
+	}
+
 	dispatch({
 		type: SET_TRUCK_LOCATION,
 		payload: {
 			equipmentID,
 			parkingLocation: {
+				id: parkingLocationID,
 				apron: parkingLocation.apron,
-				id: parkingLocation.id,
+				zoneID: parkingLocation.id,
 				phonetic: parkingLocation.phonetic,
 				position,
 				bay
@@ -89,37 +110,43 @@ export const removeEquipmentEmployee = (equipmentID, shiftID) => dispatch => {
  *
  * @param equipmentID equipmentID of equipment assignment to modify
  * @param shift shift to add to assignment employeeShifts
- * @param equipmentSlotID index of assignment employeeShift to set
  */
-export const setEquipmentEmployee = (
-	equipmentID,
-	shift,
-	equipmentSlotID
-) => dispatch => {
+export const setEquipmentEmployee = (equipmentID, shift) => dispatch => {
 	dispatch({
 		type: SET_EQUIPMENT_EMPLOYEE,
-		payload: { equipmentID, shift, equipmentSlotID }
+		payload: { equipmentID, shift }
 	});
 };
 
 /**
- * Sends the current state of the magtable to the API for persistance
+ * Sends the current state of the magtable to the API for persistence
  *
  * @param magtable magtable to publish
+ * @param publishedBy username of logged in user who called publish function
  * @returns API returns the saved state of the magtable
  */
-export const publishTable = magtable => async dispatch => {
+export const publishTable = (magtable, publishedBy) => async dispatch => {
 	try {
-		const res = await axios.post(
-			"/magtable/publish",
-			AXIOS_JSON_HEADER,
-			magtable
-		);
+		const { assignments, dailyMix, forecastLow } = magtable;
+		const data = { assignments, dailyMix, forecastLow, publishedBy };
+
+		assignments.map(assignment => {
+			const equipment = assignment.equipment;
+			assignment.status = equipment.status;
+			assignment.notice = equipment.notice;
+			return assignment;
+		});
+
+		const res = await axios.post("/magtable", data, AXIOS_JSON_HEADER);
+
 		dispatch({
 			type: PUBLISH_TABLE,
 			payload: res.data
 		});
+
+		dispatch(setAlert("Publish Successful", "success"));
 	} catch (err) {
+		dispatch(setAlert(err.response.data.message, "warning"));
 		console.log(err);
 	}
 };
@@ -129,115 +156,6 @@ export const clearTable = () => dispatch => {
 		type: CLEAR_TABLE
 	});
 };
-
-/**
- * Saves a brix record to an assignment's brixRecords list
- *
- * @param truckID id of truck the measurement is made for
- * @param brixRecord brixRecord to save to assignment
- * @returns API returns updated list of brix records for the assignment
- */
-export const addBrixRecord = (truckID, brixRecord) => async dispatch => {
-	try {
-		// const res = await axios.put("/magtable/brix", AXIOS_JSON_HEADER, {
-		// 	truckID,
-		// 	brixRecord
-		// });
-		console.log(brixRecord);
-		dispatch({
-			type: ADD_BRIX_RECORD,
-			payload: brixRecord
-		});
-	} catch (err) {
-		console.log(err);
-	}
-};
-
-/**
- * gets the last x number of brix records for a particular deice truck
- *
- * @param truckID id of truck to retrieve records for
- * @returns API returns a list of brix records for the requested truck
- */
-export const getBrixRecords = truckID => async dispatch => {
-	try {
-		dispatch({
-			type: FETCHING_BRIX_RECORDS
-		});
-
-		const testRecords = [
-			{
-				id: 1,
-				nozzle: 23.5,
-				type1: 51.7,
-				type4: 33.2,
-				litersPurged: 87,
-				timeMeasured: new Date()
-			},
-			{
-				id: 2,
-				nozzle: 33.1,
-				type1: 50.7,
-				type4: 30.2,
-				litersPurged: 100,
-				timeMeasured: new Date()
-			},
-			{
-				id: 3,
-				nozzle: 23.5,
-				type1: 51.7,
-				type4: 33.2,
-				litersPurged: 87,
-				timeMeasured: new Date()
-			},
-			{
-				id: 4,
-				nozzle: 33.1,
-				type1: 50.7,
-				type4: 30.2,
-				litersPurged: 100,
-				timeMeasured: new Date()
-			},
-			{
-				id: 5,
-				nozzle: 23.5,
-				type1: 51.7,
-				type4: 33.2,
-				litersPurged: 87,
-				timeMeasured: new Date()
-			},
-			{
-				id: 6,
-				nozzle: 33.1,
-				type1: 50.7,
-				type4: 30.2,
-				litersPurged: 100,
-				timeMeasured: new Date()
-			}
-		];
-
-		setTimeout(() => {
-			dispatch({
-				type: GET_BRIX_RECORDS,
-				payload: testRecords
-			});
-		}, 1500);
-	} catch (err) {
-		console.error(err);
-	}
-};
-
-/**
- * Sets the daily mix to a given percentage
- *
- * @param dailyMix dailyMix to set
- */
-// const setDailyMix = dailyMix => dispatch => {
-// 	dispatch({
-// 		type: SET_DAILY_MIX,
-// 		payload: dailyMix
-// 	});
-// };
 
 /**
  * Adds a daily message to the magtable
@@ -299,19 +217,16 @@ export const setSelectedApron = apronCode => dispatch => {
  * @returns API returns the entire magtable object
  */
 export const getMagTable = () => async dispatch => {
-	// todo currently only equipment and shifts are returned here,
-	//  will be updated once entire magtable is returned by api
 	try {
+		const magtableRes = await axios.get("/magtable");
 		const shiftRes = await axios.get("/shift/all");
-		const truckRes = await axios.get("/equipment/truck/all");
-		const towerRes = await axios.get("/equipment/tower/all");
 
 		setTimeout(() => {
 			dispatch({
 				type: GET_ASSIGNMENT_DATA,
 				payload: {
 					employeeShifts: shiftRes.data,
-					equipment: [...truckRes.data, ...towerRes.data]
+					magtable: magtableRes.data
 				}
 			});
 		}, 500);
@@ -323,6 +238,17 @@ export const getMagTable = () => async dispatch => {
 
 		console.log(err);
 	}
+};
+
+export const getParkingLocations = () => async dispatch => {
+	try {
+		const res = await axios.get("/magtable/parkingLocation/all");
+
+		dispatch({
+			type: GET_PARKING_LOCATIONS,
+			payload: res.data
+		});
+	} catch (err) {}
 };
 
 /**

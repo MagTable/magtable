@@ -52,12 +52,12 @@ function ResetPassword() {
 				}}
 				validationSchema={Yup.object().shape({
 					newPassword: Yup.string()
-						.required("Required Field")
+						.required("Password Required")
 						.min(8, "Minimum Length is 8"),
 					confirmNewPassword: Yup.string()
 						.min(8, "Minimum Length is 8")
-						.oneOf([Yup.ref("newPassword"), null], "Passwords must match")
-						.required("Required Field")
+						.oneOf([Yup.ref("newPassword"), null], "Passwords Must Match")
+						.required("Password Required")
 				})}
 			>
 				{props => (
