@@ -47,7 +47,6 @@ export const addBrixRecord = (truckID, brixRecord) => async dispatch => {
  */
 export const getBrixRecords = truckID => async dispatch => {
 	try {
-		console.log(truckID);
 		dispatch({
 			type: FETCHING_BRIX_RECORDS,
 			payload: { truckID }

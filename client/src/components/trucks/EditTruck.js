@@ -73,8 +73,6 @@ const EditTruck = ({ truck }) => {
 			notice: ""
 		};
 	}
-
-	console.log({ truck });
 	return (
 		<Formik
 			enableReinitialize={true}
