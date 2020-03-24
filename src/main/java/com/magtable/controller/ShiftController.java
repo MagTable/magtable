@@ -18,6 +18,10 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+/**
+ * Rest Controller for Employee Shift Routes
+ * @author David Ward
+ */
 @RestController
 @RequestMapping("/shift")
 public class ShiftController {
@@ -72,11 +76,10 @@ public class ShiftController {
 
 
     /**
-     * //todo method comment
-     *
-     * @throws Exception
+     * Method to fetch all shift data from Aeromags shift portal.
+     * Stores the updated shift information into the W2WShift table in the database.
      */
-    private void APIPull() throws Exception {
+    private void APIPull() {
 
         //Deleting Everything in the Current repo
         w2wShiftRepository.deleteAll();
@@ -160,6 +163,11 @@ public class ShiftController {
     }
 
 
+    /**
+     * Method to update the W2W SID (We don't have an api key yikes)
+     * @param SID The SID to use to access w2w
+     * @return an OK response
+     */
     @PostMapping("/update/SID")
     public ResponseEntity<HttpStatus> updateSID(@RequestBody String SID) {
       /*  ShiftScheduler shiftScheduler = ShiftScheduler.getInstance();
