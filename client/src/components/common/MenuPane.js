@@ -69,8 +69,8 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 
 	const authUser = useSelector(state => state.auth.user);
 	const { pathname } = useLocation();
-
-	if (size.width < 1200) {
+	console.log(size.width);
+	if (size.width < 1420) {
 		return (
 			<div>
 				<BrowserView>
