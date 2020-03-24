@@ -12,10 +12,10 @@ import { isMobile } from "react-device-detect";
  */
 export const UserListDiv = styled.div`
 	margin: auto;
-	overflow-y: auto;
+	overflow: auto;
 	width: 40vw;
 	max-height: calc(100vh - 70px);
-	padding: 1rem;
+	padding: 1rem 2.5rem;
 	${isMobile &&  // Mobile rules
 		`padding-top: 5px;`}
 `;
