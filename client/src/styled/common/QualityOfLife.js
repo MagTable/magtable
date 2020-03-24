@@ -15,7 +15,6 @@ import FadeIn from "react-fade-in";
 
 export const LoadingImg = styled.i`
 	animation: loading-spin infinite 1s linear;
-	font-size: 40px;
 	height: fit-content;
 	width: fit-content;
 	text-align: center;
