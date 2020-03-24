@@ -113,7 +113,6 @@ function TruckList() {
 					{serviceVehicleAssignments.map(assignment => (
 						<TruckListItem
 							noticeOpen={noticesOpen}
-							openBrixModal={handleShow}
 							key={assignment.equipment.id}
 							assignment={assignment}
 							showAM={showAM}
@@ -125,6 +124,7 @@ function TruckList() {
 					{truckAssignments.map(assignment => (
 						<TruckListItem
 							noticeOpen={noticesOpen}
+							openBrixModal={handleShow}
 							key={assignment.equipment.id}
 							assignment={assignment}
 							showAM={showAM}

@@ -5,6 +5,7 @@ import {
 	FETCHING_BRIX_RECORDS,
 	GET_BRIX_CHART,
 	GET_BRIX_RECORDS,
+	GET_WEATHER,
 	SET_DAILY_MIX
 } from "../actions/constants";
 
@@ -15,8 +16,8 @@ const initialState = {
 	addingBrixRecord: false,
 	brixChart: [],
 	weather: {
-		data: sampleWeather
-		// loading: true,
+		data: null,
+		loading: true
 	}
 };
 
@@ -24,6 +25,14 @@ export default function(state = initialState, action) {
 	const { type, payload } = action;
 
 	switch (type) {
+		case GET_WEATHER:
+			return {
+				...state,
+				weather: {
+					data: sampleWeather,
+					loading: false
+				}
+			};
 		case GET_BRIX_CHART:
 			return {
 				...state,
