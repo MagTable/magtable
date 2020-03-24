@@ -2,13 +2,19 @@ import styled, { keyframes } from "styled-components";
 import { Form } from "formik";
 import { DANGER, SUCCESS, WARNING } from "../../actions/constants";
 
+/**
+ * @date 3/24/2020
+ * @author Arran Woodruff
+ * @module Component
+ */
+
 export const getColor = type => {
 	console.log(type);
 	switch (type) {
 		case DANGER:
 			return "--context-red";
 		case WARNING:
-			return "--alert-warning";
+			return "--context-orange";
 		case SUCCESS:
 			return "--context-blue";
 		default:
@@ -119,26 +125,36 @@ export const WeatherDataWrapper = styled.div`
 	padding: 0.75rem;
 	max-height: 100%;
 	overflow: hidden;
-	border-radius: 0.5rem;
+	// border-radius: 0.5rem; // not sure on this one
 	color: var(--title-bright);
+	position: relative;
 
 	transition: box-shadow 0.5s ease-in-out;
 	display: flex; // to display horizontally
 
-	box-shadow: inset 0 0 25px 5px var(--context-green);
+	box-shadow: inset 0 0 2px 2px var(--context-green);
 
 	${({ status }) =>
 		status &&
 		`
-			box-shadow: inset 0 0 25px 5px var(${getColor(status)});
+			box-shadow: inset 0 0 2px 2px var(${getColor(status)});
 	`}
+`;
 
-	h3 {
-		margin: 0;
-		position: relative;
+export const WeatherDataItem = styled.h4`
+	margin: 0;
+	min-width: 83px;
+	text-align: center;
 
-		padding-right: 2rem;
+	:not(:first-child) {
+		padding: 0 1rem;
 	}
+
+	${({ large }) =>
+		large &&
+		`
+			font-size: 130%; 
+	`}
 `;
 
 export const DailyMixButtons = styled.div`

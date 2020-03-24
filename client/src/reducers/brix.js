@@ -10,6 +10,12 @@ import {
 	SET_DAILY_MIX
 } from "../actions/constants";
 
+/**
+ * @date 3/24/2020
+ * @author Arran Woodruff
+ * @module Component
+ */
+
 const initialState = {
 	selectedBrixRecords: [],
 	selectedTruckID: null,
@@ -27,7 +33,7 @@ const initialState = {
 
 const MIX_STEP = 5;
 const MIX_MAX = 75;
-const MIX_MIN = 5;
+const MIX_MIN = 15;
 
 export default function(state = initialState, action) {
 	const { type, payload } = action;

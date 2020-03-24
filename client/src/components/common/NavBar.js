@@ -12,7 +12,7 @@ import WeatherInfo from "../brix/WeatherInfo";
 
 /**
  * @date 2020-02-05
- * @author MJ Kochuk
+ * @author MJ Kochuk, Arran Woodruff
  * @module Component
  */
 

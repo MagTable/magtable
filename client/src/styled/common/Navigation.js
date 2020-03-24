@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 /**
  * @date 2020-02-05
- * @author MJ Kochuk
+ * @author MJ Kochuk, Arran Woodruff
  * @module Styled
  */
 
