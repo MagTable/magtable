@@ -11,9 +11,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
 import { Field, Formik } from "formik";
 import TextInput from "../common/TextInput";
-import { OkButton } from "../../styled/common/FormControl";
 import * as Yup from "yup";
 import { addBrixRecord } from "../../actions/brix";
+import styled from "styled-components";
+import { LoginBtn } from "../../styled/auth/Login";
+
+// todo we should start moving some of our form styled components into a folder now.
+const SubmitDiv = styled.div`
+	grid-area: submit;
+`;
 
 function BrixManagement() {
 	const dispatch = useDispatch();
@@ -164,8 +170,8 @@ function BrixManagement() {
 								/>
 							)}
 						</Field>
-						<div id={"submit"}>
-							<OkButton disabled={addingBrixRecord} type={"submit"}>
+						<SubmitDiv>
+							<LoginBtn disabled={addingBrixRecord} type={"submit"}>
 								{addingBrixRecord ? (
 									<SpinnerWrap>
 										<LoadingImg small className="fas fa-circle-notch" />
@@ -173,8 +179,8 @@ function BrixManagement() {
 								) : (
 									"Submit"
 								)}
-							</OkButton>
-						</div>
+							</LoginBtn>
+						</SubmitDiv>
 					</BrixForm>
 				)}
 			</Formik>

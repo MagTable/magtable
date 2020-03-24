@@ -9,15 +9,14 @@ import { Button } from "../common/FormControl";
 
 export const TruckManagementListDiv = styled.div`
 	transition: all 0.15s ease-in-out;
-	margin: 0;
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1.2;
 	flex-basis: 0;
 	overflow-y: auto;
-	overflow-x: hidden;
+	overflow-x: auto;
 	max-height: calc(100vh - 120px);
-	width: 35%;
+	width: 50%;
 	margin: auto;
 `;
 
