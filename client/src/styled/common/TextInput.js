@@ -76,8 +76,8 @@ export const TextInputIcon = styled.i`
 	cursor: pointer;
 	position: absolute;
 	z-index: 3;
+	top: calc(100% - 40px);
 	width: 30px;
-	top: calc(100% - 25px);
 	right: 0;
 	user-select: none;
 	transition: color 0.3s ease-in-out;
@@ -86,6 +86,20 @@ export const TextInputIcon = styled.i`
 		focus &&
 		`
 			color: ${accentColor || ``};
+	`}
+	
+	${({ color }) =>
+		color &&
+		`
+		color: ${color};
+	`}
+
+	${({ hoverColor }) =>
+		hoverColor &&
+		`
+		:hover {
+			color: ${hoverColor};
+		}
 	`}
 `;
 

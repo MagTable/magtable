@@ -13,6 +13,7 @@ import Modal from "../modal/Modal";
 import { FilterIcon } from "../../styled/magtable/Overflow";
 import EditTruck from "./EditTruck";
 import FadeIn from "react-fade-in";
+import { DEICE_TRUCK, SERVICE_VEHICLE } from "../../actions/constants";
 
 /**
  * @date 3/5/2020
@@ -32,6 +33,17 @@ function TruckManagement() {
 	const handleClose = () => setModal(false);
 	const handleShow = () => setModal(true);
 	const [editTruck, setEditTruck] = useState(null);
+
+	const truckAssignments = assignments.filter(
+		assignment =>
+			assignment.equipment.id < 1000 &&
+			assignment.equipment.type === DEICE_TRUCK
+	);
+	const serviceVehicleAssignments = assignments.filter(
+		assignment =>
+			assignment.equipment.id < 1000 &&
+			assignment.equipment.type === SERVICE_VEHICLE
+	);
 
 	return (
 		<EditTruckWrap>
@@ -54,18 +66,22 @@ function TruckManagement() {
 				</ListTitle>
 				<TruckManagementListDiv>
 					<FadeIn>
-						<>
-							{assignments.map(
-								truck =>
-									truck.equipment.id < 1000 && (
-										<TruckManagementItem
-											key={truck.equipment.id}
-											truck={truck}
-											setEditTruck={setEditTruck}
-										/>
-									)
-							)}
-						</>
+						<h2>Service Vehicles</h2>
+						{serviceVehicleAssignments.map(assignment => (
+							<TruckManagementItem
+								key={assignment.equipment.id}
+								truck={assignment}
+								setEditTruck={setEditTruck}
+							/>
+						))}
+						<h2>De-Ice Vehicles</h2>
+						{truckAssignments.map(assignment => (
+							<TruckManagementItem
+								key={assignment.equipment.id}
+								truck={assignment}
+								setEditTruck={setEditTruck}
+							/>
+						))}
 					</FadeIn>
 				</TruckManagementListDiv>
 			</TruckMgmtDiv>

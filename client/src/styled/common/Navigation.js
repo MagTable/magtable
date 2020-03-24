@@ -42,16 +42,18 @@ export const NavButton = styled.button`
  * The icons used in the mobile version of the navigation menu.
  */
 export const NavIcon = styled.i`
-	width: 45px;
+	display: flex;
+	justify-content: center;
 	vertical-align: middle;
-	float: left;
+	padding-left: 1rem;
+	float: right;
 `;
 
 /**
  * The div holding all content pertaining to the link for opening the navigation menu.
  */
 export const MenuTip = styled.div`
-	padding-top: 5px;
+	padding: 27px;
 	cursor: pointer;
 	transform: scale(1.2);
 `;
@@ -61,8 +63,7 @@ export const MenuTip = styled.div`
  */
 export const MenuTipIcon = styled.a`
 	transition-duration: 0.5s;
-	transform: ${({ open }) => (open ? "rotate(360deg)" : "rotate(270deg)")};
-	margin-right: 10px;
+	transform: ${({ open }) => (open ? "rotate(270deg)" : "rotate(360deg)")};
 	cursor: pointer;
 `;
 
@@ -76,11 +77,11 @@ export const NavPane = styled.div`
 	wrap-option: none;
 	overflow: hidden;
 	transition: all 0.15s ease-in-out;
-	background-color: #e9e9e9;
+	background-color: #232f3e;
 	position: absolute;
 	top: 70px;
 	right: 0px;
-	height: ${({ open }) => (open ? "195px" : "0px")};
+	max-height: ${({ open }) => (open ? "295px" : "0px")};
 	z-index: 100;
 `;
 
@@ -102,7 +103,6 @@ export const NavBar = styled.div`
 	background: var(--navbar);
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
 	height: 70px;
 `;
 
@@ -118,7 +118,7 @@ export const NavLink = styled(Link)`
 	padding-bottom: 0.5rem;
 
 	transition: color 0.25s ease-in-out, border 0.25s ease-in-out;
-	border-bottom: 2px solid #00000000;
+	border-bottom: 3px solid #00000000;
 
 	:hover {
 		color: var(--link-underline);

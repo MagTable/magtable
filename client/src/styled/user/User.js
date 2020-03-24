@@ -12,10 +12,10 @@ import { isMobile } from "react-device-detect";
  */
 export const UserListDiv = styled.div`
 	margin: auto;
-	overflow-y: auto;
+	overflow: auto;
 	width: 40vw;
 	max-height: calc(100vh - 70px);
-	padding: 1rem;
+	padding: 1rem 2.5rem;
 	${isMobile &&  // Mobile rules
 		`padding-top: 5px;`}
 `;
@@ -42,7 +42,7 @@ export const UserListItem = styled.div`
 		  `
 		  width: 100%;
 		  background-color: #f2faff;
-		  height: 40px;
+		  height: 60px;
 		  justify-content: center;
 		  display: flex;
 		  flex-direction: column;
@@ -59,8 +59,9 @@ export const UserListItem = styled.div`
 export const UserListRow = styled.div`
 	align-content: center;
 	justify-content: center;
+	height: 60px;
 	display: flex;
-	padding-top: 5px;
+	padding-top: 8px;
 	flex-basis: auto;
 	flex-grow: 1;
 	margin: auto;
@@ -78,7 +79,6 @@ export const UserListRow = styled.div`
  */
 export const UserManipulateBlock = styled.div`
 	display: flex;
-	width: 90px;
 	background-color: #f2faff;
 	align-items: center;
 	${isMobile && // Mobile rules

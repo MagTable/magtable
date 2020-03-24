@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../../res/Images/NoTextLogo.svg";
+import logo from "../../res/Images/WhiteTextLogo.svg";
 import {
 	AeroLogo,
 	NavBar as NavBarDiv,

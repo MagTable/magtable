@@ -170,7 +170,7 @@ export const TruckListItemDiv = styled.div`
 
 export const TruckMgmtItemDiv = styled(TruckListItemDiv)`
 	border-bottom: 2px solid grey;
-	height: 40px;
+	height: 50px;
 `;
 
 export const TruckStatusBox = styled.div`

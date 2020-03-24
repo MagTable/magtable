@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SYSTEM_ADMINISTRATOR } from "../../actions/constants";
 import {
@@ -33,6 +33,7 @@ function TruckManagementItem({ truck, setEditTruck }) {
 		const editedTruck = {
 			id: truck.equipment.id,
 			status: truck.equipment.status,
+			type: truck.equipment.type,
 			notice: truck.equipment.notice
 		};
 
@@ -53,7 +54,7 @@ function TruckManagementItem({ truck, setEditTruck }) {
 					<TruckStatusBox>{truck.equipment.notice}</TruckStatusBox>
 					<ManipTruckManipIconDiv>
 						<IconButton
-							faClassName="fas fa-edit"
+							faClassName="fas fa-edit fa-2x"
 							onClick={handleEdit}
 							toolTip={"Edit Truck"}
 							hoverColor={"blue"}
@@ -64,7 +65,7 @@ function TruckManagementItem({ truck, setEditTruck }) {
 						>
 							{({ confirm }) => (
 								<IconButton
-									faClassName="fa-trash-alt"
+									faClassName="fa-trash-alt fa-2x"
 									onClick={confirm}
 									toolTip={"Delete Truck"}
 									hoverColor={"red"}
@@ -78,7 +79,7 @@ function TruckManagementItem({ truck, setEditTruck }) {
 					<TruckStatusBox>{truck.equipment.notice}</TruckStatusBox>
 					<ManipTruckManipIconDiv>
 						<IconButton
-							faClassName="fas fa-edit"
+							faClassName="fas fa-edit fa-2x"
 							onClick={handleEdit}
 							toolTip={"Edit Truck"}
 							hoverColor={"blue"}

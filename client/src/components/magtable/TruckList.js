@@ -119,8 +119,7 @@ function TruckList() {
 							shift
 						/>
 					))}
-					<ListSeparator>Deice Trucks</ListSeparator>
-
+					<ListSeparator>De-Ice Trucks</ListSeparator>
 					{truckAssignments.map(assignment => (
 						<TruckListItem
 							noticeOpen={noticesOpen}
