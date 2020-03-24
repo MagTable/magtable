@@ -121,10 +121,10 @@ function TruckList() {
 						/>
 					))}
 					<ListSeparator>De-Ice Trucks</ListSeparator>
-
 					{truckAssignments.map(assignment => (
 						<TruckListItem
 							noticeOpen={noticesOpen}
+							openBrixModal={handleShow}
 							key={assignment.equipment.id}
 							assignment={assignment}
 							showAM={showAM}
