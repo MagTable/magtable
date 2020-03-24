@@ -1,14 +1,11 @@
 import {
-	SET_DAILY_MIX,
 	AXIOS_JSON_HEADER,
 	ADD_BRIX_RECORD,
 	GET_BRIX_RECORDS,
 	FETCHING_BRIX_RECORDS,
 	ADDING_BRIX_RECORD,
 	GET_BRIX_CHART,
-	GET_WEATHER,
-	DECREMENT_DAILY_MIX,
-	INCREMENT_DAILY_MIX
+	GET_WEATHER
 } from "./constants";
 import axios from "axios";
 import { sampleWeather } from "../res/test_data/magtable";
@@ -110,28 +107,4 @@ export const getWeather = () => async dispatch => {
 			payload: { date, forecastLow, currentTemperature }
 		});
 	} catch (err) {}
-};
-
-/**
- * Sets the daily mix to a given percentage
- *
- * @param dailyMix dailyMix to set
- */
-export const setDailyMix = dailyMix => dispatch => {
-	dispatch({
-		type: SET_DAILY_MIX,
-		payload: dailyMix
-	});
-};
-
-export const incrementDailyMix = () => dispatch => {
-	dispatch({
-		type: INCREMENT_DAILY_MIX
-	});
-};
-
-export const decrementDailyMix = () => dispatch => {
-	dispatch({
-		type: DECREMENT_DAILY_MIX
-	});
 };

@@ -1,13 +1,10 @@
 import {
 	ADD_BRIX_RECORD,
 	ADDING_BRIX_RECORD,
-	DECREMENT_DAILY_MIX,
 	FETCHING_BRIX_RECORDS,
 	GET_BRIX_CHART,
 	GET_BRIX_RECORDS,
-	GET_WEATHER,
-	INCREMENT_DAILY_MIX,
-	SET_DAILY_MIX
+	GET_WEATHER
 } from "../actions/constants";
 
 /**
@@ -22,7 +19,6 @@ const initialState = {
 	loading: true,
 	addingBrixRecord: false,
 	brixChart: [],
-	dailyMix: null,
 	weather: {
 		date: null,
 		forecastLow: null,
@@ -30,10 +26,6 @@ const initialState = {
 		loading: true
 	}
 };
-
-const MIX_STEP = 5;
-const MIX_MAX = 75;
-const MIX_MIN = 15;
 
 /**
  * @date 2020-03-24
@@ -87,25 +79,6 @@ export default function(state = initialState, action) {
 				selectedBrixRecords: payload.brixRecords,
 				selectedTruckID: payload.truckID,
 				loading: false
-			};
-		case SET_DAILY_MIX:
-			return {
-				...state,
-				dailyMix: payload
-			};
-		case INCREMENT_DAILY_MIX:
-			if (state.dailyMix + MIX_STEP > MIX_MAX) return state;
-
-			return {
-				...state,
-				dailyMix: state.dailyMix + MIX_STEP
-			};
-		case DECREMENT_DAILY_MIX:
-			if (state.dailyMix - MIX_STEP < MIX_MIN) return state;
-
-			return {
-				...state,
-				dailyMix: state.dailyMix - MIX_STEP
 			};
 		default:
 			return state;

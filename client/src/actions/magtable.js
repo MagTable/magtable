@@ -16,7 +16,10 @@ import {
 	REFRESHING_EMPLOYEE_SHIFTS,
 	TOGGLE_AM_PM,
 	CLEAR_TABLE,
-	GET_PARKING_LOCATIONS
+	GET_PARKING_LOCATIONS,
+	SET_DAILY_MIX,
+	INCREMENT_DAILY_MIX,
+	DECREMENT_DAILY_MIX
 } from "./constants";
 import axios from "axios";
 import { setAlert } from "./alert";
@@ -322,4 +325,28 @@ export const refreshEmployeeShifts = () => async dispatch => {
 		}
 		console.log(err);
 	}
+};
+
+/**
+ * Sets the daily mix to a given percentage
+ *
+ * @param dailyMix dailyMix to set
+ */
+export const setDailyMix = dailyMix => dispatch => {
+	dispatch({
+		type: SET_DAILY_MIX,
+		payload: dailyMix
+	});
+};
+
+export const incrementDailyMix = () => dispatch => {
+	dispatch({
+		type: INCREMENT_DAILY_MIX
+	});
+};
+
+export const decrementDailyMix = () => dispatch => {
+	dispatch({
+		type: DECREMENT_DAILY_MIX
+	});
 };

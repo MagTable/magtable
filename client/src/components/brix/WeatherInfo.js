@@ -10,7 +10,7 @@ import {
 	decrementDailyMix,
 	incrementDailyMix,
 	setDailyMix
-} from "../../actions/brix";
+} from "../../actions/magtable";
 import { DANGER, SUCCESS, WARNING } from "../../actions/constants";
 
 /**
@@ -22,7 +22,8 @@ import { DANGER, SUCCESS, WARNING } from "../../actions/constants";
 function WeatherInfo() {
 	const dispatch = useDispatch();
 
-	const { weather, brixChart, dailyMix } = useSelector(state => state.brix);
+	const { weather, brixChart } = useSelector(state => state.brix);
+	const dailyMix = useSelector(state => state.magtable.dailyMix);
 
 	const dailyMixChartRow = brixChart
 		.slice()
