@@ -47,7 +47,6 @@ function NavBar() {
 				recommendedMix = record.recommendedMix;
 			}
 		});
-		console.log(forecastLow, recommendedMix);
 	}
 
 	return (
