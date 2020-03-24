@@ -16,7 +16,7 @@ export const TruckManagementListDiv = styled.div`
 	overflow-y: auto;
 	overflow-x: auto;
 	max-height: calc(100vh - 120px);
-	width: 50%;
+	width: 60%;
 	margin: auto;
 `;
 
