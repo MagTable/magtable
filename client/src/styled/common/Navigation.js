@@ -43,6 +43,8 @@ export const NavButton = styled.button`
  * The icons used in the mobile version of the navigation menu.
  */
 export const NavIcon = styled.i`
+	display: flex;
+	justify-content: center;
 	width: 45px;
 	vertical-align: middle;
 	float: right;
@@ -80,7 +82,7 @@ export const NavPane = styled.div`
 	position: absolute;
 	top: 70px;
 	right: 0px;
-	height: ${({ open }) => (open ? "165px" : "0px")};
+	max-height: ${({ open }) => (open ? "195px" : "0px")};
 	z-index: 100;
 `;
 
@@ -88,14 +90,11 @@ export const NavPane = styled.div`
  * Holds the individual links in the navigation menu / bar.
  */
 export const NavDiv = styled.div`
-	${isMobile
-		? // Mobile rules
-		  "padding: 20px 0px 20px 20px;" +
-		  "width: 110px;" +
-		  "overflow: hidden;" +
-		  "transition: all 0.2s ease-in-out;"
-		: // Desktop Rules
-		  "display: flex;"}
+	display: flex;
+
+	:hover {
+		background-color: white;
+	}
 `;
 
 /**
@@ -115,7 +114,7 @@ export const NavLink = styled(Link)`
 	text-decoration: none;
 	color: var(--title-bright);
 	font-size: 20px;
-	padding: 0.5rem;
+	padding: 1rem;
 
 	transition: color 0.25s ease-in-out, border 0.25s ease-in-out;
 	border-bottom: 2px solid #00000000;
@@ -129,13 +128,4 @@ export const NavLink = styled(Link)`
 			border-bottom-color: var(--link-underline);
 			color: var(--link-underline);
 		`}
-	${isMobile
-		? // Mobile rules
-		  `width: 100vw;
-		  cursor: pointer;
-		  padding: 20px 0px 20px 0px;
-		  text-align: center;
-		  border-bottom: 2px solid #DADADA;`
-		: // Desktop Rules
-		  ` padding-top: 20px;`}
 `;
