@@ -45,14 +45,14 @@ export const NavButton = styled.button`
 export const NavIcon = styled.i`
 	width: 45px;
 	vertical-align: middle;
-	float: left;
+	float: right;
 `;
 
 /**
  * The div holding all content pertaining to the link for opening the navigation menu.
  */
 export const MenuTip = styled.div`
-	padding-top: 5px;
+	padding: 27px;
 	cursor: pointer;
 	transform: scale(1.2);
 `;
@@ -62,7 +62,7 @@ export const MenuTip = styled.div`
  */
 export const MenuTipIcon = styled.a`
 	transition-duration: 0.5s;
-	transform: ${({ open }) => (open ? "rotate(360deg)" : "rotate(270deg)")};
+	transform: ${({ open }) => (open ? "rotate(270deg)" : "rotate(360deg)")};
 	margin-right: 10px;
 	cursor: pointer;
 `;
@@ -77,7 +77,7 @@ export const NavPane = styled.div`
 	wrap-option: none;
 	overflow: hidden;
 	transition: all 0.15s ease-in-out;
-	background-color: #e9e9e9;
+	background-color: #232f3e;
 	position: absolute;
 	top: 70px;
 	right: 0px;
@@ -116,10 +116,10 @@ export const NavLink = styled(Link)`
 	text-decoration: none;
 	color: var(--title-bright);
 	font-size: 20px;
-	padding-bottom: 0.5rem;
+	padding: 0.5rem;
 
 	transition: color 0.25s ease-in-out, border 0.25s ease-in-out;
-	border-bottom: 2px solid #00000000;
+	border-bottom: 2px solid grey;
 
 	:hover {
 		color: var(--link-underline);

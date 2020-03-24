@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 
@@ -32,7 +32,6 @@ function App() {
 				<Switch>
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/password/reset" component={PasswordReset} />
-
 					<PrivateRoute
 						exact
 						path="/truck/all"

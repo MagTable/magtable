@@ -1,5 +1,12 @@
 import React from "react";
-import { NavDiv, NavLink } from "../../styled/common/Navigation";
+import {
+	MenuTip,
+	MenuTipIcon,
+	NavDiv,
+	NavIcon,
+	NavLink,
+	NavPane
+} from "../../styled/common/Navigation";
 import { BrowserView } from "react-device-detect";
 import { useSelector } from "react-redux";
 import { SYSTEM_ADMINISTRATOR } from "../../actions/constants";
@@ -22,68 +29,66 @@ import PropTypes from "prop-types";
  */
 function MenuPane({ menuOpen, setMenuOpen }) {
 	// Used for mobile, commented until we're ready to work on mobile.
-	// function toggleMenu() {
-	// 	if (menuOpen) {
-	// 		setMenuOpen(false);
-	// 	} else {
-	// 		setMenuOpen(true);
-	// 	}
-	// }
+	function toggleMenu() {
+		if (menuOpen) {
+			setMenuOpen(false);
+		} else {
+			setMenuOpen(true);
+		}
+	}
 
 	const authUser = useSelector(state => state.auth.user);
 	const { pathname } = useLocation();
 
 	return (
 		<div>
+			{/*<BrowserView>*/}
+			{/*	<NavDiv>*/}
+			{/*		<NavLink*/}
+			{/*			active={pathname === "/truck/all" ? 1 : undefined}*/}
+			{/*			to={"/truck/all"}*/}
+			{/*		>*/}
+			{/*			Manage Trucks*/}
+			{/*		</NavLink>*/}
+			{/*		<NavLink active={pathname === "/" ? 1 : undefined} to={"/"}>*/}
+			{/*			Truck Assignment*/}
+			{/*		</NavLink>*/}
+			{/*		/!* System Administrators Only *!/*/}
+			{/*		{authUser?.role?.name === SYSTEM_ADMINISTRATOR && (*/}
+			{/*			<NavLink*/}
+			{/*				active={pathname === "/user/all" ? 1 : undefined}*/}
+			{/*				to={"/user/all"}*/}
+			{/*			>*/}
+			{/*				Manage Users*/}
+			{/*			</NavLink>*/}
+			{/*		)}*/}
+			{/*		<NavLink to={"/logout"}>Log Out</NavLink>*/}
+			{/*	</NavDiv>*/}
+			{/*</BrowserView>*/}
 			<BrowserView>
 				<NavDiv>
-					<NavLink
-						active={pathname === "/truck/all" ? 1 : undefined}
-						to={"/truck/all"}
-					>
-						Manage Trucks
-					</NavLink>
-					<NavLink active={pathname === "/" ? 1 : undefined} to={"/"}>
-						Truck Assignment
-					</NavLink>
-					{/* System Administrators Only */}
-					{authUser?.role?.name === SYSTEM_ADMINISTRATOR && (
-						<NavLink
-							active={pathname === "/user/all" ? 1 : undefined}
-							to={"/user/all"}
-						>
-							Manage Users
+					<MenuTip onClick={() => toggleMenu()}>
+						<MenuTipIcon open={menuOpen} className="fas fa-bars fa-lg" />
+					</MenuTip>
+					<NavPane onClick={() => toggleMenu()} open={menuOpen}>
+						<NavLink to={"/"}>
+							Truck Assignment
+							<NavIcon className="fas fa-truck" />
 						</NavLink>
-					)}
-					<NavLink to={"/logout"}>Log Out</NavLink>
+						{/* System Administrators Only */}
+						{authUser?.role?.name === SYSTEM_ADMINISTRATOR && (
+							<NavLink to={"/user/all"}>
+								Manage Users
+								<NavIcon className="fas fa-users" />
+							</NavLink>
+						)}
+						<NavLink to={"/logout"}>
+							Log Out
+							<NavIcon className="fas fa-logout" />
+						</NavLink>
+					</NavPane>
 				</NavDiv>
 			</BrowserView>
-			{/*No longer focusing on Mobile*/}
-			{/*<MobileView>*/}
-			{/*	<NavDiv>*/}
-			{/*		<MenuTip onClick={() => toggleMenu()}>*/}
-			{/*			<MenuTipIcon open={menuOpen} className="fas fa-angle-down" />*/}
-			{/*			Menu*/}
-			{/*		</MenuTip>*/}
-			{/*		<NavPane onClick={() => toggleMenu()} open={menuOpen}>*/}
-			{/*			<NavLink to={"/"}>*/}
-			{/*				<NavIcon className="fas fa-truck" />*/}
-			{/*				Truck Assignment*/}
-			{/*			</NavLink>*/}
-			{/*			/!* System Administrators Only *!/*/}
-			{/*			{authUser?.role?.name === SYSTEM_ADMINISTRATOR && (*/}
-			{/*				<NavLink to={"/user/all"}>*/}
-			{/*					<NavIcon className="fas fa-users" />*/}
-			{/*					Manage Users*/}
-			{/*				</NavLink>*/}
-			{/*			)}*/}
-			{/*			<NavLink to={"/logout"}>*/}
-			{/*				<NavIcon className="fas fa-logout" />*/}
-			{/*				Log Out*/}
-			{/*			</NavLink>*/}
-			{/*		</NavPane>*/}
-			{/*	</NavDiv>*/}
-			{/*</MobileView>*/}
 		</div>
 	);
 }
