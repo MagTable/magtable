@@ -131,12 +131,15 @@ export const WeatherDataWrapper = styled.div`
 	transition: box-shadow 0.5s ease-in-out;
 	display: flex; // to display horizontally
 
-	box-shadow: inset 0 0 2px 2px var(--context-green);
+	box-shadow: inset 0 -7px 7px 2px var(--context-green);
+
+	outline: 6px solid var(--navbar);
+	outline-offset: -6px;
 
 	${({ status }) =>
 		status &&
 		`
-			box-shadow: inset 0 0 2px 2px var(${getColor(status)});
+			box-shadow: inset 0 -7px 7px 2px var(${getColor(status)});
 	`}
 `;
 
