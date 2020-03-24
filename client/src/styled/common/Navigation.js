@@ -63,7 +63,6 @@ export const MenuTip = styled.div`
 export const MenuTipIcon = styled.a`
 	transition-duration: 0.5s;
 	transform: ${({ open }) => (open ? "rotate(270deg)" : "rotate(360deg)")};
-	margin-right: 10px;
 	cursor: pointer;
 `;
 
