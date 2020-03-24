@@ -16,7 +16,7 @@ import {
 import store from "../store";
 
 import { setAlert } from "./alert";
-import { getBrixChart } from "./brix";
+import { getBrixChart, getWeather } from "./brix";
 import { getMagTable, getParkingLocations } from "./magtable";
 
 window.addEventListener("storage", e => {
@@ -49,6 +49,7 @@ export const loadUser = () => async dispatch => {
 			dispatch(getMagTable());
 			dispatch(getBrixChart());
 			dispatch(getParkingLocations());
+			dispatch(getWeather());
 		}
 	} catch (err) {
 		dispatch({
