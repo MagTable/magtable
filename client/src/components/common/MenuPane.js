@@ -71,20 +71,23 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 						<MenuTipIcon open={menuOpen} className="fas fa-bars fa-lg" />
 					</MenuTip>
 					<NavPane onClick={() => toggleMenu()} open={menuOpen}>
-						<NavLink to={"/"}>
+						<NavLink active={pathname === "/" ? 1 : undefined} to={"/"}>
 							Truck Assignment
 							<NavIcon className="fas fa-truck" />
 						</NavLink>
 						{/* System Administrators Only */}
 						{authUser?.role?.name === SYSTEM_ADMINISTRATOR && (
-							<NavLink to={"/user/all"}>
+							<NavLink
+								active={pathname === "/user/all" ? 1 : undefined}
+								to={"/user/all"}
+							>
 								Manage Users
 								<NavIcon className="fas fa-users" />
 							</NavLink>
 						)}
 						<NavLink to={"/logout"}>
 							Log Out
-							<NavIcon className="fas fa-logout" />
+							<NavIcon className="fas fa-sign-out-alt" />
 						</NavLink>
 					</NavPane>
 				</NavDiv>

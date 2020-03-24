@@ -80,7 +80,7 @@ export const NavPane = styled.div`
 	position: absolute;
 	top: 70px;
 	right: 0px;
-	height: ${({ open }) => (open ? "195px" : "0px")};
+	height: ${({ open }) => (open ? "165px" : "0px")};
 	z-index: 100;
 `;
 
@@ -118,7 +118,7 @@ export const NavLink = styled(Link)`
 	padding: 0.5rem;
 
 	transition: color 0.25s ease-in-out, border 0.25s ease-in-out;
-	border-bottom: 2px solid grey;
+	border-bottom: 2px solid #00000000;
 
 	:hover {
 		color: var(--link-underline);
@@ -137,6 +137,5 @@ export const NavLink = styled(Link)`
 		  text-align: center;
 		  border-bottom: 2px solid #DADADA;`
 		: // Desktop Rules
-		  `margin-right: 50px; 
-		  padding-top: 20px;`}
+		  ` padding-top: 20px;`}
 `;
