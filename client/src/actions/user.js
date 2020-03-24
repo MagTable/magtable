@@ -70,7 +70,7 @@ export const addUser = user => async dispatch => {
 		});
 
 		dispatch(
-			setAlert(`User "${user.username}" Added Successfully.`, "success")
+			setAlert(`User "${user.username}" Was Added Successfully.`, "success")
 		);
 	} catch (err) {
 		dispatch(setAlert(err.response?.data?.message, "danger"));

@@ -29,7 +29,7 @@ export const editTruck = truck => async dispatch => {
 		});
 
 		dispatch(
-			setAlert(`Truck "${truck.id}" Was Updated Successfully.`, "success")
+			setAlert(`Truck ${truck.id} Was Updated Successfully.`, "success")
 		);
 	} catch (err) {
 		dispatch(setAlert(err.response?.data?.message, "danger"));
@@ -58,9 +58,7 @@ export const addTruck = truck => async dispatch => {
 			payload: res.data
 		});
 
-		dispatch(
-			setAlert(`Truck "${truck.id}" Was Added Successfully.`, "success")
-		);
+		dispatch(setAlert(`Truck ${truck.id} Was Added Successfully.`, "success"));
 	} catch (err) {
 		dispatch(setAlert(err.response?.data?.message, "danger"));
 	}
@@ -75,9 +73,7 @@ export const deleteTruck = id => async dispatch => {
 			payload: id
 		});
 
-		dispatch(
-			setAlert(`Truck "${id}" Was Deactivated Successfully.`, "success")
-		);
+		dispatch(setAlert(`Truck ${id} Was Deactivated Successfully.`, "success"));
 	} catch (err) {
 		dispatch(setAlert(err.response?.data?.message, "danger"));
 	}

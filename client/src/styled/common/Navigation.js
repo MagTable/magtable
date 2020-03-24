@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { isMobile } from "react-device-detect";
 
 /**
  * @date 2020-02-05
@@ -45,8 +44,8 @@ export const NavButton = styled.button`
 export const NavIcon = styled.i`
 	display: flex;
 	justify-content: center;
-	width: 45px;
 	vertical-align: middle;
+	padding-left: 1rem;
 	float: right;
 `;
 
@@ -82,7 +81,7 @@ export const NavPane = styled.div`
 	position: absolute;
 	top: 70px;
 	right: 0px;
-	max-height: ${({ open }) => (open ? "195px" : "0px")};
+	max-height: ${({ open }) => (open ? "295px" : "0px")};
 	z-index: 100;
 `;
 
@@ -91,10 +90,6 @@ export const NavPane = styled.div`
  */
 export const NavDiv = styled.div`
 	display: flex;
-
-	:hover {
-		background-color: white;
-	}
 `;
 
 /**
@@ -114,10 +109,12 @@ export const NavLink = styled(Link)`
 	text-decoration: none;
 	color: var(--title-bright);
 	font-size: 20px;
-	padding: 1rem;
+	padding-bottom: 0.5rem;
+	padding-top: 20px;
+	margin-right: 2rem;
 
 	transition: color 0.25s ease-in-out, border 0.25s ease-in-out;
-	border-bottom: 2px solid #00000000;
+	border-bottom: 3px solid #00000000;
 
 	:hover {
 		color: var(--link-underline);

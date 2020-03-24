@@ -106,7 +106,7 @@ function Login() {
 							/>
 							<br />
 							<LoginBtn type="submit" disabled={loading}>
-								Login
+								LOGIN
 							</LoginBtn>
 						</Form>
 					)}
