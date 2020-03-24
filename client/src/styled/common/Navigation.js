@@ -68,45 +68,6 @@ export const MenuTipIcon = styled.a`
 `;
 
 /**
- * The navigation menu used in the mobile version of the site.
- */
-export const NavPane = styled.div`
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	wrap-option: none;
-	overflow: hidden;
-	transition: all 0.15s ease-in-out;
-	background-color: #232f3e;
-	position: absolute;
-	top: 70px;
-	right: 0px;
-	max-height: ${({ open }) => (open ? "295px" : "0px")};
-	z-index: 100;
-`;
-
-/**
- * Holds the individual links in the navigation menu / bar.
- */
-export const NavDiv = styled.div`
-	height: 100%;
-
-	display: flex;
-	align-items: center;
-	justify-content: center;
-`;
-
-/**
- * The header div of the page that contains the logo, navigation and possibly the title of the page.
- */
-export const NavBar = styled.div`
-	background: var(--navbar);
-	display: flex;
-	justify-content: space-between;
-	height: 70px;
-`;
-
-/**
  * The link in the navigation menu / bar to access another page of the app.
  */
 export const NavLink = styled(Link)`
@@ -129,4 +90,48 @@ export const NavLink = styled(Link)`
 			border-bottom-color: var(--link-underline);
 			color: var(--link-underline);
 		`}
+`;
+
+/**
+ * The navigation menu used in the mobile version of the site.
+ */
+export const NavPane = styled.div`
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	wrap-option: none;
+	overflow: hidden;
+	transition: all 0.15s ease-in-out;
+	background-color: #232f3e;
+	position: absolute;
+	top: 70px;
+	right: 0px;
+	max-height: ${({ open }) => (open ? "295px" : "0px")};
+	z-index: 100;
+
+	${NavLink} {
+		padding: 1rem;
+		margin: 0;
+	}
+`;
+
+/**
+ * Holds the individual links in the navigation menu / bar.
+ */
+export const NavDiv = styled.div`
+	height: 100%;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+`;
+
+/**
+ * The header div of the page that contains the logo, navigation and possibly the title of the page.
+ */
+export const NavBar = styled.div`
+	background: var(--navbar);
+	display: flex;
+	justify-content: space-between;
+	height: 70px;
 `;

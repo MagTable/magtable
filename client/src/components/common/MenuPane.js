@@ -1,5 +1,3 @@
-import React from "react";
-import { NavDiv, NavLink } from "../../styled/common/Navigation";
 import React, { useEffect, useState } from "react";
 import {
 	MenuTip,
@@ -71,47 +69,16 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 	const authUser = useSelector(state => state.auth.user);
 	const { pathname } = useLocation();
 
-	if (size.width < 1200) {
+	if (size.width < 1400) {
 		return (
-					<NavDiv>
-						<MenuTip onClick={() => toggleMenu()}>
-							<MenuTipIcon open={menuOpen} className="fas fa-bars fa-lg" />
-						</MenuTip>
-						<NavPane onClick={() => toggleMenu()} open={menuOpen}>
-							<NavLink active={pathname === "/" ? 1 : undefined} to={"/"}>
-								Truck Assignment
-								<NavIcon className="fas fa-truck" />
-							</NavLink>
-							<NavLink
-								active={pathname === "/truck/all" ? 1 : undefined}
-								to={"/truck/all"}
-							>
-								Manage Trucks
-								<NavIcon className="fas fa-truck" />
-							</NavLink>
-							{/* System Administrators Only */}
-							{authUser?.role?.name === SYSTEM_ADMINISTRATOR && (
-								<NavLink
-									active={pathname === "/user/all" ? 1 : undefined}
-									to={"/user/all"}
-								>
-									Manage Users
-									<NavIcon className="fas fa-users" />
-								</NavLink>
-							)}
-							<NavLink to={"/logout"}>
-								Log Out
-								<NavIcon className="fas fa-sign-out-alt" />
-							</NavLink>
-						</NavPane>
-					</NavDiv>
-		);
-	} else {
-		return (
-				<NavDiv>
+			<NavDiv>
+				<MenuTip onClick={() => toggleMenu()}>
+					<MenuTipIcon open={menuOpen} className="fas fa-bars fa-lg" />
+				</MenuTip>
+				<NavPane onClick={() => toggleMenu()} open={menuOpen}>
 					<NavLink active={pathname === "/" ? 1 : undefined} to={"/"}>
 						Truck Assignment
-						<NavIcon className="fas fa-tasks" />
+						<NavIcon className="fas fa-truck" />
 					</NavLink>
 					<NavLink
 						active={pathname === "/truck/all" ? 1 : undefined}
@@ -134,7 +101,38 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 						Log Out
 						<NavIcon className="fas fa-sign-out-alt" />
 					</NavLink>
-				</NavDiv>
+				</NavPane>
+			</NavDiv>
+		);
+	} else {
+		return (
+			<NavDiv>
+				<NavLink active={pathname === "/" ? 1 : undefined} to={"/"}>
+					Truck Assignment
+					<NavIcon className="fas fa-tasks" />
+				</NavLink>
+				<NavLink
+					active={pathname === "/truck/all" ? 1 : undefined}
+					to={"/truck/all"}
+				>
+					Manage Trucks
+					<NavIcon className="fas fa-truck" />
+				</NavLink>
+				{/* System Administrators Only */}
+				{authUser?.role?.name === SYSTEM_ADMINISTRATOR && (
+					<NavLink
+						active={pathname === "/user/all" ? 1 : undefined}
+						to={"/user/all"}
+					>
+						Manage Users
+						<NavIcon className="fas fa-users" />
+					</NavLink>
+				)}
+				<NavLink to={"/logout"}>
+					Log Out
+					<NavIcon className="fas fa-sign-out-alt" />
+				</NavLink>
+			</NavDiv>
 		);
 	}
 }
