@@ -1,12 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1252.92 386.05">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1248.18 386.05">
     <defs>
         <style>
-            .cls-1{fill:#92b8dd;}.cls-2{fill:#9fc6ff;}.cls-3{fill:#7fa2cc;}.cls-4{fill:#6b8daf;}.cls-5{fill:#4d6477;}.cls-6{fill:#3d515e;}.cls-7{fill:#28333a;}.cls-8{font-size:237px;fill:#f2f2f2;
-            font-family: 'Bebas Neue', cursive;
-            letter-spacing:0em;}.cls-9{letter-spacing:0em;}.cls-10{letter-spacing:0em;}.cls-11{letter-spacing:-0.05em;}
+            .cls-1{fill:#92b8dd;}.cls-2{fill:#9fc6ff;}.cls-3{fill:#7fa2cc;}.cls-4{fill:#6b8daf;}.cls-5{fill:#4d6477;}.cls-6{fill:#3d515e;}.cls-7{fill:#28333a;}.cls-8{fill:#f2f2f2;}
         </style>
     </defs>
-    <title>WhiteTextLogo_1</title>
+    <title>WhiteTextLogo_2</title>
     <g id="Layer_2" data-name="Layer 2">
         <g id="Layer_1-2" data-name="Layer 1">
             <polygon class="cls-1" points="0 139.89 94.7 144.95 261.14 81.71 109.16 67.59 0 139.89"/>
@@ -23,12 +21,19 @@
             <polygon class="cls-4" points="293.15 166.28 477.5 0 261.34 81.69 293.15 166.28"/>
         </g>
         <g id="Font">
-            <text class="cls-8" transform="translate(508.28 269.06)">m
-                <tspan class="cls-9" x="127.03" y="0">a</tspan>
-                <tspan class="cls-10" x="221.12" y="0">g</tspan>
-                <tspan class="cls-11" x="313.31" y="0">t</tspan>
-                <tspan class="cls-10" x="388.2" y="0">able</tspan>
-            </text>
+            <path class="cls-8"
+                  d="M518,103.16h37.21L571.8,221.9h.47l16.59-118.74h37.21v165.9H601.42V143.45H601L582,269.06H560.18l-19-125.61h-.47V269.06H518Z"/>
+            <path class="cls-8"
+                  d="M665.17,103.16h35.32l27,165.9H701.43l-4.74-32.94v.47H667.07l-4.74,32.47H638.15Zm28.44,110.92-11.61-82h-.47l-11.38,82Z"/>
+            <path class="cls-8"
+                  d="M747.17,260.65q-9.95-10.78-9.95-30.93V142.5q0-20.15,9.95-30.93t28.92-10.78q18.95,0,28.91,10.78t10,30.93v14.22H790.31V140.84q0-16.35-13.51-16.35t-13.51,16.35v90.77q0,16.13,13.51,16.12t13.51-16.12V199.14h-13v-23.7H815v54.28q0,20.15-10,30.93t-28.91,10.78Q757.12,271.43,747.17,260.65Z"/>
+            <path class="cls-8" d="M851.69,126.86H824.43v-23.7H905v23.7H877.76v142.2H851.69Z"/>
+            <path class="cls-8"
+                  d="M926.34,103.16h35.32l27,165.9H962.6l-4.74-32.94v.47H928.24l-4.74,32.47H899.33Zm28.44,110.92-11.61-82h-.47l-11.38,82Z"/>
+            <path class="cls-8"
+                  d="M1000.76,103.16h39.34q20.14,0,29.39,9.36t9.24,28.8V148q0,12.8-4.15,20.86a24.29,24.29,0,0,1-12.68,11.61v.48q19.44,6.63,19.44,34.6v14.22q0,19.2-10.07,29.27t-29.51,10.07h-41ZM1037,170.7q7.82,0,11.73-4t3.91-13.51v-9.25q0-9-3.2-13t-10.07-4h-12.56V170.7Zm4.74,74.66q6.87,0,10.19-3.67t3.32-12.68V214.55q0-11.37-3.91-15.76t-12.92-4.39h-11.61v51Z"/>
+            <path class="cls-8" d="M1096,103.16h26.07v142.2H1165v23.7h-69Z"/>
+            <path class="cls-8" d="M1177.08,103.16h71.1v23.7h-45V170.7h35.79v23.7h-35.79v51h45v23.7h-71.1Z"/>
         </g>
     </g>
 </svg>
