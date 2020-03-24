@@ -40,10 +40,12 @@ const AddUser = ({ role }) => {
 						label={"Add a New " + role.name}
 						type="text"
 						name="username"
+						data-lpignore="true"
 						icon={{
-							iconClass: "fa-plus fa-lg text-green",
+							iconClass: "fa-plus fa-2x",
 							action: () => props.submitForm(),
-							toolTip: "New " + role.name
+							toolTip: "New " + role.name,
+							hoverColor: "green"
 						}}
 						fit
 					/>

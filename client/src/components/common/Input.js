@@ -67,6 +67,7 @@ const Input = ({ label, ...props }) => {
 					className={"fas " + props.icon?.iconClass}
 					onClick={props.icon?.action}
 					toolTip={props.icon?.toolTip}
+					hoverColor={props.icon?.hoverColor}
 				/>
 			)}
 			<StyledLabel

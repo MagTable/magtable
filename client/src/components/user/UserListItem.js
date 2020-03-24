@@ -43,7 +43,7 @@ const UserListItem = ({ user }) => {
 						>
 							{({ confirm }) => (
 								<IconButton
-									faClassName="fa-trash-alt"
+									faClassName="fa-trash-alt fa-2x"
 									onClick={confirm}
 									toolTip={"Delete User"}
 									hoverColor={"red"}
@@ -60,14 +60,14 @@ const UserListItem = ({ user }) => {
 								<IconButton
 									toolTip={"Reset User's Password"}
 									onClick={confirm}
-									faClassName={"fa-unlock-alt"}
+									faClassName={"fa-unlock-alt fa-2x"}
 									hoverColor={"blue"}
 								/>
 							)}
 						</Confirmation>
 						{user.reset && (
 							<IconButton
-								faClassName={"fa-exclamation-triangle"}
+								faClassName={"fa-exclamation-triangle fa-2x"}
 								color={"orange"}
 								toolTip={"User's Password Has Been Reset"}
 							/>
