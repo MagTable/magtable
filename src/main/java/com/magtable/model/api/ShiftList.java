@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * Class for the EmployeeShift list to be sent to the Client
+ * @author David Ward
+ */
 public class ShiftList implements Serializable {
 
     private String scheduleDate;
@@ -14,6 +18,7 @@ public class ShiftList implements Serializable {
     private List<W2WShift> shifts;
     private static ShiftList shiftList;
 
+    //Get instance for Singleton pattern
     public static ShiftList getInstance() {
         if (shiftList == null)
             shiftList = new ShiftList();
@@ -21,6 +26,7 @@ public class ShiftList implements Serializable {
         return shiftList;
     }
 
+    //private constructor for singleton pattern
     private ShiftList() {
         shifts = new ArrayList<>();
     }

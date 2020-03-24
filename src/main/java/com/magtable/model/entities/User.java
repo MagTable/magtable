@@ -52,7 +52,6 @@ public class User implements Serializable {
     }
 
     @Basic
-    @JsonIgnore
     @Column(name = "password", length = 60)
     public String getPassword() {
         return password;

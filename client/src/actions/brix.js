@@ -5,7 +5,8 @@ import {
 	GET_BRIX_RECORDS,
 	FETCHING_BRIX_RECORDS,
 	ADDING_BRIX_RECORD,
-	GET_BRIX_CHART
+	GET_BRIX_CHART,
+	GET_WEATHER
 } from "./constants";
 import axios from "axios";
 import { setAlert } from "./alert";
@@ -72,6 +73,20 @@ export const getBrixChart = () => async dispatch => {
 		dispatch({
 			type: GET_BRIX_CHART,
 			payload: res.data
+		});
+	} catch (err) {}
+};
+
+export const getWeather = () => async dispatch => {
+	try {
+		// const res = await axios.get(
+		// 	"http://api.openweathermap.org/data/2.5/forecast?id=5913490&APPID=ae895e97d569b50fd4fa9a56923734cd&units=metric",
+		// 	{ crossdomain: true }
+		// );
+
+		dispatch({
+			type: GET_WEATHER
+			// payload: res.data
 		});
 	} catch (err) {}
 };

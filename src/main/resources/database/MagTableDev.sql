@@ -65,12 +65,12 @@ CREATE TABLE BrixRecord
 
 CREATE TABLE ParkingLocation
 (
-    parkingLocationID INT(10) NOT NULL AUTO_INCREMENT,
-    zoneID           INT(5),
-    phonetic         varchar(1),
-    apron            varchar(4),
+    parkingLocationID           INT(10) NOT NULL AUTO_INCREMENT,
+    zoneID                      INT(5),
+    phonetic                    varchar(1),
+    apron                       varchar(4),
     position                    VARCHAR(6),
-    bay                         INT(2),
+    bay                         VARCHAR(2),
     PRIMARY KEY (parkingLocationID)
 );
 

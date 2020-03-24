@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../../res/Images/logo-placeholder.png";
+import logo from "../../res/Images/NoTextLogo.svg"
 import {
 	AeroLogo,
 	NavBar as NavBarDiv,
@@ -24,38 +24,48 @@ function NavBar() {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 	//todo @arran wrong file
-	const weatherData = useSelector(state => state.brix.weather.data);
+	const weather = useSelector(state => state.brix.weather);
 	const brixChart = useSelector(state => state.brix.brixChart);
 
-	let weatherDate = new Date(0);
-	weatherDate.setUTCSeconds(weatherData.list[0].dt);
+	let weatherDate;
+	let forecastLow;
 
-	let forecastLow = 1000; // higher than realistic
-	weatherData.list.slice(0, 8).forEach(elem => {
-		if (elem.main.temp < forecastLow) forecastLow = elem.main.temp;
-	});
-	forecastLow = parseInt(forecastLow);
+	if (!weather.loading) {
+		weatherDate = new Date(0);
+		weatherDate.setUTCSeconds(weather.data.list[0].dt);
 
-	let recommendedMix = -1;
+		forecastLow = 1000; // higher than realistic
+		weather.data.list.slice(0, 8).forEach(elem => {
+			if (elem.main.temp < forecastLow) forecastLow = elem.main.temp;
+		});
+		forecastLow = parseInt(forecastLow);
 
-	brixChart.forEach(record => {
-		if (record.lout > forecastLow) {
-			recommendedMix = record.recommendedMix;
-		}
-	});
-	console.log(forecastLow, recommendedMix);
+		let recommendedMix = -1;
+
+		brixChart.forEach(record => {
+			if (record.lout > forecastLow) {
+				recommendedMix = record.recommendedMix;
+			}
+		});
+		console.log(forecastLow, recommendedMix);
+	}
 
 	return (
 		<NavBarDiv>
 			<Link to={"/"}>
 				<AeroLogo src={logo} />
 			</Link>
-			<NavLink>//todo @arran wrong file</NavLink>
-			<NavLink>Updated: {weatherDate.toLocaleDateString()}</NavLink>
-			<NavLink>Forecast Low: {forecastLow}</NavLink>
 
 			{isAuthenticated && (
-				<MenuPane menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+				<>
+					{!weather.loading && (
+						<>
+							<NavLink>Updated: {weatherDate.toLocaleDateString()}</NavLink>
+							<NavLink>Forecast Low: {forecastLow}</NavLink>
+						</>
+					)}
+					<MenuPane menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+				</>
 			)}
 		</NavBarDiv>
 	);

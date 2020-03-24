@@ -7,6 +7,9 @@ import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Objects;
 
+/**
+ * Entity Class for MagtableRecord table
+ */
 @Entity(name = "magtablerecord")
 public class MagtableRecord {
     private Integer id;

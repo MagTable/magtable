@@ -75,7 +75,9 @@ export const deleteTruck = id => async dispatch => {
 			payload: id
 		});
 
-		dispatch(setAlert(`Truck "${id}" Was Deactivated Successfully.`, "success"));
+		dispatch(
+			setAlert(`Truck "${id}" Was Deactivated Successfully.`, "success")
+		);
 	} catch (err) {
 		dispatch(setAlert(err.response?.data?.message, "danger"));
 	}
