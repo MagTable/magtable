@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../../res/Images/logo-placeholder.png";
+import logo from "../../res/Images/NoTextLogo.svg";
 import {
 	AeroLogo,
 	NavBar as NavBarDiv,
@@ -61,7 +61,7 @@ function NavBar() {
 					{!weather.loading && (
 						<>
 							<NavLink>Updated: {weatherDate.toLocaleDateString()}</NavLink>
-							<NavLink>Forecast Low: {forecastLow}</NavLink>
+							<NavLink>Forecasted Low: {forecastLow}</NavLink>
 						</>
 					)}
 					<MenuPane menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
