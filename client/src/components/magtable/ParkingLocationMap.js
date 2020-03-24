@@ -7,20 +7,17 @@ import {
 	NumberTop,
 	PadColumn,
 	FakePadDiv,
-	SafetyZoneWrapper,
-	MagTableManipDiv,
-	MagTableManipBtn
+	SafetyZoneWrapper
 } from "../../styled/magtable/TruckMapMedia";
 import { useSelector } from "react-redux";
 import ParkingLocation from "./ParkingLocation";
 import { CENTER, EAST, WEST } from "../../actions/constants";
-import Confirmation from "../common/Confirmation";
 import IconButton from "../common/IconButton";
 import OverflowLocations from "./OverflowLocations";
 
 /**
  * @date 2020-02-17
- * @author MJ Kochuk
+ * @author MJ Kochuk, Arran Woodruff
  * @module Component
  */
 

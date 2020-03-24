@@ -23,6 +23,12 @@ import { setAlert } from "./alert";
 import { logout } from "./auth";
 import store from "../store";
 
+/**
+ * @date 2020-03-24
+ * @author Arran Woodruff
+ * @module Redux
+ */
+
 export const toggleAM = () => dispatch => {
 	dispatch({
 		type: TOGGLE_AM_PM

@@ -8,6 +8,12 @@ import UserListItem from "./UserListItem";
 import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
 
 /**
+ * @date 2020-03-24
+ * @author Arran Woodruff
+ * @module Component
+ */
+
+/**
  * Handles rendering of user CRUD components
  *
  * @returns {*} The UserList component

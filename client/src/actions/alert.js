@@ -2,6 +2,12 @@ import uuid from "uuid";
 
 import { SET_ALERT, REMOVE_ALERT } from "./constants";
 
+/**
+ * @date 2020-03-24
+ * @author Arran Woodruff
+ * @module Redux
+ */
+
 export const setAlert = (msg, alertType) => dispatch => {
 	const id = uuid.v4();
 	// add alert to store

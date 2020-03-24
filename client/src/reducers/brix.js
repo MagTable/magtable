@@ -35,6 +35,12 @@ const MIX_STEP = 5;
 const MIX_MAX = 75;
 const MIX_MIN = 15;
 
+/**
+ * @date 2020-03-24
+ * @author Arran Woodruff
+ * @module Redux
+ */
+
 export default function(state = initialState, action) {
 	const { type, payload } = action;
 

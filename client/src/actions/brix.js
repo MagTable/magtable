@@ -14,9 +14,9 @@ import axios from "axios";
 import { sampleWeather } from "../res/test_data/magtable";
 
 /**
- * @date 3/24/2020
+ * @date 2020-03-24
  * @author Arran Woodruff
- * @module Component
+ * @module Redux
  */
 
 /**

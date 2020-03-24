@@ -19,6 +19,12 @@ import { setAlert } from "./alert";
 import { getBrixChart, getWeather } from "./brix";
 import { getMagTable, getParkingLocations } from "./magtable";
 
+/**
+ * @date 2020-03-24
+ * @author Arran Woodruff
+ * @module Redux
+ */
+
 window.addEventListener("storage", e => {
 	// whenever our token changes, log the user out.
 	if (e.key === "token" && e.oldValue && !e.newValue) {

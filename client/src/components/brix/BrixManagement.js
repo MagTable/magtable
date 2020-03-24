@@ -16,6 +16,12 @@ import { addBrixRecord } from "../../actions/brix";
 import styled from "styled-components";
 import { LoginBtn } from "../../styled/auth/Login";
 
+/**
+ * @date 2020-03-24
+ * @author Arran Woodruff
+ * @module Component
+ */
+
 // todo we should start moving some of our form styled components into a folder now.
 const SubmitDiv = styled.div`
 	grid-area: submit;

@@ -2,6 +2,12 @@ import styled from "styled-components";
 import { Input } from "./FormControl";
 import PlaneBG from "../../res/Images/Plane_BG.jpg";
 
+/**
+ * @date 2020-03-24
+ * @author Arran Woodruff
+ * @module Styled
+ */
+
 export const BlurCover = styled.div`
 	background-color: rgba(255, 255, 255, 0.15);
 	${({ blur }) =>

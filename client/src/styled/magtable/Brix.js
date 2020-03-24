@@ -5,11 +5,10 @@ import { DANGER, SUCCESS, WARNING } from "../../actions/constants";
 /**
  * @date 3/24/2020
  * @author Arran Woodruff
- * @module Component
+ * @module Styled
  */
 
 export const getColor = type => {
-	console.log(type);
 	switch (type) {
 		case DANGER:
 			return "--context-red";

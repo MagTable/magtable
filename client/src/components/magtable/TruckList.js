@@ -17,7 +17,7 @@ import BrixManagement from "../brix/BrixManagement";
 
 /**
  * @date 2020-02-17
- * @author MJ Kochuk
+ * @author MJ Kochuk, Arran Woodruff
  * @module Component
  */
 

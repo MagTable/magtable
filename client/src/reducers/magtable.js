@@ -22,6 +22,12 @@ import {
 } from "../actions/constants";
 import { ParkingZones } from "../res/test_data/magtable";
 
+/**
+ * @date 2020-03-24
+ * @author Arran Woodruff
+ * @module Redux
+ */
+
 const initialState = {
 	assignments: [],
 	employeeShifts: {

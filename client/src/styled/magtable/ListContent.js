@@ -4,7 +4,7 @@ import { DANGER, SUCCESS, WARNING } from "../../actions/constants";
 
 /**
  * @date 2020-02-17
- * @author MJ Kochuk
+ * @author MJ Kochuk, Arran Woodruff
  * @module Styled
  */
 
