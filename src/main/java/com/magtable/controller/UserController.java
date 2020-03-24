@@ -22,7 +22,7 @@ import java.util.List;
 
 /**
  * REST controller for user management routes
- * @author David Ward, Mustafa Al Khaldi
+ * @author David Ward, Mustafa Al Khaldi, Arran Woodruff
  */
 @RestController
 @RequestMapping("/user")
