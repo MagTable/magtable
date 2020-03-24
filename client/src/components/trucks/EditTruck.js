@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import { editTruck } from "../../actions/truck";
-import { TRUCK_STATUSES } from "../../actions/constants";
+import { TRUCK_STATUSES, VEHICLE_TYPES } from "../../actions/constants";
 import SelectBox from "../common/SelectBox";
 import { LoginBtn } from "../../styled/auth/Login";
 import TextArea from "../common/TextArea";
@@ -30,7 +30,7 @@ const EditTruckForm = styled(Form)`
 	grid-template-areas:
 		"header header"
 		"id id"
-		"status status"
+		"status type"
 		"notice notice"
 		"submit submit";
 `;
@@ -48,6 +48,10 @@ const StatusDiv = styled.div`
 	grid-area: status;
 `;
 
+const TypeDiv = styled.div`
+	grid-area: type;
+`;
+
 const NoticeDiv = styled.div`
 	grid-area: notice;
 `;
@@ -57,23 +61,27 @@ const SubmitDiv = styled.div`
 `;
 
 const EditTruck = ({ truck }) => {
-	const truckStatuses = TRUCK_STATUSES;
 	const dispatch = useDispatch();
+	const truckStatuses = TRUCK_STATUSES;
+	const vehicleTypes = VEHICLE_TYPES;
 
 	if (truck == null) {
 		truck = {
 			id: 0,
 			status: "",
+			type: "",
 			notice: ""
 		};
 	}
 
+	console.log({ truck });
 	return (
 		<Formik
 			enableReinitialize={true}
 			initialValues={{
 				id: truck.id,
 				status: truck.status,
+				type: truck.type,
 				notice: truck.notice
 			}}
 			onSubmit={values => {
@@ -83,6 +91,9 @@ const EditTruck = ({ truck }) => {
 				status: Yup.string()
 					.oneOf(truckStatuses)
 					.required("Truck Status Required"),
+				type: Yup.string()
+					.oneOf(vehicleTypes.map(type => type.id))
+					.required("Type Required"),
 				notice: Yup.string().max(250, "Maximum Length is 250 Characters")
 			})}
 		>
@@ -118,6 +129,23 @@ const EditTruck = ({ truck }) => {
 							})}
 						</SelectBox>
 					</StatusDiv>
+					<TypeDiv>
+						<SelectBox
+							errors={props.errors.type}
+							touched={props.touched.type}
+							value={props.values.type}
+							label="Truck Type"
+							name="type"
+						>
+							{vehicleTypes.map(type => {
+								return (
+									<option key={type.id} value={type.id}>
+										{type.value}
+									</option>
+								);
+							})}
+						</SelectBox>
+					</TypeDiv>
 					<NoticeDiv>
 						<TextArea
 							label="Notice"

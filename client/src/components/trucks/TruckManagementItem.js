@@ -33,6 +33,7 @@ function TruckManagementItem({ truck, setEditTruck }) {
 		const editedTruck = {
 			id: truck.equipment.id,
 			status: truck.equipment.status,
+			type: truck.equipment.type,
 			notice: truck.equipment.notice
 		};
 
