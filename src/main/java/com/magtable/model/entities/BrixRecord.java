@@ -3,6 +3,9 @@ package com.magtable.model.entities;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+/**
+ * Entity Class for Brix Record table
+ */
 @Entity(name = "brixrecord")
 public class BrixRecord {
     private int id;

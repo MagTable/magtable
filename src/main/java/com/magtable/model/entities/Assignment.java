@@ -8,6 +8,9 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 
+/**
+ * Assignment Entity Class
+ */
 @Entity
 public class Assignment {
     private Integer id;

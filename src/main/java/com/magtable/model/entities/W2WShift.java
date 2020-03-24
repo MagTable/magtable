@@ -4,6 +4,9 @@ package com.magtable.model.entities;
 
 import javax.persistence.*;
 
+/**
+ * Entity Class for W2WShift table
+ */
 @Entity
 public class W2WShift {
 

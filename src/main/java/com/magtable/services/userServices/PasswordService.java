@@ -6,6 +6,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.Random;
 
+/**
+ * Service to generate a random password
+ * @author Arran Woodruff
+ */
 @Service
 public class PasswordService {
     @Autowired

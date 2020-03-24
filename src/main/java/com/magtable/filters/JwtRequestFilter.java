@@ -18,6 +18,8 @@ import java.io.IOException;
 
 /**
  * Filter just like Web-Apps class filter
+ * Created with Reference too : "Spring Boot + Spring Security + JWT from scratch - Java Brains" - https://www.youtube.com/watch?v=X80nJ5T7YpE&list=PLqq-6Pq4lTTYTEooakHchTGglSvkZAjnE&index=12 -
+ * @author David Ward
  */
 
 //OncePerRequest means it checks every time there is a request.

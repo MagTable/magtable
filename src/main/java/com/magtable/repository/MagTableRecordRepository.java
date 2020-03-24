@@ -5,7 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
-
+/**
+ * Repository Interface for MagTableRecord
+ * @author David Ward
+ */
 public interface MagTableRecordRepository extends JpaRepository<MagtableRecord, Integer>, JpaSpecificationExecutor<MagtableRecord> {
 
     @Query(value = "SELECT * FROM MAGTABLERECORD ORDER BY magtablerecordid DESC LIMIT 1",
