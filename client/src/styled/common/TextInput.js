@@ -76,7 +76,7 @@ export const TextInputIcon = styled.i`
 	cursor: pointer;
 	position: absolute;
 	z-index: 3;
-	top: calc(100% - 30px);
+	top: calc(100% - 40px);
 	width: 45px;
 	right: 0;
 	user-select: none;
