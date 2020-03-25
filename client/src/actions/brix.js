@@ -9,7 +9,6 @@ import {
 	SET_DAILY_MIX_CHART_ROW
 } from "./constants";
 import axios from "axios";
-import { sampleWeather } from "../res/test_data/magtable";
 
 /**
  * @date 2020-03-24
@@ -84,25 +83,24 @@ export const getBrixChart = () => async dispatch => {
 
 export const getWeather = () => async dispatch => {
 	try {
-		// const res = await axios.get(
-		// 	"http://api.openweathermap.org/data/2.5/forecast?id=5913490&APPID=ae895e97d569b50fd4fa9a56923734cd&units=metric"
-		// );
-		const res = sampleWeather;
-		// const res = null;
+		const res = await axios.get("/weather");
+		const weather = res.data;
+		// const weather = sampleWeather;
+		// const weather = null;
 
 		let date;
 		date = new Date(0);
-		date.setUTCSeconds(res.list[0].dt);
+		date.setUTCSeconds(weather.list[0].dt);
 
 		let forecastLow;
 		forecastLow = 1000; // higher than realistic
-		res.list.slice(0, 8).forEach(elem => {
+		weather.list.slice(0, 8).forEach(elem => {
 			if (elem.main.temp < forecastLow)
 				forecastLow = Math.floor(elem.main.temp);
 		});
 		forecastLow = Math.ceil(parseInt(forecastLow));
 
-		let currentTemperature = Math.floor(res.list[0].main.temp);
+		let currentTemperature = Math.floor(weather.list[0].main.temp);
 
 		dispatch({
 			type: GET_WEATHER,
