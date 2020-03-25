@@ -31,11 +31,13 @@ function NavBar() {
 				<Link to={"/"}>
 					<AeroLogo src={logo} />
 				</Link>
-				{isAuthenticated && <WeatherInfo />}
 			</NavDiv>
 
 			{isAuthenticated && (
-				<MenuPane menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+				<>
+					<WeatherInfo />
+					<MenuPane menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+				</>
 			)}
 		</NavBarDiv>
 	);

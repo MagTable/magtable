@@ -143,6 +143,7 @@ export const BrixTableTitle = styled.h3`
 
 export const WeatherDataWrapper = styled.div`
 	background: var(--navbar-light);
+	min-width: 625px;
 	padding: 0.75rem;
 	max-height: 100%;
 	overflow: hidden;

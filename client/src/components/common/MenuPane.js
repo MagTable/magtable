@@ -69,7 +69,7 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 	const authUser = useSelector(state => state.auth.user);
 	const { pathname } = useLocation();
 
-	if (size.width < 1400) {
+	if (size.width < 1640) {
 		return (
 			<NavDiv>
 				<MenuTip onClick={() => toggleMenu()}>
