@@ -84,6 +84,13 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 								<NavIcon className="fas fa-truck" />
 							</NavLink>
 							<NavLink
+								active={pathname === "/truck/tv" ? 1 : undefined}
+								to={"/truck/tv"}
+							>
+								TV
+								<NavIcon className="fas fa-tv" />
+							</NavLink>
+							<NavLink
 								active={pathname === "/truck/all" ? 1 : undefined}
 								to={"/truck/all"}
 							>
