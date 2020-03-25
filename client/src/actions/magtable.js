@@ -146,17 +146,19 @@ export const publishTable = (magtable, publishedBy) => async dispatch => {
 			return assignment;
 		});
 
-		const res = await axios.post("/magtable", data, AXIOS_JSON_HEADER);
-
-		dispatch({
-			type: PUBLISH_TABLE,
-			payload: res.data
-		});
+		await axios.post("/magtable", data, AXIOS_JSON_HEADER);
 
 		dispatch(setAlert("Publish Successful", "success"));
 	} catch (err) {
 		dispatch(setAlert(err.response.data.message, "warning"));
 	}
+};
+
+export const updateTable = magtable => async dispatch => {
+	dispatch({
+		type: PUBLISH_TABLE,
+		payload: magtable
+	});
 };
 
 export const clearTable = () => dispatch => {

@@ -152,3 +152,7 @@ export const AXIOS_JSON_HEADER = {
 		"Content-Type": "application/json"
 	}
 };
+
+// API CONSTANTS
+
+export const MTR_PUBLISH = "MTR_PUBLISH";

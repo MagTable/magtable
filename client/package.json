@@ -50,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "@stomp/stompjs": "^5.4.4",
     "jsdoc": "^3.6.3",
     "prop-types": "^15.7.2",
     "uuid": "^7.0.2"

@@ -6,6 +6,7 @@ import com.magtable.repository.EquipmentRepository;
 import com.magtable.repository.MagTableRecordRepository;
 import com.magtable.repository.ParkingLocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
 
 /**
  * Rest controller for MagTable records
+ *
  * @author David Ward, Mustafa Al Khaldi, Arran Woodruff
  */
 @RestController
@@ -31,11 +33,15 @@ public class MagTableController {
     @Autowired
     ParkingLocationRepository parkingLocationRepository;
 
+    @Autowired
+    SimpMessagingTemplate template;
+
+
     /**
      * route           GET /magtable
      * description     method to get the most recent magtable, or create one if one doesn't exist. Will populate the
-     *                 assignment table with assignments equal to the total number of equipments.
-     *
+     * assignment table with assignments equal to the total number of equipments.
+     * <p>
      * access          System Admins, Personnel Managers, Mechanics
      *
      * @return The created or most recent magtable record
@@ -79,11 +85,11 @@ public class MagTableController {
      * access          System Admins, Personnel Managers, Mechanics
      *
      * @param magtableRecord The MagtableRecord to be saved
-     * @return The saved MagtableRecord
      */
     @PostMapping("")
-    public MagtableRecord publishMagTable(@RequestBody MagtableRecord magtableRecord) {
-        return magTableRecordRepository.save(magtableRecord);
+    public void publishMagTable(@RequestBody MagtableRecord magtableRecord) {
+        MagtableRecord saved = magTableRecordRepository.save(magtableRecord);
+        template.convertAndSend("/topic/mtr", new WsAction(WsAction.MTR_PUBLISH, saved));
     }
 
     /**
