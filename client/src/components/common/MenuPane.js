@@ -79,16 +79,16 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 							<MenuTipIcon open={menuOpen} className="fas fa-bars fa-lg" />
 						</MenuTip>
 						<NavPane onClick={() => toggleMenu()} open={menuOpen}>
-							<NavLink active={pathname === "/" ? 1 : undefined} to={"/"}>
-								Truck Assignment
-								<NavIcon className="fas fa-truck" />
-							</NavLink>
 							<NavLink
 								active={pathname === "/truck/tv" ? 1 : undefined}
 								to={"/truck/tv"}
 							>
 								TV
 								<NavIcon className="fas fa-tv" />
+							</NavLink>
+							<NavLink active={pathname === "/" ? 1 : undefined} to={"/"}>
+								Truck Assignment
+								<NavIcon className="fas fa-truck" />
 							</NavLink>
 							<NavLink
 								active={pathname === "/truck/all" ? 1 : undefined}
@@ -120,10 +120,18 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 		return (
 			<BrowserView>
 				<NavDiv>
+					<NavLink
+						active={pathname === "/truck/tv" ? 1 : undefined}
+						to={"/truck/tv"}
+					>
+						TV
+						<NavIcon className="fas fa-tv" />
+					</NavLink>
 					<NavLink active={pathname === "/" ? 1 : undefined} to={"/"}>
 						Truck Assignment
 						<NavIcon className="fas fa-tasks" />
 					</NavLink>
+
 					<NavLink
 						active={pathname === "/truck/all" ? 1 : undefined}
 						to={"/truck/all"}
