@@ -147,23 +147,21 @@ export const WeatherDataWrapper = styled.div`
 	max-height: 100%;
 	overflow: hidden;
 	// border-radius: 0.5rem; // not sure on this one
-	border-radius: 999px; // not sure on this one
 	color: var(--title-bright);
 	position: relative;
 
 	transition: box-shadow 0.5s ease-in-out;
 	display: flex; // to display horizontally
 
-	box-shadow: inset 0 0 7px 2px var(--context-green);
+	box-shadow: inset 0 -7px 7px 2px var(--context-green);
 
-	border: 2px solid var(--navbar-light);
-	//outline: 6px solid var(--navbar);
-	//outline-offset: -6px;
+	outline: 6px solid var(--navbar);
+	outline-offset: -6px;
 
 	${({ status }) =>
 		status &&
 		`
-			box-shadow: inset 0 0 7px 2px var(${getColor(status)});
+			box-shadow: inset 0 -7px 7px 2px var(${getColor(status)});
 	`}
 `;
 
@@ -173,7 +171,7 @@ export const WeatherDataItem = styled.h4`
 	text-align: center;
 
 	:not(:first-child) {
-		padding: 0 1.25rem;
+		padding: 0 1rem;
 	}
 
 	${({ large }) =>
@@ -187,16 +185,15 @@ export const DailyMixButtons = styled.div`
 	display: flex;
 	flex-direction: column;
 
-	height: 2.5rem;
+	height: 2rem;
 
 	position: absolute;
-	right: 15px;
-	top: calc(50% - 1.25rem);
+	right: 10px;
+	top: calc(50% - 1rem);
 
 	i {
 		cursor: pointer;
 		transition: color 0.25s ease-in-out;
-		font-size: 120%;
 
 		:hover {
 			color: var(--shader-grey);
