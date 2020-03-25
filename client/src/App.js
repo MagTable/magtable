@@ -15,6 +15,7 @@ import AssignmentTable from "./components/magtable/AssignmentTable";
 import Alert from "./components/common/Alert";
 import NavBar from "./components/common/NavBar";
 import TruckManagementLayout from "./components/trucks/TruckManagementLayout";
+import TVView from "./components/tv/TVView";
 
 function App() {
 	useEffect(() => {
@@ -37,6 +38,7 @@ function App() {
 						path="/truck/all"
 						component={TruckManagementLayout}
 					/>
+					<PrivateRoute exact path="/truck/tv" component={TVView} />
 					<PrivateRoute
 						exact
 						path="/"

@@ -353,11 +353,14 @@ function TruckListItem({ assignment, noticeOpen, showAM, openBrixModal }) {
 					onClick={e => handleToggleLocalNotice(e)}
 				>
 					{assignment.equipment.id}
-					<BrixButton
-						onClick={handleBrixClick}
-						disabled={!equipmentOperable}
-						className={"fas fa-eye-dropper"}
-					/>
+					{/* only render brix button if function exists */}
+					{openBrixModal && (
+						<BrixButton
+							onClick={handleBrixClick}
+							disabled={!equipmentOperable}
+							className={"fas fa-eye-dropper"}
+						/>
+					)}
 					{assignment.equipment.notice && (
 						<TruckNoticeIndicator
 							active={localNoticeOpen}
