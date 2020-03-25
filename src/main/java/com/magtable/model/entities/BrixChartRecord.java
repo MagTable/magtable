@@ -2,6 +2,9 @@ package com.magtable.model.entities;
 
 import javax.persistence.*;
 
+/**
+ * Entity Class for Brix Chart table
+ */
 @Entity
 @Table(name = "brixchart", schema = "magtabledev", catalog = "")
 public class BrixChartRecord {

@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Objects;
 
+/**
+ * Entity Class for Equipment table
+ */
 @Entity
 public class Equipment {
     private Integer id;

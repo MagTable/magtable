@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * REST Controller for User Authentication
+ * @author David Ward
+ */
 @RestController
 public class AuthenticationController {
 

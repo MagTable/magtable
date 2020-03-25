@@ -2,6 +2,10 @@ package com.magtable.services.userServices;
 
 import com.magtable.services.ErrorService;
 
+/**
+ * Service to validate user data before being saved into database
+ * @author Arran Woodruff
+ */
 public class ValidationService<E> {
 
     ErrorService errorService;
