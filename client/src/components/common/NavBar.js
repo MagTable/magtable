@@ -31,8 +31,7 @@ function NavBar() {
 				<Link to={"/"}>
 					<AeroLogo src={logo} />
 				</Link>
-
-				<WeatherInfo />
+				{isAuthenticated && <WeatherInfo />}
 			</NavDiv>
 
 			{isAuthenticated && (
