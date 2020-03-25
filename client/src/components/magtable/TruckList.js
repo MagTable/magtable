@@ -40,7 +40,7 @@ function TruckList() {
 	const showAM = useSelector(state => state.magtable.showAM);
 	const loading = useSelector(state => state.magtable.loading);
 
-	const [showBrixModal, setShowBrixModal] = useState(false);
+	const [showBrixModal, setShowBrixModal] = useState(true);
 
 	const handleClose = () => setShowBrixModal(false);
 	const handleShow = () => setShowBrixModal(true);

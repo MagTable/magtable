@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { ClickCatcher } from "../../styled/common/ClickCatcher";
 
 /**
  * @date 2/28/2020
@@ -80,16 +81,14 @@ const Modal = ({ handleClose, show, children }) => {
 	const showHideClassName = !!show;
 
 	return (
-		<StyledDiv
-			showHideClassName={showHideClassName}
-			onClick={e => e.currentTarget === e.target && handleClose()}
-		>
+		<StyledDiv showHideClassName={showHideClassName}>
 			<StyledSection className="modal-main">
 				{children}
 				<StyledButton onClick={handleClose}>
 					<i className="fas fa-times" />
 				</StyledButton>
 			</StyledSection>
+			<ClickCatcher onClick={handleClose} />
 		</StyledDiv>
 	);
 };

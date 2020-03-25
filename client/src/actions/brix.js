@@ -5,7 +5,8 @@ import {
 	FETCHING_BRIX_RECORDS,
 	ADDING_BRIX_RECORD,
 	GET_BRIX_CHART,
-	GET_WEATHER
+	GET_WEATHER,
+	SET_DAILY_MIX_CHART_ROW
 } from "./constants";
 import axios from "axios";
 import { sampleWeather } from "../res/test_data/magtable";
@@ -87,6 +88,7 @@ export const getWeather = () => async dispatch => {
 		// 	"http://api.openweathermap.org/data/2.5/forecast?id=5913490&APPID=ae895e97d569b50fd4fa9a56923734cd&units=metric"
 		// );
 		const res = sampleWeather;
+		// const res = null;
 
 		let date;
 		date = new Date(0);
@@ -105,6 +107,15 @@ export const getWeather = () => async dispatch => {
 		dispatch({
 			type: GET_WEATHER,
 			payload: { date, forecastLow, currentTemperature }
+		});
+	} catch (err) {}
+};
+
+export const setDailyMixChartRow = chartRow => async dispatch => {
+	try {
+		dispatch({
+			type: SET_DAILY_MIX_CHART_ROW,
+			payload: chartRow
 		});
 	} catch (err) {}
 };

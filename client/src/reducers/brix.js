@@ -4,7 +4,8 @@ import {
 	FETCHING_BRIX_RECORDS,
 	GET_BRIX_CHART,
 	GET_BRIX_RECORDS,
-	GET_WEATHER
+	GET_WEATHER,
+	SET_DAILY_MIX_CHART_ROW
 } from "../actions/constants";
 
 /**
@@ -19,6 +20,7 @@ const initialState = {
 	loading: true,
 	addingBrixRecord: false,
 	brixChart: [],
+	dailyMixChartRow: null,
 	weather: {
 		date: null,
 		forecastLow: null,
@@ -79,6 +81,11 @@ export default function(state = initialState, action) {
 				selectedBrixRecords: payload.brixRecords,
 				selectedTruckID: payload.truckID,
 				loading: false
+			};
+		case SET_DAILY_MIX_CHART_ROW:
+			return {
+				...state,
+				dailyMixChartRow: payload
 			};
 		default:
 			return state;
