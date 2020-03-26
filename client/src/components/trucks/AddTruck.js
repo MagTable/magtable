@@ -104,6 +104,7 @@ const AddTruck = () => {
 						<Input
 							errors={props.errors.id}
 							value={`${props.values.id}`}
+							touched={props.touched.id}
 							name="id"
 							type="number"
 							label="Truck ID"
@@ -116,6 +117,7 @@ const AddTruck = () => {
 						<SelectBox
 							errors={props.errors.status}
 							value={props.values.status}
+							touched={props.touched.status}
 							label="Truck Status"
 							name="status"
 						>
@@ -133,6 +135,7 @@ const AddTruck = () => {
 						<SelectBox
 							errors={props.errors.type}
 							value={props.values.type}
+							touched={props.touched.type}
 							label="Truck Type"
 							name="type"
 						>

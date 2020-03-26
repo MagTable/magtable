@@ -16,7 +16,7 @@ import PlaneLoader from "../common/PlaneLoader";
 
 /**
  * @date 2/10/2020
- * @author Arran Woodruff
+ * @author Arran Woodruff, Steven Wong
  * @module Component
  */
 
@@ -44,7 +44,6 @@ function Login() {
 	if (isAuthenticated) {
 		return <Redirect to="/" />;
 	} // don't show the page until we know user is not authenticated
-
 	return (
 		<>
 			<BGContainer>

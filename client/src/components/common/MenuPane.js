@@ -15,7 +15,7 @@ import PropTypes from "prop-types";
 
 /**
  * @date 2020-02-09
- * @author MJ Kochuk
+ * @author MJ Kochuk, Steven Wong
  * @module Component
  */
 

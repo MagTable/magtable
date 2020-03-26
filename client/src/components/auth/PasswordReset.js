@@ -10,7 +10,7 @@ import Input from "../common/Input";
 
 /**
  * @date 2/10/2020
- * @author Arran Woodruff
+ * @author Arran Woodruff, Steven Wong
  * @module Component
  */
 

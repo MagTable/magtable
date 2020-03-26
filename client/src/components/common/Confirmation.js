@@ -5,18 +5,18 @@ import { ClickCatcher } from "../../styled/common/ClickCatcher";
 
 /**
  * @date 2/17/2020
- * @author Arran Woodruff
+ * @author Arran Woodruff, Steven Wong
  * @module Component
  */
 
 /**
  *
- * @param children component that requires confirmation
- * @param action function which will be called upon confirmation
- * @param confirmationMessage message displayed on the confirmation button
- * @param color base color of confirmation button
- * @param hoverColor hover color of confirmation button
- * @returns {*} the Confirmation component
+ * @param children Component that requires confirmation
+ * @param action Function which will be called upon confirmation
+ * @param confirmationMessage Message displayed on the confirmation button
+ * @param color Base color of confirmation button
+ * @param hoverColor Hover color of confirmation button
+ * @returns {*} The Confirmation component
  * @constructor
  */
 function Confirmation({

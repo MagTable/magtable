@@ -69,7 +69,6 @@ const PrivateRoute = ({
 		return <Redirect to="/login" />;
 	}
 
-	// this is pretty complicated, ask Arran for a walkthrough
 	return (
 		<Route
 			{...rest}
