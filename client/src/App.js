@@ -32,17 +32,17 @@ function App() {
 				<Switch>
 					<Route
 						exact
-						path={process.env.PUBLIC_URL + "/#login"}
+						path={process.env.PUBLIC_URL + "/#/login"}
 						component={Login}
 					/>
 					<Route
 						exact
-						path={process.env.PUBLIC_URL + "/#password/reset"}
+						path={process.env.PUBLIC_URL + "/password/reset"}
 						component={PasswordReset}
 					/>
 					<PrivateRoute
 						exact
-						path={process.env.PUBLIC_URL + "/#truck/all"}
+						path={process.env.PUBLIC_URL + "/#/truck/all"}
 						component={TruckManagementLayout}
 					/>
 					<PrivateRoute
@@ -53,7 +53,7 @@ function App() {
 					/>
 					<PrivateRoute
 						exact
-						path={process.env.PUBLIC_URL + "/#user/all"}
+						path={process.env.PUBLIC_URL + "/user/all"}
 						component={UserList}
 						adminRoute
 					/>
