@@ -172,7 +172,6 @@ const AddEmployeeShift = ({ setShowModal }) => {
 					<NameDiv>
 						<Input
 							errors={props.errors.name}
-							touched={props.touched.name}
 							value={props.values.name}
 							name="name"
 							label="Employee Name"
@@ -183,7 +182,6 @@ const AddEmployeeShift = ({ setShowModal }) => {
 					<StartTimeDiv>
 						<SelectBox
 							errors={props.errors.startTime}
-							touched={props.touched.startTime}
 							value={props.values.startTime}
 							label="Start Time"
 							name="startTime"
@@ -199,7 +197,6 @@ const AddEmployeeShift = ({ setShowModal }) => {
 					<EndTimeDiv>
 						<SelectBox
 							errors={props.errors.endTime}
-							touched={props.touched.endTime}
 							value={props.values.endTime}
 							label="End Time"
 							name="endTime"
@@ -215,7 +212,6 @@ const AddEmployeeShift = ({ setShowModal }) => {
 					<PositionDiv>
 						<SelectBox
 							errors={props.errors.description}
-							touched={props.touched.description}
 							value={props.values.description}
 							label="Position"
 							name="description"

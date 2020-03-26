@@ -105,8 +105,7 @@ function BrixManagement() {
 					<BrixForm>
 						<Input
 							errors={props.errors.type1}
-							touched={props.touched.type1}
-							value={props.values.type1}
+							value={`${props.values.type1}`}
 							id={"type1"}
 							label={"Type 1 Tank"}
 							type={"number"}
@@ -119,8 +118,7 @@ function BrixManagement() {
 						/>
 						<Input
 							errors={props.errors.type4}
-							touched={props.touched.type4}
-							value={props.values.type4}
+							value={`${props.values.type4}`}
 							id={"type4"}
 							label={"Type 4 Tank"}
 							type={"number"}
@@ -133,8 +131,7 @@ function BrixManagement() {
 						/>
 						<Input
 							errors={props.errors.nozzle}
-							touched={props.touched.nozzle}
-							value={props.values.nozzle}
+							value={`${props.values.nozzle}`}
 							id={"nozzle"}
 							label={"Nozzle"}
 							type={"number"}
@@ -147,8 +144,7 @@ function BrixManagement() {
 						/>
 						<Input
 							errors={props.errors.litersPurged}
-							touched={props.touched.litersPurged}
-							value={props.values.litersPurged}
+							value={`${props.values.litersPurged}`}
 							id="purged"
 							label="Liters Purged"
 							type="number"

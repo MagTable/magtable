@@ -101,10 +101,8 @@ const EditTruck = ({ truck }) => {
 					<IdDiv>
 						<Input
 							errors={props.errors.id}
-							touched={props.touched.id}
-							value={props.values.id}
+							value={`${props.values.id}`}
 							name="id"
-							type="number"
 							label="Truck ID"
 							disabled
 							fit
@@ -113,7 +111,6 @@ const EditTruck = ({ truck }) => {
 					<StatusDiv>
 						<SelectBox
 							errors={props.errors.status}
-							touched={props.touched.status}
 							value={props.values.status}
 							label="Truck Status"
 							name="status"
@@ -130,7 +127,6 @@ const EditTruck = ({ truck }) => {
 					<TypeDiv>
 						<SelectBox
 							errors={props.errors.type}
-							touched={props.touched.type}
 							value={props.values.type}
 							label="Truck Type"
 							name="type"

@@ -79,7 +79,6 @@ function Login() {
 								blur={blur}
 								setBlurred={setBlur}
 								errors={props.errors.username}
-								touched={props.touched.username}
 								value={props.values.username}
 								label="Username"
 								name="username"
@@ -90,7 +89,6 @@ function Login() {
 								blur={blur}
 								setBlurred={setBlur}
 								errors={props.errors.password}
-								touched={props.touched.password}
 								value={props.values.password}
 								label="Password"
 								name="password"

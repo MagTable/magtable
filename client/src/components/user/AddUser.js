@@ -35,7 +35,6 @@ const AddUser = ({ role }) => {
 				<Form>
 					<Input
 						errors={props.errors.username}
-						touched={props.touched.username}
 						value={props.values.username}
 						label={"Add a New " + role.name}
 						type="text"
