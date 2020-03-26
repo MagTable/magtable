@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import browserHistory from "react-router";
 import { Provider } from "react-redux";
 
 import store from "./store";
@@ -26,7 +27,7 @@ function App() {
 
 	return (
 		<Provider store={store}>
-			<Router>
+			<Router history={browserHistory}>
 				<NavBar />
 				<Alert />
 				<Switch>
