@@ -30,26 +30,38 @@ function App() {
 				<NavBar />
 				<Alert />
 				<Switch>
-					<Route exact path="/login" component={Login} />
-					<Route exact path="/password/reset" component={PasswordReset} />
+					<Route
+						exact
+						path={process.env.PUBLIC_URL + "/login"}
+						component={Login}
+					/>
+					<Route
+						exact
+						path={process.env.PUBLIC_URL + "/password/reset"}
+						component={PasswordReset}
+					/>
 					<PrivateRoute
 						exact
-						path="/truck/all"
+						path={process.env.PUBLIC_URL + "/truck/all"}
 						component={TruckManagementLayout}
 					/>
 					<PrivateRoute
 						exact
-						path="/"
+						path={process.env.PUBLIC_URL + "/"}
 						component={AssignmentTable}
 						personnelManagerRoute
 					/>
 					<PrivateRoute
 						exact
-						path="/user/all"
+						path={process.env.PUBLIC_URL + "/user/all"}
 						component={UserList}
 						adminRoute
 					/>
-					<PrivateRoute exact path="/logout" component={Logout} />
+					<PrivateRoute
+						exact
+						path={process.env.PUBLIC_URL + "/logout"}
+						component={Logout}
+					/>
 				</Switch>
 			</Router>
 		</Provider>
