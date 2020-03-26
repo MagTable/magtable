@@ -103,7 +103,7 @@ const AddTruck = () => {
 					<IdDiv>
 						<Input
 							errors={props.errors.id}
-							value={props.values.id}
+							value={`${props.values.id}`}
 							name="id"
 							type="number"
 							label="Truck ID"
