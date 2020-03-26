@@ -13,13 +13,8 @@ import { addTruck } from "../../actions/truck";
 /**
  * @date 3/08/2020
  * @author Steven Wong
- * @module Component
- */
-
-/**
- *
  * Handles the rendering of the form to add a Truck to the current list of trucks.
- *
+ * @category Components/Trucks
  * @constructor
  * @returns {*} The AddTruck form component.
  */

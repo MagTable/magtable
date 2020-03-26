@@ -49,10 +49,6 @@ import IconButton from "../common/IconButton";
 /**
  * @date 2020-02-17
  * @author MJ Kochuk, Steven Wong, Arran Woodruff
- * @module Component
- */
-
-/**
  * Displays the content of a Truck's assignment.
  *
  * Truck's assignment status is displayed as a color within TruckNumberDiv as a prop
@@ -64,7 +60,7 @@ import IconButton from "../common/IconButton";
  *
  * Logic is written to determine whether incoming shifts are allowed, provide
  * a warning, or are permitted
- *
+ * @category Components/MagTable
  * @constructor
  * @param assignment the associated assignment object
  * @param noticeOpen dictates whether or not to render the truck's notices

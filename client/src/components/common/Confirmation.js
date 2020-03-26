@@ -6,11 +6,8 @@ import { ClickCatcher } from "../../styled/common/ClickCatcher";
 /**
  * @date 2/17/2020
  * @author Arran Woodruff, Steven Wong
- * @module Component
- */
-
-/**
- *
+ * @name Confirmation
+ * @category Component/Common
  * @param children Component that requires confirmation
  * @param action Function which will be called upon confirmation
  * @param confirmationMessage Message displayed on the confirmation button

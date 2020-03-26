@@ -3,7 +3,8 @@ import styled from "styled-components";
 /**
  * @date 3/24/2020
  * @author Arran Woodruff
- * @module Styled
+ * @category Styled Components
+ * @module Common
  */
 
 export const AlertDiv = styled.div`

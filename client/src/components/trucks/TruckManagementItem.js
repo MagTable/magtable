@@ -14,13 +14,9 @@ import { deleteTruck } from "../../actions/truck";
 /**
  * @date 3/5/2020
  * @author Tom Allcock, MJ Kochuk, Steven Wong
- * @module Component
- */
-
-/**
  *
  * The truck management item. This is specifically each truck and service vehicle that is in the system rendered out from Truck Management.
- *
+ * @category Components/Trucks
  * @constructor
  * @param truck The truck that is being rendered
  * @param setEditTruck The state of the truck if it is being edited or not.

@@ -8,12 +8,6 @@ import {
 	SET_DAILY_MIX_CHART_ROW
 } from "../actions/constants";
 
-/**
- * @date 3/24/2020
- * @author Arran Woodruff
- * @module Component
- */
-
 const initialState = {
 	selectedBrixRecords: [],
 	selectedTruckID: null,
@@ -32,7 +26,8 @@ const initialState = {
 /**
  * @date 2020-03-24
  * @author Arran Woodruff
- * @module Redux
+ * @category Redux-Reducers
+ * @module Brix
  */
 
 export default function(state = initialState, action) {

@@ -23,12 +23,8 @@ import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
 /**
  * @date 2/19/2020
  * @author Tom Allcock, Arran Woodruff
- * @module Component
- */
-
-/**
  * Handles rendering of the employee list in the assignment table.
- *
+ * @category Components/MagTable
  * @constructor
  * @returns {*} The EmployeeList component
  */

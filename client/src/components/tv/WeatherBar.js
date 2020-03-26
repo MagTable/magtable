@@ -16,12 +16,7 @@ import {
 /**
  * @date 2020-03-25
  * @author MJ Kochuk
-
- * @module Component
- */
-
-/**
- *
+ * @category Components/TV
  * @constructor
  * @param props
  * @returns {*} The WeatherBar component
@@ -32,7 +27,7 @@ function WeatherBar(props) {
 			<h1>Thu</h1>
 			<h1>03/25</h1>
 			<WeatherWording>Mainly Sunny</WeatherWording>
-			<SunIcon className="fas fa-sun"></SunIcon>
+			<SunIcon className="fas fa-sun" />
 			<TempHolder>
 				<WeatherWording>High</WeatherWording>
 				<Temp>24°</Temp>
@@ -45,12 +40,12 @@ function WeatherBar(props) {
 				<WeatherWording>Feels Like</WeatherWording>
 				<Temp>22°</Temp>
 			</GreyTempHolder>
-			<WindIcon className="fas fa-wind"></WindIcon>
+			<WindIcon className="fas fa-wind" />
 			<WeatherWording>43 km/h</WeatherWording>
-			<WindArrow className="fas fa-long-arrow-alt-up"></WindArrow>
+			<WindArrow className="fas fa-long-arrow-alt-up" />
 			<LaterDiv>
 				<LaterTitle>Later</LaterTitle>
-				<LaterIcon className="far fa-snowflake"></LaterIcon>
+				<LaterIcon className="far fa-snowflake" />
 				<WeatherWording>20%</WeatherWording>
 				<WeatherWording>@ 2PM</WeatherWording>
 			</LaterDiv>

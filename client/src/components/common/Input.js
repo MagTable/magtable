@@ -11,12 +11,9 @@ import { useField } from "formik";
 /**
  * @date 2/28/2020
  * @author Steven Wong, Arran Woodruff, MJ Kochuk
- * @module Component
- */
-
-/**
  * Standard component for text input, has support for labels, errors, and IconButtons
- *
+ * @name Input
+ * @category Component/Common
  * @param props see PropTypes
  * @param label Just the label for the input field.
  * @returns {*} The TextInput Component

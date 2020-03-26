@@ -8,14 +8,11 @@ import {
 } from "../../styled/common/TextInput";
 
 /**
+ * Standard component for text input, has support for labels, errors, and IconButtons
  * @date 2020-03-24
  * @author Arran Woodruff
- * @module Component
- */
-
-/**
- * Standard component for text input, has support for labels, errors, and IconButtons
- *
+ * @name TextInput
+ * @category Component/Common
  * @param props see PropTypes
  * @returns {*} The TextInput Component
  * @constructor

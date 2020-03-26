@@ -10,15 +10,19 @@ import {
 } from "./constants";
 import axios from "axios";
 
+// todo REMOVE CONSOLE LOGS!!!!!!!!!
+
 /**
  * @date 2020-03-24
- * @author Arran Woodruff
- * @module Redux
+ * @author Arran Woodruff, Steven Wong
+ * @category Redux-Actions
+ * @module Brix
  */
 
 /**
  * Saves a brix record to an assignment's brixRecords list
  *
+ * @method addBrixRecord
  * @param truckID id of truck the measurement is made for
  * @param brixRecord brixRecord to save to assignment
  * @returns API returns updated list of brix records for the assignment
@@ -47,6 +51,7 @@ export const addBrixRecord = (truckID, brixRecord) => async dispatch => {
 /**
  * gets the last x number of brix records for a particular deice truck
  *
+ * @method getBrixRecords
  * @param truckID id of truck to retrieve records for
  * @returns API returns a list of brix records for the requested truck
  */
@@ -70,6 +75,12 @@ export const getBrixRecords = truckID => async dispatch => {
 	}
 };
 
+/**
+ * Gets the Brix Char from the API.
+ *
+ * @method getBrixChart
+ * @return API returns the brix chart values
+ */
 export const getBrixChart = () => async dispatch => {
 	try {
 		const res = await axios.get("/brix/chart");
@@ -81,6 +92,13 @@ export const getBrixChart = () => async dispatch => {
 	} catch (err) {}
 };
 
+/**
+ *
+ * Gets the weather from an external API that is called through the backend.
+ *
+ * @method getWeather
+ * @return API returns the weather data.
+ */
 export const getWeather = () => async dispatch => {
 	try {
 		const res = await axios.get("/weather");
@@ -109,6 +127,15 @@ export const getWeather = () => async dispatch => {
 	} catch (err) {}
 };
 
+//todo Arran pls update this
+/**
+ *
+ * Sets the daily chart row.
+ *
+ * @method setDailyMixChartRow
+ * @param chartRow
+ * @return The daily mix chart row
+ */
 export const setDailyMixChartRow = chartRow => async dispatch => {
 	try {
 		dispatch({

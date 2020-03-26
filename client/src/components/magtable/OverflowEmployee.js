@@ -14,11 +14,7 @@ import { SYSTEM_ADMINISTRATOR } from "../../actions/constants";
 /**
  * @date 3/1/2020
  * @author Tom Allcock, Arran Woodruff, Steven Wong
- * @module Component
- */
-
-/**
- *
+ * @category Components/MagTable
  * @param children Children of the component.
  * @param color Color of the Icons
  * @param hoverColor Color when you hover over the icon

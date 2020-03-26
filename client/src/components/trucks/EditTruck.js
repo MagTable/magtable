@@ -13,12 +13,8 @@ import Input from "../common/Input";
 /**
  * @date 3/08/2020
  * @author MJ Kochuk, Steven Wong, Tom Allcock
- * @module Component
- */
-
-/**
  * For editing a truck in the manage trucks page.
- *
+ * @category Components/Trucks
  * @param truck
  * @constructor
  * @returns {*} The Edit Truck Form component.

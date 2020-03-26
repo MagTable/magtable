@@ -16,7 +16,9 @@ import PropTypes from "prop-types";
 /**
  * @date 2020-02-09
  * @author MJ Kochuk, Steven Wong
- * @module Component
+ * @name useWindowSize
+ * @category Component/Common
+ * @constructor
  */
 
 function useWindowSize() {
@@ -50,6 +52,8 @@ function useWindowSize() {
 /**
  * The menu used for navigating the site. The desktop version has a simple layout with links simply placed in the
  * header, while the mobile version has a folding menu to preserve screen real estate.
+ * @name MenuPane
+ * @category Component/Common
  * @constructor
  * @param menuOpen dictates whether or not the menu is in the open state
  * @param setMenuOpen changes the value of menuOpen
@@ -65,7 +69,7 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 		}
 	}
 
-	const size = useWindowSize();
+	const size = new useWindowSize();
 
 	const authUser = useSelector(state => state.auth.user);
 	const { pathname } = useLocation();

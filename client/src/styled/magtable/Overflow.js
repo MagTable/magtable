@@ -3,7 +3,8 @@ import styled from "styled-components";
 /**
  * @date 3/1/2020
  * @author Tom Allcock, Arran Woodruff
- * @module Styled
+ * @category Styled Components
+ * @module MagTable
  */
 
 /**

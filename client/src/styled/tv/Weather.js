@@ -3,7 +3,8 @@ import styled from "styled-components";
 /**
  * @date 2020-03-25
  * @author MJ Kochuk
- * @module Styled
+ * @category Styled Components
+ * @module TV
  */
 
 /**

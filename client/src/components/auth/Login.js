@@ -15,17 +15,17 @@ import Input from "../common/Input";
 import PlaneLoader from "../common/PlaneLoader";
 
 /**
+ *
+ * The Login Component.
+ *
  * @date 2/10/2020
  * @author Arran Woodruff, Steven Wong
- * @module Component
- */
-
-/**
- * This component allows the user to enter a username and password and in turn makes an authorization request to the API
+ * @name Login
+ * @category Component/Auth
+ * @returns {*} The Login Component
  * @constructor
- * @returns {*} The Login component
  */
-function Login() {
+const Login = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const { isAuthenticated, loading, error } = useSelector(state => state.auth);
 	const [blur, setBlur] = useState(false);
@@ -111,6 +111,6 @@ function Login() {
 			</LoginBlock>
 		</>
 	);
-}
+};
 
 export default Login;

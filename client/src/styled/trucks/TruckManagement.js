@@ -4,7 +4,8 @@ import { Button } from "../common/FormControl";
 /**
  * @date 3/5/2020
  * @author MJ Kochuk
- * @module Styled
+ * @category Styled Components
+ * @module Trucks
  */
 
 export const TruckManagementListDiv = styled.div`

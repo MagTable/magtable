@@ -3,7 +3,8 @@ import styled from "styled-components";
 /**
  * @date 2020-02-10
  * @author MJ Kochuk, Arran Woodruff
- * @module Styled
+ * @category Styled Components
+ * @module Common
  */
 
 /**

@@ -5,7 +5,8 @@ import PlaneBG from "../../res/Images/Plane_BG.jpg";
 /**
  * @date 2020-03-24
  * @author Arran Woodruff
- * @module Styled
+ * @category Styled Components
+ * @module Common
  */
 
 export const BlurCover = styled.div`

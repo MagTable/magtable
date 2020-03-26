@@ -9,12 +9,8 @@ import Input from "../common/Input";
 /**
  * @date 2020-03-24
  * @author Arran Woodruff, Steven Wong
- * @module Component
- */
-
-/**
  * Adds a user of the given role type
- *
+ * @category Components/User
  * @param role role of user to be added
  * @returns {*} The AddUser component
  * @constructor

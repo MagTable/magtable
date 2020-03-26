@@ -17,20 +17,16 @@ import { useDispatch, useSelector } from "react-redux";
 /**
  * @date 2/20/2020
  * @author Tom Allcock, Steven Wong, Arran Woodruff
- * @module Component
- */
-
-/**
  * Lists the parking locations available for trucks to be assigned to.
  * Users can drag a truck into a parking location.
  * Users cannot drag more than two trucks into any parking location,
  * other than the parking locations in the first and last column.
- *
+ * @category Components/MagTable
  * @param parkingLocation The Parking Location
  * @param position The Position
  * @param assignments The Assigned Equipment
- * @returns {*}
- * @constructor Returns the Parking Location Component
+ * @returns {*} Returns the Parking Location Component
+ * @constructor
  */
 function ParkingLocation({ parkingLocation, position, assignments }) {
 	const dispatch = useDispatch();
@@ -144,7 +140,7 @@ function ParkingLocation({ parkingLocation, position, assignments }) {
 }
 
 /**
- *
+ * @category Components/MagTable
  * @param parkingLocation The Parking Location
  * @param position The Position
  * @param assignments The Assigned Equipment.
@@ -284,6 +280,7 @@ function LeftDragDiv({
 
 /**
  *
+ * @category Components/MagTable
  * @param parkingLocation The Parking Location
  * @param position The Position
  * @param assignments The Assigned Equipment.
@@ -423,6 +420,7 @@ function RightDragDiv({
 
 /**
  *
+ * @category Components/MagTable
  * @param double If there's more than one piece of equipment in a bay.
  * @param parkingLocation The Parking Location
  * @param position The Position
@@ -538,6 +536,7 @@ function FullDropDropDiv({
 
 /**
  *
+ * @category Components/MagTable
  * @param bay The bays for equipment.
  * @param parkingLocation The Parking Location
  * @param position The Position
@@ -595,6 +594,7 @@ function LeftHalfDropDiv({
 
 /**
  *
+ * @category Components/MagTable
  * @param bay The bays for equipment.
  * @param parkingLocation The Parking Location
  * @param position The Position

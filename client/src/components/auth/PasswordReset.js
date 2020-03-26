@@ -9,20 +9,19 @@ import * as Yup from "yup";
 import Input from "../common/Input";
 
 /**
+ *
+ * The Reset Password Component
+ *
  * @date 2/10/2020
  * @author Arran Woodruff, Steven Wong
- * @module Component
- */
-
-/**
- * This component allows the user to enter a username and password and in turn makes an authorization request to the API
+ * @name Password Reset
+ * @category Component/Auth
+ * @returns {*} The ResetPassword Component
  * @constructor
- * @returns {*} The ResetPassword component
  */
 function ResetPassword() {
 	const { isAuthenticated, loading } = useSelector(state => state.auth);
 	const authUser = useSelector(state => state.auth?.user);
-	// const authUser = { username: "username", password: "password" };
 	const dispatch = useDispatch();
 
 	const [showNewPassword, setShowNewPassword] = useState(false);

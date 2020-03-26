@@ -18,9 +18,15 @@ import { addBrixRecord } from "../../actions/brix";
 import { LoginBtn } from "../../styled/auth/Login";
 
 /**
+ *
+ * The Brix Management component.
+ *
  * @date 2020-03-24
  * @author Arran Woodruff
- * @module Component
+ * @name BrixManagement
+ * @category Component/Brix
+ * @returns {*} The BrixManagement component
+ * @constructor
  */
 
 function BrixManagement() {

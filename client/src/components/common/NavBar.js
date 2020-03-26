@@ -11,13 +11,11 @@ import { useSelector } from "react-redux";
 import WeatherInfo from "../brix/WeatherInfo";
 
 /**
+ * The main navigation for the website.
  * @date 2020-02-05
  * @author MJ Kochuk, Arran Woodruff
- * @module Component
- */
-
-/**
- * The main navigation for the website.
+ * @name NavBar
+ * @category Component/Common
  * @constructor
  * @returns {*} The NavBar component
  */

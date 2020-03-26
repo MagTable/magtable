@@ -4,7 +4,8 @@ import { isMobile } from "react-device-detect";
 /**
  * @date 2020-02-05
  * @author MJ Kochuk, Arran Woodruff
- * @module Styled
+ * @category Styled Components
+ * @module User
  */
 
 /**

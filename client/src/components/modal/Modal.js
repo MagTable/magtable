@@ -2,12 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { ClickCatcher } from "../../styled/common/ClickCatcher";
 
-/**
- * @date 2/28/2020
- * @author Steven Wong, Arran Woodruff
- * @module Component
- */
-
 const StyledDiv = styled.div`
 	position: fixed;
 	top: 0;
@@ -64,13 +58,8 @@ const StyledSection = styled.section`
 /**
  * @date 3/01/2020
  * @author Steven Wong, Arran Woodruff
- * @module Component
- */
-
-/**
- *
  * A Modal to render the Add Employee Shift whenever we wish to add one. It is controlled using the OverflowEmployee.js file
- *
+ * @category Components/Modal
  * @param handleClose The state of handleClose
  * @param show The state of show
  * @param children The component we're rendering in the modal.

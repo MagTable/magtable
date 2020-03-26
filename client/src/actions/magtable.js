@@ -26,12 +26,21 @@ import { setAlert } from "./alert";
 import { logout } from "./auth";
 import store from "../store";
 
+//todo remove unused imports.
+
 /**
  * @date 2020-03-24
- * @author Arran Woodruff
- * @module Redux
+ * @author Arran Woodruff, Steven Wong
+ * @category Redux-Actions
+ * @module MagTable
  */
 
+/**
+ * Toggles whether it is AM or PM.
+ *
+ * @method toggleAM
+ * @returns AM or PM.
+ */
 export const toggleAM = () => dispatch => {
 	dispatch({
 		type: TOGGLE_AM_PM
@@ -41,7 +50,9 @@ export const toggleAM = () => dispatch => {
 /**
  * Removes parkingLocation for a particular truck
  *
- * @param equipmentID id of equipment to remove location data from
+ * @method removeTruckLocation
+ * @param {integer} equipmentID id of equipment to remove location data from
+ * @return Returns the equipmentID to be removed.
  */
 export const removeTruckLocation = equipmentID => dispatch => {
 	dispatch({
@@ -53,10 +64,12 @@ export const removeTruckLocation = equipmentID => dispatch => {
 /**
  * Sets the associated equipment's assignment parkingLocation
  *
- * @param equipmentID equipmentID of equipment to set location
- * @param parkingLocation parkingLocation to give to equipment
- * @param position position of truck within location
- * @param bay bay to assign to truck
+ * @method setTruckLocation
+ * @param {number} equipmentID EquipmentID of equipment to set location
+ * @param {object} parkingLocation ParkingLocation to give to equipment
+ * @param {string} position Position of truck within location
+ * @param {integer} bay Bay to assign to truck
+ * @return Sets the associated equipment assignments parkingLocation.
  */
 export const setTruckLocation = (
 	parkingLocation,
@@ -104,8 +117,10 @@ export const setTruckLocation = (
 /**
  * Removes an employeeShift from associated equipment's assignment
  *
- * @param equipmentID id of equipment to remove employeeShift from
- * @param shiftID shiftID of shift to remove from equipment
+ * @method removeEquipmentEmployee
+ * @param {number} equipmentID id of equipment to remove employeeShift from
+ * @param {number} shiftID shiftID of shift to remove from equipment
+ * @return Removes the employeeShift from the associated equipment's assignment.
  */
 export const removeEquipmentEmployee = (equipmentID, shiftID) => dispatch => {
 	dispatch({
@@ -117,8 +132,10 @@ export const removeEquipmentEmployee = (equipmentID, shiftID) => dispatch => {
 /**
  * Sets an employeeShift to a given equipment's employeeShift's index
  *
- * @param equipmentID equipmentID of equipment assignment to modify
- * @param shift shift to add to assignment employeeShifts
+ * @method setEquipmentEmployee
+ * @param {number} equipmentID equipmentID of equipment assignment to modify
+ * @param {number} shift shift to add to assignment employeeShifts
+ * @return Sets an employeeShift to a given equipment's employeeShift's index
  */
 export const setEquipmentEmployee = (equipmentID, shift) => dispatch => {
 	dispatch({
@@ -130,8 +147,9 @@ export const setEquipmentEmployee = (equipmentID, shift) => dispatch => {
 /**
  * Sends the current state of the magtable to the API for persistence
  *
- * @param magtable magtable to publish
- * @param publishedBy username of logged in user who called publish function
+ * @method publishTable
+ * @param {object} magtable MagTable to publish
+ * @param {string} publishedBy Username of logged in user who called publish function
  * @returns API returns the saved state of the magtable
  */
 export const publishTable = (magtable, publishedBy) => async dispatch => {
@@ -159,6 +177,12 @@ export const publishTable = (magtable, publishedBy) => async dispatch => {
 	}
 };
 
+/**
+ * Clears the MagTable of everything that is associated with it, from assignments to parking locations.
+ *
+ * @method clearTable
+ * @return A MagTable cleared of everything.
+ */
 export const clearTable = () => dispatch => {
 	try {
 		dispatch({
@@ -174,7 +198,8 @@ export const clearTable = () => dispatch => {
 /**
  * Adds a daily message to the magtable
  *
- * @param message message to add to the magtable
+ * @method addDailyMessage
+ * @param {object} message message to add to the magtable
  * @returns API returns the updated list of daily messages
  */
 // const addDailyMessage = message => async dispatch => {
@@ -190,14 +215,14 @@ export const clearTable = () => dispatch => {
 // 			payload: res.data
 // 		});
 // 	} catch (err) {
-// 		console.log(err);
 // 	}
 // };
 
 /**
  * Removes a message from the daily message list
  *
- * @param messageID messageID of the messaged to remove
+ * @method removeDailyMessage
+ * @param {integer} messageID messageID of the messaged to remove
  * @returns API returns the updated list of daily messages
  */
 // const removeDailyMessage = messageID => async dispatch => {
@@ -209,14 +234,15 @@ export const clearTable = () => dispatch => {
 // 			payload: res.data
 // 		});
 // 	} catch (err) {
-// 		console.log(err);
 // 	}
 // };
 
 /**
  * Changes the selected apron
  *
- * @param apronCode apronCode to change to
+ * @method setSelectedApron
+ * @param {string} apronCode apronCode to change to
+ * @return The apronCode to be changed to.
  */
 export const setSelectedApron = apronCode => dispatch => {
 	dispatch({
@@ -228,6 +254,7 @@ export const setSelectedApron = apronCode => dispatch => {
 /**
  * Gets the current state of the magtable from API
  *
+ * @method getMagTable
  * @returns API returns the entire magtable object
  */
 export const getMagTable = () => async dispatch => {
@@ -249,11 +276,15 @@ export const getMagTable = () => async dispatch => {
 			dispatch(logout());
 		}
 		dispatch(setAlert("Session Expired", "warning"));
-
-		console.log(err);
 	}
 };
 
+/**
+ * Gets the parkingLocations from the API
+ *
+ * @method getParkingLocations
+ * @return API returns all the parkingLocations
+ */
 export const getParkingLocations = () => async dispatch => {
 	try {
 		const res = await axios.get("/magtable/parkingLocation/all");
@@ -268,7 +299,8 @@ export const getParkingLocations = () => async dispatch => {
 /**
  * Adds a shift to the current employeeShifts list
  *
- * @param shiftData
+ * @method addEmployeeShift
+ * @param {object} shiftData The shiftData from adding an employee to the employeeShifts list
  * @returns API returns the updated list of employee shifts
  */
 export const addEmployeeShift = shiftData => async dispatch => {
@@ -300,6 +332,12 @@ export const addEmployeeShift = shiftData => async dispatch => {
 // 	});
 // };
 
+/**
+ * Refreshes the employee shifts.
+ *
+ * @method refreshEmployeeShifts
+ * @return API returns a refreshed version of the employee shifts.
+ */
 export const refreshEmployeeShifts = () => async dispatch => {
 	try {
 		dispatch({
@@ -323,14 +361,15 @@ export const refreshEmployeeShifts = () => async dispatch => {
 			dispatch(logout());
 			dispatch(setAlert("Session Expired", "warning"));
 		}
-		console.log(err);
 	}
 };
 
 /**
  * Sets the daily mix to a given percentage
  *
- * @param dailyMix dailyMix to set
+ * @method setDailyMix
+ * @param {integer} dailyMix dailyMix to set
+ * @return Sets the daily mix for the day.
  */
 export const setDailyMix = dailyMix => dispatch => {
 	dispatch({
@@ -339,12 +378,26 @@ export const setDailyMix = dailyMix => dispatch => {
 	});
 };
 
+/**
+ *
+ * Increments the daily mix.
+ *
+ * @method incrementDailyMix
+ * @return Increments the daily mix volumes for the day.
+ */
 export const incrementDailyMix = () => dispatch => {
 	dispatch({
 		type: INCREMENT_DAILY_MIX
 	});
 };
 
+/**
+ *
+ * Decrements the daily mix.
+ *
+ * @method decrementDailyMix
+ * @return Decrements the daily mix volumes for the day.
+ */
 export const decrementDailyMix = () => dispatch => {
 	dispatch({
 		type: DECREMENT_DAILY_MIX

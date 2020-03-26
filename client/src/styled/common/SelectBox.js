@@ -3,7 +3,8 @@ import styled from "styled-components";
 /**
  * @date 2/28/2020
  * @author Steven Wong, Arran Woodruff, MJ Kochuk
- * @module Styled
+ * @category Styled Components
+ * @module Common
  */
 
 export const StyledLabel = styled.label`

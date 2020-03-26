@@ -10,12 +10,9 @@ import {
 /**
  * @date 2/28/2020
  * @author Steven Wong
- * @module Component
- */
-
-/**
- *
- * @param children This is Label.
+ * @name CheckBox
+ * @category Component/Common
+ * @param children The children of the checkbox.
  * @param props Props we past in from the form.
  * @returns {*} Returns a styled checkbox component.
  * @constructor

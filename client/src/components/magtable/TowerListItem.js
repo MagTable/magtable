@@ -29,11 +29,7 @@ import IconButton from "../common/IconButton";
 /**
  * @date 2/21/2020
  * @author Steven Wong, MJ Kochuk, Tom Allcock
- * @module Component
- */
-
-/**
- *
+ * @category Components/MagTable
  * @constructor
  * @param assignment The assignment for the Tower
  * @param showAM The state of showAM

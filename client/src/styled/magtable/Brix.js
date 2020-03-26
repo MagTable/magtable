@@ -5,7 +5,8 @@ import { DANGER, SUCCESS, WARNING } from "../../actions/constants";
 /**
  * @date 3/24/2020
  * @author Arran Woodruff
- * @module Styled
+ * @category Styled Components
+ * @module MagTable
  */
 
 export const getColor = type => {

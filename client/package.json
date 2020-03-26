@@ -32,7 +32,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "doc": "jsdoc -c jsdoc.json"
+    "docs": "jsdoc -c jsdoc.json"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -50,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "better-docs": "^1.4.7",
     "jsdoc": "^3.6.3",
     "prop-types": "^15.7.2",
     "uuid": "^7.0.2"

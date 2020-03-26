@@ -13,13 +13,8 @@ import Input from "../common/Input";
 /**
  * @date 2/28/2020
  * @author Steven Wong, Arran Woodruff
- * @module Component
- */
-
-/**
- *
  * Handles the rendering of the form to add an Employee Shift to the current shifts in the EmployeeListItems.
- *
+ * @category Components/MagTable
  * @constructor
  * @returns {*} The AddEmployeeShift component.
  */

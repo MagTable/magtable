@@ -3,7 +3,8 @@ import { SET_ALERT, REMOVE_ALERT } from "../actions/constants";
 /**
  * @date 2020-03-24
  * @author Arran Woodruff
- * @module Redux
+ * @category Redux-Reducers
+ * @module Alert
  */
 
 const initialState = [];

@@ -18,15 +18,11 @@ import {
 /**
  * @date 2020-02-19
  * @author MJ Kochuk, Arran Woodruff, Steven Wong
- * @module Component
- */
-
-/**
- *
- * @constructor
+ * @category Components/MagTable
  * @param employeeShift The Employee Shift data
  * @param assignment The equipment the employee is assigned too.
  * @returns {*} The EmployeeListItem component
+ * @constructor
  */
 function EmployeeListItem({ employeeShift, assignment }) {
 	const dispatch = useDispatch();

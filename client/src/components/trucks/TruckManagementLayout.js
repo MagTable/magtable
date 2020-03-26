@@ -7,12 +7,8 @@ import { TruckMgmtWrap } from "../../styled/trucks/TruckManagement";
 /**
  * @date 03/05/2020
  * @author Steven Wong
- * @module Component
- */
-
-/**
  * The layout for the page of the Truck Management Layout.
- *
+ * @category Components/Trucks
  * @returns {*} The layout for the page of the Truck Management Layout.
  * @constructor
  */

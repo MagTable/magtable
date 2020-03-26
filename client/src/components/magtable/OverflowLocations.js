@@ -17,11 +17,7 @@ import { DoubleClickConfirm } from "../../styled/common/FormControl";
 /**
  * @date 3/1/2020
  * @author Tom Allcock, Arran Woodruff, Steven Wong
- * @module Component
- */
-
-/**
- *
+ * @category Components/MagTable
  * @param children Children of the Component
  * @param color Color of the Icon
  * @param hoverColor Hover color of icon.

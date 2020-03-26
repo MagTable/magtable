@@ -3,7 +3,8 @@ import styled from "styled-components";
 /**
  * @date 2020-03-24
  * @author Arran Woodruff
- * @module Component
+ * @category Styled Components
+ * @module Common
  */
 
 export const ConfirmationBox = styled.div`

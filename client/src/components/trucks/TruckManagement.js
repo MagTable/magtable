@@ -21,13 +21,8 @@ import {
 /**
  * @date 3/5/2020
  * @author Tom Allcock, MJ Kochuk, Steven Wong
- * @module Component
- */
-
-/**
- *
  * This is the main component that deals with all the rendering of the Truck Management page.
- *
+ * @category Components/Trucks
  * @constructor
  * @returns {*} The TruckManagement component
  */

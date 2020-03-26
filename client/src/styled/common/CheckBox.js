@@ -3,7 +3,8 @@ import styled from "styled-components";
 /**
  * @date 3/26/2020
  * @author Steven Wong
- * @module Styled
+ * @category Styled Components
+ * @module Common
  */
 
 export const StyledCheckBoxDiv = styled.div`
