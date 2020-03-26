@@ -18,7 +18,7 @@ import { addTruck } from "../../actions/truck";
 
 /**
  *
- * Handles the rendering of the form to add a Truck to the current list of trucks..
+ * Handles the rendering of the form to add a Truck to the current list of trucks.
  *
  * @constructor
  * @returns {*} The AddTruck component.
@@ -62,13 +62,11 @@ const SubmitDiv = styled.div`
 	grid-area: submit;
 `;
 
-const AddTruck = () => {
+function AddTruck() {
 	const dispatch = useDispatch();
 	const truckStatuses = TRUCK_STATUSES;
 	const vehicleTypes = VEHICLE_TYPES;
 
-	//todo figure out formik text area and add it in at the bottom.
-	// also change the text input field into a number one purely unless API can parse the string to an int and we can keep easy consistency
 	return (
 		<Formik
 			initialValues={{
@@ -103,7 +101,7 @@ const AddTruck = () => {
 					<IdDiv>
 						<Input
 							errors={props.errors.id}
-							value={`${props.values.id}`}
+							value={props.values.id}
 							touched={props.touched.id}
 							name="id"
 							type="number"
@@ -164,6 +162,6 @@ const AddTruck = () => {
 			)}
 		</Formik>
 	);
-};
+}
 
 export default AddTruck;

@@ -22,7 +22,6 @@ import Input from "../common/Input";
  * @author Arran Woodruff
  * @module Component
  */
-//todo REMOVE CONSOLE LOGS
 function BrixManagement() {
 	const dispatch = useDispatch();
 	const {
@@ -115,7 +114,8 @@ function BrixManagement() {
 					<BrixForm>
 						<Input
 							errors={props.errors.type1}
-							value={`${props.values.type1}`}
+							value={props.values.type1}
+							touched={props.touched.type1}
 							id={"type1"}
 							label={"Type 1 Tank"}
 							name="type1"
@@ -127,7 +127,8 @@ function BrixManagement() {
 						/>
 						<Input
 							errors={props.errors.type4}
-							value={`${props.values.type4}`}
+							value={props.values.type4}
+							touched={props.touched.type4}
 							id={"type4"}
 							label={"Type 4 Tank"}
 							name="type4"
@@ -139,7 +140,8 @@ function BrixManagement() {
 						/>
 						<Input
 							errors={props.errors.nozzle}
-							value={`${props.values.nozzle}`}
+							value={props.values.nozzle}
+							touched={props.touched.nozzle}
 							id={"nozzle"}
 							label={"Nozzle"}
 							name={"nozzle"}
@@ -151,7 +153,8 @@ function BrixManagement() {
 						/>
 						<Input
 							errors={props.errors.litersPurged}
-							value={`${props.values.litersPurged}`}
+							value={props.values.litersPurged}
+							touched={props.touched.litersPurged}
 							id="purged"
 							label="Liters Purged"
 							name="litersPurged"
@@ -163,7 +166,6 @@ function BrixManagement() {
 						<BrixManagementChartRowData id="rowdata">
 							{dailyMixChartRow ? (
 								<>
-									{console.log(props.errors.nozzle)}
 									<ChartRowDataItem
 										error={props.errors.nozzle === nozzleMinError}
 									>

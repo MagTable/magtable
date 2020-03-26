@@ -173,6 +173,8 @@ const AddEmployeeShift = ({ setShowModal }) => {
 						<Input
 							errors={props.errors.name}
 							value={props.values.name}
+							touched={props.touched.name}
+							onChange={props.handleChange("name")}
 							name="name"
 							label="Employee Name"
 							type="text"
@@ -183,6 +185,7 @@ const AddEmployeeShift = ({ setShowModal }) => {
 						<SelectBox
 							errors={props.errors.startTime}
 							value={props.values.startTime}
+							touched={props.touched.startTime}
 							label="Start Time"
 							name="startTime"
 						>
@@ -198,6 +201,7 @@ const AddEmployeeShift = ({ setShowModal }) => {
 						<SelectBox
 							errors={props.errors.endTime}
 							value={props.values.endTime}
+							touched={props.touched.endTime}
 							label="End Time"
 							name="endTime"
 						>
@@ -213,6 +217,7 @@ const AddEmployeeShift = ({ setShowModal }) => {
 						<SelectBox
 							errors={props.errors.description}
 							value={props.values.description}
+							touched={props.touched.description}
 							label="Position"
 							name="description"
 						>

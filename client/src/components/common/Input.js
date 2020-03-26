@@ -57,7 +57,7 @@ const Input = ({ label, ...props }) => {
 				{...props}
 				onFocus={() => setFocus(true)}
 				onBlur={() => setFocus(false)}
-				error={props.errors}
+				error={props.errors && props.touched}
 				focus={focus}
 				id={label}
 				fit={props.fit}
@@ -69,7 +69,7 @@ const Input = ({ label, ...props }) => {
 
 Input.propTypes = {
 	errors: PropTypes.string,
-	value: PropTypes.string,
+	value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	icon: PropTypes.shape({
 		iconClass: PropTypes.string.isRequired,
 		action: PropTypes.func,

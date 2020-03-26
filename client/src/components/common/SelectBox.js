@@ -34,14 +34,19 @@ const SelectBox = ({ label, ...props }) => {
 	return (
 		<SelectContainer>
 			<StyledLabel
-				error={props.errors}
+				error={props.errors && props.touched}
 				lifted={props?.value?.length > 0}
 				focus={focus}
 				htmlFor={props.id || props.name}
 			>
 				{props.errors || label}
 			</StyledLabel>
-			<StyledSelect error={props.errors} focus={focus} {...field} {...props} />
+			<StyledSelect
+				error={props.errors && props.touched}
+				focus={focus}
+				{...field}
+				{...props}
+			/>
 		</SelectContainer>
 	);
 };

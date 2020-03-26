@@ -28,6 +28,8 @@ function TextInput(props) {
 		props.setBlurred(focus || props.blur);
 	}
 
+	console.log({ ...props });
+
 	return (
 		<TextInputContainer id={props.id || null}>
 			<StyledTextInput

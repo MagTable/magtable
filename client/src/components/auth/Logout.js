@@ -15,7 +15,7 @@ import { useDispatch } from "react-redux";
  * @returns {null}
  * @constructor
  */
-const Logout = () => {
+function Logout() {
 	// simple component assigned to /logout that calls the logout function
 	const dispatch = useDispatch();
 	useEffect(() => {
@@ -23,6 +23,6 @@ const Logout = () => {
 	}, [dispatch]);
 
 	return null;
-};
+}
 
 export default Logout;
