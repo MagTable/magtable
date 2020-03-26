@@ -7,7 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-
+/**
+ * Repository Interface for BrixRecord
+ * @author Arran Woodruff
+ */
 public interface BrixRepository extends JpaRepository<BrixRecord, Integer>, JpaSpecificationExecutor<BrixRecord> {
 
     @Query(value = "SELECT * FROM brixrecord where brixrecord.equipmentid = ?1 ORDER BY brixrecord.timeMeasured DESC LIMIT 10",

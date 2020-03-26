@@ -12,14 +12,13 @@ import java.util.Map;
 import java.util.function.Function;
 
 /**
- * Author : https://github.com/koushikkothagal/spring-security-jwt
- * https://www.youtube.com/watch?v=X80nJ5T7YpE&t=583s
+ * Class for jwt utilities
+ * Created with Reference too : "Spring Boot + Spring Security + JWT from scratch - Java Brains" - https://www.youtube.com/watch?v=X80nJ5T7YpE&list=PLqq-6Pq4lTTYTEooakHchTGglSvkZAjnE&index=12
  */
 
 @Service
 public class JwtUtil {
 
-    //My secret key
     //TODO Change in production to a more secure key
     private final String SECRET_KEY = "secret";
 

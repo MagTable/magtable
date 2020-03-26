@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Rest Controller for equipment routes
+ * @author David Ward
+ */
 @RestController
 @RequestMapping("/equipment")
 public class EquipmentController {

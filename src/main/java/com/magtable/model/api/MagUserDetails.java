@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * Class to override the default Spring Boot UserDetails implementation
+ * @author David Ward
  */
 public class MagUserDetails implements UserDetails {
 

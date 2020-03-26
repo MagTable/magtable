@@ -7,8 +7,8 @@ import java.io.Serializable;
 
 /**
  * Class for User objects with no password for safety
+ * @author David Ward
  */
-
 public class SafeUser implements Serializable {
 
 
