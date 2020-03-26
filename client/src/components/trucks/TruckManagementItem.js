@@ -19,8 +19,11 @@ import { deleteTruck } from "../../actions/truck";
 
 /**
  *
+ * The truck management item. This is specifically each truck and service vehicle that is in the system rendered out from Truck Management.
+ *
  * @constructor
- * @param props
+ * @param truck The truck that is being rendered
+ * @param setEditTruck The state of the truck if it is being edited or not.
  * @returns {*} The TruckManagementItem component
  */
 function TruckManagementItem({ truck, setEditTruck }) {

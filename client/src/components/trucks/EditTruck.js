@@ -18,8 +18,10 @@ import Input from "../common/Input";
 
 /**
  * For editing a truck in the manage trucks page.
+ *
+ * @param truck
  * @constructor
- * @returns {*} The AddTruck component.
+ * @returns {*} The Edit Truck Form component.
  */
 
 const EditTruckForm = styled(Form)`
@@ -65,6 +67,7 @@ const EditTruck = ({ truck }) => {
 	const truckStatuses = TRUCK_STATUSES;
 	const vehicleTypes = VEHICLE_TYPES;
 
+	// Truck will always be null at the start of the page, to avoid errors, setting the trucks default values off the get-go
 	if (truck == null) {
 		truck = {
 			id: 0,

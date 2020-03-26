@@ -26,6 +26,8 @@ import {
 
 /**
  *
+ * This is the main component that deals with all the rendering of the Truck Management page.
+ *
  * @constructor
  * @returns {*} The TruckManagement component
  */
@@ -38,11 +40,14 @@ function TruckManagement() {
 	const [editTruck, setEditTruck] = useState(null);
 	const authUser = useSelector(state => state.auth.user);
 
+	// Gets only the De-Ice Trucks in the System.
 	const truckAssignments = assignments.filter(
 		assignment =>
 			assignment.equipment.id < 1000 &&
 			assignment.equipment.type === DEICE_TRUCK
 	);
+
+	// Gets only the Service Vehicles in the System.
 	const serviceVehicleAssignments = assignments.filter(
 		assignment =>
 			assignment.equipment.id < 1000 &&

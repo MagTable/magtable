@@ -21,7 +21,7 @@ import { addTruck } from "../../actions/truck";
  * Handles the rendering of the form to add a Truck to the current list of trucks.
  *
  * @constructor
- * @returns {*} The AddTruck component.
+ * @returns {*} The AddTruck form component.
  */
 
 const AddTruckForm = styled(Form)`

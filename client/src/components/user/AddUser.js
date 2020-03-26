@@ -8,7 +8,7 @@ import Input from "../common/Input";
 
 /**
  * @date 2020-03-24
- * @author Arran Woodruff
+ * @author Arran Woodruff, Steven Wong
  * @module Component
  */
 
