@@ -7,7 +7,6 @@ import {
 	NavLink,
 	NavPane
 } from "../../styled/common/Navigation";
-import { BrowserView } from "react-device-detect";
 import { useSelector } from "react-redux";
 import { SYSTEM_ADMINISTRATOR } from "../../actions/constants";
 import { useLocation } from "react-router-dom";
@@ -69,68 +68,18 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 
 	const authUser = useSelector(state => state.auth.user);
 	const { pathname } = useLocation();
-	if (size.width < 1420) {
+
+	if (size.width < 1640) {
 		return (
-			<div>
-				<BrowserView>
-					<NavDiv>
-						<MenuTip onClick={() => toggleMenu()}>
-							<MenuTipIcon open={menuOpen} className="fas fa-bars fa-lg" />
-						</MenuTip>
-						<NavPane onClick={() => toggleMenu()} open={menuOpen}>
-							<NavLink
-								active={pathname === "/truck/tv" ? 1 : undefined}
-								to={"/truck/tv"}
-							>
-								TV
-								<NavIcon className="fas fa-tv" />
-							</NavLink>
-							<NavLink active={pathname === "/" ? 1 : undefined} to={"/"}>
-								Truck Assignment
-								<NavIcon className="fas fa-truck" />
-							</NavLink>
-							<NavLink
-								active={pathname === "/truck/all" ? 1 : undefined}
-								to={"/truck/all"}
-							>
-								Manage Trucks
-								<NavIcon className="fas fa-truck" />
-							</NavLink>
-							{/* System Administrators Only */}
-							{authUser?.role?.name === SYSTEM_ADMINISTRATOR && (
-								<NavLink
-									active={pathname === "/user/all" ? 1 : undefined}
-									to={"/user/all"}
-								>
-									Manage Users
-									<NavIcon className="fas fa-users" />
-								</NavLink>
-							)}
-							<NavLink to={"/logout"}>
-								Log Out
-								<NavIcon className="fas fa-sign-out-alt" />
-							</NavLink>
-						</NavPane>
-					</NavDiv>
-				</BrowserView>
-			</div>
-		);
-	} else {
-		return (
-			<BrowserView>
-				<NavDiv>
-					<NavLink
-						active={pathname === "/truck/tv" ? 1 : undefined}
-						to={"/truck/tv"}
-					>
-						TV
-						<NavIcon className="fas fa-tv" />
-					</NavLink>
+			<NavDiv>
+				<MenuTip onClick={() => toggleMenu()}>
+					<MenuTipIcon open={menuOpen} className="fas fa-bars fa-lg" />
+				</MenuTip>
+				<NavPane onClick={() => toggleMenu()} open={menuOpen}>
 					<NavLink active={pathname === "/" ? 1 : undefined} to={"/"}>
 						Truck Assignment
-						<NavIcon className="fas fa-tasks" />
+						<NavIcon className="fas fa-truck" />
 					</NavLink>
-
 					<NavLink
 						active={pathname === "/truck/all" ? 1 : undefined}
 						to={"/truck/all"}
@@ -152,8 +101,38 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 						Log Out
 						<NavIcon className="fas fa-sign-out-alt" />
 					</NavLink>
-				</NavDiv>
-			</BrowserView>
+				</NavPane>
+			</NavDiv>
+		);
+	} else {
+		return (
+			<NavDiv>
+				<NavLink active={pathname === "/" ? 1 : undefined} to={"/"}>
+					Truck Assignment
+					<NavIcon className="fas fa-tasks" />
+				</NavLink>
+				<NavLink
+					active={pathname === "/truck/all" ? 1 : undefined}
+					to={"/truck/all"}
+				>
+					Manage Trucks
+					<NavIcon className="fas fa-truck" />
+				</NavLink>
+				{/* System Administrators Only */}
+				{authUser?.role?.name === SYSTEM_ADMINISTRATOR && (
+					<NavLink
+						active={pathname === "/user/all" ? 1 : undefined}
+						to={"/user/all"}
+					>
+						Manage Users
+						<NavIcon className="fas fa-users" />
+					</NavLink>
+				)}
+				<NavLink to={"/logout"}>
+					Log Out
+					<NavIcon className="fas fa-sign-out-alt" />
+				</NavLink>
+			</NavDiv>
 		);
 	}
 }

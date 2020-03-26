@@ -10,6 +10,12 @@ import {
 import { setAlert } from "./alert";
 
 /**
+ * @date 2020-03-24
+ * @author Arran Woodruff
+ * @module Redux
+ */
+
+/**
  * Retrieves list of all user accounts
  * GET /user/all
  * Dispatch Type: GET_USERS

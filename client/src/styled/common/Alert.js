@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+/**
+ * @date 2020-03-24
+ * @author Arran Woodruff
+ * @module Styled
+ */
+
 export const AlertDiv = styled.div`
 	position: fixed;
 	top: 10px;

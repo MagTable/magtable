@@ -4,7 +4,7 @@ import PlaneBG from "../../res/Images/Plane_BG.jpg";
 
 /**
  * @date 2020-02-13
- * @author MJ Kochuk
+ * @author MJ Kochuk, Arran Woodruff
  * @module Styled
  */
 

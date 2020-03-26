@@ -1,5 +1,11 @@
 import { SET_ALERT, REMOVE_ALERT } from "../actions/constants";
 
+/**
+ * @date 2020-03-24
+ * @author Arran Woodruff
+ * @module Redux
+ */
+
 const initialState = [];
 
 export default function(state = initialState, action) {

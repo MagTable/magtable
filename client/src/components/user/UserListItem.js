@@ -11,6 +11,12 @@ import IconButton from "../common/IconButton";
 import Confirmation from "../common/Confirmation";
 
 /**
+ * @date 2020-03-24
+ * @author Arran Woodruff
+ * @module Component
+ */
+
+/**
  * Displays the relevant user attributes as a list item
  * Contains buttons that perform actions on the user (delete, reset password)
  *

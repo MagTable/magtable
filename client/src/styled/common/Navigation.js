@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 /**
  * @date 2020-02-05
- * @author MJ Kochuk
+ * @author MJ Kochuk, Arran Woodruff
  * @module Styled
  */
 
@@ -68,6 +68,31 @@ export const MenuTipIcon = styled.a`
 `;
 
 /**
+ * The link in the navigation menu / bar to access another page of the app.
+ */
+export const NavLink = styled(Link)`
+	text-decoration: none;
+	color: var(--title-bright);
+	font-size: 20px;
+
+	margin-right: 2rem;
+	padding-bottom: 0.5rem;
+
+	transition: color 0.25s ease-in-out, border 0.25s ease-in-out;
+	border-bottom: 3px solid #00000000;
+
+	:hover {
+		color: var(--link-underline);
+	}
+	${({ active }) =>
+		active &&
+		`
+			border-bottom-color: var(--link-underline);
+			color: var(--link-underline);
+		`}
+`;
+
+/**
  * The navigation menu used in the mobile version of the site.
  */
 export const NavPane = styled.div`
@@ -83,13 +108,22 @@ export const NavPane = styled.div`
 	right: 0px;
 	max-height: ${({ open }) => (open ? "295px" : "0px")};
 	z-index: 100;
+
+	${NavLink} {
+		padding: 1rem;
+		margin: 0;
+	}
 `;
 
 /**
  * Holds the individual links in the navigation menu / bar.
  */
 export const NavDiv = styled.div`
+	height: 100%;
+
 	display: flex;
+	align-items: center;
+	justify-content: center;
 `;
 
 /**
@@ -100,29 +134,4 @@ export const NavBar = styled.div`
 	display: flex;
 	justify-content: space-between;
 	height: 70px;
-`;
-
-/**
- * The link in the navigation menu / bar to access another page of the app.
- */
-export const NavLink = styled(Link)`
-	text-decoration: none;
-	color: var(--title-bright);
-	font-size: 20px;
-	padding-bottom: 0.5rem;
-	padding-top: 20px;
-	margin-right: 2rem;
-
-	transition: color 0.25s ease-in-out, border 0.25s ease-in-out;
-	border-bottom: 3px solid #00000000;
-
-	:hover {
-		color: var(--link-underline);
-	}
-	${({ active }) =>
-		active &&
-		`
-			border-bottom-color: var(--link-underline);
-			color: var(--link-underline);
-		`}
 `;

@@ -13,11 +13,11 @@ import { toggleAM } from "../../actions/magtable";
 import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
 import { DEICE_TRUCK, SERVICE_VEHICLE } from "../../actions/constants";
 import Modal from "../modal/Modal";
-import BrixManagement from "./BrixManagement";
+import BrixManagement from "../brix/BrixManagement";
 
 /**
  * @date 2020-02-17
- * @author MJ Kochuk
+ * @author MJ Kochuk, Arran Woodruff
  * @module Component
  */
 

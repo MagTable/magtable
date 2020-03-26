@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 /**
  * @date 3/1/2020
- * @author Tom Allcock
+ * @author Tom Allcock, Arran Woodruff
  * @module Styled
  */
 

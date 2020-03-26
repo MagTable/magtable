@@ -1,9 +1,11 @@
 import {
 	BrixForm,
+	BrixManagementChartRowData,
 	BrixTableTitle,
 	BrixTableWrapper,
 	BrixWrapper,
-	BrixWrapperTitle
+	BrixWrapperTitle,
+	ChartRowDataItem
 } from "../../styled/magtable/Brix";
 import { Table, Th, Thead, Tr } from "../../styled/common/Table";
 import React from "react";
@@ -12,14 +14,14 @@ import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { addBrixRecord } from "../../actions/brix";
-import styled from "styled-components";
 import { LoginBtn } from "../../styled/auth/Login";
 import Input from "../common/Input";
 
-// todo we should start moving some of our form styled components into a folder now.
-const SubmitDiv = styled.div`
-	grid-area: submit;
-`;
+/**
+ * @date 2020-03-24
+ * @author Arran Woodruff
+ * @module Component
+ */
 
 function BrixManagement() {
 	const dispatch = useDispatch();
@@ -27,8 +29,10 @@ function BrixManagement() {
 		selectedBrixRecords,
 		selectedTruckID,
 		loading,
-		addingBrixRecord
+		addingBrixRecord,
+		dailyMixChartRow
 	} = useSelector(state => state.brix);
+
 	const getFormattedDate = date => {
 		date = new Date(date);
 		const months = [
@@ -64,6 +68,8 @@ function BrixManagement() {
 		);
 	};
 
+	const nozzleMinError = `Nozzle Min is ${dailyMixChartRow?.brix}`;
+
 	return (
 		<BrixWrapper>
 			<BrixWrapperTitle>
@@ -83,18 +89,22 @@ function BrixManagement() {
 				}}
 				validationSchema={Yup.object().shape({
 					nozzle: Yup.number()
-						.min(8.5, "Nozzle Min is 8.5")
+						.typeError("Must be a Number")
+						.min(dailyMixChartRow?.brix, nozzleMinError)
 						.max(42, "Nozzle Max is 42.0")
 						.required("Nozzle Required"),
 					type1: Yup.number()
+						.typeError("Must be a Number")
 						.min(50.5, "Type 1 Min is 50.5")
 						.max(53.5, "Type1  Max is 53.5")
 						.required("Type 1 Required"),
 					type4: Yup.number()
+						.typeError("Must be a Number")
 						.min(30.5, "Type 4 Min is 30.5")
 						.max(33.5, "Type 4 Max is 33.5")
 						.required("Type 4 Required"),
 					litersPurged: Yup.number()
+						.typeError("Must be a Number")
 						.min(0, "Min Purged is 0")
 						.max(1000, "Max Purged is 1000")
 						.required("Liters Required"),
@@ -154,6 +164,18 @@ function BrixManagement() {
 							}}
 							fit
 						/>
+						<BrixManagementChartRowData id="rowdata">
+							{dailyMixChartRow ? (
+								<>
+									{console.log(errors.nozzle)}
+									<ChartRowDataItem error={errors.nozzle === nozzleMinError}>
+										Minimum Nozzle Brix: {dailyMixChartRow.brix}
+									</ChartRowDataItem>
+								</>
+							) : (
+								<h4>Validation Data Not Available, Please Verify Manually.</h4>
+							)}
+						</BrixManagementChartRowData>
 						<SubmitDiv>
 							<LoginBtn disabled={addingBrixRecord} type={"submit"}>
 								{addingBrixRecord ? (

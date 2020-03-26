@@ -1,15 +1,20 @@
 import {
-	SET_DAILY_MIX,
 	AXIOS_JSON_HEADER,
 	ADD_BRIX_RECORD,
 	GET_BRIX_RECORDS,
 	FETCHING_BRIX_RECORDS,
 	ADDING_BRIX_RECORD,
 	GET_BRIX_CHART,
-	GET_WEATHER
+	GET_WEATHER,
+	SET_DAILY_MIX_CHART_ROW
 } from "./constants";
 import axios from "axios";
-import { setAlert } from "./alert";
+
+/**
+ * @date 2020-03-24
+ * @author Arran Woodruff
+ * @module Redux
+ */
 
 /**
  * Saves a brix record to an assignment's brixRecords list
@@ -78,26 +83,37 @@ export const getBrixChart = () => async dispatch => {
 
 export const getWeather = () => async dispatch => {
 	try {
-		// const res = await axios.get(
-		// 	"http://api.openweathermap.org/data/2.5/forecast?id=5913490&APPID=ae895e97d569b50fd4fa9a56923734cd&units=metric",
-		// 	{ crossdomain: true }
-		// );
+		const res = await axios.get("/weather");
+		const weather = res.data;
+		// const weather = sampleWeather;
+		// const weather = null;
+
+		let date;
+		date = new Date(0);
+		date.setUTCSeconds(weather.list[0].dt);
+
+		let forecastLow;
+		forecastLow = 1000; // higher than realistic
+		weather.list.slice(0, 8).forEach(elem => {
+			if (elem.main.temp < forecastLow)
+				forecastLow = Math.floor(elem.main.temp);
+		});
+		forecastLow = Math.ceil(parseInt(forecastLow));
+
+		let currentTemperature = Math.floor(weather.list[0].main.temp);
 
 		dispatch({
-			type: GET_WEATHER
-			// payload: res.data
+			type: GET_WEATHER,
+			payload: { date, forecastLow, currentTemperature }
 		});
 	} catch (err) {}
 };
 
-/**
- * Sets the daily mix to a given percentage
- *
- * @param dailyMix dailyMix to set
- */
-// const setDailyMix = dailyMix => dispatch => {
-// 	dispatch({
-// 		type: SET_DAILY_MIX,
-// 		payload: dailyMix
-// 	});
-// };
+export const setDailyMixChartRow = chartRow => async dispatch => {
+	try {
+		dispatch({
+			type: SET_DAILY_MIX_CHART_ROW,
+			payload: chartRow
+		});
+	} catch (err) {}
+};
