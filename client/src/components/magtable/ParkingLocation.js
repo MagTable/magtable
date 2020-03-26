@@ -26,8 +26,11 @@ import { useDispatch, useSelector } from "react-redux";
  * Users cannot drag more than two trucks into any parking location,
  * other than the parking locations in the first and last column.
  *
- * @constructor
- * @returns {*} The ParkingLocation component
+ * @param parkingLocation The Parking Location
+ * @param position The Position
+ * @param assignments The Assigned Equipment
+ * @returns {*}
+ * @constructor Returns the Parking Location Component
  */
 function ParkingLocation({ parkingLocation, position, assignments }) {
 	const dispatch = useDispatch();
@@ -140,6 +143,18 @@ function ParkingLocation({ parkingLocation, position, assignments }) {
 	);
 }
 
+/**
+ *
+ * @param parkingLocation The Parking Location
+ * @param position The Position
+ * @param assignments The Assigned Equipment.
+ * @param bay The bays for equipment.
+ * @param handleClear Clearing of the equipment.
+ * @param defaultEquipmentID Default EquipmentID
+ * @param showAM ShowAM State
+ * @returns {*}
+ * @constructor
+ */
 function LeftDragDiv({
 	parkingLocation,
 	position,
@@ -267,6 +282,18 @@ function LeftDragDiv({
 	);
 }
 
+/**
+ *
+ * @param parkingLocation The Parking Location
+ * @param position The Position
+ * @param assignments The Assigned Equipment.
+ * @param bay The bays for equipment.
+ * @param handleClear Clearing of the equipment.
+ * @param defaultEquipmentID Default EquipmentID
+ * @param showAM ShowAM State
+ * @returns {*}
+ * @constructor
+ */
 function RightDragDiv({
 	handleClear,
 	parkingLocation,
@@ -394,6 +421,17 @@ function RightDragDiv({
 	);
 }
 
+/**
+ *
+ * @param double If there's more than one piece of equipment in a bay.
+ * @param parkingLocation The Parking Location
+ * @param position The Position
+ * @param assignments The Assigned Equipment.
+ * @param handleClear Clearing of the equipment.
+ * @param showAM ShowAM State
+ * @returns {*} The full drop div.
+ * @constructor
+ */
 function FullDropDropDiv({
 	double,
 	parkingLocation,
@@ -498,6 +536,15 @@ function FullDropDropDiv({
 	);
 }
 
+/**
+ *
+ * @param bay The bays for equipment.
+ * @param parkingLocation The Parking Location
+ * @param position The Position
+ * @param defaultEquipmentID Default EquipmentID
+ * @returns {*} Returns the left half div.
+ * @constructor
+ */
 function LeftHalfDropDiv({
 	bay,
 	parkingLocation,
@@ -546,6 +593,15 @@ function LeftHalfDropDiv({
 	);
 }
 
+/**
+ *
+ * @param bay The bays for equipment.
+ * @param parkingLocation The Parking Location
+ * @param position The Position
+ * @param defaultEquipmentID Default EquipmentID
+ * @returns {*} Returns the right half div.
+ * @constructor
+ */
 function RightHalfDropDiv({
 	bay,
 	parkingLocation,

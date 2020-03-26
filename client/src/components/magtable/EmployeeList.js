@@ -44,16 +44,22 @@ const EmployeeList = () => {
 
 	// used to determine if the app filters out employees who start before noon, but after midnight, default false to show all times
 	const [filterAM, setFilterAM] = useState(false);
+
 	// used to determine if the app filters out employees who start before midnight, but after noon, default false to show all times
 	const [filterPM, setFilterPM] = useState(false);
+
 	// used to determine if the app filters out employees that are part of the technician staff, default false to show all employees
 	const [filterTech, setFilterTech] = useState(false);
+
 	// used to determine if the app filters out employees that are part of the tower staff, default false to show all employees
 	const [filterTower, setFilterTower] = useState(false);
+
 	// used to determine if the app filters out management, default is false to not show management
 	const [filterManagement, setFilterManagement] = useState(false);
+
 	// used to determine if the app filters out employees that are mechanics, default is false to show all employees
 	const [filterMechanic, setFilterMechanic] = useState(true);
+
 	// used to determine if the app filters out employees that are part of the training staff, default false to show all employees
 	const [filterTrainer, setFilterTrainer] = useState(true);
 
@@ -69,6 +75,7 @@ const EmployeeList = () => {
 		setFilterAM(false);
 	}, [filterPM]);
 
+	//todo Fix the warning we get from this --> React Hook useEffect has missing dependencies: 'filterAMEmployees' and 'filterPMEmployees'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
 	useEffect(() => {
 		if (showAM) {
 			filterPMEmployees();

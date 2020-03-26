@@ -35,8 +35,8 @@ import IconButton from "../common/IconButton";
 /**
  *
  * @constructor
- * @param assignment
- * @param showAM
+ * @param assignment The assignment for the Tower
+ * @param showAM The state of showAM
  * @returns {*} The TowerListItem component
  */
 function TowerListItem({ assignment, showAM }) {
@@ -121,6 +121,7 @@ function TowerListItem({ assignment, showAM }) {
 		dispatch(removeEquipmentEmployee(assignment.equipment.id, shiftID));
 	};
 
+	// Outline for dropping
 	function getOutline(index) {
 		const primaryDrop = index % 2 === 0; // even indexes are primaries
 		if (primaryDrop !== newShiftAttributes().isPrimary) return null;
@@ -144,6 +145,7 @@ function TowerListItem({ assignment, showAM }) {
 		if (isOver && canDrop) return SUCCESS;
 	}
 
+	// Assignment Warnings
 	function setAssignmentWarnings() {
 		Object.values(shifts).forEach(shift => {
 			if (!shift) return;
@@ -192,6 +194,7 @@ function TowerListItem({ assignment, showAM }) {
 	}
 	setAssignmentWarnings();
 
+	// Checking if we can clear the assignment
 	function setCanClear() {
 		Object.values(shifts).forEach(shift => {
 			if (!shift) return;

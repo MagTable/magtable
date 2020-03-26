@@ -17,19 +17,21 @@ import {
 
 /**
  * @date 2020-02-19
- * @author MJ Kochuk, Arran Woodruff
+ * @author MJ Kochuk, Arran Woodruff, Steven Wong
  * @module Component
  */
 
 /**
  *
  * @constructor
- * @param props
+ * @param employeeShift The Employee Shift data
+ * @param assignment The equipment the employee is assigned too.
  * @returns {*} The EmployeeListItem component
  */
 function EmployeeListItem({ employeeShift, assignment }) {
 	const dispatch = useDispatch();
 
+	// This is used to drag the employee item to pieces of equipment. Check react-dnd for further information on how it works.
 	const [{ isDragging }, drag] = useDrag({
 		item: {
 			type: SET_EQUIPMENT_EMPLOYEE,
@@ -53,13 +55,6 @@ function EmployeeListItem({ employeeShift, assignment }) {
 		})
 	});
 
-	// not needed unless we readd remove assignment to this component
-	// function handleRemove() {
-	// 	dispatch(
-	// 		removeEquipmentEmployee(assignment.equipment.id, employeeShift.id)
-	// 	);
-	// }
-
 	const assignedToTower = assignment?.equipment.id >= 1000;
 
 	return (
@@ -73,14 +68,6 @@ function EmployeeListItem({ employeeShift, assignment }) {
 
 			{assignment && (
 				<AssignedToWrap isTower={assignedToTower}>
-					{/* Difficult to determine 'canClear' currently, disabled until fix is decided*/}
-
-					{/*<UnassignBtn*/}
-					{/*	disabled={!canClear}*/}
-					{/*	onClick={() => canClear && handleRemove()}*/}
-					{/*>*/}
-					{/*	<i className="fas fa-times" />*/}
-					{/*</UnassignBtn>*/}
 					<h2>
 						{assignedToTower
 							? assignment.equipment.type
