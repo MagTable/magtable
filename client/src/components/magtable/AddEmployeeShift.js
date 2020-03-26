@@ -174,7 +174,7 @@ const AddEmployeeShift = ({ setShowModal }) => {
 							errors={props.errors.name}
 							value={props.values.name}
 							touched={props.touched.name}
-							onChange={props.handleChange("name")}
+							onBlur={props.handleBlur("name")}
 							name="name"
 							label="Employee Name"
 							type="text"

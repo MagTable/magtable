@@ -11,17 +11,18 @@ import { Table, Th, Thead, Tr } from "../../styled/common/Table";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
-import { Formik } from "formik";
+import { Field, Formik } from "formik";
+import TextInput from "../common/TextInput";
 import * as Yup from "yup";
 import { addBrixRecord } from "../../actions/brix";
 import { LoginBtn } from "../../styled/auth/Login";
-import Input from "../common/Input";
 
 /**
  * @date 2020-03-24
  * @author Arran Woodruff
  * @module Component
  */
+
 function BrixManagement() {
 	const dispatch = useDispatch();
 	const {
@@ -110,65 +111,79 @@ function BrixManagement() {
 					timeMeasured: Yup.date().required("Required")
 				})}
 			>
-				{props => (
+				{({ values, errors, touched }) => (
 					<BrixForm>
-						<Input
-							errors={props.errors.type1}
-							value={props.values.type1}
-							touched={props.touched.type1}
-							id={"type1"}
-							label={"Type 1 Tank"}
-							name="type1"
-							accentColor={"var(--type1)"}
-							icon={{
-								iconClass: "fa-eye-dropper fa-lg"
-							}}
-							fit
-						/>
-						<Input
-							errors={props.errors.type4}
-							value={props.values.type4}
-							touched={props.touched.type4}
-							id={"type4"}
-							label={"Type 4 Tank"}
-							name="type4"
-							accentColor={"var(--type4)"}
-							icon={{
-								iconClass: "fa-eye-dropper fa-lg"
-							}}
-							fit
-						/>
-						<Input
-							errors={props.errors.nozzle}
-							value={props.values.nozzle}
-							touched={props.touched.nozzle}
-							id={"nozzle"}
-							label={"Nozzle"}
-							name={"nozzle"}
-							accentColor={"var(--type1)"}
-							icon={{
-								iconClass: "fa-shower fa-lg"
-							}}
-							fit
-						/>
-						<Input
-							errors={props.errors.litersPurged}
-							value={props.values.litersPurged}
-							touched={props.touched.litersPurged}
-							id="purged"
-							label="Liters Purged"
-							name="litersPurged"
-							icon={{
-								iconClass: "fa-water fa-lg"
-							}}
-							fit
-						/>
+						<Field name="type1">
+							{({ field }) => (
+								<TextInput
+									{...field}
+									errors={errors.type1}
+									touched={touched.type1}
+									value={values.type1}
+									id={"type1"}
+									label={"Type 1 Tank"}
+									type={"number"}
+									accentColor={"var(--type1)"}
+									icon={{
+										iconClass: "fa-eye-dropper"
+									}}
+								/>
+							)}
+						</Field>
+						<Field name={"type4"}>
+							{({ field }) => (
+								<TextInput
+									{...field}
+									errors={errors.type4}
+									touched={touched.type4}
+									value={values.type4}
+									id={"type4"}
+									label={"Type 4 Tank"}
+									type={"number"}
+									accentColor={"var(--type4)"}
+									icon={{
+										iconClass: "fa-eye-dropper"
+									}}
+								/>
+							)}
+						</Field>
+						<Field name={"nozzle"}>
+							{({ field }) => (
+								<TextInput
+									{...field}
+									errors={errors.nozzle}
+									touched={touched.nozzle}
+									value={values.nozzle}
+									id={"nozzle"}
+									label={"Nozzle"}
+									type={"number"}
+									accentColor={"var(--type1)"}
+									icon={{
+										iconClass: "fa-shower"
+									}}
+								/>
+							)}
+						</Field>
+						<Field name={"litersPurged"}>
+							{({ field }) => (
+								<TextInput
+									{...field}
+									errors={errors.litersPurged}
+									touched={touched.litersPurged}
+									value={values.litersPurged}
+									id={"purged"}
+									label={"Liters Purged"}
+									type={"number"}
+									icon={{
+										iconClass: "fa-water"
+									}}
+								/>
+							)}
+						</Field>
 						<BrixManagementChartRowData id="rowdata">
 							{dailyMixChartRow ? (
 								<>
-									<ChartRowDataItem
-										error={props.errors.nozzle === nozzleMinError}
-									>
+									<ChartRowDataItem error={errors.nozzle === nozzleMinError}>
 										Minimum Nozzle Brix: {dailyMixChartRow.brix}
 									</ChartRowDataItem>
 								</>

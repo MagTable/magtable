@@ -21,15 +21,12 @@ import {
  * @constructor
  */
 const CheckBox = ({ children, ...props }) => {
-	const [field, meta] = useField({ ...props, type: "checkbox" });
+	const [field] = useField({ ...props, type: "checkbox" });
 
 	return (
 		<StyledCheckBoxDiv>
 			<StyledCheckBoxInput {...field} {...props} type="checkbox" />
 			<StyledCheckBoxLabel>{children}</StyledCheckBoxLabel>
-			{meta.touched && meta.error ? (
-				<div className="error">{meta.error}</div>
-			) : null}
 		</StyledCheckBoxDiv>
 	);
 };
