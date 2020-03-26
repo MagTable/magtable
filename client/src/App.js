@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import browserHistory from "react-router";
 import { Provider } from "react-redux";
 
 import store from "./store";
@@ -16,6 +15,7 @@ import AssignmentTable from "./components/magtable/AssignmentTable";
 import Alert from "./components/common/Alert";
 import NavBar from "./components/common/NavBar";
 import TruckManagementLayout from "./components/trucks/TruckManagementLayout";
+import { createBrowserHistory } from "history";
 
 function App() {
 	useEffect(() => {
@@ -25,9 +25,11 @@ function App() {
 		fetch();
 	}, []);
 
+	const history = createBrowserHistory();
+
 	return (
 		<Provider store={store}>
-			<Router history={browserHistory}>
+			<Router history={history}>
 				<NavBar />
 				<Alert />
 				<Switch>
