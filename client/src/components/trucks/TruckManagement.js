@@ -12,8 +12,11 @@ import AddTruck from "./AddTruck";
 import Modal from "../modal/Modal";
 import { FilterIcon } from "../../styled/magtable/Overflow";
 import EditTruck from "./EditTruck";
-import FadeIn from "react-fade-in";
-import { DEICE_TRUCK, SERVICE_VEHICLE } from "../../actions/constants";
+import {
+	DEICE_TRUCK,
+	SERVICE_VEHICLE,
+	SYSTEM_ADMINISTRATOR
+} from "../../actions/constants";
 
 /**
  * @date 3/5/2020
@@ -33,6 +36,7 @@ function TruckManagement() {
 	const handleClose = () => setModal(false);
 	const handleShow = () => setModal(true);
 	const [editTruck, setEditTruck] = useState(null);
+	const authUser = useSelector(state => state.auth.user);
 
 	const truckAssignments = assignments.filter(
 		assignment =>
@@ -50,39 +54,41 @@ function TruckManagement() {
 			<TruckMgmtDiv>
 				<ListTitle>
 					<ListTitleText>Truck Status + Notices</ListTitleText>
-					<Modal show={showModal} handleClose={handleClose}>
-						<AddTruck />
-					</Modal>
-					<Modal
-						show={editTruck !== null}
-						handleClose={() => setEditTruck(null)}
-					>
-						<EditTruck truck={editTruck} />
-					</Modal>
-					<AddTruckBtn onClick={handleShow}>
-						<FilterIcon className={"fas fa-plus"} />
-						Add Truck
-					</AddTruckBtn>
+					{authUser?.role?.name === SYSTEM_ADMINISTRATOR ? (
+						<>
+							<Modal show={showModal} handleClose={handleClose}>
+								<AddTruck />
+							</Modal>
+							<Modal
+								show={editTruck !== null}
+								handleClose={() => setEditTruck(null)}
+							>
+								<EditTruck truck={editTruck} />
+							</Modal>
+							<AddTruckBtn onClick={handleShow}>
+								<FilterIcon className={"fas fa-plus"} />
+								Add Truck
+							</AddTruckBtn>
+						</>
+					) : null}
 				</ListTitle>
 				<TruckManagementListDiv>
-					<FadeIn>
-						<h2>Service Vehicles</h2>
-						{serviceVehicleAssignments.map(assignment => (
-							<TruckManagementItem
-								key={assignment.equipment.id}
-								truck={assignment}
-								setEditTruck={setEditTruck}
-							/>
-						))}
-						<h2>De-Ice Vehicles</h2>
-						{truckAssignments.map(assignment => (
-							<TruckManagementItem
-								key={assignment.equipment.id}
-								truck={assignment}
-								setEditTruck={setEditTruck}
-							/>
-						))}
-					</FadeIn>
+					<h2>Service Vehicles</h2>
+					{serviceVehicleAssignments.map(assignment => (
+						<TruckManagementItem
+							key={assignment.equipment.id}
+							truck={assignment}
+							setEditTruck={setEditTruck}
+						/>
+					))}
+					<h2>De-Ice Vehicles</h2>
+					{truckAssignments.map(assignment => (
+						<TruckManagementItem
+							key={assignment.equipment.id}
+							truck={assignment}
+							setEditTruck={setEditTruck}
+						/>
+					))}
 				</TruckManagementListDiv>
 			</TruckMgmtDiv>
 		</EditTruckWrap>

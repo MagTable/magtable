@@ -6,6 +6,7 @@ import { UserListDiv, UserListSection } from "../../styled/user/User";
 import AddUser from "./AddUser";
 import UserListItem from "./UserListItem";
 import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
+import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 
 /**
  * Handles rendering of user CRUD components
@@ -43,27 +44,32 @@ const UserList = () => {
 	});
 
 	return (
-		<UserListDiv>
-			{roles.map(role => (
-				<UserListSection key={role.id}>
-					<h2>{role.name}s</h2>
-					{/*This part checks for users with the same role as above and adds them to that section*/}
-					{!role.empty ? (
-						users.map(
-							user =>
-								user.role.id === role.id && (
-									<UserListItem key={user.id} user={user} />
-								)
-						)
-					) : (
-						<h4 className={"m-0"}>
-							<i className="fas fa-exclamation-circle" /> No {role.name}s
-						</h4>
-					)}
-					<AddUser role={role} />
-				</UserListSection>
-			))}
-		</UserListDiv>
+		<>
+			<ListTitle>
+				<ListTitleText>Manage Users</ListTitleText>
+			</ListTitle>
+			<UserListDiv>
+				{roles.map(role => (
+					<UserListSection key={role.id}>
+						<h2>{role.name}s</h2>
+						{/*This part checks for users with the same role as above and adds them to that section*/}
+						{!role.empty ? (
+							users.map(
+								user =>
+									user.role.id === role.id && (
+										<UserListItem key={user.id} user={user} />
+									)
+							)
+						) : (
+							<h4 className={"m-0"}>
+								<i className="fas fa-exclamation-circle" /> No {role.name}s
+							</h4>
+						)}
+						<AddUser role={role} />
+					</UserListSection>
+				))}
+			</UserListDiv>
+		</>
 	);
 };
 

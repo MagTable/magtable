@@ -42,7 +42,7 @@ const AddUser = ({ role }) => {
 						name="username"
 						data-lpignore="true"
 						icon={{
-							iconClass: "fa-user-plus fa-2x",
+							iconClass: "fa-user-plus fa-lg",
 							action: () => props.submitForm(),
 							toolTip: "New " + role.name,
 							hoverColor: "green"

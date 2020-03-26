@@ -9,12 +9,12 @@ import { Table, Th, Thead, Tr } from "../../styled/common/Table";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
-import { Field, Formik } from "formik";
-import TextInput from "../common/TextInput";
+import { Formik } from "formik";
 import * as Yup from "yup";
 import { addBrixRecord } from "../../actions/brix";
 import styled from "styled-components";
 import { LoginBtn } from "../../styled/auth/Login";
+import Input from "../common/Input";
 
 // todo we should start moving some of our form styled components into a folder now.
 const SubmitDiv = styled.div`
@@ -85,91 +85,79 @@ function BrixManagement() {
 					nozzle: Yup.number()
 						.min(8.5, "Nozzle Min is 8.5")
 						.max(42, "Nozzle Max is 42.0")
-						.required("Required"),
+						.required("Nozzle Required"),
 					type1: Yup.number()
 						.min(50.5, "Type 1 Min is 50.5")
 						.max(53.5, "Type1  Max is 53.5")
-						.required("Required"),
+						.required("Type 1 Required"),
 					type4: Yup.number()
 						.min(30.5, "Type 4 Min is 30.5")
 						.max(33.5, "Type 4 Max is 33.5")
-						.required("Required"),
+						.required("Type 4 Required"),
 					litersPurged: Yup.number()
 						.min(0, "Min Purged is 0")
 						.max(1000, "Max Purged is 1000")
-						.required("Required"),
+						.required("Liters Required"),
 					timeMeasured: Yup.date().required("Required")
 				})}
 			>
-				{({ values, errors, touched }) => (
+				{props => (
 					<BrixForm>
-						<Field name="type1">
-							{({ field }) => (
-								<TextInput
-									{...field}
-									errors={errors.type1}
-									touched={touched.type1}
-									value={values.type1}
-									id={"type1"}
-									label={"Type 1 Tank"}
-									type={"number"}
-									accentColor={"var(--type1)"}
-									icon={{
-										iconClass: "fa-eye-dropper"
-									}}
-								/>
-							)}
-						</Field>
-						<Field name={"type4"}>
-							{({ field }) => (
-								<TextInput
-									{...field}
-									errors={errors.type4}
-									touched={touched.type4}
-									value={values.type4}
-									id={"type4"}
-									label={"Type 4 Tank"}
-									type={"number"}
-									accentColor={"var(--type4)"}
-									icon={{
-										iconClass: "fa-eye-dropper"
-									}}
-								/>
-							)}
-						</Field>
-						<Field name={"nozzle"}>
-							{({ field }) => (
-								<TextInput
-									{...field}
-									errors={errors.nozzle}
-									touched={touched.nozzle}
-									value={values.nozzle}
-									id={"nozzle"}
-									label={"Nozzle"}
-									type={"number"}
-									accentColor={"var(--type1)"}
-									icon={{
-										iconClass: "fa-shower"
-									}}
-								/>
-							)}
-						</Field>
-						<Field name={"litersPurged"}>
-							{({ field }) => (
-								<TextInput
-									{...field}
-									errors={errors.litersPurged}
-									touched={touched.litersPurged}
-									value={values.litersPurged}
-									id={"purged"}
-									label={"Liters Purged"}
-									type={"number"}
-									icon={{
-										iconClass: "fa-water"
-									}}
-								/>
-							)}
-						</Field>
+						<Input
+							errors={props.errors.type1}
+							touched={props.touched.type1}
+							value={props.values.type1}
+							id={"type1"}
+							label={"Type 1 Tank"}
+							type={"number"}
+							name="type1"
+							accentColor={"var(--type1)"}
+							icon={{
+								iconClass: "fa-eye-dropper fa-lg"
+							}}
+							fit
+						/>
+						<Input
+							errors={props.errors.type4}
+							touched={props.touched.type4}
+							value={props.values.type4}
+							id={"type4"}
+							label={"Type 4 Tank"}
+							type={"number"}
+							name="type4"
+							accentColor={"var(--type4)"}
+							icon={{
+								iconClass: "fa-eye-dropper fa-lg"
+							}}
+							fit
+						/>
+						<Input
+							errors={props.errors.nozzle}
+							touched={props.touched.nozzle}
+							value={props.values.nozzle}
+							id={"nozzle"}
+							label={"Nozzle"}
+							type={"number"}
+							name={"nozzle"}
+							accentColor={"var(--type1)"}
+							icon={{
+								iconClass: "fa-shower fa-lg"
+							}}
+							fit
+						/>
+						<Input
+							errors={props.errors.litersPurged}
+							touched={props.touched.litersPurged}
+							value={props.values.litersPurged}
+							id="purged"
+							label="Liters Purged"
+							type="number"
+							name="litersPurged"
+							icon={{
+								iconClass: "fa-water fa-lg"
+							}}
+							fit
+						/>
 						<SubmitDiv>
 							<LoginBtn disabled={addingBrixRecord} type={"submit"}>
 								{addingBrixRecord ? (

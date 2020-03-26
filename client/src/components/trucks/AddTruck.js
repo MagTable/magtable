@@ -109,6 +109,8 @@ const AddTruck = () => {
 							type="number"
 							label="Truck ID"
 							fit
+							min={0}
+							max={999}
 						/>
 					</IdDiv>
 					<StatusDiv>

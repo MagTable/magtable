@@ -51,6 +51,8 @@ const StyledLabel = styled.label`
 		`
 			color: red;
 	`}
+	
+	${({ accentColor }) => accentColor && `color: ${accentColor};`}
 `;
 
 const Input = ({ label, ...props }) => {
@@ -68,13 +70,16 @@ const Input = ({ label, ...props }) => {
 					onClick={props.icon?.action}
 					toolTip={props.icon?.toolTip}
 					hoverColor={props.icon?.hoverColor}
+					focus={focus}
+					accentColor={props?.accentColor}
 				/>
 			)}
 			<StyledLabel
 				error={props.errors && props.touched}
-				lifted={props?.value?.length > 0 || props?.value > 0}
+				lifted={props?.value?.toString().length > 0}
 				focus={focus}
 				htmlFor={props.id || props.name}
+				accentColor={props?.accentColor}
 			>
 				{(props.touched && props.errors) || label}
 			</StyledLabel>
@@ -86,6 +91,7 @@ const Input = ({ label, ...props }) => {
 				focus={focus}
 				id={label}
 				fit={props.fit}
+				accentColor={props.accentColor}
 			/>
 		</TextInputContainer>
 	);
