@@ -22,7 +22,7 @@ import Input from "../common/Input";
  * @author Arran Woodruff
  * @module Component
  */
-
+//todo REMOVE CONSOLE LOGS
 function BrixManagement() {
 	const dispatch = useDispatch();
 	const {
@@ -118,7 +118,6 @@ function BrixManagement() {
 							value={`${props.values.type1}`}
 							id={"type1"}
 							label={"Type 1 Tank"}
-							type={"number"}
 							name="type1"
 							accentColor={"var(--type1)"}
 							icon={{
@@ -131,7 +130,6 @@ function BrixManagement() {
 							value={`${props.values.type4}`}
 							id={"type4"}
 							label={"Type 4 Tank"}
-							type={"number"}
 							name="type4"
 							accentColor={"var(--type4)"}
 							icon={{
@@ -144,7 +142,6 @@ function BrixManagement() {
 							value={`${props.values.nozzle}`}
 							id={"nozzle"}
 							label={"Nozzle"}
-							type={"number"}
 							name={"nozzle"}
 							accentColor={"var(--type1)"}
 							icon={{
@@ -157,7 +154,6 @@ function BrixManagement() {
 							value={`${props.values.litersPurged}`}
 							id="purged"
 							label="Liters Purged"
-							type="number"
 							name="litersPurged"
 							icon={{
 								iconClass: "fa-water fa-lg"
@@ -167,8 +163,10 @@ function BrixManagement() {
 						<BrixManagementChartRowData id="rowdata">
 							{dailyMixChartRow ? (
 								<>
-									{console.log(errors.nozzle)}
-									<ChartRowDataItem error={errors.nozzle === nozzleMinError}>
+									{console.log(props.errors.nozzle)}
+									<ChartRowDataItem
+										error={props.errors.nozzle === nozzleMinError}
+									>
 										Minimum Nozzle Brix: {dailyMixChartRow.brix}
 									</ChartRowDataItem>
 								</>
@@ -176,7 +174,7 @@ function BrixManagement() {
 								<h4>Validation Data Not Available, Please Verify Manually.</h4>
 							)}
 						</BrixManagementChartRowData>
-						<SubmitDiv>
+						<div id={"submit"}>
 							<LoginBtn disabled={addingBrixRecord} type={"submit"}>
 								{addingBrixRecord ? (
 									<SpinnerWrap>
@@ -186,7 +184,7 @@ function BrixManagement() {
 									"Submit"
 								)}
 							</LoginBtn>
-						</SubmitDiv>
+						</div>
 					</BrixForm>
 				)}
 			</Formik>
