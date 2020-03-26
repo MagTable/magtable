@@ -82,6 +82,7 @@ function Login() {
 								label="Username"
 								name="username"
 								type="text"
+								data-lpignore="true"
 								fit
 							/>
 							<Input
@@ -90,6 +91,7 @@ function Login() {
 								value={props.values.password}
 								label="Password"
 								name="password"
+								data-lpignore="true"
 								type={showPassword ? "text" : "password"}
 								icon={{
 									action: () => setShowPassword(!showPassword),

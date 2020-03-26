@@ -76,6 +76,7 @@ function ResetPassword() {
 							value={props.values.newPassword}
 							label="New Password"
 							name="newPassword"
+							data-lpignore="true"
 							type={showNewPassword ? "text" : "password"}
 							icon={{
 								action: () => setShowNewPassword(!showNewPassword),
@@ -91,6 +92,7 @@ function ResetPassword() {
 							value={props.values.confirmNewPassword}
 							label="Confirm New Password"
 							name="confirmNewPassword"
+							data-lpignore="true"
 							type={showConfirmNewPassword ? "text" : "password"}
 							icon={{
 								action: () =>
