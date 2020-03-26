@@ -44,8 +44,8 @@ function ResetPassword() {
 				initialValues={{
 					username: authUser.username,
 					password: authUser.password,
-					newPassword: "password",
-					confirmNewPassword: "password"
+					newPassword: "",
+					confirmNewPassword: ""
 				}}
 				onSubmit={values => {
 					dispatch(setUserPassword(values));
@@ -73,7 +73,6 @@ function ResetPassword() {
 						/>
 						<Input
 							errors={props.errors.newPassword}
-							touched={props.touched.newPassword}
 							value={props.values.newPassword}
 							label="New Password"
 							name="newPassword"
@@ -89,7 +88,6 @@ function ResetPassword() {
 						/>
 						<Input
 							errors={props.errors?.confirmNewPassword}
-							touched={props.touched?.confirmNewPassword}
 							value={props.values.confirmNewPassword}
 							label="Confirm New Password"
 							name="confirmNewPassword"

@@ -76,8 +76,7 @@ function Login() {
 					{props => (
 						<Form>
 							<Input
-								blur={blur}
-								setBlurred={setBlur}
+								onClick={() => setBlur(true)}
 								errors={props.errors.username}
 								value={props.values.username}
 								label="Username"
@@ -86,8 +85,7 @@ function Login() {
 								fit
 							/>
 							<Input
-								blur={blur}
-								setBlurred={setBlur}
+								onClick={() => setBlur(true)}
 								errors={props.errors.password}
 								value={props.values.password}
 								label="Password"
