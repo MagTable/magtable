@@ -134,6 +134,7 @@ export const FETCHING_BRIX_RECORDS = "FETCHING_BRIX_RECORDS";
 export const GET_BRIX_RECORDS = "GET_BRIX_RECORDS";
 export const GET_BRIX_CHART = "GET_BRIX_CHART";
 export const GET_WEATHER = "GET_WEATHER";
+export const GET_BRIX_CSV="GET_CSV";
 
 export const PUBLISH_TABLE = "PUBLISH_TABLE";
 export const CLEAR_TABLE = "CLEAR_TABLE";

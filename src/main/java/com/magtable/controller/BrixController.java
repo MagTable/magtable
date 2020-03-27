@@ -6,8 +6,12 @@ import com.magtable.repository.BrixChartRepository;
 import com.magtable.repository.BrixRepository;
 import com.magtable.services.ErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -65,5 +69,18 @@ public class BrixController {
     @GetMapping("/chart")
     public List<BrixChartRecord> getBrixChart() {
         return brixChartRepository.findAll();
+    }
+
+
+    @GetMapping(path="/export" , produces = "text/csv")
+    public ResponseEntity exportToCSV(){
+
+        File file = new File("./src/main/java/com/magtable/controller/brix.csv");
+
+        return ResponseEntity.ok()
+                .header("Content-Disposition", "attachment; filename=" + "reportName" + ".csv")
+                .contentLength(file.length())
+                .contentType(MediaType.parseMediaType("text/csv"))
+                .body(new FileSystemResource(file));
     }
 }

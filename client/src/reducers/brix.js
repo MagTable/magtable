@@ -6,7 +6,8 @@ import {
 	GET_BRIX_CHART,
 	GET_BRIX_RECORDS,
 	GET_WEATHER,
-	SET_DAILY_MIX
+	SET_DAILY_MIX,
+	GET_BRIX_CSV
 } from "../actions/constants";
 
 const initialState = {
@@ -18,7 +19,8 @@ const initialState = {
 	weather: {
 		data: null,
 		loading: true
-	}
+	},
+	brixCSV: null,
 };
 
 export default function(state = initialState, action) {
@@ -38,6 +40,11 @@ export default function(state = initialState, action) {
 				...state,
 				brixChart: payload
 			};
+		case GET_BRIX_CSV:
+			return {
+				...state,
+				brixCSV: payload
+			}
 		case ADD_BRIX_RECORD:
 			return {
 				...state,
