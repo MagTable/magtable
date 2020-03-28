@@ -72,6 +72,7 @@ export const OverflowMenuButton = styled.button`
 export const FilterIcon = styled.i`
 	cursor: pointer;
 	float: right;
+	padding: 1px;
 	width: 30px;
 	text-align: center;
 
