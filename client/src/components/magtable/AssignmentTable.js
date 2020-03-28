@@ -10,11 +10,8 @@ import TruckList from "./TruckList";
 /**
  * @date 2020-03-24
  * @author Arran Woodruff
- * @module Component
- */
-
-/**
  * Placeholder component to assist in displaying routing
+ * @category Components/MagTable
  * @constructor
  */
 const AssignmentTable = () => {

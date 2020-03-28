@@ -18,9 +18,15 @@ import { addBrixRecord } from "../../actions/brix";
 import { LoginBtn } from "../../styled/auth/Login";
 
 /**
+ *
+ * The Brix Management component.
+ *
  * @date 2020-03-24
  * @author Arran Woodruff
- * @module Component
+ * @name BrixManagement
+ * @category Component/Brix
+ * @returns {*} The BrixManagement component
+ * @constructor
  */
 
 function BrixManagement() {
@@ -92,22 +98,22 @@ function BrixManagement() {
 						.typeError("Must be a Number")
 						.min(dailyMixChartRow?.brix, nozzleMinError)
 						.max(42, "Nozzle Max is 42.0")
-						.required("Required"),
+						.required("Nozzle Required"),
 					type1: Yup.number()
 						.typeError("Must be a Number")
 						.min(50.5, "Type 1 Min is 50.5")
 						.max(53.5, "Type1  Max is 53.5")
-						.required("Required"),
+						.required("Type 1 Required"),
 					type4: Yup.number()
 						.typeError("Must be a Number")
 						.min(30.5, "Type 4 Min is 30.5")
 						.max(33.5, "Type 4 Max is 33.5")
-						.required("Required"),
+						.required("Type 4 Required"),
 					litersPurged: Yup.number()
 						.typeError("Must be a Number")
 						.min(0, "Min Purged is 0")
 						.max(1000, "Max Purged is 1000")
-						.required("Required"),
+						.required("Liters Required"),
 					timeMeasured: Yup.date().required("Required")
 				})}
 			>
@@ -183,7 +189,6 @@ function BrixManagement() {
 						<BrixManagementChartRowData id="rowdata">
 							{dailyMixChartRow ? (
 								<>
-									{console.log(errors.nozzle)}
 									<ChartRowDataItem error={errors.nozzle === nozzleMinError}>
 										Minimum Nozzle Brix: {dailyMixChartRow.brix}
 									</ChartRowDataItem>

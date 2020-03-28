@@ -13,13 +13,11 @@ import Input from "../common/Input";
 /**
  * @date 3/08/2020
  * @author MJ Kochuk, Steven Wong, Tom Allcock
- * @module Component
- */
-
-/**
  * For editing a truck in the manage trucks page.
+ * @category Components/Trucks
+ * @param truck
  * @constructor
- * @returns {*} The AddTruck component.
+ * @returns {*} The Edit Truck Form component.
  */
 
 const EditTruckForm = styled(Form)`
@@ -65,6 +63,7 @@ const EditTruck = ({ truck }) => {
 	const truckStatuses = TRUCK_STATUSES;
 	const vehicleTypes = VEHICLE_TYPES;
 
+	// Truck will always be null at the start of the page, to avoid errors, setting the trucks default values off the get-go
 	if (truck == null) {
 		truck = {
 			id: 0,
@@ -101,10 +100,8 @@ const EditTruck = ({ truck }) => {
 					<IdDiv>
 						<Input
 							errors={props.errors.id}
-							touched={props.touched.id}
-							value={props.values.id}
+							value={`${props.values.id}`}
 							name="id"
-							type="number"
 							label="Truck ID"
 							disabled
 							fit
@@ -113,7 +110,6 @@ const EditTruck = ({ truck }) => {
 					<StatusDiv>
 						<SelectBox
 							errors={props.errors.status}
-							touched={props.touched.status}
 							value={props.values.status}
 							label="Truck Status"
 							name="status"
@@ -130,7 +126,6 @@ const EditTruck = ({ truck }) => {
 					<TypeDiv>
 						<SelectBox
 							errors={props.errors.type}
-							touched={props.touched.type}
 							value={props.values.type}
 							label="Truck Type"
 							name="type"

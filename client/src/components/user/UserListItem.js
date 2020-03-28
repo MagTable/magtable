@@ -11,15 +11,11 @@ import IconButton from "../common/IconButton";
 import Confirmation from "../common/Confirmation";
 
 /**
- * @date 2020-03-24
- * @author Arran Woodruff
- * @module Component
- */
-
-/**
  * Displays the relevant user attributes as a list item
  * Contains buttons that perform actions on the user (delete, reset password)
- *
+ * @date 2020-03-24
+ * @author Arran Woodruff
+ * @category Components/User
  * @param user user to be rendered in the list item
  * @returns {*} UserListItem Component
  * @constructor
@@ -49,7 +45,7 @@ const UserListItem = ({ user }) => {
 						>
 							{({ confirm }) => (
 								<IconButton
-									faClassName="fa-user-minus fa-2x"
+									faClassName="fa-user-minus fa-lg"
 									onClick={confirm}
 									toolTip={"Delete User"}
 									hoverColor={"red"}
@@ -66,14 +62,14 @@ const UserListItem = ({ user }) => {
 								<IconButton
 									toolTip={"Reset User's Password"}
 									onClick={confirm}
-									faClassName={"fa-unlock-alt fa-2x"}
+									faClassName={"fa-unlock-alt fa-lg"}
 									hoverColor={"blue"}
 								/>
 							)}
 						</Confirmation>
 						{user.reset && (
 							<IconButton
-								faClassName={"fa-exclamation-triangle fa-2x"}
+								faClassName={"fa-exclamation-triangle fa-lg"}
 								color={"orange"}
 								toolTip={"User's Password Has Been Reset"}
 							/>

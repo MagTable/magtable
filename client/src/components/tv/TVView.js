@@ -4,12 +4,7 @@ import WeatherBar from "./WeatherBar";
 /**
  * @date 2020-03-25
  * @author MJ Kochuk
-
- * @module Component
- */
-
-/**
- *
+ * @category Components/TV
  * @constructor
  * @param props
  * @returns {*} The TVView component

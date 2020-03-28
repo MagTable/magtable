@@ -11,7 +11,8 @@ import {
 /**
  * @date 2020-03-24
  * @author Arran Woodruff
- * @module Redux
+ * @category Redux-Reducers
+ * @module Auth
  */
 
 const initialState = {

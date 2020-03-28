@@ -5,7 +5,8 @@ import { DANGER, SUCCESS, WARNING } from "../../actions/constants";
 /**
  * @date 3/24/2020
  * @author Arran Woodruff
- * @module Styled
+ * @category Styled Components
+ * @module MagTable
  */
 
 export const getColor = type => {
@@ -147,8 +148,8 @@ export const WeatherDataWrapper = styled.div`
 	padding: 0.75rem;
 	max-height: 100%;
 	overflow: hidden;
-	// border-radius: 0.5rem; // not sure on this one
-	border-radius: 999px; // not sure on this one
+	border-radius: 0.45rem; // not sure on this one
+	// border-radius: 999px; // not sure on this one
 	color: var(--title-bright);
 	position: relative;
 

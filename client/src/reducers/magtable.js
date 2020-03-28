@@ -28,7 +28,8 @@ import { ParkingZones } from "../res/test_data/magtable";
 /**
  * @date 2020-03-24
  * @author Arran Woodruff
- * @module Redux
+ * @category Redux-Reducers
+ * @module MagTable
  */
 
 const initialState = {

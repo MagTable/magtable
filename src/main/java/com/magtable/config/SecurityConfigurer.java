@@ -52,8 +52,8 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .antMatchers("/equipment/*").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER)
                 .antMatchers("/equipment").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER)
                 .antMatchers("/shift/*/*").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER)
-                .antMatchers("/shift/*").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER)
-                .antMatchers("/shift").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER)
+                .antMatchers("/shift/*").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER, MECHANIC)
+                .antMatchers("/shift").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER, MECHANIC)
                 .antMatchers("/authenticate").permitAll()
                 .antMatchers("/password/reset").permitAll()
                 .and().csrf().disable() //TODO Check all route Security /add them

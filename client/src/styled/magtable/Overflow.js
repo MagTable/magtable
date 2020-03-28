@@ -3,7 +3,8 @@ import styled from "styled-components";
 /**
  * @date 3/1/2020
  * @author Tom Allcock, Arran Woodruff
- * @module Styled
+ * @category Styled Components
+ * @module MagTable
  */
 
 /**
@@ -71,6 +72,7 @@ export const OverflowMenuButton = styled.button`
 export const FilterIcon = styled.i`
 	cursor: pointer;
 	float: right;
+	padding: 1px;
 	width: 30px;
 	text-align: center;
 

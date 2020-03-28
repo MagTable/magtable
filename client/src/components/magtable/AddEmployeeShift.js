@@ -13,13 +13,8 @@ import Input from "../common/Input";
 /**
  * @date 2/28/2020
  * @author Steven Wong, Arran Woodruff
- * @module Component
- */
-
-/**
- *
  * Handles the rendering of the form to add an Employee Shift to the current shifts in the EmployeeListItems.
- *
+ * @category Components/MagTable
  * @constructor
  * @returns {*} The AddEmployeeShift component.
  */
@@ -172,8 +167,9 @@ const AddEmployeeShift = ({ setShowModal }) => {
 					<NameDiv>
 						<Input
 							errors={props.errors.name}
-							touched={props.touched.name}
 							value={props.values.name}
+							touched={props.touched.name}
+							onBlur={props.handleBlur("name")}
 							name="name"
 							label="Employee Name"
 							type="text"
@@ -183,8 +179,8 @@ const AddEmployeeShift = ({ setShowModal }) => {
 					<StartTimeDiv>
 						<SelectBox
 							errors={props.errors.startTime}
-							touched={props.touched.startTime}
 							value={props.values.startTime}
+							touched={props.touched.startTime}
 							label="Start Time"
 							name="startTime"
 						>
@@ -199,8 +195,8 @@ const AddEmployeeShift = ({ setShowModal }) => {
 					<EndTimeDiv>
 						<SelectBox
 							errors={props.errors.endTime}
-							touched={props.touched.endTime}
 							value={props.values.endTime}
+							touched={props.touched.endTime}
 							label="End Time"
 							name="endTime"
 						>
@@ -215,8 +211,8 @@ const AddEmployeeShift = ({ setShowModal }) => {
 					<PositionDiv>
 						<SelectBox
 							errors={props.errors.description}
-							touched={props.touched.description}
 							value={props.values.description}
+							touched={props.touched.description}
 							label="Position"
 							name="description"
 						>

@@ -17,14 +17,10 @@ import OverflowLocations from "./OverflowLocations";
 
 /**
  * @date 2020-02-17
- * @author MJ Kochuk, Arran Woodruff
- * @module Component
- */
-
-/**
- *
+ * @author MJ Kochuk, Arran Woodruff, Steven Wong
+ * @category Components/MagTable
  * @constructor
- * @param props
+ * @param props The props that are used within the component
  * @returns {*} The ParkingLocationMap component
  */
 function ParkingLocationMap(props) {

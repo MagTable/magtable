@@ -15,14 +15,13 @@ import { DANGER, SUCCESS, WARNING } from "../../actions/constants";
 import { setDailyMixChartRow } from "../../actions/brix";
 
 /**
- * @date 3/24/2020
- * @author Arran Woodruff
- * @module Component
- */
-
-/**
+ *
  * Consumes weather data including current temperature, forecast low
  *
+ * @date 3/24/2020
+ * @author Arran Woodruff
+ * @name WeatherInfo
+ * @category Component/Brix
  * @returns {*} The WeatherInfo component
  * @constructor
  */

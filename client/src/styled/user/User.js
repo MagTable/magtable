@@ -1,11 +1,21 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { isMobile } from "react-device-detect";
 
 /**
  * @date 2020-02-05
  * @author MJ Kochuk, Arran Woodruff
- * @module Styled
+ * @category Styled Components
+ * @module User
  */
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
 
 /**
  * Holds all of the rows / information in the user list.
@@ -16,8 +26,12 @@ export const UserListDiv = styled.div`
 	width: 40vw;
 	max-height: calc(100vh - 70px);
 	padding: 1rem 2.5rem;
-	${isMobile &&  // Mobile rules
-		`padding-top: 5px;`}
+	animation: 0.3s ${fadeIn} ease-out;
+
+	${isMobile && // Mobile rules
+		`
+		padding-top: 5px;
+	`}
 `;
 
 export const UserListSection = styled.div`
@@ -88,11 +102,4 @@ export const UserManipulateBlock = styled.div`
 		  border-bottom: 2px solid #DEDEDE; 
 		  margin-bottom: 10px;`}
 	\`;
-`;
-
-export const SeparatorLine = styled.div`
-	border-bottom: 2px solid #dedede;
-	height: 0px;
-	width: auto;
-	margin-top: 20px;
 `;
