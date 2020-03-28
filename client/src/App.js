@@ -16,6 +16,7 @@ import Alert from "./components/common/Alert";
 import NavBar from "./components/common/NavBar";
 import TruckManagementLayout from "./components/trucks/TruckManagementLayout";
 import { createBrowserHistory } from "history";
+import TVView from "./components/tv/TVView";
 
 function App() {
 	useEffect(() => {
@@ -48,6 +49,7 @@ function App() {
 						path={process.env.PUBLIC_URL + "/truck/all"}
 						component={TruckManagementLayout}
 					/>
+					<PrivateRoute exact path="/truck/tv" component={TVView} />
 					<PrivateRoute
 						exact
 						path={process.env.PUBLIC_URL + "/"}

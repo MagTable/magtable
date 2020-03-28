@@ -7,12 +7,15 @@ import {
 	SideBar,
 	SunIcon,
 	Temp,
+	TempDiv,
+	TempDiv2,
 	TempHolder,
 	WeatherWording,
 	WindArrow,
 	WindIcon
 } from "../../styled/tv/Weather";
 import { SampleWeather as Weather } from "../../res/test_data/magtable";
+import { SpinnerWrap, TempLoadingImg } from "../../styled/common/QualityOfLife";
 
 function getNextWorst() {
 	const warningWeather = [2, 3, 5, 6];
@@ -30,6 +33,7 @@ function getNextWorst() {
 
 function getDate() {
 	const date = new Date();
+	console.log(date.getMonth());
 	// console.log("month - " + date.getMonth());
 	// console.log("Day - " + date.getDay());
 	console.log(date.getDate());
@@ -49,38 +53,49 @@ function getDate() {
 function WeatherBar(props) {
 	getNextWorst();
 	return (
-		<SideBar>
-			<h1>Thu</h1>
-			<h1>{getDate()}</h1>
-			<WeatherWording>{Weather.list[0].weather[0].description}</WeatherWording>
-			<SunIcon className="fas fa-sun" />
-			<TempHolder>
-				<WeatherWording>High</WeatherWording>
-				<Temp>{Math.round(Weather.list[0].main.temp_max)}°</Temp>
-			</TempHolder>
-			<TempHolder>
-				<WeatherWording>Low</WeatherWording>
-				<Temp>{Math.round(Weather.list[0].main.temp_min)}°</Temp>
-			</TempHolder>
-			<GreyTempHolder>
-				<WeatherWording>Feels Like</WeatherWording>
-				<Temp>{Math.round(Weather.list[0].main.feels_like)}°</Temp>
-			</GreyTempHolder>
-			<WindIcon className="fas fa-wind" />
-			<WeatherWording>
-				{Math.round(Weather.list[0].wind.speed * 3.6)} km/h
-			</WeatherWording>
-			<WindArrow
-				className="fas fa-long-arrow-alt-up"
-				angle={Weather.list[0].wind.deg}
-			/>
-			<LaterDiv>
-				<LaterTitle>Later</LaterTitle>
-				<LaterIcon className="far fa-snowflake" />
-				<WeatherWording>20%</WeatherWording>
-				<WeatherWording>@ 2PM</WeatherWording>
-			</LaterDiv>
-		</SideBar>
+		<TempDiv>
+			<TempDiv2>
+				<SpinnerWrap>
+					<TempLoadingImg className="fas fa-10x fas fa-tools" />
+				</SpinnerWrap>
+				<br />
+				<h1>Page Currently Under Construction</h1>
+			</TempDiv2>
+			<SideBar>
+				<h1>Thu</h1>
+				<h1>{getDate()}</h1>
+				<WeatherWording>
+					{Weather.list[0].weather[0].description}
+				</WeatherWording>
+				<SunIcon className="fas fa-sun" />
+				<TempHolder>
+					<WeatherWording>High</WeatherWording>
+					<Temp>{Math.round(Weather.list[0].main.temp_max)}°</Temp>
+				</TempHolder>
+				<TempHolder>
+					<WeatherWording>Low</WeatherWording>
+					<Temp>{Math.round(Weather.list[0].main.temp_min)}°</Temp>
+				</TempHolder>
+				<GreyTempHolder>
+					<WeatherWording>Feels Like</WeatherWording>
+					<Temp>{Math.round(Weather.list[0].main.feels_like)}°</Temp>
+				</GreyTempHolder>
+				<WindIcon className="fas fa-wind" />
+				<WeatherWording>
+					{Math.round(Weather.list[0].wind.speed * 3.6)} km/h
+				</WeatherWording>
+				<WindArrow
+					className="fas fa-long-arrow-alt-up"
+					angle={Weather.list[0].wind.deg}
+				/>
+				<LaterDiv>
+					<LaterTitle>Later</LaterTitle>
+					<LaterIcon className="far fa-snowflake" />
+					<WeatherWording>20%</WeatherWording>
+					<WeatherWording>@ 2PM</WeatherWording>
+				</LaterDiv>
+			</SideBar>
+		</TempDiv>
 	);
 }
 

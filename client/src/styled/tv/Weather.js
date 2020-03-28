@@ -7,6 +7,16 @@ import styled from "styled-components";
  * @module TV
  */
 
+export const TempDiv = styled.div`
+	display: flex;
+	border: 2px solid red;
+	margin: auto;
+`;
+
+export const TempDiv2 = styled.div`
+	margin: auto;
+`;
+
 /**
  * Holds all the weather information in the sidebar displayed in the TV page
  **/
