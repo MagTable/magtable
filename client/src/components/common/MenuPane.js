@@ -9,7 +9,7 @@ import {
 } from "../../styled/common/Navigation";
 import { BrowserView } from "react-device-detect";
 import { useSelector } from "react-redux";
-import { SYSTEM_ADMINISTRATOR } from "../../actions/constants";
+import { MECHANIC, SYSTEM_ADMINISTRATOR } from "../../actions/constants";
 import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -89,10 +89,12 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 								TV
 								<NavIcon className="fas fa-tv" />
 							</NavLink>
-							<NavLink active={pathname === "/" ? 1 : undefined} to={"/"}>
-								Truck Assignment
-								<NavIcon className="fas fa-truck" />
-							</NavLink>
+							{authUser?.role?.name !== MECHANIC && (
+								<NavLink active={pathname === "/" ? 1 : undefined} to={"/"}>
+									Truck Assignment
+									<NavIcon className="fas fa-tasks" />
+								</NavLink>
+							)}
 							<NavLink
 								active={pathname === "/truck/all" ? 1 : undefined}
 								to={"/truck/all"}
@@ -130,11 +132,12 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 						TV
 						<NavIcon className="fas fa-tv" />
 					</NavLink>
-					<NavLink active={pathname === "/" ? 1 : undefined} to={"/"}>
-						Truck Assignment
-						<NavIcon className="fas fa-tasks" />
-					</NavLink>
-
+					{authUser?.role?.name !== MECHANIC && (
+						<NavLink active={pathname === "/" ? 1 : undefined} to={"/"}>
+							Truck Assignment
+							<NavIcon className="fas fa-tasks" />
+						</NavLink>
+					)}
 					<NavLink
 						active={pathname === "/truck/all" ? 1 : undefined}
 						to={"/truck/all"}
