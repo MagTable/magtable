@@ -1,5 +1,6 @@
 package com.magtable.controller;
 
+import com.magtable.model.api.ExportRequest;
 import com.magtable.model.entities.BrixChartRecord;
 import com.magtable.model.entities.BrixRecord;
 import com.magtable.repository.BrixChartRepository;
@@ -11,11 +12,15 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- *REST controller for BRIX routes
+ * REST controller for BRIX routes
+ *
  * @author Arran Woodruff
  */
 @RestController
@@ -49,7 +54,7 @@ public class BrixController {
      * access          System Admins, Personnel Managers, Mechanics
      *
      * @param equipmentID - Id of the Truck
-     * @param brixRecord - Brix record to save
+     * @param brixRecord  - Brix record to save
      * @return The inserted brix record
      */
     @PostMapping("/{id}")
@@ -72,15 +77,45 @@ public class BrixController {
     }
 
 
-    @GetMapping(path="/export" , produces = "text/csv")
-    public ResponseEntity exportToCSV(){
+    @PostMapping(path = "/export", produces = "text/csv")
+    public ResponseEntity exportToCSV(@RequestBody ExportRequest exportRequest) {
 
-        File file = new File("./src/main/java/com/magtable/controller/brix.csv");
+        File brixCSV = new File(".\\src\\main\\resources\\res\\brix.csv");
+
+        try {
+            FileWriter fileWriter = new FileWriter(brixCSV, false);
+            BufferedWriter writer = new BufferedWriter(fileWriter);
+
+            ArrayList<BrixRecord> brixRecords = new ArrayList<>();
+            if(exportRequest.getId() == null){
+                brixRecords = (ArrayList<BrixRecord>) brixRepository.findBetweenDates(exportRequest.getFrom(), exportRequest.getTo());
+            }else{
+                brixRecords = (ArrayList<BrixRecord>) brixRepository.findBetweenDatesByEquipmentID(exportRequest.getFrom(), exportRequest.getTo(), exportRequest.getId());
+            }
+
+            //Writing the Header
+            writer.write("Truck Number, Nozzle, Type1, Type4, Liters Purged, Time Measured\n");
+
+            //Writing Each record
+            for(BrixRecord record : brixRecords){
+                writer.write(record.toString());
+                writer.write("\n");
+            }
+
+
+            writer.close();
+            fileWriter.close();
+        } catch (Exception e) {
+            //return a 500 if we hit an error
+            return ResponseEntity.status(500).build();
+
+        }
+
 
         return ResponseEntity.ok()
-                .header("Content-Disposition", "attachment; filename=" + "reportName" + ".csv")
-                .contentLength(file.length())
+                .header("Content-Disposition", "attachment; filename=brix.csv")
+                .contentLength(brixCSV.length())
                 .contentType(MediaType.parseMediaType("text/csv"))
-                .body(new FileSystemResource(file));
+                .body(new FileSystemResource(brixCSV));
     }
 }

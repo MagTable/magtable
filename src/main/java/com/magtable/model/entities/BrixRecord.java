@@ -116,4 +116,10 @@ public class BrixRecord {
         result = 31 * result + (timeMeasured != null ? timeMeasured.hashCode() : 0);
         return result;
     }
+
+
+    @Override
+    public String toString() {
+        return equipmentID + "," + nozzle + "," + type1 + "," + type4  + "," + litersPurged  + "," + timeMeasured;
+    }
 }
