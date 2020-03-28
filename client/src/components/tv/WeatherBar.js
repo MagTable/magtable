@@ -12,6 +12,7 @@ import {
 	WindArrow,
 	WindIcon
 } from "../../styled/tv/Weather";
+import { SampleWeather as Weather } from "../../res/test_data/magtable";
 
 /**
  * @date 2020-03-25
@@ -30,15 +31,15 @@ function WeatherBar(props) {
 			<SunIcon className="fas fa-sun" />
 			<TempHolder>
 				<WeatherWording>High</WeatherWording>
-				<Temp>24°</Temp>
+				<Temp>{Math.round(Weather.list[0].main.temp_max)}°</Temp>
 			</TempHolder>
 			<TempHolder>
 				<WeatherWording>Low</WeatherWording>
-				<Temp>17°</Temp>
+				<Temp>{Math.round(Weather.list[0].main.temp_min)}°</Temp>
 			</TempHolder>
 			<GreyTempHolder>
 				<WeatherWording>Feels Like</WeatherWording>
-				<Temp>22°</Temp>
+				<Temp>{Math.round(Weather.list[0].main.feels_like)}°</Temp>
 			</GreyTempHolder>
 			<WindIcon className="fas fa-wind" />
 			<WeatherWording>43 km/h</WeatherWording>

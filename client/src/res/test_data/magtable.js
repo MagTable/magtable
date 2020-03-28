@@ -123,7 +123,7 @@ export const ParkingZones = [
 	}
 ];
 
-export const sampleWeather = {
+export const SampleWeather = {
 	cod: "200",
 	message: 0,
 	cnt: 40,

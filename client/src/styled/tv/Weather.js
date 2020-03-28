@@ -8,7 +8,7 @@ import styled from "styled-components";
  */
 
 /**
- *
+ * Holds all the weather information in the sidebar displayed in the TV page
  **/
 export const SideBar = styled.div`
 	height: calc(100vh - 70px);
@@ -18,7 +18,10 @@ export const SideBar = styled.div`
 	border-left: 2px solid var(--border-color);
 `;
 
-export const StatusIcon = styled.i`
+/**
+ * Base for weather icons
+ */
+const StatusIcon = styled.i`
 	font-size: 90px;
 	margin: 15px 0;
 `;
