@@ -91,8 +91,6 @@ function TruckList() {
 		}
 	});
 
-	console.log(truckStatusTotals);
-
 	return (
 		<TruckListDivWrapper>
 			<ListTitle>
