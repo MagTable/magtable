@@ -39,12 +39,13 @@ export const SnowIcon = styled(StatusIcon)`
 `;
 
 export const WindArrow = styled(StatusIcon)`
-	transform: rotate(225deg);
+	transform: rotate(${props => props.angle}deg);
 `;
 
 export const WeatherWording = styled.h4`
 	margin-block-end: 0;
 	margin-block-start: 0;
+	text-transform: capitalize;
 `;
 
 export const TempHolder = styled.div`
