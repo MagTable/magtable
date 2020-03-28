@@ -9,7 +9,6 @@ import styled from "styled-components";
 
 export const TempDiv = styled.div`
 	display: flex;
-	border: 2px solid red;
 	margin: auto;
 `;
 
