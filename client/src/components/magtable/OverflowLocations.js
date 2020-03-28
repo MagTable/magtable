@@ -16,15 +16,15 @@ import { DoubleClickConfirm } from "../../styled/common/FormControl";
 
 /**
  * @date 3/1/2020
- * @author Tom Allcock, Arran Woodruff
- * @module Component
- */
-
-/**
- *
+ * @author Tom Allcock, Arran Woodruff, Steven Wong
+ * @category Components/MagTable
+ * @param children Children of the Component
+ * @param color Color of the Icon
+ * @param hoverColor Hover color of icon.
+ * @param open Open State of the overflow menu
+ * @param setOpen Change the open state of the overflow menu.
+ * @returns {*} Returns the overflow menu for Parking Map which holds Clear Table, Publish Table and Apron Switches
  * @constructor
- * @param props
- * @returns {*} The OverflowEmployee component
  */
 function OverflowLocations({ children, color, hoverColor, open, setOpen }) {
 	const [clearConfirmation, setClearConfirmation] = useState(false);
@@ -52,6 +52,7 @@ function OverflowLocations({ children, color, hoverColor, open, setOpen }) {
 		setOpen(true);
 	};
 
+	// Apron Switch Toggle
 	const handleApronSwitch = () => {
 		if (selectedApron === EAST_APRON) {
 			dispatch(setSelectedApron(WEST_APRON));
@@ -60,6 +61,7 @@ function OverflowLocations({ children, color, hoverColor, open, setOpen }) {
 		}
 	};
 
+	// Publishing of the MagTable
 	const handlePublish = () => {
 		if (!publishConfirmation) {
 			setPublishConfirmation(true);
@@ -76,6 +78,7 @@ function OverflowLocations({ children, color, hoverColor, open, setOpen }) {
 		}
 	};
 
+	// Clearing of the MagTable.
 	const handleClear = () => {
 		if (!clearConfirmation) {
 			setClearConfirmation(true);

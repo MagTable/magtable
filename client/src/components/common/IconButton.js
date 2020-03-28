@@ -6,17 +6,15 @@ import { BrowserView } from "react-device-detect";
 
 /**
  * @date 2/17/2020
- * @author Arran Woodruff
- * @module Component
- */
-
-/**
+ * @author Arran Woodruff, Steven wong
  * A component rendered as a FontAwesome icon which has a tooltip and an onClick function
- * @param faClassName class name of the FontAwesome icon
- * @param color color of the icon
- * @param hoverColor hover color of the icon
- * @param onClick function to be called onClick
- * @param toolTip tooltip message
+ * @name IconButton
+ * @category Component/Common
+ * @param faClassName Class name of the FontAwesome icon
+ * @param color Color of the icon
+ * @param hoverColor Hover color of the icon
+ * @param onClick Function to be called onClick
+ * @param toolTip Tooltip message
  * @returns {*} The IconButton component
  * @constructor
  */

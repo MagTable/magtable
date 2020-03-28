@@ -10,10 +10,20 @@ import {
 import { setAlert } from "./alert";
 
 /**
+ * @date 2020-03-24
+ * @author Arran Woodruff, Steven Wong
+ * @category Redux-Actions
+ * @module User
+ */
+
+/**
  * Retrieves list of all user accounts
  * GET /user/all
  * Dispatch Type: GET_USERS
  * Dispatch Payload: res.data
+ *
+ * @method getUsers
+ * @return API returns all the users from the database.
  */
 export const getUsers = () => async dispatch => {
 	try {
@@ -37,6 +47,9 @@ export const getUsers = () => async dispatch => {
  * GET /user/roles
  * Dispatch Type: GET_ROLES
  * Dispatch Payload: res.data
+ *
+ * @method getRoles
+ * @return API returns a list of roles.
  */
 export const getRoles = () => async dispatch => {
 	try {
@@ -48,7 +61,6 @@ export const getRoles = () => async dispatch => {
 		});
 	} catch (err) {
 		// no error necessary here
-		// dispatch(setAlert(err.response?.data?.message, "danger"));
 	}
 };
 
@@ -57,6 +69,10 @@ export const getRoles = () => async dispatch => {
  * POST /user/add
  * Dispatch Type: ADD_USER
  * Dispatch Payload: res.data
+ *
+ * @method addUser
+ * @param {object} user The user being added to the system.
+ * @return API adds a user to the system and returns updated Users.
  */
 export const addUser = user => async dispatch => {
 	try {
@@ -82,6 +98,10 @@ export const addUser = user => async dispatch => {
  * DELETE /user/${id}
  * Dispatch Type: DELETE_USER
  * Dispatch Payload: id
+ *
+ * @method deleteUser
+ * @param {integer} id The id of the user we are deleting from the system.
+ * @return API returns an updated list of users after deleting the specific user.
  */
 export const deleteUser = id => async dispatch => {
 	try {
@@ -103,6 +123,10 @@ export const deleteUser = id => async dispatch => {
  * PUT /user/reset/${id}
  * Dispatch Type: RESET_PASSWORD
  * Dispatch Payload: { id, user: res.data }
+ *
+ * @method resetPassword
+ * @param {integer} id The id of the user who is having their password reset.
+ * @return API returns a list of users with the specific user whose id has been reset with the temporary password.
  */
 export const resetPassword = id => async dispatch => {
 	try {

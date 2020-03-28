@@ -1,4 +1,3 @@
-import { sampleWeather } from "../res/test_data/magtable";
 import {
 	ADD_BRIX_RECORD,
 	ADDING_BRIX_RECORD,
@@ -6,7 +5,7 @@ import {
 	GET_BRIX_CHART,
 	GET_BRIX_RECORDS,
 	GET_WEATHER,
-	SET_DAILY_MIX
+	SET_DAILY_MIX_CHART_ROW
 } from "../actions/constants";
 
 const initialState = {
@@ -15,21 +14,35 @@ const initialState = {
 	loading: true,
 	addingBrixRecord: false,
 	brixChart: [],
+	dailyMixChartRow: null,
 	weather: {
-		data: null,
+		date: null,
+		forecastLow: null,
+		currentTemperature: null,
 		loading: true
 	}
 };
+
+/**
+ * @date 2020-03-24
+ * @author Arran Woodruff
+ * @category Redux-Reducers
+ * @module Brix
+ */
 
 export default function(state = initialState, action) {
 	const { type, payload } = action;
 
 	switch (type) {
 		case GET_WEATHER:
+			const { date, forecastLow, currentTemperature } = payload;
+
 			return {
 				...state,
 				weather: {
-					data: sampleWeather,
+					date,
+					forecastLow,
+					currentTemperature,
 					loading: false
 				}
 			};
@@ -64,10 +77,10 @@ export default function(state = initialState, action) {
 				selectedTruckID: payload.truckID,
 				loading: false
 			};
-		case SET_DAILY_MIX:
+		case SET_DAILY_MIX_CHART_ROW:
 			return {
 				...state,
-				dailyMix: payload
+				dailyMixChartRow: payload
 			};
 		default:
 			return state;

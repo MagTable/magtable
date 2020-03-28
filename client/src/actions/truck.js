@@ -8,12 +8,18 @@ import {
 } from "./constants";
 
 /**
- *
+ * @date 2020-03-24
+ * @author Arran Woodruff, Steven Wong
+ * @category Redux-Actions
+ * @module Truck
+ */
+
+/**
  * Edit's the selected trucks information. This can be anything from the truck status to the notice information.
  *
- * PUT /truck/edit
- * Dispatch Type: EDIT_TRUCK
- * Dispatch Payload: res.data
+ * @method editTruck
+ * @param {object} truck The truck whose data is being edited.
+ * @return API updates the truck within the database.
  */
 export const editTruck = truck => async dispatch => {
 	try {
@@ -38,11 +44,11 @@ export const editTruck = truck => async dispatch => {
 
 /**
  *
- * Add truck to the database.
+ * Adds a truck to the database.
  *
- * POST /truck/edit
- * Dispatch Type: ADD_TRUCK
- * Dispatch Payload: res.data
+ * @method addTruck
+ * @param {object} truck The truck whose data is being added.
+ * @return API updates and adds truck within the database.
  */
 export const addTruck = truck => async dispatch => {
 	try {
@@ -52,7 +58,6 @@ export const addTruck = truck => async dispatch => {
 			AXIOS_JSON_HEADER
 		);
 
-		//todo check payload to make sure it is what we want.
 		dispatch({
 			type: ADD_TRUCK,
 			payload: res.data
@@ -64,6 +69,13 @@ export const addTruck = truck => async dispatch => {
 	}
 };
 
+/**
+ * The truck in which is being deactivated from the database.
+ *
+ * @method deleteTruck
+ * @param {integer} id The Truck ID
+ * @return API updates the truck to be deactivated.
+ */
 export const deleteTruck = id => async dispatch => {
 	try {
 		await axios.put(`/equipment/truck/deactivate/${id}`);

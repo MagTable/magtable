@@ -5,7 +5,8 @@ import { Button } from "../common/FormControl";
 /**
  * @date 2020-02-20
  * @author MJ Kochuk, Arran Woodruff
- * @module Styled
+ * @category Styled Components
+ * @module MagTable
  */
 
 const scrollIn = keyframes`

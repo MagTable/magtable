@@ -1,19 +1,28 @@
 import {
-	SET_DAILY_MIX,
 	AXIOS_JSON_HEADER,
 	ADD_BRIX_RECORD,
 	GET_BRIX_RECORDS,
 	FETCHING_BRIX_RECORDS,
 	ADDING_BRIX_RECORD,
 	GET_BRIX_CHART,
-	GET_WEATHER
+	GET_WEATHER,
+	SET_DAILY_MIX_CHART_ROW
 } from "./constants";
 import axios from "axios";
-import { setAlert } from "./alert";
+
+// todo REMOVE CONSOLE LOGS!!!!!!!!!
+
+/**
+ * @date 2020-03-24
+ * @author Arran Woodruff, Steven Wong
+ * @category Redux-Actions
+ * @module Brix
+ */
 
 /**
  * Saves a brix record to an assignment's brixRecords list
  *
+ * @method addBrixRecord
  * @param truckID id of truck the measurement is made for
  * @param brixRecord brixRecord to save to assignment
  * @returns API returns updated list of brix records for the assignment
@@ -42,6 +51,7 @@ export const addBrixRecord = (truckID, brixRecord) => async dispatch => {
 /**
  * gets the last x number of brix records for a particular deice truck
  *
+ * @method getBrixRecords
  * @param truckID id of truck to retrieve records for
  * @returns API returns a list of brix records for the requested truck
  */
@@ -65,6 +75,12 @@ export const getBrixRecords = truckID => async dispatch => {
 	}
 };
 
+/**
+ * Gets the Brix Char from the API.
+ *
+ * @method getBrixChart
+ * @return API returns the brix chart values
+ */
 export const getBrixChart = () => async dispatch => {
 	try {
 		const res = await axios.get("/brix/chart");
@@ -76,28 +92,55 @@ export const getBrixChart = () => async dispatch => {
 	} catch (err) {}
 };
 
+/**
+ *
+ * Gets the weather from an external API that is called through the backend.
+ *
+ * @method getWeather
+ * @return API returns the weather data.
+ */
 export const getWeather = () => async dispatch => {
 	try {
-		// const res = await axios.get(
-		// 	"http://api.openweathermap.org/data/2.5/forecast?id=5913490&APPID=ae895e97d569b50fd4fa9a56923734cd&units=metric",
-		// 	{ crossdomain: true }
-		// );
+		const res = await axios.get("/weather");
+		const weather = res.data;
+		// const weather = sampleWeather;
+		// const weather = null;
+
+		let date;
+		date = new Date(0);
+		date.setUTCSeconds(weather.list[0].dt);
+
+		let forecastLow;
+		forecastLow = 1000; // higher than realistic
+		weather.list.slice(0, 8).forEach(elem => {
+			if (elem.main.temp < forecastLow)
+				forecastLow = Math.floor(elem.main.temp);
+		});
+		forecastLow = Math.ceil(parseInt(forecastLow));
+
+		let currentTemperature = Math.floor(weather.list[0].main.temp);
 
 		dispatch({
-			type: GET_WEATHER
-			// payload: res.data
+			type: GET_WEATHER,
+			payload: { date, forecastLow, currentTemperature }
 		});
 	} catch (err) {}
 };
 
+//todo Arran pls update this
 /**
- * Sets the daily mix to a given percentage
  *
- * @param dailyMix dailyMix to set
+ * Sets the daily chart row.
+ *
+ * @method setDailyMixChartRow
+ * @param chartRow
+ * @return The daily mix chart row
  */
-// const setDailyMix = dailyMix => dispatch => {
-// 	dispatch({
-// 		type: SET_DAILY_MIX,
-// 		payload: dailyMix
-// 	});
-// };
+export const setDailyMixChartRow = chartRow => async dispatch => {
+	try {
+		dispatch({
+			type: SET_DAILY_MIX_CHART_ROW,
+			payload: chartRow
+		});
+	} catch (err) {}
+};

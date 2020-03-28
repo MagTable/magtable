@@ -6,6 +6,13 @@ import magtable from "./magtable";
 import brix from "./brix";
 import { LOGOUT } from "../actions/constants";
 
+/**
+ * @date 2020-03-24
+ * @author Arran Woodruff
+ * @category Redux-Reducers
+ * @module Index
+ */
+
 const appReducer = combineReducers({
 	user,
 	alert,

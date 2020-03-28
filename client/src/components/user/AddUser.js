@@ -7,8 +7,10 @@ import * as Yup from "yup";
 import Input from "../common/Input";
 
 /**
+ * @date 2020-03-24
+ * @author Arran Woodruff, Steven Wong
  * Adds a user of the given role type
- *
+ * @category Components/User
  * @param role role of user to be added
  * @returns {*} The AddUser component
  * @constructor
@@ -35,14 +37,13 @@ const AddUser = ({ role }) => {
 				<Form>
 					<Input
 						errors={props.errors.username}
-						touched={props.touched.username}
 						value={props.values.username}
 						label={"Add a New " + role.name}
 						type="text"
 						name="username"
 						data-lpignore="true"
 						icon={{
-							iconClass: "fa-user-plus fa-2x",
+							iconClass: "fa-user-plus fa-lg",
 							action: () => props.submitForm(),
 							toolTip: "New " + role.name,
 							hoverColor: "green"

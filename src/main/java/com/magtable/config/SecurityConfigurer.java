@@ -16,10 +16,16 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+
+/**
+ * Class to override spring security methods
+ * @author David Ward
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
+    //Qualifer tells Spring too use our UserDetailsService in place of the default UserDetailsService
     @Qualifier("magUserDetailsService")
     @Autowired
     UserDetailsService userDetailsService;
@@ -46,11 +52,11 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .antMatchers("/equipment/*").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER)
                 .antMatchers("/equipment").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER)
                 .antMatchers("/shift/*/*").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER)
-                .antMatchers("/shift/*").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER)
-                .antMatchers("/shift").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER)
+                .antMatchers("/shift/*").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER, MECHANIC)
+                .antMatchers("/shift").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER, MECHANIC)
                 .antMatchers("/authenticate").permitAll()
                 .antMatchers("/password/reset").permitAll()
-                .and().csrf().disable()
+                .and().csrf().disable() //TODO Check all route Security /add them
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(JwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }

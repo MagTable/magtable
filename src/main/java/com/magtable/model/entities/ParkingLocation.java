@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Objects;
 
+/**
+ * Entity Class for ParkingLocation table
+ */
 @Entity(name = "parkinglocation")
 public class ParkingLocation {
     private Integer id;

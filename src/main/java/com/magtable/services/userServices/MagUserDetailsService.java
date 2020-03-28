@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 /**
  * Class to override the loadUserByUsername method in {@link UserDetailsService} with our
  * own implementation.
+ * @author David Ward
+ * Created with Reference too : "Spring Boot + Spring Security + JWT from scratch - Java Brains" - https://www.youtube.com/watch?v=X80nJ5T7YpE&list=PLqq-6Pq4lTTYTEooakHchTGglSvkZAjnE&index=12
  */
 @Service
 public class MagUserDetailsService implements UserDetailsService {

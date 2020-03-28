@@ -9,6 +9,13 @@ import {
 	RESET_PASSWORD
 } from "../actions/constants";
 
+/**
+ * @date 2020-03-24
+ * @author Arran Woodruff
+ * @category Redux-Reducers
+ * @module User
+ */
+
 const initialState = {
 	users: [],
 	user: null,

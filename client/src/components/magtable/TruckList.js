@@ -13,20 +13,16 @@ import { toggleAM } from "../../actions/magtable";
 import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
 import { DEICE_TRUCK, SERVICE_VEHICLE } from "../../actions/constants";
 import Modal from "../modal/Modal";
-import BrixManagement from "./BrixManagement";
+import BrixManagement from "../brix/BrixManagement";
 
 /**
  * @date 2020-02-17
- * @author MJ Kochuk
- * @module Component
- */
-
-/**
+ * @author MJ Kochuk, Arran Woodruff
  * Rendered on the Truck Assignment page, displays all available trucks, the employees assigned to each (two AM and two
  * PM slots for employees) while color-coding each truck to represent their operational status. User can expand and
  * contract notices on all trucks and swap between displaying AM employees and PM employees. Trucks are draggable for
  * assigning them to locations in the ParkingLocationMap.
- *
+ * @category Components/MagTable
  * @constructor
  * @returns {*} The TruckList component
  */
@@ -113,7 +109,6 @@ function TruckList() {
 					{serviceVehicleAssignments.map(assignment => (
 						<TruckListItem
 							noticeOpen={noticesOpen}
-							openBrixModal={handleShow}
 							key={assignment.equipment.id}
 							assignment={assignment}
 							showAM={showAM}

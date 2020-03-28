@@ -18,9 +18,19 @@ import {
 	TOGGLE_AM_PM,
 	ADD_TRUCK,
 	EDIT_TRUCK,
-	DELETE_TRUCK
+	DELETE_TRUCK,
+	SET_DAILY_MIX,
+	INCREMENT_DAILY_MIX,
+	DECREMENT_DAILY_MIX
 } from "../actions/constants";
 import { ParkingZones } from "../res/test_data/magtable";
+
+/**
+ * @date 2020-03-24
+ * @author Arran Woodruff
+ * @category Redux-Reducers
+ * @module MagTable
+ */
 
 const initialState = {
 	assignments: [],
@@ -30,7 +40,7 @@ const initialState = {
 		shifts: []
 	},
 	dailyMessages: "",
-	dailyMix: 40,
+	dailyMix: null,
 	selectedApron: EAST_APRON,
 	loading: true,
 	shiftsLoading: true,
@@ -38,6 +48,10 @@ const initialState = {
 	parkingZones: ParkingZones,
 	parkingLocations: []
 };
+
+const MIX_STEP = 5;
+const MIX_MAX = 75;
+const MIX_MIN = 15;
 
 export default function(state = initialState, action) {
 	const { type, payload } = action;
@@ -101,6 +115,7 @@ export default function(state = initialState, action) {
 		case CLEAR_TABLE:
 			return {
 				...state,
+				dailyMix: null,
 				assignments: state.assignments.map(assignment => ({
 					...assignment,
 					employeeShifts: [],
@@ -204,6 +219,25 @@ export default function(state = initialState, action) {
 					truck => truck.equipment.id !== payload
 				),
 				loading: false
+			};
+		case SET_DAILY_MIX:
+			return {
+				...state,
+				dailyMix: payload
+			};
+		case INCREMENT_DAILY_MIX:
+			if (state.dailyMix + MIX_STEP > MIX_MAX) return state;
+
+			return {
+				...state,
+				dailyMix: state.dailyMix + MIX_STEP
+			};
+		case DECREMENT_DAILY_MIX:
+			if (state.dailyMix - MIX_STEP < MIX_MIN) return state;
+
+			return {
+				...state,
+				dailyMix: state.dailyMix - MIX_STEP
 			};
 		default:
 			return state;

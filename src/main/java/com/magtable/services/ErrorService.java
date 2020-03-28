@@ -5,6 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+/**
+ * Service for reporting errors
+ * @author Mustafa Al Khaldi, David Ward, Arran Woodruff
+ */
 @Service
 public class ErrorService {
     /**

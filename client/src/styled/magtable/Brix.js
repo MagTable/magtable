@@ -1,5 +1,26 @@
 import styled, { keyframes } from "styled-components";
 import { Form } from "formik";
+import { DANGER, SUCCESS, WARNING } from "../../actions/constants";
+
+/**
+ * @date 3/24/2020
+ * @author Arran Woodruff
+ * @category Styled Components
+ * @module MagTable
+ */
+
+export const getColor = type => {
+	switch (type) {
+		case DANGER:
+			return "--context-red";
+		case WARNING:
+			return "--context-orange";
+		case SUCCESS:
+			return "--context-blue";
+		default:
+			return "--navbar";
+	}
+};
 
 export const BrixWrapper = styled.div`
 	display: grid;
@@ -37,6 +58,7 @@ export const BrixForm = styled(Form)`
 	grid-template-areas:
 		"type1 type4"
 		"nozzle purged"
+		"rowdata rowdata"
 		"submit submit";
 
 	#nozzle {
@@ -51,8 +73,10 @@ export const BrixForm = styled(Form)`
 	#purged {
 		grid-area: purged;
 	}
+	#rowdata {
+		grid-area: rowdata;
+	}
 	#submit {
-		margin-top: 1rem;
 		grid-area: submit;
 		display: flex;
 		justify-content: center;
@@ -95,6 +119,89 @@ export const BrixTableWrapper = styled.div`
 	}
 `;
 
+export const BrixManagementChartRowData = styled.div`
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	h4 {
+		margin: 0;
+	}
+`;
+
+export const ChartRowDataItem = styled.h4`
+	margin: 0;
+
+	${({ error }) =>
+		error &&
+		`
+		color: var(--context-red);
+	`}
+`;
+
 export const BrixTableTitle = styled.h3`
 	grid-area: table-title;
+`;
+
+export const WeatherDataWrapper = styled.div`
+	background: var(--navbar-light);
+	min-width: 625px;
+	padding: 0.75rem;
+	max-height: 100%;
+	overflow: hidden;
+	// border-radius: 0.5rem; // not sure on this one
+	border-radius: 999px; // not sure on this one
+	color: var(--title-bright);
+	position: relative;
+
+	transition: box-shadow 0.5s ease-in-out;
+	display: flex; // to display horizontally
+
+	box-shadow: inset 0 0 7px 2px var(--context-green);
+
+	border: 2px solid var(--navbar-light);
+	//outline: 6px solid var(--navbar);
+	//outline-offset: -6px;
+
+	${({ status }) =>
+		status &&
+		`
+			box-shadow: inset 0 0 7px 2px var(${getColor(status)});
+	`}
+`;
+
+export const WeatherDataItem = styled.h4`
+	margin: 0;
+	min-width: 83px;
+	text-align: center;
+
+	:not(:first-child) {
+		padding: 0 1.25rem;
+	}
+
+	${({ large }) =>
+		large &&
+		`
+			font-size: 130%; 
+	`}
+`;
+
+export const DailyMixButtons = styled.div`
+	display: flex;
+	flex-direction: column;
+
+	height: 2.5rem;
+
+	position: absolute;
+	right: 15px;
+	top: calc(50% - 1.25rem);
+
+	i {
+		cursor: pointer;
+		transition: color 0.25s ease-in-out;
+		font-size: 120%;
+
+		:hover {
+			color: var(--shader-grey);
+		}
+	}
 `;

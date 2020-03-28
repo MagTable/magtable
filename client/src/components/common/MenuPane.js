@@ -9,14 +9,16 @@ import {
 } from "../../styled/common/Navigation";
 import { BrowserView } from "react-device-detect";
 import { useSelector } from "react-redux";
-import { SYSTEM_ADMINISTRATOR } from "../../actions/constants";
+import { MECHANIC, SYSTEM_ADMINISTRATOR } from "../../actions/constants";
 import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 
 /**
  * @date 2020-02-09
- * @author MJ Kochuk
- * @module Component
+ * @author MJ Kochuk, Steven Wong
+ * @name useWindowSize
+ * @category Component/Common
+ * @constructor
  */
 
 function useWindowSize() {
@@ -50,6 +52,8 @@ function useWindowSize() {
 /**
  * The menu used for navigating the site. The desktop version has a simple layout with links simply placed in the
  * header, while the mobile version has a folding menu to preserve screen real estate.
+ * @name MenuPane
+ * @category Component/Common
  * @constructor
  * @param menuOpen dictates whether or not the menu is in the open state
  * @param setMenuOpen changes the value of menuOpen
@@ -65,12 +69,11 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 		}
 	}
 
-	const size = useWindowSize();
+	const size = new useWindowSize();
 
 	const authUser = useSelector(state => state.auth.user);
 	const { pathname } = useLocation();
-
-	if (size.width < 1200) {
+	if (size.width < 1420) {
 		return (
 			<div>
 				<BrowserView>
@@ -79,10 +82,19 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 							<MenuTipIcon open={menuOpen} className="fas fa-bars fa-lg" />
 						</MenuTip>
 						<NavPane onClick={() => toggleMenu()} open={menuOpen}>
-							<NavLink active={pathname === "/" ? 1 : undefined} to={"/"}>
-								Truck Assignment
-								<NavIcon className="fas fa-truck" />
+							<NavLink
+								active={pathname === "/truck/tv" ? 1 : undefined}
+								to={"/truck/tv"}
+							>
+								TV
+								<NavIcon className="fas fa-tv" />
 							</NavLink>
+							{authUser?.role?.name !== MECHANIC && (
+								<NavLink active={pathname === "/" ? 1 : undefined} to={"/"}>
+									Truck Assignment
+									<NavIcon className="fas fa-tasks" />
+								</NavLink>
+							)}
 							<NavLink
 								active={pathname === "/truck/all" ? 1 : undefined}
 								to={"/truck/all"}
@@ -113,10 +125,19 @@ function MenuPane({ menuOpen, setMenuOpen }) {
 		return (
 			<BrowserView>
 				<NavDiv>
-					<NavLink active={pathname === "/" ? 1 : undefined} to={"/"}>
-						Truck Assignment
-						<NavIcon className="fas fa-tasks" />
+					<NavLink
+						active={pathname === "/truck/tv" ? 1 : undefined}
+						to={"/truck/tv"}
+					>
+						TV
+						<NavIcon className="fas fa-tv" />
 					</NavLink>
+					{authUser?.role?.name !== MECHANIC && (
+						<NavLink active={pathname === "/" ? 1 : undefined} to={"/"}>
+							Truck Assignment
+							<NavIcon className="fas fa-tasks" />
+						</NavLink>
+					)}
 					<NavLink
 						active={pathname === "/truck/all" ? 1 : undefined}
 						to={"/truck/all"}

@@ -20,7 +20,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * REST controller for user management routes
+ * @author David Ward, Mustafa Al Khaldi, Arran Woodruff
+ */
 @RestController
 @RequestMapping("/user")
 public class UserController {

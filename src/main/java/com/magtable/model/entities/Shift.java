@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * Entity Class for Shift table
+ */
 @Entity
 public class Shift {
     private Integer id;

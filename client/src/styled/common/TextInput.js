@@ -2,6 +2,13 @@ import styled from "styled-components";
 import { Input } from "./FormControl";
 import PlaneBG from "../../res/Images/Plane_BG.jpg";
 
+/**
+ * @date 2020-03-24
+ * @author Arran Woodruff
+ * @category Styled Components
+ * @module Common
+ */
+
 export const BlurCover = styled.div`
 	background-color: rgba(255, 255, 255, 0.15);
 	${({ blur }) =>
@@ -39,6 +46,12 @@ export const TextInputContainer = styled.div`
 export const TextInput = styled(Input)`
 	margin-top: 20px;
 	background: transparent;
+	
+	::-webkit-outer-spin-button,
+	::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+  		margin: 0;
+  	}
 
 	padding: 7px;
 
@@ -66,6 +79,11 @@ export const TextInput = styled(Input)`
 		`
 			border-bottom: 2px solid red;
 	`}
+	
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+  	
+	}
 `;
 
 /**
@@ -76,8 +94,8 @@ export const TextInputIcon = styled.i`
 	cursor: pointer;
 	position: absolute;
 	z-index: 3;
-	top: calc(100% - 40px);
-	width: 45px;
+	top: calc(100% - 30px);
+	width: 30px;
 	right: 0;
 	user-select: none;
 	transition: color 0.3s ease-in-out;
