@@ -15,11 +15,15 @@ export const TruckManagementListDiv = styled.div`
 	flex-grow: 1.2;
 	flex-basis: 0;
 	overflow-y: auto;
-	overflow-x: auto;
-	max-height: calc(100vh - 120px);
-	width: 60%;
 	margin: auto;
+	width: auto;
+	max-height: calc(100vh - 120px);
 	padding: 0px 40px;
+`;
+
+export const TruckManagementDiv = styled.div`
+	margin: auto;
+	width: 60%;
 `;
 
 export const TruckMgmtDiv = styled.div`
