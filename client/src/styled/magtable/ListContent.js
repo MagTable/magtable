@@ -169,7 +169,27 @@ export const TruckListItemDiv = styled.div`
 	`}
 `;
 
-export const TruckMgmtItemDiv = styled(TruckListItemDiv)`
+export const TruckListManipulateBlock = styled.div`
+	display: flex;
+	width: 100%;
+	margin: 0.5rem;
+	background-color: #f2faff;
+	border-radius: 0.5rem;
+	text-overflow: ellipsis;
+	min-height: 65px;
+
+	:hover {
+		background-color: #dff3ff;
+	}
+
+	&:hover ${ManipTruckManipIconDiv} {
+		// display: flex;
+		opacity: 1;
+		transition: 0.3s ease-in-out;
+	}
+`;
+
+export const TruckMgmtItemDiv = styled(TruckListManipulateBlock)`
 	border-bottom: 2px solid grey;
 	height: 50px;
 `;

@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 import TruckManagementItem from "./TruckManagementItem";
 import {
 	TruckManagementListDiv,
-	EditTruckWrap,
 	TruckMgmtDiv,
-	AddTruckBtn
+	AddTruckBtn,
+	TruckManagementDiv
 } from "../../styled/trucks/TruckManagement";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import AddTruck from "./AddTruck";
@@ -39,40 +39,42 @@ function TruckManagement() {
 	const truckAssignments = assignments.filter(
 		assignment =>
 			assignment.equipment.id < 1000 &&
-			assignment.equipment.type === DEICE_TRUCK
+			assignment.equipment.type === DEICE_TRUCK &&
+			assignment.equipment.active === true
 	);
 
 	// Gets only the Service Vehicles in the System.
 	const serviceVehicleAssignments = assignments.filter(
 		assignment =>
 			assignment.equipment.id < 1000 &&
-			assignment.equipment.type === SERVICE_VEHICLE
+			assignment.equipment.type === SERVICE_VEHICLE &&
+			assignment.equipment.active === true
 	);
 
 	return (
-		<EditTruckWrap>
-			<TruckMgmtDiv>
-				<ListTitle>
-					<ListTitleText>Truck Status + Notices</ListTitleText>
-					{authUser?.role?.name === SYSTEM_ADMINISTRATOR ? (
-						<>
-							<Modal show={showModal} handleClose={handleClose}>
-								<AddTruck />
-							</Modal>
-							<Modal
-								show={editTruck !== null}
-								handleClose={() => setEditTruck(null)}
-							>
-								<EditTruck truck={editTruck} />
-							</Modal>
-							<AddTruckBtn onClick={handleShow}>
-								<FilterIcon className={"fas fa-plus"} />
-								Add Truck
-							</AddTruckBtn>
-						</>
-					) : null}
-				</ListTitle>
-				<TruckManagementListDiv>
+		<TruckMgmtDiv>
+			<ListTitle>
+				<ListTitleText>Manage Trucks</ListTitleText>
+				{authUser?.role?.name === SYSTEM_ADMINISTRATOR ? (
+					<>
+						<Modal show={showModal} handleClose={handleClose}>
+							<AddTruck />
+						</Modal>
+						<Modal
+							show={editTruck !== null}
+							handleClose={() => setEditTruck(null)}
+						>
+							<EditTruck truck={editTruck} />
+						</Modal>
+						<AddTruckBtn onClick={handleShow}>
+							<FilterIcon className={"fas fa-plus"} />
+							Add Truck
+						</AddTruckBtn>
+					</>
+				) : null}
+			</ListTitle>
+			<TruckManagementListDiv>
+				<TruckManagementDiv>
 					<h2>Service Vehicles</h2>
 					{serviceVehicleAssignments.map(assignment => (
 						<TruckManagementItem
@@ -81,7 +83,7 @@ function TruckManagement() {
 							setEditTruck={setEditTruck}
 						/>
 					))}
-					<h2>De-Ice Vehicles</h2>
+					<h2>De-Ice Trucks</h2>
 					{truckAssignments.map(assignment => (
 						<TruckManagementItem
 							key={assignment.equipment.id}
@@ -89,9 +91,9 @@ function TruckManagement() {
 							setEditTruck={setEditTruck}
 						/>
 					))}
-				</TruckManagementListDiv>
-			</TruckMgmtDiv>
-		</EditTruckWrap>
+				</TruckManagementDiv>
+			</TruckManagementListDiv>
+		</TruckMgmtDiv>
 	);
 }
 
