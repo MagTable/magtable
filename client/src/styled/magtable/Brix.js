@@ -144,12 +144,10 @@ export const BrixTableTitle = styled.h3`
 
 export const WeatherDataWrapper = styled.div`
 	background: var(--navbar-light);
-	min-width: 625px;
 	padding: 0.75rem;
 	max-height: 100%;
 	overflow: hidden;
-	border-radius: 0.45rem; // not sure on this one
-	// border-radius: 999px; // not sure on this one
+	border-radius: 0.45rem;
 	color: var(--title-bright);
 	position: relative;
 
@@ -159,8 +157,6 @@ export const WeatherDataWrapper = styled.div`
 	box-shadow: inset 0 0 7px 2px var(--context-green);
 
 	border: 2px solid var(--navbar-light);
-	//outline: 6px solid var(--navbar);
-	//outline-offset: -6px;
 
 	${({ status }) =>
 		status &&
@@ -183,6 +179,14 @@ export const WeatherDataItem = styled.h4`
 		`
 			font-size: 130%; 
 	`}
+
+	${({ hideSm }) =>
+		hideSm &&
+		`
+			@media (max-width: 1100px) {
+				display: none;
+			}
+	`};
 `;
 
 export const DailyMixButtons = styled.div`

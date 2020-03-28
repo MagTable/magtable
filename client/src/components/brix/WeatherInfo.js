@@ -39,9 +39,9 @@ function WeatherInfo() {
 		.find(row => row.recommendedMix === dailyMix);
 
 	// the first chart record with a LOUT lower than the current forecast row is recommended
-	const recommendedChartRow = brixChart.find(
-		row => row.lout < weather.forecastLow
-	);
+	const recommendedChartRow =
+		weather.forecastLow &&
+		brixChart.find(row => row.lout < weather.forecastLow);
 
 	// the first chart record with a LOUT lower than the current OAT is the minimum
 	const minimumChartRow = brixChart.find(
@@ -81,10 +81,10 @@ function WeatherInfo() {
 	return (
 		<NavDiv>
 			<WeatherDataWrapper status={getDailyMixColor()}>
-				<WeatherDataItem>
+				<WeatherDataItem hideSm>
 					Current: {weather.currentTemperature}°
 				</WeatherDataItem>
-				<WeatherDataItem>Low: {weather.forecastLow}°</WeatherDataItem>
+				<WeatherDataItem hideSm>Low: {weather.forecastLow}°</WeatherDataItem>
 				<WeatherDataItem large>
 					Mix: {recommendedChartRow ? dailyMix + "%" : "..."}
 				</WeatherDataItem>

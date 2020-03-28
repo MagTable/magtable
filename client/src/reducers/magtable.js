@@ -125,6 +125,8 @@ export default function(state = initialState, action) {
 		case PUBLISH_TABLE:
 			return {
 				...state,
+				publishedBy: payload.publishedBy,
+				dailyMix: payload.dailyMix,
 				assignments: payload.assignments
 				// server will echo the given assignments to verify changes were made properly
 			};
