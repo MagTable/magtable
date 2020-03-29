@@ -1,20 +1,15 @@
 package com.magtable.controller;
 
-import com.magtable.model.api.ExportRequest;
 import com.magtable.model.entities.BrixChartRecord;
 import com.magtable.model.entities.BrixRecord;
 import com.magtable.repository.BrixChartRepository;
 import com.magtable.repository.BrixRepository;
 import com.magtable.services.ErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,46 +71,39 @@ public class BrixController {
         return brixChartRepository.findAll();
     }
 
+    @GetMapping(path = "/export/{from}/{to}/{id}")
+    public String exportToCSV(@PathVariable(value = "from") String from,
+                              @PathVariable(value = "to") String to,
+                              @PathVariable(value = "id") Integer equipmentID) throws ParseException {
 
-    @PostMapping(path = "/export", produces = "text/csv")
-    public ResponseEntity exportToCSV(@RequestBody ExportRequest exportRequest) {
+        StringBuilder records = new StringBuilder();
 
-        File brixCSV = new File(".\\src\\main\\resources\\res\\brix.csv");
+        ArrayList<BrixRecord> brixRecords = (ArrayList<BrixRecord>)
+                brixRepository.findBetweenDates(
+                        new SimpleDateFormat("yyyy-MM-dd").parse(from),
+                        new SimpleDateFormat("yyyy-MM-dd").parse(to),
+                        equipmentID);
 
-        try {
-            FileWriter fileWriter = new FileWriter(brixCSV, false);
-            BufferedWriter writer = new BufferedWriter(fileWriter);
+        for (BrixRecord record : brixRecords) {
+            records.append(record.toString()).append("\n");
+        }
+        return records.toString();
+    }
 
-            ArrayList<BrixRecord> brixRecords = new ArrayList<>();
-            if(exportRequest.getId() == null){
-                brixRecords = (ArrayList<BrixRecord>) brixRepository.findBetweenDates(exportRequest.getFrom(), exportRequest.getTo());
-            }else{
-                brixRecords = (ArrayList<BrixRecord>) brixRepository.findBetweenDatesByEquipmentID(exportRequest.getFrom(), exportRequest.getTo(), exportRequest.getId());
-            }
+    @GetMapping(path = "/export/{from}/{to}")
+    public String exportToCSV(@PathVariable(value = "from") String from,
+                                      @PathVariable(value = "to") String to) throws ParseException {
+        StringBuilder records = new StringBuilder();
 
-            //Writing the Header
-            writer.write("Truck Number, Nozzle, Type1, Type4, Liters Purged, Time Measured\n");
+        ArrayList<BrixRecord> brixRecords = (ArrayList<BrixRecord>)
+                brixRepository.findBetweenDates(
+                        new SimpleDateFormat("yyyy-MM-dd").parse(from),
+                        new SimpleDateFormat("yyyy-MM-dd").parse(to));
 
-            //Writing Each record
-            for(BrixRecord record : brixRecords){
-                writer.write(record.toString());
-                writer.write("\n");
-            }
-
-
-            writer.close();
-            fileWriter.close();
-        } catch (Exception e) {
-            //return a 500 if we hit an error
-            return ResponseEntity.status(500).build();
-
+        for (BrixRecord record : brixRecords) {
+            records.append(record.toString()).append("\n");
         }
 
-
-        return ResponseEntity.ok()
-                .header("Content-Disposition", "attachment; filename=brix.csv")
-                .contentLength(brixCSV.length())
-                .contentType(MediaType.parseMediaType("text/csv"))
-                .body(new FileSystemResource(brixCSV));
+        return records.toString();
     }
 }

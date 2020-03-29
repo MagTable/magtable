@@ -128,17 +128,12 @@ export const getWeather = () => async dispatch => {
 	} catch (err) {}
 };
 
-const FileDownload = require("js-file-download");
-
 export const getCSV = () => async dispatch => {
 	try {
-		const res = await axios.get("/brix/export").then(response => {
-			FileDownload(response.data, "fuckHoesGetMoney.csv");
-		});
-
+		const res = await axios.get("/brix/export/2020-03-25/2020-04-29/8");
 		dispatch({
 			type: GET_BRIX_CSV,
-			payload: res
+			payload: res.data
 		});
 	} catch (e) {}
 };
