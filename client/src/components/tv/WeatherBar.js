@@ -12,9 +12,19 @@ import {
 	WindArrow,
 	WindIcon
 } from "../../styled/tv/Weather";
-import { SampleWeather as Weather } from "../../res/test_data/magtable";
+// import { SampleWeather as Weather } from "../../res/test_data/magtable";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+
+async function getWeather() {
+	try {
+		const res = await axios.get("/weather");
+		return res.data;
+	} catch (err) {}
+}
 
 function getNextWorst() {
+	const Weather = getWeather();
 	const warningWeather = [2, 3, 5, 6];
 
 	for (let i = 0; i < 15; i++) {
@@ -47,32 +57,36 @@ function getDate() {
  * @returns {*} The WeatherBar component
  */
 function WeatherBar(props) {
+	const dispatch = useDispatch();
+
+	const { weather, brixChart } = useSelector(state => state.brix);
+
 	getNextWorst();
 	return (
 		<SideBar>
 			<h1>Thu</h1>
 			<h1>{getDate()}</h1>
-			<WeatherWording>{Weather.list[0].weather[0].description}</WeatherWording>
+			<WeatherWording>{weather.description}</WeatherWording>
 			<SunIcon className="fas fa-sun" />
 			<TempHolder>
 				<WeatherWording>High</WeatherWording>
-				<Temp>{Math.round(Weather.list[0].main.temp_max)}°</Temp>
+				<Temp>{weather.forecastHigh}°</Temp>
 			</TempHolder>
 			<TempHolder>
 				<WeatherWording>Low</WeatherWording>
-				<Temp>{Math.round(Weather.list[0].main.temp_min)}°</Temp>
+				<Temp>{weather.forecastLow}°</Temp>
 			</TempHolder>
 			<GreyTempHolder>
 				<WeatherWording>Feels Like</WeatherWording>
-				<Temp>{Math.round(Weather.list[0].main.feels_like)}°</Temp>
+				<Temp>{weather.feelsLike}°</Temp>
 			</GreyTempHolder>
 			<WindIcon className="fas fa-wind" />
 			<WeatherWording>
-				{Math.round(Weather.list[0].wind.speed * 3.6)} km/h
+				{Math.round(weather.wind.speed * 3.6)} km/h
 			</WeatherWording>
 			<WindArrow
 				className="fas fa-long-arrow-alt-up"
-				angle={Weather.list[0].wind.deg}
+				angle={weather.wind.deg}
 			/>
 			<LaterDiv>
 				<LaterTitle>Later</LaterTitle>

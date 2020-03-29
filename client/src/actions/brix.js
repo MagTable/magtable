@@ -14,7 +14,7 @@ import axios from "axios";
 
 /**
  * @date 2020-03-24
- * @author Arran Woodruff, Steven Wong
+ * @author Arran Woodruff, Steven Wong, MJ Kochuk
  * @category Redux-Actions
  * @module Brix
  */
@@ -118,11 +118,53 @@ export const getWeather = () => async dispatch => {
 		});
 		forecastLow = Math.ceil(parseInt(forecastLow));
 
+		let forecastHigh = -1000; // lower than realistic
+		weather.list.slice(0, 8).forEach(elem => {
+			if (elem.main.temp > forecastHigh)
+				forecastHigh = Math.floor(elem.main.temp);
+		});
+		forecastHigh = Math.ceil(parseInt(forecastHigh));
+
 		let currentTemperature = Math.floor(weather.list[0].main.temp);
+		let feelsLike = weather.list[0].main.feels_like;
+		let wind = weather.list[0].wind; // Contains both speed and direction
+		let description = weather.list[0].weather.description; // The description of the current weather, ie sunny
+
+		let hourlyTemps = [
+			{
+				temp: weather.list[3].main.temp,
+				conditionID: weather.list[3].weather[0].id
+			},
+			{
+				temp: weather.list[6].main.temp,
+				conditionID: weather.list[6].weather[0].id
+			},
+			{
+				temp: weather.list[9].main.temp,
+				conditionID: weather.list[9].weather[0].id
+			},
+			{
+				temp: weather.list[12].main.temp,
+				conditionID: weather.list[12].weather[0].id
+			},
+			{
+				temp: weather.list[15].main.temp,
+				conditionID: weather.list[15].weather[0].id
+			}
+		];
 
 		dispatch({
 			type: GET_WEATHER,
-			payload: { date, forecastLow, currentTemperature }
+			payload: {
+				date,
+				forecastLow,
+				forecastHigh,
+				currentTemperature,
+				feelsLike,
+				wind,
+				hourlyTemps,
+				description
+			}
 		});
 	} catch (err) {}
 };
