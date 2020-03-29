@@ -20,7 +20,7 @@ const initialState = {
 		data: null,
 		loading: true
 	},
-	brixCSV: null,
+	brixCSV: null
 };
 
 export default function(state = initialState, action) {
@@ -44,7 +44,7 @@ export default function(state = initialState, action) {
 			return {
 				...state,
 				brixCSV: payload
-			}
+			};
 		case ADD_BRIX_RECORD:
 			return {
 				...state,
