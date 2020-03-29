@@ -9,7 +9,10 @@ import {
 
 /**
  * Standard component for text input, has support for labels, errors, and IconButtons
- *
+ * @date 2020-03-24
+ * @author Arran Woodruff
+ * @name TextInput
+ * @category Component/Common
  * @param props see PropTypes
  * @returns {*} The TextInput Component
  * @constructor
@@ -17,11 +20,9 @@ import {
 function TextInput(props) {
 	const [focus, setFocus] = useState(false);
 
-	// Todo MJ - find a way to determine if a prop exists and only blur when it does.
 	if (props.setBlurred) {
 		props.setBlurred(focus || props.blur);
 	}
-
 	return (
 		<TextInputContainer id={props.id || null}>
 			<StyledTextInput

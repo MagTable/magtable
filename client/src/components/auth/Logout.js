@@ -3,19 +3,17 @@ import { logout } from "../../actions/auth";
 import { useDispatch } from "react-redux";
 
 /**
+ *
+ * The Logout component.
+ *
  * @date 2/10/2020
  * @author Arran Woodruff
- * @module Component
- */
-
-/**
- * Simple redirect, mapped to /logout
- * When this component is rendered, the logout function is immediately called
- *
- * @returns {null}
+ * @name Logout
+ * @category Component/Auth
+ * @returns {*} The logout component
  * @constructor
  */
-const Logout = () => {
+function Logout() {
 	// simple component assigned to /logout that calls the logout function
 	const dispatch = useDispatch();
 	useEffect(() => {
@@ -23,6 +21,6 @@ const Logout = () => {
 	}, [dispatch]);
 
 	return null;
-};
+}
 
 export default Logout;

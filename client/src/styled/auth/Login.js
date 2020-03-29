@@ -4,10 +4,14 @@ import PlaneBG from "../../res/Images/Plane_BG.jpg";
 
 /**
  * @date 2020-02-13
- * @author MJ Kochuk
- * @module Styled
+ * @author MJ Kochuk, Arran Woodruff
+ * @category Styled Components
+ * @module Auth
  */
 
+/**
+ * @method Background
+ */
 export const Background = styled.div`
 	background-image: url(${PlaneBG});
 	height: calc(100vh + 10px);
@@ -18,6 +22,9 @@ export const Background = styled.div`
 	transform: translate(-10px, -10px);
 `;
 
+/**
+ * @method Background Container
+ */
 export const BGContainer = styled.div`
 	overflow: hidden;
 	position: absolute;
@@ -26,6 +33,8 @@ export const BGContainer = styled.div`
 
 /**
  * The container immediately surrounding the login elements, provides style and input positioning.
+ *
+ * @method LoginBlock
  */
 export const LoginBlock = styled.div`
 	max-width: 488px;
@@ -48,6 +57,8 @@ export const LoginBlock = styled.div`
 
 /**
  * The submit button to log in to the app
+ *
+ * @method LoginBlock
  */
 export const LoginBtn = styled(OkButton)`
 	color: black;

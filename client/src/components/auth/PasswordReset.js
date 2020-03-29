@@ -9,20 +9,19 @@ import * as Yup from "yup";
 import Input from "../common/Input";
 
 /**
+ *
+ * The Reset Password Component
+ *
  * @date 2/10/2020
- * @author Arran Woodruff
- * @module Component
- */
-
-/**
- * This component allows the user to enter a username and password and in turn makes an authorization request to the API
+ * @author Arran Woodruff, Steven Wong
+ * @name Password Reset
+ * @category Component/Auth
+ * @returns {*} The ResetPassword Component
  * @constructor
- * @returns {*} The ResetPassword component
  */
 function ResetPassword() {
 	const { isAuthenticated, loading } = useSelector(state => state.auth);
 	const authUser = useSelector(state => state.auth?.user);
-	// const authUser = { username: "username", password: "password" };
 	const dispatch = useDispatch();
 
 	const [showNewPassword, setShowNewPassword] = useState(false);
@@ -44,8 +43,8 @@ function ResetPassword() {
 				initialValues={{
 					username: authUser.username,
 					password: authUser.password,
-					newPassword: "password",
-					confirmNewPassword: "password"
+					newPassword: "",
+					confirmNewPassword: ""
 				}}
 				onSubmit={values => {
 					dispatch(setUserPassword(values));
@@ -73,10 +72,10 @@ function ResetPassword() {
 						/>
 						<Input
 							errors={props.errors.newPassword}
-							touched={props.touched.newPassword}
 							value={props.values.newPassword}
 							label="New Password"
 							name="newPassword"
+							data-lpignore="true"
 							type={showNewPassword ? "text" : "password"}
 							icon={{
 								action: () => setShowNewPassword(!showNewPassword),
@@ -89,10 +88,10 @@ function ResetPassword() {
 						/>
 						<Input
 							errors={props.errors?.confirmNewPassword}
-							touched={props.touched?.confirmNewPassword}
 							value={props.values.confirmNewPassword}
 							label="Confirm New Password"
 							name="confirmNewPassword"
+							data-lpignore="true"
 							type={showConfirmNewPassword ? "text" : "password"}
 							icon={{
 								action: () =>

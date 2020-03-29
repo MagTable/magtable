@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+/**
+ * @date 2020-03-24
+ * @author Arran Woodruff
+ * @category Styled Components
+ * @module Common
+ */
+
 export const Table = styled.table`
 	border-spacing: 0;
 	border-collapse: collapse;

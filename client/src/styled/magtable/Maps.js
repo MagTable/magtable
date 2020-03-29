@@ -1,10 +1,20 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 /**
  * @date 2020-02-17
  * @author MJ Kochuk, Arran Woodruff
- * @module Styled
+ * @category Styled Components
+ * @module MagTable
  */
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
 
 /**
  * Wrapper div to hold the truck map and its title.
@@ -37,6 +47,7 @@ export const TowerPositionDiv = styled.div`
 	outline: 2px solid var(--border-color);
 	outline-offset: -1px;
 	flex-direction: column;
+	animation: 0.3s ${fadeIn} ease-out;
 `;
 
 /**

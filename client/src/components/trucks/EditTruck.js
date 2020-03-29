@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import { editTruck } from "../../actions/truck";
-import { TRUCK_STATUSES } from "../../actions/constants";
+import { TRUCK_STATUSES, VEHICLE_TYPES } from "../../actions/constants";
 import SelectBox from "../common/SelectBox";
 import { LoginBtn } from "../../styled/auth/Login";
 import TextArea from "../common/TextArea";
@@ -13,13 +13,11 @@ import Input from "../common/Input";
 /**
  * @date 3/08/2020
  * @author MJ Kochuk, Steven Wong, Tom Allcock
- * @module Component
- */
-
-/**
  * For editing a truck in the manage trucks page.
+ * @category Components/Trucks
+ * @param truck
  * @constructor
- * @returns {*} The AddTruck component.
+ * @returns {*} The Edit Truck Form component.
  */
 
 const EditTruckForm = styled(Form)`
@@ -30,7 +28,7 @@ const EditTruckForm = styled(Form)`
 	grid-template-areas:
 		"header header"
 		"id id"
-		"status status"
+		"status type"
 		"notice notice"
 		"submit submit";
 `;
@@ -48,6 +46,10 @@ const StatusDiv = styled.div`
 	grid-area: status;
 `;
 
+const TypeDiv = styled.div`
+	grid-area: type;
+`;
+
 const NoticeDiv = styled.div`
 	grid-area: notice;
 `;
@@ -57,23 +59,26 @@ const SubmitDiv = styled.div`
 `;
 
 const EditTruck = ({ truck }) => {
-	const truckStatuses = TRUCK_STATUSES;
 	const dispatch = useDispatch();
+	const truckStatuses = TRUCK_STATUSES;
+	const vehicleTypes = VEHICLE_TYPES;
 
+	// Truck will always be null at the start of the page, to avoid errors, setting the trucks default values off the get-go
 	if (truck == null) {
 		truck = {
 			id: 0,
 			status: "",
+			type: "",
 			notice: ""
 		};
 	}
-
 	return (
 		<Formik
 			enableReinitialize={true}
 			initialValues={{
 				id: truck.id,
 				status: truck.status,
+				type: truck.type,
 				notice: truck.notice
 			}}
 			onSubmit={values => {
@@ -83,6 +88,9 @@ const EditTruck = ({ truck }) => {
 				status: Yup.string()
 					.oneOf(truckStatuses)
 					.required("Truck Status Required"),
+				type: Yup.string()
+					.oneOf(vehicleTypes.map(type => type.id))
+					.required("Type Required"),
 				notice: Yup.string().max(250, "Maximum Length is 250 Characters")
 			})}
 		>
@@ -92,10 +100,8 @@ const EditTruck = ({ truck }) => {
 					<IdDiv>
 						<Input
 							errors={props.errors.id}
-							touched={props.touched.id}
-							value={props.values.id}
+							value={`${props.values.id}`}
 							name="id"
-							type="number"
 							label="Truck ID"
 							disabled
 							fit
@@ -104,7 +110,6 @@ const EditTruck = ({ truck }) => {
 					<StatusDiv>
 						<SelectBox
 							errors={props.errors.status}
-							touched={props.touched.status}
 							value={props.values.status}
 							label="Truck Status"
 							name="status"
@@ -118,6 +123,22 @@ const EditTruck = ({ truck }) => {
 							})}
 						</SelectBox>
 					</StatusDiv>
+					<TypeDiv>
+						<SelectBox
+							errors={props.errors.type}
+							value={props.values.type}
+							label="Truck Type"
+							name="type"
+						>
+							{vehicleTypes.map(type => {
+								return (
+									<option key={type.id} value={type.id}>
+										{type.value}
+									</option>
+								);
+							})}
+						</SelectBox>
+					</TypeDiv>
 					<NoticeDiv>
 						<TextArea
 							label="Notice"

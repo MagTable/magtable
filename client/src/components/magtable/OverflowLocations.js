@@ -16,15 +16,15 @@ import { DoubleClickConfirm } from "../../styled/common/FormControl";
 
 /**
  * @date 3/1/2020
- * @author Tom Allcock, Arran Woodruff
- * @module Component
- */
-
-/**
- *
+ * @author Tom Allcock, Arran Woodruff, Steven Wong
+ * @category Components/MagTable
+ * @param children Children of the Component
+ * @param color Color of the Icon
+ * @param hoverColor Hover color of icon.
+ * @param open Open State of the overflow menu
+ * @param setOpen Change the open state of the overflow menu.
+ * @returns {*} Returns the overflow menu for Parking Map which holds Clear Table, Publish Table and Apron Switches
  * @constructor
- * @param props
- * @returns {*} The OverflowEmployee component
  */
 function OverflowLocations({ children, color, hoverColor, open, setOpen }) {
 	const [clearConfirmation, setClearConfirmation] = useState(false);
@@ -47,6 +47,10 @@ function OverflowLocations({ children, color, hoverColor, open, setOpen }) {
 	const selectedApron = useSelector(state => state.magtable.selectedApron);
 	const magtable = useSelector(state => state.magtable);
 	const authUsername = useSelector(state => state.auth.user.username);
+
+	const timePublished =
+		magtable.timePublished && new Date(magtable.timePublished);
+	const publishedBy = magtable.publishedBy;
 
 	const openOverflow = () => {
 		setOpen(true);
@@ -104,37 +108,34 @@ function OverflowLocations({ children, color, hoverColor, open, setOpen }) {
 								Apron: {selectedApron}
 							</OverflowMenuButton>
 
-							<DoubleClickConfirm
-								active={clearConfirmation}
-								color={"var(--context-red)"}
+							<OverflowMenuButton
+								hoverColor={!clearConfirmation && "var(--context-red-light)"}
+								waiting={clearDisabled}
+								disabled={clearDisabled}
+								onClick={handleClear}
 							>
-								<OverflowMenuButton
-									hoverColor={
-										clearConfirmation
-											? "var(--context-red)"
-											: "var(--context-red-light)"
-									}
-									disabled={clearDisabled}
-									onClick={handleClear}
-								>
-									{clearConfirmation ? "Confirm Clear" : "Clear All"}
-								</OverflowMenuButton>
-							</DoubleClickConfirm>
+								{clearConfirmation ? "Confirm Clear" : "Clear All"}
+							</OverflowMenuButton>
 
-							<DoubleClickConfirm
-								active={publishConfirmation}
-								color={"var(--context-blue)"}
-							>
+							<DoubleClickConfirm active={publishConfirmation}>
 								<OverflowMenuButton
 									hoverColor={
-										publishConfirmation
-											? "var(--context-blue)"
-											: "var(--context-blue-light)"
+										!publishConfirmation && "var(--context-blue-light)"
 									}
-									disabled={publishDisabled}
+									waiting={publishDisabled}
+									disabed={publishDisabled}
 									onClick={handlePublish}
 								>
 									{publishConfirmation ? "Confirm Publish" : "Publish"}
+								</OverflowMenuButton>
+								<OverflowMenuButton disabled>
+									Published By: {publishedBy ? publishedBy : "..."}
+								</OverflowMenuButton>
+								<OverflowMenuButton disabled>
+									Submitted At:{" "}
+									{timePublished
+										? timePublished.getHours() + timePublished.getMinutes()
+										: "..."}
 								</OverflowMenuButton>
 							</DoubleClickConfirm>
 						</OverflowMenu>

@@ -8,7 +8,10 @@ import EmployeeList from "./EmployeeList";
 import TruckList from "./TruckList";
 
 /**
+ * @date 2020-03-24
+ * @author Arran Woodruff
  * Placeholder component to assist in displaying routing
+ * @category Components/MagTable
  * @constructor
  */
 const AssignmentTable = () => {

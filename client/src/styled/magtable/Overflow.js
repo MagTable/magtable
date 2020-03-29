@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 /**
  * @date 3/1/2020
- * @author Tom Allcock
- * @module Styled
+ * @author Tom Allcock, Arran Woodruff
+ * @category Styled Components
+ * @module MagTable
  */
 
 /**
@@ -59,18 +60,22 @@ export const OverflowMenuButton = styled.button`
 	font-weight: bold;
 
 	:hover {
-		background: ${({ hoverColor }) => hoverColor || "#c7c7c7"};
+		background: ${({ hoverColor }) =>
+			hoverColor || "var(--context-grey-light)"};
 	}
 
-	:disabled {
+	${({ waiting }) =>
+		waiting &&
+		`
 		background: var(--context-grey-light);
 		cursor: wait;
-	}
+	`}
 `;
 
 export const FilterIcon = styled.i`
 	cursor: pointer;
 	float: right;
+	padding: 1px;
 	width: 30px;
 	text-align: center;
 

@@ -15,6 +15,8 @@ import AssignmentTable from "./components/magtable/AssignmentTable";
 import Alert from "./components/common/Alert";
 import NavBar from "./components/common/NavBar";
 import TruckManagementLayout from "./components/trucks/TruckManagementLayout";
+import TVView from "./components/tv/TVView";
+import StompClient from "./styled/common/StompClient";
 
 function App() {
 	useEffect(() => {
@@ -29,15 +31,16 @@ function App() {
 			<Router>
 				<NavBar />
 				<Alert />
+				<StompClient />
 				<Switch>
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/password/reset" component={PasswordReset} />
-
 					<PrivateRoute
 						exact
 						path="/truck/all"
 						component={TruckManagementLayout}
 					/>
+					<PrivateRoute exact path="/truck/tv" component={TVView} />
 					<PrivateRoute
 						exact
 						path="/"
