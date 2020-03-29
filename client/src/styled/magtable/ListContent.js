@@ -9,6 +9,15 @@ import { DANGER, SUCCESS, WARNING } from "../../actions/constants";
  * @module MagTable
  */
 
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
 /**
  * Provides the correct color code for an employee's label based on their abilities/role
  * @param type The codes representing an employees roles. Can be gp (Green pass), ts (Tower staff), ojt (On the job training) or bl (bay lead)
@@ -93,25 +102,28 @@ export const EmployeeListDiv = styled.div`
 	flex-grow: 1;
 	flex-direction: column;
 	flex-basis: 0;
-	min-width: 180px;
 	overflow-y: auto;
+	max-height: 100%;
 	overflow-x: hidden;
+	animation: 0.3s ${fadeIn} ease-out;
 `;
 
 /**
  * Holds the employee list and title for the list.
  */
-export const EmployeeListDivWrapper = styled(EmployeeListDiv)`
+export const EmployeeListDivWrapper = styled.div`
 	border-right: 2px solid var(--border-color);
 	max-width: 300px;
-	min-width: 250px;
+	min-width: 275px;
 `;
 
 /**
  * Holds the content div for an employee shift and the labels representing their abilities.
  */
 export const EmployeeListRefreshInfo = styled.div`
+	border-top: 1px solid var(--border-color);
 	border-bottom: 1px solid var(--border-color);
+	margin-bottom: -1px;
 	padding: 0.75rem;
 	h4 {
 		margin: 0;
@@ -122,7 +134,6 @@ export const EmployeeListRefreshInfo = styled.div`
  **/
 export const TruckListDiv = styled.div`
 	transition: all 0.15s ease-in-out;
-	min-width: 330px;
 	margin: 0;
 	display: flex;
 	flex-direction: column;
@@ -130,11 +141,15 @@ export const TruckListDiv = styled.div`
 	flex-basis: 0;
 	overflow-y: auto;
 	overflow-x: hidden;
+	max-height: 100%;
+	animation: 0.3s ${fadeIn} ease-out;
 `;
 
-export const TruckListDivWrapper = styled(TruckListDiv)`
+export const TruckListDivWrapper = styled.div`
 	border-right: 2px solid var(--border-color);
 	max-width: 380px;
+	width: 350px;
+
 	min-width: 340px;
 `;
 
@@ -142,17 +157,38 @@ export const ManipTruckManipIconDiv = styled.div`
 	width: auto;
 	align-items: center;
 	justify-items: end;
-	// display: none;
 	opacity: 0;
 	display: flex;
 	transition: 0.3s ease-in-out;
+`;
+
+export const TruckStatusCounterWrapper = styled.div`
+	display: grid;
+	grid-auto-columns: 25%;
+	grid-auto-flow: column;
+	background: var(--header);
+
+	border-bottom: 1px solid var(--border-color);
+`;
+
+export const TruckStatusCounterItem = styled.span`
+	text-align: center;
+
+	margin: 0;
+	min-width: 2rem;
+	cursor: pointer;
+	
+	${({ GO }) => GO && `color: var(--context-green)`}
+	${({ CON }) => CON && `color: var(--context-orange)`}
+	${({ OOS }) => OOS && `color: var(--context-grey)`}
+	${({ INOP }) => INOP && `color: var(--context-red)`}
 `;
 
 export const TruckListItemDiv = styled.div`
 	transition: all 0.15s ease-in-out;
 	display: flex;
 	height: 60px;
-	width: 100%;
+	width: 350px;
 	margin: auto;
 	text-overflow: ellipsis;
 	&:hover ${ManipTruckManipIconDiv} {
@@ -169,7 +205,27 @@ export const TruckListItemDiv = styled.div`
 	`}
 `;
 
-export const TruckMgmtItemDiv = styled(TruckListItemDiv)`
+export const TruckListManipulateBlock = styled.div`
+	display: flex;
+	width: 100%;
+	margin: 0.5rem;
+	background-color: #f2faff;
+	border-radius: 0.5rem;
+	text-overflow: ellipsis;
+	min-height: 65px;
+
+	:hover {
+		background-color: #dff3ff;
+	}
+
+	&:hover ${ManipTruckManipIconDiv} {
+		// display: flex;
+		opacity: 1;
+		transition: 0.3s ease-in-out;
+	}
+`;
+
+export const TruckMgmtItemDiv = styled(TruckListManipulateBlock)`
 	border-bottom: 2px solid grey;
 	height: 50px;
 `;
@@ -319,15 +375,6 @@ export const TruckStatusMessage = styled.h4`
 	}
 `;
 
-const fadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-`;
-
 export const TruckListItemLocation = styled.div`
 	position: relative;
 
@@ -463,11 +510,19 @@ export const EquipmentListItemEmployeeClearButton = styled.div`
 /**
  * Divides the list of available employees into sections based on start time.
  */
-export const ListSeparator = styled.h3`
-	margin: 0;
+export const ListSeparator = styled.div`
+	font-weight: bold;
+	font-size: 125%;
 	padding: 0.5rem 1rem;
-	border-bottom: 1px solid var(--border-color);
+	margin: 0;
 	background: var(--header);
+	display: flex;
+	justify-content: space-around;
+
+	border-bottom: 1px solid var(--border-color);
+	:first-child {
+		border-top: 1px solid var(--border-color);
+	}
 `;
 
 export const EmpName = styled.div`
@@ -514,7 +569,7 @@ export const LabelWrapper = styled.div`
 `;
 
 export const LabelText = styled.div`
-	width: 0px;
+	width: 0;
 	overflow: hidden;
 	transition: 0.3s ease-in-out;
 	white-space: nowrap;
@@ -523,11 +578,8 @@ export const LabelText = styled.div`
 `;
 
 export const Labels = styled.div`
-	display: flex;
-	flex-direction: row:
-	justify-content: flex-end;
 	grid-area: labels;
-	
+
 	:hover {
 		${LabelWrapper}, ${LabelText} {
 			width: 90px;
