@@ -60,13 +60,16 @@ export const OverflowMenuButton = styled.button`
 	font-weight: bold;
 
 	:hover {
-		background: ${({ hoverColor }) => hoverColor || "#c7c7c7"};
+		background: ${({ hoverColor }) =>
+			hoverColor || "var(--context-grey-light)"};
 	}
 
-	:disabled {
+	${({ waiting }) =>
+		waiting &&
+		`
 		background: var(--context-grey-light);
 		cursor: wait;
-	}
+	`}
 `;
 
 export const FilterIcon = styled.i`

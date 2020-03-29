@@ -125,10 +125,11 @@ export default function(state = initialState, action) {
 		case PUBLISH_TABLE:
 			return {
 				...state,
+				assignments: payload.assignments,
+				timePublished: payload.timePublished,
 				publishedBy: payload.publishedBy,
 				dailyMix: payload.dailyMix,
-				assignments: payload.assignments
-				// server will echo the given assignments to verify changes were made properly
+				loading: false
 			};
 		case REMOVE_DAILY_MESSAGE: // API request for these actions will probably just return all daily messages after addition or deletion
 		case ADD_DAILY_MESSAGE:
@@ -146,6 +147,7 @@ export default function(state = initialState, action) {
 				...state,
 				employeeShifts: payload.employeeShifts,
 				assignments: payload.magtable.assignments,
+				publishedBy: payload.magtable.publishedBy,
 				timePublished: payload.magtable.timePublished,
 				dailyMix: payload.magtable.dailyMix,
 				loading: false,

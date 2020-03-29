@@ -188,7 +188,6 @@ export const TruckListItemDiv = styled.div`
 	transition: all 0.15s ease-in-out;
 	display: flex;
 	height: 60px;
-	width: 350px;
 	margin: auto;
 	text-overflow: ellipsis;
 	&:hover ${ManipTruckManipIconDiv} {
