@@ -19,7 +19,7 @@ import {
  */
 const SelectBox = ({ label, ...props }) => {
 	const [focus, setFocus] = useState(false);
-	const [field] = useField(props);
+	const [field, meta] = useField(props);
 
 	field.onBlur = () => {
 		setFocus(false);
@@ -31,15 +31,15 @@ const SelectBox = ({ label, ...props }) => {
 	return (
 		<SelectContainer>
 			<StyledLabel
-				error={props.errors && props.touched}
+				error={meta.error && meta.touched}
 				lifted={props?.value?.length > 0}
 				focus={focus}
 				htmlFor={props.id || props.name}
 			>
-				{props.errors || label}
+				{meta.error || label}
 			</StyledLabel>
 			<StyledSelect
-				error={props.errors && props.touched}
+				error={meta.error && meta.touched}
 				focus={focus}
 				{...field}
 				{...props}

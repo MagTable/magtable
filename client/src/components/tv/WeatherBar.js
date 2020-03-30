@@ -23,6 +23,21 @@ function getDate() {
 }
 
 /**
+ *
+ * Function to translate the information to the current day in string.
+ *
+ * @date 2020-03-30
+ * @author Steven Wong
+ * @Category Components/TV
+ * @return {string} Current Day Shortened to 3 Letters
+ */
+function getDay() {
+	const date = new Date();
+	const currentDay = date.toLocaleDateString("en-CA", { weekday: "long" });
+	return currentDay.substr(0, 3);
+}
+
+/**
  * @date 2020-03-25
  * @author MJ Kochuk
  * @category Components/TV
@@ -35,7 +50,7 @@ function WeatherBar(props) {
 
 	return (
 		<SideBar>
-			<h1>Thu</h1>
+			<h1>{getDay()}</h1>
 			<h1>{getDate()}</h1>
 			<LaterDiv>
 				<NowTitle>Now</NowTitle>

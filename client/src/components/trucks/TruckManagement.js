@@ -17,6 +17,7 @@ import {
 	SERVICE_VEHICLE,
 	SYSTEM_ADMINISTRATOR
 } from "../../actions/constants";
+import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
 
 /**
  * @date 3/5/2020
@@ -28,6 +29,7 @@ import {
  */
 function TruckManagement() {
 	const assignments = useSelector(state => state.magtable.assignments);
+	const loading = useSelector(state => state.magtable.loading);
 	// Next 3 lines of code are for the Add Truck Modal
 	const [showModal, setModal] = useState(false);
 	const handleClose = () => setModal(false);
@@ -76,21 +78,33 @@ function TruckManagement() {
 			<TruckManagementListDiv>
 				<TruckManagementDiv>
 					<h2>Service Vehicles</h2>
-					{serviceVehicleAssignments.map(assignment => (
-						<TruckManagementItem
-							key={assignment.equipment.id}
-							truck={assignment}
-							setEditTruck={setEditTruck}
-						/>
-					))}
+					{!loading ? (
+						serviceVehicleAssignments.map(assignment => (
+							<TruckManagementItem
+								key={assignment.equipment.id}
+								truck={assignment}
+								setEditTruck={setEditTruck}
+							/>
+						))
+					) : (
+						<SpinnerWrap>
+							<LoadingImg className="fas fa-2x fa-circle-notch" />
+						</SpinnerWrap>
+					)}
 					<h2>De-Ice Trucks</h2>
-					{truckAssignments.map(assignment => (
-						<TruckManagementItem
-							key={assignment.equipment.id}
-							truck={assignment}
-							setEditTruck={setEditTruck}
-						/>
-					))}
+					{!loading ? (
+						truckAssignments.map(assignment => (
+							<TruckManagementItem
+								key={assignment.equipment.id}
+								truck={assignment}
+								setEditTruck={setEditTruck}
+							/>
+						))
+					) : (
+						<SpinnerWrap>
+							<LoadingImg className="fas fa-2x fa-circle-notch" />
+						</SpinnerWrap>
+					)}
 				</TruckManagementDiv>
 			</TruckManagementListDiv>
 		</TruckMgmtDiv>

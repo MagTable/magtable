@@ -11,14 +11,14 @@ import PlaneBG from "../../res/Images/Plane_BG.jpg";
 
 export const BlurCover = styled.div`
 	background-color: rgba(255, 255, 255, 0.15);
+	height: 120%;
+	width: 120%;
+	transition: 0.5s ease-in-out;
 	${({ blur }) =>
 		blur &&
 		` 
 		filter: blur(5px);
 	`}
-	height: 120%;
-	width: 120%;
-	transition: 0.5s ease-in-out;
 `;
 
 export const Background = styled.div`
@@ -127,14 +127,13 @@ export const TextInputLabel = styled.label`
 	top: 30px;
 	left: 5px;
 	
+	cursor: text;
+	z-index: 0;
+	transition: all 150ms cubic-bezier(0.4,0,0.2,1),opacity 150ms cubic-bezier(0.4,0,0.2,1);
+		
 	${({ accentColor }) =>
 		accentColor ? `color: ${accentColor};` : `color: var(--input-label);`}
 	
-	cursor: text;
-	z-index: 0;
-	
-	transition: all 150ms cubic-bezier(0.4,0,0.2,1),opacity 150ms cubic-bezier(0.4,0,0.2,1);
-
 	${({ focus, accentColor }) =>
 		focus &&
 		`
@@ -144,7 +143,8 @@ export const TextInputLabel = styled.label`
 	${({ lifted, focus }) =>
 		(lifted || focus) &&
 		`
-			transform: scale(.75) translateY(-32px);
+			transform: translateY(-25px);
+			font-size: 0.75rem;
 	`}
 		
 	${({ error }) =>

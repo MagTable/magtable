@@ -95,9 +95,7 @@ function AddTruck() {
 					<Header>Add Trucks</Header>
 					<IdDiv>
 						<Input
-							errors={props.errors.id}
 							value={props.values.id}
-							touched={props.touched.id}
 							name="id"
 							type="number"
 							label="Truck ID"
@@ -108,9 +106,7 @@ function AddTruck() {
 					</IdDiv>
 					<StatusDiv>
 						<SelectBox
-							errors={props.errors.status}
 							value={props.values.status}
-							touched={props.touched.status}
 							label="Truck Status"
 							name="status"
 						>
@@ -125,13 +121,7 @@ function AddTruck() {
 						</SelectBox>
 					</StatusDiv>
 					<TypeDiv>
-						<SelectBox
-							errors={props.errors.type}
-							value={props.values.type}
-							touched={props.touched.type}
-							label="Truck Type"
-							name="type"
-						>
+						<SelectBox value={props.values.type} label="Truck Type" name="type">
 							<option value="" />
 							{vehicleTypes.map(type => {
 								return (

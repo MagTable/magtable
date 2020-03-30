@@ -99,7 +99,6 @@ const EditTruck = ({ truck }) => {
 					<Header>Edit Truck {truck.id}</Header>
 					<IdDiv>
 						<Input
-							errors={props.errors.id}
 							value={`${props.values.id}`}
 							name="id"
 							label="Truck ID"
@@ -109,7 +108,6 @@ const EditTruck = ({ truck }) => {
 					</IdDiv>
 					<StatusDiv>
 						<SelectBox
-							errors={props.errors.status}
 							value={props.values.status}
 							label="Truck Status"
 							name="status"
@@ -124,12 +122,7 @@ const EditTruck = ({ truck }) => {
 						</SelectBox>
 					</StatusDiv>
 					<TypeDiv>
-						<SelectBox
-							errors={props.errors.type}
-							value={props.values.type}
-							label="Truck Type"
-							name="type"
-						>
+						<SelectBox value={props.values.type} label="Truck Type" name="type">
 							{vehicleTypes.map(type => {
 								return (
 									<option key={type.id} value={type.id}>
