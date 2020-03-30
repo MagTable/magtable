@@ -18,7 +18,7 @@ export const TruckManagementListDiv = styled.div`
 	margin: auto;
 	width: auto;
 	max-height: calc(100vh - 120px);
-	padding: 0px 40px;
+	padding: 0 40px;
 `;
 
 export const TruckManagementDiv = styled.div`

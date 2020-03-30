@@ -51,7 +51,7 @@ function TruckManagementItem({ truck, setEditTruck }) {
 			<TruckStatusBox>{truck.equipment.notice}</TruckStatusBox>
 			<ManipTruckManipIconDiv>
 				<IconButton
-					faClassName="fa-edit fa-2x"
+					faClassName="fa-edit fa-lg"
 					onClick={handleEdit}
 					toolTip="Edit Truck"
 					hoverColor="blue"
@@ -63,7 +63,7 @@ function TruckManagementItem({ truck, setEditTruck }) {
 					>
 						{({ confirm }) => (
 							<IconButton
-								faClassName="fa-trash-alt fa-2x"
+								faClassName="fa-trash-alt fa-lg"
 								onClick={confirm}
 								toolTip="Delete Truck"
 								hoverColor="red"

@@ -20,7 +20,7 @@ import {
 	OOS,
 	SERVICE_VEHICLE
 } from "../../actions/constants";
-import Modal from "../modal/Modal";
+import Modal from "../common/Modal";
 import BrixManagement from "../brix/BrixManagement";
 import ReactTooltip from "react-tooltip";
 

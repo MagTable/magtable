@@ -222,6 +222,10 @@ export const TruckListManipulateBlock = styled.div`
 		opacity: 1;
 		transition: 0.3s ease-in-out;
 	}
+
+	:not(ManipTruckManipIconDiv) {
+		animation: 0.3s ${fadeIn} ease-out;
+	}
 `;
 
 export const TruckMgmtItemDiv = styled(TruckListManipulateBlock)`

@@ -19,7 +19,7 @@ import WeatherInfo from "../brix/WeatherInfo";
  * @constructor
  * @returns {*} The NavBar component
  */
-function NavBar() {
+function NavBar({ wsConnected }) {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
@@ -27,7 +27,7 @@ function NavBar() {
 		<NavBarDiv>
 			<NavDiv>
 				<Link to={"/"}>
-					<AeroLogo src={logo} />
+					<AeroLogo connected={wsConnected} src={logo} />
 				</Link>
 			</NavDiv>
 

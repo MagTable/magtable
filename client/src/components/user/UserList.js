@@ -38,7 +38,7 @@ const UserList = () => {
 	if (usersLoading)
 		return (
 			<SpinnerWrap fullPage>
-				<LoadingImg className="fas fa-10x fa-circle-notch" />
+				<LoadingImg className="fas fa-2x fa-circle-notch" />
 			</SpinnerWrap>
 		);
 

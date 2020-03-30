@@ -13,7 +13,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { EAST_APRON, WEST_APRON } from "../../actions/constants";
 import { DoubleClickConfirm } from "../../styled/common/FormControl";
-import Modal from "../modal/Modal";
+import Modal from "../common/Modal";
 import BrixExport from "../brix/BrixExport";
 
 /**
