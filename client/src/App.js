@@ -52,12 +52,6 @@ function App() {
 					<PrivateRoute exact path="/truck/tv" component={TVView} />
 					<PrivateRoute
 						exact
-						path={process.env.PUBLIC_URL + "/"}
-						component={AssignmentTable}
-						personnelManagerRoute
-					/>
-					<PrivateRoute
-						exact
 						path={process.env.PUBLIC_URL + "/user/all"}
 						component={UserList}
 						adminRoute
@@ -66,6 +60,11 @@ function App() {
 						exact
 						path={process.env.PUBLIC_URL + "/logout"}
 						component={Logout}
+					/>
+					<PrivateRoute
+						path={process.env.PUBLIC_URL + "/"}
+						component={AssignmentTable}
+						personnelManagerRoute
 					/>
 				</Switch>
 			</Router>
