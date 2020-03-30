@@ -15,7 +15,7 @@ import AssignmentTable from "./components/magtable/AssignmentTable";
 import Alert from "./components/common/Alert";
 import NavBar from "./components/common/NavBar";
 import TVView from "./components/tv/TVView";
-import StompClient from "./styled/common/StompClient";
+import StompClient from "./components/common/StompClient";
 import TruckManagement from "./components/trucks/TruckManagement";
 
 function App() {
