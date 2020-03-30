@@ -14,8 +14,8 @@ import UserList from "./components/user/UserList";
 import AssignmentTable from "./components/magtable/AssignmentTable";
 import Alert from "./components/common/Alert";
 import NavBar from "./components/common/NavBar";
-import TruckManagementLayout from "./components/trucks/TruckManagementLayout";
 import TVView from "./components/tv/TVView";
+import TruckManagement from "./components/trucks/TruckManagement";
 
 function App() {
 	useEffect(() => {
@@ -33,11 +33,7 @@ function App() {
 				<Switch>
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/password/reset" component={PasswordReset} />
-					<PrivateRoute
-						exact
-						path="/truck/all"
-						component={TruckManagementLayout}
-					/>
+					<PrivateRoute exact path="/truck/all" component={TruckManagement} />
 					<PrivateRoute exact path="/truck/tv" component={TVView} />
 					<PrivateRoute
 						exact
