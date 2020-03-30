@@ -62,12 +62,6 @@ function TruckManagement() {
 						<Modal show={showModal} handleClose={handleClose}>
 							<AddTruck />
 						</Modal>
-						<Modal
-							show={editTruck !== null}
-							handleClose={() => setEditTruck(null)}
-						>
-							<EditTruck truck={editTruck} />
-						</Modal>
 						<AddTruckBtn onClick={handleShow}>
 							<FilterIcon className={"fas fa-plus"} />
 							Add Truck
@@ -107,6 +101,9 @@ function TruckManagement() {
 					)}
 				</TruckManagementDiv>
 			</TruckManagementListDiv>
+			<Modal show={editTruck !== null} handleClose={() => setEditTruck(null)}>
+				<EditTruck truck={editTruck} />
+			</Modal>
 		</TruckMgmtDiv>
 	);
 }
