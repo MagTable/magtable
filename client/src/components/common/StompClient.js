@@ -24,7 +24,7 @@ const StompClient = ({ setWSConnected }) => {
 
 	client.onWebSocketError = () => {
 		client.brokerURL =
-			"ws://https://sait-capstone2020.herokuapp.com/ws/websocket";
+			"ws://sait-capstone2020.herokuapp.com/ws/websocket";
 		client.activate();
 	};
 
