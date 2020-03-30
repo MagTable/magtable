@@ -7,7 +7,8 @@ import { updateTable } from "../../actions/magtable";
 const StompClient = ({ setWSConnected }) => {
 	const dispatch = useDispatch();
 	const client = new Client({
-		brokerURL: "ws://localhost:8080/ws/websocket",
+		// brokerURL: "ws://localhost:8080/ws/websocket",
+		brokerURL: "wss://sait-capstone2020.herokuapp.com/ws/websocket",
 		reconnectDelay: 3000,
 		heartbeatIncoming: 30000,
 		heartbeatOutgoing: 30000
@@ -20,12 +21,6 @@ const StompClient = ({ setWSConnected }) => {
 	client.onConnect = () => {
 		client.subscribe("/topic/mtr", onMessage);
 		setWSConnected(true);
-	};
-
-	client.onWebSocketError = () => {
-		client.brokerURL =
-			"ws://sait-capstone2020.herokuapp.com/ws/websocket";
-		client.activate();
 	};
 
 	const onMessage = e => {
