@@ -22,8 +22,7 @@ import { useField } from "formik";
 
 const Input = ({ label, ...props }) => {
 	const [focus, setFocus] = useState(false);
-	const [field] = useField(props);
-
+	const [field, meta] = useField(props);
 	if (props.setBlurred) {
 		props.setBlurred(focus || props.blur);
 	}
@@ -41,22 +40,21 @@ const Input = ({ label, ...props }) => {
 				/>
 			)}
 			<TextInputLabel
-				error={props.errors}
+				error={meta.error && meta.touched}
 				lifted={props.value?.toString().length > 0}
 				focus={focus}
 				htmlFor={props.id || props.name}
 				accentColor={props?.accentColor}
 			>
-				{props.errors || label}
+				{meta.error || label}
 			</TextInputLabel>
 			<StyledTextInput
 				{...field}
 				{...props}
 				onFocus={() => setFocus(true)}
 				onBlur={() => setFocus(false)}
-				error={props.errors && props.touched}
+				error={meta.error && meta.touched}
 				focus={focus}
-				id={label}
 				fit={props.fit}
 				accentColor={props.accentColor}
 			/>

@@ -144,7 +144,8 @@ export const TextInputLabel = styled.label`
 	${({ lifted, focus }) =>
 		(lifted || focus) &&
 		`
-			transform: scale(.75) translateY(-32px);
+			transform: translateY(-25px);
+			font-size: 0.75rem;
 	`}
 		
 	${({ error }) =>
