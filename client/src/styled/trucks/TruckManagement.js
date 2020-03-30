@@ -24,6 +24,7 @@ export const TruckManagementListDiv = styled.div`
 export const TruckManagementDiv = styled.div`
 	margin: auto;
 	width: 60%;
+	padding-bottom: 2rem;
 `;
 
 export const TruckMgmtDiv = styled.div`

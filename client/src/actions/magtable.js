@@ -4,10 +4,6 @@ import {
 	SET_TRUCK_LOCATION,
 	REMOVE_TRUCK_LOCATION,
 	PUBLISH_TABLE,
-	// SET_DAILY_MIX,
-	// ADD_DAILY_MESSAGE,
-	// REMOVE_DAILY_MESSAGE,
-	// TOGGLE_BAY_LEAD,
 	AXIOS_JSON_HEADER,
 	SET_SELECTED_APRON,
 	GET_ASSIGNMENT_DATA,
@@ -25,8 +21,6 @@ import axios from "axios";
 import { setAlert } from "./alert";
 import { logout } from "./auth";
 import store from "../store";
-
-//todo remove unused imports.
 
 /**
  * @date 2020-03-24
@@ -164,17 +158,19 @@ export const publishTable = (magtable, publishedBy) => async dispatch => {
 			return assignment;
 		});
 
-		const res = await axios.post("/magtable", data, AXIOS_JSON_HEADER);
-
-		dispatch({
-			type: PUBLISH_TABLE,
-			payload: res.data
-		});
+		await axios.post("/magtable", data, AXIOS_JSON_HEADER);
 
 		dispatch(setAlert("Publish Successful", "success"));
 	} catch (err) {
 		dispatch(setAlert(err.response.data.message, "warning"));
 	}
+};
+
+export const updateTable = magtable => async dispatch => {
+	dispatch({
+		type: PUBLISH_TABLE,
+		payload: magtable
+	});
 };
 
 /**
@@ -215,6 +211,7 @@ export const clearTable = () => dispatch => {
 // 			payload: res.data
 // 		});
 // 	} catch (err) {
+// 		console.log(err);
 // 	}
 // };
 
@@ -234,6 +231,7 @@ export const clearTable = () => dispatch => {
 // 			payload: res.data
 // 		});
 // 	} catch (err) {
+// 		console.log(err);
 // 	}
 // };
 
@@ -276,6 +274,8 @@ export const getMagTable = () => async dispatch => {
 			dispatch(logout());
 		}
 		dispatch(setAlert("Session Expired", "warning"));
+
+		console.log(err);
 	}
 };
 

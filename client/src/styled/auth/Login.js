@@ -41,9 +41,8 @@ export const LoginBlock = styled.div`
 	height: auto;
 	padding: 2rem;
 	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.06), 0 0 6px rgba(0, 0, 0, 0.23);
-	margin: auto;
 	border-radius: 0.45rem;
-	margin-top: 90px;
+	margin: 90px auto auto;
 	background: white;
 	position: relative;
 	&:focus-within ${Background} {
@@ -62,8 +61,7 @@ export const LoginBlock = styled.div`
  */
 export const LoginBtn = styled(OkButton)`
 	color: black;
-	margin: auto;
-	margin-top: 10px;
+	margin: 10px auto auto;
 	padding: 10px;
 	border-radius: 0.45rem;
 `;

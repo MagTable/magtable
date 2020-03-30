@@ -14,9 +14,9 @@ import UserList from "./components/user/UserList";
 import AssignmentTable from "./components/magtable/AssignmentTable";
 import Alert from "./components/common/Alert";
 import NavBar from "./components/common/NavBar";
-import TruckManagementLayout from "./components/trucks/TruckManagementLayout";
-import { createBrowserHistory } from "history";
 import TVView from "./components/tv/TVView";
+import StompClient from "./styled/common/StompClient";
+import TruckManagement from "./components/trucks/TruckManagement";
 
 function App() {
 	useEffect(() => {
@@ -26,46 +26,30 @@ function App() {
 		fetch();
 	}, []);
 
-	const history = createBrowserHistory();
-
 	return (
 		<Provider store={store}>
-			<Router history={history}>
+			<Router>
 				<NavBar />
 				<Alert />
+				<StompClient />
 				<Switch>
-					<Route
-						exact
-						path={process.env.PUBLIC_URL + "/login"}
-						component={Login}
-					/>
-					<Route
-						exact
-						path={process.env.PUBLIC_URL + "/password/reset"}
-						component={PasswordReset}
-					/>
-					<PrivateRoute
-						exact
-						path={process.env.PUBLIC_URL + "/truck/all"}
-						component={TruckManagementLayout}
-					/>
+					<Route exact path="/login" component={Login} />
+					<Route exact path="/password/reset" component={PasswordReset} />
+					<PrivateRoute exact path="/truck/all" component={TruckManagement} />
 					<PrivateRoute exact path="/truck/tv" component={TVView} />
 					<PrivateRoute
 						exact
-						path={process.env.PUBLIC_URL + "/user/all"}
-						component={UserList}
-						adminRoute
-					/>
-					<PrivateRoute
-						exact
-						path={process.env.PUBLIC_URL + "/logout"}
-						component={Logout}
-					/>
-					<PrivateRoute
-						path={process.env.PUBLIC_URL + "/"}
+						path="/"
 						component={AssignmentTable}
 						personnelManagerRoute
 					/>
+					<PrivateRoute
+						exact
+						path="/user/all"
+						component={UserList}
+						adminRoute
+					/>
+					<PrivateRoute exact path="/logout" component={Logout} />
 				</Switch>
 			</Router>
 		</Provider>

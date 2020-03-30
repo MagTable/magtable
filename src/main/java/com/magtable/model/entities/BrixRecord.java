@@ -1,7 +1,8 @@
 package com.magtable.model.entities;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Date;
+import java.util.Objects;
 
 /**
  * Entity Class for Brix Record table
@@ -14,7 +15,8 @@ public class BrixRecord {
     private Double type1;
     private Double type4;
     private Integer litersPurged;
-    private Timestamp timeMeasured;
+    private Date timeMeasured;
+    private String employee;
 
     @Id
     @Column(name = "brixrecordid")
@@ -25,6 +27,17 @@ public class BrixRecord {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+
+    @Basic
+    @Column(name = "employee")
+    public String getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(String employee) {
+        this.employee = employee;
     }
 
     @Basic
@@ -77,13 +90,13 @@ public class BrixRecord {
         this.litersPurged = litersPurged;
     }
 
-    @Basic
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "timemeasured")
-    public Timestamp getTimeMeasured() {
+    public Date getTimeMeasured() {
         return timeMeasured;
     }
 
-    public void setTimeMeasured(Timestamp timeMeasured) {
+    public void setTimeMeasured(Date timeMeasured) {
         this.timeMeasured = timeMeasured;
     }
 
@@ -115,5 +128,11 @@ public class BrixRecord {
         result = 31 * result + (litersPurged != null ? litersPurged.hashCode() : 0);
         result = 31 * result + (timeMeasured != null ? timeMeasured.hashCode() : 0);
         return result;
+    }
+
+
+    @Override
+    public String toString() {
+        return equipmentID + "," + nozzle + "," + type1 + "," + type4 + "," + litersPurged + "," + timeMeasured + "," + Objects.toString(employee, "");
     }
 }

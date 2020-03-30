@@ -94,6 +94,10 @@ export const LaterTitle = styled.h2`
 	color: black;
 `;
 
+export const NowTitle = styled(LaterTitle)`
+	bottom: -10px;
+`;
+
 export const LaterIcon = styled(StatusIcon)`
 	font-size: 60px;
 `;

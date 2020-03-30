@@ -76,7 +76,6 @@ const Login = () => {
 						<Form>
 							<Input
 								onClick={() => setBlur(true)}
-								errors={props.errors.username}
 								value={props.values.username}
 								label="Username"
 								name="username"
@@ -86,7 +85,6 @@ const Login = () => {
 							/>
 							<Input
 								onClick={() => setBlur(true)}
-								errors={props.errors.password}
 								value={props.values.password}
 								label="Password"
 								name="password"

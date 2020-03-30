@@ -4,42 +4,37 @@ import {
 	LaterDiv,
 	LaterIcon,
 	LaterTitle,
+	NowTitle,
 	SideBar,
 	SunIcon,
 	Temp,
-	TempDiv,
-	TempDiv2,
 	TempHolder,
 	WeatherWording,
 	WindArrow,
 	WindIcon
 } from "../../styled/tv/Weather";
-import { SampleWeather as Weather } from "../../res/test_data/magtable";
-import { SpinnerWrap, TempLoadingImg } from "../../styled/common/QualityOfLife";
-
-function getNextWorst() {
-	const warningWeather = [2, 3, 5, 6];
-
-	for (let i = 0; i < 15; i++) {
-		if (
-			warningWeather.includes(
-				Math.floor(Weather.list[i].weather[0].id / Math.pow(10, 2)) % 10
-			)
-		) {
-			return Weather.list[i];
-		}
-	}
-}
+import { useSelector } from "react-redux";
 
 function getDate() {
 	const date = new Date();
-	console.log(date.getMonth());
-	// console.log("month - " + date.getMonth());
-	// console.log("Day - " + date.getDay());
-	console.log(date.getDate());
 	const month = date.getMonth();
 	const day = date.getDate();
 	return ("0" + (month + 1)).slice(-2) + "/" + ("0" + day).slice(-2);
+}
+
+/**
+ *
+ * Function to translate the information to the current day in string.
+ *
+ * @date 2020-03-30
+ * @author Steven Wong
+ * @Category Components/TV
+ * @return {string} Current Day Shortened to 3 Letters
+ */
+function getDay() {
+	const date = new Date();
+	const currentDay = date.toLocaleDateString("en-CA", { weekday: "long" });
+	return currentDay.substr(0, 3);
 }
 
 /**
@@ -51,51 +46,39 @@ function getDate() {
  * @returns {*} The WeatherBar component
  */
 function WeatherBar(props) {
-	getNextWorst();
+	const { weather } = useSelector(state => state.brix);
+
 	return (
-		<TempDiv>
-			<TempDiv2>
-				<SpinnerWrap>
-					<TempLoadingImg className="fas fa-10x fas fa-tools" />
-				</SpinnerWrap>
-				<br />
-				<h1>Page Currently Under Construction</h1>
-			</TempDiv2>
-			<SideBar>
-				<h1>Thu</h1>
-				<h1>{getDate()}</h1>
-				<WeatherWording>
-					{Weather.list[0].weather[0].description}
-				</WeatherWording>
-				<SunIcon className="fas fa-sun" />
-				<TempHolder>
-					<WeatherWording>High</WeatherWording>
-					<Temp>{Math.round(Weather.list[0].main.temp_max)}°</Temp>
-				</TempHolder>
-				<TempHolder>
-					<WeatherWording>Low</WeatherWording>
-					<Temp>{Math.round(Weather.list[0].main.temp_min)}°</Temp>
-				</TempHolder>
-				<GreyTempHolder>
-					<WeatherWording>Feels Like</WeatherWording>
-					<Temp>{Math.round(Weather.list[0].main.feels_like)}°</Temp>
-				</GreyTempHolder>
-				<WindIcon className="fas fa-wind" />
-				<WeatherWording>
-					{Math.round(Weather.list[0].wind.speed * 3.6)} km/h
-				</WeatherWording>
-				<WindArrow
-					className="fas fa-long-arrow-alt-up"
-					angle={Weather.list[0].wind.deg}
-				/>
-				<LaterDiv>
-					<LaterTitle>Later</LaterTitle>
-					<LaterIcon className="far fa-snowflake" />
-					<WeatherWording>20%</WeatherWording>
-					<WeatherWording>@ 2PM</WeatherWording>
-				</LaterDiv>
-			</SideBar>
-		</TempDiv>
+		<SideBar>
+			<h1>{getDay()}</h1>
+			<h1>{getDate()}</h1>
+			<LaterDiv>
+				<NowTitle>Now</NowTitle>
+			</LaterDiv>
+			<WeatherWording>{weather.description}</WeatherWording>
+			<SunIcon className="fas fa-sun" />
+			<TempHolder>
+				<WeatherWording>High</WeatherWording>
+				<Temp>{weather.forecastHigh}°</Temp>
+			</TempHolder>
+			<TempHolder>
+				<WeatherWording>Low</WeatherWording>
+				<Temp>{weather.forecastLow}°</Temp>
+			</TempHolder>
+			<GreyTempHolder>
+				<WeatherWording>Feels Like</WeatherWording>
+				<Temp>{weather.feelsLike}°</Temp>
+			</GreyTempHolder>
+			<WindIcon className="fas fa-wind" />
+			<WeatherWording>{weather.windSpeed} km/h</WeatherWording>
+			<WindArrow className="fas fa-long-arrow-alt-up" angle={weather.windDir} />
+			<LaterDiv>
+				<LaterTitle>Later</LaterTitle>
+				<LaterIcon className="far fa-snowflake" />
+				<WeatherWording>20%</WeatherWording>
+				<WeatherWording>@ 2PM</WeatherWording>
+			</LaterDiv>
+		</SideBar>
 	);
 }
 

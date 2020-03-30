@@ -58,6 +58,7 @@ function ResetPassword() {
 						.oneOf([Yup.ref("newPassword"), null], "Passwords Must Match")
 						.required("Password Required")
 				})}
+				validateOnChange={true}
 			>
 				{props => (
 					<Form>

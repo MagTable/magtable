@@ -20,7 +20,8 @@ const initialState = {
 		forecastLow: null,
 		currentTemperature: null,
 		loading: true
-	}
+	},
+	brixCSV: null
 };
 
 /**
@@ -35,14 +36,30 @@ export default function(state = initialState, action) {
 
 	switch (type) {
 		case GET_WEATHER:
-			const { date, forecastLow, currentTemperature } = payload;
+			const {
+				date,
+				forecastLow,
+				forecastHigh,
+				currentTemperature,
+				feelsLike,
+				windSpeed,
+				windDir,
+				hourlyTemps,
+				description
+			} = payload;
 
 			return {
 				...state,
 				weather: {
 					date,
 					forecastLow,
+					forecastHigh,
 					currentTemperature,
+					feelsLike,
+					windSpeed,
+					windDir,
+					hourlyTemps,
+					description,
 					loading: false
 				}
 			};
@@ -68,6 +85,7 @@ export default function(state = initialState, action) {
 				...state,
 				selectedBrixRecords: [],
 				selectedTruckID: payload.truckID,
+				selectedTruckPrimary: payload.primary,
 				loading: true
 			};
 		case GET_BRIX_RECORDS:
@@ -75,6 +93,7 @@ export default function(state = initialState, action) {
 				...state,
 				selectedBrixRecords: payload.brixRecords,
 				selectedTruckID: payload.truckID,
+				selectedTruckPrimary: payload.primary,
 				loading: false
 			};
 		case SET_DAILY_MIX_CHART_ROW:

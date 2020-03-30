@@ -12,13 +12,13 @@ import { Button } from "../common/FormControl";
 const scrollIn = keyframes`
 	from {
     // transform: scale(0);
-		transform: translateY(-100%);
+		// transform: translateY(-100%);
     opacity: 0;
   }
 
   to {
     // transform: scale(100%);
-		transform: translateY(0);
+		// transform: translateY(0);
     opacity: 1;
   }
 `;
@@ -233,7 +233,6 @@ export const FakePadDiv = styled.div`
 `;
 
 export const PadColumn = styled.div`
-	width: fit-content;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

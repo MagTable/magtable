@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
 import { getRoles, getUsers } from "../../actions/user";
 import { useDispatch, useSelector } from "react-redux";
-import { UserListDiv, UserListSection } from "../../styled/user/User";
+import {
+	UserListDiv,
+	UserListMgmtDiv,
+	UserListSection,
+	UserManagmentListDiv
+} from "../../styled/user/User";
 
 import AddUser from "./AddUser";
 import UserListItem from "./UserListItem";
@@ -48,32 +53,34 @@ const UserList = () => {
 	});
 
 	return (
-		<>
+		<UserListMgmtDiv>
 			<ListTitle>
 				<ListTitleText>Manage Users</ListTitleText>
 			</ListTitle>
-			<UserListDiv>
-				{roles.map(role => (
-					<UserListSection key={role.id}>
-						<h2>{role.name}s</h2>
-						{/*This part checks for users with the same role as above and adds them to that section*/}
-						{!role.empty ? (
-							users.map(
-								user =>
-									user.role.id === role.id && (
-										<UserListItem key={user.id} user={user} />
-									)
-							)
-						) : (
-							<h4 className={"m-0"}>
-								<i className="fas fa-exclamation-circle" /> No {role.name}s
-							</h4>
-						)}
-						<AddUser role={role} />
-					</UserListSection>
-				))}
-			</UserListDiv>
-		</>
+			<UserManagmentListDiv>
+				<UserListDiv>
+					{roles.map(role => (
+						<UserListSection key={role.id}>
+							<h2>{role.name}s</h2>
+							{/*This part checks for users with the same role as above and adds them to that section*/}
+							{!role.empty ? (
+								users.map(
+									user =>
+										user.role.id === role.id && (
+											<UserListItem key={user.id} user={user} />
+										)
+								)
+							) : (
+								<h4 className={"m-0"}>
+									<i className="fas fa-exclamation-circle" /> No {role.name}s
+								</h4>
+							)}
+							<AddUser role={role} />
+						</UserListSection>
+					))}
+				</UserListDiv>
+			</UserManagmentListDiv>
+		</UserListMgmtDiv>
 	);
 };
 

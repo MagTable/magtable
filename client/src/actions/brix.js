@@ -14,7 +14,7 @@ import axios from "axios";
 
 /**
  * @date 2020-03-24
- * @author Arran Woodruff, Steven Wong
+ * @author Arran Woodruff, Steven Wong, MJ Kochuk
  * @category Redux-Actions
  * @module Brix
  */
@@ -24,16 +24,23 @@ import axios from "axios";
  *
  * @method addBrixRecord
  * @param truckID id of truck the measurement is made for
+ * @param selectedTruckPrimary name of currently assigned primary
  * @param brixRecord brixRecord to save to assignment
  * @returns API returns updated list of brix records for the assignment
  */
-export const addBrixRecord = (truckID, brixRecord) => async dispatch => {
+export const addBrixRecord = (
+	truckID,
+	selectedTruckPrimary,
+	brixRecord
+) => async dispatch => {
+	console.log(selectedTruckPrimary);
 	try {
 		dispatch({ type: ADDING_BRIX_RECORD });
 		const res = await axios.post(
 			`/brix/${truckID}`,
 			{
-				...brixRecord
+				...brixRecord,
+				employee: selectedTruckPrimary
 			},
 			AXIOS_JSON_HEADER
 		);
@@ -53,13 +60,14 @@ export const addBrixRecord = (truckID, brixRecord) => async dispatch => {
  *
  * @method getBrixRecords
  * @param truckID id of truck to retrieve records for
+ * @param primary name of currently assigned primary
  * @returns API returns a list of brix records for the requested truck
  */
-export const getBrixRecords = truckID => async dispatch => {
+export const getBrixRecords = (truckID, primary) => async dispatch => {
 	try {
 		dispatch({
 			type: FETCHING_BRIX_RECORDS,
-			payload: { truckID }
+			payload: { truckID, primary }
 		});
 
 		const res = await axios.get(`/brix/${truckID}`);
@@ -67,7 +75,7 @@ export const getBrixRecords = truckID => async dispatch => {
 		setTimeout(() => {
 			dispatch({
 				type: GET_BRIX_RECORDS,
-				payload: { brixRecords: res.data, truckID }
+				payload: { brixRecords: res.data, truckID, primary }
 			});
 		}, 500);
 	} catch (err) {
@@ -118,11 +126,55 @@ export const getWeather = () => async dispatch => {
 		});
 		forecastLow = Math.ceil(parseInt(forecastLow));
 
+		let forecastHigh = -1000; // lower than realistic
+		weather.list.slice(0, 8).forEach(elem => {
+			if (elem.main.temp > forecastHigh)
+				forecastHigh = Math.floor(elem.main.temp);
+		});
+		forecastHigh = Math.ceil(parseInt(forecastHigh));
+
 		let currentTemperature = Math.floor(weather.list[0].main.temp);
+		let feelsLike = weather.list[0].main.feels_like;
+		let windSpeed = Math.round(weather.list[0].wind.speed * 3.6); // Wind speed in KM/H
+		let windDir = weather.list[0].wind.deg;
+		let description = weather.list[0].weather.description; // The description of the current weather, ie sunny
+
+		let hourlyTemps = [
+			{
+				temp: weather.list[3].main.temp,
+				conditionID: weather.list[3].weather[0].id
+			},
+			{
+				temp: weather.list[6].main.temp,
+				conditionID: weather.list[6].weather[0].id
+			},
+			{
+				temp: weather.list[9].main.temp,
+				conditionID: weather.list[9].weather[0].id
+			},
+			{
+				temp: weather.list[12].main.temp,
+				conditionID: weather.list[12].weather[0].id
+			},
+			{
+				temp: weather.list[15].main.temp,
+				conditionID: weather.list[15].weather[0].id
+			}
+		];
 
 		dispatch({
 			type: GET_WEATHER,
-			payload: { date, forecastLow, currentTemperature }
+			payload: {
+				date,
+				forecastLow,
+				forecastHigh,
+				currentTemperature,
+				feelsLike,
+				windSpeed,
+				windDir,
+				hourlyTemps,
+				description
+			}
 		});
 	} catch (err) {}
 };

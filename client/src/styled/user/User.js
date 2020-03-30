@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { isMobile } from "react-device-detect";
 
 /**
@@ -8,17 +8,39 @@ import { isMobile } from "react-device-detect";
  * @module User
  */
 
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+export const UserListMgmtDiv = styled.div`
+	width: 100%;
+`;
+
 /**
  * Holds all of the rows / information in the user list.
  */
+export const UserManagmentListDiv = styled.div`
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1.2;
+	flex-basis: 0;
+	overflow: auto;
+	width: auto;
+	max-height: calc(100vh - 120px);
+	padding: 1rem 2.5rem;
+	animation: 0.3s ${fadeIn} ease-out;
+`;
+
 export const UserListDiv = styled.div`
 	margin: auto;
-	overflow: auto;
 	width: 40vw;
-	max-height: calc(100vh - 70px);
-	padding: 1rem 2.5rem;
-	${isMobile &&  // Mobile rules
-		`padding-top: 5px;`}
+	padding-bottom: 2rem;
 `;
 
 export const UserListSection = styled.div`
@@ -42,7 +64,6 @@ export const UserListItem = styled.div`
 		: // Desktop Rules
 		  `
 		  width: 100%;
-		  background-color: #f2faff;
 		  height: 60px;
 		  justify-content: center;
 		  display: flex;
@@ -51,6 +72,7 @@ export const UserListItem = styled.div`
 		  justify-content: center;
 		  font-size: 20px;
 		  padding-left: 20px;
+		  
 		  `}
 `;
 
@@ -82,6 +104,17 @@ export const UserManipulateBlock = styled.div`
 	display: flex;
 	background-color: #f2faff;
 	align-items: center;
+	width: 100%;
+	margin: 0.5rem;
+	background-color: #f2faff;
+	border-radius: 0.5rem;
+	text-overflow: ellipsis;
+	min-height: 65px;
+
+	:hover {
+		background-color: #dff3ff;
+	}
+
 	${isMobile && // Mobile rules
 		`justify-content: space-around;
 		  width: 100vw;
@@ -89,11 +122,4 @@ export const UserManipulateBlock = styled.div`
 		  border-bottom: 2px solid #DEDEDE; 
 		  margin-bottom: 10px;`}
 	\`;
-`;
-
-export const SeparatorLine = styled.div`
-	border-bottom: 2px solid #dedede;
-	height: 0px;
-	width: auto;
-	margin-top: 20px;
 `;

@@ -51,6 +51,7 @@ const StyledSection = styled.section`
 	position: relative;
 	z-index: 100;
 	padding: 2rem;
+	min-width: 20%;
 	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.06), 0 0 6px rgba(0, 0, 0, 0.23);
 	border-radius: 0.45rem;
 `;

@@ -8,15 +8,22 @@ import com.magtable.services.ErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
- *REST controller for BRIX routes
+ * REST controller for BRIX routes
+ *
  * @author Arran Woodruff
  */
 @RestController
 @RequestMapping("/brix")
 public class BrixController {
+
+    ZoneId defaultZoneId = ZoneId.systemDefault();
 
     @Autowired
     private BrixRepository brixRepository;
@@ -45,7 +52,7 @@ public class BrixController {
      * access          System Admins, Personnel Managers, Mechanics
      *
      * @param equipmentID - Id of the Truck
-     * @param brixRecord - Brix record to save
+     * @param brixRecord  - Brix record to save
      * @return The inserted brix record
      */
     @PostMapping("/{id}")
@@ -65,5 +72,53 @@ public class BrixController {
     @GetMapping("/chart")
     public List<BrixChartRecord> getBrixChart() {
         return brixChartRepository.findAll();
+    }
+
+    @GetMapping(path = "/export/{from}/{to}/{id}")
+    public String exportToCSV(@PathVariable(value = "from") String from,
+                              @PathVariable(value = "to") String to,
+                              @PathVariable(value = "id") Integer equipmentID) {
+
+        StringBuilder records = new StringBuilder();
+        records.append("Truck Number, Nozzle, Type1, Type4, Liters Purged, Time Measured\n");
+
+        LocalDate ldFrom = LocalDate.parse(from);
+        LocalDate ldTo = LocalDate.parse(to).plusDays(1);
+
+        Date dateFrom = Date.from(ldFrom.atStartOfDay(defaultZoneId).toInstant());
+        Date dateTo = Date.from(ldTo.atStartOfDay(defaultZoneId).toInstant());
+
+        ArrayList<BrixRecord> brixRecords = (ArrayList<BrixRecord>)
+                brixRepository.findBetweenDates(
+                        dateFrom,
+                        dateTo,
+                        equipmentID);
+
+        for (BrixRecord record : brixRecords) {
+            records.append(record.toString()).append("\n");
+        }
+        return records.toString();
+    }
+
+    @GetMapping(path = "/export/{from}/{to}")
+    public String exportToCSV(@PathVariable(value = "from") String from,
+                              @PathVariable(value = "to") String to) {
+        StringBuilder records = new StringBuilder();
+        records.append("Truck Number, Nozzle, Type1, Type4, Liters Purged, Time Measured\n");
+
+        LocalDate ldFrom = LocalDate.parse(from);
+        LocalDate ldTo = LocalDate.parse(to).plusDays(1);
+
+        Date dateFrom = Date.from(ldFrom.atStartOfDay(defaultZoneId).toInstant());
+        Date dateTo = Date.from(ldTo.atStartOfDay(defaultZoneId).toInstant());
+
+        ArrayList<BrixRecord> brixRecords =
+                (ArrayList<BrixRecord>) brixRepository.findBetweenDates(dateFrom, dateTo);
+
+        for (BrixRecord record : brixRecords) {
+            records.append(record.toString()).append("\n");
+        }
+
+        return records.toString();
     }
 }

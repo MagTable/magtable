@@ -13,6 +13,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { EAST_APRON, WEST_APRON } from "../../actions/constants";
 import { DoubleClickConfirm } from "../../styled/common/FormControl";
+import Modal from "../modal/Modal";
+import BrixExport from "../brix/BrixExport";
 
 /**
  * @date 3/1/2020
@@ -48,11 +50,19 @@ function OverflowLocations({ children, color, hoverColor, open, setOpen }) {
 	const magtable = useSelector(state => state.magtable);
 	const authUsername = useSelector(state => state.auth.user.username);
 
+	const timePublished =
+		magtable.timePublished && new Date(magtable.timePublished);
+	const publishedBy = magtable.publishedBy;
+
+	// todo close overflow on button press? - arran
 	const openOverflow = () => {
 		setOpen(true);
 	};
+	const [showModal, setShowModal] = useState(false);
 
-	// Apron Switch Toggle
+	const handleClose = () => setShowModal(false);
+	const handleShow = () => setShowModal(true);
+
 	const handleApronSwitch = () => {
 		if (selectedApron === EAST_APRON) {
 			dispatch(setSelectedApron(WEST_APRON));
@@ -61,7 +71,6 @@ function OverflowLocations({ children, color, hoverColor, open, setOpen }) {
 		}
 	};
 
-	// Publishing of the MagTable
 	const handlePublish = () => {
 		if (!publishConfirmation) {
 			setPublishConfirmation(true);
@@ -78,7 +87,6 @@ function OverflowLocations({ children, color, hoverColor, open, setOpen }) {
 		}
 	};
 
-	// Clearing of the MagTable.
 	const handleClear = () => {
 		if (!clearConfirmation) {
 			setClearConfirmation(true);
@@ -107,40 +115,43 @@ function OverflowLocations({ children, color, hoverColor, open, setOpen }) {
 								Apron: {selectedApron}
 							</OverflowMenuButton>
 
-							<DoubleClickConfirm
-								active={clearConfirmation}
-								color={"var(--context-red)"}
+							<OverflowMenuButton
+								hoverColor={!clearConfirmation && "var(--context-red-light)"}
+								waiting={clearDisabled}
+								disabled={clearDisabled}
+								onClick={handleClear}
 							>
-								<OverflowMenuButton
-									hoverColor={
-										clearConfirmation
-											? "var(--context-red)"
-											: "var(--context-red-light)"
-									}
-									disabled={clearDisabled}
-									onClick={handleClear}
-								>
-									{clearConfirmation ? "Confirm Clear" : "Clear All"}
-								</OverflowMenuButton>
-							</DoubleClickConfirm>
+								{clearConfirmation ? "Confirm Clear" : "Clear All"}
+							</OverflowMenuButton>
 
-							<DoubleClickConfirm
-								active={publishConfirmation}
-								color={"var(--context-blue)"}
-							>
+							<DoubleClickConfirm active={publishConfirmation}>
 								<OverflowMenuButton
 									hoverColor={
-										publishConfirmation
-											? "var(--context-blue)"
-											: "var(--context-blue-light)"
+										!publishConfirmation && "var(--context-blue-light)"
 									}
-									disabled={publishDisabled}
+									waiting={publishDisabled}
+									disabed={publishDisabled}
 									onClick={handlePublish}
 								>
 									{publishConfirmation ? "Confirm Publish" : "Publish"}
 								</OverflowMenuButton>
+								<OverflowMenuButton disabled>
+									Published By: {publishedBy ? publishedBy : "..."}
+								</OverflowMenuButton>
+								<OverflowMenuButton disabled>
+									Submitted At:{" "}
+									{timePublished
+										? timePublished.getHours() + timePublished.getMinutes()
+										: "..."}
+								</OverflowMenuButton>
+								<OverflowMenuButton onClick={handleShow}>
+									Export Brix Records
+								</OverflowMenuButton>
 							</DoubleClickConfirm>
 						</OverflowMenu>
+						<Modal show={showModal} handleClose={handleClose}>
+							<BrixExport setShowModal={setShowModal} />
+						</Modal>
 					</div>
 				</>
 			)}
