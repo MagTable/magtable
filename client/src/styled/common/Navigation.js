@@ -13,9 +13,15 @@ import { Link } from "react-router-dom";
  **/
 export const AeroLogo = styled.img`
 	height: 55px;
-	padding: 8px;
-	padding-left: 10px;
+	padding: 8px 8px 8px 10px;
 	z-index: 20;
+	transition: filter 0.5s ease-in-out;
+
+	${({ connected }) =>
+		!connected &&
+		`
+			filter: hue-rotate(115deg);
+	`}
 `;
 
 /**
@@ -106,7 +112,7 @@ export const NavPane = styled.div`
 	background-color: #232f3e;
 	position: absolute;
 	top: 70px;
-	right: 0px;
+	right: 0;
 	max-height: ${({ open }) => (open ? "295px" : "0px")};
 	z-index: 100;
 

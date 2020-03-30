@@ -4,7 +4,7 @@ import { MTR_PUBLISH } from "../../actions/constants";
 import { useDispatch } from "react-redux";
 import { updateTable } from "../../actions/magtable";
 
-const StompClient = () => {
+const StompClient = ({ setWSConnected }) => {
 	const dispatch = useDispatch();
 	const client = new Client({
 		brokerURL: "ws://localhost:8080/ws/websocket",
@@ -13,8 +13,19 @@ const StompClient = () => {
 		heartbeatOutgoing: 30000
 	});
 
+	client.onWebSocketClose = () => {
+		setWSConnected(false);
+	};
+
 	client.onConnect = () => {
 		client.subscribe("/topic/mtr", onMessage);
+		setWSConnected(true);
+	};
+
+	client.onWebSocketError = () => {
+		client.brokerURL =
+			"ws://https://sait-capstone2020.herokuapp.com/ws/websocket";
+		client.activate();
 	};
 
 	const onMessage = e => {
