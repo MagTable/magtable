@@ -102,7 +102,7 @@ function TruckManagement() {
 				</TruckManagementDiv>
 			</TruckManagementListDiv>
 			<Modal show={editTruck !== null} handleClose={() => setEditTruck(null)}>
-				<EditTruck truck={editTruck} />
+				<EditTruck truck={editTruck} handleClose={() => setEditTruck(null)} />
 			</Modal>
 		</TruckMgmtDiv>
 	);

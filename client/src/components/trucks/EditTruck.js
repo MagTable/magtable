@@ -58,7 +58,7 @@ const SubmitDiv = styled.div`
 	grid-area: submit;
 `;
 
-const EditTruck = ({ truck }) => {
+const EditTruck = ({ truck, handleClose }) => {
 	const dispatch = useDispatch();
 	const truckStatuses = TRUCK_STATUSES;
 	const vehicleTypes = VEHICLE_TYPES;
@@ -83,6 +83,7 @@ const EditTruck = ({ truck }) => {
 			}}
 			onSubmit={values => {
 				dispatch(editTruck(values));
+				handleClose();
 			}}
 			validationSchema={Yup.object().shape({
 				status: Yup.string()
