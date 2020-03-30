@@ -127,7 +127,8 @@ export const getWeather = () => async dispatch => {
 
 		let currentTemperature = Math.floor(weather.list[0].main.temp);
 		let feelsLike = weather.list[0].main.feels_like;
-		let wind = weather.list[0].wind; // Contains both speed and direction
+		let windSpeed = Math.round(weather.list[0].wind.speed * 3.6); // Wind speed in KM/H
+		let windDir = weather.list[0].wind.deg;
 		let description = weather.list[0].weather.description; // The description of the current weather, ie sunny
 
 		let hourlyTemps = [
@@ -161,7 +162,8 @@ export const getWeather = () => async dispatch => {
 				forecastHigh,
 				currentTemperature,
 				feelsLike,
-				wind,
+				windSpeed,
+				windDir,
 				hourlyTemps,
 				description
 			}

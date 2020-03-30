@@ -35,14 +35,30 @@ export default function(state = initialState, action) {
 
 	switch (type) {
 		case GET_WEATHER:
-			const { date, forecastLow, currentTemperature } = payload;
+			const {
+				date,
+				forecastLow,
+				forecastHigh,
+				currentTemperature,
+				feelsLike,
+				windSpeed,
+				windDir,
+				hourlyTemps,
+				description
+			} = payload;
 
 			return {
 				...state,
 				weather: {
 					date,
 					forecastLow,
+					forecastHigh,
 					currentTemperature,
+					feelsLike,
+					windSpeed,
+					windDir,
+					hourlyTemps,
+					description,
 					loading: false
 				}
 			};
