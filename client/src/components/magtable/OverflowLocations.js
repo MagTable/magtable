@@ -13,6 +13,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { EAST_APRON, WEST_APRON } from "../../actions/constants";
 import { DoubleClickConfirm } from "../../styled/common/FormControl";
+import Modal from "../modal/Modal";
+import BrixExport from "../brix/BrixExport";
 
 /**
  * @date 3/1/2020
@@ -52,9 +54,14 @@ function OverflowLocations({ children, color, hoverColor, open, setOpen }) {
 		magtable.timePublished && new Date(magtable.timePublished);
 	const publishedBy = magtable.publishedBy;
 
+	// todo close overflow on button press? - arran
 	const openOverflow = () => {
 		setOpen(true);
 	};
+	const [showModal, setShowModal] = useState(false);
+
+	const handleClose = () => setShowModal(false);
+	const handleShow = () => setShowModal(true);
 
 	const handleApronSwitch = () => {
 		if (selectedApron === EAST_APRON) {
@@ -137,8 +144,14 @@ function OverflowLocations({ children, color, hoverColor, open, setOpen }) {
 										? timePublished.getHours() + timePublished.getMinutes()
 										: "..."}
 								</OverflowMenuButton>
+								<OverflowMenuButton onClick={handleShow}>
+									Export Brix Records
+								</OverflowMenuButton>
 							</DoubleClickConfirm>
 						</OverflowMenu>
+						<Modal show={showModal} handleClose={handleClose}>
+							<BrixExport setShowModal={setShowModal} />
+						</Modal>
 					</div>
 				</>
 			)}

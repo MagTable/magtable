@@ -497,7 +497,6 @@ export const GET_BRIX_CHART = "GET_BRIX_CHART";
  * @const {string} GET_WEATHER
  */
 export const GET_WEATHER = "GET_WEATHER";
-export const GET_BRIX_CSV = "GET_BRIX_CSV";
 
 /**
  * Sets daily mix.

@@ -16,7 +16,7 @@ import {
 import store from "../store";
 
 import { setAlert } from "./alert";
-import { getBrixChart, getWeather, getCSV } from "./brix";
+import { getBrixChart, getWeather } from "./brix";
 import { getMagTable, getParkingLocations } from "./magtable";
 
 /**
@@ -62,7 +62,6 @@ export const loadUser = () => async dispatch => {
 			dispatch(getBrixChart());
 			dispatch(getParkingLocations());
 			dispatch(getWeather());
-			dispatch(getCSV());
 		}
 	} catch (err) {
 		dispatch({

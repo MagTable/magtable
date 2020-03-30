@@ -60,7 +60,13 @@ function WeatherInfo() {
 		if (dailyMixChartRow) {
 			dispatch(setDailyMixChartRow(dailyMixChartRow));
 		}
-	}, [dailyMix, recommendedChartRow]);
+	}, [
+		dailyMix,
+		recommendedChartRow,
+		recommendedMix,
+		dailyMixChartRow,
+		dispatch
+	]);
 
 	const getDailyMixColor = () => {
 		// if something went wrong with the weather pull, default to danger

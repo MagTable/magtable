@@ -332,7 +332,7 @@ function TruckListItem({ assignment, noticeOpen, showAM, openBrixModal }) {
 	const currentSecondary = showAM ? amSecondary : pmSecondary;
 
 	const handleBrixClick = () => {
-		dispatch(getBrixRecords(assignment.equipment.id));
+		dispatch(getBrixRecords(assignment.equipment.id, currentPrimary?.name));
 
 		openBrixModal();
 	};

@@ -58,7 +58,7 @@ export const BrixForm = styled(Form)`
 	grid-template-areas:
 		"type1 type4"
 		"nozzle purged"
-		"rowdata rowdata"
+		". ."
 		"submit submit";
 
 	#nozzle {
@@ -116,15 +116,6 @@ export const BrixTableWrapper = styled.div`
 		tr {
 			animation: 1s ${fadeIn} ease-out;
 		}
-	}
-`;
-
-export const BrixManagementChartRowData = styled.div`
-	display: flex;
-	justify-content: space-between;
-	width: 100%;
-	h4 {
-		margin: 0;
 	}
 `;
 
@@ -207,5 +198,18 @@ export const DailyMixButtons = styled.div`
 		:hover {
 			color: var(--shader-grey);
 		}
+	}
+`;
+
+export const BrixExportWrapper = styled.div`
+	input[type="text"] {
+		box-sizing: border-box;
+	}
+
+	h2 {
+		margin-top: 0;
+	}
+	h4 {
+		margin: 0 0 0.25rem 0;
 	}
 `;

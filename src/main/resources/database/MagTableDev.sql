@@ -57,6 +57,7 @@ CREATE TABLE BrixRecord
     type4               FLOAT(3),
     litersPurged        INT(5),
     timeMeasured        TIMESTAMP,
+    employee            VARCHAR(50),
     PRIMARY KEY (BrixRecordID),
     CONSTRAINT FK_BrixRecord_Assignment FOREIGN KEY (equipmentID) REFERENCES Equipment (equipmentID) ON DELETE RESTRICT ON UPDATE RESTRICT,
     CONSTRAINT CK_equipment_truck CHECK (equipmentID >= 0 AND equipmentID <= 1000), -- must be a truck

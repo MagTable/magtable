@@ -15,6 +15,7 @@ public class BrixRecord {
     private Double type4;
     private Integer litersPurged;
     private Date timeMeasured;
+    private String employee;
 
     @Id
     @Column(name = "brixrecordid")
@@ -25,6 +26,17 @@ public class BrixRecord {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+
+    @Basic
+    @Column(name = "employee")
+    public String getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(String employee) {
+        this.employee = employee;
     }
 
     @Basic
@@ -120,6 +132,6 @@ public class BrixRecord {
 
     @Override
     public String toString() {
-        return equipmentID + "," + nozzle + "," + type1 + "," + type4  + "," + litersPurged  + "," + timeMeasured;
+        return equipmentID + "," + nozzle + "," + type1 + "," + type4 + "," + litersPurged + "," + timeMeasured + "," + employee;
     }
 }

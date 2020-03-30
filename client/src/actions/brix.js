@@ -5,7 +5,6 @@ import {
 	FETCHING_BRIX_RECORDS,
 	ADDING_BRIX_RECORD,
 	GET_BRIX_CHART,
-	GET_BRIX_CSV,
 	GET_WEATHER,
 	SET_DAILY_MIX_CHART_ROW
 } from "./constants";
@@ -25,16 +24,23 @@ import axios from "axios";
  *
  * @method addBrixRecord
  * @param truckID id of truck the measurement is made for
+ * @param selectedTruckPrimary name of currently assigned primary
  * @param brixRecord brixRecord to save to assignment
  * @returns API returns updated list of brix records for the assignment
  */
-export const addBrixRecord = (truckID, brixRecord) => async dispatch => {
+export const addBrixRecord = (
+	truckID,
+	selectedTruckPrimary,
+	brixRecord
+) => async dispatch => {
+	console.log(selectedTruckPrimary);
 	try {
 		dispatch({ type: ADDING_BRIX_RECORD });
 		const res = await axios.post(
 			`/brix/${truckID}`,
 			{
-				...brixRecord
+				...brixRecord,
+				employee: selectedTruckPrimary
 			},
 			AXIOS_JSON_HEADER
 		);
@@ -54,13 +60,14 @@ export const addBrixRecord = (truckID, brixRecord) => async dispatch => {
  *
  * @method getBrixRecords
  * @param truckID id of truck to retrieve records for
+ * @param primary name of currently assigned primary
  * @returns API returns a list of brix records for the requested truck
  */
-export const getBrixRecords = truckID => async dispatch => {
+export const getBrixRecords = (truckID, primary) => async dispatch => {
 	try {
 		dispatch({
 			type: FETCHING_BRIX_RECORDS,
-			payload: { truckID }
+			payload: { truckID, primary }
 		});
 
 		const res = await axios.get(`/brix/${truckID}`);
@@ -68,7 +75,7 @@ export const getBrixRecords = truckID => async dispatch => {
 		setTimeout(() => {
 			dispatch({
 				type: GET_BRIX_RECORDS,
-				payload: { brixRecords: res.data, truckID }
+				payload: { brixRecords: res.data, truckID, primary }
 			});
 		}, 500);
 	} catch (err) {
@@ -126,16 +133,6 @@ export const getWeather = () => async dispatch => {
 			payload: { date, forecastLow, currentTemperature }
 		});
 	} catch (err) {}
-};
-
-export const getCSV = () => async dispatch => {
-	try {
-		const res = await axios.get("/brix/export/2020-03-25/2020-04-29/8");
-		dispatch({
-			type: GET_BRIX_CSV,
-			payload: res.data
-		});
-	} catch (e) {}
 };
 
 //todo Arran pls update this

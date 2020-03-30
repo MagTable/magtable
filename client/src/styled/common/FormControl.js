@@ -82,6 +82,10 @@ export const OkButton = styled(Button)`
 	:hover {
 		background: #80c9ff;
 	}
+
+	:disabled {
+		background: #80afd1;
+	}
 `;
 
 /**

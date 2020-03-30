@@ -5,8 +5,7 @@ import {
 	GET_BRIX_CHART,
 	GET_BRIX_RECORDS,
 	GET_WEATHER,
-	SET_DAILY_MIX_CHART_ROW,
-	GET_BRIX_CSV
+	SET_DAILY_MIX_CHART_ROW
 } from "../actions/constants";
 
 const initialState = {
@@ -53,11 +52,6 @@ export default function(state = initialState, action) {
 				...state,
 				brixChart: payload
 			};
-		case GET_BRIX_CSV:
-			return {
-				...state,
-				brixCSV: payload
-			};
 		case ADD_BRIX_RECORD:
 			return {
 				...state,
@@ -75,6 +69,7 @@ export default function(state = initialState, action) {
 				...state,
 				selectedBrixRecords: [],
 				selectedTruckID: payload.truckID,
+				selectedTruckPrimary: payload.primary,
 				loading: true
 			};
 		case GET_BRIX_RECORDS:
@@ -82,6 +77,7 @@ export default function(state = initialState, action) {
 				...state,
 				selectedBrixRecords: payload.brixRecords,
 				selectedTruckID: payload.truckID,
+				selectedTruckPrimary: payload.primary,
 				loading: false
 			};
 		case SET_DAILY_MIX_CHART_ROW:
