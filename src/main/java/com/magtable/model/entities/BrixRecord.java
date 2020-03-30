@@ -2,6 +2,7 @@ package com.magtable.model.entities;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Entity Class for Brix Record table
@@ -132,6 +133,6 @@ public class BrixRecord {
 
     @Override
     public String toString() {
-        return equipmentID + "," + nozzle + "," + type1 + "," + type4 + "," + litersPurged + "," + timeMeasured + "," + employee;
+        return equipmentID + "," + nozzle + "," + type1 + "," + type4 + "," + litersPurged + "," + timeMeasured + "," + Objects.toString(employee, "");
     }
 }
