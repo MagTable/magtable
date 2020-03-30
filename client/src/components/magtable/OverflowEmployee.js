@@ -7,7 +7,7 @@ import {
 } from "../../styled/magtable/Overflow";
 import { ClickCatcher } from "../../styled/common/ClickCatcher";
 import AddEmployeeShift from "./AddEmployeeShift";
-import Modal from "../modal/Modal";
+import Modal from "../common/Modal";
 import { useSelector } from "react-redux";
 import { SYSTEM_ADMINISTRATOR } from "../../actions/constants";
 

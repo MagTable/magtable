@@ -9,7 +9,7 @@ import {
 } from "../../styled/trucks/TruckManagement";
 import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
 import AddTruck from "./AddTruck";
-import Modal from "../modal/Modal";
+import Modal from "../common/Modal";
 import { FilterIcon } from "../../styled/magtable/Overflow";
 import EditTruck from "./EditTruck";
 import {

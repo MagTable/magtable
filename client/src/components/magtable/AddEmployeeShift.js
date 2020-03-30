@@ -21,7 +21,7 @@ import Input from "../common/Input";
 
 const AddEmployeeForm = styled(Form)`
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 200px 200px;
 	grid-auto-rows: auto;
 	grid-gap: 1rem;
 	grid-template-areas:
