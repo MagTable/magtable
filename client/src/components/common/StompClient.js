@@ -8,7 +8,7 @@ const StompClient = ({ setWSConnected }) => {
 	const dispatch = useDispatch();
 	const client = new Client({
 		brokerURL: "ws://localhost:8080/ws/websocket",
-		reconnectDelay: 3000,
+		// brokerURL: "wss://sait-capstone2020.herokuapp.com/ws/websocket",
 		heartbeatIncoming: 30000,
 		heartbeatOutgoing: 30000
 	});
@@ -20,12 +20,6 @@ const StompClient = ({ setWSConnected }) => {
 	client.onConnect = () => {
 		client.subscribe("/topic/mtr", onMessage);
 		setWSConnected(true);
-	};
-
-	client.onWebSocketError = () => {
-		client.brokerURL =
-			"ws://https://sait-capstone2020.herokuapp.com/ws/websocket";
-		client.activate();
 	};
 
 	const onMessage = e => {
