@@ -33,10 +33,10 @@ export const Input = styled.input`
 export const DoubleClickConfirm = styled.div`
 	transition: background 0.3s ease-in-out;
 
-	${({ active, color }) =>
+	${({ active }) =>
 			active &&
 			`
-			background: ${color} !important;
+			background: var(--context-grey-light) !important;
 	`}
 		:not(:last-child) {
 		border-bottom: 2px solid var(--context-grey);
@@ -82,6 +82,10 @@ export const OkButton = styled(Button)`
 	:hover {
 		background: #80c9ff;
 	}
+
+	:disabled {
+		background: #80afd1;
+	}
 `;
 
 /**
@@ -117,17 +121,16 @@ export const ToggleLabelLeftNotice = styled.h4`
 	width: 100%;
 	color: var(--title-bright);
 	font-family: "Noto Sans KR", sans-serif;
-	text-align center;
+	text-align: center;
 `;
 
 export const ToggleLabelRightNotice = styled.h4`
 	padding-right: 50px;
-	text-align: left;
 	margin: 0 0 0 0;
 	width: 100%;
 	color: var(--title-bright);
 	font-family: "Noto Sans KR", sans-serif;
-	text-align center;
+	text-align: center;
 `;
 
 /**

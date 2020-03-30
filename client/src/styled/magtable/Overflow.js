@@ -24,7 +24,7 @@ export const OverflowMenu = styled.div`
 
 		border-left: 5px solid transparent;
 		border-right: 5px solid transparent;
-		border-bottom: 5px solid white};
+		border-bottom: 5px solid var(--context-grey);
 	}
 
 	#container {
@@ -60,13 +60,16 @@ export const OverflowMenuButton = styled.button`
 	font-weight: bold;
 
 	:hover {
-		background: ${({ hoverColor }) => hoverColor || "#c7c7c7"};
+		background: ${({ hoverColor }) =>
+			hoverColor || "var(--context-grey-light)"};
 	}
 
-	:disabled {
+	${({ waiting }) =>
+		waiting &&
+		`
 		background: var(--context-grey-light);
 		cursor: wait;
-	}
+	`}
 `;
 
 export const FilterIcon = styled.i`

@@ -20,7 +20,8 @@ const initialState = {
 		forecastLow: null,
 		currentTemperature: null,
 		loading: true
-	}
+	},
+	brixCSV: null
 };
 
 /**
@@ -84,6 +85,7 @@ export default function(state = initialState, action) {
 				...state,
 				selectedBrixRecords: [],
 				selectedTruckID: payload.truckID,
+				selectedTruckPrimary: payload.primary,
 				loading: true
 			};
 		case GET_BRIX_RECORDS:
@@ -91,6 +93,7 @@ export default function(state = initialState, action) {
 				...state,
 				selectedBrixRecords: payload.brixRecords,
 				selectedTruckID: payload.truckID,
+				selectedTruckPrimary: payload.primary,
 				loading: false
 			};
 		case SET_DAILY_MIX_CHART_ROW:

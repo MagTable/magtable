@@ -1,6 +1,5 @@
 import {
 	BrixForm,
-	BrixManagementChartRowData,
 	BrixTableTitle,
 	BrixTableWrapper,
 	BrixWrapper,
@@ -34,6 +33,7 @@ function BrixManagement() {
 	const {
 		selectedBrixRecords,
 		selectedTruckID,
+		selectedTruckPrimary,
 		loading,
 		addingBrixRecord,
 		dailyMixChartRow
@@ -90,7 +90,9 @@ function BrixManagement() {
 					timeMeasured: new Date()
 				}}
 				onSubmit={(values, { resetForm }) => {
-					dispatch(addBrixRecord(selectedTruckID, { ...values }));
+					dispatch(
+						addBrixRecord(selectedTruckID, selectedTruckPrimary, { ...values })
+					);
 					resetForm();
 				}}
 				validationSchema={Yup.object().shape({
@@ -186,17 +188,18 @@ function BrixManagement() {
 								/>
 							)}
 						</Field>
-						<BrixManagementChartRowData id="rowdata">
+						<ChartRowDataItem error={errors.nozzle === nozzleMinError}>
 							{dailyMixChartRow ? (
-								<>
-									<ChartRowDataItem error={errors.nozzle === nozzleMinError}>
-										Minimum Nozzle Brix: {dailyMixChartRow.brix}
-									</ChartRowDataItem>
-								</>
+								<span>Minimum Nozzle Brix: {dailyMixChartRow.brix}</span>
 							) : (
-								<h4>Validation Data Not Available, Please Verify Manually.</h4>
+								<span>
+									Validation Data Not Available, Please Verify Manually.
+								</span>
 							)}
-						</BrixManagementChartRowData>
+						</ChartRowDataItem>
+						<ChartRowDataItem id={""}>
+							Operator: {selectedTruckPrimary ? selectedTruckPrimary : "N/A"}
+						</ChartRowDataItem>
 						<div id={"submit"}>
 							<LoginBtn disabled={addingBrixRecord} type={"submit"}>
 								{addingBrixRecord ? (

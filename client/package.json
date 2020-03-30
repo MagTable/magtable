@@ -8,8 +8,11 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "formik": "^2.1.4",
+    "js-file-download": "^0.4.10",
+    "moment": "^2.24.0",
     "react": "^16.13.1",
     "react-addons-css-transition-group": "^15.6.2",
+    "react-dates": "^21.8.0",
     "react-device-detect": "^1.11.14",
     "react-dnd": "^10.0.2",
     "react-dnd-html5-backend": "^10.0.2",
@@ -51,6 +54,7 @@
   },
   "devDependencies": {
     "better-docs": "^1.4.7",
+    "@stomp/stompjs": "^5.4.4",
     "jsdoc": "^3.6.3",
     "prop-types": "^15.7.2",
     "uuid": "^7.0.2"
