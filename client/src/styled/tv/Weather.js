@@ -72,6 +72,7 @@ export const LaterDiv = styled.div`
 	margin-top: 20px;
 	position: relative;
 	color: #a2a2a2;
+	padding-top: 25px;
 `;
 
 export const LaterTitle = styled.h2`
@@ -81,7 +82,7 @@ export const LaterTitle = styled.h2`
 	position: absolute;
 	margin: auto;
 	right: 32px;
-	bottom: 118px;
+	bottom: 205px;
 	color: black;
 `;
 

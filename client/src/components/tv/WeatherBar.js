@@ -14,6 +14,7 @@ import {
 	WindIcon
 } from "../../styled/tv/Weather";
 import { useSelector } from "react-redux";
+import { useWindowSize } from "../common/MenuPane";
 
 function getDate() {
 	const date = new Date();
@@ -74,10 +75,23 @@ function WeatherBar(props) {
 			<WindArrow className="fas fa-long-arrow-alt-up" angle={weather.windDir} />
 			<LaterDiv>
 				<LaterTitle>Later</LaterTitle>
-				<LaterIcon className="far fa-snowflake" />
-				<WeatherWording>20%</WeatherWording>
-				<WeatherWording>@ 2PM</WeatherWording>
+
+				<WeatherWording>{weather.hourlyTemps[0].temp}</WeatherWording>
+				<WeatherWording>+3 hrs</WeatherWording>
+
+				<WeatherWording>{weather.hourlyTemps[1].temp}</WeatherWording>
+				<WeatherWording>+6 hrs</WeatherWording>
+
+				<WeatherWording>{weather.hourlyTemps[2].temp}</WeatherWording>
+				<WeatherWording>+9 hrs</WeatherWording>
+
+				<WeatherWording>{weather.hourlyTemps[3].temp}</WeatherWording>
+				<WeatherWording>+12 hrs</WeatherWording>
+
+				<WeatherWording>{weather.hourlyTemps[4].temp}</WeatherWording>
+				<WeatherWording>+15 hrs</WeatherWording>
 			</LaterDiv>
+			<LaterDiv></LaterDiv>
 		</SideBar>
 	);
 }
