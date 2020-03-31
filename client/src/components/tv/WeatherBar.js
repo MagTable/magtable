@@ -53,7 +53,9 @@ function getDay() {
 function WeatherBar(props) {
 	const { weather } = useSelector(state => state.brix);
 
-	return (
+	return weather.loading ? (
+		"..."
+	) : (
 		<SideBar>
 			<h1>{getDay()}</h1>
 			<h1>{getDate()}</h1>
