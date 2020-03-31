@@ -244,7 +244,7 @@ const EmployeeList = () => {
 						{filterEmployeeShifts()}
 						{filteredStartTimes.length > 0 ? (
 							filteredStartTimes.map(startTime => (
-								<div key={startTime}>
+								<React.Fragment key={startTime}>
 									<ListSeparator>{startTime}</ListSeparator>
 									{filteredEmployeeShifts.map(
 										shift =>
@@ -262,7 +262,7 @@ const EmployeeList = () => {
 												/>
 											)
 									)}
-								</div>
+								</React.Fragment>
 							))
 						) : (
 							<EmployeeListRefreshInfo>
