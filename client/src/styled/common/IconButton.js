@@ -12,6 +12,8 @@ export const IconButton = styled.i`
 	text-align: center;
 	padding: 10px;
 
+	${({ nopad }) => nopad && `padding: 0;`}
+	
 	${({ color }) =>
 		color &&
 		`
