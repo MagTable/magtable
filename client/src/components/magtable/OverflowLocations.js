@@ -50,8 +50,21 @@ function OverflowLocations({ children, color, hoverColor, open, setOpen }) {
 	const magtable = useSelector(state => state.magtable);
 	const authUsername = useSelector(state => state.auth.user.username);
 
-	const timePublished =
-		magtable.timePublished && new Date(magtable.timePublished);
+	let timePublished = "...";
+	if (magtable.timePublished) {
+		const date = new Date(magtable.timePublished);
+		timePublished =
+			date
+				.getHours()
+				.toString()
+				.padStart(2, "0") +
+			":" +
+			date
+				.getMinutes()
+				.toString()
+				.padStart(2, "0");
+	}
+
 	const publishedBy = magtable.publishedBy;
 
 	// todo close overflow on button press? - arran
@@ -139,10 +152,7 @@ function OverflowLocations({ children, color, hoverColor, open, setOpen }) {
 									Published By: {publishedBy ? publishedBy : "..."}
 								</OverflowMenuButton>
 								<OverflowMenuButton disabled>
-									Submitted At:{" "}
-									{timePublished
-										? timePublished.getHours() + timePublished.getMinutes()
-										: "..."}
+									Submitted At: {timePublished}
 								</OverflowMenuButton>
 								<OverflowMenuButton onClick={handleShow}>
 									Export Brix Records
