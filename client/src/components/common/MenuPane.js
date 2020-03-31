@@ -21,6 +21,7 @@ import PropTypes from "prop-types";
  * @constructor
  */
 
+// Sourced from https://usehooks.com/useWindowSize/ | Author: Gabe Ragland
 export function useWindowSize() {
 	const isClient = typeof window === "object";
 
