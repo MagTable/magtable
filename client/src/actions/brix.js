@@ -140,32 +140,20 @@ export const getWeather = () => async dispatch => {
 		let description = weather.list[0].weather[0].description; // The description of the current weather, ie sunny
 		let conditionID = weather.list[0].weather[0].id;
 
-		const dateTest = new Date();
-		dateTest.setUTCSeconds(weather.list[3].dt);
-		console.log("The date is... " + dateTest);
-
-		console.log(
-			"The condensed date is..." + new Date().setUTCSeconds(weather.list[0].dt)
-		);
-
-		let hourlyTemps = [];
+		let hourlyTemps = []; // For the later div in the weathermap in the TV view.
 
 		for (let i = 0; i < 6; i++) {
-			let thisHour = {};
+			let thisHour = {}; // The object to hold the data for the current hour being gathered.
 			const time = new Date();
 			time.setUTCSeconds(weather.list[i + 1].dt);
-
-			console.log(time.getUTCHours());
-			console.log(time.getUTCMinutes());
 			thisHour.temp = Math.floor(weather.list[i + 1].main.temp);
 			thisHour.conditionID = weather.list[i + 1].weather[0].id;
 			thisHour.time = time.getUTCHours() + ":00";
-			thisHour.description = weather.list[i + 1].description;
+			thisHour.description = weather.list[i + 1].weather[0].description;
 			thisHour.conditionID = weather.list[i + 1].weather[0].id;
 
 			hourlyTemps[i] = thisHour;
 		}
-		console.log(hourlyTemps);
 
 		dispatch({
 			type: GET_WEATHER,

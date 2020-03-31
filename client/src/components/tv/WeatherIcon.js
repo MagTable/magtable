@@ -31,7 +31,7 @@ function WeatherIcon({ condition }) {
 	}
 	if (condition >= 200 && condition < 300) {
 		// Thunderstorms
-		return <ThunderstormIcon class="fas fa-bolt" />;
+		return <ThunderstormIcon className="fas fa-bolt" />;
 	}
 	if (condition < 400 || (condition > 519 && condition < 600)) {
 		// Drizzle

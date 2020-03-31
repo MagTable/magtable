@@ -1,25 +1,23 @@
 import React from "react";
 import {
+	DescriptionWording,
 	GreyTempHolder,
 	LaterDiv,
 	LaterHourHead,
 	LaterHourWrapper,
-	LaterIcon,
 	LaterTitle,
 	NowTitle,
-	RainIcon,
 	SideBar,
-	SnowIcon,
-	SunIcon,
 	Temp,
 	TempHolder,
 	WeatherWording,
 	WindArrow,
+	WindArrowWrap,
 	WindIcon
 } from "../../styled/tv/Weather";
 import { useSelector } from "react-redux";
-import { useWindowSize } from "../common/MenuPane";
 import WeatherIcon from "./WeatherIcon";
+import CardinalDirection from "./CardinalDirection";
 
 function getDate() {
 	const date = new Date();
@@ -63,7 +61,7 @@ function WeatherBar(props) {
 			<LaterDiv>
 				<NowTitle>Now</NowTitle>
 			</LaterDiv>
-			<WeatherWording>{weather.description}</WeatherWording>
+			<DescriptionWording>{weather.description}</DescriptionWording>
 			<WeatherIcon condition={weather.conditionID} />
 			<TempHolder>
 				<WeatherWording>High</WeatherWording>
@@ -79,41 +77,23 @@ function WeatherBar(props) {
 			</GreyTempHolder>
 			<WindIcon className="fas fa-wind" />
 			<WeatherWording>{weather.windSpeed} km/h</WeatherWording>
-			<WindArrow className="fas fa-long-arrow-alt-up" angle={weather.windDir} />
+			<WindArrowWrap>
+				<WindArrow
+					className="fas fa-location-arrow"
+					angle={weather.windDir - 45}
+				/>
+			</WindArrowWrap>
+			<CardinalDirection direction={weather.windDir} />
 			<LaterDiv>
 				<LaterTitle>Later</LaterTitle>
 				{weather.hourlyTemps.map(hour => (
-					<LaterHourWrapper>
+					<LaterHourWrapper key={hour.time}>
 						<LaterHourHead>{hour.time}</LaterHourHead>
 						<WeatherWording>{hour.temp}°</WeatherWording>
+						<DescriptionWording>{hour.description}</DescriptionWording>
 						<WeatherIcon condition={hour.conditionID} />
 					</LaterHourWrapper>
 				))}
-				;{/*<LaterHourWrapper>*/}
-				{/*	<LaterHourHead>{weather.hourlyTemps[0].time}</LaterHourHead>*/}
-				{/*	<WeatherWording>{weather.hourlyTemps[0].temp}°</WeatherWording>*/}
-				{/*	<RainIcon className="fas fa-cloud-showers-heavy" />*/}
-				{/*</LaterHourWrapper>*/}
-				{/*<LaterHourWrapper>*/}
-				{/*	<LaterHourHead>{weather.hourlyTemps[1].time}</LaterHourHead>*/}
-				{/*	<WeatherWording>{weather.hourlyTemps[1].temp}°</WeatherWording>*/}
-				{/*	<SnowIcon className="fas fa-snowflake" />*/}
-				{/*</LaterHourWrapper>*/}
-				{/*<LaterHourWrapper>*/}
-				{/*	<LaterHourHead>{weather.hourlyTemps[2].time}</LaterHourHead>*/}
-				{/*	<WeatherWording>{weather.hourlyTemps[2].temp}°</WeatherWording>*/}
-				{/*	<SnowIcon className="fas fa-snowflake" />*/}
-				{/*</LaterHourWrapper>*/}
-				{/*<LaterHourWrapper>*/}
-				{/*	<LaterHourHead>{weather.hourlyTemps[3].time}</LaterHourHead>*/}
-				{/*	<WeatherWording>{weather.hourlyTemps[3].temp}°</WeatherWording>*/}
-				{/*	<SnowIcon className="fas fa-snowflake" />*/}
-				{/*</LaterHourWrapper>*/}
-				{/*<LaterHourWrapper>*/}
-				{/*	<LaterHourHead>{weather.hourlyTemps[4].time}</LaterHourHead>*/}
-				{/*	<WeatherWording>{weather.hourlyTemps[4].temp}°</WeatherWording>*/}
-				{/*	<SnowIcon className="fas fa-snowflake" />*/}
-				{/*</LaterHourWrapper>*/}
 			</LaterDiv>
 		</SideBar>
 	);
