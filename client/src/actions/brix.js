@@ -134,33 +134,62 @@ export const getWeather = () => async dispatch => {
 		forecastHigh = Math.ceil(parseInt(forecastHigh));
 
 		let currentTemperature = Math.floor(weather.list[0].main.temp);
-		let feelsLike = weather.list[0].main.feels_like;
+		let feelsLike = Math.floor(weather.list[0].main.feels_like);
 		let windSpeed = Math.round(weather.list[0].wind.speed * 3.6); // Wind speed in KM/H
 		let windDir = weather.list[0].wind.deg;
 		let description = weather.list[0].weather.description; // The description of the current weather, ie sunny
 
+		const dateTest = new Date();
+		dateTest.setUTCSeconds(weather.list[3].dt);
+		console.log("The date is... " + dateTest);
+
+		console.log(
+			"The condensed date is..." + new Date().setUTCSeconds(weather.list[0].dt)
+		);
+
 		let hourlyTemps = [
-			{
-				temp: weather.list[3].main.temp,
-				conditionID: weather.list[3].weather[0].id
-			},
-			{
-				temp: weather.list[6].main.temp,
-				conditionID: weather.list[6].weather[0].id
-			},
-			{
-				temp: weather.list[9].main.temp,
-				conditionID: weather.list[9].weather[0].id
-			},
-			{
-				temp: weather.list[12].main.temp,
-				conditionID: weather.list[12].weather[0].id
-			},
-			{
-				temp: weather.list[15].main.temp,
-				conditionID: weather.list[15].weather[0].id
-			}
+			// {
+			// 	temp: Math.floor(weather.list[3].main.temp),
+			// 	conditionID: weather.list[3].weather[0].id,
+			// 	time: new Date().setUTCSeconds(weather.list[0].dt).toString()
+			// },
+			// {
+			// 	temp: Math.floor(weather.list[6].main.temp),
+			// 	conditionID: weather.list[6].weather[0].id,
+			// 	time: weather.list[1].dt_txt
+			// },
+			// {
+			// 	temp: Math.floor(weather.list[9].main.temp),
+			// 	conditionID: weather.list[9].weather[0].id,
+			// 	time: new Date(weather.list[9].dt * 1000).toUTCString().slice(-11, -4)
+			// },
+			// {
+			// 	temp: Math.floor(weather.list[12].main.temp),
+			// 	conditionID: weather.list[12].weather[0].id,
+			// 	time: new Date(weather.list[12].dt * 1000).toUTCString().slice(-11, -4)
+			// },
+			// {
+			// 	temp: Math.floor(weather.list[15].main.temp),
+			// 	conditionID: weather.list[15].weather[0].id,
+			// 	time: new Date(weather.list[15].dt * 1000).toUTCString().slice(-11, -4)
+			// }
 		];
+
+		for (let i = 0; i < 6; i++) {
+			let thisHour = {};
+			const time = new Date();
+			time.setUTCSeconds(weather.list[i + 1].dt);
+
+			console.log(time.getUTCHours());
+			console.log(time.getUTCMinutes());
+			thisHour.temp = Math.floor(weather.list[i + 1].main.temp);
+			thisHour.conditionID = weather.list[i + 1].weather[0].id;
+			thisHour.time = time.getUTCHours() + ":00";
+			thisHour.description = weather.list[i + 1].description;
+
+			hourlyTemps[i] = thisHour;
+		}
+		console.log(hourlyTemps);
 
 		dispatch({
 			type: GET_WEATHER,

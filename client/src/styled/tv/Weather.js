@@ -27,7 +27,7 @@ const StatusIcon = styled.i`
 `;
 
 export const SunIcon = styled(StatusIcon)`
-	color: #eaab0e;
+	color: #eaab0ea3;
 `;
 
 export const WindIcon = styled(StatusIcon)`
@@ -35,6 +35,18 @@ export const WindIcon = styled(StatusIcon)`
 `;
 
 export const SnowIcon = styled(StatusIcon)`
+	color: #9fc6ff;
+`;
+
+export const RainIcon = styled(StatusIcon)`
+	color: #b2f3ff;
+`;
+
+export const CloudIcon = styled(StatusIcon)`
+	color: #b2f3ff;
+`;
+
+export const AtmosphereIcon = styled(StatusIcon)`
 	color: dodgerblue;
 `;
 
@@ -82,12 +94,21 @@ export const LaterTitle = styled.h2`
 	position: absolute;
 	margin: auto;
 	right: 32px;
-	bottom: 205px;
+	bottom: 935px;
+	color: black;
+`;
+
+export const LaterHourWrapper = styled.div`
+	margin-block-end: 25px;
+`;
+
+export const LaterHourHead = styled(WeatherWording)`
+	font-size: 22px;
 	color: black;
 `;
 
 export const NowTitle = styled(LaterTitle)`
-	bottom: -10px;
+	bottom: 15px;
 `;
 
 export const LaterIcon = styled(StatusIcon)`
