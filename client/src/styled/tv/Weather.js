@@ -22,30 +22,57 @@ export const SideBar = styled.div`
  * Base for weather icons
  */
 const StatusIcon = styled.i`
-	font-size: 90px;
-	margin: 15px 0;
+	font-size: 40px;
+	margin-bottom: 15px;
 `;
 
 export const SunIcon = styled(StatusIcon)`
-	color: #eaab0e;
+	color: #eaab0ea3;
+`;
+
+export const ThunderstormIcon = styled(StatusIcon)`
+	color: dimgrey;
 `;
 
 export const WindIcon = styled(StatusIcon)`
 	color: dimgrey;
+	font-size: 60px;
 `;
 
 export const SnowIcon = styled(StatusIcon)`
-	color: dodgerblue;
+	color: #9fc6ff;
+`;
+
+export const RainIcon = styled(StatusIcon)`
+	color: #b2f3ff;
+`;
+
+export const CloudIcon = styled(StatusIcon)`
+	color: #4d6367;
+`;
+
+export const AtmosphereIcon = styled(StatusIcon)`
+	color: #636363;
 `;
 
 export const WindArrow = styled(StatusIcon)`
 	transform: rotate(${props => props.angle}deg);
+	margin: 0;
+	font-size: 45px;
+`;
+
+export const WindArrowWrap = styled.div`
+	margin-top: 25px;
 `;
 
 export const WeatherWording = styled.h4`
 	margin-block-end: 0;
 	margin-block-start: 0;
 	text-transform: capitalize;
+`;
+
+export const DescriptionWording = styled(WeatherWording)`
+	font-size: 19px;
 `;
 
 export const TempHolder = styled.div`
@@ -57,9 +84,10 @@ export const TempHolder = styled.div`
 `;
 
 export const GreyTempHolder = styled(TempHolder)`
-	background: var(--context-grey);
+	background: #7cdcdc47;
 	padding: 11px 0;
 	flex-direction: column;
+	margin: 15px 0;
 `;
 
 export const Temp = styled.h2`
@@ -69,9 +97,10 @@ export const Temp = styled.h2`
 
 export const LaterDiv = styled.div`
 	border-top: 2px solid var(--border-color);
-	margin-top: 20px;
 	position: relative;
 	color: #a2a2a2;
+	padding-top: 35px;
+	margin-top: 40px;
 `;
 
 export const LaterTitle = styled.h2`
@@ -81,12 +110,21 @@ export const LaterTitle = styled.h2`
 	position: absolute;
 	margin: auto;
 	right: 32px;
-	bottom: 118px;
+	top: -17px;
+	color: black;
+`;
+
+export const LaterHourWrapper = styled.div`
+	margin-block-end: 25px;
+`;
+
+export const LaterHourHead = styled(WeatherWording)`
+	font-size: 22px;
 	color: black;
 `;
 
 export const NowTitle = styled(LaterTitle)`
-	bottom: -10px;
+	bottom: 15px;
 `;
 
 export const LaterIcon = styled(StatusIcon)`

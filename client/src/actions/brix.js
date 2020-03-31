@@ -134,33 +134,26 @@ export const getWeather = () => async dispatch => {
 		forecastHigh = Math.ceil(parseInt(forecastHigh));
 
 		let currentTemperature = Math.floor(weather.list[0].main.temp);
-		let feelsLike = weather.list[0].main.feels_like;
+		let feelsLike = Math.floor(weather.list[0].main.feels_like);
 		let windSpeed = Math.round(weather.list[0].wind.speed * 3.6); // Wind speed in KM/H
 		let windDir = weather.list[0].wind.deg;
-		let description = weather.list[0].weather.description; // The description of the current weather, ie sunny
+		let description = weather.list[0].weather[0].description; // The description of the current weather, ie sunny
+		let conditionID = weather.list[0].weather[0].id;
 
-		let hourlyTemps = [
-			{
-				temp: weather.list[3].main.temp,
-				conditionID: weather.list[3].weather[0].id
-			},
-			{
-				temp: weather.list[6].main.temp,
-				conditionID: weather.list[6].weather[0].id
-			},
-			{
-				temp: weather.list[9].main.temp,
-				conditionID: weather.list[9].weather[0].id
-			},
-			{
-				temp: weather.list[12].main.temp,
-				conditionID: weather.list[12].weather[0].id
-			},
-			{
-				temp: weather.list[15].main.temp,
-				conditionID: weather.list[15].weather[0].id
-			}
-		];
+		let hourlyTemps = []; // For the later div in the weathermap in the TV view.
+
+		for (let i = 0; i < 6; i++) {
+			let thisHour = {}; // The object to hold the data for the current hour being gathered.
+			const time = new Date();
+			time.setUTCSeconds(weather.list[i + 1].dt);
+			thisHour.temp = Math.floor(weather.list[i + 1].main.temp);
+			thisHour.conditionID = weather.list[i + 1].weather[0].id;
+			thisHour.time = time.getUTCHours() + ":00";
+			thisHour.description = weather.list[i + 1].weather[0].description;
+			thisHour.conditionID = weather.list[i + 1].weather[0].id;
+
+			hourlyTemps[i] = thisHour;
+		}
 
 		dispatch({
 			type: GET_WEATHER,
@@ -173,7 +166,8 @@ export const getWeather = () => async dispatch => {
 				windSpeed,
 				windDir,
 				hourlyTemps,
-				description
+				description,
+				conditionID
 			}
 		});
 	} catch (err) {}

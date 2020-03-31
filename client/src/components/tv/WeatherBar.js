@@ -1,19 +1,23 @@
 import React from "react";
 import {
+	DescriptionWording,
 	GreyTempHolder,
 	LaterDiv,
-	LaterIcon,
+	LaterHourHead,
+	LaterHourWrapper,
 	LaterTitle,
 	NowTitle,
 	SideBar,
-	SunIcon,
 	Temp,
 	TempHolder,
 	WeatherWording,
 	WindArrow,
+	WindArrowWrap,
 	WindIcon
 } from "../../styled/tv/Weather";
 import { useSelector } from "react-redux";
+import WeatherIcon from "./WeatherIcon";
+import CardinalDirection from "./CardinalDirection";
 
 function getDate() {
 	const date = new Date();
@@ -48,15 +52,17 @@ function getDay() {
 function WeatherBar(props) {
 	const { weather } = useSelector(state => state.brix);
 
-	return (
+	return weather.loading ? (
+		"..."
+	) : (
 		<SideBar>
 			<h1>{getDay()}</h1>
 			<h1>{getDate()}</h1>
 			<LaterDiv>
 				<NowTitle>Now</NowTitle>
 			</LaterDiv>
-			<WeatherWording>{weather.description}</WeatherWording>
-			<SunIcon className="fas fa-sun" />
+			<DescriptionWording>{weather.description}</DescriptionWording>
+			<WeatherIcon condition={weather.conditionID} />
 			<TempHolder>
 				<WeatherWording>High</WeatherWording>
 				<Temp>{weather.forecastHigh}°</Temp>
@@ -71,12 +77,23 @@ function WeatherBar(props) {
 			</GreyTempHolder>
 			<WindIcon className="fas fa-wind" />
 			<WeatherWording>{weather.windSpeed} km/h</WeatherWording>
-			<WindArrow className="fas fa-long-arrow-alt-up" angle={weather.windDir} />
+			<WindArrowWrap>
+				<WindArrow
+					className="fas fa-location-arrow"
+					angle={weather.windDir - 45}
+				/>
+			</WindArrowWrap>
+			<CardinalDirection direction={weather.windDir} />
 			<LaterDiv>
 				<LaterTitle>Later</LaterTitle>
-				<LaterIcon className="far fa-snowflake" />
-				<WeatherWording>20%</WeatherWording>
-				<WeatherWording>@ 2PM</WeatherWording>
+				{weather.hourlyTemps.map(hour => (
+					<LaterHourWrapper key={hour.time}>
+						<LaterHourHead>{hour.time}</LaterHourHead>
+						<WeatherWording>{hour.temp}°</WeatherWording>
+						<DescriptionWording>{hour.description}</DescriptionWording>
+						<WeatherIcon condition={hour.conditionID} />
+					</LaterHourWrapper>
+				))}
 			</LaterDiv>
 		</SideBar>
 	);
