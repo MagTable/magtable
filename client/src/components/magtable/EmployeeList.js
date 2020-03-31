@@ -196,6 +196,7 @@ const EmployeeList = () => {
 				filteredStartTimes.push(emp.startTime); // add the start time if it's not already in the list
 			}
 		});
+		filteredStartTimes.sort((a, b) => a - b);
 	}
 
 	return (
