@@ -30,6 +30,8 @@ export const SunIcon = styled(StatusIcon)`
 	color: #eaab0ea3;
 `;
 
+export const ThunderstormIcon = styled(StatusIcon)``;
+
 export const WindIcon = styled(StatusIcon)`
 	color: dimgrey;
 `;
@@ -94,7 +96,7 @@ export const LaterTitle = styled.h2`
 	position: absolute;
 	margin: auto;
 	right: 32px;
-	bottom: 935px;
+	top: -17px;
 	color: black;
 `;
 

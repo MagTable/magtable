@@ -45,7 +45,8 @@ export default function(state = initialState, action) {
 				windSpeed,
 				windDir,
 				hourlyTemps,
-				description
+				description,
+				conditionID
 			} = payload;
 
 			return {
@@ -60,6 +61,7 @@ export default function(state = initialState, action) {
 					windDir,
 					hourlyTemps,
 					description,
+					conditionID,
 					loading: false
 				}
 			};
