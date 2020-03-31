@@ -2,10 +2,14 @@ import React from "react";
 import {
 	GreyTempHolder,
 	LaterDiv,
+	LaterHourHead,
+	LaterHourWrapper,
 	LaterIcon,
 	LaterTitle,
 	NowTitle,
+	RainIcon,
 	SideBar,
+	SnowIcon,
 	SunIcon,
 	Temp,
 	TempHolder,
@@ -14,6 +18,7 @@ import {
 	WindIcon
 } from "../../styled/tv/Weather";
 import { useSelector } from "react-redux";
+import { useWindowSize } from "../common/MenuPane";
 
 function getDate() {
 	const date = new Date();
@@ -74,9 +79,36 @@ function WeatherBar(props) {
 			<WindArrow className="fas fa-long-arrow-alt-up" angle={weather.windDir} />
 			<LaterDiv>
 				<LaterTitle>Later</LaterTitle>
-				<LaterIcon className="far fa-snowflake" />
-				<WeatherWording>20%</WeatherWording>
-				<WeatherWording>@ 2PM</WeatherWording>
+
+				<LaterHourWrapper>
+					<LaterHourHead>{weather.hourlyTemps[0].time}</LaterHourHead>
+					<WeatherWording>{weather.hourlyTemps[0].temp}°</WeatherWording>
+					<RainIcon className="fas fa-cloud-showers-heavy" />
+				</LaterHourWrapper>
+
+				<LaterHourWrapper>
+					<LaterHourHead>{weather.hourlyTemps[1].time}</LaterHourHead>
+					<WeatherWording>{weather.hourlyTemps[1].temp}°</WeatherWording>
+					<SnowIcon className="fas fa-snowflake" />
+				</LaterHourWrapper>
+
+				<LaterHourWrapper>
+					<LaterHourHead>{weather.hourlyTemps[2].time}</LaterHourHead>
+					<WeatherWording>{weather.hourlyTemps[2].temp}°</WeatherWording>
+					<SnowIcon className="fas fa-snowflake" />
+				</LaterHourWrapper>
+
+				<LaterHourWrapper>
+					<LaterHourHead>{weather.hourlyTemps[3].time}</LaterHourHead>
+					<WeatherWording>{weather.hourlyTemps[3].temp}°</WeatherWording>
+					<SnowIcon className="fas fa-snowflake" />
+				</LaterHourWrapper>
+
+				<LaterHourWrapper>
+					<LaterHourHead>{weather.hourlyTemps[4].time}</LaterHourHead>
+					<WeatherWording>{weather.hourlyTemps[4].temp}°</WeatherWording>
+					<SnowIcon className="fas fa-snowflake" />
+				</LaterHourWrapper>
 			</LaterDiv>
 		</SideBar>
 	);
