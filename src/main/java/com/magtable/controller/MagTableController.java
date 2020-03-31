@@ -1,5 +1,6 @@
 package com.magtable.controller;
 
+import com.magtable.model.api.ExportRequest;
 import com.magtable.model.entities.*;
 import com.magtable.repository.AssignmentRepository;
 import com.magtable.repository.EquipmentRepository;
@@ -8,6 +9,8 @@ import com.magtable.repository.ParkingLocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.transform.sax.SAXSource;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,5 +100,17 @@ public class MagTableController {
     public List<ParkingLocation> getParkingLocations() {
         return parkingLocationRepository.findAll();
     }
+
+
+    @PostMapping("/history") //TODO discuss route name - placeholder for now
+    public List getMagtableRecordsByDate(@RequestBody ExportRequest date){
+
+        List<MagtableRecord> records =  magTableRecordRepository.findAllByDate(date.getFrom());
+
+        return records;
+    }
+
+
+
 
 }
