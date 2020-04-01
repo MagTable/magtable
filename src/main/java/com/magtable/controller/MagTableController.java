@@ -6,6 +6,7 @@ import com.magtable.repository.AssignmentRepository;
 import com.magtable.repository.EquipmentRepository;
 import com.magtable.repository.MagTableRecordRepository;
 import com.magtable.repository.ParkingLocationRepository;
+import com.magtable.services.ErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +41,9 @@ public class MagTableController {
 
     @Autowired
     SimpMessagingTemplate template;
+
+    @Autowired
+    ErrorService errorService;
 
 
     /**
@@ -112,7 +116,7 @@ public class MagTableController {
 
     /**
      * route           Get /list/{date}
-     * description     method to
+     * description     method to get a list of magtableHistoryResponses
      * access          System Admins, Personnel Managers
      *
      * @param requestDate The request containing the date
@@ -138,4 +142,15 @@ public class MagTableController {
     }
 
 
+    /**
+     * route           Get /magtable/{id}
+     * description     method to get a magtablerecord by ID
+     * access          System Admins, Personnel Managers
+     *
+     * @param magId The magtable id
+     */
+    @GetMapping("/{id}")
+    public MagtableRecord getMagtableByid(@PathVariable(value = "id")Integer magId){
+        return magTableRecordRepository.findById(magId).orElseThrow(() -> errorService.magIdNotFound(magId));
+    }
 }
