@@ -535,6 +535,30 @@ export const PUBLISH_TABLE = "PUBLISH_TABLE";
 export const CLEAR_TABLE = "CLEAR_TABLE";
 
 /**
+ * Loading indicator for fetching magtable history list
+ * @const {string} FETCHING_MAGTABLE_HISTORY_LIST
+ */
+export const FETCHING_MAGTABLE_HISTORY_LIST = "FETCHING_MAGTABLE_HISTORY_LIST";
+
+/**
+ * Gets magtable history list
+ * @const {string} GET_MAGTABLE_HISTORY_LIST
+ */
+export const GET_MAGTABLE_HISTORY_LIST = "GET_MAGTABLE_HISTORY_LIST";
+
+/**
+ * Gets singular historical magtable
+ * @const {string} GET_HISTORICAL_MAGTABLE
+ */
+export const GET_HISTORICAL_MAGTABLE = "GET_HISTORICAL_MAGTABLE";
+
+/**
+ * Loading indicator for fetching singular historical magtable
+ * @const {string} FETCHING_HISTORICAL_MAGTABLE
+ */
+export const FETCHING_HISTORICAL_MAGTABLE = "FETCHING_HISTORICAL_MAGTABLE";
+
+/**
  * Gets parking locations.
  * @const {string} GET_PARKING_LOCATIONS
  */

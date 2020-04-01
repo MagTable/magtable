@@ -16,6 +16,41 @@ import * as Yup from "yup";
 import { addBrixRecord } from "../../actions/brix";
 import { LoginBtn } from "../../styled/auth/Login";
 
+export const getFormattedDate = date => {
+	date = new Date(date);
+	const months = [
+		"JAN",
+		"FEB",
+		"MAR",
+		"APR",
+		"MAY",
+		"JUN",
+		"JUL",
+		"AUG",
+		"SEP",
+		"OCT",
+		"NOV",
+		"DEC"
+	];
+
+	const d = date.getDate().toString();
+	const m = months[date.getMonth()];
+	const y = date.getFullYear().toString();
+	const h = date.getHours();
+	const min = date.getMinutes();
+	return (
+		d +
+		"-" +
+		m +
+		"-" +
+		y +
+		"@" +
+		h.toString().padStart(2, "0") +
+		":" +
+		min.toString().padStart(2, "0")
+	);
+};
+
 /**
  *
  * The Brix Management component.
@@ -27,7 +62,6 @@ import { LoginBtn } from "../../styled/auth/Login";
  * @returns {*} The BrixManagement component
  * @constructor
  */
-
 function BrixManagement() {
 	const dispatch = useDispatch();
 	const {
@@ -38,41 +72,6 @@ function BrixManagement() {
 		addingBrixRecord,
 		dailyMixChartRow
 	} = useSelector(state => state.brix);
-
-	const getFormattedDate = date => {
-		date = new Date(date);
-		const months = [
-			"JAN",
-			"FEB",
-			"MAR",
-			"APR",
-			"MAY",
-			"JUN",
-			"JUL",
-			"AUG",
-			"SEP",
-			"OCT",
-			"NOV",
-			"DEC"
-		];
-
-		const d = date.getDate().toString();
-		const m = months[date.getMonth()];
-		const y = date.getFullYear().toString();
-		const h = date.getHours();
-		const min = date.getMinutes();
-		return (
-			d +
-			"-" +
-			m +
-			"-" +
-			y +
-			"@" +
-			h.toString().padStart(2, "0") +
-			":" +
-			min.toString().padStart(2, "0")
-		);
-	};
 
 	const nozzleMinError = `Nozzle Min is ${dailyMixChartRow?.brix}`;
 
