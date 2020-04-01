@@ -38,15 +38,22 @@ function ViewListItem({ assignment, assigned, isEven }) {
 
 	if (assigned) {
 		return (
-			<ListItemWrapper>
+			<ListItemWrapper isEven={isEven}>
 				<TruckNumDiv>
 					<TruckNum>{assignment.equipment.id}</TruckNum>
 				</TruckNumDiv>
 				<AssignedToDiv>
 					{assignment.parkingLocation === null
-						? null
-						: assignment.parkingLocation.apron}
+						? "NA"
+						: assignment.parkingLocation.apron.charAt(0) +
+						  "-" +
+						  assignment.parkingLocation.phonetic +
+						  assignment.parkingLocation.position +
+						  (assignment.parkingLocation.bay === null
+								? ""
+								: assignment.parkingLocation.bay)}
 				</AssignedToDiv>
+				{/*E-AW is (East Pad)-(phonetic)(position)*/}
 				<EmployeeWrap>
 					<AMEmp isEven={isEven}>
 						{amShifts.map(shift => (

@@ -16,26 +16,40 @@ export const TVWrap = styled.div`
  **/
 export const ViewListDiv = styled.div`
 	width: calc(100vw - 200px);
-	height: calc(100vh - 120px);
-	place-self: center;
+	justify-self: center;
+	height: min-content;
 	display: flex;
 	flex-direction: column;
+	//outline: 1px solid black;
+
+	//border-top: 1px solid grey;
+	margin-top: 20px;
 `;
 
 export const ListItemWrapper = styled.div`
 	width: 100%;
 	display: flex;
-	outline: 1px solid black;
+	//border-bottom: 1px solid grey;
+	${({ isEven }) =>
+		isEven
+			? `
+			background-color: #F1F1F1;
+		`
+			: `
+		`}
 `;
 
 export const UnassignedWrap = styled(ListItemWrapper)`
 	height: auto;
+	outline: 1px solid grey;
+	outline-offset: -1px;
 `;
 
 export const TruckNumDiv = styled.div`
 	height: 50px;
 	width: 50px;
-	outline: 1px solid black;
+	//border-left: 1px solid grey;
+	border-right: 1px solid grey;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -47,6 +61,7 @@ export const TruckNum = styled.span`
 
 export const AssignedToDiv = styled(TruckNumDiv)`
 	width: 80px;
+	outline: none;
 `;
 
 export const EmployeeWrap = styled.div`
@@ -55,6 +70,9 @@ export const EmployeeWrap = styled.div`
 	flex-direction: row;
 	width: 100%;
 	font-size: 18px;
+	border-left: 1px solid grey;
+	//border-right: 1px solid grey;
+	outline-offset: -1px;
 `;
 
 export const PairedEmpDiv = styled.div`
@@ -90,7 +108,6 @@ export const PMEmp = styled(PairedEmpDiv)`
 export const EmployeeDiv = styled.div`
 	display: flex;
 	flex-grow: 1;
-	outline: 1px solid black;
 	display: flex;
 	align-items: center;
 	padding-left: 10px;
