@@ -20,6 +20,7 @@ export const ViewListDiv = styled.div`
 	height: min-content;
 	display: flex;
 	flex-direction: column;
+	margin-top: 20px;
 `;
 
 export const ListItemWrapper = styled.div`
@@ -65,7 +66,6 @@ export const EmployeeWrap = styled.div`
 	display: flex;
 	flex-direction: row;
 	width: 100%;
-	font-size: 18px;
 	border-left: 1px solid grey;
 	//border-right: 1px solid grey;
 	outline-offset: -1px;
@@ -78,26 +78,18 @@ export const PairedEmpDiv = styled.div`
 	font-family: "Segoe UI", serif;
 `;
 
-export const AMEmp = styled(PairedEmpDiv)`
-	${({ isEven }) =>
-		isEven
-			? `
-			background-color: #F1F1F1;
-		`
-			: `
-		`}
-`;
+export const AMEmp = styled(PairedEmpDiv)``;
 
 export const PMEmp = styled(PairedEmpDiv)`
-	color: white;
+	//color: white;
 
 	${({ isEven }) =>
 		isEven
 			? `
-			background-color: #747474;
+			background-color: #bdbdbd;
 		`
 			: `
-			background-color: #A5A5A5;
+			background-color: #d4d4d4;
 		`}
 `;
 
