@@ -30,19 +30,6 @@ export const Input = styled.input`
 	}
 `;
 
-export const DoubleClickConfirm = styled.div`
-	transition: background 0.3s ease-in-out;
-
-	${({ active }) =>
-			active &&
-			`
-			background: var(--context-grey-light) !important;
-	`}
-		:not(:last-child) {
-		border-bottom: 2px solid var(--context-grey);
-	}
-`;
-
 /**
  * The apps basic button.
  */

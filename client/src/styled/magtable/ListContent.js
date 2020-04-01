@@ -151,20 +151,13 @@ export const ManipTruckManipIconDiv = styled.div`
 	transition: 0.3s ease-in-out;
 `;
 
-export const TruckStatusCounterWrapper = styled.div`
-	display: grid;
-	grid-auto-columns: 25%;
-	grid-auto-flow: column;
-	background: var(--header);
-
-	border-bottom: 1px solid var(--border-color);
-`;
-
 export const TruckStatusCounterItem = styled.span`
 	text-align: center;
 
+	transition: opacity 0.3s ease-in-out;
+
 	margin: 0;
-	min-width: 2rem;
+	opacity: 0;
 	cursor: pointer;
 	
 	${({ GO }) => GO && `color: var(--context-green)`}
@@ -215,11 +208,6 @@ export const TruckListManipulateBlock = styled.div`
 	:not(ManipTruckManipIconDiv) {
 		animation: 0.3s ${fadeIn} ease-out;
 	}
-`;
-
-export const TruckMgmtItemDiv = styled(TruckListManipulateBlock)`
-	border-bottom: 2px solid grey;
-	height: 50px;
 `;
 
 export const TruckStatusBox = styled.div`
@@ -514,6 +502,12 @@ export const ListSeparator = styled.div`
 	border-bottom: 1px solid var(--border-color);
 	:first-child {
 		border-top: 1px solid var(--border-color);
+	}
+
+	:hover {
+		${TruckStatusCounterItem} {
+			opacity: 1;
+		}
 	}
 `;
 

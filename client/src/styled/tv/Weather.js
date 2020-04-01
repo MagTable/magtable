@@ -16,6 +16,7 @@ export const SideBar = styled.div`
 	float: right;
 	text-align: center;
 	border-left: 2px solid var(--border-color);
+	overflow-y: auto;
 `;
 
 /**
@@ -108,7 +109,6 @@ export const LaterTitle = styled.h2`
 	width: min-content;
 	margin: auto;
 	position: absolute;
-	margin: auto;
 	right: 32px;
 	top: -17px;
 	color: black;

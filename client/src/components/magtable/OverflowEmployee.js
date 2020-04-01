@@ -63,8 +63,8 @@ function OverflowEmployee({
 			{open && (
 				<>
 					<ClickCatcher onClick={() => setOpen(false)} />
-					<div id={"arrow"} />
 					<div id={"container"}>
+						<div id={"arrow"} />
 						<OverflowMenuButton onClick={filterAMEmployees}>
 							{activeFilters[0] ? (
 								<FilterIcon className={"fas fa-times"} color={"red"} />

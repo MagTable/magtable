@@ -25,7 +25,7 @@ export const ConfirmationBox = styled.div`
 
 		width: 120px;
 		left: calc(50% - 60px);
-		top: calc(100% + 0.5rem);
+		bottom: calc(-100%);
 
 		:hover {
 			background: ${({ hoverColor }) => hoverColor || "#d00"};
@@ -37,11 +37,11 @@ export const ConfirmationBox = styled.div`
 
 		width: 0;
 		height: 0;
-		left: calc(50% - 5px);
-		top: calc(100% + 0.5rem - 5px);
+		left: calc(50% - 5px) !important;
+		top: -5px !important;
 
-		border-left: 5px solid transparent;
-		border-right: 5px solid transparent;
-		border-bottom: 5px solid ${({ color }) => color || `red`};
+		border-left: 5px solid transparent !important;
+		border-right: 5px solid transparent !important;
+		border-bottom: 5px solid ${({ color }) => color || `red`} !important;
 	}
 `;

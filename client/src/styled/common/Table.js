@@ -33,6 +33,9 @@ export const Th = styled.th`
 `;
 
 export const Tr = styled.tr`
+	:hover {
+		background: var(--context-grey-light);
+	}
 	:not(:last-child) {
 		border-bottom: 1px solid var(--border-color-light);
 	}

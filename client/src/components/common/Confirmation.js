@@ -36,16 +36,16 @@ function Confirmation({
 
 	return (
 		<ConfirmationBox color={color} hoverColor={hoverColor}>
+			{children({ confirm })}
 			{open && (
 				<>
 					<ClickCatcher onClick={() => setOpen(false)} />
-					<div id={"arrow"} />
 					<button id={"confirmButton"} onClick={handleClick}>
+						<div id={"arrow"} />
 						{confirmationMessage}
 					</button>
 				</>
 			)}
-			{children({ confirm })}
 		</ConfirmationBox>
 	);
 }
