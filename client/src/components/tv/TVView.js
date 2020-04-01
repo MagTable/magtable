@@ -1,5 +1,7 @@
 import React from "react";
 import WeatherBar from "./WeatherBar";
+import ViewList from "./ViewList";
+import { TVWrap } from "../../styled/tv/ViewList";
 
 /**
  * @date 2020-03-25
@@ -10,7 +12,12 @@ import WeatherBar from "./WeatherBar";
  * @returns {*} The TVView component
  */
 function TVView(props) {
-	return <WeatherBar />;
+	return (
+		<TVWrap>
+			<ViewList />
+			<WeatherBar />
+		</TVWrap>
+	);
 }
 
 export default TVView;
