@@ -42,7 +42,7 @@ function getDay() {
 
 /**
  * @date 2020-03-25
- * @author MJ Kochuk
+ * @author MJ Kochuk, Arran Woodruff
  * @category Components/TV
  * @constructor
  * @param props
