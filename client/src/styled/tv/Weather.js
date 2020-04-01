@@ -12,11 +12,113 @@ import styled from "styled-components";
  **/
 export const SideBar = styled.div`
 	height: calc(100vh - 70px);
-	width: 119px;
-	float: right;
 	text-align: center;
 	border-left: 2px solid var(--border-color);
+
+	display: block;
+
+	@media (max-height: 1600px) {
+		display: grid;
+
+		grid-template-rows: auto 1fr;
+		grid-template-columns: 50% 50%;
+		grid-template-areas:
+			"date date"
+			"current later"
+			"current later";
+
+		#weather_current {
+			grid-area: current;
+			border-right: 2px solid var(--border-color);
+		}
+
+		#weather_later {
+			grid-area: later;
+		}
+
+		#weather_date {
+			grid-area: date;
+
+			border-bottom: 2px solid var(--border-color);
+			padding: 0.5rem 0;
+			h1 {
+				margin: 0;
+			}
+		}
+	}
+`;
+
+export const WeatherWording = styled.h4`
+	margin: 0 0 0.5rem 0;
+	text-transform: capitalize;
+`;
+
+export const DescriptionWording = styled(WeatherWording)`
+	font-size: 19px;
+`;
+
+export const TempHolder = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 15px;
+	padding: 0 10px;
+`;
+
+export const GreyTempHolder = styled(TempHolder)`
+	background: #7cdcdc47;
+	padding: 11px 0;
+	flex-direction: column;
+	margin: 15px 0;
+`;
+
+export const Temp = styled.h2`
+	margin-block-end: 0;
+	margin-block-start: 0;
+`;
+
+export const TimePeriodDiv = styled.div`
+	position: relative;
+	max-height: 100%;
 	overflow-y: auto;
+`;
+
+export const TimePeriodTitle = styled.h2`
+	position: sticky;
+	top: 0;
+	z-index: 1;
+	margin: 0.5rem 0;
+	background: white;
+
+	@media (min-height: 1600px) {
+		:before {
+			border-top: 2px solid black;
+			content: "";
+			margin: 0 auto;
+			position: absolute;
+			top: 50%;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			width: 95%;
+			z-index: -1;
+		}
+
+		span {
+			background: #fff;
+			padding: 0 5px;
+		}
+	}
+`;
+
+export const LaterHourWrapper = styled.div`
+	padding: 0.5rem;
+	border-bottom: 1px solid var(--border-color);
+`;
+
+export const LaterHourHead = styled(WeatherWording)`
+	font-size: 22px;
+	color: black;
 `;
 
 /**
@@ -64,69 +166,4 @@ export const WindArrow = styled(StatusIcon)`
 
 export const WindArrowWrap = styled.div`
 	margin-top: 25px;
-`;
-
-export const WeatherWording = styled.h4`
-	margin-block-end: 0;
-	margin-block-start: 0;
-	text-transform: capitalize;
-`;
-
-export const DescriptionWording = styled(WeatherWording)`
-	font-size: 19px;
-`;
-
-export const TempHolder = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin-top: 15px;
-	padding: 0 10px;
-`;
-
-export const GreyTempHolder = styled(TempHolder)`
-	background: #7cdcdc47;
-	padding: 11px 0;
-	flex-direction: column;
-	margin: 15px 0;
-`;
-
-export const Temp = styled.h2`
-	margin-block-end: 0;
-	margin-block-start: 0;
-`;
-
-export const LaterDiv = styled.div`
-	border-top: 2px solid var(--border-color);
-	position: relative;
-	color: #a2a2a2;
-	padding-top: 35px;
-	margin-top: 40px;
-`;
-
-export const LaterTitle = styled.h2`
-	background: white;
-	width: min-content;
-	margin: auto;
-	position: absolute;
-	right: 32px;
-	top: -17px;
-	color: black;
-`;
-
-export const LaterHourWrapper = styled.div`
-	margin-block-end: 25px;
-`;
-
-export const LaterHourHead = styled(WeatherWording)`
-	font-size: 22px;
-	color: black;
-`;
-
-export const NowTitle = styled(LaterTitle)`
-	bottom: 15px;
-`;
-
-export const LaterIcon = styled(StatusIcon)`
-	font-size: 60px;
 `;

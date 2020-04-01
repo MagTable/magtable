@@ -61,7 +61,7 @@ export const PairedEmpDiv = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: 50%;
-	font-family: "Segoe UI";
+	font-family: "Segoe UI", serif;
 `;
 
 export const AMEmp = styled(PairedEmpDiv)`
@@ -91,7 +91,6 @@ export const EmployeeDiv = styled.div`
 	display: flex;
 	flex-grow: 1;
 	outline: 1px solid black;
-	display: flex;
 	align-items: center;
 	padding-left: 10px;
 `;

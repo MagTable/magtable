@@ -2,11 +2,10 @@ import React from "react";
 import {
 	DescriptionWording,
 	GreyTempHolder,
-	LaterDiv,
+	TimePeriodDiv,
 	LaterHourHead,
 	LaterHourWrapper,
-	LaterTitle,
-	NowTitle,
+	TimePeriodTitle,
 	SideBar,
 	Temp,
 	TempHolder,
@@ -56,36 +55,42 @@ function WeatherBar(props) {
 		"..."
 	) : (
 		<SideBar>
-			<h1>{getDay()}</h1>
-			<h1>{getDate()}</h1>
-			<LaterDiv>
-				<NowTitle>Now</NowTitle>
-			</LaterDiv>
-			<DescriptionWording>{weather.description}</DescriptionWording>
-			<WeatherIcon condition={weather.conditionID} />
-			<TempHolder>
-				<WeatherWording>High</WeatherWording>
-				<Temp>{weather.forecastHigh}°</Temp>
-			</TempHolder>
-			<TempHolder>
-				<WeatherWording>Low</WeatherWording>
-				<Temp>{weather.forecastLow}°</Temp>
-			</TempHolder>
-			<GreyTempHolder>
-				<WeatherWording>Feels Like</WeatherWording>
-				<Temp>{weather.feelsLike}°</Temp>
-			</GreyTempHolder>
-			<WindIcon className="fas fa-wind" />
-			<WeatherWording>{weather.windSpeed} km/h</WeatherWording>
-			<WindArrowWrap>
-				<WindArrow
-					className="fas fa-location-arrow"
-					angle={weather.windDir - 45}
-				/>
-			</WindArrowWrap>
-			<CardinalDirection direction={weather.windDir} />
-			<LaterDiv>
-				<LaterTitle>Later</LaterTitle>
+			<div id={"weather_date"}>
+				<h1>{getDay()}</h1>
+				<h1>{getDate()}</h1>
+			</div>
+			<div id={"weather_current"}>
+				<TimePeriodTitle>
+					<span>Now</span>
+				</TimePeriodTitle>
+				<DescriptionWording>{weather.description}</DescriptionWording>
+				<WeatherIcon condition={weather.conditionID} />
+				<TempHolder>
+					<WeatherWording>High</WeatherWording>
+					<Temp>{weather.forecastHigh}°</Temp>
+				</TempHolder>
+				<TempHolder>
+					<WeatherWording>Low</WeatherWording>
+					<Temp>{weather.forecastLow}°</Temp>
+				</TempHolder>
+				<GreyTempHolder>
+					<WeatherWording>Feels Like</WeatherWording>
+					<Temp>{weather.feelsLike}°</Temp>
+				</GreyTempHolder>
+				<WindIcon className="fas fa-wind" />
+				<WeatherWording>{weather.windSpeed} km/h</WeatherWording>
+				<WindArrowWrap>
+					<WindArrow
+						className="fas fa-location-arrow"
+						angle={weather.windDir - 45}
+					/>
+				</WindArrowWrap>
+				<CardinalDirection direction={weather.windDir} />
+			</div>
+			<TimePeriodDiv id={"weather_later"}>
+				<TimePeriodTitle>
+					<span>Later</span>
+				</TimePeriodTitle>
 				{weather.hourlyTemps.map(hour => (
 					<LaterHourWrapper key={hour.time}>
 						<LaterHourHead>{hour.time}</LaterHourHead>
@@ -94,7 +99,7 @@ function WeatherBar(props) {
 						<WeatherIcon condition={hour.conditionID} />
 					</LaterHourWrapper>
 				))}
-			</LaterDiv>
+			</TimePeriodDiv>
 		</SideBar>
 	);
 }
