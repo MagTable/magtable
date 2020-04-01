@@ -21,7 +21,11 @@ import {
 	DELETE_TRUCK,
 	SET_DAILY_MIX,
 	INCREMENT_DAILY_MIX,
-	DECREMENT_DAILY_MIX
+	DECREMENT_DAILY_MIX,
+	GET_HISTORICAL_MAGTABLE,
+	GET_MAGTABLE_HISTORY_LIST,
+	FETCHING_HISTORICAL_MAGTABLE,
+	FETCHING_MAGTABLE_HISTORY_LIST
 } from "../actions/constants";
 import { ParkingZones } from "../res/test_data/magtable";
 
@@ -46,7 +50,12 @@ const initialState = {
 	shiftsLoading: true,
 	showAM: true,
 	parkingZones: ParkingZones,
-	parkingLocations: []
+	parkingLocations: [],
+	historical: {
+		magtable: null,
+		list: [],
+		loading: false
+	}
 };
 
 const MIX_STEP = 5;
@@ -242,6 +251,42 @@ export default function(state = initialState, action) {
 			return {
 				...state,
 				dailyMix: state.dailyMix - MIX_STEP
+			};
+		case FETCHING_HISTORICAL_MAGTABLE:
+			return {
+				...state,
+				historical: {
+					...state.historical,
+					magtable: null,
+					loading: true
+				}
+			};
+		case GET_HISTORICAL_MAGTABLE:
+			return {
+				...state,
+				historical: {
+					...state.historical,
+					magtable: payload,
+					loading: false
+				}
+			};
+		case FETCHING_MAGTABLE_HISTORY_LIST:
+			return {
+				...state,
+				historical: {
+					...state.historical,
+					list: [],
+					loading: true
+				}
+			};
+		case GET_MAGTABLE_HISTORY_LIST:
+			return {
+				...state,
+				historical: {
+					...state.historical,
+					list: payload,
+					loading: false
+				}
 			};
 		default:
 			return state;

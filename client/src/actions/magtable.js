@@ -15,7 +15,11 @@ import {
 	GET_PARKING_LOCATIONS,
 	SET_DAILY_MIX,
 	INCREMENT_DAILY_MIX,
-	DECREMENT_DAILY_MIX
+	DECREMENT_DAILY_MIX,
+	FETCHING_MAGTABLE_HISTORY_LIST,
+	GET_MAGTABLE_HISTORY_LIST,
+	FETCHING_HISTORICAL_MAGTABLE,
+	GET_HISTORICAL_MAGTABLE
 } from "./constants";
 import axios from "axios";
 import { setAlert } from "./alert";
@@ -192,50 +196,6 @@ export const clearTable = () => dispatch => {
 };
 
 /**
- * Adds a daily message to the magtable
- *
- * @method addDailyMessage
- * @param {object} message message to add to the magtable
- * @returns API returns the updated list of daily messages
- */
-// const addDailyMessage = message => async dispatch => {
-// 	try {
-// 		const res = await axios.put(
-// 			"/magtable/message/",
-// 			AXIOS_JSON_HEADER,
-// 			message
-// 		);
-//
-// 		dispatch({
-// 			type: ADD_DAILY_MESSAGE,
-// 			payload: res.data
-// 		});
-// 	} catch (err) {
-// 		console.log(err);
-// 	}
-// };
-
-/**
- * Removes a message from the daily message list
- *
- * @method removeDailyMessage
- * @param {integer} messageID messageID of the messaged to remove
- * @returns API returns the updated list of daily messages
- */
-// const removeDailyMessage = messageID => async dispatch => {
-// 	try {
-// 		const res = await axios.delete(`/magtable/message/${messageID}`);
-//
-// 		dispatch({
-// 			type: REMOVE_DAILY_MESSAGE,
-// 			payload: res.data
-// 		});
-// 	} catch (err) {
-// 		console.log(err);
-// 	}
-// };
-
-/**
  * Changes the selected apron
  *
  * @method setSelectedApron
@@ -320,18 +280,6 @@ export const addEmployeeShift = shiftData => async dispatch => {
 	}
 };
 
-/*
- * Toggles bay lead status of an assignment
- *
- * @param equipmentID equipmentID of assignment to toggle
- */
-// const toggleBayLead = equipmentID => dispatch => {
-// 	dispatch({
-// 		type: TOGGLE_BAY_LEAD,
-// 		payload: equipmentID
-// 	});
-// };
-
 /**
  * Refreshes the employee shifts.
  *
@@ -403,3 +351,93 @@ export const decrementDailyMix = () => dispatch => {
 		type: DECREMENT_DAILY_MIX
 	});
 };
+
+/**
+ * Fetches list of magtable records from the API that were published on a given date
+ *
+ * @param date date of related magtable records to fetch
+ * @returns list of historical magtable records
+ */
+export const getMagtableHistoryList = date => async dispatch => {
+	try {
+		dispatch({
+			type: FETCHING_MAGTABLE_HISTORY_LIST
+		});
+
+		const res = await axios.get(`/magtable/list/${date}`);
+
+		setTimeout(() => {
+			dispatch({
+				type: GET_MAGTABLE_HISTORY_LIST,
+				payload: res.data
+			});
+		}, 500);
+	} catch (err) {
+		console.error(err);
+	}
+};
+
+/**
+ * Fetches singular historical magtable record by ID
+ *
+ * @param id id of historical magtable record
+ * @returns magtablerecord with given id
+ */
+export const getHistoricalMagtableRecord = id => async dispatch => {
+	try {
+		dispatch({ type: FETCHING_HISTORICAL_MAGTABLE });
+
+		const res = await axios.get(`/magtable/${id}`);
+
+		dispatch({
+			type: GET_HISTORICAL_MAGTABLE,
+			payload: res.data
+		});
+	} catch (err) {
+		console.error(err);
+	}
+};
+
+/**
+ * Adds a daily message to the magtable
+ *
+ * @method addDailyMessage
+ * @param {object} message message to add to the magtable
+ * @returns API returns the updated list of daily messages
+ */
+// const addDailyMessage = message => async dispatch => {
+// 	try {
+// 		const res = await axios.put(
+// 			"/magtable/message/",
+// 			AXIOS_JSON_HEADER,
+// 			message
+// 		);
+//
+// 		dispatch({
+// 			type: ADD_DAILY_MESSAGE,
+// 			payload: res.data
+// 		});
+// 	} catch (err) {
+// 		console.log(err);
+// 	}
+// };
+
+/**
+ * Removes a message from the daily message list
+ *
+ * @method removeDailyMessage
+ * @param {integer} messageID messageID of the messaged to remove
+ * @returns API returns the updated list of daily messages
+ */
+// const removeDailyMessage = messageID => async dispatch => {
+// 	try {
+// 		const res = await axios.delete(`/magtable/message/${messageID}`);
+//
+// 		dispatch({
+// 			type: REMOVE_DAILY_MESSAGE,
+// 			payload: res.data
+// 		});
+// 	} catch (err) {
+// 		console.log(err);
+// 	}
+// };
