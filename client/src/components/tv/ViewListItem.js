@@ -42,7 +42,11 @@ function ViewListItem({ assignment, assigned, isEven }) {
 				<TruckNumDiv>
 					<TruckNum>{assignment.equipment.id}</TruckNum>
 				</TruckNumDiv>
-				<AssignedToDiv>{assignment.parkingLocation.apron}</AssignedToDiv>
+				<AssignedToDiv>
+					{assignment.parkingLocation === null
+						? null
+						: assignment.parkingLocation.apron}
+				</AssignedToDiv>
 				<EmployeeWrap>
 					<AMEmp isEven={isEven}>
 						{amShifts.map(shift => (

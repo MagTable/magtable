@@ -8,7 +8,7 @@ import styled from "styled-components";
 
 export const TVWrap = styled.div`
 	display: grid;
-	grid-template-columns: auto auto;
+	grid-template-columns: 1fr auto;
 `;
 
 /**
