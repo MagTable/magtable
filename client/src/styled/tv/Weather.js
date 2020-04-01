@@ -113,7 +113,9 @@ export const TimePeriodTitle = styled.h2`
 
 export const LaterHourWrapper = styled.div`
 	padding: 0.5rem;
-	border-bottom: 1px solid var(--border-color);
+	:nth-child(odd) {
+		background: #7cdcdc47;
+	}
 `;
 
 export const LaterHourHead = styled(WeatherWording)`
