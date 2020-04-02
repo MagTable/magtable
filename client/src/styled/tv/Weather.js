@@ -66,7 +66,7 @@ export const TempHolder = styled.div`
 `;
 
 export const GreyTempHolder = styled(TempHolder)`
-	background: #7cdcdc47;
+	background: #9fc6ff70;
 	padding: 11px 0;
 	flex-direction: column;
 	margin: 15px 0;
@@ -114,7 +114,7 @@ export const TimePeriodTitle = styled.h2`
 export const LaterHourWrapper = styled.div`
 	padding: 0.5rem;
 	:nth-child(odd) {
-		background: #7cdcdc47;
+		background: #9fc6ff70;
 	}
 `;
 

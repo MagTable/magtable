@@ -20,6 +20,7 @@ export const ViewListDiv = styled.div`
 	height: min-content;
 	display: flex;
 	flex-direction: column;
+	margin-top: 20px;
 `;
 
 export const ListItemWrapper = styled.div`
@@ -29,16 +30,18 @@ export const ListItemWrapper = styled.div`
 	${({ isEven }) =>
 		isEven
 			? `
-			background-color: #F1F1F1;
+			background-color: #9fc6ff70;
 		`
 			: `
 		`}
 `;
 
-export const UnassignedWrap = styled(ListItemWrapper)`
-	height: auto;
-	outline: 1px solid grey;
-	outline-offset: -1px;
+export const UnassignedWrap = styled.div`
+	width: 100%;
+	background-color: #d3d3d3;
+	:nth-child(odd) {
+		background: #bdbdbd;
+	}
 `;
 
 export const TruckNumDiv = styled.div`
@@ -51,8 +54,14 @@ export const TruckNumDiv = styled.div`
 	justify-content: center;
 `;
 
+export const TruckNumDivUnassigned = styled(TruckNumDiv)`
+	height: 30px;
+`;
+
 export const TruckNum = styled.span`
 	font-size: 20px;
+	width: 50px;
+	text-align: center;
 `;
 
 export const AssignedToDiv = styled(TruckNumDiv)`
@@ -65,46 +74,41 @@ export const EmployeeWrap = styled.div`
 	display: flex;
 	flex-direction: row;
 	width: 100%;
-	font-size: 18px;
 	border-left: 1px solid grey;
-	//border-right: 1px solid grey;
+	//justify-content: space-between;
+	white-space: nowrap;
 	outline-offset: -1px;
+	font-size: 20px;
 `;
 
 export const PairedEmpDiv = styled.div`
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	width: 50%;
 	font-family: "Segoe UI", serif;
+	justify-content: space-around;
+	padding: 0 10px;
 `;
 
-export const AMEmp = styled(PairedEmpDiv)`
-	${({ isEven }) =>
-		isEven
-			? `
-			background-color: #F1F1F1;
-		`
-			: `
-		`}
-`;
+export const AMEmp = styled(PairedEmpDiv)``;
 
 export const PMEmp = styled(PairedEmpDiv)`
-	color: white;
+	//color: white;
 
 	${({ isEven }) =>
 		isEven
 			? `
-			background-color: #747474;
+			background-color: #9fc6ff70;
 		`
 			: `
-			background-color: #A5A5A5;
+			background-color: #9fc6ff2b;
 		`}
 `;
 
 export const EmployeeDiv = styled.div`
 	display: flex;
-	flex-grow: 1;
-	display: flex;
 	align-items: center;
-	padding-left: 10px;
+
+	width: 50%;
+	justify-content: center;
 `;
