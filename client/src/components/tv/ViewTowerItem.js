@@ -4,6 +4,7 @@ import {
 	EmployeeDiv,
 	EmployeeWrap,
 	PMEmp,
+	TowerEmployeeDiv,
 	TowerListDiv,
 	TowerPos,
 	TowerPosDiv
@@ -41,10 +42,14 @@ function ViewTowerItem({ assignment }) {
 				<TowerPos>{assignment.equipment.type}</TowerPos>
 				<EmployeeWrap>
 					<AMEmp>
-						<EmployeeDiv>{amShift == null ? "" : amShift.name}</EmployeeDiv>
+						<TowerEmployeeDiv>
+							{amShift == null ? "" : amShift.name}
+						</TowerEmployeeDiv>
 					</AMEmp>
 					<PMEmp>
-						<EmployeeDiv>{pmShift == null ? "" : pmShift.name}</EmployeeDiv>
+						<TowerEmployeeDiv>
+							{pmShift == null ? "" : pmShift.name}
+						</TowerEmployeeDiv>
 					</PMEmp>
 				</EmployeeWrap>
 			</TowerPosDiv>
