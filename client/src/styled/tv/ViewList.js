@@ -30,7 +30,7 @@ export const ListItemWrapper = styled.div`
 	${({ isEven }) =>
 		isEven
 			? `
-			background-color: #F1F1F1;
+			background-color: #9fc6ff70;
 		`
 			: `
 		`}
@@ -67,15 +67,19 @@ export const EmployeeWrap = styled.div`
 	flex-direction: row;
 	width: 100%;
 	border-left: 1px solid grey;
-	//border-right: 1px solid grey;
+	//justify-content: space-between;
+	white-space: nowrap;
 	outline-offset: -1px;
+	font-size: 20px;
 `;
 
 export const PairedEmpDiv = styled.div`
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	width: 50%;
 	font-family: "Segoe UI", serif;
+	justify-content: space-around;
+	padding: 0 10px;
 `;
 
 export const AMEmp = styled(PairedEmpDiv)``;
@@ -86,17 +90,17 @@ export const PMEmp = styled(PairedEmpDiv)`
 	${({ isEven }) =>
 		isEven
 			? `
-			background-color: #bdbdbd;
+			background-color: #9fc6ff70;
 		`
 			: `
-			background-color: #d4d4d4;
+			background-color: #9fc6ff2b;
 		`}
 `;
 
 export const EmployeeDiv = styled.div`
 	display: flex;
-	flex-grow: 1;
-	display: flex;
 	align-items: center;
-	padding-left: 10px;
+
+	width: 50%;
+	justify-content: center;
 `;
