@@ -58,7 +58,7 @@ function ViewList(props) {
 				assignments[i].equipment.type === "SVV" || // It is a service truck.
 				numDisabledIce < MAX_NUM_UNASSIGNED_ICE // There is enough room for a non-assigned de-ice truck.
 			) {
-				disabledAssignments.push(assignments[i]);
+				// disabledAssignments.push(assignments[i]);
 				if (assignments[i].equipment.type === "ICE") {
 					// If the truck is a de-ice truck.
 					numDisabledIce++;
@@ -70,30 +70,9 @@ function ViewList(props) {
 	return (
 		<ViewListDiv>
 			<SectionTitle>Tower</SectionTitle>
-			<TowerListWrap>
-				<TowerPadWrap>
-					{towerAssignments.map(
-						assignment =>
-							assignment.equipment.id <= 1010 && (
-								<ViewTowerItem
-									assignment={assignment}
-									key={assignment.equipment.id}
-								/>
-							)
-					)}
-				</TowerPadWrap>
-				<WestPadWrap>
-					{towerAssignments.map(
-						assignment =>
-							assignment.equipment.id > 1010 && (
-								<ViewTowerItem
-									assignment={assignment}
-									key={assignment.equipment.id}
-								/>
-							)
-					)}
-				</WestPadWrap>
-			</TowerListWrap>
+			{towerAssignments.map(assignment => (
+				<ViewTowerItem assignment={assignment} key={assignment.equipment.id} />
+			))}
 			<VehicleListWrap>
 				<SectionTitle>Service Vehicles</SectionTitle>
 				{enabledAssignments.map(
@@ -137,7 +116,7 @@ function ViewList(props) {
 							/>
 						)
 				)}
-				<FadeOutDiv />
+				{/*<FadeOutDiv />*/}
 			</VehicleListWrap>
 			<SectionTitle>Vehicle Notices</SectionTitle>
 			{notices.map(notice => (

@@ -36,7 +36,8 @@ export const TowerPadWrap = styled.div`
 `;
 
 export const WestPadWrap = styled(TowerPadWrap)`
-	border-left: 3px solid grey;
+	//border-left: 3px solid grey;
+	margin-left: 10px;
 `;
 
 /**
@@ -164,6 +165,10 @@ export const EmployeeWrap = styled.div`
 	white-space: nowrap;
 	outline-offset: -1px;
 	font-size: 20px;
+`;
+
+export const TowerEmployeeWrap = styled(EmployeeWrap)`
+	font-size: 15px;
 `;
 
 /**
