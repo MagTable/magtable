@@ -36,10 +36,12 @@ export const ListItemWrapper = styled.div`
 		`}
 `;
 
-export const UnassignedWrap = styled(ListItemWrapper)`
-	height: auto;
-	outline: 1px solid grey;
-	outline-offset: -1px;
+export const UnassignedWrap = styled.div`
+	width: 100%;
+	background-color: #d3d3d3;
+	:nth-child(odd) {
+		background: #bdbdbd;
+	}
 `;
 
 export const TruckNumDiv = styled.div`
@@ -52,8 +54,14 @@ export const TruckNumDiv = styled.div`
 	justify-content: center;
 `;
 
+export const TruckNumDivUnassigned = styled(TruckNumDiv)`
+	height: 30px;
+`;
+
 export const TruckNum = styled.span`
 	font-size: 20px;
+	width: 50px;
+	text-align: center;
 `;
 
 export const AssignedToDiv = styled(TruckNumDiv)`

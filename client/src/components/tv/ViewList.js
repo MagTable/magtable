@@ -26,30 +26,38 @@ function ViewList(props) {
 	const assignments = useSelector(state => state.magtable.assignments);
 	console.log(assignments);
 
+	let enabledAssignments = [];
+	let disabledAssignments = [];
+
+	for (let i = 0; i < assignments.length; i++) {
+		if (
+			assignments[i].employeeShifts.length > 0 ||
+			assignments[i].parkingLocation !== null
+		) {
+			enabledAssignments.push(assignments[i]);
+		} else {
+			disabledAssignments.push(assignments[i]);
+		}
+	}
+
 	return (
 		<ViewListDiv>
-			{assignments.map(
-				assignment =>
-					assignment.employeeShifts.length > 0 && (
-						<ViewListItem
-							assignment={assignment}
-							assigned={true}
-							key={assignment.equipment.id}
-							isEven={rowShade()}
-						/>
-					)
-			)}
+			{enabledAssignments.map(assignment => (
+				<ViewListItem
+					assignment={assignment}
+					assigned={true}
+					key={assignment.equipment.id}
+					isEven={rowShade()}
+				/>
+			))}
 
-			{assignments.map(
-				assignment =>
-					assignment.employeeShifts.length === 0 && (
-						<ViewListItem
-							assignment={assignment}
-							assigned={false}
-							key={assignment.equipment.id}
-						/>
-					)
-			)}
+			{disabledAssignments.map(assignment => (
+				<ViewListItem
+					assignment={assignment}
+					assigned={false}
+					key={assignment.equipment.id}
+				/>
+			))}
 		</ViewListDiv>
 	);
 }

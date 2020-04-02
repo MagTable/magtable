@@ -9,6 +9,7 @@ import {
 	PMEmp,
 	TruckNum,
 	TruckNumDiv,
+	TruckNumDivUnassigned,
 	UnassignedWrap
 } from "../../styled/tv/ViewList";
 
@@ -69,7 +70,13 @@ function ViewListItem({ assignment, assigned, isEven }) {
 			</ListItemWrapper>
 		);
 	}
-	return <UnassignedWrap>Unassigned</UnassignedWrap>;
+	return (
+		<UnassignedWrap>
+			<TruckNumDivUnassigned>
+				<TruckNum>{assignment.equipment.id}</TruckNum>
+			</TruckNumDivUnassigned>
+		</UnassignedWrap>
+	);
 }
 
 export default ViewListItem;
