@@ -47,14 +47,14 @@ function ViewList(props) {
 		if (assignments[i].equipment.id >= 1000) {
 			towerAssignments.push(assignments[i]);
 		} else {
-			if (assignments[i].notice !== "") {
-				notices.push(assignments[i]);
-			}
 			if (
 				assignments[i].employeeShifts.length > 0 ||
 				assignments[i].parkingLocation !== null
 			) {
 				enabledAssignments.push(assignments[i]);
+				if (assignments[i].equipment.notice !== "") {
+					notices.push(assignments[i]);
+				}
 			} else if (
 				assignments[i].equipment.type === "SVV" ||
 				numDisabledIce < MAX_NUM_UNASSIGNED_ICE

@@ -24,10 +24,9 @@ function ViewNotice({ assignment }) {
 			<TruckNumDiv>
 				<TruckNum>{assignment.equipment.id}</TruckNum>
 			</TruckNumDiv>
-			<TruckNotice>{assignment.notice}</TruckNotice>
+			<TruckNotice>{assignment.equipment.notice}</TruckNotice>
 		</NoticeWrapper>
 	);
-	return <>{assignment.notice}</>;
 }
 
 export default ViewNotice;

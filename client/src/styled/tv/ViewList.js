@@ -55,6 +55,7 @@ export const NoticeWrapper = styled.div`
 export const TruckNumDiv = styled.div`
 	height: 50px;
 	width: 50px;
+	position: relative;
 	//border-left: 1px solid grey;
 	border-right: 1px solid grey;
 	display: flex;
@@ -158,4 +159,10 @@ export const FadeOutDiv = styled.div`
 		rgba(255, 255, 255, 1) 0%,
 		rgba(255, 255, 255, 0) 100%
 	);
+`;
+
+export const NoticeIcon = styled.i`
+	position: absolute;
+	left: -10px;
+	color: #ff2800;
 `;

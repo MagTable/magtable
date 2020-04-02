@@ -5,6 +5,7 @@ import {
 	EmployeeDiv,
 	EmployeeWrap,
 	ListItemWrapper,
+	NoticeIcon,
 	PMEmp,
 	TruckNum,
 	TruckNumDiv,
@@ -40,6 +41,10 @@ function ViewListItem({ assignment, assigned, isEven }) {
 		return (
 			<ListItemWrapper isEven={isEven}>
 				<TruckNumDiv>
+					{assignment.equipment.notice === "" ? null : (
+						<NoticeIcon className="fas fa-exclamation-triangle" />
+					)}
+
 					<TruckNum>{assignment.equipment.id}</TruckNum>
 				</TruckNumDiv>
 				<AssignedToDiv>
