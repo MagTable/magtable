@@ -27,8 +27,7 @@ export const StyledLabel = styled.label`
 	${({ lifted, focus }) =>
 		(lifted || focus) &&
 		`
-			transform: translateY(-25px);
-			font-size: 0.75rem;
+			transform: scale(.75) translateY(-40px);
 	`}
 		
 	${({ error }) =>
