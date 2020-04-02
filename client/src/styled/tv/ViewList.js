@@ -19,10 +19,24 @@ export const TVWrap = styled.div`
  **/
 export const ViewListDiv = styled.div`
 	width: calc(100vw - 200px);
+	height: calc(100vh - 70px);
 	justify-self: center;
-	height: min-content;
 	display: flex;
 	flex-direction: column;
+	overflow-y: auto;
+`;
+
+export const TowerListWrap = styled.div`
+	display: flex;
+	flex-direction: row;
+`;
+
+export const TowerPadWrap = styled.div`
+	width: 100%;
+`;
+
+export const WestPadWrap = styled(TowerPadWrap)`
+	border-left: 3px solid grey;
 `;
 
 /**
@@ -120,7 +134,7 @@ export const TruckNum = styled.span`
  * Holds the name of the tower position.
  */
 export const TowerPos = styled(TruckNum)`
-	width: 180px;
+	width: 150px;
 	padding-left: 5px;
 	text-align: left;
 	border-right: 1px solid grey;
@@ -162,6 +176,7 @@ export const PairedEmpDiv = styled.div`
 	font-family: "Segoe UI", serif;
 	justify-content: space-around;
 	padding: 0 10px;
+	white-space: normal;
 `;
 
 /**
@@ -185,6 +200,11 @@ export const EmployeeDiv = styled.div`
 
 	width: 50%;
 	justify-content: center;
+`;
+
+export const TowerEmployeeDiv = styled(EmployeeDiv)`
+	//width: 100px;
+	text-align: center;
 `;
 
 /**
@@ -226,6 +246,7 @@ export const FadeOutDiv = styled.div`
  */
 export const NoticeIcon = styled.i`
 	position: absolute;
-	left: -10px;
+	right: 0px;
+	top: 1px;
 	color: #ff2800;
 `;

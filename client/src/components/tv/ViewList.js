@@ -3,8 +3,11 @@ import { useSelector } from "react-redux";
 import {
 	FadeOutDiv,
 	SectionTitle,
+	TowerListWrap,
+	TowerPadWrap,
 	VehicleListWrap,
-	ViewListDiv
+	ViewListDiv,
+	WestPadWrap
 } from "../../styled/tv/ViewList";
 import ViewListItem from "./ViewListItem";
 import ViewTowerItem from "./ViewTowerItem";
@@ -67,9 +70,30 @@ function ViewList(props) {
 	return (
 		<ViewListDiv>
 			<SectionTitle>Tower</SectionTitle>
-			{towerAssignments.map(assignment => (
-				<ViewTowerItem assignment={assignment} key={assignment.equipment.id} />
-			))}
+			<TowerListWrap>
+				<TowerPadWrap>
+					{towerAssignments.map(
+						assignment =>
+							assignment.equipment.id <= 1010 && (
+								<ViewTowerItem
+									assignment={assignment}
+									key={assignment.equipment.id}
+								/>
+							)
+					)}
+				</TowerPadWrap>
+				<WestPadWrap>
+					{towerAssignments.map(
+						assignment =>
+							assignment.equipment.id > 1010 && (
+								<ViewTowerItem
+									assignment={assignment}
+									key={assignment.equipment.id}
+								/>
+							)
+					)}
+				</WestPadWrap>
+			</TowerListWrap>
 			<VehicleListWrap>
 				<SectionTitle>Service Vehicles</SectionTitle>
 				{enabledAssignments.map(
