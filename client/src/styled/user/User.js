@@ -1,5 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import { isMobile } from "react-device-detect";
+import { IconButton } from "../common/IconButton";
 
 /**
  * @date 2020-02-05
@@ -110,8 +111,16 @@ export const UserManipulateBlock = styled.div`
 	text-overflow: ellipsis;
 	min-height: 65px;
 
+	${IconButton} {
+		opacity: 0;
+		transition: opacity 0.3s ease-in-out;
+	}
+
 	:hover {
 		background-color: #dff3ff;
+		${IconButton} {
+			opacity: 1;
+		}
 	}
 
 	${isMobile && // Mobile rules

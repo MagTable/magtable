@@ -39,7 +39,7 @@ function IconButton({
 				data-tip={toolTip}
 				hoverColor={hoverColor}
 				color={color}
-				nopad
+				nopad={nopad}
 				{...props}
 			/>
 			<BrowserView>
