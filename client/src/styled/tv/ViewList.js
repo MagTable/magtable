@@ -6,13 +6,16 @@ import styled from "styled-components";
  * @module Styled
  */
 
+/**
+ * Holds the lists and the weather bar.
+ */
 export const TVWrap = styled.div`
 	display: grid;
 	grid-template-columns: 1fr auto;
 `;
 
 /**
- *
+ * Holds the lists.
  **/
 export const ViewListDiv = styled.div`
 	width: calc(100vw - 200px);
@@ -22,10 +25,16 @@ export const ViewListDiv = styled.div`
 	flex-direction: column;
 `;
 
+/**
+ * Holds the vehicle list.
+ */
 export const VehicleListWrap = styled.div`
 	position: relative;
 `;
 
+/**
+ * For each individual vehicle item.
+ */
 export const ListItemWrapper = styled.div`
 	width: 100%;
 	display: flex;
@@ -35,6 +44,9 @@ export const ListItemWrapper = styled.div`
 	}
 `;
 
+/**
+ * For trucks that are unassigned.
+ */
 export const UnassignedWrap = styled.div`
 	width: 100%;
 	background-color: #d3d3d3;
@@ -43,6 +55,9 @@ export const UnassignedWrap = styled.div`
 	}
 `;
 
+/**
+ * Holds notices for trucks
+ */
 export const NoticeWrapper = styled.div`
 	width: 100%;
 	display: flex;
@@ -52,6 +67,9 @@ export const NoticeWrapper = styled.div`
 	}
 `;
 
+/**
+ * Holds the truck's ID.
+ */
 export const TruckNumDiv = styled.div`
 	height: 50px;
 	width: 50px;
@@ -63,6 +81,9 @@ export const TruckNumDiv = styled.div`
 	justify-content: center;
 `;
 
+/**
+ * The list of tower positions.
+ */
 export const TowerListDiv = styled.div`
 	width: 100%;
 	display: flex;
@@ -71,21 +92,33 @@ export const TowerListDiv = styled.div`
 	}
 `;
 
+/**
+ * Each individual tower position.
+ */
 export const TowerPosDiv = styled(TruckNumDiv)`
 	width: 100%;
 	border: none;
 `;
 
+/**
+ * The truck number div for unassigned trucks.
+ */
 export const TruckNumDivUnassigned = styled(TruckNumDiv)`
 	height: 30px;
 `;
 
+/**
+ * The numerical value representing the trucks ID.
+ */
 export const TruckNum = styled.span`
 	font-size: 20px;
 	width: 50px;
 	text-align: center;
 `;
 
+/**
+ * Holds the name of the tower position.
+ */
 export const TowerPos = styled(TruckNum)`
 	width: 180px;
 	padding-left: 5px;
@@ -96,11 +129,17 @@ export const TowerPos = styled(TruckNum)`
 	align-items: center;
 `;
 
+/**
+ * The location the truck is assigfned to.
+ */
 export const AssignedToDiv = styled(TruckNumDiv)`
 	width: 80px;
 	outline: none;
 `;
 
+/**
+ * Holds all slots for employees assigned to  a truck.
+ */
 export const EmployeeWrap = styled.div`
 	height: 50px;
 	display: flex;
@@ -113,6 +152,9 @@ export const EmployeeWrap = styled.div`
 	font-size: 20px;
 `;
 
+/**
+ * Employee pairings ie. AM or PM.
+ */
 export const PairedEmpDiv = styled.div`
 	display: flex;
 	flex-direction: row;
@@ -122,12 +164,21 @@ export const PairedEmpDiv = styled.div`
 	padding: 0 10px;
 `;
 
+/**
+ * Employees in the AM slot of a truck.
+ */
 export const AMEmp = styled(PairedEmpDiv)``;
 
+/**
+ * Employees in the PM slot of a truck.
+ */
 export const PMEmp = styled(PairedEmpDiv)`
 	background-color: #9fc6ff70;
 `;
 
+/**
+ * Holds individual employee names.
+ */
 export const EmployeeDiv = styled.div`
 	display: flex;
 	align-items: center;
@@ -136,18 +187,27 @@ export const EmployeeDiv = styled.div`
 	justify-content: center;
 `;
 
+/**
+ * Titles of each list ie Tower, Service Vehicles etc...
+ */
 export const SectionTitle = styled.h2`
 	margin-block-end: 0.2em;
 	margin-block-start: 0.8em;
 	font-size: 30px;
 `;
 
+/**
+ * Holds truck notices.
+ */
 export const TruckNotice = styled.span`
 	display: flex;
 	align-items: center;
 	padding: 0 5px;
 `;
 
+/**
+ * Fades the end of the list of De-Ice trucks in order to provide a smoother transition/to signify there are more than what is seen.
+ */
 export const FadeOutDiv = styled.div`
 	position: absolute;
 	bottom: 0;
@@ -161,6 +221,9 @@ export const FadeOutDiv = styled.div`
 	);
 `;
 
+/**
+ * The exclamation mark to express there is a notice on the truck.
+ */
 export const NoticeIcon = styled.i`
 	position: absolute;
 	left: -10px;

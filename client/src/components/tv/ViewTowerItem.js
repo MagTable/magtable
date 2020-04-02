@@ -3,15 +3,11 @@ import {
 	AMEmp,
 	EmployeeDiv,
 	EmployeeWrap,
-	ListItemWrapper,
 	PMEmp,
 	TowerListDiv,
 	TowerPos,
-	TowerPosDiv,
-	TruckNum,
-	TruckNumDiv
+	TowerPosDiv
 } from "../../styled/tv/ViewList";
-import { TruckNumberDiv } from "../../styled/magtable/ListContent";
 
 /**
  * @date 2020-04-01
@@ -20,24 +16,24 @@ import { TruckNumberDiv } from "../../styled/magtable/ListContent";
  */
 
 /**
- *
+ * Tower items within the list of towers in TV view.
  * @constructor
  * @param props
  * @returns {*} The ViewTowerItem component
  */
 function ViewTowerItem({ assignment }) {
-	let amShift;
-	let pmShift;
+	let amShift; // The employee assigned to the AM shift.
+	let pmShift; // The employee assigned to the PM shift.
 
 	for (let i = 0; i < assignment.employeeShifts.length; i++) {
 		if (assignment.employeeShifts[i].timeOfDay === "AM") {
+			// The Employee is assigned the AM shift.
 			amShift = assignment.employeeShifts[i];
 		} else if (assignment.employeeShifts[i].timeOfDay === "PM") {
+			// The Employee is assigned the PM shift.
 			pmShift = assignment.employeeShifts[i];
 		}
 	}
-
-	console.log(pmShift);
 
 	return (
 		<TowerListDiv>

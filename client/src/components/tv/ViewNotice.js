@@ -13,7 +13,7 @@ import {
  */
 
 /**
- *
+ * Displays individual notices for trucks with their IDs.
  * @constructor
  * @param props
  * @returns {*} The ViewNotice component
