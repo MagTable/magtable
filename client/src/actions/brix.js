@@ -144,11 +144,11 @@ export const getWeather = () => async dispatch => {
 
 		for (let i = 0; i < 6; i++) {
 			let thisHour = {}; // The object to hold the data for the current hour being gathered.
-			const time = new Date();
+			const time = new Date(0);
 			time.setUTCSeconds(weather.list[i + 1].dt);
 			thisHour.temp = Math.floor(weather.list[i + 1].main.temp);
 			thisHour.conditionID = weather.list[i + 1].weather[0].id;
-			thisHour.time = time.getUTCHours() + ":00";
+			thisHour.time = time.getHours() + ":00";
 			thisHour.description = weather.list[i + 1].weather[0].description;
 			thisHour.conditionID = weather.list[i + 1].weather[0].id;
 

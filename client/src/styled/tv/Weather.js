@@ -13,7 +13,7 @@ import styled from "styled-components";
 export const SideBar = styled.div`
 	height: calc(100vh - 70px);
 	text-align: center;
-	border-left: 2px solid var(--border-color);
+	border-left: 1px solid var(--border-color);
 
 	display: block;
 
@@ -29,7 +29,7 @@ export const SideBar = styled.div`
 
 		#weather_current {
 			grid-area: current;
-			border-right: 2px solid var(--border-color);
+			border-right: 1px solid var(--border-color);
 		}
 
 		#weather_later {
@@ -39,7 +39,7 @@ export const SideBar = styled.div`
 		#weather_date {
 			grid-area: date;
 
-			border-bottom: 2px solid var(--border-color);
+			border-bottom: 1px solid var(--border-color);
 			padding: 0.5rem 0;
 			h1 {
 				margin: 0;
