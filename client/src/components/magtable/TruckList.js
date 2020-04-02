@@ -20,7 +20,7 @@ import {
 	OOS,
 	SERVICE_VEHICLE
 } from "../../actions/constants";
-import Modal from "../modal/Modal";
+import Modal from "../common/Modal";
 import BrixManagement from "../brix/BrixManagement";
 import ReactTooltip from "react-tooltip";
 
@@ -49,6 +49,8 @@ function TruckList() {
 
 	const handleClose = () => setShowBrixModal(false);
 	const handleShow = () => setShowBrixModal(true);
+
+	const listItemSeparator = "|";
 
 	const handleShiftToggle = () => {
 		dispatch(toggleAM());
@@ -142,19 +144,19 @@ function TruckList() {
 			{!loading ? (
 				<TruckListDiv>
 					<ListSeparator>
-						Service Vehicles:
+						Service Vehicles
 						<TruckStatusCounterItem GO data-tip={GO}>
 							{truckStatusTotals[SERVICE_VEHICLE][GO]}
 						</TruckStatusCounterItem>
-						/
+						<TruckStatusCounterItem>{listItemSeparator}</TruckStatusCounterItem>
 						<TruckStatusCounterItem CON data-tip={CON}>
 							{truckStatusTotals[SERVICE_VEHICLE][CON]}
 						</TruckStatusCounterItem>
-						/
+						<TruckStatusCounterItem>{listItemSeparator}</TruckStatusCounterItem>
 						<TruckStatusCounterItem OOS data-tip={OOS}>
 							{truckStatusTotals[SERVICE_VEHICLE][OOS]}
 						</TruckStatusCounterItem>
-						/
+						<TruckStatusCounterItem>{listItemSeparator}</TruckStatusCounterItem>
 						<TruckStatusCounterItem INOP data-tip={INOP}>
 							{truckStatusTotals[SERVICE_VEHICLE][INOP]}
 						</TruckStatusCounterItem>
@@ -176,19 +178,19 @@ function TruckList() {
 						/>
 					))}
 					<ListSeparator>
-						De-Ice Trucks:
+						De-Ice Trucks
 						<TruckStatusCounterItem GO data-tip={GO}>
 							{truckStatusTotals[DEICE_TRUCK][GO]}
 						</TruckStatusCounterItem>
-						/
+						<TruckStatusCounterItem>{listItemSeparator}</TruckStatusCounterItem>
 						<TruckStatusCounterItem CON data-tip={CON}>
 							{truckStatusTotals[DEICE_TRUCK][CON]}
 						</TruckStatusCounterItem>
-						/
+						<TruckStatusCounterItem>{listItemSeparator}</TruckStatusCounterItem>
 						<TruckStatusCounterItem OOS data-tip={OOS}>
 							{truckStatusTotals[DEICE_TRUCK][OOS]}
 						</TruckStatusCounterItem>
-						/
+						<TruckStatusCounterItem>{listItemSeparator}</TruckStatusCounterItem>
 						<TruckStatusCounterItem INOP data-tip={INOP}>
 							{truckStatusTotals[DEICE_TRUCK][INOP]}
 						</TruckStatusCounterItem>

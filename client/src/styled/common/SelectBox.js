@@ -11,8 +11,7 @@ export const StyledLabel = styled.label`
 	user-select: none;
 	position: relative;
 	float: left;
-	top 30px;
-	// left: 5px;
+	top: 30px;
 	color: var(--input-label);
 	cursor: text;
 	z-index: 0;
@@ -28,8 +27,7 @@ export const StyledLabel = styled.label`
 	${({ lifted, focus }) =>
 		(lifted || focus) &&
 		`
-			transform: translateY(-25px);
-			font-size: 0.75rem;
+			transform: scale(.75) translateY(-40px);
 	`}
 		
 	${({ error }) =>
@@ -69,5 +67,4 @@ export const StyledSelect = styled.select`
 
 export const SelectContainer = styled.div`
 	position: relative;
-	width: -webkit-fill-available;
 `;

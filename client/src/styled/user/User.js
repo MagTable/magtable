@@ -102,7 +102,6 @@ export const UserListRow = styled.div`
  */
 export const UserManipulateBlock = styled.div`
 	display: flex;
-	background-color: #f2faff;
 	align-items: center;
 	width: 100%;
 	margin: 0.5rem;

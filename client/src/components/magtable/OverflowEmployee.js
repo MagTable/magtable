@@ -7,7 +7,7 @@ import {
 } from "../../styled/magtable/Overflow";
 import { ClickCatcher } from "../../styled/common/ClickCatcher";
 import AddEmployeeShift from "./AddEmployeeShift";
-import Modal from "../modal/Modal";
+import Modal from "../common/Modal";
 import { useSelector } from "react-redux";
 import { SYSTEM_ADMINISTRATOR } from "../../actions/constants";
 
@@ -63,8 +63,8 @@ function OverflowEmployee({
 			{open && (
 				<>
 					<ClickCatcher onClick={() => setOpen(false)} />
-					<div id={"arrow"} />
 					<div id={"container"}>
+						<div id={"arrow"} />
 						<OverflowMenuButton onClick={filterAMEmployees}>
 							{activeFilters[0] ? (
 								<FilterIcon className={"fas fa-times"} color={"red"} />

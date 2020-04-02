@@ -1,15 +1,21 @@
 package com.magtable.controller;
 
+import com.magtable.model.api.MagTableHistoryResponse;
 import com.magtable.model.entities.*;
 import com.magtable.repository.AssignmentRepository;
 import com.magtable.repository.EquipmentRepository;
 import com.magtable.repository.MagTableRecordRepository;
 import com.magtable.repository.ParkingLocationRepository;
+import com.magtable.services.ErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,6 +41,9 @@ public class MagTableController {
 
     @Autowired
     SimpMessagingTemplate template;
+
+    @Autowired
+    ErrorService errorService;
 
 
     /**
@@ -104,4 +113,44 @@ public class MagTableController {
         return parkingLocationRepository.findAll();
     }
 
+
+    /**
+     * route           Get /list/{date}
+     * description     method to get a list of magtableHistoryResponses
+     * access          System Admins, Personnel Managers
+     *
+     * @param requestDate The request containing the date
+     */
+    @GetMapping("/list/{date}")
+    public List<MagTableHistoryResponse> getHistoricalMagTables(@PathVariable(value = "date") String requestDate) {
+
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+
+        LocalDate localDate = LocalDate.parse(requestDate);
+        Date date = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
+
+        ArrayList<MagtableRecord> records = (ArrayList<MagtableRecord>) magTableRecordRepository.findAllByDate(date);
+
+        ArrayList<MagTableHistoryResponse> responses = new ArrayList<>();
+
+        for(MagtableRecord record : records){
+            MagTableHistoryResponse response = new MagTableHistoryResponse(record);
+                responses.add(response);
+        }
+
+        return responses;
+    }
+
+
+    /**
+     * route           Get /magtable/{id}
+     * description     method to get a magtablerecord by ID
+     * access          System Admins, Personnel Managers
+     *
+     * @param magId The magtable id
+     */
+    @GetMapping("/{id}")
+    public MagtableRecord getMagtableByid(@PathVariable(value = "id")Integer magId){
+        return magTableRecordRepository.findById(magId).orElseThrow(() -> errorService.magIdNotFound(magId));
+    }
 }

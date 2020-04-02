@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 /**
  * @date 2020-03-25
- * @author MJ Kochuk
+ * @author MJ Kochuk, Arran Woodruff
  * @category Styled Components
  * @module TV
  */
@@ -21,40 +21,49 @@ export const TempDiv2 = styled.div`
  **/
 export const SideBar = styled.div`
 	height: calc(100vh - 70px);
-	width: 119px;
-	float: right;
 	text-align: center;
-	border-left: 2px solid var(--border-color);
-`;
+	border-left: 1px solid var(--border-color);
 
-/**
- * Base for weather icons
- */
-const StatusIcon = styled.i`
-	font-size: 90px;
-	margin: 15px 0;
-`;
+	display: block;
 
-export const SunIcon = styled(StatusIcon)`
-	color: #eaab0e;
-`;
+	@media (max-height: 1600px) {
+		display: grid;
 
-export const WindIcon = styled(StatusIcon)`
-	color: dimgrey;
-`;
+		grid-template-rows: auto 1fr;
+		grid-template-columns: 50% 50%;
+		grid-template-areas:
+			"date date"
+			"current later"
+			"current later";
 
-export const SnowIcon = styled(StatusIcon)`
-	color: dodgerblue;
-`;
+		#weather_current {
+			grid-area: current;
+			border-right: 1px solid var(--border-color);
+		}
 
-export const WindArrow = styled(StatusIcon)`
-	transform: rotate(${props => props.angle}deg);
+		#weather_later {
+			grid-area: later;
+		}
+
+		#weather_date {
+			grid-area: date;
+
+			border-bottom: 1px solid var(--border-color);
+			padding: 0.5rem 0;
+			h1 {
+				margin: 0;
+			}
+		}
+	}
 `;
 
 export const WeatherWording = styled.h4`
-	margin-block-end: 0;
-	margin-block-start: 0;
+	margin: 0 0 0.5rem 0;
 	text-transform: capitalize;
+`;
+
+export const DescriptionWording = styled(WeatherWording)`
+	font-size: 19px;
 `;
 
 export const TempHolder = styled.div`
@@ -66,9 +75,10 @@ export const TempHolder = styled.div`
 `;
 
 export const GreyTempHolder = styled(TempHolder)`
-	background: var(--context-grey);
+	background: #9fc6ff70;
 	padding: 11px 0;
 	flex-direction: column;
+	margin: 15px 0;
 `;
 
 export const Temp = styled.h2`
@@ -76,28 +86,95 @@ export const Temp = styled.h2`
 	margin-block-start: 0;
 `;
 
-export const LaterDiv = styled.div`
-	border-top: 2px solid var(--border-color);
-	margin-top: 20px;
+export const TimePeriodDiv = styled.div`
 	position: relative;
-	color: #a2a2a2;
+	max-height: 100%;
+	overflow-y: auto;
 `;
 
-export const LaterTitle = styled.h2`
+export const TimePeriodTitle = styled.h2`
+	position: sticky;
+	top: 0;
+	z-index: 1;
+	margin: 0.5rem 0;
 	background: white;
-	width: min-content;
-	margin: auto;
-	position: absolute;
-	margin: auto;
-	right: 32px;
-	bottom: 118px;
+
+	@media (min-height: 1600px) {
+		:before {
+			border-top: 2px solid black;
+			content: "";
+			margin: 0 auto;
+			position: absolute;
+			top: 50%;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			width: 95%;
+			z-index: -1;
+		}
+
+		span {
+			background: #fff;
+			padding: 0 5px;
+		}
+	}
+`;
+
+export const LaterHourWrapper = styled.div`
+	padding: 0.5rem;
+	:nth-child(odd) {
+		background: #9fc6ff70;
+	}
+`;
+
+export const LaterHourHead = styled(WeatherWording)`
+	font-size: 22px;
 	color: black;
 `;
 
-export const NowTitle = styled(LaterTitle)`
-	bottom: -10px;
+/**
+ * Base for weather icons
+ */
+const StatusIcon = styled.i`
+	font-size: 40px;
+	margin-bottom: 15px;
 `;
 
-export const LaterIcon = styled(StatusIcon)`
+export const SunIcon = styled(StatusIcon)`
+	color: #eaab0ea3;
+`;
+
+export const ThunderstormIcon = styled(StatusIcon)`
+	color: dimgrey;
+`;
+
+export const WindIcon = styled(StatusIcon)`
+	color: dimgrey;
 	font-size: 60px;
+`;
+
+export const SnowIcon = styled(StatusIcon)`
+	color: #9fc6ff;
+`;
+
+export const RainIcon = styled(StatusIcon)`
+	color: #b2f3ff;
+`;
+
+export const CloudIcon = styled(StatusIcon)`
+	color: #4d6367;
+`;
+
+export const AtmosphereIcon = styled(StatusIcon)`
+	color: #636363;
+`;
+
+export const WindArrow = styled(StatusIcon)`
+	transform: rotate(${props => props.angle}deg);
+	margin: 0;
+	font-size: 45px;
+`;
+
+export const WindArrowWrap = styled.div`
+	margin-top: 25px;
 `;

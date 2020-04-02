@@ -41,7 +41,7 @@ const PrivateRoute = ({
 	if (loading)
 		return (
 			<SpinnerWrap fullPage>
-				<LoadingImg className="fas fa-circle-notch" />
+				<LoadingImg className="fas fa-circle-notch fa-2x" />
 			</SpinnerWrap>
 		);
 

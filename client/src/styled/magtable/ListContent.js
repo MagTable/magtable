@@ -97,14 +97,7 @@ export const UnassignBtn = styled.button`
  *    Holds the currently available employees and separator divs for start times.
  */
 export const EmployeeListDiv = styled.div`
-	margin: 0;
-	display: flex;
-	flex-grow: 1;
-	flex-direction: column;
-	flex-basis: 0;
 	overflow-y: auto;
-	max-height: 100%;
-	overflow-x: hidden;
 	animation: 0.3s ${fadeIn} ease-out;
 `;
 
@@ -115,6 +108,8 @@ export const EmployeeListDivWrapper = styled.div`
 	border-right: 2px solid var(--border-color);
 	max-width: 300px;
 	min-width: 275px;
+	display: grid;
+	grid-template-rows: 50px auto 1fr;
 `;
 
 /**
@@ -133,15 +128,7 @@ export const EmployeeListRefreshInfo = styled.div`
 /**
  **/
 export const TruckListDiv = styled.div`
-	transition: all 0.15s ease-in-out;
-	margin: 0;
-	display: flex;
-	flex-direction: column;
-	flex-grow: 1.2;
-	flex-basis: 0;
 	overflow-y: auto;
-	overflow-x: hidden;
-	max-height: 100%;
 	animation: 0.3s ${fadeIn} ease-out;
 `;
 
@@ -149,8 +136,10 @@ export const TruckListDivWrapper = styled.div`
 	border-right: 2px solid var(--border-color);
 	max-width: 380px;
 	width: 350px;
-
 	min-width: 340px;
+
+	display: grid;
+	grid-template-rows: 50px 1fr;
 `;
 
 export const ManipTruckManipIconDiv = styled.div`
@@ -162,20 +151,13 @@ export const ManipTruckManipIconDiv = styled.div`
 	transition: 0.3s ease-in-out;
 `;
 
-export const TruckStatusCounterWrapper = styled.div`
-	display: grid;
-	grid-auto-columns: 25%;
-	grid-auto-flow: column;
-	background: var(--header);
-
-	border-bottom: 1px solid var(--border-color);
-`;
-
 export const TruckStatusCounterItem = styled.span`
 	text-align: center;
 
+	transition: opacity 0.3s ease-in-out;
+
 	margin: 0;
-	min-width: 2rem;
+	opacity: 0;
 	cursor: pointer;
 	
 	${({ GO }) => GO && `color: var(--context-green)`}
@@ -222,11 +204,10 @@ export const TruckListManipulateBlock = styled.div`
 		opacity: 1;
 		transition: 0.3s ease-in-out;
 	}
-`;
 
-export const TruckMgmtItemDiv = styled(TruckListManipulateBlock)`
-	border-bottom: 2px solid grey;
-	height: 50px;
+	:not(ManipTruckManipIconDiv) {
+		animation: 0.3s ${fadeIn} ease-out;
+	}
 `;
 
 export const TruckStatusBox = styled.div`
@@ -521,6 +502,12 @@ export const ListSeparator = styled.div`
 	border-bottom: 1px solid var(--border-color);
 	:first-child {
 		border-top: 1px solid var(--border-color);
+	}
+
+	:hover {
+		${TruckStatusCounterItem} {
+			opacity: 1;
+		}
 	}
 `;
 

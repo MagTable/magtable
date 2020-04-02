@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import WeatherBar from "./WeatherBar";
+import ViewList from "./ViewList";
+import { TVWrap } from "../../styled/tv/ViewList";
+import MagtableHistorySelector from "../magtable/MagtableHistorySelector";
+import Modal from "../common/Modal";
 
 /**
+ * The page used on the TV to display assignments and the weather without user input.
  * @date 2020-03-25
  * @author MJ Kochuk
  * @category Components/TV
@@ -10,7 +15,24 @@ import WeatherBar from "./WeatherBar";
  * @returns {*} The TVView component
  */
 function TVView(props) {
-	return <WeatherBar />;
+	const [showHistoryModal, setShowHistoryModal] = useState(false);
+
+	return (
+		<>
+			<TVWrap>
+				<ViewList />
+				<WeatherBar />
+			</TVWrap>
+			<Modal
+				show={showHistoryModal}
+				handleClose={() => setShowHistoryModal(false)}
+			>
+				<MagtableHistorySelector
+					handleClose={() => setShowHistoryModal(false)}
+				/>
+			</Modal>
+		</>
+	);
 }
 
 export default TVView;

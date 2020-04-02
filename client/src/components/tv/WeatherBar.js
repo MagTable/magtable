@@ -1,22 +1,22 @@
 import React from "react";
 import {
+	DescriptionWording,
 	GreyTempHolder,
-	LaterDiv,
-	LaterIcon,
-	LaterTitle,
-	NowTitle,
+	TimePeriodDiv,
+	LaterHourHead,
+	LaterHourWrapper,
+	TimePeriodTitle,
 	SideBar,
-	SunIcon,
 	Temp,
-	TempDiv,
-	TempDiv2,
 	TempHolder,
 	WeatherWording,
 	WindArrow,
+	WindArrowWrap,
 	WindIcon
 } from "../../styled/tv/Weather";
 import { useSelector } from "react-redux";
-import { SpinnerWrap, TempLoadingImg } from "../../styled/common/QualityOfLife";
+import WeatherIcon from "./WeatherIcon";
+import CardinalDirection from "./CardinalDirection";
 
 function getDate() {
 	const date = new Date();
@@ -42,7 +42,7 @@ function getDay() {
 
 /**
  * @date 2020-03-25
- * @author MJ Kochuk
+ * @author MJ Kochuk, Arran Woodruff
  * @category Components/TV
  * @constructor
  * @param props
@@ -51,23 +51,20 @@ function getDay() {
 function WeatherBar(props) {
 	const { weather } = useSelector(state => state.brix);
 
-	return (
-		<TempDiv>
-			<TempDiv2>
-				<SpinnerWrap>
-					<TempLoadingImg className="fas fa-10x fas fa-tools" />
-				</SpinnerWrap>
-				<br />
-				<h1>Page Currently Under Construction</h1>
-			</TempDiv2>
-			<SideBar>
+	return weather.loading ? (
+		"..."
+	) : (
+		<SideBar>
+			<div id={"weather_date"}>
 				<h1>{getDay()}</h1>
 				<h1>{getDate()}</h1>
-				<LaterDiv>
-					<NowTitle>Now</NowTitle>
-				</LaterDiv>
-				<WeatherWording>{weather.description}</WeatherWording>
-				<SunIcon className="fas fa-sun" />
+			</div>
+			<div id={"weather_current"}>
+				<TimePeriodTitle>
+					<span>Now</span>
+				</TimePeriodTitle>
+				<DescriptionWording>{weather.description}</DescriptionWording>
+				<WeatherIcon condition={weather.conditionID} />
 				<TempHolder>
 					<WeatherWording>High</WeatherWording>
 					<Temp>{weather.forecastHigh}°</Temp>
@@ -82,18 +79,28 @@ function WeatherBar(props) {
 				</GreyTempHolder>
 				<WindIcon className="fas fa-wind" />
 				<WeatherWording>{weather.windSpeed} km/h</WeatherWording>
-				<WindArrow
-					className="fas fa-long-arrow-alt-up"
-					angle={weather.windDir}
-				/>
-				<LaterDiv>
-					<LaterTitle>Later</LaterTitle>
-					<LaterIcon className="far fa-snowflake" />
-					<WeatherWording>20%</WeatherWording>
-					<WeatherWording>@ 2PM</WeatherWording>
-				</LaterDiv>
-			</SideBar>
-		</TempDiv>
+				<WindArrowWrap>
+					<WindArrow
+						className="fas fa-location-arrow"
+						angle={weather.windDir - 45}
+					/>
+				</WindArrowWrap>
+				<CardinalDirection direction={weather.windDir} />
+			</div>
+			<TimePeriodDiv id={"weather_later"}>
+				<TimePeriodTitle>
+					<span>Later</span>
+				</TimePeriodTitle>
+				{weather.hourlyTemps.map(hour => (
+					<LaterHourWrapper key={hour.time}>
+						<LaterHourHead>{hour.time}</LaterHourHead>
+						<WeatherWording>{hour.temp}°</WeatherWording>
+						<DescriptionWording>{hour.description}</DescriptionWording>
+						<WeatherIcon condition={hour.conditionID} />
+					</LaterHourWrapper>
+				))}
+			</TimePeriodDiv>
+		</SideBar>
 	);
 }
 
