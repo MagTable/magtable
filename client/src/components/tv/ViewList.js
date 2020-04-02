@@ -8,6 +8,7 @@ import {
 } from "../../styled/tv/ViewList";
 import ViewListItem from "./ViewListItem";
 import ViewTowerItem from "./ViewTowerItem";
+import ViewNotice from "./ViewNotice";
 
 /**
  * @date 2020-03-31
@@ -36,15 +37,19 @@ function ViewList(props) {
 	let disabledAssignments = [];
 	let towerAssignments = [];
 	let numDisabledIce = 0;
+	let notices = [];
 
 	const MAX_NUM_UNASSIGNED_ICE = 6;
 
 	console.log(towerAssignments);
 
 	for (let i = 0; i < assignments.length; i++) {
-		if (assignments[i].equipment.id > 1000) {
+		if (assignments[i].equipment.id >= 1000) {
 			towerAssignments.push(assignments[i]);
 		} else {
+			if (assignments[i].notice !== "") {
+				notices.push(assignments[i]);
+			}
 			if (
 				assignments[i].employeeShifts.length > 0 ||
 				assignments[i].parkingLocation !== null
@@ -115,6 +120,10 @@ function ViewList(props) {
 				)}
 				<FadeOutDiv />
 			</VehicleListWrap>
+			<SectionTitle>Vehicle Notices</SectionTitle>
+			{notices.map(notice => (
+				<ViewNotice assignment={notice} key={notice.equipment.id + "notice"} />
+			))}
 		</ViewListDiv>
 	);
 }

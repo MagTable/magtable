@@ -43,6 +43,15 @@ export const UnassignedWrap = styled.div`
 	}
 `;
 
+export const NoticeWrapper = styled.div`
+	width: 100%;
+	display: flex;
+	//border-bottom: 1px solid grey;
+	:nth-child(odd) {
+		background: #ffd49f9e;
+	}
+`;
+
 export const TruckNumDiv = styled.div`
 	height: 50px;
 	width: 50px;
@@ -80,7 +89,7 @@ export const TowerPos = styled(TruckNum)`
 	width: 180px;
 	padding-left: 5px;
 	text-align: left;
-	border-right: 2px solid grey;
+	border-right: 1px solid grey;
 	height: 100%;
 	display: flex;
 	align-items: center;
@@ -131,11 +140,19 @@ export const SectionTitle = styled.h2`
 	margin-block-start: 0.8em;
 	font-size: 30px;
 `;
+
+export const TruckNotice = styled.span`
+	display: flex;
+	align-items: center;
+	padding: 0 5px;
+`;
+
 export const FadeOutDiv = styled.div`
 	position: absolute;
 	bottom: 0;
 	width: 100%;
 	height: 50px;
+	// Gradient found at https://cssgradient.io/
 	background: linear-gradient(
 		0deg,
 		rgba(255, 255, 255, 1) 0%,
