@@ -1,7 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { ViewListDiv } from "../../styled/tv/ViewList";
+import {
+	FadeOutDiv,
+	SectionTitle,
+	VehicleListWrap,
+	ViewListDiv
+} from "../../styled/tv/ViewList";
 import ViewListItem from "./ViewListItem";
+import ViewTowerItem from "./ViewTowerItem";
 
 /**
  * @date 2020-03-31
@@ -28,36 +34,87 @@ function ViewList(props) {
 
 	let enabledAssignments = [];
 	let disabledAssignments = [];
+	let towerAssignments = [];
+	let numDisabledIce = 0;
+
+	const MAX_NUM_UNASSIGNED_ICE = 6;
+
+	console.log(towerAssignments);
 
 	for (let i = 0; i < assignments.length; i++) {
-		if (
-			assignments[i].employeeShifts.length > 0 ||
-			assignments[i].parkingLocation !== null
-		) {
-			enabledAssignments.push(assignments[i]);
+		if (assignments[i].equipment.id > 1000) {
+			towerAssignments.push(assignments[i]);
 		} else {
-			disabledAssignments.push(assignments[i]);
+			if (
+				assignments[i].employeeShifts.length > 0 ||
+				assignments[i].parkingLocation !== null
+			) {
+				enabledAssignments.push(assignments[i]);
+			} else if (
+				assignments[i].equipment.type === "SVV" ||
+				numDisabledIce < MAX_NUM_UNASSIGNED_ICE
+			) {
+				disabledAssignments.push(assignments[i]);
+				if (assignments[i].equipment.type === "ICE") {
+					numDisabledIce++;
+				}
+			}
 		}
 	}
 
 	return (
 		<ViewListDiv>
-			{enabledAssignments.map(assignment => (
-				<ViewListItem
-					assignment={assignment}
-					assigned={true}
-					key={assignment.equipment.id}
-					isEven={rowShade()}
-				/>
+			<SectionTitle>Tower</SectionTitle>
+			{towerAssignments.map(assignment => (
+				<ViewTowerItem assignment={assignment} key={assignment.equipment.id} />
 			))}
-
-			{disabledAssignments.map(assignment => (
-				<ViewListItem
-					assignment={assignment}
-					assigned={false}
-					key={assignment.equipment.id}
-				/>
-			))}
+			<VehicleListWrap>
+				<SectionTitle>Service Vehicles</SectionTitle>
+				{enabledAssignments.map(
+					assignment =>
+						assignment.equipment.type === "SVV" && (
+							<ViewListItem
+								assignment={assignment}
+								assigned={true}
+								key={assignment.equipment.id}
+								isEven={rowShade()}
+							/>
+						)
+				)}
+				{disabledAssignments.map(
+					assignment =>
+						assignment.equipment.type === "SVV" && (
+							<ViewListItem
+								assignment={assignment}
+								assigned={false}
+								key={assignment.equipment.id}
+							/>
+						)
+				)}
+				<SectionTitle>De-Ice Trucks</SectionTitle>
+				{enabledAssignments.map(
+					assignment =>
+						assignment.equipment.type === "ICE" && (
+							<ViewListItem
+								assignment={assignment}
+								assigned={true}
+								key={assignment.equipment.id}
+								isEven={rowShade()}
+							/>
+						)
+				)}
+				{disabledAssignments.map(
+					assignment =>
+						assignment.equipment.type === "ICE" && (
+							<ViewListItem
+								assignment={assignment}
+								assigned={false}
+								key={assignment.equipment.id}
+							/>
+						)
+				)}
+				<FadeOutDiv />
+			</VehicleListWrap>
 		</ViewListDiv>
 	);
 }

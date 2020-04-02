@@ -5,7 +5,6 @@ import {
 	EmployeeDiv,
 	EmployeeWrap,
 	ListItemWrapper,
-	PairedEmpDiv,
 	PMEmp,
 	TruckNum,
 	TruckNumDiv,
@@ -58,12 +57,12 @@ function ViewListItem({ assignment, assigned, isEven }) {
 				<EmployeeWrap>
 					<AMEmp isEven={isEven}>
 						{amShifts.map(shift => (
-							<EmployeeDiv>{shift.name}</EmployeeDiv>
+							<EmployeeDiv key={shift.id}>{shift.name}</EmployeeDiv>
 						))}
 					</AMEmp>
 					<PMEmp isEven={isEven}>
 						{pmShifts.map(shift => (
-							<EmployeeDiv>{shift.name}</EmployeeDiv>
+							<EmployeeDiv key={shift.id}>{shift.name}</EmployeeDiv>
 						))}
 					</PMEmp>
 				</EmployeeWrap>

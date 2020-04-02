@@ -20,20 +20,19 @@ export const ViewListDiv = styled.div`
 	height: min-content;
 	display: flex;
 	flex-direction: column;
-	margin-top: 20px;
+`;
+
+export const VehicleListWrap = styled.div`
+	position: relative;
 `;
 
 export const ListItemWrapper = styled.div`
 	width: 100%;
 	display: flex;
 	//border-bottom: 1px solid grey;
-	${({ isEven }) =>
-		isEven
-			? `
-			background-color: #9fc6ff70;
-		`
-			: `
-		`}
+	:nth-child(even) {
+		background: #9fc6ff70;
+	}
 `;
 
 export const UnassignedWrap = styled.div`
@@ -54,6 +53,19 @@ export const TruckNumDiv = styled.div`
 	justify-content: center;
 `;
 
+export const TowerListDiv = styled.div`
+	width: 100%;
+	display: flex;
+	:nth-child(even) {
+		background: #9fc6ff70;
+	}
+`;
+
+export const TowerPosDiv = styled(TruckNumDiv)`
+	width: 100%;
+	border: none;
+`;
+
 export const TruckNumDivUnassigned = styled(TruckNumDiv)`
 	height: 30px;
 `;
@@ -62,6 +74,16 @@ export const TruckNum = styled.span`
 	font-size: 20px;
 	width: 50px;
 	text-align: center;
+`;
+
+export const TowerPos = styled(TruckNum)`
+	width: 180px;
+	padding-left: 5px;
+	text-align: left;
+	border-right: 2px solid grey;
+	height: 100%;
+	display: flex;
+	align-items: center;
 `;
 
 export const AssignedToDiv = styled(TruckNumDiv)`
@@ -93,16 +115,7 @@ export const PairedEmpDiv = styled.div`
 export const AMEmp = styled(PairedEmpDiv)``;
 
 export const PMEmp = styled(PairedEmpDiv)`
-	//color: white;
-
-	${({ isEven }) =>
-		isEven
-			? `
-			background-color: #9fc6ff70;
-		`
-			: `
-			background-color: #9fc6ff2b;
-		`}
+	background-color: #9fc6ff70;
 `;
 
 export const EmployeeDiv = styled.div`
@@ -111,4 +124,21 @@ export const EmployeeDiv = styled.div`
 
 	width: 50%;
 	justify-content: center;
+`;
+
+export const SectionTitle = styled.h2`
+	margin-block-end: 0.2em;
+	margin-block-start: 0.8em;
+	font-size: 30px;
+`;
+export const FadeOutDiv = styled.div`
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 50px;
+	background: linear-gradient(
+		0deg,
+		rgba(255, 255, 255, 1) 0%,
+		rgba(255, 255, 255, 0) 100%
+	);
 `;
