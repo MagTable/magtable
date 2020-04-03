@@ -11,7 +11,13 @@ import {
 	incrementDailyMix,
 	setDailyMix
 } from "../../actions/magtable";
-import { DANGER, SUCCESS, WARNING } from "../../actions/constants";
+import {
+	DANGER,
+	PERSONNEL_MANAGER,
+	SUCCESS,
+	SYSTEM_ADMINISTRATOR,
+	WARNING
+} from "../../actions/constants";
 import { setDailyMixChartRow } from "../../actions/brix";
 
 /**
@@ -30,6 +36,7 @@ function WeatherInfo() {
 
 	const { weather, brixChart } = useSelector(state => state.brix);
 	const dailyMix = useSelector(state => state.magtable.dailyMix);
+	const { loading, user } = useSelector(state => state.auth);
 
 	// reverse the chart and find the first record with a recommended mix equal to our daily mix
 	// this object contains the rest of the chart data for a given daily mix
@@ -100,16 +107,22 @@ function WeatherInfo() {
 				<WeatherDataItem>
 					Brix: {dailyMixChartRow ? dailyMixChartRow.brix.toFixed(1) : "..."}
 				</WeatherDataItem>
-				<DailyMixButtons>
-					<i
-						onClick={() => dispatch(incrementDailyMix())}
-						className="fas fa-caret-up"
-					/>
-					<i
-						onClick={() => dispatch(decrementDailyMix())}
-						className="fas fa-caret-down"
-					/>
-				</DailyMixButtons>
+
+				{!loading &&
+					[PERSONNEL_MANAGER, SYSTEM_ADMINISTRATOR].includes(
+						user.role.name
+					) && (
+						<DailyMixButtons>
+							<i
+								onClick={() => dispatch(incrementDailyMix())}
+								className="fas fa-caret-up"
+							/>
+							<i
+								onClick={() => dispatch(decrementDailyMix())}
+								className="fas fa-caret-down"
+							/>
+						</DailyMixButtons>
+					)}
 			</WeatherDataWrapper>
 		</NavDiv>
 	);
