@@ -56,7 +56,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .antMatchers("/shift").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER, MECHANIC)
                 .antMatchers("/authenticate").permitAll()
                 .antMatchers("/password/reset").permitAll()
-                .antMatchers("/topic").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER, MECHANIC)
+                .antMatchers("/topic").hasAnyAuthority(MECHANIC)
                 .and().csrf().disable() //TODO Check all route Security /add them
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(JwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
