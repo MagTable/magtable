@@ -6,6 +6,7 @@ import MagtableHistorySelector from "../magtable/MagtableHistorySelector";
 import Modal from "../common/Modal";
 
 /**
+ * The page used on the TV to display assignments and the weather without user input.
  * @date 2020-03-25
  * @author MJ Kochuk
  * @category Components/TV

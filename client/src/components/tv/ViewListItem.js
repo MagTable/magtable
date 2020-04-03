@@ -5,7 +5,7 @@ import {
 	EmployeeDiv,
 	EmployeeWrap,
 	ListItemWrapper,
-	PairedEmpDiv,
+	NoticeIcon,
 	PMEmp,
 	TruckNum,
 	TruckNumDiv,
@@ -20,33 +20,39 @@ import {
  */
 
 /**
- *
+ * List items containing truck information for the TV view page.
  * @constructor
  * @param props
  * @returns {*} The ViewListItem component
  */
-function ViewListItem({ assignment, assigned, isEven }) {
-	let amShifts = [];
-	let pmShifts = [];
+function ViewListItem({ assignment, assigned }) {
+	let amShifts = []; // Employees assigned to this truck in the AM.
+	let pmShifts = []; // Employees assigned to this truck in the PM.
 
 	for (let i = 0; i < assignment.employeeShifts.length; i++) {
 		if (assignment.employeeShifts[i].timeOfDay === "AM") {
+			// Get the employees assigned to AM shift.
 			amShifts.push(assignment.employeeShifts[i]);
 		} else {
+			// The PM employees
 			pmShifts.push(assignment.employeeShifts[i]);
 		}
 	}
 
 	if (assigned) {
 		return (
-			<ListItemWrapper isEven={isEven}>
+			<ListItemWrapper>
 				<TruckNumDiv>
+					{assignment.equipment.notice === "" ? null : ( // If there is a notice on the vehicle, display a warning.
+						<NoticeIcon className="fas fa-exclamation-triangle" />
+					)}
+
 					<TruckNum>{assignment.equipment.id}</TruckNum>
 				</TruckNumDiv>
 				<AssignedToDiv>
-					{assignment.parkingLocation === null
+					{assignment.parkingLocation === null // If the truck is assigned to a location.
 						? "NA"
-						: assignment.parkingLocation.apron.charAt(0) +
+						: assignment.parkingLocation.apron.charAt(0) + // E or W.
 						  "-" +
 						  assignment.parkingLocation.phonetic +
 						  assignment.parkingLocation.position +
@@ -54,16 +60,15 @@ function ViewListItem({ assignment, assigned, isEven }) {
 								? ""
 								: assignment.parkingLocation.bay)}
 				</AssignedToDiv>
-				{/*E-AW is (East Pad)-(phonetic)(position)*/}
 				<EmployeeWrap>
-					<AMEmp isEven={isEven}>
+					<AMEmp>
 						{amShifts.map(shift => (
-							<EmployeeDiv>{shift.name}</EmployeeDiv>
+							<EmployeeDiv key={shift.id}>{shift.name}</EmployeeDiv>
 						))}
 					</AMEmp>
-					<PMEmp isEven={isEven}>
+					<PMEmp>
 						{pmShifts.map(shift => (
-							<EmployeeDiv>{shift.name}</EmployeeDiv>
+							<EmployeeDiv key={shift.id}>{shift.name}</EmployeeDiv>
 						))}
 					</PMEmp>
 				</EmployeeWrap>

@@ -8,7 +8,7 @@ import { WeatherWording } from "../../styled/tv/Weather";
  */
 
 /**
- *
+ * Determines the cardinal direction based on a value in degrees. North is 0.
  * @constructor
  * @param props
  * @returns {*} The CardinalDirection component
