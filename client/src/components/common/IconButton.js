@@ -18,6 +18,7 @@ import { BrowserView } from "react-device-detect";
  * @param nopad boolean flag for 0 padding icon
  * @param toolTipSide side on which to display the tooltip
  * @param props rest of supplied props
+ * @param nohide if the icon shouldn't be hidden as in a warning
  * @returns {*} The IconButton component
  * @constructor
  */
@@ -28,6 +29,7 @@ function IconButton({
 	onClick,
 	toolTip,
 	nopad,
+	nohide,
 	toolTipSide,
 	...props
 }) {
@@ -40,6 +42,7 @@ function IconButton({
 				hoverColor={hoverColor}
 				color={color}
 				nopad={nopad}
+				nohide={nohide}
 				{...props}
 			/>
 			<BrowserView>
