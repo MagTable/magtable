@@ -62,7 +62,10 @@ IconButton.propTypes = {
 	color: PropTypes.string,
 	hoverColor: PropTypes.string,
 	onClick: PropTypes.func,
-	toolTip: PropTypes.string
+	toolTip: PropTypes.string,
+	nopad: PropTypes.bool,
+	nohide: PropTypes.bool,
+	toolTipSide: PropTypes.string
 };
 
 export default IconButton;
