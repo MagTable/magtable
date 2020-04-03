@@ -13,7 +13,6 @@ export const AlertDiv = styled.div`
 	left: 50%;
 	width: auto;
 
-	z-index: 100;
 	transform: translateX(-50%);
 
 	padding: 1rem;
@@ -24,7 +23,6 @@ export const AlertDiv = styled.div`
 export const Alert = styled.div`
 	background: white;
 	color: black;
-	border-radius: 5px;
 	padding: 0.75rem;
 	margin-bottom: 0.5rem;
 
@@ -34,9 +32,9 @@ export const Alert = styled.div`
 
 	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.06), 0 0 6px rgba(0, 0, 0, 0.23);
 
-	font-size: 1rem;
-	font-weight: bold;
 	font-family: "Noto Sans KR", sans-serif;
+	font-size: 1.3rem;
+	font-weight: bold;
 
 	::before {
 		font-size: 1.25rem;
