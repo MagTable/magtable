@@ -46,7 +46,7 @@ export const loadUser = () => async dispatch => {
 	}
 
 	try {
-		const res = await axios.post("/authenticate");
+		const res = await axios.get("/authenticate");
 
 		const user = res.data;
 
