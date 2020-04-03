@@ -1,17 +1,27 @@
 {
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc","closure"]
+  },
   "source": {
     "include": ["src"],
-    "includePattern": ".js$",
-    "excludePattern": "(node_modules/|docs)"
+    "includePattern": "\\.(jsx|js|ts|tsx)$",
+    "excludePattern": "(^|\\/|\\\\)_"
   },
-  "plugins": ["plugins/markdown"],
+  "plugins": [
+    "plugins/markdown",
+    "node_modules/better-docs/component",
+    "node_modules/better-docs/category"
+  ],
   "templates": {
-    "cleverLinks": true,
-    "monospaceLinks": true
+    "better-docs": {
+      "name": "SAIT 2020 Capstone - Documentation"
+    }
   },
   "opts": {
     "recurse": true,
     "destination": "./doc",
-    "template": "jsdoc-template"
+    "template": "node_modules/better-docs",
+    "readme": "README.md"
   }
 }

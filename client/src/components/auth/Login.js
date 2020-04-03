@@ -15,17 +15,17 @@ import Input from "../common/Input";
 import PlaneLoader from "../common/PlaneLoader";
 
 /**
+ *
+ * The Login Component.
+ *
  * @date 2/10/2020
- * @author Arran Woodruff
- * @module Component
- */
-
-/**
- * This component allows the user to enter a username and password and in turn makes an authorization request to the API
+ * @author Arran Woodruff, Steven Wong
+ * @name Login
+ * @category Component/Auth
+ * @returns {*} The Login Component
  * @constructor
- * @returns {*} The Login component
  */
-function Login() {
+const Login = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const { isAuthenticated, loading, error } = useSelector(state => state.auth);
 	const [blur, setBlur] = useState(false);
@@ -44,7 +44,6 @@ function Login() {
 	if (isAuthenticated) {
 		return <Redirect to="/" />;
 	} // don't show the page until we know user is not authenticated
-
 	return (
 		<>
 			<BGContainer>
@@ -58,8 +57,8 @@ function Login() {
 				<PlaneLoader />
 				<Formik
 					initialValues={{
-						username: "mustafa",
-						password: "password"
+						username: "",
+						password: ""
 					}}
 					onSubmit={values => {
 						dispatch(login(values));
@@ -76,24 +75,20 @@ function Login() {
 					{props => (
 						<Form>
 							<Input
-								blur={blur}
-								setBlurred={setBlur}
-								errors={props.errors.username}
-								touched={props.touched.username}
+								onClick={() => setBlur(true)}
 								value={props.values.username}
 								label="Username"
 								name="username"
 								type="text"
+								data-lpignore="true"
 								fit
 							/>
 							<Input
-								blur={blur}
-								setBlurred={setBlur}
-								errors={props.errors.password}
-								touched={props.touched.password}
+								onClick={() => setBlur(true)}
 								value={props.values.password}
 								label="Password"
 								name="password"
+								data-lpignore="true"
 								type={showPassword ? "text" : "password"}
 								icon={{
 									action: () => setShowPassword(!showPassword),
@@ -106,7 +101,7 @@ function Login() {
 							/>
 							<br />
 							<LoginBtn type="submit" disabled={loading}>
-								Login
+								LOGIN
 							</LoginBtn>
 						</Form>
 					)}
@@ -114,6 +109,6 @@ function Login() {
 			</LoginBlock>
 		</>
 	);
-}
+};
 
 export default Login;

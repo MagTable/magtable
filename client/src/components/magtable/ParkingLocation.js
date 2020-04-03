@@ -17,17 +17,16 @@ import { useDispatch, useSelector } from "react-redux";
 /**
  * @date 2/20/2020
  * @author Tom Allcock, Steven Wong, Arran Woodruff
- * @module Component
- */
-
-/**
  * Lists the parking locations available for trucks to be assigned to.
  * Users can drag a truck into a parking location.
  * Users cannot drag more than two trucks into any parking location,
  * other than the parking locations in the first and last column.
- *
+ * @category Components/MagTable
+ * @param parkingLocation The Parking Location
+ * @param position The Position
+ * @param assignments The Assigned Equipment
+ * @returns {*} Returns the Parking Location Component
  * @constructor
- * @returns {*} The ParkingLocation component
  */
 function ParkingLocation({ parkingLocation, position, assignments }) {
 	const dispatch = useDispatch();
@@ -140,6 +139,18 @@ function ParkingLocation({ parkingLocation, position, assignments }) {
 	);
 }
 
+/**
+ * @category Components/MagTable
+ * @param parkingLocation The Parking Location
+ * @param position The Position
+ * @param assignments The Assigned Equipment.
+ * @param bay The bays for equipment.
+ * @param handleClear Clearing of the equipment.
+ * @param defaultEquipmentID Default EquipmentID
+ * @param showAM ShowAM State
+ * @returns {*}
+ * @constructor
+ */
 function LeftDragDiv({
 	parkingLocation,
 	position,
@@ -267,6 +278,19 @@ function LeftDragDiv({
 	);
 }
 
+/**
+ *
+ * @category Components/MagTable
+ * @param parkingLocation The Parking Location
+ * @param position The Position
+ * @param assignments The Assigned Equipment.
+ * @param bay The bays for equipment.
+ * @param handleClear Clearing of the equipment.
+ * @param defaultEquipmentID Default EquipmentID
+ * @param showAM ShowAM State
+ * @returns {*}
+ * @constructor
+ */
 function RightDragDiv({
 	handleClear,
 	parkingLocation,
@@ -394,6 +418,18 @@ function RightDragDiv({
 	);
 }
 
+/**
+ *
+ * @category Components/MagTable
+ * @param double If there's more than one piece of equipment in a bay.
+ * @param parkingLocation The Parking Location
+ * @param position The Position
+ * @param assignments The Assigned Equipment.
+ * @param handleClear Clearing of the equipment.
+ * @param showAM ShowAM State
+ * @returns {*} The full drop div.
+ * @constructor
+ */
 function FullDropDropDiv({
 	double,
 	parkingLocation,
@@ -498,6 +534,16 @@ function FullDropDropDiv({
 	);
 }
 
+/**
+ *
+ * @category Components/MagTable
+ * @param bay The bays for equipment.
+ * @param parkingLocation The Parking Location
+ * @param position The Position
+ * @param defaultEquipmentID Default EquipmentID
+ * @returns {*} Returns the left half div.
+ * @constructor
+ */
 function LeftHalfDropDiv({
 	bay,
 	parkingLocation,
@@ -546,6 +592,16 @@ function LeftHalfDropDiv({
 	);
 }
 
+/**
+ *
+ * @category Components/MagTable
+ * @param bay The bays for equipment.
+ * @param parkingLocation The Parking Location
+ * @param position The Position
+ * @param defaultEquipmentID Default EquipmentID
+ * @returns {*} Returns the right half div.
+ * @constructor
+ */
 function RightHalfDropDiv({
 	bay,
 	parkingLocation,

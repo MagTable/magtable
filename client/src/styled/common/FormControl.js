@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 /**
  * @date 2020-02-10
- * @author MJ Kochuk
- * @module Styled
+ * @author MJ Kochuk, Arran Woodruff
+ * @category Styled Components
+ * @module Common
  */
 
 /**
@@ -26,19 +27,6 @@ export const Input = styled.input`
 			rgba(51, 51, 51, 0.1) 0%,
 			rgba(255, 255, 255, 1) 95%
 		);
-	}
-`;
-
-export const DoubleClickConfirm = styled.div`
-	transition: background 0.3s ease-in-out;
-
-	${({ active, color }) =>
-			active &&
-			`
-			background: ${color} !important;
-	`}
-		:not(:last-child) {
-		border-bottom: 2px solid var(--context-grey);
 	}
 `;
 
@@ -81,6 +69,10 @@ export const OkButton = styled(Button)`
 	:hover {
 		background: #80c9ff;
 	}
+
+	:disabled {
+		background: #80afd1;
+	}
 `;
 
 /**
@@ -116,17 +108,16 @@ export const ToggleLabelLeftNotice = styled.h4`
 	width: 100%;
 	color: var(--title-bright);
 	font-family: "Noto Sans KR", sans-serif;
-	text-align center;
+	text-align: center;
 `;
 
 export const ToggleLabelRightNotice = styled.h4`
 	padding-right: 50px;
-	text-align: left;
 	margin: 0 0 0 0;
 	width: 100%;
 	color: var(--title-bright);
 	font-family: "Noto Sans KR", sans-serif;
-	text-align center;
+	text-align: center;
 `;
 
 /**

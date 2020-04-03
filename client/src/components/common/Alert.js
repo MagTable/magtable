@@ -8,12 +8,9 @@ import {
 /**
  * @date 2/10/2020
  * @author Arran Woodruff
- * @module Component
- */
-
-/**
  * Renders the current alerts from redux store.
- *
+ * @name Alert
+ * @category Component/Common
  * @returns {*} The Alert Component
  * @constructor
  */

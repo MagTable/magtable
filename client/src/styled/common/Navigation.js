@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { isMobile } from "react-device-detect";
 
 /**
  * @date 2020-02-05
- * @author MJ Kochuk
- * @module Styled
+ * @author MJ Kochuk, Arran Woodruff
+ * @category Styled Components
+ * @module Common
  */
 
 /**
@@ -13,9 +13,15 @@ import { isMobile } from "react-device-detect";
  **/
 export const AeroLogo = styled.img`
 	height: 55px;
-	padding: 8px;
-	padding-left: 10px;
+	padding: 8px 8px 8px 10px;
 	z-index: 20;
+	transition: filter 0.5s ease-in-out;
+
+	${({ connected }) =>
+		!connected &&
+		`
+			filter: hue-rotate(115deg);
+	`}
 `;
 
 /**
@@ -43,16 +49,18 @@ export const NavButton = styled.button`
  * The icons used in the mobile version of the navigation menu.
  */
 export const NavIcon = styled.i`
-	width: 45px;
+	display: flex;
+	justify-content: center;
 	vertical-align: middle;
-	float: left;
+	padding-left: 1rem;
+	float: right;
 `;
 
 /**
  * The div holding all content pertaining to the link for opening the navigation menu.
  */
 export const MenuTip = styled.div`
-	padding-top: 5px;
+	padding: 27px;
 	cursor: pointer;
 	transform: scale(1.2);
 `;
@@ -62,9 +70,33 @@ export const MenuTip = styled.div`
  */
 export const MenuTipIcon = styled.a`
 	transition-duration: 0.5s;
-	transform: ${({ open }) => (open ? "rotate(360deg)" : "rotate(270deg)")};
-	margin-right: 10px;
+	transform: ${({ open }) => (open ? "rotate(270deg)" : "rotate(360deg)")};
 	cursor: pointer;
+`;
+
+/**
+ * The link in the navigation menu / bar to access another page of the app.
+ */
+export const NavLink = styled(Link)`
+	text-decoration: none;
+	color: var(--title-bright);
+	font-size: 20px;
+
+	margin-right: 2rem;
+	padding-bottom: 0.5rem;
+
+	transition: color 0.25s ease-in-out, border 0.25s ease-in-out;
+	border-bottom: 3px solid #00000000;
+
+	:hover {
+		color: var(--link-underline);
+	}
+	${({ active }) =>
+		active &&
+		`
+			border-bottom-color: var(--link-underline);
+			color: var(--link-underline);
+		`}
 `;
 
 /**
@@ -77,26 +109,28 @@ export const NavPane = styled.div`
 	wrap-option: none;
 	overflow: hidden;
 	transition: all 0.15s ease-in-out;
-	background-color: #e9e9e9;
+	background-color: #232f3e;
 	position: absolute;
 	top: 70px;
-	right: 0px;
-	height: ${({ open }) => (open ? "195px" : "0px")};
+	right: 0;
+	max-height: ${({ open }) => (open ? "295px" : "0px")};
 	z-index: 100;
+
+	${NavLink} {
+		padding: 1rem;
+		margin: 0;
+	}
 `;
 
 /**
  * Holds the individual links in the navigation menu / bar.
  */
 export const NavDiv = styled.div`
-	${isMobile
-		? // Mobile rules
-		  "padding: 20px 0px 20px 20px;" +
-		  "width: 110px;" +
-		  "overflow: hidden;" +
-		  "transition: all 0.2s ease-in-out;"
-		: // Desktop Rules
-		  "display: flex;"}
+	height: 100%;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `;
 
 /**
@@ -107,37 +141,4 @@ export const NavBar = styled.div`
 	display: flex;
 	justify-content: space-between;
 	height: 70px;
-`;
-
-/**
- * The link in the navigation menu / bar to access another page of the app.
- */
-export const NavLink = styled(Link)`
-	text-decoration: none;
-	color: var(--title-bright);
-	font-size: 20px;
-	padding-bottom: 0.5rem;
-
-	transition: color 0.25s ease-in-out, border 0.25s ease-in-out;
-	border-bottom: 2px solid #00000000;
-
-	:hover {
-		color: var(--link-underline);
-	}
-	${({ active }) =>
-		active &&
-		`
-			border-bottom-color: var(--link-underline);
-			color: var(--link-underline);
-		`}
-	${isMobile
-		? // Mobile rules
-		  `width: 100vw;
-		  cursor: pointer;
-		  padding: 20px 0px 20px 0px;
-		  text-align: center;
-		  border-bottom: 2px solid #DADADA;`
-		: // Desktop Rules
-		  `margin-right: 50px; 
-		  padding-top: 20px;`}
 `;

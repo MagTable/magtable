@@ -8,6 +8,13 @@ import {
 	USER_LOADED
 } from "../actions/constants";
 
+/**
+ * @date 2020-03-24
+ * @author Arran Woodruff
+ * @category Redux-Reducers
+ * @module Auth
+ */
+
 const initialState = {
 	token: localStorage.getItem("token"),
 	isAuthenticated: null,

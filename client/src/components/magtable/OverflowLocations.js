@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import {
 	OverflowMenu,
@@ -12,45 +12,54 @@ import {
 } from "../../actions/magtable";
 import { useDispatch, useSelector } from "react-redux";
 import { EAST_APRON, WEST_APRON } from "../../actions/constants";
-import { DoubleClickConfirm } from "../../styled/common/FormControl";
+import Modal from "../common/Modal";
+import BrixExport from "../brix/BrixExport";
+import IconButton from "../common/IconButton";
+import Confirmation from "../common/Confirmation";
 
 /**
  * @date 3/1/2020
- * @author Tom Allcock, Arran Woodruff
- * @module Component
- */
-
-/**
- *
+ * @author Tom Allcock, Arran Woodruff, Steven Wong
+ * @category Components/MagTable
+ * @param children Children of the Component
+ * @param color Color of the Icon
+ * @param hoverColor Hover color of icon.
+ * @param open Open State of the overflow menu
+ * @param setOpen Change the open state of the overflow menu.
+ * @returns {*} Returns the overflow menu for Parking Map which holds Clear Table, Publish Table and Apron Switches
  * @constructor
- * @param props
- * @returns {*} The OverflowEmployee component
  */
 function OverflowLocations({ children, color, hoverColor, open, setOpen }) {
-	const [clearConfirmation, setClearConfirmation] = useState(false);
-	const [clearDisabled, setClearDisabled] = useState(false);
-
-	const [publishConfirmation, setPublishConfirmation] = useState(false);
-	const [publishDisabled, setPublishDisabled] = useState(false);
-
-	// monitor the show boolean and clear the confirmations if it's true (when the menu is closed)
-	useEffect(() => {
-		setClearConfirmation(false);
-		setClearDisabled(false);
-		setPublishConfirmation(false);
-		setPublishDisabled(false);
-	}, [open]);
-
-	const CONFIRMATION_DELAY = 2000;
-
 	const dispatch = useDispatch();
 	const selectedApron = useSelector(state => state.magtable.selectedApron);
 	const magtable = useSelector(state => state.magtable);
 	const authUsername = useSelector(state => state.auth.user.username);
 
+	let timePublished = "...";
+	if (magtable.timePublished) {
+		const date = new Date(magtable.timePublished);
+		timePublished =
+			date
+				.getHours()
+				.toString()
+				.padStart(2, "0") +
+			":" +
+			date
+				.getMinutes()
+				.toString()
+				.padStart(2, "0");
+	}
+
+	const publishedBy = magtable.publishedBy;
+
+	// todo close overflow on button press? - arran
 	const openOverflow = () => {
 		setOpen(true);
 	};
+	const [showModal, setShowModal] = useState(false);
+
+	const handleClose = () => setShowModal(false);
+	const handleShow = () => setShowModal(true);
 
 	const handleApronSwitch = () => {
 		if (selectedApron === EAST_APRON) {
@@ -61,35 +70,13 @@ function OverflowLocations({ children, color, hoverColor, open, setOpen }) {
 	};
 
 	const handlePublish = () => {
-		if (!publishConfirmation) {
-			setPublishConfirmation(true);
-			setPublishDisabled(true);
-
-			setTimeout(() => {
-				setPublishDisabled(false);
-			}, CONFIRMATION_DELAY);
-		} else {
-			dispatch(publishTable(magtable, authUsername));
-
-			setPublishDisabled(false);
-			setPublishConfirmation(false);
-		}
+		dispatch(publishTable(magtable, authUsername));
+		handleClose();
 	};
 
 	const handleClear = () => {
-		if (!clearConfirmation) {
-			setClearConfirmation(true);
-			setClearDisabled(true);
-
-			setTimeout(() => {
-				setClearDisabled(false);
-			}, CONFIRMATION_DELAY);
-		} else {
-			dispatch(clearTable());
-
-			setClearDisabled(false);
-			setClearConfirmation(false);
-		}
+		dispatch(clearTable());
+		handleClose();
 	};
 
 	return (
@@ -97,47 +84,57 @@ function OverflowLocations({ children, color, hoverColor, open, setOpen }) {
 			{open && (
 				<>
 					<ClickCatcher onClick={() => setOpen(false)} />
-					<div id={"arrow"} />
 					<div id={"container"}>
+						<div id={"arrow"} />
 						<OverflowMenu>
 							<OverflowMenuButton onClick={handleApronSwitch}>
 								Apron: {selectedApron}
 							</OverflowMenuButton>
 
-							<DoubleClickConfirm
-								active={clearConfirmation}
-								color={"var(--context-red)"}
+							<Confirmation
+								confirmationMessage={"Confirm Clear"}
+								action={handleClear}
+								color={"red"}
+								hoverColor={"darkred"}
 							>
-								<OverflowMenuButton
-									hoverColor={
-										clearConfirmation
-											? "var(--context-red)"
-											: "var(--context-red-light)"
-									}
-									disabled={clearDisabled}
-									onClick={handleClear}
-								>
-									{clearConfirmation ? "Confirm Clear" : "Clear All"}
-								</OverflowMenuButton>
-							</DoubleClickConfirm>
+								{({ confirm }) => (
+									<OverflowMenuButton onClick={confirm}>
+										Clear Table
+									</OverflowMenuButton>
+								)}
+							</Confirmation>
 
-							<DoubleClickConfirm
-								active={publishConfirmation}
-								color={"var(--context-blue)"}
+							<Confirmation
+								confirmationMessage={"Confirm Publish"}
+								action={handlePublish}
+								color={"blue"}
+								hoverColor={"darkblue"}
 							>
-								<OverflowMenuButton
-									hoverColor={
-										publishConfirmation
-											? "var(--context-blue)"
-											: "var(--context-blue-light)"
-									}
-									disabled={publishDisabled}
-									onClick={handlePublish}
-								>
-									{publishConfirmation ? "Confirm Publish" : "Publish"}
-								</OverflowMenuButton>
-							</DoubleClickConfirm>
+								{({ confirm }) => (
+									<OverflowMenuButton onClick={confirm}>
+										Publish
+										<IconButton
+											style={{ float: "right" }}
+											nopad
+											toolTipSide={"left"}
+											color={"var(--context-blue)"}
+											faClassName={"fa-info-circle fa-lg"}
+											toolTip={`Last published by ${
+												publishedBy ? publishedBy : "..."
+											}
+										at ${timePublished}`}
+										/>
+									</OverflowMenuButton>
+								)}
+							</Confirmation>
+
+							<OverflowMenuButton onClick={handleShow}>
+								Export Brix Records
+							</OverflowMenuButton>
 						</OverflowMenu>
+						<Modal show={showModal} handleClose={handleClose}>
+							<BrixExport setShowModal={setShowModal} />
+						</Modal>
 					</div>
 				</>
 			)}

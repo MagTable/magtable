@@ -5,21 +5,20 @@ import FadeIn from "react-fade-in";
 /**
  * @date 2020-03-03
  * @author MJ Kochuk
- * @module Styled
- */
-
-/**
+ * @category Styled Components
+ * @module Common
  * @constructor
- * @returns {*} The NavBar component
+ * @returns {*}
  */
 
 export const LoadingImg = styled.i`
 	animation: loading-spin infinite 1s linear;
-	font-size: 40px;
 	height: fit-content;
 	width: fit-content;
 	text-align: center;
 	margin: 1.5rem;
+	-webkit-transform: scaleY(-1);
+	transform: scaleY(-1);
 
 	${({ small }) =>
 		small &&
@@ -76,9 +75,6 @@ export function SpinningLoadIcon() {
 	);
 }
 
-/**
- * @return {null}
- */
 export function LoginLoadIcon({ loading }) {
 	if (loading) {
 		return (

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 
@@ -14,9 +14,13 @@ import UserList from "./components/user/UserList";
 import AssignmentTable from "./components/magtable/AssignmentTable";
 import Alert from "./components/common/Alert";
 import NavBar from "./components/common/NavBar";
-import TruckManagementLayout from "./components/trucks/TruckManagementLayout";
+import TVView from "./components/tv/TVView";
+import StompClient from "./components/common/StompClient";
+import TruckManagement from "./components/trucks/TruckManagement";
 
 function App() {
+	const [wsConnected, setWSConnected] = useState(false);
+
 	useEffect(() => {
 		async function fetch() {
 			await store.dispatch(loadUser());
@@ -27,17 +31,14 @@ function App() {
 	return (
 		<Provider store={store}>
 			<Router>
-				<NavBar />
+				<NavBar wsConnected={wsConnected} />
 				<Alert />
+				<StompClient setWSConnected={setWSConnected} />
 				<Switch>
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/password/reset" component={PasswordReset} />
-
-					<PrivateRoute
-						exact
-						path="/truck/all"
-						component={TruckManagementLayout}
-					/>
+					<PrivateRoute exact path="/truck/all" component={TruckManagement} />
+					<PrivateRoute exact path="/truck/tv" component={TVView} />
 					<PrivateRoute
 						exact
 						path="/"

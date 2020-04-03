@@ -3,7 +3,8 @@ import styled from "styled-components";
 /**
  * @date 2020-02-17
  * @author MJ Kochuk
- * @module Styled
+ * @category Styled Components
+ * @module MagTable
  */
 
 /**
@@ -27,8 +28,7 @@ export const ListTitleText = styled.p`
 	width: 100%;
 	font-size: 20px;
 	font-family: "Noto Sans KR", sans-serif;
-	margin-block-start: 0em;
-	margin-block-end: 0em;
+	margin: 0;
 	display: flex;
 	flex-direction: row;
 `;
