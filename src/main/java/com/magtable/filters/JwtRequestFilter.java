@@ -40,7 +40,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         String username = null;
         String jwt= null;
-
+        System.out.println("************FILTER**********");
+        System.out.println("************FILTER**********");
+        System.out.println("************FILTER**********");
         //looks for a Bearer authorization header
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             //substring of 7 because "Bearer " is 7 indexes long
