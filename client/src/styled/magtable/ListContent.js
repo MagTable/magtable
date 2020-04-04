@@ -361,10 +361,8 @@ export const TruckListItemLocation = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	flex-grow: 1.4;
-	flex-basis: 0;
 
-	max-width: 80px;
+	width: 4.5rem;
 
 	border-left: 2px solid var(--border-color);
 

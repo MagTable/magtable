@@ -68,6 +68,7 @@ const UserListItem = ({ user }) => {
 					</Confirmation>
 					{user.reset && (
 						<IconButton
+							nohide
 							faClassName={"fa-exclamation-triangle fa-lg"}
 							color={"orange"}
 							toolTip={"User's Password Has Been Reset"}
