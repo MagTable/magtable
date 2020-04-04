@@ -53,7 +53,6 @@ public class ShiftController {
      *
      * @return An OK response if pulled successfully
      */
-    //TODO Change to PUT
     @GetMapping("/update")
     @Scheduled(cron = "0 0 2 * * *")
     public ShiftList updateShifts() {

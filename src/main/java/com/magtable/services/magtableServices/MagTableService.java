@@ -9,10 +9,15 @@ import com.magtable.repository.AssignmentRepository;
 import com.magtable.repository.EquipmentRepository;
 import com.magtable.repository.MagTableRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
+/**
+ * Service class with magtable helper methods
+ * @author David Ward
+ */
 @Service
 public class MagTableService {
 
@@ -27,6 +32,10 @@ public class MagTableService {
 
 
 
+    /**
+     * Method for creating a new magtable record
+     * @return The new Magtablerecord
+     */
     public MagtableRecord newMTR(){
 
         MagtableRecord magtableRecord = new MagtableRecord(); //making a blank mtr

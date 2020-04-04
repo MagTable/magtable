@@ -10,6 +10,7 @@ import com.magtable.services.ErrorService;
 import com.magtable.services.magtableServices.MagTableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
@@ -74,6 +75,21 @@ public class MagTableController {
     public void publishMagTable(@RequestBody MagtableRecord magtableRecord) {
         MagtableRecord saved = magTableRecordRepository.save(magtableRecord);
         template.convertAndSend("/topic/mtr", new WsAction(WsAction.MTR_PUBLISH, saved));
+    }
+
+
+    /**
+     * Method for clearing the magtable - This is done by creating a new empty Magtablerecord
+     * Scheduled to happen everyday at 2am
+     */
+    @Scheduled(cron = "0 0 2 * * *")
+    public void clearMagTable(){
+        MagtableRecord record = magTableService.newMTR();
+        for(Assignment assignment : record.getAssignments()){
+                assignment.setMagtableRecord(record);
+        }
+        record = magTableRecordRepository.save(record);
+        template.convertAndSend("/topic/mtr", new WsAction(WsAction.MTR_PUBLISH, record));
     }
 
     /**

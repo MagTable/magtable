@@ -22,7 +22,7 @@ public class MagtableRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "magtablerecordid", nullable = false)
+    @Column(name = "magtablerecordid")
     public Integer getId() {
         return id;
     }
