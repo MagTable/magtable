@@ -256,3 +256,14 @@ export const NoticeIcon = styled.i`
 	top: 1px;
 	color: #ff2800;
 `;
+
+/**
+ * Holds sections of the TV view at the bottom of the screen.
+ */
+export const BottomWrap = styled.div`
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	bottom: 0;
+	width: 100%;
+`;
