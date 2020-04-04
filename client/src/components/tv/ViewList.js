@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import {
+	BottomWrap,
 	FadeOutDiv,
 	SectionTitle,
 	TowerListWrap,
@@ -69,59 +70,68 @@ function ViewList(props) {
 
 	return (
 		<ViewListDiv>
-			<SectionTitle>Tower</SectionTitle>
-			{towerAssignments.map(assignment => (
-				<ViewTowerItem assignment={assignment} key={assignment.equipment.id} />
-			))}
-			<VehicleListWrap>
-				<SectionTitle>Service Vehicles</SectionTitle>
-				{enabledAssignments.map(
-					assignment =>
-						assignment.equipment.type === "SVV" && (
-							<ViewListItem
-								assignment={assignment}
-								assigned={true}
-								key={assignment.equipment.id}
-							/>
-						)
-				)}
-				{disabledAssignments.map(
-					assignment =>
-						assignment.equipment.type === "SVV" && (
-							<ViewListItem
-								assignment={assignment}
-								assigned={false}
-								key={assignment.equipment.id}
-							/>
-						)
-				)}
-				<SectionTitle>De-Ice Trucks</SectionTitle>
-				{enabledAssignments.map(
-					assignment =>
-						assignment.equipment.type === "ICE" && (
-							<ViewListItem
-								assignment={assignment}
-								assigned={true}
-								key={assignment.equipment.id}
-							/>
-						)
-				)}
-				{disabledAssignments.map(
-					assignment =>
-						assignment.equipment.type === "ICE" && (
-							<ViewListItem
-								assignment={assignment}
-								assigned={false}
-								key={assignment.equipment.id}
-							/>
-						)
-				)}
-				{/*<FadeOutDiv />*/}
-			</VehicleListWrap>
+			<SectionTitle>De-Ice Trucks</SectionTitle>
+			{enabledAssignments.map(
+				assignment =>
+					assignment.equipment.type === "ICE" && (
+						<ViewListItem
+							assignment={assignment}
+							assigned={true}
+							key={assignment.equipment.id}
+						/>
+					)
+			)}
+			{disabledAssignments.map(
+				assignment =>
+					assignment.equipment.type === "ICE" && (
+						<ViewListItem
+							assignment={assignment}
+							assigned={false}
+							key={assignment.equipment.id}
+						/>
+					)
+			)}
+
 			<SectionTitle>Vehicle Notices</SectionTitle>
 			{notices.map(notice => (
 				<ViewNotice assignment={notice} key={notice.equipment.id + "notice"} />
 			))}
+
+			<BottomWrap>
+				<VehicleListWrap>
+					<SectionTitle>Service Vehicles</SectionTitle>
+					{enabledAssignments.map(
+						assignment =>
+							assignment.equipment.type === "SVV" && (
+								<ViewListItem
+									assignment={assignment}
+									assigned={true}
+									key={assignment.equipment.id}
+								/>
+							)
+					)}
+					{disabledAssignments.map(
+						assignment =>
+							assignment.equipment.type === "SVV" && (
+								<ViewListItem
+									assignment={assignment}
+									assigned={false}
+									key={assignment.equipment.id}
+								/>
+							)
+					)}
+
+					{/*<FadeOutDiv />*/}
+				</VehicleListWrap>
+
+				<SectionTitle>Tower</SectionTitle>
+				{towerAssignments.map(assignment => (
+					<ViewTowerItem
+						assignment={assignment}
+						key={assignment.equipment.id}
+					/>
+				))}
+			</BottomWrap>
 		</ViewListDiv>
 	);
 }
