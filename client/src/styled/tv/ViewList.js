@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 /**
  * @date 2020-04-01
- * @author MJ Kochuk
+ * @author MJ Kochuk, Arran Woodruff
  * @module Styled
  */
 
@@ -11,6 +11,7 @@ import styled from "styled-components";
  */
 export const TVWrap = styled.div`
 	display: grid;
+	grid-template-rows: auto 1fr;
 	grid-template-columns: 1fr auto;
 `;
 
@@ -252,7 +253,7 @@ export const FadeOutDiv = styled.div`
  */
 export const NoticeIcon = styled.i`
 	position: absolute;
-	right: 0px;
+	right: 0;
 	top: 1px;
 	color: #ff2800;
 `;

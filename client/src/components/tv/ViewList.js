@@ -2,21 +2,18 @@ import React from "react";
 import { useSelector } from "react-redux";
 import {
 	BottomWrap,
-	FadeOutDiv,
 	SectionTitle,
-	TowerListWrap,
-	TowerPadWrap,
 	VehicleListWrap,
-	ViewListDiv,
-	WestPadWrap
+	ViewListDiv
 } from "../../styled/tv/ViewList";
 import ViewListItem from "./ViewListItem";
 import ViewTowerItem from "./ViewTowerItem";
 import ViewNotice from "./ViewNotice";
+import { DEICE_TRUCK, SERVICE_VEHICLE } from "../../actions/constants";
 
 /**
  * @date 2020-03-31
- * @author MJ Kochuk
+ * @author MJ Kochuk, Arran Woodruff
  * @module Component
  */
 
@@ -27,40 +24,48 @@ import ViewNotice from "./ViewNotice";
  * @returns {*} The ViewList component
  */
 function ViewList(props) {
+	const historicalMagtable = useSelector(
+		state => state.magtable.historical.magtable
+	);
+
+	const historicalAssignments = historicalMagtable
+		? historicalMagtable.assignments
+		: null;
+
 	const assignments = useSelector(state => state.magtable.assignments);
-	console.log(assignments);
 
 	let enabledAssignments = []; // Trucks assigned to a location and/or with employees assigned to it.
-	let disabledAssignments = []; // Trucks with no assignments.
 	let towerAssignments = []; // All towers and their assigned employees.
 	let notices = []; // Notices of the trucks with assignments.
 
 	let numDisabledIce = 0; // Counter to track the number of disabled de-ice trucks to maximize screen real-estate.
 	const MAX_NUM_UNASSIGNED_ICE = 6; // Determines how many disabled de-ice trucks can be displayed.
 
-	console.log(towerAssignments);
+	const selectedAssignments = historicalAssignments
+		? historicalAssignments
+		: assignments;
 
-	for (let i = 0; i < assignments.length; i++) {
-		if (assignments[i].equipment.id >= 1000) {
+	for (let i = 0; i < selectedAssignments.length; i++) {
+		if (selectedAssignments[i].equipment.id >= 1000) {
 			// Towers.
-			towerAssignments.push(assignments[i]);
+			towerAssignments.push(selectedAssignments[i]);
 		} else {
 			if (
-				assignments[i].employeeShifts.length > 0 || // There are employees assigned to the truck.
-				assignments[i].parkingLocation !== null // The truck is assigned to a location.
+				selectedAssignments[i].employeeShifts.length > 0 || // There are employees assigned to the truck.
+				selectedAssignments[i].parkingLocation !== null // The truck is assigned to a location.
 			) {
-				enabledAssignments.push(assignments[i]);
-				if (assignments[i].equipment.notice !== "") {
+				enabledAssignments.push(selectedAssignments[i]);
+				if (selectedAssignments[i].equipment.notice !== "") {
 					// If the truck has a notice.
-					notices.push(assignments[i]);
+					notices.push(selectedAssignments[i]);
 				}
 			} else if (
 				// The truck does not have any assignments
-				assignments[i].equipment.type === "SVV" || // It is a service truck.
+				selectedAssignments[i].equipment.type === SERVICE_VEHICLE || // It is a service truck.
 				numDisabledIce < MAX_NUM_UNASSIGNED_ICE // There is enough room for a non-assigned de-ice truck.
 			) {
 				// disabledAssignments.push(assignments[i]);
-				if (assignments[i].equipment.type === "ICE") {
+				if (selectedAssignments[i].equipment.type === DEICE_TRUCK) {
 					// If the truck is a de-ice truck.
 					numDisabledIce++;
 				}
