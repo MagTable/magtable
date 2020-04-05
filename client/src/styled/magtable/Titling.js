@@ -21,11 +21,7 @@ export const ListTitle = styled.div`
 	padding: 0 1rem;
 `;
 
-export const TruckMgmtTitle = styled(ListTitle)`
-	-webkit-box-shadow: 0px 10px 21px 1px rgba(0, 0, 0, 0.75);
-	-moz-box-shadow: 0px 10px 21px 1px rgba(0, 0, 0, 0.75);
-	box-shadow: 0px 10px 21px 1px rgba(0, 0, 0, 0.75);
-`;
+export const TruckMgmtTitle = styled(ListTitle)``;
 
 /**
  * The text within the ListTitle div.
