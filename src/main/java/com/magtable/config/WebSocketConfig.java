@@ -31,7 +31,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         config.enableSimpleBroker("https://sait-capstone2020.herokuapp.com/")
                 .setTaskScheduler(new DefaultManagedTaskScheduler())
                 .setHeartbeatValue(new long[]{10000, 10000});
-        config.setApplicationDestinationPrefixes("/app");
+        config.setApplicationDestinationPrefixes("/topic");
     }
 
     @Bean

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Route, Switch, HashRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 
 import store from "./store";
@@ -30,21 +30,21 @@ function App() {
 
 	return (
 		<Provider store={store}>
-			<Router>
+			<HashRouter basename={"/"} hashType={"slash"}>
 				<NavBar wsConnected={wsConnected} />
 				<Alert />
 				<StompClient setWSConnected={setWSConnected} />
 				<Switch>
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/password/reset" component={PasswordReset} />
-					<PrivateRoute exact path="/truck/all" component={TruckManagement} />
-					<PrivateRoute exact path="/truck/tv" component={TVView} />
 					<PrivateRoute
 						exact
 						path="/"
 						component={AssignmentTable}
 						personnelManagerRoute
 					/>
+					<PrivateRoute exact path="/truck/all" component={TruckManagement} />
+					<PrivateRoute exact path="/truck/tv" component={TVView} />
 					<PrivateRoute
 						exact
 						path="/user/all"
@@ -53,7 +53,7 @@ function App() {
 					/>
 					<PrivateRoute exact path="/logout" component={Logout} />
 				</Switch>
-			</Router>
+			</HashRouter>
 		</Provider>
 	);
 }

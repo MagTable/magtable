@@ -10,8 +10,6 @@ import {
 } from "./constants";
 import axios from "axios";
 
-// todo REMOVE CONSOLE LOGS!!!!!!!!!
-
 /**
  * @date 2020-03-24
  * @author Arran Woodruff, Steven Wong, MJ Kochuk
@@ -33,7 +31,6 @@ export const addBrixRecord = (
 	selectedTruckPrimary,
 	brixRecord
 ) => async dispatch => {
-	console.log(selectedTruckPrimary);
 	try {
 		dispatch({ type: ADDING_BRIX_RECORD });
 		const res = await axios.post(
@@ -79,7 +76,7 @@ export const getBrixRecords = (truckID, primary) => async dispatch => {
 			});
 		}, 500);
 	} catch (err) {
-		console.error(err);
+		console.error(err.response);
 	}
 };
 
@@ -97,7 +94,9 @@ export const getBrixChart = () => async dispatch => {
 			type: GET_BRIX_CHART,
 			payload: res.data
 		});
-	} catch (err) {}
+	} catch (err) {
+		console.error(err.response);
+	}
 };
 
 /**
@@ -111,8 +110,6 @@ export const getWeather = () => async dispatch => {
 	try {
 		const res = await axios.get("/weather");
 		const weather = res.data;
-		// const weather = sampleWeather;
-		// const weather = null;
 
 		let date;
 		date = new Date(0);
@@ -170,13 +167,13 @@ export const getWeather = () => async dispatch => {
 				conditionID
 			}
 		});
-	} catch (err) {}
+	} catch (err) {
+		console.error(err.response);
+	}
 };
 
-//todo Arran pls update this
 /**
- *
- * Sets the daily chart row.
+ * Sets the chart row that corresponds to the current daily mix.
  *
  * @method setDailyMixChartRow
  * @param chartRow
@@ -188,5 +185,7 @@ export const setDailyMixChartRow = chartRow => async dispatch => {
 			type: SET_DAILY_MIX_CHART_ROW,
 			payload: chartRow
 		});
-	} catch (err) {}
+	} catch (err) {
+		console.error(err.response);
+	}
 };
