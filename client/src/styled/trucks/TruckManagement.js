@@ -19,12 +19,15 @@ export const TruckManagementListDiv = styled.div`
 	width: auto;
 	max-height: calc(100vh - 120px);
 	padding: 0 40px;
+	background: #f4f4f4;
 `;
 
 export const TruckManagementDiv = styled.div`
 	margin: auto;
 	width: 60%;
-	padding-bottom: 2rem;
+	padding: 0 4rem 2rem 2rem;
+	background: white;
+	box-shadow: 0px 0px 44px 0px rgba(0, 0, 0, 0.75);
 `;
 
 export const TruckMgmtDiv = styled.div`

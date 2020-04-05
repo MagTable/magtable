@@ -7,7 +7,11 @@ import {
 	AddTruckBtn,
 	TruckManagementDiv
 } from "../../styled/trucks/TruckManagement";
-import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
+import {
+	ListTitle,
+	ListTitleText,
+	TruckMgmtTitle
+} from "../../styled/magtable/Titling";
 import AddTruck from "./AddTruck";
 import Modal from "../common/Modal";
 import { FilterIcon } from "../../styled/magtable/Overflow";
@@ -55,7 +59,7 @@ function TruckManagement() {
 
 	return (
 		<TruckMgmtDiv>
-			<ListTitle>
+			<TruckMgmtTitle>
 				<ListTitleText>Manage Trucks</ListTitleText>
 				{authUser?.role?.name === SYSTEM_ADMINISTRATOR ? (
 					<>
@@ -68,7 +72,7 @@ function TruckManagement() {
 						</AddTruckBtn>
 					</>
 				) : null}
-			</ListTitle>
+			</TruckMgmtTitle>
 			<TruckManagementListDiv>
 				<TruckManagementDiv>
 					<h2>Service Vehicles</h2>
