@@ -95,9 +95,10 @@ public class MagTableController {
      * @param magtableRecord The MagtableRecord to be saved
      */
     @PostMapping("")
-    public void publishMagTable(@RequestBody MagtableRecord magtableRecord) {
+    public MagtableRecord publishMagTable(@RequestBody MagtableRecord magtableRecord) {
         MagtableRecord saved = magTableRecordRepository.save(magtableRecord);
         template.convertAndSend("/topic/mtr", new WsAction(WsAction.MTR_PUBLISH, saved));
+        return saved;
     }
 
     /**
