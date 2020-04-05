@@ -35,6 +35,7 @@ function ViewList(props) {
 	const assignments = useSelector(state => state.magtable.assignments);
 
 	let enabledAssignments = []; // Trucks assigned to a location and/or with employees assigned to it.
+	let disabledAssignments = []; // Trucks with no assignments.
 	let towerAssignments = []; // All towers and their assigned employees.
 	let notices = []; // Notices of the trucks with assignments.
 
