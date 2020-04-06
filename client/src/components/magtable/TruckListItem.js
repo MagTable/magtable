@@ -83,12 +83,11 @@ function TruckListItem({ assignment, noticeOpen, showAM, openBrixModal }) {
 		assignment.equipment.status === GO || assignment.equipment.status === CON;
 
 	useEffect(() => {
-		console.log(assignment.equipment.status, assignment.equipment.id);
-		console.log([OOS, INOP].includes(assignment.equipment.status));
+		// clear assignments if status is changed to inop or oos
 		if ([OOS, INOP].includes(assignment.equipment.status)) {
 			dispatch(clearAssignmentShifts(assignment.equipment.id));
 		}
-	}, [assignment.equipment.status]);
+	}, [assignment.equipment.status, assignment.equipment.id, dispatch]);
 
 	useEffect(() => {
 		const amPrimary = assignment.employeeShifts.find(

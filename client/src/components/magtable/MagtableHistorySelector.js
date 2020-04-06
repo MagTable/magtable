@@ -19,7 +19,7 @@ const MagtableHistorySelector = ({ handleClose }) => {
 
 	useEffect(() => {
 		dispatch(getMagtableHistoryList(date.format("YYYY-MM-DD")));
-	}, [date]);
+	}, [date, dispatch]);
 
 	const { list, loading } = useSelector(state => state.magtable.historical);
 

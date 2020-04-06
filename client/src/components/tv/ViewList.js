@@ -1,13 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import {
-	FadeOutDiv,
 	SectionTitle,
-	TowerListWrap,
-	TowerPadWrap,
 	VehicleListWrap,
-	ViewListDiv,
-	WestPadWrap
+	ViewListDiv
 } from "../../styled/tv/ViewList";
 import ViewListItem from "./ViewListItem";
 import ViewTowerItem from "./ViewTowerItem";
@@ -27,17 +23,13 @@ import ViewNotice from "./ViewNotice";
  */
 function ViewList(props) {
 	const assignments = useSelector(state => state.magtable.assignments);
-	console.log(assignments);
 
 	let enabledAssignments = []; // Trucks assigned to a location and/or with employees assigned to it.
-	let disabledAssignments = []; // Trucks with no assignments.
 	let towerAssignments = []; // All towers and their assigned employees.
 	let notices = []; // Notices of the trucks with assignments.
 
 	let numDisabledIce = 0; // Counter to track the number of disabled de-ice trucks to maximize screen real-estate.
 	const MAX_NUM_UNASSIGNED_ICE = 6; // Determines how many disabled de-ice trucks can be displayed.
-
-	console.log(towerAssignments);
 
 	for (let i = 0; i < assignments.length; i++) {
 		if (assignments[i].equipment.id >= 1000) {
@@ -85,16 +77,6 @@ function ViewList(props) {
 							/>
 						)
 				)}
-				{disabledAssignments.map(
-					assignment =>
-						assignment.equipment.type === "SVV" && (
-							<ViewListItem
-								assignment={assignment}
-								assigned={false}
-								key={assignment.equipment.id}
-							/>
-						)
-				)}
 				<SectionTitle>De-Ice Trucks</SectionTitle>
 				{enabledAssignments.map(
 					assignment =>
@@ -106,17 +88,6 @@ function ViewList(props) {
 							/>
 						)
 				)}
-				{disabledAssignments.map(
-					assignment =>
-						assignment.equipment.type === "ICE" && (
-							<ViewListItem
-								assignment={assignment}
-								assigned={false}
-								key={assignment.equipment.id}
-							/>
-						)
-				)}
-				{/*<FadeOutDiv />*/}
 			</VehicleListWrap>
 			<SectionTitle>Vehicle Notices</SectionTitle>
 			{notices.map(notice => (

@@ -222,12 +222,14 @@ export default function(state = initialState, action) {
 					assignment.equipment.id === payload
 						? {
 								...assignment,
-								employeeShifts: []
+								employeeShifts: [],
+								parkingLocation: null
 						  }
 						: assignment
 				)
 			};
 		case EDIT_TRUCK:
+			// clears employee shifts and parking location if the status is set to inop or oos
 			const clearEmployeeShifts = [INOP, OOS].includes(payload.status);
 			return {
 				...state,
@@ -238,6 +240,9 @@ export default function(state = initialState, action) {
 								employeeShifts: clearEmployeeShifts
 									? []
 									: assignment.employeeShift,
+								parkingLocation: clearEmployeeShifts
+									? null
+									: assignment.parkingLocation,
 								equipment: payload
 						  }
 						: assignment
