@@ -20,6 +20,7 @@ export const TruckManagementListDiv = styled.div`
 	max-height: calc(100vh - 120px);
 	padding: 0 40px;
 	background: #f4f4f4;
+	height: 100%;
 `;
 
 export const TruckManagementDiv = styled.div`
