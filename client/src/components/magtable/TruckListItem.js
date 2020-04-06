@@ -25,9 +25,11 @@ import {
 	DANGER,
 	DEICE_TRUCK,
 	GO,
+	INOP,
 	MANAGEMENT_POSITIONS,
 	MECHANIC,
 	OJT,
+	OOS,
 	PM,
 	SERVICE_VEHICLE,
 	SET_EQUIPMENT_EMPLOYEE,
@@ -39,6 +41,7 @@ import {
 } from "../../actions/constants";
 import { useDispatch } from "react-redux";
 import {
+	clearAssignmentShifts,
 	removeEquipmentEmployee,
 	removeTruckLocation,
 	setTruckLocation
@@ -78,6 +81,14 @@ function TruckListItem({ assignment, noticeOpen, showAM, openBrixModal }) {
 
 	const equipmentOperable =
 		assignment.equipment.status === GO || assignment.equipment.status === CON;
+
+	useEffect(() => {
+		console.log(assignment.equipment.status, assignment.equipment.id);
+		console.log([OOS, INOP].includes(assignment.equipment.status));
+		if ([OOS, INOP].includes(assignment.equipment.status)) {
+			dispatch(clearAssignmentShifts(assignment.equipment.id));
+		}
+	}, [assignment.equipment.status]);
 
 	useEffect(() => {
 		const amPrimary = assignment.employeeShifts.find(

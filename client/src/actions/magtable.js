@@ -19,7 +19,8 @@ import {
 	FETCHING_MAGTABLE_HISTORY_LIST,
 	GET_MAGTABLE_HISTORY_LIST,
 	FETCHING_HISTORICAL_MAGTABLE,
-	GET_HISTORICAL_MAGTABLE
+	GET_HISTORICAL_MAGTABLE,
+	CLEAR_ASSIGNMENT_SHIFTS
 } from "./constants";
 import axios from "axios";
 import { setAlert } from "./alert";
@@ -193,6 +194,13 @@ export const clearTable = () => dispatch => {
 	} catch (err) {
 		dispatch(setAlert(err.response.data.message, "warning"));
 	}
+};
+
+export const clearAssignmentShifts = equipmentID => dispatch => {
+	dispatch({
+		type: CLEAR_ASSIGNMENT_SHIFTS,
+		payload: equipmentID
+	});
 };
 
 /**

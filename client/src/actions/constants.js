@@ -594,4 +594,14 @@ export const AXIOS_JSON_HEADER = {
 
 // API CONSTANTS
 
+/**
+ * Publish magtable case
+ * @type {string} MTR_PUBLISH
+ */
 export const MTR_PUBLISH = "MTR_PUBLISH";
+
+/**
+ * Clear assignment shifts
+ * @type {string} CLEAR_ASSIGNMENT_SHIFTS
+ */
+export const CLEAR_ASSIGNMENT_SHIFTS = "CLEAR_ASSIGNMENT_SHIFTS";

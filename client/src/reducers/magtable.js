@@ -25,7 +25,10 @@ import {
 	GET_HISTORICAL_MAGTABLE,
 	GET_MAGTABLE_HISTORY_LIST,
 	FETCHING_HISTORICAL_MAGTABLE,
-	FETCHING_MAGTABLE_HISTORY_LIST
+	FETCHING_MAGTABLE_HISTORY_LIST,
+	OOS,
+	INOP,
+	CLEAR_ASSIGNMENT_SHIFTS
 } from "../actions/constants";
 import { ParkingZones } from "../res/test_data/magtable";
 
@@ -212,16 +215,32 @@ export default function(state = initialState, action) {
 				].sort((a, b) => a.equipment.id - b.equipment.id),
 				loading: false
 			};
-		case EDIT_TRUCK:
+		case CLEAR_ASSIGNMENT_SHIFTS:
 			return {
 				...state,
-				assignments: state.assignments.map(truck =>
-					truck.equipment.id === payload.id
+				assignments: state.assignments.map(assignment =>
+					assignment.equipment.id === payload
 						? {
-								...truck,
+								...assignment,
+								employeeShifts: []
+						  }
+						: assignment
+				)
+			};
+		case EDIT_TRUCK:
+			const clearEmployeeShifts = [INOP, OOS].includes(payload.status);
+			return {
+				...state,
+				assignments: state.assignments.map(assignment =>
+					assignment.equipment.id === payload.id
+						? {
+								...assignment,
+								employeeShifts: clearEmployeeShifts
+									? []
+									: assignment.employeeShift,
 								equipment: payload
 						  }
-						: truck
+						: assignment
 				),
 				loading: false
 			};
