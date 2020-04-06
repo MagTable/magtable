@@ -103,7 +103,11 @@ export const login = ({ username, password }) => async dispatch => {
 			dispatch(loadUser());
 		}, 750);
 	} catch (err) {
-		dispatch(setAlert(err.response?.data?.message, "danger"));
+		if (err.response.status === 303) {
+			dispatch(setAlert(err.response?.data?.message, "info"));
+		} else {
+			dispatch(setAlert(err.response?.data?.message, "danger"));
+		}
 
 		// send the login error to redux state to allow other components to see what the error was and react accordingly
 		const { status, message } = err.response?.data;

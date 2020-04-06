@@ -39,6 +39,7 @@ function IconButton({
 				className={"fas " + faClassName}
 				onClick={onClick}
 				data-tip={toolTip}
+				data-for={"icon-tooltip"}
 				hoverColor={hoverColor}
 				color={color}
 				nopad={nopad}
@@ -51,6 +52,7 @@ function IconButton({
 					type="dark"
 					effect="solid"
 					delayShow={200}
+					id={"icon-tooltip"}
 				/>
 			</BrowserView>
 		</>
