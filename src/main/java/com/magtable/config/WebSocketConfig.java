@@ -28,7 +28,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("https://sait-capstone2020.herokuapp.com/")
+        config.enableSimpleBroker("https://magtable.herokuapp.com/")
                 .setTaskScheduler(new DefaultManagedTaskScheduler())
                 .setHeartbeatValue(new long[]{10000, 10000});
         config.setApplicationDestinationPrefixes("/topic");
