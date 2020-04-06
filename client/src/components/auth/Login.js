@@ -57,8 +57,8 @@ const Login = () => {
 				<PlaneLoader />
 				<Formik
 					initialValues={{
-						username: "mustafa",
-						password: "password"
+						username: "",
+						password: ""
 					}}
 					onSubmit={values => {
 						dispatch(login(values));

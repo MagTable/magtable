@@ -91,7 +91,7 @@ public class ErrorService {
      * @return ResponseStatusException message.
      */
     public ResponseStatusException duplicateUsername() {
-        return new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username Taken.");
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username Already Taken.");
     }
 
     /**
@@ -182,7 +182,7 @@ public class ErrorService {
      * @return ResponseStatusException message
      */
     public ResponseStatusException truckAlreadyExists(Integer id) {
-        return new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Truck : %d Already Exists", id));
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Truck %d Already Exists", id));
     }
 
     /**
@@ -191,7 +191,7 @@ public class ErrorService {
      * @return ResponseStatusException message
      */
     public ResponseStatusException truckDoesntExists(Integer id) {
-        return new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Truck : %d Doesn't Exists", id));
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Truck %d Doesn't Exists", id));
     }
 
     /**
@@ -207,7 +207,7 @@ public class ErrorService {
      * @return ResponseStatusException message
      */
     public ResponseStatusException invalidTruckId() {
-        return new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Truck ids must be between 1 and 1000"));
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Truck ID must be between 1 and 999"));
     }
 
     /**
