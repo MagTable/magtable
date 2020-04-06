@@ -88,6 +88,7 @@ public class MagTableController {
         for(Assignment assignment : record.getAssignments()){
                 assignment.setMagtableRecord(record);
         }
+        record.setPublishedBy("system");
         record = magTableRecordRepository.save(record);
         template.convertAndSend("/topic/mtr", new WsAction(WsAction.MTR_PUBLISH, record));
     }
@@ -125,8 +126,11 @@ public class MagTableController {
         ArrayList<MagTableHistoryResponse> responses = new ArrayList<>();
 
         for(MagtableRecord record : records){
-            MagTableHistoryResponse response = new MagTableHistoryResponse(record);
+            if(!record.getPublishedBy().equals("system")){
+                MagTableHistoryResponse response = new MagTableHistoryResponse(record);
                 responses.add(response);
+            }
+
         }
 
         return responses;
