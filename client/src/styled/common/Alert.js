@@ -9,7 +9,7 @@ import styled from "styled-components";
 
 export const AlertDiv = styled.div`
 	position: fixed;
-	top: 70px;
+	top: 4rem;
 	left: 50%;
 	width: auto;
 
@@ -26,12 +26,13 @@ export const Alert = styled.div`
 	padding: 0.75rem;
 	margin-bottom: 0.5rem;
 
-	border-width: 2px 4px 2px 4px;
+	border-width: 3px 3px 3px 3px;
 	border-style: solid;
 	border-radius: 0.45rem;
 
 	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.06), 0 0 6px rgba(0, 0, 0, 0.23);
 
+	font-family: "Noto Sans KR", sans-serif;
 	font-size: 1.3rem;
 	font-weight: bold;
 

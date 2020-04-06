@@ -12,6 +12,7 @@ export const IconButton = styled.i`
 	text-align: center;
 	padding: 10px;
 
+	${({ nohide }) => nohide && `opacity: 1 !important;`}
 	${({ nopad }) => nopad && `padding: 0;`}
 	
 	${({ color }) =>

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 /**
  * @date 2020-04-01
- * @author MJ Kochuk
+ * @author MJ Kochuk, Arran Woodruff
  * @module Styled
  */
 
@@ -11,6 +11,7 @@ import styled from "styled-components";
  */
 export const TVWrap = styled.div`
 	display: grid;
+	grid-template-rows: auto 1fr;
 	grid-template-columns: 1fr auto;
 `;
 
@@ -86,7 +87,7 @@ export const NoticeWrapper = styled.div`
  * Holds the truck's ID.
  */
 export const TruckNumDiv = styled.div`
-	height: 50px;
+	//height: 25px;
 	width: 50px;
 	position: relative;
 	//border-left: 1px solid grey;
@@ -129,13 +130,14 @@ export const TruckNum = styled.span`
 	font-size: 20px;
 	width: 50px;
 	text-align: center;
+	font-weight: bold;
 `;
 
 /**
  * Holds the name of the tower position.
  */
 export const TowerPos = styled(TruckNum)`
-	width: 150px;
+	width: 190px;
 	padding-left: 5px;
 	text-align: left;
 	border-right: 1px solid grey;
@@ -156,7 +158,7 @@ export const AssignedToDiv = styled(TruckNumDiv)`
  * Holds all slots for employees assigned to  a truck.
  */
 export const EmployeeWrap = styled.div`
-	height: 50px;
+	height: 25px;
 	display: flex;
 	flex-direction: row;
 	width: 100%;
@@ -202,8 +204,8 @@ export const PMEmp = styled(PairedEmpDiv)`
 export const EmployeeDiv = styled.div`
 	display: flex;
 	align-items: center;
-
-	width: 50%;
+	white-space: nowrap;
+	width: 100%;
 	justify-content: center;
 `;
 
@@ -216,9 +218,9 @@ export const TowerEmployeeDiv = styled(EmployeeDiv)`
  * Titles of each list ie Tower, Service Vehicles etc...
  */
 export const SectionTitle = styled.h2`
-	margin-block-end: 0.2em;
-	margin-block-start: 0.8em;
-	font-size: 30px;
+	margin-block-end: 0.05em;
+	margin-block-start: 0.2em;
+	font-size: 23px;
 `;
 
 /**
@@ -237,7 +239,7 @@ export const FadeOutDiv = styled.div`
 	position: absolute;
 	bottom: 0;
 	width: 100%;
-	height: 50px;
+	height: 25px;
 	// Gradient found at https://cssgradient.io/
 	background: linear-gradient(
 		0deg,
@@ -251,7 +253,18 @@ export const FadeOutDiv = styled.div`
  */
 export const NoticeIcon = styled.i`
 	position: absolute;
-	right: 0px;
+	right: 0;
 	top: 1px;
 	color: #ff2800;
+`;
+
+/**
+ * Holds sections of the TV view at the bottom of the screen.
+ */
+export const BottomWrap = styled.div`
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	bottom: 0;
+	width: 100%;
 `;

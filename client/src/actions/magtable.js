@@ -164,8 +164,9 @@ export const publishTable = (magtable, publishedBy) => async dispatch => {
 			return assignment;
 		});
 
-		await axios.post("/magtable", data, AXIOS_JSON_HEADER);
+		const res = await axios.post("/magtable", data, AXIOS_JSON_HEADER);
 
+		dispatch({ type: PUBLISH_TABLE, payload: res.data });
 		dispatch(setAlert("Publish Successful", "success"));
 	} catch (err) {
 		dispatch(setAlert(err.response.data.message, "warning"));

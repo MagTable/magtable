@@ -21,6 +21,8 @@ export const ListTitle = styled.div`
 	padding: 0 1rem;
 `;
 
+export const TruckMgmtTitle = styled(ListTitle)``;
+
 /**
  * The text within the ListTitle div.
  */

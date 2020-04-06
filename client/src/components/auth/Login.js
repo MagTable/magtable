@@ -47,7 +47,7 @@ const Login = () => {
 	return (
 		<>
 			<BGContainer>
-				<BlurCover blur={blur}>
+				<BlurCover blur={true}>
 					<Background />
 				</BlurCover>
 			</BGContainer>

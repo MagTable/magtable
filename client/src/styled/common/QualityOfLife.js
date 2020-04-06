@@ -28,6 +28,23 @@ export const LoadingImg = styled.i`
 	`}
 `;
 
+export const TempLoadingImg = styled.i`
+	animation: loading-spin infinite 8s linear;
+	height: fit-content;
+	width: fit-content;
+	text-align: center;
+	margin: 1.5rem;
+	-webkit-transform: scaleY(-1);
+	transform: scaleY(-1);
+
+	${({ small }) =>
+		small &&
+		`
+		font-size: 22px;
+		margin: 0;
+	`}
+`;
+
 export const SpinnerWrap = styled.div`
 	text-align: center;
 	display: flex;

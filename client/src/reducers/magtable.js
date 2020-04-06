@@ -28,7 +28,8 @@ import {
 	FETCHING_MAGTABLE_HISTORY_LIST,
 	OOS,
 	INOP,
-	CLEAR_ASSIGNMENT_SHIFTS
+	CLEAR_ASSIGNMENT_SHIFTS,
+	CLEAR_HISTORICAL_MAGTABLE
 } from "../actions/constants";
 import { ParkingZones } from "../res/test_data/magtable";
 
@@ -309,6 +310,15 @@ export default function(state = initialState, action) {
 				historical: {
 					...state.historical,
 					list: payload,
+					loading: false
+				}
+			};
+		case CLEAR_HISTORICAL_MAGTABLE:
+			return {
+				...state,
+				historical: {
+					...state.historical,
+					magtable: null,
 					loading: false
 				}
 			};

@@ -10,6 +10,7 @@ import AddEmployeeShift from "./AddEmployeeShift";
 import Modal from "../common/Modal";
 import { useSelector } from "react-redux";
 import { SYSTEM_ADMINISTRATOR } from "../../actions/constants";
+import IconButton from "../common/IconButton";
 
 /**
  * @date 3/1/2020
@@ -129,7 +130,14 @@ function OverflowEmployee({
 								}}
 							>
 								<FilterIcon className={"fas fa-sync"} />
-								Refresh
+								Refresh{" "}
+								<IconButton
+									nopad
+									toolTipSide={"right"}
+									toolTip={"This will de-sync the Employee and Truck Lists"}
+									color={"var(--context-orange)"}
+									faClassName={"fa-exclamation-triangle"}
+								/>
 							</OverflowMenuButton>
 						)}
 						<Modal show={showModal} handleClose={handleClose}>

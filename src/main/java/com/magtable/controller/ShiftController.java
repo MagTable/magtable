@@ -53,7 +53,6 @@ public class ShiftController {
      *
      * @return An OK response if pulled successfully
      */
-    //TODO Change to PUT
     @GetMapping("/update")
     @Scheduled(cron = "0 0 2 * * *")
     public ShiftList updateShifts() {
@@ -65,11 +64,7 @@ public class ShiftController {
         ShiftList shiftList = ShiftList.getInstance();
         shiftList.updateShifts((ArrayList<W2WShift>) w2wShiftRepository.findAll());
 
-        Calendar cal = Calendar.getInstance();
-        shiftList.setLastUpdated(String.format("%d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE)));
-
         return shiftList;
-
     }
 
 
