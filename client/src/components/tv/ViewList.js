@@ -41,8 +41,6 @@ function ViewList(props) {
 	let numDisabledIce = 0; // Counter to track the number of disabled de-ice trucks to maximize screen real-estate.
 	const MAX_NUM_UNASSIGNED_ICE = 6; // Determines how many disabled de-ice trucks can be displayed.
 
-	for (let i = 0; i < assignments.length; i++) {
-		if (assignments[i].equipment.id >= 1000) {
 	const selectedAssignments = historicalAssignments
 		? historicalAssignments
 		: assignments;
@@ -88,16 +86,6 @@ function ViewList(props) {
 						/>
 					)
 			)}
-			{disabledAssignments.map(
-				assignment =>
-					assignment.equipment.type === "ICE" && (
-						<ViewListItem
-							assignment={assignment}
-							assigned={false}
-							key={assignment.equipment.id}
-						/>
-					)
-			)}
 
 			<SectionTitle>Vehicle Notices</SectionTitle>
 			{notices.map(notice => (
@@ -113,16 +101,6 @@ function ViewList(props) {
 								<ViewListItem
 									assignment={assignment}
 									assigned={true}
-									key={assignment.equipment.id}
-								/>
-							)
-					)}
-					{disabledAssignments.map(
-						assignment =>
-							assignment.equipment.type === "SVV" && (
-								<ViewListItem
-									assignment={assignment}
-									assigned={false}
 									key={assignment.equipment.id}
 								/>
 							)
