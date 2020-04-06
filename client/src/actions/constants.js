@@ -559,6 +559,12 @@ export const GET_HISTORICAL_MAGTABLE = "GET_HISTORICAL_MAGTABLE";
 export const FETCHING_HISTORICAL_MAGTABLE = "FETCHING_HISTORICAL_MAGTABLE";
 
 /**
+ * To clear the historical magtable object
+ * @type {string} CLEAR_HISTORICAL_MAGTABLE
+ */
+export const CLEAR_HISTORICAL_MAGTABLE = "CLEAR_HISTORICAL_MAGTABLE";
+
+/**
  * Gets parking locations.
  * @const {string} GET_PARKING_LOCATIONS
  */

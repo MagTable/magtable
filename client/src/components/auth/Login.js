@@ -47,7 +47,7 @@ const Login = () => {
 	return (
 		<>
 			<BGContainer>
-				<BlurCover blur={blur}>
+				<BlurCover blur={true}>
 					<Background />
 				</BlurCover>
 			</BGContainer>
@@ -57,8 +57,8 @@ const Login = () => {
 				<PlaneLoader />
 				<Formik
 					initialValues={{
-						username: "",
-						password: ""
+						username: "mustafa",
+						password: "password"
 					}}
 					onSubmit={values => {
 						dispatch(login(values));

@@ -42,6 +42,7 @@ const MagtableHistorySelector = ({ handleClose }) => {
 					displayFormat={"YYYY-MM-DD"}
 					onFocusChange={({ focused }) => setFocused(focused)} // PropTypes.func.isRequired
 					id="historical_datepicker" // PropTypes.string.isRequired,
+					isOutsideRange={date => date > moment()}
 				/>{" "}
 			</label>
 			<h4>Related Records</h4>
