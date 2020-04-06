@@ -20,6 +20,7 @@ const fadeIn = keyframes`
 
 export const UserListMgmtDiv = styled.div`
 	width: 100%;
+	height: 100vh;
 `;
 
 /**
@@ -37,6 +38,7 @@ export const UserManagmentListDiv = styled.div`
 	padding: 0 1rem 2.5rem 1rem;
 	animation: 0.3s ${fadeIn} ease-out;
 	background: #f4f4f4;
+	height: 100%;
 `;
 
 export const UserListDiv = styled.div`

@@ -32,6 +32,7 @@ export const TruckManagementDiv = styled.div`
 
 export const TruckMgmtDiv = styled.div`
 	width: 100%;
+	height: 100vh;
 `;
 
 /**
