@@ -14,7 +14,6 @@ import java.util.List;
 public class ShiftList implements Serializable {
 
     private String scheduleDate;
-    private String lastUpdated;
     private List<W2WShift> shifts;
     private static ShiftList shiftList;
 
@@ -49,11 +48,4 @@ public class ShiftList implements Serializable {
         this.shifts = shifts;
     }
 
-    public String getLastUpdated() {
-        return lastUpdated;
-    }
-
-    public void setLastUpdated(String lastUpdated) {
-        this.lastUpdated = lastUpdated;
-    }
 }

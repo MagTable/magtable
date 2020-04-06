@@ -1,32 +1,29 @@
 package com.magtable.controller;
 
-import com.magtable.model.api.ExportRequest;
 import com.magtable.model.entities.BrixChartRecord;
 import com.magtable.model.entities.BrixRecord;
 import com.magtable.repository.BrixChartRepository;
 import com.magtable.repository.BrixRepository;
 import com.magtable.services.ErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
  * REST controller for BRIX routes
  *
- * @author Arran Woodruff, David Ward
+ * @author Arran Woodruff
  */
 @RestController
 @RequestMapping("/brix")
 public class BrixController {
+
+    ZoneId defaultZoneId = ZoneId.systemDefault();
 
     @Autowired
     private BrixRepository brixRepository;
@@ -77,55 +74,51 @@ public class BrixController {
         return brixChartRepository.findAll();
     }
 
+    @GetMapping(path = "/export/{from}/{to}/{id}")
+    public String exportToCSV(@PathVariable(value = "from") String from,
+                              @PathVariable(value = "to") String to,
+                              @PathVariable(value = "id") Integer equipmentID) {
 
-    /**
-     * route           POST brix/export
-     * description     method to export brix records between to dates, either all Brix records or optional by Truck
-     * access          System Admins
-     *
-     * @return A 200 containing the file if successful, a 500 if a server Error
-     */
-    @PostMapping(path = "/export", produces = "text/csv")
-    public ResponseEntity exportToCSV(@RequestBody ExportRequest exportRequest) {
+        StringBuilder records = new StringBuilder();
+        records.append("Truck Number, Nozzle, Type1, Type4, Liters Purged, Time Measured\n");
 
-        File brixCSV = new File(".\\src\\main\\resources\\res\\brix.csv");
+        LocalDate ldFrom = LocalDate.parse(from);
+        LocalDate ldTo = LocalDate.parse(to).plusDays(1);
 
-        try {
-            FileWriter fileWriter = new FileWriter(brixCSV, false);
-            BufferedWriter writer = new BufferedWriter(fileWriter);
+        Date dateFrom = Date.from(ldFrom.atStartOfDay(defaultZoneId).toInstant());
+        Date dateTo = Date.from(ldTo.atStartOfDay(defaultZoneId).toInstant());
 
-            ArrayList<BrixRecord> brixRecords;
-            if(exportRequest.getId() == null){
-                brixRecords = (ArrayList<BrixRecord>) brixRepository.findBetweenDates(exportRequest.getFrom(), exportRequest.getTo());
-            }else{
-                brixRecords = (ArrayList<BrixRecord>) brixRepository.findBetweenDatesByEquipmentID(exportRequest.getFrom(), exportRequest.getTo(), exportRequest.getId());
-            }
+        ArrayList<BrixRecord> brixRecords = (ArrayList<BrixRecord>)
+                brixRepository.findBetweenDates(
+                        dateFrom,
+                        dateTo,
+                        equipmentID);
 
+        for (BrixRecord record : brixRecords) {
+            records.append(record.toString()).append("\n");
+        }
+        return records.toString();
+    }
 
-            //Writing the Header
-            writer.write("Truck Number, Nozzle, Type1, Type4, Liters Purged, Time Measured\n");
+    @GetMapping(path = "/export/{from}/{to}")
+    public String exportToCSV(@PathVariable(value = "from") String from,
+                              @PathVariable(value = "to") String to) {
+        StringBuilder records = new StringBuilder();
+        records.append("Truck Number, Nozzle, Type1, Type4, Liters Purged, Time Measured\n");
 
-            //Writing Each record
-            for(BrixRecord record : brixRecords){
-                writer.write(record.toString());
-                writer.write("\n");
-            }
+        LocalDate ldFrom = LocalDate.parse(from);
+        LocalDate ldTo = LocalDate.parse(to).plusDays(1);
 
+        Date dateFrom = Date.from(ldFrom.atStartOfDay(defaultZoneId).toInstant());
+        Date dateTo = Date.from(ldTo.atStartOfDay(defaultZoneId).toInstant());
 
-            writer.close();
-            fileWriter.close();
-        } catch (Exception e) {
-            //return a 500 if we hit an error
-            return ResponseEntity.status(500).build();
+        ArrayList<BrixRecord> brixRecords =
+                (ArrayList<BrixRecord>) brixRepository.findBetweenDates(dateFrom, dateTo);
 
+        for (BrixRecord record : brixRecords) {
+            records.append(record.toString()).append("\n");
         }
 
-
-        //sending the file in the 200 response
-        return ResponseEntity.ok()
-                .header("Content-Disposition", "attachment; filename=brix.csv")
-                .contentLength(brixCSV.length())
-                .contentType(MediaType.parseMediaType("text/csv"))
-                .body(new FileSystemResource(brixCSV));
+        return records.toString();
     }
 }

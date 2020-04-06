@@ -7,22 +7,26 @@ import { LoginBlock, LoginBtn } from "../../styled/auth/Login";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import Input from "../common/Input";
+import {
+	Background,
+	BGContainer,
+	BlurCover
+} from "../../styled/common/TextInput";
 
 /**
+ *
+ * The Reset Password Component
+ *
  * @date 2/10/2020
- * @author Arran Woodruff
- * @module Component
- */
-
-/**
- * This component allows the user to enter a username and password and in turn makes an authorization request to the API
+ * @author Arran Woodruff, Steven Wong
+ * @name Password Reset
+ * @category Component/Auth
+ * @returns {*} The ResetPassword Component
  * @constructor
- * @returns {*} The ResetPassword component
  */
 function ResetPassword() {
 	const { isAuthenticated, loading } = useSelector(state => state.auth);
 	const authUser = useSelector(state => state.auth?.user);
-	// const authUser = { username: "username", password: "password" };
 	const dispatch = useDispatch();
 
 	const [showNewPassword, setShowNewPassword] = useState(false);
@@ -39,81 +43,89 @@ function ResetPassword() {
 	}
 
 	return (
-		<LoginBlock>
-			<Formik
-				initialValues={{
-					username: authUser.username,
-					password: authUser.password,
-					newPassword: "password",
-					confirmNewPassword: "password"
-				}}
-				onSubmit={values => {
-					dispatch(setUserPassword(values));
-				}}
-				validationSchema={Yup.object().shape({
-					newPassword: Yup.string()
-						.required("Password Required")
-						.min(8, "Minimum Length is 8"),
-					confirmNewPassword: Yup.string()
-						.min(8, "Minimum Length is 8")
-						.oneOf([Yup.ref("newPassword"), null], "Passwords Must Match")
-						.required("Password Required")
-				})}
-			>
-				{props => (
-					<Form>
-						<h2>Password Reset</h2>
-						<Input
-							label="Username"
-							name="username"
-							type="text"
-							value={props.values.username}
-							disabled
-							fit
-						/>
-						<Input
-							errors={props.errors.newPassword}
-							touched={props.touched.newPassword}
-							value={props.values.newPassword}
-							label="New Password"
-							name="newPassword"
-							type={showNewPassword ? "text" : "password"}
-							icon={{
-								action: () => setShowNewPassword(!showNewPassword),
-								iconClass: showNewPassword
-									? "fa-eye-slash fa-lg"
-									: "fa-eye fa-lg",
-								toolTip: showNewPassword ? "Hide Password" : "Show Password"
-							}}
-							fit
-						/>
-						<Input
-							errors={props.errors?.confirmNewPassword}
-							touched={props.touched?.confirmNewPassword}
-							value={props.values.confirmNewPassword}
-							label="Confirm New Password"
-							name="confirmNewPassword"
-							type={showConfirmNewPassword ? "text" : "password"}
-							icon={{
-								action: () =>
-									setShowConfirmNewPassword(!showConfirmNewPassword),
-								iconClass: showConfirmNewPassword
-									? "fa-eye-slash fa-lg"
-									: "fa-eye fa-lg",
-								toolTip: showConfirmNewPassword
-									? "Hide Password"
-									: "Show Password"
-							}}
-							fit
-						/>
+		<>
+			<BGContainer>
+				<BlurCover blur={true}>
+					<Background />
+				</BlurCover>
+			</BGContainer>
+			<LoginBlock>
+				<Formik
+					initialValues={{
+						username: authUser.username,
+						password: authUser.password,
+						newPassword: "",
+						confirmNewPassword: ""
+					}}
+					onSubmit={values => {
+						dispatch(setUserPassword(values));
+					}}
+					validationSchema={Yup.object().shape({
+						newPassword: Yup.string()
+							.required("Password Required")
+							.min(8, "Minimum Length is 8"),
+						confirmNewPassword: Yup.string()
+							.min(8, "Minimum Length is 8")
+							.oneOf([Yup.ref("newPassword"), null], "Passwords Must Match")
+							.required("Password Required")
+					})}
+					validateOnChange={true}
+				>
+					{props => (
+						<Form>
+							<h2>Password Reset</h2>
+							<Input
+								label="Username"
+								name="username"
+								type="text"
+								value={props.values.username}
+								disabled
+								fit
+							/>
+							<Input
+								errors={props.errors.newPassword}
+								value={props.values.newPassword}
+								label="New Password"
+								name="newPassword"
+								data-lpignore="true"
+								type={showNewPassword ? "text" : "password"}
+								icon={{
+									action: () => setShowNewPassword(!showNewPassword),
+									iconClass: showNewPassword
+										? "fa-eye-slash fa-lg"
+										: "fa-eye fa-lg",
+									toolTip: showNewPassword ? "Hide Password" : "Show Password"
+								}}
+								fit
+							/>
+							<Input
+								errors={props.errors?.confirmNewPassword}
+								value={props.values.confirmNewPassword}
+								label="Confirm New Password"
+								name="confirmNewPassword"
+								data-lpignore="true"
+								type={showConfirmNewPassword ? "text" : "password"}
+								icon={{
+									action: () =>
+										setShowConfirmNewPassword(!showConfirmNewPassword),
+									iconClass: showConfirmNewPassword
+										? "fa-eye-slash fa-lg"
+										: "fa-eye fa-lg",
+									toolTip: showConfirmNewPassword
+										? "Hide Password"
+										: "Show Password"
+								}}
+								fit
+							/>
 
-						<LoginBtn type="submit" disabled={loading}>
-							Reset
-						</LoginBtn>
-					</Form>
-				)}
-			</Formik>
-		</LoginBlock>
+							<LoginBtn type="submit" disabled={loading}>
+								Reset
+							</LoginBtn>
+						</Form>
+					)}
+				</Formik>
+			</LoginBlock>
+		</>
 	);
 }
 

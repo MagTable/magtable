@@ -166,109 +166,57 @@ INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (11 ,'
 INSERT INTO parkingLocation (zoneID,apron,phonetic, position, bay) values (11 ,'EDA','G', 'W', null);
 
 
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (0, 0, 0, 10, 0);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (8.5, 12.8, -5, 5, 15);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (9.9, 15.0, -6, 4, 15);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (11.2, 17.0, -7, 3, 20);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (12.4, 19.0, -8, 2, 20);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (13.6, 20.8, -9, 1, 20);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (14.7, 22.6, -10, 0, 25);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (15.7, 24.3, -11, -1, 25);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (16.7, 25.9, -12, -2, 25);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (17.6, 27.4, -13, -3, 30);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (18.5, 28.8, -14, -4, 30);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (19.3, 30.2, -15, -5, 30);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (20.1, 31.5, -16, -6, 35);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (20.8, 32.8, -17, -7, 35);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (21.5, 34.0, -18, -8, 35);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (22.2, 35.2, -19, -9, 35);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (22.9, 36.3, -20, -10, 40);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (23.5, 37.4, -21, -11, 40);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (24.1, 38.5, -22, -12, 40);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (24.7, 39.5, -23, -13, 40);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (25.2, 40.5, -24, -14, 40);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (25.8, 41.5, -25, -15, 45);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (26.3, 42.4, -26, -16, 45);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (26.8, 43.3, -27, -17, 45);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (27.3, 44.2, -28, -18, 45);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (27.8, 45.1, -29, -19, 45);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (28.3, 46.0, -30, -20, 50);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (28.8, 46.9, -31, -21, 50);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (29.2, 47.4, -32, -22, 50);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (29.7, 48.6, -33, -23, 50);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (30.1, 49.4, -34, -24, 50);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (30.5, 50.3, -35, -25, 50);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (31.0, 51.1, -36, -26, 55);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (31.4, 51.9, -37, -27, 55);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (31.8, 52.7, -38, -28, 55);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (32.2, 53.5, -39, -29, 55);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (32.6, 54.3, -40, -30, 55);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (33.1, 55.1, -41, -31, 55);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (33.4, 55.9, -42, -32, 55);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (33.8, 56.7, -43, -33, 60);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (34.2, 57.4, -44, -34, 60);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (34.6, 58.2, -45, -35, 60);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (35.0, 58.9, -46, -36, 60);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (35.3, 59.6, -47, -37, 60);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (35.7, 60.3, -48, -38, 60);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (36.0, 61.0, -49, -39, 65);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (36.3, 61.7, -50, -40, 65);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (36.6, 62.3, -51, -41, 65);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (36.9, 63.0, -52, -42, 65);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (37.2, 63.5, -53, -43, 65);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (37.5, 64.1, -54, -44, 65);
-INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix)
-values (37.7, 64.6, -55, -45, 65);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (0, 0, 0, 10, 0);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (8.5, 12.8, -5, 5, 15);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (9.9, 15.0, -6, 4, 15);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (11.2, 17.0, -7, 3, 20);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (12.4, 19.0, -8, 2, 20);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (13.6, 20.8, -9, 1, 25);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (14.7, 22.6, -10, 0, 25);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (15.7, 24.3, -11, -1, 25);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (16.7, 25.9, -12, -2, 30);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (17.6, 27.4, -13, -3, 30);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (18.5, 28.8, -14, -4, 30);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (19.3, 30.2, -15, -5, 35);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (20.1, 31.5, -16, -6, 35);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (20.8, 32.8, -17, -7, 35);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (21.5, 34.0, -18, -8, 35);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (22.2, 35.2, -19, -9, 40);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (22.9, 36.3, -20, -10, 40);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (23.5, 37.4, -21, -11, 40);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (24.1, 38.5, -22, -12, 40);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (24.7, 39.5, -23, -13, 40);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (25.2, 40.5, -24, -14, 45);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (25.8, 41.5, -25, -15, 45);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (26.3, 42.4, -26, -16, 45);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (26.8, 43.3, -27, -17, 45);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (27.3, 44.2, -28, -18, 45);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (27.8, 45.1, -29, -19, 50);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (28.3, 46.0, -30, -20, 50);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (28.8, 46.9, -31, -21, 50);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (29.2, 47.4, -32, -22, 50);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (29.7, 48.6, -33, -23, 50);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (30.1, 49.4, -34, -24, 50);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (30.5, 50.3, -35, -25, 55);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (31.0, 51.1, -36, -26, 55);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (31.4, 51.9, -37, -27, 55);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (31.8, 52.7, -38, -28, 55);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (32.2, 53.5, -39, -29, 55);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (32.6, 54.3, -40, -30, 55);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (33.1, 55.1, -41, -31, 60);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (33.4, 55.9, -42, -32, 60);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (33.8, 56.7, -43, -33, 60);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (34.2, 57.4, -44, -34, 60);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (34.6, 58.2, -45, -35, 60);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (35.0, 58.9, -46, -36, 60);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (35.3, 59.6, -47, -37, 60);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (35.7, 60.3, -48, -38, 65);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (36.0, 61.0, -49, -39, 65);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (36.3, 61.7, -50, -40, 65);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (36.6, 62.3, -51, -41, 65);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (36.9, 63.0, -52, -42, 65);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (37.2, 63.5, -53, -43, 65);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (37.5, 64.1, -54, -44, 65);
+INSERT INTO BrixChart (brix, concentration, freezepoint, lout, recommendedmix) values (37.7, 64.6, -55, -45, 65);
 
 

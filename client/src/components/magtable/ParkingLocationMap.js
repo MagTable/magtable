@@ -7,27 +7,20 @@ import {
 	NumberTop,
 	PadColumn,
 	FakePadDiv,
-	SafetyZoneWrapper,
-	MagTableManipDiv,
-	MagTableManipBtn
+	SafetyZoneWrapper
 } from "../../styled/magtable/TruckMapMedia";
 import { useSelector } from "react-redux";
 import ParkingLocation from "./ParkingLocation";
 import { CENTER, EAST, WEST } from "../../actions/constants";
-import Confirmation from "../common/Confirmation";
 import IconButton from "../common/IconButton";
 import OverflowLocations from "./OverflowLocations";
 
 /**
  * @date 2020-02-17
- * @author MJ Kochuk
- * @module Component
- */
-
-/**
- *
+ * @author MJ Kochuk, Arran Woodruff, Steven Wong
+ * @category Components/MagTable
  * @constructor
- * @param props
+ * @param props The props that are used within the component
  * @returns {*} The ParkingLocationMap component
  */
 function ParkingLocationMap(props) {

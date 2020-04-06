@@ -5,13 +5,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Repository Interface for BrixRecord
- * @author Arran Woodruff
+ * @author Arran Woodruff, David Ward
  */
 public interface BrixRepository extends JpaRepository<BrixRecord, Integer>, JpaSpecificationExecutor<BrixRecord> {
 
@@ -21,10 +20,10 @@ public interface BrixRepository extends JpaRepository<BrixRecord, Integer>, JpaS
 
     @Query(value = "SELECT * FROM brixrecord WHERE brixrecord.timemeasured >= ?1 AND brixrecord.timemeasured <= ?2",
             nativeQuery = true)
-    List<BrixRecord> findBetweenDates(Timestamp from, Timestamp too);
+    List<BrixRecord> findBetweenDates(Date from, Date to);
 
     @Query(value = "SELECT * FROM brixrecord WHERE brixrecord.timemeasured >= ?1 AND brixrecord.timemeasured <= ?2 AND brixrecord.equipmentId = ?3",
             nativeQuery = true)
-    List<BrixRecord> findBetweenDatesByEquipmentID(Timestamp from, Timestamp to, Integer equipmentId);
+    List<BrixRecord> findBetweenDates(Date from, Date to, Integer equipmentId);
 
 }

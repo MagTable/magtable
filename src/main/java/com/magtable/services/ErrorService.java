@@ -49,7 +49,7 @@ public class ErrorService {
      * @return ResponseStatusException message.
      */
     public ResponseStatusException jwtNotFound() {
-        return new ResponseStatusException(HttpStatus.BAD_REQUEST, "Authentication Failed"); //todo This might be obsolete
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, "Authentication Failed");
     }
 
     /**
@@ -195,7 +195,7 @@ public class ErrorService {
     }
 
     /**
-     *Error Service for generic errors TEMPORARY Should be used with a //todo
+     *Error Service for generic errors TEMPORARY
      *
      */
     public ResponseStatusException notYetImplemented(){

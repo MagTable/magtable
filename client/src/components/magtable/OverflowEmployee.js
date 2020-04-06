@@ -7,21 +7,31 @@ import {
 } from "../../styled/magtable/Overflow";
 import { ClickCatcher } from "../../styled/common/ClickCatcher";
 import AddEmployeeShift from "./AddEmployeeShift";
-import Modal from "../modal/Modal";
+import Modal from "../common/Modal";
 import { useSelector } from "react-redux";
 import { SYSTEM_ADMINISTRATOR } from "../../actions/constants";
+import IconButton from "../common/IconButton";
 
 /**
  * @date 3/1/2020
- * @author Tom Allcock, Arran Woodruff
- * @module Component
- */
-
-/**
- *
+ * @author Tom Allcock, Arran Woodruff, Steven Wong
+ * @category Components/MagTable
+ * @param children Children of the component.
+ * @param color Color of the Icons
+ * @param hoverColor Color when you hover over the icon
+ * @param open Open state
+ * @param setOpen Changing of the Open State
+ * @param activeFilters The currently active filters.
+ * @param filterAMEmployees AM Employees
+ * @param filterPMEmployees PM Employees
+ * @param filterTechEmployees Baylead and Technician Employees
+ * @param filterTowerEmployees Tower Employees
+ * @param filterManagementEmployees Management Employees
+ * @param filterMechanicEmployees Mechanic Employees
+ * @param filterTrainerEmployees Trainer Employees
+ * @param refreshEmployees Refresh button for Employee List
+ * @returns {*} Returns the overflow menu that is used to filter out all the specific information regarding employees and Adding Employees.
  * @constructor
- * @param props
- * @returns {*} The OverflowEmployee component
  */
 function OverflowEmployee({
 	children,
@@ -54,8 +64,8 @@ function OverflowEmployee({
 			{open && (
 				<>
 					<ClickCatcher onClick={() => setOpen(false)} />
-					<div id={"arrow"} />
 					<div id={"container"}>
+						<div id={"arrow"} />
 						<OverflowMenuButton onClick={filterAMEmployees}>
 							{activeFilters[0] ? (
 								<FilterIcon className={"fas fa-times"} color={"red"} />
@@ -120,7 +130,14 @@ function OverflowEmployee({
 								}}
 							>
 								<FilterIcon className={"fas fa-sync"} />
-								Refresh
+								Refresh{" "}
+								<IconButton
+									nopad
+									toolTipSide={"right"}
+									toolTip={"This will de-sync the Employee and Truck Lists"}
+									color={"var(--context-orange)"}
+									faClassName={"fa-exclamation-triangle"}
+								/>
 							</OverflowMenuButton>
 						)}
 						<Modal show={showModal} handleClose={handleClose}>

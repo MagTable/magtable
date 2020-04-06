@@ -1,10 +1,11 @@
 package com.magtable.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -16,12 +17,12 @@ public class MagtableRecord {
     private Integer dailyMix;
     private Integer forecastLow;
     private String publishedBy;
-    private Timestamp timePublished;
+    private Date timePublished;
     private Collection<Assignment> assignments;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "magtablerecordid", nullable = false)
+    @Column(name = "magtablerecordid")
     public Integer getId() {
         return id;
     }
@@ -60,13 +61,14 @@ public class MagtableRecord {
         this.publishedBy = publishedBy;
     }
 
-    @Basic
-    @Column(name = "timepublished", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    public Timestamp getTimePublished() {
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "timepublished")
+    public Date getTimePublished() {
         return timePublished;
     }
 
-    public void setTimePublished(Timestamp timePublished) {
+    public void setTimePublished(Date timePublished) {
         this.timePublished = timePublished;
     }
 

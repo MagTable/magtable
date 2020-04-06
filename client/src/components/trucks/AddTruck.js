@@ -13,15 +13,10 @@ import { addTruck } from "../../actions/truck";
 /**
  * @date 3/08/2020
  * @author Steven Wong
- * @module Component
- */
-
-/**
- *
- * Handles the rendering of the form to add a Truck to the current list of trucks..
- *
+ * Handles the rendering of the form to add a Truck to the current list of trucks.
+ * @category Components/Trucks
  * @constructor
- * @returns {*} The AddTruck component.
+ * @returns {*} The AddTruck form component.
  */
 
 const AddTruckForm = styled(Form)`
@@ -62,13 +57,11 @@ const SubmitDiv = styled.div`
 	grid-area: submit;
 `;
 
-const AddTruck = () => {
+function AddTruck() {
 	const dispatch = useDispatch();
 	const truckStatuses = TRUCK_STATUSES;
 	const vehicleTypes = VEHICLE_TYPES;
 
-	//todo figure out formik text area and add it in at the bottom.
-	// also change the text input field into a number one purely unless API can parse the string to an int and we can keep easy consistency
 	return (
 		<Formik
 			initialValues={{
@@ -102,19 +95,17 @@ const AddTruck = () => {
 					<Header>Add Trucks</Header>
 					<IdDiv>
 						<Input
-							errors={props.errors.id}
-							touched={props.touched.id}
 							value={props.values.id}
 							name="id"
 							type="number"
 							label="Truck ID"
 							fit
+							min={0}
+							max={999}
 						/>
 					</IdDiv>
 					<StatusDiv>
 						<SelectBox
-							errors={props.errors.status}
-							touched={props.touched.status}
 							value={props.values.status}
 							label="Truck Status"
 							name="status"
@@ -130,13 +121,7 @@ const AddTruck = () => {
 						</SelectBox>
 					</StatusDiv>
 					<TypeDiv>
-						<SelectBox
-							errors={props.errors.type}
-							touched={props.touched.type}
-							value={props.values.type}
-							label="Truck Type"
-							name="type"
-						>
+						<SelectBox value={props.values.type} label="Truck Type" name="type">
 							<option value="" />
 							{vehicleTypes.map(type => {
 								return (
@@ -162,6 +147,6 @@ const AddTruck = () => {
 			)}
 		</Formik>
 	);
-};
+}
 
 export default AddTruck;

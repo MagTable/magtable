@@ -3,63 +3,30 @@ import PropTypes from "prop-types";
 import {
 	TextInput as StyledTextInput,
 	TextInputIcon,
-	TextInputContainer
+	TextInputContainer,
+	TextInputLabel
 } from "../../styled/common/TextInput";
 import { useField } from "formik";
-import styled from "styled-components";
 
 /**
  * @date 2/28/2020
  * @author Steven Wong, Arran Woodruff, MJ Kochuk
- * @module Component
- */
-
-/**
  * Standard component for text input, has support for labels, errors, and IconButtons
- *
+ * @name Input
+ * @category Component/Common
  * @param props see PropTypes
+ * @param label Just the label for the input field.
  * @returns {*} The TextInput Component
  * @constructor
  */
 
-const StyledLabel = styled.label`
-	user-select: none;
-	position: relative;
-	float: left;
-	top 45px;
-	left: 5px;
-	color: var(--input-label);
-	cursor: text;
-	z-index: 0;
-	
-	transition: all 150ms cubic-bezier(0.4,0,0.2,1),opacity 150ms cubic-bezier(0.4,0,0.2,1);
-
-	${({ focus }) =>
-		focus &&
-		`
-			color: #28aae1;
-	`}
-	
-	${({ lifted, focus }) =>
-		(lifted || focus) &&
-		`
-			transform: scale(.75) translateY(-40px) ;
-	`}
-		
-	${({ error }) =>
-		error &&
-		`
-			color: red;
-	`}
-`;
-
 const Input = ({ label, ...props }) => {
 	const [focus, setFocus] = useState(false);
-	const [field] = useField(props);
-
+	const [field, meta] = useField(props);
 	if (props.setBlurred) {
 		props.setBlurred(focus || props.blur);
 	}
+
 	return (
 		<TextInputContainer>
 			{props.icon && (
@@ -67,24 +34,29 @@ const Input = ({ label, ...props }) => {
 					className={"fas " + props.icon?.iconClass}
 					onClick={props.icon?.action}
 					toolTip={props.icon?.toolTip}
+					hoverColor={props.icon?.hoverColor}
+					focus={focus}
+					accentColor={props?.accentColor}
 				/>
 			)}
-			<StyledLabel
-				error={props.errors && props.touched}
-				lifted={props?.value?.length > 0 || props?.value > 0}
+			<TextInputLabel
+				error={meta.error && meta.touched}
+				lifted={props.value?.toString().length > 0}
 				focus={focus}
 				htmlFor={props.id || props.name}
+				accentColor={props?.accentColor}
 			>
-				{(props.touched && props.errors) || label}
-			</StyledLabel>
+				{meta.error || label}
+			</TextInputLabel>
 			<StyledTextInput
 				{...field}
 				{...props}
 				onFocus={() => setFocus(true)}
 				onBlur={() => setFocus(false)}
+				error={meta.error && meta.touched}
 				focus={focus}
-				id={label}
 				fit={props.fit}
+				accentColor={props.accentColor}
 			/>
 		</TextInputContainer>
 	);
@@ -92,8 +64,7 @@ const Input = ({ label, ...props }) => {
 
 Input.propTypes = {
 	errors: PropTypes.string,
-	touched: PropTypes.bool,
-	value: PropTypes.string,
+	value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	icon: PropTypes.shape({
 		iconClass: PropTypes.string.isRequired,
 		action: PropTypes.func,

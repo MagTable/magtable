@@ -3,14 +3,6 @@ import PropTypes from "prop-types";
 import { useField } from "formik";
 import styled from "styled-components";
 
-//todo Who made this originally? Please replace __UNKNOWN__ with your name!!
-
-/**
- * @date 2/28/2020
- * @author Steven Wong, MJ Kochuk
- * @module Component
- */
-
 const StyledLabel = styled.label`
 	margin-top: 1rem;
 `;
@@ -22,6 +14,15 @@ const StyledTextArea = styled.textarea`
 	min-height: 200px;
 `;
 
+/**
+ * @date 2/28/2020
+ * @author Steven Wong, MJ Kochuk
+ * @category Component/Common
+ * @param label
+ * @param props
+ * @return {*}
+ * @constructor
+ */
 const TextArea = ({ label, ...props }) => {
 	const [focus, setFocus] = useState(false);
 	const [field, meta] = useField(props);

@@ -18,9 +18,24 @@ import {
 	TOGGLE_AM_PM,
 	ADD_TRUCK,
 	EDIT_TRUCK,
-	DELETE_TRUCK
+	DELETE_TRUCK,
+	SET_DAILY_MIX,
+	INCREMENT_DAILY_MIX,
+	DECREMENT_DAILY_MIX,
+	GET_HISTORICAL_MAGTABLE,
+	GET_MAGTABLE_HISTORY_LIST,
+	FETCHING_HISTORICAL_MAGTABLE,
+	FETCHING_MAGTABLE_HISTORY_LIST,
+	CLEAR_HISTORICAL_MAGTABLE
 } from "../actions/constants";
 import { ParkingZones } from "../res/test_data/magtable";
+
+/**
+ * @date 2020-03-24
+ * @author Arran Woodruff
+ * @category Redux-Reducers
+ * @module MagTable
+ */
 
 const initialState = {
 	assignments: [],
@@ -30,14 +45,23 @@ const initialState = {
 		shifts: []
 	},
 	dailyMessages: "",
-	dailyMix: 40,
+	dailyMix: null,
 	selectedApron: EAST_APRON,
 	loading: true,
 	shiftsLoading: true,
 	showAM: true,
 	parkingZones: ParkingZones,
-	parkingLocations: []
+	parkingLocations: [],
+	historical: {
+		magtable: null,
+		list: [],
+		loading: false
+	}
 };
+
+const MIX_STEP = 5;
+const MIX_MAX = 75;
+const MIX_MIN = 15;
 
 export default function(state = initialState, action) {
 	const { type, payload } = action;
@@ -101,6 +125,7 @@ export default function(state = initialState, action) {
 		case CLEAR_TABLE:
 			return {
 				...state,
+				dailyMix: null,
 				assignments: state.assignments.map(assignment => ({
 					...assignment,
 					employeeShifts: [],
@@ -110,8 +135,11 @@ export default function(state = initialState, action) {
 		case PUBLISH_TABLE:
 			return {
 				...state,
-				assignments: payload.assignments
-				// server will echo the given assignments to verify changes were made properly
+				assignments: payload.assignments,
+				timePublished: payload.timePublished,
+				publishedBy: payload.publishedBy,
+				dailyMix: payload.dailyMix,
+				loading: false
 			};
 		case REMOVE_DAILY_MESSAGE: // API request for these actions will probably just return all daily messages after addition or deletion
 		case ADD_DAILY_MESSAGE:
@@ -129,6 +157,7 @@ export default function(state = initialState, action) {
 				...state,
 				employeeShifts: payload.employeeShifts,
 				assignments: payload.magtable.assignments,
+				publishedBy: payload.magtable.publishedBy,
 				timePublished: payload.magtable.timePublished,
 				dailyMix: payload.magtable.dailyMix,
 				loading: false,
@@ -204,6 +233,70 @@ export default function(state = initialState, action) {
 					truck => truck.equipment.id !== payload
 				),
 				loading: false
+			};
+		case SET_DAILY_MIX:
+			return {
+				...state,
+				dailyMix: payload
+			};
+		case INCREMENT_DAILY_MIX:
+			if (state.dailyMix + MIX_STEP > MIX_MAX) return state;
+
+			return {
+				...state,
+				dailyMix: state.dailyMix + MIX_STEP
+			};
+		case DECREMENT_DAILY_MIX:
+			if (state.dailyMix - MIX_STEP < MIX_MIN) return state;
+
+			return {
+				...state,
+				dailyMix: state.dailyMix - MIX_STEP
+			};
+		case FETCHING_HISTORICAL_MAGTABLE:
+			return {
+				...state,
+				historical: {
+					...state.historical,
+					magtable: null,
+					loading: true
+				}
+			};
+		case GET_HISTORICAL_MAGTABLE:
+			return {
+				...state,
+				historical: {
+					...state.historical,
+					magtable: payload,
+					loading: false
+				}
+			};
+		case FETCHING_MAGTABLE_HISTORY_LIST:
+			return {
+				...state,
+				historical: {
+					...state.historical,
+					list: [],
+					loading: true
+				}
+			};
+		case GET_MAGTABLE_HISTORY_LIST:
+			return {
+				...state,
+				historical: {
+					...state.historical,
+					list: payload,
+					loading: false
+				}
+			};
+		case CLEAR_HISTORICAL_MAGTABLE:
+			return {
+				...state,
+				historical: {
+					...state.historical,
+					magtable: null,
+					loading: false
+				}
 			};
 		default:
 			return state;

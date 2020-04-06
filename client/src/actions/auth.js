@@ -19,6 +19,13 @@ import { setAlert } from "./alert";
 import { getBrixChart, getWeather } from "./brix";
 import { getMagTable, getParkingLocations } from "./magtable";
 
+/**
+ * @date 2020-03-24
+ * @author Arran Woodruff, Steven Wong
+ * @category Redux-Actions
+ * @module Auth
+ */
+
 window.addEventListener("storage", e => {
 	// whenever our token changes, log the user out.
 	if (e.key === "token" && e.oldValue && !e.newValue) {
@@ -26,7 +33,12 @@ window.addEventListener("storage", e => {
 	}
 });
 
-// get the JWT's corresponding user object
+/**
+ * Gets the JWT's corresponding user object.
+ *
+ * @method loadUser
+ * @returns The user that is logged in.
+ */
 export const loadUser = () => async dispatch => {
 	// if there is a token in local storage, assign it to axios's common variables
 	if (localStorage.token) {
@@ -58,7 +70,15 @@ export const loadUser = () => async dispatch => {
 	}
 };
 
-// login user
+/**
+ *
+ * The login action of the application. Requires a username and password within the system in order to enter.
+ *
+ * @method login
+ * @param {string} username The users username.
+ * @param {string} password The users password.
+ * @returns The loadUser action as long as the login passes validation.
+ */
 export const login = ({ username, password }) => async dispatch => {
 	try {
 		dispatch({
@@ -83,7 +103,11 @@ export const login = ({ username, password }) => async dispatch => {
 			dispatch(loadUser());
 		}, 750);
 	} catch (err) {
-		dispatch(setAlert(err.response?.data?.message, "danger"));
+		if (err.response.status === 303) {
+			dispatch(setAlert(err.response?.data?.message, "info"));
+		} else {
+			dispatch(setAlert(err.response?.data?.message, "danger"));
+		}
 
 		// send the login error to redux state to allow other components to see what the error was and react accordingly
 		const { status, message } = err.response?.data;
@@ -95,6 +119,16 @@ export const login = ({ username, password }) => async dispatch => {
 	}
 };
 
+/**
+ *
+ * This sets the users new password to whatever they choose to set.
+ *
+ * @method setUserPassword
+ * @param username The users username.
+ * @param password The temporary password of the user.
+ * @param newPassword The new password that the user sets.
+ * @returns The loadUser action as long as setting the new password is successful.
+ */
 export const setUserPassword = ({
 	username,
 	password,
@@ -125,18 +159,35 @@ export const setUserPassword = ({
 	}
 };
 
+/**
+ *
+ * Clears the authentication error.
+ *
+ * @method clearSAuthError
+ * @returns Clears Authentication Errors
+ */
 export const clearAuthError = () => dispatch => {
 	dispatch({
 		type: CLEAR_ERROR
 	});
 };
 
-// logout / clear profile
+/**
+ * Logs the user out of the system.
+ *
+ * @method logout
+ * @returns Logging out of the system.
+ */
 export const logout = () => dispatch => {
 	dispatch({ type: LOGOUT });
 };
 
-// set auth token for common axios parameters, this will be added to all requests
+/**
+ * Set auth token for common axios parameters, this will be added to all requests
+ *
+ * @method setAuthToken
+ * @param {string} token The auth token.
+ */
 const setAuthToken = token => {
 	// set axios' common header attribute to the given token if it exists, otherwise delete the attribute
 	if (token) {

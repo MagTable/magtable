@@ -1,12 +1,18 @@
 import styled from "styled-components";
 
+/**
+ * @date 3/24/2020
+ * @author Arran Woodruff
+ * @category Styled Components
+ * @module Common
+ */
+
 export const AlertDiv = styled.div`
 	position: fixed;
-	top: 10px;
+	top: 4rem;
 	left: 50%;
 	width: auto;
 
-	z-index: 100;
 	transform: translateX(-50%);
 
 	padding: 1rem;
@@ -17,17 +23,18 @@ export const AlertDiv = styled.div`
 export const Alert = styled.div`
 	background: white;
 	color: black;
-	border-radius: 5px;
 	padding: 0.75rem;
 	margin-bottom: 0.5rem;
 
-	border-width: 1px 3px 1px 3px;
+	border-width: 3px 3px 3px 3px;
 	border-style: solid;
-	border-radius: 0.25rem;
+	border-radius: 0.45rem;
 
 	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.06), 0 0 6px rgba(0, 0, 0, 0.23);
 
-	font-size: 1rem;
+	font-family: "Noto Sans KR", sans-serif;
+	font-size: 1.3rem;
+	font-weight: bold;
 
 	::before {
 		font-size: 1.25rem;

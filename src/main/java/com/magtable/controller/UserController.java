@@ -90,7 +90,7 @@ public class UserController {
     public User createUser(@RequestBody User user) {
         // current cannot catch the error for when user.userId is a string, it occurs during the JSON -> Java translation
         new ValidationService<>("User", user).exists();
-        new ValidationService<>("Username", user.getUsername()).exists().isString().isMinLengthString(5); // TODO discuss username min length
+        new ValidationService<>("Username", user.getUsername()).exists().isString().isMinLengthString(5);
         new ValidationService<>("UserId", user.getId()).notExists();
 
         Role role;

@@ -4,10 +4,6 @@ import {
 	SET_TRUCK_LOCATION,
 	REMOVE_TRUCK_LOCATION,
 	PUBLISH_TABLE,
-	// SET_DAILY_MIX,
-	// ADD_DAILY_MESSAGE,
-	// REMOVE_DAILY_MESSAGE,
-	// TOGGLE_BAY_LEAD,
 	AXIOS_JSON_HEADER,
 	SET_SELECTED_APRON,
 	GET_ASSIGNMENT_DATA,
@@ -16,13 +12,34 @@ import {
 	REFRESHING_EMPLOYEE_SHIFTS,
 	TOGGLE_AM_PM,
 	CLEAR_TABLE,
-	GET_PARKING_LOCATIONS
+	GET_PARKING_LOCATIONS,
+	SET_DAILY_MIX,
+	INCREMENT_DAILY_MIX,
+	DECREMENT_DAILY_MIX,
+	FETCHING_MAGTABLE_HISTORY_LIST,
+	GET_MAGTABLE_HISTORY_LIST,
+	FETCHING_HISTORICAL_MAGTABLE,
+	GET_HISTORICAL_MAGTABLE,
+	CLEAR_HISTORICAL_MAGTABLE
 } from "./constants";
 import axios from "axios";
 import { setAlert } from "./alert";
 import { logout } from "./auth";
 import store from "../store";
 
+/**
+ * @date 2020-03-24
+ * @author Arran Woodruff, Steven Wong
+ * @category Redux-Actions
+ * @module MagTable
+ */
+
+/**
+ * Toggles whether it is AM or PM.
+ *
+ * @method toggleAM
+ * @returns AM or PM.
+ */
 export const toggleAM = () => dispatch => {
 	dispatch({
 		type: TOGGLE_AM_PM
@@ -32,7 +49,9 @@ export const toggleAM = () => dispatch => {
 /**
  * Removes parkingLocation for a particular truck
  *
- * @param equipmentID id of equipment to remove location data from
+ * @method removeTruckLocation
+ * @param {integer} equipmentID id of equipment to remove location data from
+ * @return Returns the equipmentID to be removed.
  */
 export const removeTruckLocation = equipmentID => dispatch => {
 	dispatch({
@@ -44,10 +63,12 @@ export const removeTruckLocation = equipmentID => dispatch => {
 /**
  * Sets the associated equipment's assignment parkingLocation
  *
- * @param equipmentID equipmentID of equipment to set location
- * @param parkingLocation parkingLocation to give to equipment
- * @param position position of truck within location
- * @param bay bay to assign to truck
+ * @method setTruckLocation
+ * @param {number} equipmentID EquipmentID of equipment to set location
+ * @param {object} parkingLocation ParkingLocation to give to equipment
+ * @param {string} position Position of truck within location
+ * @param {integer} bay Bay to assign to truck
+ * @return Sets the associated equipment assignments parkingLocation.
  */
 export const setTruckLocation = (
 	parkingLocation,
@@ -95,8 +116,10 @@ export const setTruckLocation = (
 /**
  * Removes an employeeShift from associated equipment's assignment
  *
- * @param equipmentID id of equipment to remove employeeShift from
- * @param shiftID shiftID of shift to remove from equipment
+ * @method removeEquipmentEmployee
+ * @param {number} equipmentID id of equipment to remove employeeShift from
+ * @param {number} shiftID shiftID of shift to remove from equipment
+ * @return Removes the employeeShift from the associated equipment's assignment.
  */
 export const removeEquipmentEmployee = (equipmentID, shiftID) => dispatch => {
 	dispatch({
@@ -108,8 +131,10 @@ export const removeEquipmentEmployee = (equipmentID, shiftID) => dispatch => {
 /**
  * Sets an employeeShift to a given equipment's employeeShift's index
  *
- * @param equipmentID equipmentID of equipment assignment to modify
- * @param shift shift to add to assignment employeeShifts
+ * @method setEquipmentEmployee
+ * @param {number} equipmentID equipmentID of equipment assignment to modify
+ * @param {number} shift shift to add to assignment employeeShifts
+ * @return Sets an employeeShift to a given equipment's employeeShift's index
  */
 export const setEquipmentEmployee = (equipmentID, shift) => dispatch => {
 	dispatch({
@@ -121,8 +146,9 @@ export const setEquipmentEmployee = (equipmentID, shift) => dispatch => {
 /**
  * Sends the current state of the magtable to the API for persistence
  *
- * @param magtable magtable to publish
- * @param publishedBy username of logged in user who called publish function
+ * @method publishTable
+ * @param {object} magtable MagTable to publish
+ * @param {string} publishedBy Username of logged in user who called publish function
  * @returns API returns the saved state of the magtable
  */
 export const publishTable = (magtable, publishedBy) => async dispatch => {
@@ -139,70 +165,44 @@ export const publishTable = (magtable, publishedBy) => async dispatch => {
 
 		const res = await axios.post("/magtable", data, AXIOS_JSON_HEADER);
 
-		dispatch({
-			type: PUBLISH_TABLE,
-			payload: res.data
-		});
-
+		dispatch({ type: PUBLISH_TABLE, payload: res.data });
 		dispatch(setAlert("Publish Successful", "success"));
 	} catch (err) {
 		dispatch(setAlert(err.response.data.message, "warning"));
-		console.log(err);
 	}
 };
 
-export const clearTable = () => dispatch => {
+export const updateTable = magtable => async dispatch => {
 	dispatch({
-		type: CLEAR_TABLE
+		type: PUBLISH_TABLE,
+		payload: magtable
 	});
 };
 
 /**
- * Adds a daily message to the magtable
+ * Clears the MagTable of everything that is associated with it, from assignments to parking locations.
  *
- * @param message message to add to the magtable
- * @returns API returns the updated list of daily messages
+ * @method clearTable
+ * @return A MagTable cleared of everything.
  */
-// const addDailyMessage = message => async dispatch => {
-// 	try {
-// 		const res = await axios.put(
-// 			"/magtable/message/",
-// 			AXIOS_JSON_HEADER,
-// 			message
-// 		);
-//
-// 		dispatch({
-// 			type: ADD_DAILY_MESSAGE,
-// 			payload: res.data
-// 		});
-// 	} catch (err) {
-// 		console.log(err);
-// 	}
-// };
+export const clearTable = () => dispatch => {
+	try {
+		dispatch({
+			type: CLEAR_TABLE
+		});
 
-/**
- * Removes a message from the daily message list
- *
- * @param messageID messageID of the messaged to remove
- * @returns API returns the updated list of daily messages
- */
-// const removeDailyMessage = messageID => async dispatch => {
-// 	try {
-// 		const res = await axios.delete(`/magtable/message/${messageID}`);
-//
-// 		dispatch({
-// 			type: REMOVE_DAILY_MESSAGE,
-// 			payload: res.data
-// 		});
-// 	} catch (err) {
-// 		console.log(err);
-// 	}
-// };
+		dispatch(setAlert("Table Cleared Successful", "success"));
+	} catch (err) {
+		dispatch(setAlert(err.response.data.message, "warning"));
+	}
+};
 
 /**
  * Changes the selected apron
  *
- * @param apronCode apronCode to change to
+ * @method setSelectedApron
+ * @param {string} apronCode apronCode to change to
+ * @return The apronCode to be changed to.
  */
 export const setSelectedApron = apronCode => dispatch => {
 	dispatch({
@@ -214,6 +214,7 @@ export const setSelectedApron = apronCode => dispatch => {
 /**
  * Gets the current state of the magtable from API
  *
+ * @method getMagTable
  * @returns API returns the entire magtable object
  */
 export const getMagTable = () => async dispatch => {
@@ -240,6 +241,12 @@ export const getMagTable = () => async dispatch => {
 	}
 };
 
+/**
+ * Gets the parkingLocations from the API
+ *
+ * @method getParkingLocations
+ * @return API returns all the parkingLocations
+ */
 export const getParkingLocations = () => async dispatch => {
 	try {
 		const res = await axios.get("/magtable/parkingLocation/all");
@@ -254,7 +261,8 @@ export const getParkingLocations = () => async dispatch => {
 /**
  * Adds a shift to the current employeeShifts list
  *
- * @param shiftData
+ * @method addEmployeeShift
+ * @param {object} shiftData The shiftData from adding an employee to the employeeShifts list
  * @returns API returns the updated list of employee shifts
  */
 export const addEmployeeShift = shiftData => async dispatch => {
@@ -270,22 +278,16 @@ export const addEmployeeShift = shiftData => async dispatch => {
 			setAlert(`Employee "${shiftData.name}" Added Successfully.`, "success")
 		);
 	} catch (err) {
-		console.log(err);
+		dispatch(setAlert(err.response.data.message, "warning"));
 	}
 };
 
-/*
- * Toggles bay lead status of an assignment
+/**
+ * Refreshes the employee shifts.
  *
- * @param equipmentID equipmentID of assignment to toggle
+ * @method refreshEmployeeShifts
+ * @return API returns a refreshed version of the employee shifts.
  */
-// const toggleBayLead = equipmentID => dispatch => {
-// 	dispatch({
-// 		type: TOGGLE_BAY_LEAD,
-// 		payload: equipmentID
-// 	});
-// };
-
 export const refreshEmployeeShifts = () => async dispatch => {
 	try {
 		dispatch({
@@ -309,6 +311,141 @@ export const refreshEmployeeShifts = () => async dispatch => {
 			dispatch(logout());
 			dispatch(setAlert("Session Expired", "warning"));
 		}
-		console.log(err);
 	}
 };
+
+/**
+ * Sets the daily mix to a given percentage
+ *
+ * @method setDailyMix
+ * @param {integer} dailyMix dailyMix to set
+ * @return Sets the daily mix for the day.
+ */
+export const setDailyMix = dailyMix => dispatch => {
+	dispatch({
+		type: SET_DAILY_MIX,
+		payload: dailyMix
+	});
+};
+
+/**
+ *
+ * Increments the daily mix.
+ *
+ * @method incrementDailyMix
+ * @return Increments the daily mix volumes for the day.
+ */
+export const incrementDailyMix = () => dispatch => {
+	dispatch({
+		type: INCREMENT_DAILY_MIX
+	});
+};
+
+/**
+ *
+ * Decrements the daily mix.
+ *
+ * @method decrementDailyMix
+ * @return Decrements the daily mix volumes for the day.
+ */
+export const decrementDailyMix = () => dispatch => {
+	dispatch({
+		type: DECREMENT_DAILY_MIX
+	});
+};
+
+/**
+ * Fetches list of magtable records from the API that were published on a given date
+ *
+ * @param date date of related magtable records to fetch
+ * @returns list of historical magtable records
+ */
+export const getMagtableHistoryList = date => async dispatch => {
+	try {
+		dispatch({
+			type: FETCHING_MAGTABLE_HISTORY_LIST
+		});
+
+		const res = await axios.get(`/magtable/list/${date}`);
+
+		setTimeout(() => {
+			dispatch({
+				type: GET_MAGTABLE_HISTORY_LIST,
+				payload: res.data
+			});
+		}, 500);
+	} catch (err) {
+		console.error(err);
+	}
+};
+
+/**
+ * Fetches singular historical magtable record by ID
+ *
+ * @param id id of historical magtable record
+ * @returns magtablerecord with given id
+ */
+export const getHistoricalMagtableRecord = id => async dispatch => {
+	try {
+		dispatch({ type: FETCHING_HISTORICAL_MAGTABLE });
+
+		const res = await axios.get(`/magtable/${id}`);
+
+		dispatch({
+			type: GET_HISTORICAL_MAGTABLE,
+			payload: res.data
+		});
+	} catch (err) {
+		console.error(err);
+	}
+};
+
+export const clearHistoricalMagtable = () => dispatch => {
+	dispatch({
+		type: CLEAR_HISTORICAL_MAGTABLE
+	});
+};
+
+/**
+ * Adds a daily message to the magtable
+ *
+ * @method addDailyMessage
+ * @param {object} message message to add to the magtable
+ * @returns API returns the updated list of daily messages
+ */
+// const addDailyMessage = message => async dispatch => {
+// 	try {
+// 		const res = await axios.put(
+// 			"/magtable/message/",
+// 			AXIOS_JSON_HEADER,
+// 			message
+// 		);
+//
+// 		dispatch({
+// 			type: ADD_DAILY_MESSAGE,
+// 			payload: res.data
+// 		});
+// 	} catch (err) {
+// 		console.log(err);
+// 	}
+// };
+
+/**
+ * Removes a message from the daily message list
+ *
+ * @method removeDailyMessage
+ * @param {integer} messageID messageID of the messaged to remove
+ * @returns API returns the updated list of daily messages
+ */
+// const removeDailyMessage = messageID => async dispatch => {
+// 	try {
+// 		const res = await axios.delete(`/magtable/message/${messageID}`);
+//
+// 		dispatch({
+// 			type: REMOVE_DAILY_MESSAGE,
+// 			payload: res.data
+// 		});
+// 	} catch (err) {
+// 		console.log(err);
+// 	}
+// };

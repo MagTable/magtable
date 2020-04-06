@@ -1,81 +1,25 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useField } from "formik";
-import styled from "styled-components";
+import {
+	SelectContainer,
+	StyledLabel,
+	StyledSelect
+} from "../../styled/common/SelectBox";
 
 /**
  * @date 2/28/2020
  * @author Steven Wong, Arran Woodruff, MJ Kochuk
- * @module Component
+ * @name SelectBox
+ * @category Component/Common
+ * @param label The label for the Select Box
+ * @param props The props that will be used to do various things like error, lifted etc...
+ * @returns {*} Styled select box with options to be used.
+ * @constructor
  */
-
-const StyledLabel = styled.label`
-	user-select: none;
-	position: relative;
-	float: left;
-	top 30px;
-	// left: 5px;
-	color: var(--input-label);
-	cursor: text;
-	z-index: 0;
-	
-	transition: all 150ms cubic-bezier(0.4,0,0.2,1),opacity 150ms cubic-bezier(0.4,0,0.2,1);
-
-	${({ focus }) =>
-		focus &&
-		`
-			color: #28aae1;
-	`}
-	
-	${({ lifted, focus }) =>
-		(lifted || focus) &&
-		`
-			transform: scale(.75) translateY(-40px) ;
-	`}
-		
-	${({ error }) =>
-		error &&
-		`
-			color: red;
-	`}
-`;
-
-const StyledSelect = styled.select`
-	user-select: none;
-	position: relative;
-	display: block;
-	width: 100%;
-	border: 0;
-	border-bottom: 2px solid black;
-	font-family: "Nanum Gothic", sans-serif;
-	background: transparent;
-	padding: 7px;
-
-	font-size: 20px;
-	option {
-		font-size: 14px;
-	}
-
-	${({ focus }) =>
-		focus &&
-		` 
-			border-color: #28aae1;
-	`}
-	${({ error }) =>
-		error &&
-		`
-			border-color: var(--context-red);
-	`}
-`;
-
-const SelectContainer = styled.div`
-	position: relative;
-	width: -webkit-fill-available;
-`;
-
 const SelectBox = ({ label, ...props }) => {
 	const [focus, setFocus] = useState(false);
-	const [field] = useField(props);
+	const [field, meta] = useField(props);
 
 	field.onBlur = () => {
 		setFocus(false);
@@ -87,15 +31,15 @@ const SelectBox = ({ label, ...props }) => {
 	return (
 		<SelectContainer>
 			<StyledLabel
-				error={props.errors && props.touched}
+				error={meta.error && meta.touched}
 				lifted={props?.value?.length > 0}
 				focus={focus}
 				htmlFor={props.id || props.name}
 			>
-				{(props.touched && props.errors) || label}
+				{meta.error || label}
 			</StyledLabel>
 			<StyledSelect
-				error={props.errors && props.touched}
+				error={meta.error && meta.touched}
 				focus={focus}
 				{...field}
 				{...props}

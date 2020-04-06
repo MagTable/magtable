@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+/**
+ * @date 2020-03-24
+ * @author Arran Woodruff
+ * @category Styled Components
+ * @module Common
+ */
+
 export const Table = styled.table`
 	border-spacing: 0;
 	border-collapse: collapse;
@@ -26,6 +33,9 @@ export const Th = styled.th`
 `;
 
 export const Tr = styled.tr`
+	:hover {
+		background: var(--context-grey-light);
+	}
 	:not(:last-child) {
 		border-bottom: 1px solid var(--border-color-light);
 	}

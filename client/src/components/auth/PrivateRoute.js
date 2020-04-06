@@ -11,19 +11,19 @@ import {
 import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
 
 /**
- * @date 2/10/2020
- * @author Arran Woodruff
- * @module Component
- */
-
-/**
  *
- * @param Component the component to render in the private route
- * @param data additional props to pass to given component
- * @param adminRoute boolean representing if this route should only be accessible by admins
- * @param personnelManagerRoute boolean representing if this route should only be accessible by personnel managers
- * @param rest contains the rest of the props built into <Route>
- * @returns {*} The PrivateRoute Component
+ * The Private Routes Component.
+ *
+ * @date 2/10/2020
+ * @author Arran Woodruff, Steven Wong
+ * @name PrivateRoute
+ * @category Component/Auth
+ * @param Component The Component to return
+ * @param data The Component data
+ * @param adminRoute The route for only admins
+ * @param personnelManagerRoute The route for only Personnel Managers
+ * @param rest whatever this this is
+ * @returns {*} The Private Route Component
  * @constructor
  */
 const PrivateRoute = ({
@@ -41,7 +41,7 @@ const PrivateRoute = ({
 	if (loading)
 		return (
 			<SpinnerWrap fullPage>
-				<LoadingImg className="fas fa-circle-notch" />
+				<LoadingImg className="fas fa-circle-notch fa-2x" />
 			</SpinnerWrap>
 		);
 
@@ -69,7 +69,6 @@ const PrivateRoute = ({
 		return <Redirect to="/login" />;
 	}
 
-	// this is pretty complicated, ask Arran for a walkthrough
 	return (
 		<Route
 			{...rest}

@@ -56,10 +56,14 @@ CREATE TABLE BrixRecord
     type1               FLOAT(3),
     type4               FLOAT(3),
     litersPurged        INT(5),
-    timeMeasured        DATETIME,
+    timeMeasured        TIMESTAMP,
+    employee            VARCHAR(50),
     PRIMARY KEY (BrixRecordID),
     CONSTRAINT FK_BrixRecord_Assignment FOREIGN KEY (equipmentID) REFERENCES Equipment (equipmentID) ON DELETE RESTRICT ON UPDATE RESTRICT,
     CONSTRAINT CK_equipment_truck CHECK (equipmentID >= 0 AND equipmentID <= 1000), -- must be a truck
+    CONSTRAINT CK_type1_range CHECK (type1 >= 50.5 AND type1 <= 53.5), -- business rules
+    CONSTRAINT CK_type4_range CHECK (type4 >= 30.5 AND type4 <= 33.5), -- ..
+    CONSTRAINT CK_nozzle_range CHECK (nozzle >= 9.9 AND nozzle <= 37.7), -- ..
     CONSTRAINT CK_litersPurged CHECK (litersPurged >= 0 AND litersPurged <= 1000)
 );
 

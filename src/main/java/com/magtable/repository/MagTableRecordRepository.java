@@ -5,12 +5,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Repository Interface for MagTableRecord
+ *
  * @author David Ward
  */
 public interface MagTableRecordRepository extends JpaRepository<MagtableRecord, Integer>, JpaSpecificationExecutor<MagtableRecord> {
@@ -19,8 +19,10 @@ public interface MagTableRecordRepository extends JpaRepository<MagtableRecord, 
             nativeQuery = true)
     MagtableRecord findMostRecent();
 
+    @Query(value = "SELECT * FROM MAGTABLERECORD WHERE timepublished >= ?1 AND timepublished < (?1 + INTERVAL 1 DAY) " +
+            "and magtableRecordID != (select max(magtableRecordID) from magtablerecord)",
+            nativeQuery = true)
+    List<MagtableRecord> findAllByDate(Date date);
 
-    @Query(value = "SELECT * FROM MAGTABLERECORD WHERE magtablerecord.timePublished = ?1",
-    nativeQuery = true)
-    List<MagtableRecord> findAllByDate(Timestamp date);
+
 }

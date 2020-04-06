@@ -49,10 +49,6 @@ import IconButton from "../common/IconButton";
 /**
  * @date 2020-02-17
  * @author MJ Kochuk, Steven Wong, Arran Woodruff
- * @module Component
- */
-
-/**
  * Displays the content of a Truck's assignment.
  *
  * Truck's assignment status is displayed as a color within TruckNumberDiv as a prop
@@ -64,7 +60,7 @@ import IconButton from "../common/IconButton";
  *
  * Logic is written to determine whether incoming shifts are allowed, provide
  * a warning, or are permitted
- *
+ * @category Components/MagTable
  * @constructor
  * @param assignment the associated assignment object
  * @param noticeOpen dictates whether or not to render the truck's notices
@@ -336,7 +332,7 @@ function TruckListItem({ assignment, noticeOpen, showAM, openBrixModal }) {
 	const currentSecondary = showAM ? amSecondary : pmSecondary;
 
 	const handleBrixClick = () => {
-		dispatch(getBrixRecords(assignment.equipment.id));
+		dispatch(getBrixRecords(assignment.equipment.id, currentPrimary?.name));
 
 		openBrixModal();
 	};
@@ -353,11 +349,14 @@ function TruckListItem({ assignment, noticeOpen, showAM, openBrixModal }) {
 					onClick={e => handleToggleLocalNotice(e)}
 				>
 					{assignment.equipment.id}
-					<BrixButton
-						onClick={handleBrixClick}
-						disabled={!equipmentOperable}
-						className={"fas fa-eye-dropper"}
-					/>
+					{/* only render brix button if function exists */}
+					{openBrixModal && (
+						<BrixButton
+							onClick={handleBrixClick}
+							disabled={!equipmentOperable}
+							className={"fas fa-eye-dropper"}
+						/>
+					)}
 					{assignment.equipment.notice && (
 						<TruckNoticeIndicator
 							active={localNoticeOpen}

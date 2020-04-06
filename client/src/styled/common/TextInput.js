@@ -2,16 +2,23 @@ import styled from "styled-components";
 import { Input } from "./FormControl";
 import PlaneBG from "../../res/Images/Plane_BG.jpg";
 
+/**
+ * @date 2020-03-24
+ * @author Arran Woodruff
+ * @category Styled Components
+ * @module Common
+ */
+
 export const BlurCover = styled.div`
 	background-color: rgba(255, 255, 255, 0.15);
+	height: 120%;
+	width: 120%;
+	transition: 0.5s ease-in-out;
 	${({ blur }) =>
 		blur &&
 		` 
 		filter: blur(5px);
 	`}
-	height: 120%;
-	width: 120%;
-	transition: 0.5s ease-in-out;
 `;
 
 export const Background = styled.div`
@@ -39,6 +46,12 @@ export const TextInputContainer = styled.div`
 export const TextInput = styled(Input)`
 	margin-top: 20px;
 	background: transparent;
+	
+	::-webkit-outer-spin-button,
+	::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+  		margin: 0;
+  	}
 
 	padding: 7px;
 
@@ -66,6 +79,11 @@ export const TextInput = styled(Input)`
 		`
 			border-bottom: 2px solid red;
 	`}
+	
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+  	
+	}
 `;
 
 /**
@@ -76,8 +94,8 @@ export const TextInputIcon = styled.i`
 	cursor: pointer;
 	position: absolute;
 	z-index: 3;
+	top: calc(100% - 30px);
 	width: 30px;
-	top: calc(100% - 25px);
 	right: 0;
 	user-select: none;
 	transition: color 0.3s ease-in-out;
@@ -87,6 +105,20 @@ export const TextInputIcon = styled.i`
 		`
 			color: ${accentColor || ``};
 	`}
+	
+	${({ color }) =>
+		color &&
+		`
+		color: ${color};
+	`}
+
+	${({ hoverColor }) =>
+		hoverColor &&
+		`
+		:hover {
+			color: ${hoverColor};
+		}
+	`}
 `;
 
 export const TextInputLabel = styled.label`
@@ -95,14 +127,13 @@ export const TextInputLabel = styled.label`
 	top: 30px;
 	left: 5px;
 	
+	cursor: text;
+	z-index: 0;
+	transition: all 150ms cubic-bezier(0.4,0,0.2,1),opacity 150ms cubic-bezier(0.4,0,0.2,1);
+		
 	${({ accentColor }) =>
 		accentColor ? `color: ${accentColor};` : `color: var(--input-label);`}
 	
-	cursor: text;
-	z-index: 0;
-	
-	transition: all 150ms cubic-bezier(0.4,0,0.2,1),opacity 150ms cubic-bezier(0.4,0,0.2,1);
-
 	${({ focus, accentColor }) =>
 		focus &&
 		`
@@ -112,7 +143,8 @@ export const TextInputLabel = styled.label`
 	${({ lifted, focus }) =>
 		(lifted || focus) &&
 		`
-			transform: scale(.75) translateY(-32px);
+			transform: translateY(-25px);
+			font-size: 0.75rem;
 	`}
 		
 	${({ error }) =>
