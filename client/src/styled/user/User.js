@@ -20,6 +20,7 @@ const fadeIn = keyframes`
 
 export const UserListMgmtDiv = styled.div`
 	width: 100%;
+	height: 100vh;
 `;
 
 /**
@@ -34,14 +35,18 @@ export const UserManagmentListDiv = styled.div`
 	overflow: auto;
 	width: auto;
 	max-height: calc(100vh - 120px);
-	padding: 1rem 2.5rem;
+	padding: 0 1rem 2.5rem 1rem;
 	animation: 0.3s ${fadeIn} ease-out;
+	background: #f4f4f4;
+	height: 100%;
 `;
 
 export const UserListDiv = styled.div`
 	margin: auto;
 	width: 40vw;
-	padding-bottom: 2rem;
+	padding: 0 4rem 2rem 2rem;
+	background: white;
+	box-shadow: 0px 0px 44px 0px rgba(0, 0, 0, 0.75);
 `;
 
 export const UserListSection = styled.div`

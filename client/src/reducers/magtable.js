@@ -25,7 +25,8 @@ import {
 	GET_HISTORICAL_MAGTABLE,
 	GET_MAGTABLE_HISTORY_LIST,
 	FETCHING_HISTORICAL_MAGTABLE,
-	FETCHING_MAGTABLE_HISTORY_LIST
+	FETCHING_MAGTABLE_HISTORY_LIST,
+	CLEAR_HISTORICAL_MAGTABLE
 } from "../actions/constants";
 import { ParkingZones } from "../res/test_data/magtable";
 
@@ -285,6 +286,15 @@ export default function(state = initialState, action) {
 				historical: {
 					...state.historical,
 					list: payload,
+					loading: false
+				}
+			};
+		case CLEAR_HISTORICAL_MAGTABLE:
+			return {
+				...state,
+				historical: {
+					...state.historical,
+					magtable: null,
 					loading: false
 				}
 			};

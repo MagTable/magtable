@@ -19,7 +19,8 @@ import {
 	FETCHING_MAGTABLE_HISTORY_LIST,
 	GET_MAGTABLE_HISTORY_LIST,
 	FETCHING_HISTORICAL_MAGTABLE,
-	GET_HISTORICAL_MAGTABLE
+	GET_HISTORICAL_MAGTABLE,
+	CLEAR_HISTORICAL_MAGTABLE
 } from "./constants";
 import axios from "axios";
 import { setAlert } from "./alert";
@@ -162,8 +163,9 @@ export const publishTable = (magtable, publishedBy) => async dispatch => {
 			return assignment;
 		});
 
-		await axios.post("/magtable", data, AXIOS_JSON_HEADER);
+		const res = await axios.post("/magtable", data, AXIOS_JSON_HEADER);
 
+		dispatch({ type: PUBLISH_TABLE, payload: res.data });
 		dispatch(setAlert("Publish Successful", "success"));
 	} catch (err) {
 		dispatch(setAlert(err.response.data.message, "warning"));
@@ -396,6 +398,12 @@ export const getHistoricalMagtableRecord = id => async dispatch => {
 	} catch (err) {
 		console.error(err);
 	}
+};
+
+export const clearHistoricalMagtable = () => dispatch => {
+	dispatch({
+		type: CLEAR_HISTORICAL_MAGTABLE
+	});
 };
 
 /**
