@@ -583,6 +583,12 @@ export const ADD_TRUCK = "ADD_TRUCK";
 export const DELETE_TRUCK = "DELETE_TRUCK";
 
 /**
+ * To clear the historical magtable object
+ * @type {string} CLEAR_HISTORICAL_MAGTABLE
+ */
+export const CLEAR_HISTORICAL_MAGTABLE = "CLEAR_HISTORICAL_MAGTABLE";
+
+/**
  * Gets headers data from Axios
  * @const {object} AXIOS_JSON_HEADER
  */

@@ -20,7 +20,8 @@ import {
 	GET_MAGTABLE_HISTORY_LIST,
 	FETCHING_HISTORICAL_MAGTABLE,
 	GET_HISTORICAL_MAGTABLE,
-	CLEAR_ASSIGNMENT_SHIFTS
+	CLEAR_ASSIGNMENT_SHIFTS,
+	CLEAR_HISTORICAL_MAGTABLE
 } from "./constants";
 import axios from "axios";
 import { setAlert } from "./alert";
@@ -404,6 +405,16 @@ export const getHistoricalMagtableRecord = id => async dispatch => {
 	} catch (err) {
 		console.error(err);
 	}
+};
+
+/**
+ * Clears the current historical magtable
+ * @returns nothing
+ */
+export const clearHistoricalMagtable = () => dispatch => {
+	dispatch({
+		type: CLEAR_HISTORICAL_MAGTABLE
+	});
 };
 
 /**
