@@ -11,6 +11,7 @@
     "js-file-download": "^0.4.10",
     "moment": "^2.24.0",
     "react": "^16.13.1",
+    "history": "^4.10.1",
     "react-addons-css-transition-group": "^15.6.2",
     "react-dates": "^21.8.0",
     "react-device-detect": "^1.11.14",
@@ -28,6 +29,7 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.0.0",
+    "typescript": "^3.8.3",
     "yup": "^0.28.1"
   },
   "scripts": {
