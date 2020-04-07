@@ -145,22 +145,39 @@ function TruckList() {
 				<TruckListDiv>
 					<ListSeparator>
 						Service Vehicles
-						<TruckStatusCounterItem GO data-tip={GO}>
+						<TruckStatusCounterItem
+							GO
+							data-tip={GO}
+							data-for={"service_vehicle_totals"}
+						>
 							{truckStatusTotals[SERVICE_VEHICLE][GO]}
 						</TruckStatusCounterItem>
 						<TruckStatusCounterItem>{listItemSeparator}</TruckStatusCounterItem>
-						<TruckStatusCounterItem CON data-tip={CON}>
+						<TruckStatusCounterItem
+							CON
+							data-tip={CON}
+							data-for={"service_vehicle_totals"}
+						>
 							{truckStatusTotals[SERVICE_VEHICLE][CON]}
 						</TruckStatusCounterItem>
 						<TruckStatusCounterItem>{listItemSeparator}</TruckStatusCounterItem>
-						<TruckStatusCounterItem OOS data-tip={OOS}>
+						<TruckStatusCounterItem
+							OOS
+							data-tip={OOS}
+							data-for={"service_vehicle_totals"}
+						>
 							{truckStatusTotals[SERVICE_VEHICLE][OOS]}
 						</TruckStatusCounterItem>
 						<TruckStatusCounterItem>{listItemSeparator}</TruckStatusCounterItem>
-						<TruckStatusCounterItem INOP data-tip={INOP}>
+						<TruckStatusCounterItem
+							INOP
+							data-tip={INOP}
+							data-for={"service_vehicle_totals"}
+						>
 							{truckStatusTotals[SERVICE_VEHICLE][INOP]}
 						</TruckStatusCounterItem>
 						<ReactTooltip
+							id={"service_vehicle_totals"}
 							place="top"
 							type="dark"
 							effect="solid"
@@ -179,22 +196,39 @@ function TruckList() {
 					))}
 					<ListSeparator>
 						De-Ice Trucks
-						<TruckStatusCounterItem GO data-tip={GO}>
+						<TruckStatusCounterItem
+							GO
+							data-tip={GO}
+							data-for={"deice_truck_totals"}
+						>
 							{truckStatusTotals[DEICE_TRUCK][GO]}
 						</TruckStatusCounterItem>
 						<TruckStatusCounterItem>{listItemSeparator}</TruckStatusCounterItem>
-						<TruckStatusCounterItem CON data-tip={CON}>
+						<TruckStatusCounterItem
+							CON
+							data-tip={CON}
+							data-for={"deice_truck_totals"}
+						>
 							{truckStatusTotals[DEICE_TRUCK][CON]}
 						</TruckStatusCounterItem>
 						<TruckStatusCounterItem>{listItemSeparator}</TruckStatusCounterItem>
-						<TruckStatusCounterItem OOS data-tip={OOS}>
+						<TruckStatusCounterItem
+							OOS
+							data-tip={OOS}
+							data-for={"deice_truck_totals"}
+						>
 							{truckStatusTotals[DEICE_TRUCK][OOS]}
 						</TruckStatusCounterItem>
 						<TruckStatusCounterItem>{listItemSeparator}</TruckStatusCounterItem>
-						<TruckStatusCounterItem INOP data-tip={INOP}>
+						<TruckStatusCounterItem
+							INOP
+							data-tip={INOP}
+							data-for={"deice_truck_totals"}
+						>
 							{truckStatusTotals[DEICE_TRUCK][INOP]}
 						</TruckStatusCounterItem>
 						<ReactTooltip
+							id={"deice_truck_totals"}
 							place="top"
 							type="dark"
 							effect="solid"
