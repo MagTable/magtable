@@ -7,8 +7,10 @@ import com.magtable.repository.EquipmentRepository;
 import com.magtable.repository.MagTableRecordRepository;
 import com.magtable.repository.ParkingLocationRepository;
 import com.magtable.services.ErrorService;
+import com.magtable.services.magtableServices.MagTableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -30,12 +32,6 @@ public class MagTableController {
     MagTableRecordRepository magTableRecordRepository;
 
     @Autowired
-    EquipmentRepository equipmentRepository;
-
-    @Autowired
-    AssignmentRepository assignmentRepository;
-
-    @Autowired
     ParkingLocationRepository parkingLocationRepository;
 
     @Autowired
@@ -43,6 +39,9 @@ public class MagTableController {
 
     @Autowired
     ErrorService errorService;
+
+    @Autowired
+    MagTableService magTableService;
 
 
     /**
@@ -57,31 +56,8 @@ public class MagTableController {
     @GetMapping("")
     public MagtableRecord getMagTable() {
         MagtableRecord magtableRecord = magTableRecordRepository.findMostRecent();
-        if (magtableRecord == null) {
-            magtableRecord = new MagtableRecord(); //making a blank mtr
-
-            ArrayList<Equipment> equipmentList = (ArrayList<Equipment>) equipmentRepository.findAll();
-            ArrayList<Assignment> assignmentList = new ArrayList<>();
-
-            ArrayList<Shift> shiftList = new ArrayList<>(4);
-
-            for (Equipment equipment : equipmentList) {
-
-                if (!equipment.getActive()) {
-                    continue;
-                }
-
-                Assignment assignment = new Assignment();
-                assignment.setEquipment(equipment);
-                assignment.setParkingLocation(null);
-                assignment.setEmployeeShifts(shiftList);
-
-                assignmentList.add(assignment);
-
-            }
-
-            magtableRecord.setAssignments(assignmentList);
-
+        if (magtableRecord == null) { //Create a new MagtableRecord
+            magtableRecord = magTableService.newMTR();
         }
         return magtableRecord;
     }
@@ -99,6 +75,22 @@ public class MagTableController {
         MagtableRecord saved = magTableRecordRepository.save(magtableRecord);
         template.convertAndSend("/topic/mtr", new WsAction(WsAction.MTR_PUBLISH, saved));
         return saved;
+    }
+
+
+    /**
+     * Method for clearing the magtable - This is done by creating a new empty Magtablerecord
+     * Scheduled to happen everyday at 2am
+     */
+    @Scheduled(cron = "0 0 2 * * *")
+    public void clearMagTable(){
+        MagtableRecord record = magTableService.newMTR();
+        for(Assignment assignment : record.getAssignments()){
+                assignment.setMagtableRecord(record);
+        }
+        record.setPublishedBy("system");
+        record = magTableRecordRepository.save(record);
+        template.convertAndSend("/topic/mtr", new WsAction(WsAction.MTR_PUBLISH, record));
     }
 
     /**
@@ -134,8 +126,11 @@ public class MagTableController {
         ArrayList<MagTableHistoryResponse> responses = new ArrayList<>();
 
         for(MagtableRecord record : records){
-            MagTableHistoryResponse response = new MagTableHistoryResponse(record);
+            if(!record.getPublishedBy().equals("system")){
+                MagTableHistoryResponse response = new MagTableHistoryResponse(record);
                 responses.add(response);
+            }
+
         }
 
         return responses;

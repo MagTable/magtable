@@ -44,7 +44,7 @@ public class AuthenticationService {
 
         User user;
         user = userRepository.findUserByUsername(authenticationToken.getName()).orElseThrow(() ->
-                errorService.userNotFound(authenticationToken.getName())); //Todo This is never thrown will have to be fixed
+                errorService.userNotFound(authenticationToken.getName()));
 
         return user;
     }

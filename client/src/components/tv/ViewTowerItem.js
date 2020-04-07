@@ -4,8 +4,6 @@ import {
 	EmployeeDiv,
 	EmployeeWrap,
 	PMEmp,
-	TowerEmployeeDiv,
-	TowerEmployeeWrap,
 	TowerListDiv,
 	TowerPos,
 	TowerPosDiv
