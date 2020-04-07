@@ -7,7 +7,6 @@ import { updateTable } from "../../actions/magtable";
 const StompClient = ({ setWSConnected }) => {
 	const dispatch = useDispatch();
 	const client = new Client({
-		// 		brokerURL: "ws://localhost:8080/ws/websocket",
 		brokerURL: "wss://magtable.herokuapp.com/ws/websocket",
 		reconnectDelay: 3000,
 		heartbeatIncoming: 10000,
