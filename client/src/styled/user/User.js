@@ -47,6 +47,7 @@ export const UserListDiv = styled.div`
 	padding: 0 4rem 2rem 2rem;
 	background: white;
 	box-shadow: 0px 0px 44px 0px rgba(0, 0, 0, 0.75);
+	height: 100%;
 `;
 
 export const UserListSection = styled.div`
