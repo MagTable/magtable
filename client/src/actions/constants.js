@@ -559,12 +559,6 @@ export const GET_HISTORICAL_MAGTABLE = "GET_HISTORICAL_MAGTABLE";
 export const FETCHING_HISTORICAL_MAGTABLE = "FETCHING_HISTORICAL_MAGTABLE";
 
 /**
- * To clear the historical magtable object
- * @type {string} CLEAR_HISTORICAL_MAGTABLE
- */
-export const CLEAR_HISTORICAL_MAGTABLE = "CLEAR_HISTORICAL_MAGTABLE";
-
-/**
  * Gets parking locations.
  * @const {string} GET_PARKING_LOCATIONS
  */
@@ -589,6 +583,12 @@ export const ADD_TRUCK = "ADD_TRUCK";
 export const DELETE_TRUCK = "DELETE_TRUCK";
 
 /**
+ * To clear the historical magtable object
+ * @type {string} CLEAR_HISTORICAL_MAGTABLE
+ */
+export const CLEAR_HISTORICAL_MAGTABLE = "CLEAR_HISTORICAL_MAGTABLE";
+
+/**
  * Gets headers data from Axios
  * @const {object} AXIOS_JSON_HEADER
  */
@@ -600,4 +600,14 @@ export const AXIOS_JSON_HEADER = {
 
 // API CONSTANTS
 
+/**
+ * Publish magtable case
+ * @type {string} MTR_PUBLISH
+ */
 export const MTR_PUBLISH = "MTR_PUBLISH";
+
+/**
+ * Clear assignment shifts
+ * @type {string} CLEAR_ASSIGNMENT_SHIFTS
+ */
+export const CLEAR_ASSIGNMENT_SHIFTS = "CLEAR_ASSIGNMENT_SHIFTS";

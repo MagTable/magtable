@@ -35,7 +35,6 @@ function ViewList(props) {
 	const assignments = useSelector(state => state.magtable.assignments);
 
 	let enabledAssignments = []; // Trucks assigned to a location and/or with employees assigned to it.
-	let disabledAssignments = []; // Trucks with no assignments.
 	let towerAssignments = []; // All towers and their assigned employees.
 	let notices = []; // Notices of the trucks with assignments.
 
@@ -87,16 +86,6 @@ function ViewList(props) {
 						/>
 					)
 			)}
-			{disabledAssignments.map(
-				assignment =>
-					assignment.equipment.type === "ICE" && (
-						<ViewListItem
-							assignment={assignment}
-							assigned={false}
-							key={assignment.equipment.id}
-						/>
-					)
-			)}
 
 			<SectionTitle>Vehicle Notices</SectionTitle>
 			{notices.map(notice => (
@@ -112,16 +101,6 @@ function ViewList(props) {
 								<ViewListItem
 									assignment={assignment}
 									assigned={true}
-									key={assignment.equipment.id}
-								/>
-							)
-					)}
-					{disabledAssignments.map(
-						assignment =>
-							assignment.equipment.type === "SVV" && (
-								<ViewListItem
-									assignment={assignment}
-									assigned={false}
 									key={assignment.equipment.id}
 								/>
 							)

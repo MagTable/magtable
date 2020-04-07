@@ -11,7 +11,7 @@ import styled from "styled-components";
  * Holds all the weather information in the sidebar displayed in the TV page
  **/
 export const SideBar = styled.div`
-	height: calc(100vh - 70px);
+	max-height: calc(100vh - 120px);
 	text-align: center;
 	border-left: 1px solid var(--border-color);
 
@@ -49,7 +49,7 @@ export const SideBar = styled.div`
 `;
 
 export const WeatherWording = styled.h4`
-	margin: 0 0 0.5rem 0;
+	margin: 0.5rem 0 0.5rem 0;
 	text-transform: capitalize;
 `;
 
