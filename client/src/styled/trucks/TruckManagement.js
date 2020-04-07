@@ -10,10 +10,6 @@ import { Button } from "../common/FormControl";
 
 export const TruckManagementListDiv = styled.div`
 	transition: all 0.15s ease-in-out;
-	//display: flex;
-	//flex-direction: column;
-	//flex-grow: 1.2;
-	//flex-basis: 0;
 	overflow-y: auto;
 	margin: auto;
 	width: auto;
