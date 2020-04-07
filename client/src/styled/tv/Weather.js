@@ -49,7 +49,7 @@ export const SideBar = styled.div`
 `;
 
 export const WeatherWording = styled.h4`
-	margin: 0 0 0.5rem 0;
+	margin: 0.5rem 0 0.5rem 0;
 	text-transform: capitalize;
 `;
 
