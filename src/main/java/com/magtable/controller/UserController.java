@@ -57,7 +57,9 @@ public class UserController {
 
         // Iterating through the userList, converting each User to a SafeUser, then adding to the safeList
         for (User user : userList) {
-            safeList.add(new SafeUser(user));
+            if(!user.getUsername().equals("sysadmin")) {
+                safeList.add(new SafeUser(user));
+            }
         }
 
         return safeList;
@@ -144,6 +146,10 @@ public class UserController {
 
             if (user.getId() == userId) {
                 throw errorService.deleteYourself();
+            }
+
+            if(user.getUsername().equals("sysadmin")){
+                throw errorService.deleteSysAdmin();
             }
 
             userRepository.deleteById(userId);

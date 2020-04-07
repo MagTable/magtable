@@ -21,7 +21,7 @@ public class Shift {
     private Boolean isGreen;
     private Assignment assignment;
 
-    @Id //TODO LOGIC TO MAKE SURE SHIFTID = W2W SHIFT ID
+    @Id
     @Column(name = "shiftID", nullable = false)
     public Integer getId() {
         return id;

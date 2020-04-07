@@ -49,7 +49,7 @@ public class ErrorService {
      * @return ResponseStatusException message.
      */
     public ResponseStatusException jwtNotFound() {
-        return new ResponseStatusException(HttpStatus.BAD_REQUEST, "Authentication Failed"); //todo This might be obsolete
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, "Authentication Failed");
     }
 
     /**
@@ -101,6 +101,22 @@ public class ErrorService {
      */
     public ResponseStatusException deleteYourself() {
         return new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot Delete.");
+    }
+
+    /**
+     * Message reporting attempt to delete the system admin cannot be done
+     * @return ResponseStatusException message.
+     */
+    public ResponseStatusException deleteSysAdmin() {
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot Delete Sysadmin");
+    }
+
+    /**
+     * Message reporting attempt to delete the system admin cannot have there password changed
+     * @return ResponseStatusException message.
+     */
+    public ResponseStatusException resetSysAdmin() {
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot Reset Sysadmin password");
     }
 
     /**
@@ -195,7 +211,7 @@ public class ErrorService {
     }
 
     /**
-     *Error Service for generic errors TEMPORARY Should be used with a //todo
+     *Error Service for generic errors TEMPORARY
      *
      */
     public ResponseStatusException notYetImplemented(){
@@ -218,4 +234,7 @@ public class ErrorService {
     public ResponseStatusException invalidTruckType(String type) {
         return new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("%s is not a valid type", type));
     }
+
+
+
 }
