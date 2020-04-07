@@ -68,16 +68,14 @@ function TVView(props) {
 				<ViewList />
 				<WeatherBar />
 			</TVWrap>
-			{showHistoryModal && (
-				<Modal
-					show={showHistoryModal}
+			<Modal
+				show={showHistoryModal}
+				handleClose={() => setShowHistoryModal(false)}
+			>
+				<MagtableHistorySelector
 					handleClose={() => setShowHistoryModal(false)}
-				>
-					<MagtableHistorySelector
-						handleClose={() => setShowHistoryModal(false)}
-					/>
-				</Modal>
-			)}
+				/>
+			</Modal>
 		</div>
 	);
 }
