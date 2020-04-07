@@ -6,7 +6,6 @@ plugins {
 }
 
 group = 'com'
-version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 configurations {
@@ -35,37 +34,37 @@ dependencies {
     }
 }
 
-test {
-    useJUnitPlatform()
-}
-
-task appNpmInstall(type: NpmTask) {
-    description = "Installs all dependencies from package.json"
-    workingDir = file("${project.projectDir}/client")
-    args = ["install"]
-}
-
-task appNpmBuild(type: NpmTask) {
-    description = "Builds production version of the webapp"
-    workingDir = file("${project.projectDir}/client")
-    args = ["run", "build"]
-}
-
-task copyWebApp(type: Copy) {
-    from 'client/build'
-    into 'build/resources/main/static/.'
-}
-
-appNpmBuild.dependsOn appNpmInstall
-copyWebApp.dependsOn appNpmBuild
-compileJava.dependsOn copyWebApp
-
-node {
-    download = true
-
-    // Set the work directory for unpacking node
-    workDir = file("${project.buildDir}/nodejs")
-
-    // Set the work directory for NPM
-    npmWorkDir = file("${project.buildDir}/npm")
-}
+//test {
+//    useJUnitPlatform()
+//}
+//
+//task appNpmInstall(type: NpmTask) {
+//    description = "Installs all dependencies from package.json"
+//    workingDir = file("${project.projectDir}/client")
+//    args = ["install"]
+//}
+//
+//task appNpmBuild(type: NpmTask) {
+//    description = "Builds production version of the webapp"
+//    workingDir = file("${project.projectDir}/client")
+//    args = ["run", "build"]
+//}
+//
+//task copyWebApp(type: Copy) {
+//    from 'client/build'
+//    into 'build/resources/main/static/.'
+//}
+//
+//appNpmBuild.dependsOn appNpmInstall
+//copyWebApp.dependsOn appNpmBuild
+//compileJava.dependsOn copyWebApp
+//
+//node {
+//    download = true
+//
+//    // Set the work directory for unpacking node
+//    workDir = file("${project.buildDir}/nodejs")
+//
+//    // Set the work directory for NPM
+//    npmWorkDir = file("${project.buildDir}/npm")
+//}

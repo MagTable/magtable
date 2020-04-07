@@ -34,6 +34,7 @@ function OverflowLocations({ children, color, hoverColor, open, setOpen }) {
 	const selectedApron = useSelector(state => state.magtable.selectedApron);
 	const magtable = useSelector(state => state.magtable);
 	const authUsername = useSelector(state => state.auth.user.username);
+	const forecastLow = useSelector(state => state.brix.weather.forecastLow);
 
 	let timePublished = "...";
 	if (magtable.timePublished) {
@@ -70,7 +71,7 @@ function OverflowLocations({ children, color, hoverColor, open, setOpen }) {
 	};
 
 	const handlePublish = () => {
-		dispatch(publishTable(magtable, authUsername));
+		dispatch(publishTable({ ...magtable, forecastLow }, authUsername));
 		handleClose();
 	};
 
