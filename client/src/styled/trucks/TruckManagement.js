@@ -10,26 +10,27 @@ import { Button } from "../common/FormControl";
 
 export const TruckManagementListDiv = styled.div`
 	transition: all 0.15s ease-in-out;
-	display: flex;
-	flex-direction: column;
-	flex-grow: 1.2;
-	flex-basis: 0;
+	//display: flex;
+	//flex-direction: column;
+	//flex-grow: 1.2;
+	//flex-basis: 0;
 	overflow-y: auto;
 	margin: auto;
 	width: auto;
-	max-height: calc(100vh - 120px);
+	//max-height: calc(100vh - 120px);
 	padding: 0 40px;
 	background: #f4f4f4;
-	height: 100%;
+	height: calc(100vh - 120px);
 `;
 
 export const TruckManagementDiv = styled.div`
 	margin: auto;
 	width: 60%;
-	padding: 0 4rem 2rem 2rem;
+	padding: 14px 4rem 1rem 2rem;
 	background: white;
 	box-shadow: 0px 0px 44px 0px rgba(0, 0, 0, 0.75);
-	height: 100%;
+	/* min-height: 100%; */
+	min-height: 100%;
 `;
 
 export const TruckMgmtDiv = styled.div`
