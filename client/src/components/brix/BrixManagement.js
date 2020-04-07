@@ -82,10 +82,10 @@ function BrixManagement() {
 			</BrixWrapperTitle>
 			<Formik
 				initialValues={{
-					nozzle: "30.3",
-					type1: "52.4",
-					type4: "32.5",
-					litersPurged: "105",
+					nozzle: "",
+					type1: "",
+					type4: "",
+					litersPurged: "",
 					timeMeasured: new Date()
 				}}
 				onSubmit={(values, { resetForm }) => {
@@ -129,7 +129,6 @@ function BrixManagement() {
 									value={values.type1}
 									id={"type1"}
 									label={"Type 1 Tank"}
-									type={"number"}
 									accentColor={"var(--type1)"}
 									icon={{
 										iconClass: "fa-eye-dropper"
@@ -146,7 +145,6 @@ function BrixManagement() {
 									value={values.type4}
 									id={"type4"}
 									label={"Type 4 Tank"}
-									type={"number"}
 									accentColor={"var(--type4)"}
 									icon={{
 										iconClass: "fa-eye-dropper"
@@ -163,7 +161,6 @@ function BrixManagement() {
 									value={values.nozzle}
 									id={"nozzle"}
 									label={"Nozzle"}
-									type={"number"}
 									accentColor={"var(--type1)"}
 									icon={{
 										iconClass: "fa-shower"
@@ -180,7 +177,6 @@ function BrixManagement() {
 									value={values.litersPurged}
 									id={"purged"}
 									label={"Liters Purged"}
-									type={"number"}
 									icon={{
 										iconClass: "fa-water"
 									}}

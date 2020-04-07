@@ -44,7 +44,6 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-
         http.authorizeRequests()
                 .antMatchers("/user/*/*").hasAuthority(SYSTEM_ADMIN)
                 .antMatchers("/user/*").hasAuthority(SYSTEM_ADMIN)
@@ -56,7 +55,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .antMatchers("/shift").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER, MECHANIC)
                 .antMatchers("/authenticate").permitAll()
                 .antMatchers("/password/reset").permitAll()
-                .antMatchers("/stomp").hasAnyAuthority(MECHANIC)
+                .antMatchers("/topic/*").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER, MECHANIC)
                 .and().csrf().disable() //TODO Check all route Security /add them
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(JwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
