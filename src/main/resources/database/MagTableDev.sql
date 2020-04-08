@@ -4,10 +4,10 @@
     Created: February 21, 2020
     Description: Use Case two updated database scheme for MagTable.
  */
-DROP DATABASE IF EXISTS magtabledev;
-CREATE DATABASE magtabledev;
+DROP DATABASE IF EXISTS magtableteach;
+CREATE DATABASE magtableteach;
 
-USE magtabledev;
+USE magtableteach;
 
 CREATE TABLE Role
 (

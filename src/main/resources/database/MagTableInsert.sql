@@ -5,7 +5,7 @@
     Description: Use Case two updated database inserts for the database.
  */
 
-use magtabledev;
+use magtableteach;
 
 DELETE FROM BrixRecord;
 DELETE FROM Shift;
@@ -30,8 +30,11 @@ INSERT INTO role VALUES (3, 'Mechanic');
 
 INSERT INTO `user` (`role`, username, password, resetflag) VALUES (1, 'sysadmin', '$2a$10$/yhtIoFMLy/RjA5NiiflLutYVGBDR8RxTY24ip.eUJn9uhTDNrlx6', true);
 INSERT INTO `user` (`role`, username, password, resetflag) VALUES (1, 'mustafa', '$2a$10$p5Z.PzEZm2J6ikfp9T4lFeW6hdRjDQUfTdfqOiKK5xHRsd2C9GqKK', false);
+INSERT INTO `user` (`role`, username, password, resetflag) VALUES (1, 'arran', '$2a$10$p5Z.PzEZm2J6ikfp9T4lFeW6hdRjDQUfTdfqOiKK5xHRsd2C9GqKK', false);
 INSERT INTO `user` (role, username, password,resetflag) VALUES (2, 'david', '$2a$10$p5Z.PzEZm2J6ikfp9T4lFeW6hdRjDQUfTdfqOiKK5xHRsd2C9GqKK', false);
+INSERT INTO `user` (role, username, password,resetflag) VALUES (2, 'thomas', '$2a$10$p5Z.PzEZm2J6ikfp9T4lFeW6hdRjDQUfTdfqOiKK5xHRsd2C9GqKK', false);
 INSERT INTO `user` (role, username, password, resetflag) VALUES (3, 'steven', '$2a$10$p5Z.PzEZm2J6ikfp9T4lFeW6hdRjDQUfTdfqOiKK5xHRsd2C9GqKK', false);
+INSERT INTO `user` (role, username, password, resetflag) VALUES (3, 'mjkochuk', '$2a$10$p5Z.PzEZm2J6ikfp9T4lFeW6hdRjDQUfTdfqOiKK5xHRsd2C9GqKK', false);
 
 -- SERVICE VEHICLES
 INSERT INTO Equipment (equipmentID, type, status, notice, active) values (1 , 'SVV', 'GO', '', false);
