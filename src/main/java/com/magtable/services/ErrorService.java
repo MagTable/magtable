@@ -104,6 +104,22 @@ public class ErrorService {
     }
 
     /**
+     * Message reporting attempt to delete the system admin cannot be done
+     * @return ResponseStatusException message.
+     */
+    public ResponseStatusException deleteSysAdmin() {
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot Delete Sysadmin");
+    }
+
+    /**
+     * Message reporting attempt to delete the system admin cannot have there password changed
+     * @return ResponseStatusException message.
+     */
+    public ResponseStatusException resetSysAdmin() {
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot Reset Sysadmin password");
+    }
+
+    /**
      * Message reporting that a server error has occurred.
      * @return ResponseStatusException message.
      */
@@ -218,4 +234,7 @@ public class ErrorService {
     public ResponseStatusException invalidTruckType(String type) {
         return new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("%s is not a valid type", type));
     }
+
+
+
 }
