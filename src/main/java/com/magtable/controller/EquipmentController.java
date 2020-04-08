@@ -86,9 +86,15 @@ public class EquipmentController {
     @PostMapping("truck/add")
     public Equipment addTruck(@RequestBody Equipment equipment) {
 
-//        if(equipmentRepository.findById(equipment.getId()).isPresent()){
-//           throw errorService.truckAlreadyExists(equipment.getId());
-//        }
+        if(equipmentRepository.findById(equipment.getId()).isPresent()){
+            Equipment finalEquipment = equipment;
+            Equipment temp = equipmentRepository.findById(equipment.getId()).orElseThrow(()
+                    -> errorService.truckDoesntExists(finalEquipment.getId())); //this or else is never thrown
+            if(temp.getActive()){
+                throw errorService.truckAlreadyExists(equipment.getId());
+            }
+
+        }
         validationService.truckId(equipment.getId());
         validationService.truckStatus(equipment);
         validationService.truckType(equipment);
