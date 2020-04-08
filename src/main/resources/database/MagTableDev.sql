@@ -95,7 +95,7 @@ CREATE TABLE Assignment
 
 CREATE TABLE Shift
 (
-    shiftID      INT(10) NOT NULL, -- todo w2w unique ids
+    shiftID      INT(10) NOT NULL,
     assignmentID  INT(10) NOT NULL,
     timeOfDay    VARCHAR(2),
     isPrimary    BOOLEAN,
