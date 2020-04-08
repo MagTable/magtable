@@ -55,8 +55,15 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .antMatchers("/shift").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER, MECHANIC)
                 .antMatchers("/authenticate").permitAll()
                 .antMatchers("/password/reset").permitAll()
+                .antMatchers("/magtable*").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER, MECHANIC)
+                .antMatchers("/magtable*/*").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER, MECHANIC)
+                .antMatchers("/equipment*").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER, MECHANIC)
+                .antMatchers("/equipment*/*").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER, MECHANIC)
+                .antMatchers("/weather*").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER, MECHANIC)
+                .antMatchers("/brix*").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER, MECHANIC)
+                .antMatchers("/brix*/*").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER, MECHANIC)
                 .antMatchers("/topic/*").hasAnyAuthority(SYSTEM_ADMIN, PERSONNEL_MANAGER, MECHANIC)
-                .and().csrf().disable() //TODO Check all route Security /add them
+                .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(JwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
