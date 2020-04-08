@@ -6,9 +6,12 @@ import { DANGER, SUCCESS, WARNING } from "../../actions/constants";
  * @date 3/24/2020
  * @author Arran Woodruff
  * @category Styled Components
- * @module MagTable
+ * @module Brix
  */
 
+/**
+ *
+ */
 export const getColor = type => {
 	switch (type) {
 		case DANGER:
@@ -22,6 +25,9 @@ export const getColor = type => {
 	}
 };
 
+/**
+ *
+ */
 export const BrixWrapper = styled.div`
 	display: grid;
 
@@ -49,6 +55,9 @@ export const BrixWrapper = styled.div`
 	}
 `;
 
+/**
+ *
+ */
 export const BrixForm = styled(Form)`
 	display: grid;
 
@@ -88,6 +97,9 @@ export const BrixForm = styled(Form)`
 	}
 `;
 
+/**
+ *
+ */
 export const BrixWrapperTitle = styled.h2`
 	grid-area: title;
 	margin: 0;
@@ -102,6 +114,9 @@ const fadeIn = keyframes`
   }
 `;
 
+/**
+ *
+ */
 export const BrixTableWrapper = styled.div`
 	grid-area: table;
 
@@ -119,6 +134,9 @@ export const BrixTableWrapper = styled.div`
 	}
 `;
 
+/**
+ *
+ */
 export const ChartRowDataItem = styled.h4`
 	margin: 0;
 
@@ -129,10 +147,16 @@ export const ChartRowDataItem = styled.h4`
 	`}
 `;
 
+/**
+ *
+ */
 export const BrixTableTitle = styled.h3`
 	grid-area: table-title;
 `;
 
+/**
+ *
+ */
 export const WeatherDataWrapper = styled.div`
 	background: var(--navbar-light);
 	padding: 0.75rem;
@@ -156,6 +180,9 @@ export const WeatherDataWrapper = styled.div`
 	`}
 `;
 
+/**
+ *
+ */
 export const WeatherDataItem = styled.h4`
 	margin: 0;
 	min-width: 83px;
@@ -180,6 +207,9 @@ export const WeatherDataItem = styled.h4`
 	`};
 `;
 
+/**
+ *
+ */
 export const DailyMixButtons = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -201,6 +231,9 @@ export const DailyMixButtons = styled.div`
 	}
 `;
 
+/**
+ *
+ */
 export const BrixExportWrapper = styled.div`
 	input[type="text"] {
 		box-sizing: border-box;

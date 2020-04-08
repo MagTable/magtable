@@ -7,10 +7,11 @@ import FadeIn from "react-fade-in";
  * @author MJ Kochuk
  * @category Styled Components
  * @module Common
- * @constructor
- * @returns {*}
  */
 
+/**
+ *
+ */
 export const LoadingImg = styled.i`
 	animation: loading-spin infinite 1s linear;
 	height: fit-content;
@@ -44,7 +45,9 @@ export const TempLoadingImg = styled.i`
 		margin: 0;
 	`}
 `;
-
+/**
+ *
+ */
 export const SpinnerWrap = styled.div`
 	text-align: center;
 	display: flex;
@@ -59,12 +62,16 @@ export const SpinnerWrap = styled.div`
 		height: calc(100vh - 70px);
 	`}
 `;
-
+/**
+ *
+ */
 export const LoadingText = styled.p`
 	font-size: 25px;
 	margin-block-start: 0em;
 `;
-
+/**
+ *
+ */
 export const LoaderCover = styled.div`
 	background-color: rgba(255, 255, 255, 0.15);
 	backdrop-filter: blur(5px);
@@ -77,7 +84,9 @@ export const LoaderCover = styled.div`
 	z-index: 10;
 	transform: translate(-32px, -32px);
 `;
-
+/**
+ *
+ */
 export const LoginLoader = styled(LoaderCover)`
 	transform: translate(-2rem, -2rem);
 	border-radius: 0.45rem;

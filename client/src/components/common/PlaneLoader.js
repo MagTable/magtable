@@ -9,12 +9,12 @@ import {
 
 /**
  * @date 2020-03-22
- * @author MJ Kochuk, Steven Wong
+ * @author MJ Kochuk
  * @name PlaneLoader
- * @category Component/Common
+ * @category Components/Common
+ * @param props Any Props for the component.
+ * @returns The PlaneLoader component
  * @constructor
- * @param props
- * @returns {*} The PlaneLoader component
  */
 function PlaneLoader(props) {
 	return (

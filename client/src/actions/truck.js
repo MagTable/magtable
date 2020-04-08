@@ -9,9 +9,9 @@ import {
 
 /**
  * @date 2020-03-24
- * @author Arran Woodruff, Steven Wong
+ * @author Steven Wong, Tom Allcock, MJ Kochuk
  * @category Redux-Actions
- * @module Truck
+ * @module Truck-Actions
  */
 
 /**

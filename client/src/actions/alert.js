@@ -4,9 +4,9 @@ import { SET_ALERT, REMOVE_ALERT } from "./constants";
 
 /**
  * @date 2020-03-24
- * @author Arran Woodruff, Steven Wong
+ * @author Arran Woodruff
  * @category Redux-Actions
- * @module Alert
+ * @module Alert-Actions
  */
 
 /**

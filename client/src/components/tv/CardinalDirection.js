@@ -2,16 +2,13 @@ import React from "react";
 import { WeatherWording } from "../../styled/tv/Weather";
 
 /**
+ * Determines the cardinal direction based on a value in degrees. North is 0.
  * @date 2020-03-31
  * @author MJ Kochuk
- * @module Component
- */
-
-/**
- * Determines the cardinal direction based on a value in degrees. North is 0.
- * @constructor
- * @param props
+ * @category Components/TV
+ * @param direction The direction.
  * @returns {*} The CardinalDirection component
+ * @constructor
  */
 function CardinalDirection({ direction }) {
 	if (direction >= 337.5 || direction < 22.5) {

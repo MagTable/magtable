@@ -18,15 +18,17 @@ import IconButton from "../common/IconButton";
 import Confirmation from "../common/Confirmation";
 
 /**
+ * The Overflow menu for the Parking Location's part of the page.
+ *
  * @date 3/1/2020
- * @author Tom Allcock, Arran Woodruff, Steven Wong
+ * @author Arran Woodruff
  * @category Components/MagTable
  * @param children Children of the Component
  * @param color Color of the Icon
  * @param hoverColor Hover color of icon.
  * @param open Open State of the overflow menu
  * @param setOpen Change the open state of the overflow menu.
- * @returns {*} Returns the overflow menu for Parking Map which holds Clear Table, Publish Table and Apron Switches
+ * @returns Returns the overflow menu for Parking Map which holds Clear Table, Publish Table and Apron Switches
  * @constructor
  */
 function OverflowLocations({ children, color, hoverColor, open, setOpen }) {

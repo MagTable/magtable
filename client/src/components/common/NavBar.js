@@ -15,9 +15,10 @@ import WeatherInfo from "../brix/WeatherInfo";
  * @date 2020-02-05
  * @author MJ Kochuk, Arran Woodruff
  * @name NavBar
- * @category Component/Common
+ * @category Components/Common
+ * @param wsConnected If the websocket connection is connected or not.
+ * @returns The NavBar component
  * @constructor
- * @returns {*} The NavBar component
  */
 function NavBar({ wsConnected }) {
 	const [menuOpen, setMenuOpen] = useState(false);

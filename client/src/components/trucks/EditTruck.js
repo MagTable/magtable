@@ -11,13 +11,13 @@ import styled from "styled-components";
 import Input from "../common/Input";
 
 /**
+ * For editing a truck in the manage trucks page.
  * @date 3/08/2020
  * @author MJ Kochuk, Steven Wong, Tom Allcock
- * For editing a truck in the manage trucks page.
  * @category Components/Trucks
- * @param truck
- * @constructor
+ * @param truck Truck that is being edited.
  * @returns {*} The Edit Truck Form component.
+ * @constructor
  */
 
 const EditTruckForm = styled(Form)`

@@ -14,13 +14,10 @@ import {
 } from "../../styled/tv/ViewList";
 
 /**
+ * List items containing truck information for the TV view page.
  * @date 2020-03-31
  * @author MJ Kochuk
- * @module Component
- */
-
-/**
- * List items containing truck information for the TV view page.
+ * @category Components/TV
  * @constructor
  * @param props
  * @returns {*} The ViewListItem component

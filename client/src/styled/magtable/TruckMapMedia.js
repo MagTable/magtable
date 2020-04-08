@@ -6,7 +6,7 @@ import { Button } from "../common/FormControl";
  * @date 2020-02-20
  * @author MJ Kochuk, Arran Woodruff
  * @category Styled Components
- * @module MagTable
+ * @module Brix
  */
 
 const scrollIn = keyframes`
@@ -24,7 +24,7 @@ const scrollIn = keyframes`
 `;
 
 /**
- * Header that contains parkinglocation code
+ *  PadDivHeader Header that contains parkinglocation code
  */
 export const PadDivHeader = styled.div`
 	grid-area: parking_code;
@@ -33,6 +33,9 @@ export const PadDivHeader = styled.div`
 	border-top-left-radius: 10px;
 `;
 
+/**
+ *  HalfPadDropDiv
+ */
 export const HalfPadDropDiv = styled.div`
 	position: relative;
 	font-size: 1.75rem;
@@ -59,6 +62,9 @@ export const HalfPadDropDiv = styled.div`
 	${({ canDrop }) => !canDrop && `background: var(--context-red-light);`}
 `;
 
+/**
+ *  FullPadDropDiv
+ */
 export const FullPadDropDiv = styled.div`
 	grid-area: 2 / 1 / span 1 / span 2;
 	height: 100%;
@@ -138,6 +144,9 @@ const LocationAssignment = styled.div`
 	}
 `;
 
+/**
+ *  CenterAssigned
+ */
 export const CenterAssigned = styled(LocationAssignment)`
 	display: inline-grid;
 	vertical-align: middle;
@@ -147,6 +156,9 @@ export const CenterAssigned = styled(LocationAssignment)`
 	border-bottom-right-radius: 18px;
 	border-bottom-left-radius: 18px;
 `;
+/**
+ *  LeftAssigned
+ */
 export const LeftAssigned = styled(LocationAssignment)`
 	grid-area: left_assigned;
 
@@ -159,6 +171,9 @@ export const LeftAssigned = styled(LocationAssignment)`
 
 	z-index: 2;
 `;
+/**
+ *  RightAssigned
+ */
 export const RightAssigned = styled(LocationAssignment)`
 	grid-area: right_assigned;
 
@@ -173,8 +188,8 @@ export const RightAssigned = styled(LocationAssignment)`
 `;
 
 /**
- *
- **/
+ *  PadDiv
+ */
 export const PadDiv = styled.div`
 	position: relative;
 	text-align: center;
@@ -222,6 +237,9 @@ export const PadDiv = styled.div`
 	`}
 `;
 
+/**
+ *  FakePadDiv
+ */
 export const FakePadDiv = styled.div`
 	display: flex;
 	width: 100%;
@@ -232,6 +250,9 @@ export const FakePadDiv = styled.div`
 	flex-basis: 0;
 `;
 
+/**
+ *  PadColumn
+ */
 export const PadColumn = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -241,6 +262,9 @@ export const PadColumn = styled.div`
 	width: 100%;
 `;
 
+/**
+ *  MapWrapper
+ */
 export const MapWrapper = styled.div`
 	padding: 10px;
 	display: flex;
@@ -250,6 +274,9 @@ export const MapWrapper = styled.div`
 	align-items: center;
 `;
 
+/**
+ *  SafetyZoneWrapper
+ */
 export const SafetyZoneWrapper = styled.div`
 	height: 100%;
 	width: 100%;
@@ -263,6 +290,9 @@ const NumberLabel = styled.div`
 	font-family: "Noto Sans KR", sans-serif;
 `;
 
+/**
+ *  NumberMiddle
+ */
 export const NumberMiddle = styled(NumberLabel)`
 	height: 100%;
 	padding: 0 0.5rem;
@@ -272,6 +302,9 @@ export const NumberMiddle = styled(NumberLabel)`
 	animation: ${scrollIn} 0.5s ease;
 `;
 
+/**
+ *  NumberTop
+ */
 export const NumberTop = styled(NumberLabel)`
 	height: 30px;
 	width: 100%;

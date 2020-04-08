@@ -18,7 +18,7 @@ import { ListTitle, ListTitleText } from "../../styled/magtable/Titling";
  * Handles rendering of user CRUD components
  *
  * @date 2020-03-24
- * @author Arran Woodruff
+ * @author Arran Woodruff, Steven Wong, MJ Kochuk, Tom Allcock
  * @category Components/User
  * @returns {*} The UserList component
  * @constructor

@@ -19,10 +19,10 @@ import PlaneLoader from "../common/PlaneLoader";
  * The Login Component.
  *
  * @date 2/10/2020
- * @author Arran Woodruff, Steven Wong
+ * @author Arran Woodruff, Steven Wong, MJ Kockuck
  * @name Login
- * @category Component/Auth
- * @returns {*} The Login Component
+ * @category Components/Auth
+ * @returns The Login Component
  * @constructor
  */
 const Login = () => {

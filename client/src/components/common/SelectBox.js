@@ -9,9 +9,9 @@ import {
 
 /**
  * @date 2/28/2020
- * @author Steven Wong, Arran Woodruff, MJ Kochuk
+ * @author Steven Wong, Arran Woodruff
  * @name SelectBox
- * @category Component/Common
+ * @category Components/Common
  * @param label The label for the Select Box
  * @param props The props that will be used to do various things like error, lifted etc...
  * @returns {*} Styled select box with options to be used.

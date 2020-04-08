@@ -7,13 +7,10 @@ import {
 } from "../../styled/tv/ViewList";
 
 /**
+ * Displays individual notices for trucks with their IDs.
  * @date 2020-04-01
  * @author MJ Kochuk
- * @module Component
- */
-
-/**
- * Displays individual notices for trucks with their IDs.
+ * @category Components/TV
  * @constructor
  * @param props
  * @returns {*} The ViewNotice component

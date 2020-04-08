@@ -6,12 +6,12 @@ import {
 } from "../../styled/common/Alert";
 
 /**
+ * Renders the current alerts from redux store.
  * @date 2/10/2020
  * @author Arran Woodruff
- * Renders the current alerts from redux store.
  * @name Alert
- * @category Component/Common
- * @returns {*} The Alert Component
+ * @category Components/Common
+ * @returns The Alert Component
  * @constructor
  */
 const Alert = () => {

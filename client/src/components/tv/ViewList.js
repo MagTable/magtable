@@ -12,16 +12,13 @@ import ViewNotice from "./ViewNotice";
 import { DEICE_TRUCK, SERVICE_VEHICLE } from "../../actions/constants";
 
 /**
+ * List of trucks for the TV View page
  * @date 2020-03-31
  * @author MJ Kochuk, Arran Woodruff
- * @module Component
- */
-
-/**
- * List of trucks for the TV View page
- * @constructor
- * @param props
+ * @category Components/TV
+ * @param props Props for the ViewList
  * @returns {*} The ViewList component
+ * @constructor
  */
 function ViewList(props) {
 	const historicalMagtable = useSelector(

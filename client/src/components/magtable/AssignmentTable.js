@@ -8,9 +8,9 @@ import EmployeeList from "./EmployeeList";
 import TruckList from "./TruckList";
 
 /**
+ * Placeholder component to assist in displaying routing
  * @date 2020-03-24
  * @author Arran Woodruff
- * Placeholder component to assist in displaying routing
  * @category Components/MagTable
  * @constructor
  */

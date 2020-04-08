@@ -264,8 +264,6 @@ export const EAST = "E";
  * @const {string} CENTER
  */
 export const CENTER = "C";
-// export const LEFT = "left";
-// export const RIGHT = "right";
 
 /**
  * AM Setting
@@ -388,7 +386,6 @@ export const CLEAR_ERROR = "CLEAR_ERROR";
  * @const {string} SET_EQUIPMENT_EMPLOYEE
  */
 export const SET_EQUIPMENT_EMPLOYEE = "SET_EQUIPMENT_EMPLOYEE";
-// export const ADD_EQUIPMENT_EMPLOYEE = "ADD_EQUIPMENT_EMPLOYEE";
 
 /**
  * Remove Equipment Employee
@@ -584,7 +581,7 @@ export const DELETE_TRUCK = "DELETE_TRUCK";
 
 /**
  * To clear the historical magtable object
- * @type {string} CLEAR_HISTORICAL_MAGTABLE
+ * @const {string} CLEAR_HISTORICAL_MAGTABLE
  */
 export const CLEAR_HISTORICAL_MAGTABLE = "CLEAR_HISTORICAL_MAGTABLE";
 
@@ -602,12 +599,12 @@ export const AXIOS_JSON_HEADER = {
 
 /**
  * Publish magtable case
- * @type {string} MTR_PUBLISH
+ * @const {string} MTR_PUBLISH
  */
 export const MTR_PUBLISH = "MTR_PUBLISH";
 
 /**
  * Clear assignment shifts
- * @type {string} CLEAR_ASSIGNMENT_SHIFTS
+ * @const {string} CLEAR_ASSIGNMENT_SHIFTS
  */
 export const CLEAR_ASSIGNMENT_SHIFTS = "CLEAR_ASSIGNMENT_SHIFTS";

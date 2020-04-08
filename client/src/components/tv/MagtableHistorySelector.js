@@ -12,6 +12,16 @@ import {
 	getHistoricalMagtableRecord
 } from "../../actions/magtable";
 
+/**
+ * The history selector for the previous magtables.
+ *
+ * @date 3/08/2020
+ * @author Arran Woodruff
+ * @category Components/TV
+ * @param handleClose
+ * @return {*} The previous magtables
+ * @constructor
+ */
 const MagtableHistorySelector = ({ handleClose }) => {
 	const dispatch = useDispatch();
 	const [focused, setFocused] = useState(false);

@@ -7,6 +7,9 @@ import styled from "styled-components";
  * @module Common
  */
 
+/**
+ *
+ */
 export const StyledLabel = styled.label`
 	user-select: none;
 	position: relative;
@@ -37,6 +40,9 @@ export const StyledLabel = styled.label`
 	`}
 `;
 
+/**
+ *
+ */
 export const StyledSelect = styled.select`
 	user-select: none;
 	position: relative;
@@ -65,6 +71,9 @@ export const StyledSelect = styled.select`
 	`}
 `;
 
+/**
+ *
+ */
 export const SelectContainer = styled.div`
 	position: relative;
 `;

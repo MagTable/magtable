@@ -14,7 +14,7 @@ import { clearHistoricalMagtable } from "../../actions/magtable";
 /**
  * The page used on the TV to display assignments and the weather without user input.
  * @date 2020-03-25
- * @author MJ Kochuk
+ * @author MJ Kochuk, Arran Woodruff
  * @category Components/TV
  * @constructor
  * @param props

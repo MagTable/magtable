@@ -11,9 +11,9 @@ import { setAlert } from "./alert";
 
 /**
  * @date 2020-03-24
- * @author Arran Woodruff, Steven Wong
+ * @author Arran Woodruff
  * @category Redux-Actions
- * @module User
+ * @module User-Actions
  */
 
 /**

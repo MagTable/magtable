@@ -7,6 +7,9 @@ import styled from "styled-components";
  * @module Common
  */
 
+/**
+ *
+ */
 export const AlertDiv = styled.div`
 	position: fixed;
 	top: 4rem;
@@ -20,6 +23,9 @@ export const AlertDiv = styled.div`
 	z-index: 1000;
 `;
 
+/**
+ *
+ */
 export const Alert = styled.div`
 	background: white;
 	color: black;

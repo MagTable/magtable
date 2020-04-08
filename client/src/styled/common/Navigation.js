@@ -25,7 +25,7 @@ export const AeroLogo = styled.img`
 `;
 
 /**
- *  A div to hold the NavButtons in the navigation bar.
+ * A div to hold the NavButtons in the navigation bar.
  **/
 export const NavBtnGroup = styled.div`
 	position: absolute;

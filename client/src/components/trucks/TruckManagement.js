@@ -7,11 +7,7 @@ import {
 	AddTruckBtn,
 	TruckManagementDiv
 } from "../../styled/trucks/TruckManagement";
-import {
-	ListTitle,
-	ListTitleText,
-	TruckMgmtTitle
-} from "../../styled/magtable/Titling";
+import { ListTitleText, TruckMgmtTitle } from "../../styled/magtable/Titling";
 import AddTruck from "./AddTruck";
 import Modal from "../common/Modal";
 import { FilterIcon } from "../../styled/magtable/Overflow";
@@ -24,9 +20,9 @@ import {
 import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
 
 /**
+ * This is the main component that deals with all the rendering of the Truck Management page.
  * @date 3/5/2020
  * @author Tom Allcock, MJ Kochuk, Steven Wong
- * This is the main component that deals with all the rendering of the Truck Management page.
  * @category Components/Trucks
  * @constructor
  * @returns {*} The TruckManagement component

@@ -17,7 +17,9 @@ const fadeIn = keyframes`
     opacity: 1;
   }
 `;
-
+/**
+ *
+ */
 export const UserListMgmtDiv = styled.div`
 	width: 100%;
 	height: 100vh;
@@ -48,7 +50,9 @@ export const UserManagmentListDiv = styled.div`
 	background: #f4f4f4;
 	height: calc(100vh - 120px);
 `;
-
+/**
+ *
+ */
 export const UserListDiv = styled.div`
 	margin: auto;
 	width: 60%;
@@ -59,6 +63,9 @@ export const UserListDiv = styled.div`
 	min-height: 100%;
 `;
 
+/**
+ *
+ */
 export const UserListSection = styled.div`
 	margin-bottom: 3rem;
 `;

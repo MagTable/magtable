@@ -7,6 +7,9 @@ import styled from "styled-components";
  * @module Common
  */
 
+/**
+ *
+ */
 export const ClickCatcher = styled.div`
 	position: fixed;
 	z-index: 99;

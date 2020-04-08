@@ -15,17 +15,17 @@ import { removeTruckLocation, setTruckLocation } from "../../actions/magtable";
 import { useDispatch, useSelector } from "react-redux";
 
 /**
- * @date 2/20/2020
- * @author Tom Allcock, Steven Wong, Arran Woodruff
  * Lists the parking locations available for trucks to be assigned to.
  * Users can drag a truck into a parking location.
  * Users cannot drag more than two trucks into any parking location,
  * other than the parking locations in the first and last column.
+ * @date 2/20/2020
+ * @author Tom Allcock, Steven Wong, Arran Woodruff
  * @category Components/MagTable
  * @param parkingLocation The Parking Location
  * @param position The Position
  * @param assignments The Assigned Equipment
- * @returns {*} Returns the Parking Location Component
+ * @returns Returns the Parking Location Component
  * @constructor
  */
 function ParkingLocation({ parkingLocation, position, assignments }) {

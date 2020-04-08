@@ -3,7 +3,8 @@ import styled from "styled-components";
 /**
  * @date 2020-04-01
  * @author MJ Kochuk, Arran Woodruff
- * @module Styled
+ * @category Styled Components
+ * @module TV
  */
 
 /**
@@ -32,6 +33,9 @@ export const TowerListWrap = styled.div`
 	flex-direction: row;
 `;
 
+/**
+ *
+ */
 export const TowerPadWrap = styled.div`
 	width: 100%;
 `;

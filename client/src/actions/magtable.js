@@ -32,7 +32,7 @@ import store from "../store";
  * @date 2020-03-24
  * @author Arran Woodruff, Steven Wong
  * @category Redux-Actions
- * @module MagTable
+ * @module MagTable-Actions
  */
 
 /**
@@ -365,6 +365,7 @@ export const decrementDailyMix = () => dispatch => {
 /**
  * Fetches list of magtable records from the API that were published on a given date
  *
+ * @method getMagtableHistoryList
  * @param date date of related magtable records to fetch
  * @returns list of historical magtable records
  */
@@ -390,6 +391,7 @@ export const getMagtableHistoryList = date => async dispatch => {
 /**
  * Fetches singular historical magtable record by ID
  *
+ * @method getHistoricalMagtableRecord
  * @param id id of historical magtable record
  * @returns magtablerecord with given id
  */
@@ -409,7 +411,9 @@ export const getHistoricalMagtableRecord = id => async dispatch => {
 };
 
 /**
- * Clears the current historical magtable
+ * Clears the current historical MagTable
+ *
+ * @method clearHistoricalMagtable
  * @returns nothing
  */
 export const clearHistoricalMagtable = () => dispatch => {
@@ -417,47 +421,3 @@ export const clearHistoricalMagtable = () => dispatch => {
 		type: CLEAR_HISTORICAL_MAGTABLE
 	});
 };
-
-/**
- * Adds a daily message to the magtable
- *
- * @method addDailyMessage
- * @param {object} message message to add to the magtable
- * @returns API returns the updated list of daily messages
- */
-// const addDailyMessage = message => async dispatch => {
-// 	try {
-// 		const res = await axios.put(
-// 			"/magtable/message/",
-// 			AXIOS_JSON_HEADER,
-// 			message
-// 		);
-//
-// 		dispatch({
-// 			type: ADD_DAILY_MESSAGE,
-// 			payload: res.data
-// 		});
-// 	} catch (err) {
-// 		console.log(err);
-// 	}
-// };
-
-/**
- * Removes a message from the daily message list
- *
- * @method removeDailyMessage
- * @param {integer} messageID messageID of the messaged to remove
- * @returns API returns the updated list of daily messages
- */
-// const removeDailyMessage = messageID => async dispatch => {
-// 	try {
-// 		const res = await axios.delete(`/magtable/message/${messageID}`);
-//
-// 		dispatch({
-// 			type: REMOVE_DAILY_MESSAGE,
-// 			payload: res.data
-// 		});
-// 	} catch (err) {
-// 		console.log(err);
-// 	}
-// };

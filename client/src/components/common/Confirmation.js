@@ -4,10 +4,13 @@ import { ConfirmationBox } from "../../styled/common/Confirmation";
 import { ClickCatcher } from "../../styled/common/ClickCatcher";
 
 /**
+ *
+ * Confirmation Component on buttons.
+ *
  * @date 2/17/2020
- * @author Arran Woodruff, Steven Wong
+ * @author Arran Woodruff
  * @name Confirmation
- * @category Component/Common
+ * @category Components/Common
  * @param children Component that requires confirmation
  * @param action Function which will be called upon confirmation
  * @param confirmationMessage Message displayed on the confirmation button

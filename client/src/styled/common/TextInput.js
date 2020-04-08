@@ -9,6 +9,9 @@ import PlaneBG from "../../res/Images/Plane_BG.jpg";
  * @module Common
  */
 
+/**
+ *
+ */
 export const BlurCover = styled.div`
 	background-color: rgba(255, 255, 255, 0.15);
 	height: 120%;
@@ -21,6 +24,9 @@ export const BlurCover = styled.div`
 	`}
 `;
 
+/**
+ *
+ */
 export const Background = styled.div`
 	background-image: url(${PlaneBG});
 	height: calc(100vh + 10px);
@@ -30,12 +36,18 @@ export const Background = styled.div`
 	transform: translate(-10px, -10px);
 `;
 
+/**
+ *
+ */
 export const BGContainer = styled.div`
 	overflow: hidden;
 	position: absolute;
 	z-index: -5;
 `;
 
+/**
+ *
+ */
 export const TextInputContainer = styled.div`
 	position: relative;
 `;
@@ -121,6 +133,9 @@ export const TextInputIcon = styled.i`
 	`}
 `;
 
+/**
+ *
+ */
 export const TextInputLabel = styled.label`
 	user-select: none;
 	position: absolute;

@@ -7,6 +7,9 @@ import styled from "styled-components";
  * @module Common
  */
 
+/**
+ *
+ */
 export const ConfirmationBox = styled.div`
 	position: relative;
 

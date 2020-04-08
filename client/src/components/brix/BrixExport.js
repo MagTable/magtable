@@ -19,8 +19,8 @@ import { setAlert } from "../../actions/alert";
  * @date 3/29/2020
  * @author Arran Woodruff
  * @name BrixExport
- * @category Component/Brix
- * @returns {*} The BrixExport component
+ * @category Components/Brix
+ * @returns The BrixExport component
  * @constructor
  */
 function BrixExport() {

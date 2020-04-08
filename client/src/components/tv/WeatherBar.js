@@ -26,21 +26,8 @@ function getDate() {
 }
 
 /**
+ * The weather bar component
  *
- * Function to translate the information to the current day in string.
- *
- * @date 2020-03-30
- * @author Steven Wong
- * @Category Components/TV
- * @return {string} Current Day Shortened to 3 Letters
- */
-function getDay() {
-	const date = new Date();
-	const currentDay = date.toLocaleDateString("en-CA", { weekday: "long" });
-	return currentDay.substr(0, 3);
-}
-
-/**
  * @date 2020-03-25
  * @author MJ Kochuk, Arran Woodruff
  * @category Components/TV
@@ -50,6 +37,12 @@ function getDay() {
  */
 function WeatherBar(props) {
 	const { weather } = useSelector(state => state.brix);
+
+	function getDay() {
+		const date = new Date();
+		const currentDay = date.toLocaleDateString("en-CA", { weekday: "long" });
+		return currentDay.substr(0, 3);
+	}
 
 	return weather.loading ? (
 		"..."

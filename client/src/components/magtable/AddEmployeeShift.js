@@ -11,14 +11,13 @@ import { LoginBtn } from "../../styled/auth/Login";
 import Input from "../common/Input";
 
 /**
+ * Handles the rendering of the form to add an Employee Shift to the current shifts in the EmployeeListItems.
  * @date 2/28/2020
  * @author Steven Wong, Arran Woodruff
- * Handles the rendering of the form to add an Employee Shift to the current shifts in the EmployeeListItems.
  * @category Components/MagTable
+ * @returns The AddEmployeeShift component.
  * @constructor
- * @returns {*} The AddEmployeeShift component.
  */
-
 const AddEmployeeForm = styled(Form)`
 	display: grid;
 	grid-template-columns: 200px 200px;

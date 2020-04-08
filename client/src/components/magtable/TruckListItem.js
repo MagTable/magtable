@@ -50,26 +50,22 @@ import { getBrixRecords } from "../../actions/brix";
 import IconButton from "../common/IconButton";
 
 /**
- * @date 2020-02-17
- * @author MJ Kochuk, Steven Wong, Arran Woodruff
  * Displays the content of a Truck's assignment.
- *
  * Truck's assignment status is displayed as a color within TruckNumberDiv as a prop
- *
  * Renders each associated employeeShift with the ability to clear assignments
  * in accordance with business rules (no secondaries assigned without a primary)
- *
  * showAM toggles which employees are displayed (not handled with react, handled in css)
- *
  * Logic is written to determine whether incoming shifts are allowed, provide
  * a warning, or are permitted
+ * @date 2020-02-17
+ * @author MJ Kochuk, Steven Wong, Arran Woodruff, Tom Allcock
  * @category Components/MagTable
- * @constructor
  * @param assignment the associated assignment object
  * @param noticeOpen dictates whether or not to render the truck's notices
  * @param showAM toggle to display am or pm shift slots
  * @param openBrixModal boolean to toggle the brix management modal
  * @returns {*} The TruckListItem component
+ * @constructor
  */
 function TruckListItem({ assignment, noticeOpen, showAM, openBrixModal }) {
 	const [hoveredShiftDescription, setHoveredShiftDescription] = useState(null);

@@ -13,6 +13,8 @@ import { SYSTEM_ADMINISTRATOR } from "../../actions/constants";
 import IconButton from "../common/IconButton";
 
 /**
+ * The Overflow menu for the Employee List side of the page.
+ *
  * @date 3/1/2020
  * @author Tom Allcock, Arran Woodruff, Steven Wong
  * @category Components/MagTable
@@ -30,7 +32,7 @@ import IconButton from "../common/IconButton";
  * @param filterMechanicEmployees Mechanic Employees
  * @param filterTrainerEmployees Trainer Employees
  * @param refreshEmployees Refresh button for Employee List
- * @returns {*} Returns the overflow menu that is used to filter out all the specific information regarding employees and Adding Employees.
+ * @returns Returns the overflow menu that is used to filter out all the specific information regarding employees and Adding Employees.
  * @constructor
  */
 function OverflowEmployee({

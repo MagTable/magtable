@@ -25,8 +25,8 @@ import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
  * @author Tom Allcock, Arran Woodruff
  * Handles rendering of the employee list in the assignment table.
  * @category Components/MagTable
+ * @returns The EmployeeList component
  * @constructor
- * @returns {*} The EmployeeList component
  */
 const EmployeeList = () => {
 	const dispatch = useDispatch();

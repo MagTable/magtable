@@ -26,9 +26,9 @@ const initialState = {
 
 /**
  * @date 2020-03-24
- * @author Arran Woodruff
+ * @author Arran Woodruff, MJ Kochuk
  * @category Redux-Reducers
- * @module Brix
+ * @module Brix-Reducer
  */
 
 export default function(state = initialState, action) {

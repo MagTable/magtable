@@ -11,9 +11,9 @@ import Input from "../common/Input";
 import { addTruck } from "../../actions/truck";
 
 /**
+ * Handles the rendering of the form to add a Truck to the current list of trucks.
  * @date 3/08/2020
  * @author Steven Wong
- * Handles the rendering of the form to add a Truck to the current list of trucks.
  * @category Components/Trucks
  * @constructor
  * @returns {*} The AddTruck form component.

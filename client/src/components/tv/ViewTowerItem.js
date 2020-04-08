@@ -10,13 +10,10 @@ import {
 } from "../../styled/tv/ViewList";
 
 /**
+ * Tower items within the list of towers in TV view.
  * @date 2020-04-01
  * @author MJ Kochuk
- * @module Component
- */
-
-/**
- * Tower items within the list of towers in TV view.
+ * @category Components/TV
  * @constructor
  * @param props
  * @returns {*} The ViewTowerItem component

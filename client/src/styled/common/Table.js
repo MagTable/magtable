@@ -7,6 +7,9 @@ import styled from "styled-components";
  * @module Common
  */
 
+/**
+ *
+ */
 export const Table = styled.table`
 	border-spacing: 0;
 	border-collapse: collapse;
@@ -19,12 +22,18 @@ export const Table = styled.table`
 	}
 `;
 
+/**
+ *
+ */
 export const Thead = styled.thead`
 	border-bottom: 2px solid var(--border-color-light);
 `;
 
 export const Td = styled.td``;
 
+/**
+ *
+ */
 export const Th = styled.th`
 	// tbody scroll only
 	position: sticky;
@@ -32,6 +41,9 @@ export const Th = styled.th`
 	background: var(--modal-bg);
 `;
 
+/**
+ *
+ */
 export const Tr = styled.tr`
 	:hover {
 		background: var(--context-grey-light);

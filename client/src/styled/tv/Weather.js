@@ -48,15 +48,24 @@ export const SideBar = styled.div`
 	}
 `;
 
+/**
+ *
+ */
 export const WeatherWording = styled.h4`
 	margin: 0.5rem 0 0.5rem 0;
 	text-transform: capitalize;
 `;
 
+/**
+ *
+ */
 export const DescriptionWording = styled(WeatherWording)`
 	font-size: 19px;
 `;
 
+/**
+ *
+ */
 export const TempHolder = styled.div`
 	display: flex;
 	align-items: center;
@@ -65,6 +74,9 @@ export const TempHolder = styled.div`
 	padding: 0 10px;
 `;
 
+/**
+ *
+ */
 export const GreyTempHolder = styled(TempHolder)`
 	background: #9fc6ff70;
 	padding: 11px 0;
@@ -72,17 +84,26 @@ export const GreyTempHolder = styled(TempHolder)`
 	margin: 15px 0;
 `;
 
+/**
+ *
+ */
 export const Temp = styled.h2`
 	margin-block-end: 0;
 	margin-block-start: 0;
 `;
 
+/**
+ *
+ */
 export const TimePeriodDiv = styled.div`
 	position: relative;
 	max-height: 100%;
 	overflow-y: auto;
 `;
 
+/**
+ *
+ */
 export const TimePeriodTitle = styled.h2`
 	position: sticky;
 	top: 0;
@@ -111,6 +132,9 @@ export const TimePeriodTitle = styled.h2`
 	}
 `;
 
+/**
+ *
+ */
 export const LaterHourWrapper = styled.div`
 	padding: 0.5rem;
 	:nth-child(odd) {
@@ -118,6 +142,9 @@ export const LaterHourWrapper = styled.div`
 	}
 `;
 
+/**
+ *
+ */
 export const LaterHourHead = styled(WeatherWording)`
 	font-size: 22px;
 	color: black;
@@ -131,41 +158,68 @@ const StatusIcon = styled.i`
 	margin-bottom: 15px;
 `;
 
+/**
+ *
+ */
 export const SunIcon = styled(StatusIcon)`
 	color: #eaab0ea3;
 `;
 
+/**
+ *
+ */
 export const ThunderstormIcon = styled(StatusIcon)`
 	color: dimgrey;
 `;
 
+/**
+ *
+ */
 export const WindIcon = styled(StatusIcon)`
 	color: dimgrey;
 	font-size: 60px;
 `;
 
+/**
+ *
+ */
 export const SnowIcon = styled(StatusIcon)`
 	color: #9fc6ff;
 `;
 
+/**
+ *
+ */
 export const RainIcon = styled(StatusIcon)`
 	color: #b2f3ff;
 `;
 
+/**
+ *
+ */
 export const CloudIcon = styled(StatusIcon)`
 	color: #4d6367;
 `;
 
+/**
+ *
+ */
 export const AtmosphereIcon = styled(StatusIcon)`
 	color: #636363;
 `;
 
+/**
+ *
+ */
 export const WindArrow = styled(StatusIcon)`
 	transform: rotate(${props => props.angle}deg);
 	margin: 0;
 	font-size: 45px;
 `;
 
+/**
+ *
+ */
 export const WindArrowWrap = styled.div`
 	margin-top: 25px;
 `;
