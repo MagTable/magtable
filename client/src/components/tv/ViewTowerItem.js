@@ -1,10 +1,6 @@
 import React from "react";
-import {} from "../../styled/tv/ViewList";
 import { ViewTowerListItem } from "../../styled/tv/ViewList";
 import { ViewTruckEmployees } from "../../styled/tv/ViewList";
-import { ViewTruckListItem } from "../../styled/tv/ViewList";
-import { ViewTruckNumber } from "../../styled/tv/ViewList";
-import { ViewTruckParkingLocation } from "../../styled/tv/ViewList";
 import { ViewTowerListType } from "../../styled/tv/ViewList";
 
 /**
@@ -22,7 +18,6 @@ import { ViewTowerListType } from "../../styled/tv/ViewList";
 function ViewTowerItem({ assignment }) {
 	let amShifts = []; // Employees assigned to this truck in the AM.
 	let pmShifts = []; // Employees assigned to this truck in the PM.
-	console.log(assignment.employeeShifts);
 
 	for (let i = 0; i < assignment.employeeShifts.length; i++) {
 		if (assignment.employeeShifts[i].timeOfDay === "AM") {

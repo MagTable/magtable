@@ -6,6 +6,7 @@ import ViewNotice from "./ViewNotice";
 import { DEICE_TRUCK, SERVICE_VEHICLE } from "../../actions/constants";
 import {
 	SectionHeader,
+	ViewListContent,
 	ViewTowerContainer,
 	ViewTowerList
 } from "../../styled/tv/ViewList";
@@ -62,7 +63,7 @@ function ViewList(props) {
 	);
 
 	return (
-		<div style={{ position: "relative" }}>
+		<ViewListContent>
 			<SectionHeader>
 				De-Ice Trucks
 				<IconButton
@@ -122,7 +123,7 @@ function ViewList(props) {
 					{towerSpotter && <ViewTowerItem assignment={towerSpotter} />}
 				</ViewTowerList>
 			</ViewTowerContainer>
-		</div>
+		</ViewListContent>
 	);
 }
 

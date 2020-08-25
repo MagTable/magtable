@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import WeatherBar from "./WeatherBar";
 import ViewList from "./ViewList";
-import {
-	TvViewContainer,
-	TvViewContent,
-	TVWrap
-} from "../../styled/tv/ViewList";
+import { TvViewContainer, TvViewContent } from "../../styled/tv/ViewList";
 import MagtableHistorySelector from "./MagtableHistorySelector";
 import Modal from "../common/Modal";
 import { useDispatch, useSelector } from "react-redux";

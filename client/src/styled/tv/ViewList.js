@@ -7,7 +7,7 @@ import styled from "styled-components";
  */
 
 export const TvViewContainer = styled.div`
-	height: 100%;
+	max-height: 100%;
 	display: grid;
 	grid-template-rows: 50px 1fr;
 	position: relative;
@@ -16,6 +16,7 @@ export const TvViewContainer = styled.div`
 export const TvViewContent = styled.div`
 	display: grid;
 	grid-template-columns: 1fr auto;
+	max-height: 100%;
 
 	${({ fullScreen }) =>
 		fullScreen &&
@@ -27,6 +28,13 @@ export const TvViewContent = styled.div`
 		right: 0;
 		background: white;
 	`}
+`;
+
+export const ViewListContent = styled.div`
+	position: relative;
+	max-height: 100%;
+	overflow-y: auto;
+	border-right: 2px solid var(--navbar);
 `;
 
 export const SectionHeader = styled.h2`
@@ -117,7 +125,6 @@ export const ViewTruckNoticeListItem = styled.div`
 	align-items: center;
 
 	box-sizing: border-box;
-	border-right: 2px solid var(--navbar-light);
 	:nth-child(odd) {
 		border-right: 2px solid var(--navbar-light);
 	}
@@ -132,24 +139,20 @@ export const ViewTowerContainer = styled.div`
 	position: absolute;
 	width: 100%;
 	bottom: 0;
+	background: white;
 `;
 
 export const ViewTowerList = styled.div`
 	display: flex;
-	flex-wrap: wrap-reverse;
-	height: 182px;
-	flex-direction: column;
+	flex-wrap: wrap;
+	flex-direction: row;
 `;
 
 export const ViewTowerListType = styled(ViewTruckNumber)`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
 	width: 100%;
 	h2 {
 		margin: 0;
-		padding: 0.5rem 0;
+		padding: 0.5rem;
 	}
 `;
 
@@ -157,13 +160,6 @@ export const ViewTowerListItem = styled(ViewTruckListItem)`
 	display: grid;
 	grid-template-columns: 170px 1fr 1fr;
 	grid-template-areas: "number am pm";
-
-	box-sizing: border-box;
-
-	:not(:last-child) {
-		border-bottom: 2px solid var(--navbar-light);
-	}
-	border-right: 0 !important;
 
 	> * {
 		display: block;
