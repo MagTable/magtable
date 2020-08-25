@@ -22,7 +22,7 @@ import java.util.Calendar;
 @RequestMapping("/shift")
 public class ShiftController {
 
-    private static String SID = "32325584041A4";
+    private static String SID = System.getenv("W2W_MOB_SID");
 
 
     @Autowired
