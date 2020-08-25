@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import WeatherBar from "./WeatherBar";
 import ViewList from "./ViewList";
-import { TVWrap } from "../../styled/tv/ViewList";
+import {
+	TvViewContainer,
+	TvViewContent,
+	TVWrap
+} from "../../styled/tv/ViewList";
 import MagtableHistorySelector from "./MagtableHistorySelector";
 import Modal from "../common/Modal";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,6 +26,8 @@ import { clearHistoricalMagtable } from "../../actions/magtable";
  */
 function TVView(props) {
 	const [showHistoryModal, setShowHistoryModal] = useState(false);
+	const [fullScreen, setFullScreen] = useState(false);
+
 	const dispatch = useDispatch();
 	const authUser = useSelector(state => state.auth.user);
 	const historicalMagtable = useSelector(
@@ -51,7 +57,7 @@ function TVView(props) {
 	};
 
 	return (
-		<div>
+		<TvViewContainer>
 			<ListTitle>
 				<ListTitleText>
 					Assignments
@@ -59,15 +65,15 @@ function TVView(props) {
 				</ListTitleText>
 				{authUser.role.name === SYSTEM_ADMINISTRATOR && (
 					<AddTruckBtn onClick={handleHistoryClick}>
-						<FilterIcon className={"fas fa-calendar-alt"} />
 						{historicalMagtable ? "Current" : "History"}
+						<FilterIcon className={"fas fa-calendar-alt"} />
 					</AddTruckBtn>
 				)}
 			</ListTitle>
-			<TVWrap>
-				<ViewList />
+			<TvViewContent fullScreen={fullScreen}>
+				<ViewList fullScreen={fullScreen} setFullScreen={setFullScreen} />
 				<WeatherBar />
-			</TVWrap>
+			</TvViewContent>
 			<Modal
 				show={showHistoryModal}
 				handleClose={() => setShowHistoryModal(false)}
@@ -76,7 +82,7 @@ function TVView(props) {
 					handleClose={() => setShowHistoryModal(false)}
 				/>
 			</Modal>
-		</div>
+		</TvViewContainer>
 	);
 }
 

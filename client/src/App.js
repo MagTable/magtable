@@ -17,6 +17,7 @@ import NavBar from "./components/common/NavBar";
 import TVView from "./components/tv/TVView";
 import StompClient from "./components/common/StompClient";
 import TruckManagement from "./components/trucks/TruckManagement";
+import { Page } from "./styled/common/Navigation";
 
 function App() {
 	const [wsConnected, setWSConnected] = useState(false);
@@ -31,28 +32,30 @@ function App() {
 	return (
 		<Provider store={store}>
 			<HashRouter basename={"/"} hashType={"slash"}>
-				<NavBar wsConnected={wsConnected} />
-				<Alert />
-				<StompClient setWSConnected={setWSConnected} />
-				<Switch>
-					<Route exact path="/login" component={Login} />
-					<Route exact path="/password/reset" component={PasswordReset} />
-					<PrivateRoute
-						exact
-						path="/"
-						component={AssignmentTable}
-						personnelManagerRoute
-					/>
-					<PrivateRoute exact path="/truck/all" component={TruckManagement} />
-					<PrivateRoute exact path="/truck/tv" component={TVView} />
-					<PrivateRoute
-						exact
-						path="/user/all"
-						component={UserList}
-						adminRoute
-					/>
-					<PrivateRoute exact path="/logout" component={Logout} />
-				</Switch>
+				<Page>
+					<NavBar wsConnected={wsConnected} />
+					<Alert />
+					<StompClient setWSConnected={setWSConnected} />
+					<Switch>
+						<Route exact path="/login" component={Login} />
+						<Route exact path="/password/reset" component={PasswordReset} />
+						<PrivateRoute
+							exact
+							path="/"
+							component={AssignmentTable}
+							personnelManagerRoute
+						/>
+						<PrivateRoute exact path="/truck/all" component={TruckManagement} />
+						<PrivateRoute exact path="/truck/tv" component={TVView} />
+						<PrivateRoute
+							exact
+							path="/user/all"
+							component={UserList}
+							adminRoute
+						/>
+						<PrivateRoute exact path="/logout" component={Logout} />
+					</Switch>
+				</Page>
 			</HashRouter>
 		</Provider>
 	);
