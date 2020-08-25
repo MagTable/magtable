@@ -7,7 +7,8 @@ import { updateTable } from "../../actions/magtable";
 const StompClient = ({ setWSConnected }) => {
 	const dispatch = useDispatch();
 	const client = new Client({
-		brokerURL: process.env.REACT_APP_PUBLIC_WS_URL || "ws://localhost:8080/ws/websocket",
+		brokerURL:
+			process.env.REACT_APP_PUBLIC_WS_URL || "ws://localhost:8080/ws/websocket",
 		reconnectDelay: 3000,
 		heartbeatIncoming: 10000,
 		heartbeatOutgoing: 10000
