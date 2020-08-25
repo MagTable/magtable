@@ -22,7 +22,7 @@ import java.util.Calendar;
 @RequestMapping("/shift")
 public class ShiftController {
 
-    private static String SID = System.getenv("W2W_MOB_SID");
+    private static String SID = "138943278443A6";
 
 
     @Autowired
@@ -40,6 +40,9 @@ public class ShiftController {
      */
     @GetMapping("/all")
     public ShiftList getAllShifts() {
+        System.out.println(System.getenv("W2W_MOB_SID"));
+        
+        
         ShiftList shiftList = ShiftList.getInstance();
         shiftList.updateShifts((ArrayList<W2WShift>) w2wShiftRepository.findAll());
         return shiftList;
