@@ -28,7 +28,6 @@ import PlaneLoader from "../common/PlaneLoader";
 const Login = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const { isAuthenticated, loading, error } = useSelector(state => state.auth);
-	const [blur, setBlur] = useState(false);
 	const dispatch = useDispatch();
 	const history = useHistory(); // to allow us to redirect the user
 
@@ -75,7 +74,6 @@ const Login = () => {
 					{props => (
 						<Form>
 							<Input
-								onClick={() => setBlur(true)}
 								value={props.values.username}
 								label="Username"
 								name="username"
@@ -84,7 +82,6 @@ const Login = () => {
 								fit
 							/>
 							<Input
-								onClick={() => setBlur(true)}
 								value={props.values.password}
 								label="Password"
 								name="password"

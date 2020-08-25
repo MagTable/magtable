@@ -33,7 +33,7 @@ function TVView(props) {
 		return () => {
 			dispatch(clearHistoricalMagtable());
 		};
-	}, []);
+	}, [dispatch]);
 
 	const timePublished = new Date(historicalMagtable?.timePublished);
 

@@ -7,11 +7,7 @@ import {
 	AddTruckBtn,
 	TruckManagementDiv
 } from "../../styled/trucks/TruckManagement";
-import {
-	ListTitle,
-	ListTitleText,
-	TruckMgmtTitle
-} from "../../styled/magtable/Titling";
+import { ListTitleText, TruckMgmtTitle } from "../../styled/magtable/Titling";
 import AddTruck from "./AddTruck";
 import Modal from "../common/Modal";
 import { FilterIcon } from "../../styled/magtable/Overflow";
