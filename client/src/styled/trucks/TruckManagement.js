@@ -8,6 +8,9 @@ import { Button } from "../common/FormControl";
  * @module Trucks
  */
 
+/**
+ *
+ */
 export const TruckManagementListDiv = styled.div`
 	transition: all 0.15s ease-in-out;
 	overflow-y: auto;
@@ -18,7 +21,9 @@ export const TruckManagementListDiv = styled.div`
 	background: #f4f4f4;
 	height: calc(100vh - 120px);
 `;
-
+/**
+ *
+ */
 export const TruckManagementDiv = styled.div`
 	margin: auto;
 	width: 60%;
@@ -28,7 +33,9 @@ export const TruckManagementDiv = styled.div`
 	/* min-height: 100%; */
 	min-height: 100%;
 `;
-
+/**
+ *
+ */
 export const TruckMgmtDiv = styled.div`
 	width: 100%;
 	height: 100vh;
@@ -61,7 +68,9 @@ export const TruckMgmtWrap = styled.div`
 	display: flex;
 	flex-direction: row;
 `;
-
+/**
+ *
+ */
 export const AddTruckBtn = styled(Button)`
 	width: 165px;
 	margin-right: 30px;

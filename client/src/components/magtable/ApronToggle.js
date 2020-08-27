@@ -8,6 +8,16 @@ import {
 } from "../../styled/common/FormControl";
 import { EAST_APRON, WEST_APRON } from "../../actions/constants";
 
+/**
+ *
+ * Apron Toggle used to switch between aprons.
+ *
+ * @date 2020-03-24
+ * @author Tom Allcock, MJ Kochuk
+ * @category Components/MagTable
+ * @return The Apron Toggle
+ * @constructor
+ */
 const ApronToggle = () => {
 	const dispatch = useDispatch();
 

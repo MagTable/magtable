@@ -15,9 +15,9 @@ import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
  * The Private Routes Component.
  *
  * @date 2/10/2020
- * @author Arran Woodruff, Steven Wong
+ * @author Arran Woodruff
  * @name PrivateRoute
- * @category Component/Auth
+ * @category Components/Auth
  * @param Component The Component to return
  * @param data The Component data
  * @param adminRoute The route for only admins

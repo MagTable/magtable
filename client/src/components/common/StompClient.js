@@ -4,6 +4,17 @@ import { MTR_PUBLISH } from "../../actions/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { updateTable } from "../../actions/magtable";
 
+/**
+ *
+ * Client WebSocket Configuration
+ *
+ * @date 2/28/2020
+ * @author Arran Woodruff
+ * @category Components/Common
+ * @param setWSConnected
+ * @return The WebSockets updates.
+ * @constructor
+ */
 const StompClient = ({ setWSConnected }) => {
 	const authenticated = useSelector(state => state.auth.isAuthenticated);
 

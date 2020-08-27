@@ -7,9 +7,9 @@ import * as Yup from "yup";
 import Input from "../common/Input";
 
 /**
+ * Adds a user of the given role type
  * @date 2020-03-24
  * @author Arran Woodruff, Steven Wong
- * Adds a user of the given role type
  * @category Components/User
  * @param role role of user to be added
  * @returns {*} The AddUser component

@@ -27,8 +27,8 @@ import { setDailyMixChartRow } from "../../actions/brix";
  * @date 3/24/2020
  * @author Arran Woodruff
  * @name WeatherInfo
- * @category Component/Brix
- * @returns {*} The WeatherInfo component
+ * @category Components/Brix
+ * @returns The WeatherInfo component
  * @constructor
  */
 function WeatherInfo() {

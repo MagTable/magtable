@@ -15,9 +15,11 @@ const StyledTextArea = styled.textarea`
 `;
 
 /**
+ * TextArea box for forms.
+ *
  * @date 2/28/2020
  * @author Steven Wong, MJ Kochuk
- * @category Component/Common
+ * @category Components/Common
  * @param label
  * @param props
  * @return {*}

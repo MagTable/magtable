@@ -16,12 +16,15 @@ import {
 } from "../../styled/magtable/ListContent";
 
 /**
+ *
+ * Each individual item within the Employee List.
+ *
  * @date 2020-02-19
- * @author MJ Kochuk, Arran Woodruff, Steven Wong
+ * @author MJ Kochuk, Arran Woodruff
  * @category Components/MagTable
  * @param employeeShift The Employee Shift data
  * @param assignment The equipment the employee is assigned too.
- * @returns {*} The EmployeeListItem component
+ * @returns The EmployeeListItem component
  * @constructor
  */
 function EmployeeListItem({ employeeShift, assignment }) {

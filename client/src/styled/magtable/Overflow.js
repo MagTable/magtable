@@ -4,11 +4,11 @@ import styled from "styled-components";
  * @date 3/1/2020
  * @author Tom Allcock, Arran Woodruff
  * @category Styled Components
- * @module MagTable
+ * @module Brix
  */
 
 /**
- *
+ *  OverflowMenu
  **/
 export const OverflowMenu = styled.div`
 	position: relative;
@@ -40,7 +40,9 @@ export const OverflowMenu = styled.div`
 		top: 2.5rem;
 	}
 `;
-
+/**
+ *  OverflowMenuButton
+ **/
 export const OverflowMenuButton = styled.button`
 	position: relative;
 	transition: background 0.1s ease-in-out;
@@ -69,7 +71,9 @@ export const OverflowMenuButton = styled.button`
 			hoverColor || "var(--context-grey-light)"};
 	}
 `;
-
+/**
+ *  FilterIcon
+ **/
 export const FilterIcon = styled.i`
 	cursor: pointer;
 	float: right;

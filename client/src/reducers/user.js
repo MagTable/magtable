@@ -11,9 +11,9 @@ import {
 
 /**
  * @date 2020-03-24
- * @author Arran Woodruff
+ * @author Arran Woodruff, Steven wong
  * @category Redux-Reducers
- * @module User
+ * @module User-Reducer
  */
 
 const initialState = {

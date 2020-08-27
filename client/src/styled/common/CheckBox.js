@@ -7,6 +7,9 @@ import styled from "styled-components";
  * @module Common
  */
 
+/**
+ *
+ */
 export const StyledCheckBoxDiv = styled.div`
 	background-color: #e5eaef;
 	display: block;
@@ -14,6 +17,9 @@ export const StyledCheckBoxDiv = styled.div`
 	position: relative;
 `;
 
+/**
+ *
+ */
 export const StyledCheckBoxLabel = styled.label`
 	padding: 0.75rem;
 	display: block;
@@ -57,6 +63,9 @@ export const StyledCheckBoxLabel = styled.label`
 	}
 `;
 
+/**
+ *
+ */
 export const StyledCheckBoxInput = styled.input`
 	width: 100%;
 	height: 100%;

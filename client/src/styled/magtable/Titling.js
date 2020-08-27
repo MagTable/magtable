@@ -4,11 +4,11 @@ import styled from "styled-components";
  * @date 2020-02-17
  * @author MJ Kochuk
  * @category Styled Components
- * @module MagTable
+ * @module Brix
  */
 
 /**
- * A block to hold the title for a section of the Mag Table.js eg. Employees, Trucks, Parking Locations, Tower.
+ *  ListTitle A block to hold the title for a section of the Mag Table.js eg. Employees, Trucks, Parking Locations, Tower.
  **/
 export const ListTitle = styled.div`
 	background-color: var(--header);
@@ -21,10 +21,13 @@ export const ListTitle = styled.div`
 	padding: 0 1rem;
 `;
 
+/**
+ *  TruckMgmtTitle
+ */
 export const TruckMgmtTitle = styled(ListTitle)``;
 
 /**
- * The text within the ListTitle div.
+ *  ListTitleText The text within the ListTitle div.
  */
 export const ListTitleText = styled.p`
 	width: 100%;
@@ -36,7 +39,7 @@ export const ListTitleText = styled.p`
 `;
 
 /**
- * Title div specific to the tower, since the tower map contains roles that need titles.
+ *  TowerTitle Title div specific to the tower, since the tower map contains roles that need titles.
  */
 export const TowerTitle = styled.div`
 	background-color: var(--header);
@@ -45,7 +48,7 @@ export const TowerTitle = styled.div`
 `;
 
 /**
- * The text within the TowerTitle div.
+ *  TowerTitleText The text within the TowerTitle div.
  */
 export const TowerTitleText = styled(ListTitleText)`
 	color: var(--sub-header-text);

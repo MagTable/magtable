@@ -20,9 +20,9 @@ import {
 import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
 
 /**
+ * This is the main component that deals with all the rendering of the Truck Management page.
  * @date 3/5/2020
  * @author Tom Allcock, MJ Kochuk, Steven Wong
- * This is the main component that deals with all the rendering of the Truck Management page.
  * @category Components/Trucks
  * @constructor
  * @returns {*} The TruckManagement component

@@ -34,10 +34,11 @@ import {
 import { ParkingZones } from "../res/test_data/magtable";
 
 /**
+ *
  * @date 2020-03-24
- * @author Arran Woodruff
+ * @author Arran Woodruff, Steven wong
  * @category Redux-Reducers
- * @module MagTable
+ * @module MagTable-Reducer
  */
 
 const initialState = {

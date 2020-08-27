@@ -56,10 +56,10 @@ const StyledSection = styled.section`
 `;
 
 /**
+ * A Modal to render the Add Employee Shift whenever we wish to add one. It is controlled using the OverflowEmployee.js file
  * @date 3/01/2020
  * @author Steven Wong, Arran Woodruff
- * A Modal to render the Add Employee Shift whenever we wish to add one. It is controlled using the OverflowEmployee.js file
- * @category Components/Modal
+ * @category Components/Common
  * @param handleClose The state of handleClose
  * @param show The state of show
  * @param children The component we're rendering in the modal.

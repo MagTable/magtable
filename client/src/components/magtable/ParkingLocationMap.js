@@ -16,6 +16,8 @@ import IconButton from "../common/IconButton";
 import OverflowLocations from "./OverflowLocations";
 
 /**
+ * The actual map of parking locations.
+ *
  * @date 2020-02-17
  * @author MJ Kochuk, Arran Woodruff, Steven Wong
  * @category Components/MagTable

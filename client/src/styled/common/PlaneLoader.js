@@ -1,6 +1,13 @@
 import styled, { keyframes } from "styled-components";
 import { ReactComponent as NoTextLogo } from "../../res/Images/NoTextLogo.svg";
 
+/**
+ * @date 2020-02-05
+ * @author MJ Kochuk, Arran Woodruff
+ * @category Styled Components
+ * @module Common
+ */
+
 const flyIn = keyframes`
   from {
     transform: translate(-350px, 150px);
@@ -22,6 +29,9 @@ const slide = keyframes`
     }
 `;
 
+/**
+ *
+ */
 export const PlaneLoaderDiv = styled.div`
 	width: 490px;
 	height: 150px;
@@ -29,7 +39,9 @@ export const PlaneLoaderDiv = styled.div`
 	position: relative;
 	z-index: 10;
 `;
-
+/**
+ *
+ */
 export const PlaneImg = styled(NoTextLogo)`
     width: 150px;
     height: auto;
@@ -39,7 +51,9 @@ export const PlaneImg = styled(NoTextLogo)`
     z-index: 11;
 }
 `;
-
+/**
+ *
+ */
 export const LogoText = styled.p`
 	font-size: 100px;
 
@@ -50,7 +64,9 @@ export const LogoText = styled.p`
 	transform: translate(-320px, 50px);
 	font-family: "Bebas Neue", cursive;
 `;
-
+/**
+ *
+ */
 export const TextHolder = styled.div`
 	position: absolute;
 	z-index: -1;

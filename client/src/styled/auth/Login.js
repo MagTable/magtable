@@ -10,7 +10,7 @@ import PlaneBG from "../../res/Images/Plane_BG.jpg";
  */
 
 /**
- * @method Background
+ *
  */
 export const Background = styled.div`
 	background-image: url(${PlaneBG});
@@ -23,7 +23,7 @@ export const Background = styled.div`
 `;
 
 /**
- * @method Background Container
+ *
  */
 export const BGContainer = styled.div`
 	overflow: hidden;
@@ -34,7 +34,6 @@ export const BGContainer = styled.div`
 /**
  * The container immediately surrounding the login elements, provides style and input positioning.
  *
- * @method LoginBlock
  */
 export const LoginBlock = styled.div`
 	max-width: 488px;
@@ -56,8 +55,6 @@ export const LoginBlock = styled.div`
 
 /**
  * The submit button to log in to the app
- *
- * @method LoginBlock
  */
 export const LoginBtn = styled(OkButton)`
 	color: black;

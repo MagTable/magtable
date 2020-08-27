@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
  * @date 2/10/2020
  * @author Arran Woodruff
  * @name Logout
- * @category Component/Auth
+ * @category Components/Auth
  * @returns {*} The logout component
  * @constructor
  */

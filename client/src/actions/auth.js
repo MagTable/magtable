@@ -21,9 +21,9 @@ import { getMagTable, getParkingLocations } from "./magtable";
 
 /**
  * @date 2020-03-24
- * @author Arran Woodruff, Steven Wong
+ * @author Arran Woodruff
  * @category Redux-Actions
- * @module Auth
+ * @module Auth-Actions
  */
 
 window.addEventListener("storage", e => {

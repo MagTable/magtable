@@ -6,11 +6,13 @@ import { EAST_APRON, WEST_APRON } from "../../actions/constants";
 import { LoadingImg, SpinnerWrap } from "../../styled/common/QualityOfLife";
 
 /**
+ * The Tower List section. Sorts the positions and sends the children to TowerListItem
+ *
  * @date 2020-02-19
- * @author MJ Kochuk, Steven Wong, Arran Woodruff
+ * @author Steven Wong, Arran Woodruff
  * @category Components/MagTable
- * @constructor
  * @returns {*} The TowerList component and sets the tower positions based on the selected Apron
+ * @constructor
  */
 function TowerList() {
 	const assignments = useSelector(state => state.magtable.assignments);

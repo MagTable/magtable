@@ -20,8 +20,8 @@ import {
  * @date 2/10/2020
  * @author Arran Woodruff, Steven Wong
  * @name Password Reset
- * @category Component/Auth
- * @returns {*} The ResetPassword Component
+ * @category Components/Auth
+ * @returns The ResetPassword Component
  * @constructor
  */
 function ResetPassword() {

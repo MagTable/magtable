@@ -9,13 +9,10 @@ import {
 } from "../../styled/tv/Weather";
 
 /**
+ * Depending on the status ID provided for the weather, a certain component with the correct styling will be returned.
  * @date 2020-03-31
  * @author MJ Kochuk
- * @module Component
- */
-
-/**
- * Depending on the status ID provided for the weather, a certain component with the correct styling will be returned.
+ * @category Components/TV
  * @constructor
  * @param props
  * @returns {*} The WeatherIcon component

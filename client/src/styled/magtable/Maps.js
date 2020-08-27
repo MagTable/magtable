@@ -4,7 +4,7 @@ import styled, { keyframes } from "styled-components";
  * @date 2020-02-17
  * @author MJ Kochuk, Arran Woodruff
  * @category Styled Components
- * @module MagTable
+ * @module Brix
  */
 
 const fadeIn = keyframes`
@@ -17,7 +17,7 @@ const fadeIn = keyframes`
 `;
 
 /**
- * Wrapper div to hold the truck map and its title.
+ *  TruckMapDiv Wrapper div to hold the truck map and its title.
  **/
 export const TruckMapDiv = styled.div`
 	display: flex;
@@ -29,7 +29,7 @@ export const TruckMapDiv = styled.div`
 `;
 
 /**
- * Wrapper div to hold the tower map.
+ *  TowerMapDiv Wrapper div to hold the tower map.
  */
 export const TowerMapDiv = styled.div`
 	display: flex;
@@ -38,7 +38,7 @@ export const TowerMapDiv = styled.div`
 `;
 
 /**
- * Holds the title and currently assigned employees for each tower role.
+ *  TowerPositionDiv Holds the title and currently assigned employees for each tower role.
  */
 export const TowerPositionDiv = styled.div`
 	display: flex;
@@ -51,7 +51,7 @@ export const TowerPositionDiv = styled.div`
 `;
 
 /**
- * Wrapper for both the truck map and tower map, used for keeping column alignment between them.
+ *  MapsDiv Wrapper for both the truck map and tower map, used for keeping column alignment between them.
  */
 export const MapsDiv = styled.div`
 	display: flex;
@@ -61,7 +61,7 @@ export const MapsDiv = styled.div`
 `;
 
 /**
- * Wrapper div for the entire component, keeps all sections in one page.
+ *  AssignmentContainer Wrapper div for the entire component, keeps all sections in one page.
  */
 export const AssignmentContainer = styled.div`
 	display: flex;

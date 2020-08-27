@@ -13,14 +13,6 @@ import { MECHANIC, SYSTEM_ADMINISTRATOR } from "../../actions/constants";
 import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 
-/**
- * @date 2020-02-09
- * @author MJ Kochuk, Steven Wong
- * @name useWindowSize
- * @category Component/Common
- * @constructor
- */
-
 // Sourced from https://usehooks.com/useWindowSize/ | Author: Gabe Ragland
 export function useWindowSize() {
 	const isClient = typeof window === "object";
@@ -53,12 +45,14 @@ export function useWindowSize() {
 /**
  * The menu used for navigating the site. The desktop version has a simple layout with links simply placed in the
  * header, while the mobile version has a folding menu to preserve screen real estate.
+ *
+ * @author MJ Kochuk, Steven Wong
  * @name MenuPane
- * @category Component/Common
- * @constructor
+ * @category Components/Common
  * @param menuOpen dictates whether or not the menu is in the open state
  * @param setMenuOpen changes the value of menuOpen
  * @returns {*} The MenuPane component
+ * @constructor
  */
 function MenuPane({ menuOpen, setMenuOpen }) {
 	// Used for mobile, commented until we're ready to work on mobile.

@@ -5,11 +5,11 @@ import { IconButton as StyledIconButton } from "../../styled/common/IconButton";
 import { BrowserView } from "react-device-detect";
 
 /**
- * @date 2/17/2020
- * @author Arran Woodruff, Steven wong
  * A component rendered as a FontAwesome icon which has a tooltip and an onClick function
+ * @date 2/17/2020
+ * @author Arran Woodruff
  * @name IconButton
- * @category Component/Common
+ * @category Components/Common
  * @param faClassName Class name of the FontAwesome icon
  * @param color Color of the icon
  * @param hoverColor Hover color of the icon

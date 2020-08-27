@@ -8,10 +8,13 @@ import {
 } from "../../styled/common/CheckBox";
 
 /**
+ *
+ * CheckBox Component for forms
+ *
  * @date 2/28/2020
  * @author Steven Wong
  * @name CheckBox
- * @category Component/Common
+ * @category Components/Common
  * @param children The children of the checkbox.
  * @param props Props we past in from the form.
  * @returns {*} Returns a styled checkbox component.

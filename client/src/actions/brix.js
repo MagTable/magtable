@@ -12,9 +12,9 @@ import axios from "axios";
 
 /**
  * @date 2020-03-24
- * @author Arran Woodruff, Steven Wong, MJ Kochuk
+ * @author Arran Woodruff, MJ Kochuk
  * @category Redux-Actions
- * @module Brix
+ * @module Brix-Actions
  */
 
 /**

@@ -58,8 +58,8 @@ export const getFormattedDate = date => {
  * @date 2020-03-24
  * @author Arran Woodruff
  * @name BrixManagement
- * @category Component/Brix
- * @returns {*} The BrixManagement component
+ * @category Components/Brix
+ * @returns The BrixManagement component
  * @constructor
  */
 function BrixManagement() {

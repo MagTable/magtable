@@ -25,15 +25,15 @@ import BrixManagement from "../brix/BrixManagement";
 import ReactTooltip from "react-tooltip";
 
 /**
- * @date 2020-02-17
- * @author MJ Kochuk, Arran Woodruff
  * Rendered on the Truck Assignment page, displays all available trucks, the employees assigned to each (two AM and two
  * PM slots for employees) while color-coding each truck to represent their operational status. User can expand and
  * contract notices on all trucks and swap between displaying AM employees and PM employees. Trucks are draggable for
  * assigning them to locations in the ParkingLocationMap.
+ * @date 2020-02-17
+ * @author MJ Kochuk, Arran Woodruff, Tom Allcock
  * @category Components/MagTable
- * @constructor
  * @returns {*} The TruckList component
+ * @constructor
  */
 function TruckList() {
 	const [noticesOpen, setNoticesOpen] = useState(false);

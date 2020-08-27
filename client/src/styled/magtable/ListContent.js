@@ -6,7 +6,7 @@ import { DANGER, SUCCESS, WARNING } from "../../actions/constants";
  * @date 2020-02-17
  * @author MJ Kochuk, Arran Woodruff
  * @category Styled Components
- * @module MagTable
+ * @module Brix
  */
 
 const fadeIn = keyframes`
@@ -19,7 +19,7 @@ const fadeIn = keyframes`
 `;
 
 /**
- * Provides the correct color code for an employee's label based on their abilities/role
+ *  getColor Provides the correct color code for an employee's label based on their abilities/role
  * @param type The codes representing an employees roles. Can be gp (Green pass), ts (Tower staff), ojt (On the job training) or bl (bay lead)
  */
 export const getColor = type => {
@@ -36,7 +36,7 @@ export const getColor = type => {
 };
 
 /**
- * Provides the correct color code for a truck based on the status of the truck.
+ *  getTruckColorCode Provides the correct color code for a truck based on the status of the truck.
  * @param status The status of the truck. Can be GO (Operational), INOP (Inoperable), CON (Conditional) or OOS(Out of service)
  */
 const getTruckColorCode = status => {
@@ -59,6 +59,9 @@ const getTruckColorCode = status => {
 	}
 };
 
+/**
+ *
+ */
 export const UnassignBtn = styled.button`
 	position: absolute;
 	border-bottom-left-radius: 5px;
@@ -126,12 +129,16 @@ export const EmployeeListRefreshInfo = styled.div`
 `;
 
 /**
- **/
+ *  TruckListDiv
+ */
 export const TruckListDiv = styled.div`
 	overflow-y: auto;
 	animation: 0.3s ${fadeIn} ease-out;
 `;
 
+/**
+ *  TruckListDivWrapper
+ */
 export const TruckListDivWrapper = styled.div`
 	border-right: 2px solid var(--border-color);
 	max-width: 380px;
@@ -142,6 +149,9 @@ export const TruckListDivWrapper = styled.div`
 	grid-template-rows: 50px 1fr;
 `;
 
+/**
+ *  ManipTruckManipIconDiv
+ */
 export const ManipTruckManipIconDiv = styled.div`
 	width: auto;
 	align-items: center;
@@ -151,6 +161,9 @@ export const ManipTruckManipIconDiv = styled.div`
 	transition: 0.3s ease-in-out;
 `;
 
+/**
+ *  TruckStatusCounterItem
+ */
 export const TruckStatusCounterItem = styled.span`
 	text-align: center;
 
@@ -166,6 +179,9 @@ export const TruckStatusCounterItem = styled.span`
 	${({ INOP }) => INOP && `color: var(--context-red)`}
 `;
 
+/**
+ *  TruckListItemDiv
+ */
 export const TruckListItemDiv = styled.div`
 	transition: all 0.15s ease-in-out;
 	display: flex;
@@ -186,6 +202,9 @@ export const TruckListItemDiv = styled.div`
 	`}
 `;
 
+/**
+ *  TruckListManipulateBlock
+ */
 export const TruckListManipulateBlock = styled.div`
 	display: flex;
 	width: 100%;
@@ -210,6 +229,9 @@ export const TruckListManipulateBlock = styled.div`
 	}
 `;
 
+/**
+ *  TruckStatusBox
+ */
 export const TruckStatusBox = styled.div`
 	width: 100%;
 	display: block;
@@ -221,6 +243,9 @@ export const TruckStatusBox = styled.div`
 	padding-left: 5px;
 `;
 
+/**
+ *  TruckNoticeDiv
+ */
 export const TruckNoticeDiv = styled.div`
 	overflow: hidden;
 	transition: all 0.25s ease-in-out;
@@ -228,6 +253,9 @@ export const TruckNoticeDiv = styled.div`
 	border-bottom: 1px solid var(--border-color);
 `;
 
+/**
+ *  TruckProblemsText
+ */
 export const TruckProblemsText = styled.p`
 	margin: 0;
 	padding: 0.5rem;
@@ -238,6 +266,9 @@ export const TruckProblemsText = styled.p`
 	border-top: 1px solid var(--border-color);
 `;
 
+/**
+ *  BrixButton
+ */
 export const BrixButton = styled.i`
 	font-size: 15px;
 	transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
@@ -268,6 +299,9 @@ export const BrixButton = styled.i`
 	`}
 `;
 
+/**
+ *  TruckNoticeIndicator
+ */
 export const TruckNoticeIndicator = styled.i`
 	font-size: 15px;
 	transition: color 0.3s ease-in-out;
@@ -297,6 +331,9 @@ export const TruckNoticeIndicator = styled.i`
 	}
 `;
 
+/**
+ *  TruckNumberDiv
+ */
 export const TruckNumberDiv = styled.div`
 	cursor: pointer;
 	display: flex;
@@ -333,6 +370,9 @@ export const TruckNumberDiv = styled.div`
 	}
 `;
 
+/**
+ *  TruckInfoDiv
+ */
 export const TruckInfoDiv = styled.div`
 	display: flex;
 	flex-grow: 3;
@@ -340,7 +380,7 @@ export const TruckInfoDiv = styled.div`
 `;
 
 /**
- * Rendered instead of the employee slots for inop and oos trucks
+ *  TruckStatusMessage Rendered instead of the employee slots for inop and oos trucks
  */
 export const TruckStatusMessage = styled.h4`
 	width: 100%;
@@ -355,6 +395,9 @@ export const TruckStatusMessage = styled.h4`
 	}
 `;
 
+/**
+ *  TruckListItemLocation
+ */
 export const TruckListItemLocation = styled.div`
 	position: relative;
 
@@ -380,6 +423,9 @@ export const TruckListItemLocation = styled.div`
 	}
 `;
 
+/**
+ *  TruckListManipDiv
+ */
 export const TruckListManipDiv = styled.div`
 	display: grid;
 	grid-template-columns: 60px 60px;
@@ -387,6 +433,9 @@ export const TruckListManipDiv = styled.div`
 	margin: 10px;
 `;
 
+/**
+ *  EquipmentListItemButton
+ */
 export const EquipmentListItemButton = styled(DangerButton)`
 	transition: opacity 0.3s ease-in-out;
 	opacity: 0;
@@ -414,6 +463,9 @@ export const EquipmentListItemButton = styled(DangerButton)`
 	`}
 `;
 
+/**
+ *  EquipmentListItemEmployeeList
+ */
 export const EquipmentListItemEmployeeList = styled.div`
 	display: flex;
 	align-self: center;
@@ -424,6 +476,9 @@ export const EquipmentListItemEmployeeList = styled.div`
 	width: 100%;
 `;
 
+/**
+ *  EquipmentListItemEmployee
+ */
 export const EquipmentListItemEmployee = styled.div`
 	display: grid;
 	padding-left: 0.5rem;
@@ -454,6 +509,9 @@ export const EquipmentListItemEmployee = styled.div`
 	}
 `;
 
+/**
+ *  EquipmentListItemEmployeeName
+ */
 export const EquipmentListItemEmployeeName = styled.div`
 	grid-area: name;
 	overflow: hidden;
@@ -470,11 +528,17 @@ export const EquipmentListItemEmployeeName = styled.div`
 			transform : translateY(${offPosition}%);
 		`}
 `;
+/**
+ *  EquipmentListItemEmployeeWarning
+ */
 export const EquipmentListItemEmployeeWarning = styled.div`
 	grid-area: warning;
 	display: flex;
 	align-items: center;
 `;
+/**
+ *  EquipmentListItemEmployeeClearButton
+ */
 export const EquipmentListItemEmployeeClearButton = styled.div`
 	grid-area: clearbutton;
 	display: flex;
@@ -486,7 +550,7 @@ export const EquipmentListItemEmployeeClearButton = styled.div`
  *---------------------------------------------------------------------------*/
 
 /**
- * Divides the list of available employees into sections based on start time.
+ *  ListSeparator Divides the list of available employees into sections based on start time.
  */
 export const ListSeparator = styled.div`
 	font-weight: bold;
@@ -509,6 +573,9 @@ export const ListSeparator = styled.div`
 	}
 `;
 
+/**
+ *  EmpName
+ */
 export const EmpName = styled.div`
 	padding: 5px 0 0 5px;
 	margin-block-start: 0;
@@ -519,6 +586,9 @@ export const EmpName = styled.div`
 	font-weight: bold;
 `;
 
+/**
+ *  EmpHours
+ */
 export const EmpHours = styled.p`
 	padding-left: 5px;
 	margin-block-start: 0;
@@ -527,6 +597,9 @@ export const EmpHours = styled.p`
 	white-space: nowrap;
 `;
 
+/**
+ *  LabelWrapper
+ */
 export const LabelWrapper = styled.div`
 	display: flex;
 	justify-content: center;
@@ -552,6 +625,9 @@ export const LabelWrapper = styled.div`
 	}
 `;
 
+/**
+ *  LabelText
+ */
 export const LabelText = styled.div`
 	width: 0;
 	overflow: hidden;
@@ -561,6 +637,9 @@ export const LabelText = styled.div`
 	opacity: 0;
 `;
 
+/**
+ *  Labels
+ */
 export const Labels = styled.div`
 	grid-area: labels;
 	display: flex;
@@ -576,6 +655,9 @@ export const Labels = styled.div`
 	}
 `;
 
+/**
+ *  AssignedToWrap
+ */
 export const AssignedToWrap = styled.div`
 	position: relative;
 	background-color: #0496b2;
@@ -598,11 +680,17 @@ export const AssignedToWrap = styled.div`
 	}
 `;
 
+/**
+ *  ShiftInfo
+ */
 export const ShiftInfo = styled.div`
 	text-overflow: ellipsis;
 	grid-area: name;
 `;
 
+/**
+ *  EmpRole
+ */
 export const EmpRole = styled.h2`
 	display: flex;
 	align-self: end;
@@ -618,6 +706,9 @@ export const EmpRole = styled.h2`
 	grid-area: position;
 `;
 
+/**
+ *  EmpListItemDiv
+ */
 export const EmpListItemDiv = styled.div`
 	width: 100%;
 	border-bottom: 1px solid var(--border-color);

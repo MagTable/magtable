@@ -8,7 +8,7 @@ import styled from "styled-components";
  */
 
 /**
- * The app's basic text box.
+ * Input The app's basic text box.
  **/
 export const Input = styled.input`
 	font-family: "Nanum Gothic", sans-serif;
@@ -31,7 +31,7 @@ export const Input = styled.input`
 `;
 
 /**
- * The apps basic button.
+ * Button The apps basic button.
  */
 export const Button = styled.button`
 	background-color: #414244;
@@ -52,6 +52,9 @@ export const Button = styled.button`
 	${({ auto }) => auto && `width: auto;`}
 `;
 
+/**
+ * DangerButton Danger Button
+ */
 export const DangerButton = styled(Button)`
 	background: var(--context-red);
 
@@ -61,7 +64,7 @@ export const DangerButton = styled(Button)`
 `;
 
 /**
- * The submit button to log in to the app
+ *  OkButton The submit button to log in to the app
  */
 export const OkButton = styled(Button)`
 	background: #9cd5ff;
@@ -76,7 +79,7 @@ export const OkButton = styled(Button)`
 `;
 
 /**
- * The on / off state labels for toggles.
+ *  ToggleLabel The on / off state labels for toggles.
  */
 const ToggleLabel = styled.div`
 	display: flex;
@@ -90,14 +93,14 @@ const ToggleLabel = styled.div`
 `;
 
 /**
- * The label for a toggle, specific to the right side.
+ *  ToggleLabelRight The label for a toggle, specific to the right side.
  */
 export const ToggleLabelRight = styled(ToggleLabel)`
 	padding-right: 20px;
 `;
 
 /**
- * The label for a toggle, specific to the left side.
+ *  ToggleLabelLeft The label for a toggle, specific to the left side.
  */
 export const ToggleLabelLeft = styled(ToggleLabel)`
 	padding-left: 20px;
@@ -121,7 +124,7 @@ export const ToggleLabelRightNotice = styled.h4`
 `;
 
 /**
- * Text boxes for username and password.
+ *  Select Text boxes for username and password.
  */
 export const Select = styled.select`
 	margin-top: 20px;

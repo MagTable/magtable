@@ -12,9 +12,9 @@ import {
  * @date 2020-03-24
  * @author Arran Woodruff
  * @name TextInput
- * @category Component/Common
+ * @category Components/Common
  * @param props see PropTypes
- * @returns {*} The TextInput Component
+ * @returns The TextInput Component
  * @constructor
  */
 function TextInput(props) {
