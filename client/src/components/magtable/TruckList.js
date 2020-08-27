@@ -189,6 +189,7 @@ function TruckList() {
 						<TruckListItem
 							noticeOpen={noticesOpen}
 							key={assignment.equipment.id}
+							openBrixModal={() => setShowBrixModal(true)}
 							assignment={assignment}
 							showAM={showAM}
 							shift
