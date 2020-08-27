@@ -17,6 +17,13 @@ export const SideBar = styled.div`
 
 	display: block;
 
+	background: var(--navbar);
+	color: white;
+
+	h2 {
+		margin: 0.5rem 0;
+	}
+
 	@media (max-height: 1600px) {
 		display: grid;
 
@@ -38,12 +45,9 @@ export const SideBar = styled.div`
 
 		#weather_date {
 			grid-area: date;
+			display: block;
 
-			border-bottom: 1px solid var(--border-color);
-			padding: 0.5rem 0;
-			h1 {
-				margin: 0;
-			}
+			text-align: center;
 		}
 	}
 `;
@@ -111,9 +115,12 @@ export const TimePeriodTitle = styled.h2`
 	margin: 0.5rem 0;
 	background: white;
 
+	background: var(--navbar);
+	color: white;
+
 	@media (min-height: 1600px) {
 		:before {
-			border-top: 2px solid black;
+			border-top: 2px solid white;
 			content: "";
 			margin: 0 auto;
 			position: absolute;
@@ -128,6 +135,8 @@ export const TimePeriodTitle = styled.h2`
 		span {
 			background: #fff;
 			padding: 0 5px;
+			background: var(--navbar);
+			color: white;
 		}
 	}
 `;
@@ -147,7 +156,6 @@ export const LaterHourWrapper = styled.div`
  */
 export const LaterHourHead = styled(WeatherWording)`
 	font-size: 22px;
-	color: black;
 `;
 
 /**

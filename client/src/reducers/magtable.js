@@ -241,7 +241,7 @@ export default function(state = initialState, action) {
 								...assignment,
 								employeeShifts: clearEmployeeShifts
 									? []
-									: assignment.employeeShift,
+									: assignment.employeeShifts || [],
 								parkingLocation: clearEmployeeShifts
 									? null
 									: assignment.parkingLocation,

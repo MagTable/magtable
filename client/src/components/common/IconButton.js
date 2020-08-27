@@ -46,15 +46,17 @@ function IconButton({
 				nohide={nohide}
 				{...props}
 			/>
-			<BrowserView>
-				<ReactTooltip
-					place={toolTipSide || "top"}
-					type="dark"
-					effect="solid"
-					delayShow={200}
-					id={"icon-tooltip"}
-				/>
-			</BrowserView>
+			{toolTip && (
+				<BrowserView>
+					<ReactTooltip
+						place={toolTipSide || "top"}
+						type="dark"
+						effect="solid"
+						delayShow={200}
+						id={"icon-tooltip"}
+					/>
+				</BrowserView>
+			)}
 		</>
 	);
 }

@@ -642,6 +642,7 @@ export const LabelText = styled.div`
  */
 export const Labels = styled.div`
 	grid-area: labels;
+	display: flex;
 
 	:hover {
 		${LabelWrapper}, ${LabelText} {

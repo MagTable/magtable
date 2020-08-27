@@ -1,7 +1,7 @@
 import React from "react";
 import { Client } from "@stomp/stompjs";
 import { MTR_PUBLISH } from "../../actions/constants";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateTable } from "../../actions/magtable";
 
 /**
@@ -16,9 +16,12 @@ import { updateTable } from "../../actions/magtable";
  * @constructor
  */
 const StompClient = ({ setWSConnected }) => {
+	const authenticated = useSelector(state => state.auth.isAuthenticated);
+
 	const dispatch = useDispatch();
-	const client = new Client({
-		brokerURL: "wss://sait-capstone2020.herokuapp.com/ws/websocket",
+	let client = new Client({
+		brokerURL:
+			process.env.REACT_APP_PUBLIC_WS_URL || "ws://localhost:8080/ws/websocket",
 		reconnectDelay: 3000,
 		heartbeatIncoming: 10000,
 		heartbeatOutgoing: 10000
@@ -45,7 +48,11 @@ const StompClient = ({ setWSConnected }) => {
 		}
 	};
 
-	client.activate();
+	if (authenticated) {
+		client.activate();
+	} else if (client) {
+		setWSConnected(false);
+	}
 
 	return <></>;
 };

@@ -1,9 +1,8 @@
 import React from "react";
 import {
-	NoticeWrapper,
-	TruckNotice,
-	TruckNum,
-	TruckNumDiv
+	ViewTruckNotice,
+	ViewTruckNoticeListItem,
+	ViewTruckNumber
 } from "../../styled/tv/ViewList";
 
 /**
@@ -17,12 +16,12 @@ import {
  */
 function ViewNotice({ assignment }) {
 	return (
-		<NoticeWrapper>
-			<TruckNumDiv>
-				<TruckNum>{assignment.equipment.id}</TruckNum>
-			</TruckNumDiv>
-			<TruckNotice>{assignment.equipment.notice}</TruckNotice>
-		</NoticeWrapper>
+		<ViewTruckNoticeListItem>
+			<ViewTruckNumber>
+				<h1>{assignment.equipment.id}</h1>
+			</ViewTruckNumber>
+			<ViewTruckNotice>{assignment.equipment.notice}</ViewTruckNotice>
+		</ViewTruckNoticeListItem>
 	);
 }
 

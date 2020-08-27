@@ -1,16 +1,9 @@
 import React from "react";
 import {
-	AMEmp,
-	AssignedToDiv,
-	EmployeeDiv,
-	EmployeeWrap,
-	ListItemWrapper,
-	NoticeIcon,
-	PMEmp,
-	TruckNum,
-	TruckNumDiv,
-	TruckNumDivUnassigned,
-	UnassignedWrap
+	ViewTruckEmployees,
+	ViewTruckListItem,
+	ViewTruckNumber,
+	ViewTruckParkingLocation
 } from "../../styled/tv/ViewList";
 
 /**
@@ -22,7 +15,7 @@ import {
  * @param props
  * @returns {*} The ViewListItem component
  */
-function ViewListItem({ assignment, assigned }) {
+function ViewListItem({ assignment }) {
 	let amShifts = []; // Employees assigned to this truck in the AM.
 	let pmShifts = []; // Employees assigned to this truck in the PM.
 
@@ -36,49 +29,67 @@ function ViewListItem({ assignment, assigned }) {
 		}
 	}
 
-	if (assigned) {
-		return (
-			<ListItemWrapper>
-				<TruckNumDiv>
-					{assignment.equipment.notice === "" ? null : ( // If there is a notice on the vehicle, display a warning.
-						<NoticeIcon className="fas fa-exclamation-triangle" />
-					)}
+	const hasNotice = assignment.equipment.notice !== "";
 
-					<TruckNum>{assignment.equipment.id}</TruckNum>
-				</TruckNumDiv>
-				<AssignedToDiv>
-					{assignment.parkingLocation === null // If the truck is assigned to a location.
-						? "NA"
-						: assignment.parkingLocation.apron.charAt(0) + // E or W.
-						  "-" +
-						  assignment.parkingLocation.phonetic +
-						  assignment.parkingLocation.position +
-						  (assignment.parkingLocation.bay === null
-								? ""
-								: assignment.parkingLocation.bay)}
-				</AssignedToDiv>
-				<EmployeeWrap>
-					<AMEmp>
-						{amShifts.map(shift => (
-							<EmployeeDiv key={shift.id}>{shift.name}</EmployeeDiv>
-						))}
-					</AMEmp>
-					<PMEmp>
-						{pmShifts.map(shift => (
-							<EmployeeDiv key={shift.id}>{shift.name}</EmployeeDiv>
-						))}
-					</PMEmp>
-				</EmployeeWrap>
-			</ListItemWrapper>
-		);
-	}
+	const parkingLocation = assignment.parkingLocation;
+
+	const apronCode = parkingLocation
+		? parkingLocation.apron.charAt(0) + "-"
+		: "";
+	const zoneCode = parkingLocation
+		? parkingLocation.phonetic + parkingLocation.position
+		: "";
+	const bay =
+		parkingLocation && parkingLocation.bay ? "-" + parkingLocation.bay : "";
+
 	return (
-		<UnassignedWrap>
-			<TruckNumDivUnassigned>
-				<TruckNum>{assignment.equipment.id}</TruckNum>
-			</TruckNumDivUnassigned>
-		</UnassignedWrap>
+		<ViewTruckListItem hasNotice={hasNotice}>
+			<ViewTruckNumber>
+				<h1>{assignment.equipment.id}</h1>
+			</ViewTruckNumber>
+
+			<ViewTruckParkingLocation>
+				<h2>
+					{apronCode}
+					{zoneCode}
+					{bay}
+				</h2>
+			</ViewTruckParkingLocation>
+
+			<ViewTruckEmployees am>
+				{amShifts.map(shift => (
+					<h4 key={shift.id}>{getShortenedName(shift.name)}</h4>
+				))}
+			</ViewTruckEmployees>
+
+			<ViewTruckEmployees pm>
+				{pmShifts.map(shift => (
+					<h4 key={shift.id}>{getShortenedName(shift.name)}</h4>
+				))}
+			</ViewTruckEmployees>
+		</ViewTruckListItem>
 	);
 }
 
+function getShortenedName(name) {
+	return name.split(" ")[0] + " " + name.split(" ")[1].charAt(0) + ".";
+}
+
 export default ViewListItem;
+
+export const ViewListItemHeader = () => (
+	<ViewTruckListItem>
+		<ViewTruckNumber>
+			<h1>#</h1>
+		</ViewTruckNumber>
+		<ViewTruckParkingLocation>
+			<h2>Location</h2>
+		</ViewTruckParkingLocation>
+		<ViewTruckEmployees>
+			<h2>AM</h2>
+		</ViewTruckEmployees>
+		<ViewTruckEmployees>
+			<h2>PM</h2>
+		</ViewTruckEmployees>
+	</ViewTruckListItem>
+);

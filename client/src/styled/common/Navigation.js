@@ -142,3 +142,9 @@ export const NavBar = styled.div`
 	justify-content: space-between;
 	height: 70px;
 `;
+
+export const Page = styled.div`
+	height: 100vh;
+	display: grid;
+	grid-template-rows: 70px 1fr;
+`;

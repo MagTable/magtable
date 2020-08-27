@@ -35,8 +35,13 @@ function WeatherInfo() {
 	const dispatch = useDispatch();
 
 	const { weather, brixChart } = useSelector(state => state.brix);
-	const dailyMix = useSelector(state => state.magtable.dailyMix);
+	const currentDailyMix = useSelector(state => state.magtable.dailyMix);
+	const historicalDailyMix = useSelector(
+		state => state.magtable.historical?.magtable?.dailyMix
+	);
 	const { loading, user } = useSelector(state => state.auth);
+
+	let dailyMix = historicalDailyMix || currentDailyMix;
 
 	// reverse the chart and find the first record with a recommended mix equal to our daily mix
 	// this object contains the rest of the chart data for a given daily mix
