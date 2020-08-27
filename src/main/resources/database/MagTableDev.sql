@@ -4,10 +4,10 @@
     Created: February 21, 2020
     Description: Use Case two updated database scheme for MagTable.
  */
-DROP DATABASE IF EXISTS magtabledev;
-CREATE DATABASE magtabledev;
+DROP DATABASE IF EXISTS magtableteach;
+CREATE DATABASE magtableteach;
 
-USE magtabledev;
+USE magtableteach;
 
 CREATE TABLE Role
 (
@@ -95,7 +95,7 @@ CREATE TABLE Assignment
 
 CREATE TABLE Shift
 (
-    shiftID      INT(10) NOT NULL, -- todo w2w unique ids
+    shiftID      INT(10) NOT NULL,
     assignmentID  INT(10) NOT NULL,
     timeOfDay    VARCHAR(2),
     isPrimary    BOOLEAN,

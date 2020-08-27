@@ -230,14 +230,7 @@ const EmployeeList = () => {
 			{!loading ? (
 				<>
 					<EmployeeListRefreshInfo>
-						<h4>
-							{employeeShifts.scheduleDate}
-							<br />
-							<small>
-								Last Updated at{"\t"}
-								{employeeShifts.lastUpdated}
-							</small>
-						</h4>
+						<h4>{employeeShifts.scheduleDate}</h4>
 					</EmployeeListRefreshInfo>
 
 					<EmployeeListDiv>

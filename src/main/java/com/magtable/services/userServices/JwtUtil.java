@@ -18,8 +18,6 @@ import java.util.function.Function;
 
 @Service
 public class JwtUtil {
-
-    //TODO Change in production to a more secure key
     private final String SECRET_KEY = "secret";
 
     public String extractUsername(String token) {

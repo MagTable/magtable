@@ -1,13 +1,7 @@
 import React from "react";
-import {
-	AMEmp,
-	EmployeeDiv,
-	EmployeeWrap,
-	PMEmp,
-	TowerListDiv,
-	TowerPos,
-	TowerPosDiv
-} from "../../styled/tv/ViewList";
+import { ViewTowerListItem } from "../../styled/tv/ViewList";
+import { ViewTruckEmployees } from "../../styled/tv/ViewList";
+import { ViewTowerListType } from "../../styled/tv/ViewList";
 
 /**
  * @date 2020-04-01
@@ -22,34 +16,46 @@ import {
  * @returns {*} The ViewTowerItem component
  */
 function ViewTowerItem({ assignment }) {
-	let amShift; // The employee assigned to the AM shift.
-	let pmShift; // The employee assigned to the PM shift.
+	let amShifts = []; // Employees assigned to this truck in the AM.
+	let pmShifts = []; // Employees assigned to this truck in the PM.
 
 	for (let i = 0; i < assignment.employeeShifts.length; i++) {
 		if (assignment.employeeShifts[i].timeOfDay === "AM") {
-			// The Employee is assigned the AM shift.
-			amShift = assignment.employeeShifts[i];
-		} else if (assignment.employeeShifts[i].timeOfDay === "PM") {
-			// The Employee is assigned the PM shift.
-			pmShift = assignment.employeeShifts[i];
+			// Get the employees assigned to AM shift.
+			amShifts.push(assignment.employeeShifts[i]);
+		} else {
+			// The PM employees
+			pmShifts.push(assignment.employeeShifts[i]);
 		}
 	}
 
 	return (
-		<TowerListDiv>
-			<TowerPosDiv>
-				<TowerPos>{assignment.equipment.type}</TowerPos>
-				<EmployeeWrap>
-					<AMEmp>
-						<EmployeeDiv>{amShift == null ? "" : amShift.name}</EmployeeDiv>
-					</AMEmp>
-					<PMEmp>
-						<EmployeeDiv>{pmShift == null ? "" : pmShift.name}</EmployeeDiv>
-					</PMEmp>
-				</EmployeeWrap>
-			</TowerPosDiv>
-		</TowerListDiv>
+		<ViewTowerListItem>
+			<ViewTowerListType>
+				<h2>{getShortenedType(assignment.equipment.type)}</h2>
+			</ViewTowerListType>
+
+			<ViewTruckEmployees am>
+				{amShifts.map(shift => (
+					<h4 key={shift.id}>{getShortenedName(shift.name)}</h4>
+				))}
+			</ViewTruckEmployees>
+
+			<ViewTruckEmployees pm>
+				{pmShifts.map(shift => (
+					<h4 key={shift.id}>{getShortenedName(shift.name)}</h4>
+				))}
+			</ViewTruckEmployees>
+		</ViewTowerListItem>
 	);
+}
+
+function getShortenedName(name) {
+	return name.split(" ")[0] + " " + name.split(" ")[1].charAt(0) + ".";
+}
+
+function getShortenedType(type) {
+	return type.split(" ")[0].charAt(0) + " " + type.split(" ")[1];
 }
 
 export default ViewTowerItem;

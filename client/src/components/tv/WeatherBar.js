@@ -56,8 +56,8 @@ function WeatherBar(props) {
 	) : (
 		<SideBar>
 			<div id={"weather_date"}>
-				<h1>{getDay()}</h1>
-				<h1>{getDate()}</h1>
+				<h2>{getDay()}</h2>
+				<h2>{getDate()}</h2>
 			</div>
 			<div id={"weather_current"}>
 				<TimePeriodTitle>

@@ -53,7 +53,6 @@ function OverflowLocations({ children, color, hoverColor, open, setOpen }) {
 
 	const publishedBy = magtable.publishedBy;
 
-	// todo close overflow on button press? - arran
 	const openOverflow = () => {
 		setOpen(true);
 	};

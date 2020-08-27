@@ -15,12 +15,12 @@
   ],
   "templates": {
     "better-docs": {
-      "name": "SAIT 2020 Capstone - Documentation"
+      "name": "SAIT 2020 Capstone - Front-End Documentation"
     }
   },
   "opts": {
     "recurse": true,
-    "destination": "./doc",
+    "destination": "../doc/front-end/",
     "template": "node_modules/better-docs",
     "readme": "README.md"
   }
