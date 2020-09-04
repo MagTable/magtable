@@ -86,3 +86,7 @@ select:-webkit-autofill:focus {
     transform: rotate(360deg);
   }
 }
+
+* {
+  position: relative;
+}

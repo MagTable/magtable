@@ -595,6 +595,14 @@ export const AXIOS_JSON_HEADER = {
 	}
 };
 
+/**
+ * Clear assignment shifts
+ * @const {string} CLEAR_ASSIGNMENT_SHIFTS
+ */
+export const CLEAR_ASSIGNMENT_SHIFTS = "CLEAR_ASSIGNMENT_SHIFTS";
+
+export const GET_BRIX_STATUS = "GET_BRIX_STATUS";
+
 // API CONSTANTS
 
 /**
@@ -603,10 +611,4 @@ export const AXIOS_JSON_HEADER = {
  */
 export const MTR_PUBLISH = "MTR_PUBLISH";
 
-/**
- * Clear assignment shifts
- * @const {string} CLEAR_ASSIGNMENT_SHIFTS
- */
-export const CLEAR_ASSIGNMENT_SHIFTS = "CLEAR_ASSIGNMENT_SHIFTS";
-
-export const GET_BRIX_STATUS = "GET_BRIX_STATUS";
+export const UPDATE_BRIX_STATUS = "UPDATE_BRIX_STATUS";

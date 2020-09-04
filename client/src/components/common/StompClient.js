@@ -1,8 +1,8 @@
 import React from "react";
 import { Client } from "@stomp/stompjs";
-import { MTR_PUBLISH } from "../../actions/constants";
+import { MTR_PUBLISH, UPDATE_BRIX_STATUS } from "../../actions/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { updateTable } from "../../actions/magtable";
+import { updateBrixStatus, updateTable } from "../../actions/magtable";
 
 /**
  *
@@ -40,6 +40,9 @@ const StompClient = ({ setWSConnected }) => {
 		const { type, payload } = JSON.parse(e.body);
 
 		switch (type) {
+			case UPDATE_BRIX_STATUS:
+				dispatch(updateBrixStatus(payload));
+				break;
 			case MTR_PUBLISH:
 				dispatch(updateTable(payload));
 				break;

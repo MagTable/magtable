@@ -14,7 +14,6 @@ import {
 	TruckStatusMessage,
 	EquipmentListItemButton,
 	UnassignBtn,
-	TruckNoticeIndicator,
 	BrixButton
 } from "../../styled/magtable/ListContent";
 import { useDrop, useDrag } from "react-dnd";
@@ -64,10 +63,19 @@ import IconButton from "../common/IconButton";
  * @param noticeOpen dictates whether or not to render the truck's notices
  * @param showAM toggle to display am or pm shift slots
  * @param openBrixModal boolean to toggle the brix management modal
+ * @param brixWarning
+ * @param brixUpToDate
  * @returns {*} The TruckListItem component
  * @constructor
  */
-function TruckListItem({ assignment, noticeOpen, showAM, openBrixModal }) {
+function TruckListItem({
+	assignment,
+	noticeOpen,
+	showAM,
+	openBrixModal,
+	brixWarning,
+	brixUpToDate
+}) {
 	const [hoveredShiftDescription, setHoveredShiftDescription] = useState(null);
 	const [localNoticeOpen, setLocalNoticeOpen] = useState(false);
 	const [shifts, setShifts] = useState({});
@@ -355,22 +363,24 @@ function TruckListItem({ assignment, noticeOpen, showAM, openBrixModal }) {
 					onClick={e => handleToggleLocalNotice(e)}
 				>
 					{assignment.equipment.id}
-					{/* only render brix button if function exists */}
+					{/* only render brix button if function exists (won't exist for service vehicles) */}
 					{openBrixModal && (
 						<BrixButton
 							onClick={handleBrixClick}
 							disabled={!equipmentOperable}
 							className={"fas fa-eye-dropper"}
+							warning={brixWarning}
+							upToDate={brixUpToDate}
 						/>
 					)}
-					{assignment.equipment.notice && (
-						<TruckNoticeIndicator
-							active={localNoticeOpen}
-							disabled={!equipmentOperable}
-							className={"fas fa-exclamation-triangle"}
-							onClick={e => handleToggleLocalNotice(e)}
-						/>
-					)}
+					{/*{assignment.equipment.notice && (*/}
+					{/*	<TruckNoticeIndicator*/}
+					{/*		active={localNoticeOpen}*/}
+					{/*		disabled={!equipmentOperable}*/}
+					{/*		className={"fas fa-exclamation-triangle"}*/}
+					{/*		onClick={e => handleToggleLocalNotice(e)}*/}
+					{/*	/>*/}
+					{/*)}*/}
 				</TruckNumberDiv>
 				{equipmentOperable ? (
 					<TruckInfoDiv>
