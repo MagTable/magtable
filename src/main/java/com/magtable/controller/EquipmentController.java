@@ -2,12 +2,12 @@ package com.magtable.controller;
 
 import com.magtable.model.entities.Assignment;
 import com.magtable.model.entities.Equipment;
-import com.magtable.model.entities.User;
 import com.magtable.repository.AssignmentRepository;
 import com.magtable.repository.EquipmentRepository;
 import com.magtable.repository.MagTableRecordRepository;
 import com.magtable.services.ErrorService;
 import com.magtable.services.equipmentServices.EquipmentValidationService;
+import com.magtable.services.equipmentServices.TruckBrixStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,6 +50,19 @@ public class EquipmentController {
     public List<Equipment> getAllTrucks() {
         return equipmentRepository.findAllTrucks();
     }
+
+    /**
+     * Documentation available upon request
+     */
+    @GetMapping("/truck/brixstatus")
+    public TruckBrixStatus getTruckBrixStatus() {
+        List<Integer> upToDate = equipmentRepository.getTrucksWithRecentBrix();
+        List<Integer> warning = equipmentRepository.getTrucksWithBrixWarning();
+
+        return new TruckBrixStatus(upToDate, warning);
+    }
+
+
 
 
     /**

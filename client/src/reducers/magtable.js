@@ -29,7 +29,8 @@ import {
 	OOS,
 	INOP,
 	CLEAR_ASSIGNMENT_SHIFTS,
-	CLEAR_HISTORICAL_MAGTABLE
+	CLEAR_HISTORICAL_MAGTABLE,
+	GET_BRIX_STATUS
 } from "../actions/constants";
 import { ParkingZones } from "../res/test_data/magtable";
 
@@ -56,6 +57,10 @@ const initialState = {
 	showAM: true,
 	parkingZones: ParkingZones,
 	parkingLocations: [],
+	truckBrixStatus: {
+		upToDate: [],
+		warning: []
+	},
 	historical: {
 		magtable: null,
 		list: [],
@@ -71,6 +76,11 @@ export default function(state = initialState, action) {
 	const { type, payload } = action;
 
 	switch (type) {
+		case GET_BRIX_STATUS:
+			return {
+				...state,
+				truckBrixStatus: payload
+			};
 		case REMOVE_TRUCK_LOCATION:
 			return {
 				...state,

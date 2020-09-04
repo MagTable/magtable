@@ -21,7 +21,8 @@ import {
 	FETCHING_HISTORICAL_MAGTABLE,
 	GET_HISTORICAL_MAGTABLE,
 	CLEAR_ASSIGNMENT_SHIFTS,
-	CLEAR_HISTORICAL_MAGTABLE
+	CLEAR_HISTORICAL_MAGTABLE,
+	GET_BRIX_STATUS
 } from "./constants";
 import axios from "axios";
 import { setAlert } from "./alert";
@@ -261,6 +262,20 @@ export const getParkingLocations = () => async dispatch => {
 
 		dispatch({
 			type: GET_PARKING_LOCATIONS,
+			payload: res.data
+		});
+	} catch (err) {}
+};
+
+/**
+ * Documentation available on request
+ */
+export const getBrixStatus = () => async dispatch => {
+	try {
+		const res = await axios.get("/equipment/truck/brixstatus");
+
+		dispatch({
+			type: GET_BRIX_STATUS,
 			payload: res.data
 		});
 	} catch (err) {}

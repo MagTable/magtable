@@ -42,6 +42,9 @@ function TruckList() {
 	const assignments = useSelector(state =>
 		state.magtable.assignments.filter(assignment => assignment.equipment.active)
 	);
+	const truckStatuses = useSelector(state => state.magtable.truckBrixStatus);
+	const { upToDate, warning } = truckStatuses;
+
 	const showAM = useSelector(state => state.magtable.showAM);
 	const loading = useSelector(state => state.magtable.loading);
 
