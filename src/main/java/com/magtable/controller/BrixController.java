@@ -2,10 +2,13 @@ package com.magtable.controller;
 
 import com.magtable.model.entities.BrixChartRecord;
 import com.magtable.model.entities.BrixRecord;
+import com.magtable.model.entities.WsAction;
 import com.magtable.repository.BrixChartRepository;
 import com.magtable.repository.BrixRepository;
 import com.magtable.services.ErrorService;
+import com.magtable.services.equipmentServices.TruckBrixStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -32,7 +35,13 @@ public class BrixController {
     private BrixChartRepository brixChartRepository;
 
     @Autowired
+    private EquipmentController equipmentController;
+
+    @Autowired
     public ErrorService errorService;
+
+    @Autowired
+    SimpMessagingTemplate template;
 
     /**
      * route           GET /brix/{id}
@@ -58,7 +67,12 @@ public class BrixController {
     @PostMapping("/{id}")
     public BrixRecord insertBrixRecord(@PathVariable(value = "id") Integer equipmentID, @RequestBody BrixRecord brixRecord) {
         brixRecord.setEquipmentID(equipmentID);
-        return brixRepository.saveAndFlush(brixRecord);
+        BrixRecord saved = brixRepository.saveAndFlush(brixRecord);
+
+        TruckBrixStatus tbs = equipmentController.getTruckBrixStatus();
+        template.convertAndSend("/topic/mtr", new WsAction(WsAction.UPDATE_BRIX_STATUS, tbs));
+
+        return saved;
     }
 
 

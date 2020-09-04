@@ -7,6 +7,7 @@ package com.magtable.model.entities;
 
 public class WsAction {
     public static final String MTR_PUBLISH = "MTR_PUBLISH";
+    public static final String UPDATE_BRIX_STATUS = "UPDATE_BRIX_STATUS";
 
     private String type;
     private Object payload;

@@ -22,7 +22,8 @@ import {
 	GET_HISTORICAL_MAGTABLE,
 	CLEAR_ASSIGNMENT_SHIFTS,
 	CLEAR_HISTORICAL_MAGTABLE,
-	GET_BRIX_STATUS
+	GET_BRIX_STATUS,
+	UPDATE_BRIX_STATUS
 } from "./constants";
 import axios from "axios";
 import { setAlert } from "./alert";
@@ -279,6 +280,16 @@ export const getBrixStatus = () => async dispatch => {
 			payload: res.data
 		});
 	} catch (err) {}
+};
+
+/**
+ * Documentation available on request
+ */
+export const updateBrixStatus = payload => dispatch => {
+	dispatch({
+		type: UPDATE_BRIX_STATUS,
+		payload: payload
+	});
 };
 
 /**

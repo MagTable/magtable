@@ -30,7 +30,8 @@ import {
 	INOP,
 	CLEAR_ASSIGNMENT_SHIFTS,
 	CLEAR_HISTORICAL_MAGTABLE,
-	GET_BRIX_STATUS
+	GET_BRIX_STATUS,
+	UPDATE_BRIX_STATUS
 } from "../actions/constants";
 import { ParkingZones } from "../res/test_data/magtable";
 
@@ -76,6 +77,7 @@ export default function(state = initialState, action) {
 	const { type, payload } = action;
 
 	switch (type) {
+		case UPDATE_BRIX_STATUS:
 		case GET_BRIX_STATUS:
 			return {
 				...state,

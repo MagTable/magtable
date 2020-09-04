@@ -272,31 +272,42 @@ export const TruckProblemsText = styled.p`
 export const BrixButton = styled.i`
 	font-size: 15px;
 	transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
-	color: var(--context-blue-light);
+	color: var(--context-red);
 
 	position: absolute;
 	top: 3px;
 	left: 3px;
 
-	display: none;
-	opacity: 0;
+	opacity: 0.5;
 
 	:hover {
-		display: block;
 		opacity: 1;
-		color: var(--context-blue);
 		transform: scale(1.15);
+
+		// :after {
+		// 	content: "Expired";
+		// }
+		// ${({ upToDate }) => upToDate && `:after { content: "Valid"; }`}
+		// ${({ warning }) => warning && `:after { content: "Expiring Soon"; }`}
 	}
 
-	${({ disabled }) =>
-		disabled &&
-		`
-		// disabled truckListItems have a smaller height so the icon needs to be a bit smaller
-		
-		font-size: 12px;	
-		bottom: 1px;
-		left: 1px;
-	`}
+	//:after {
+	//	opacity: 1;
+	//	z-index: 10;
+	//	position: absolute;
+	//	//left: calc(100% + 5px);
+	//	right: 0px;
+	//	bottom: 50%;
+	//	transform: translateY(50%);
+    //
+	//	background: white;
+	//	padding: 5px;
+	//	border-radius: 5px;
+	//	font-family: "Noto Sans KR", sans-serif;
+	//}
+
+	${({ upToDate }) => upToDate && `color: var(--context-blue);`}
+	${({ warning }) => warning && `color: var(--context-orange);`}
 `;
 
 /**
@@ -307,8 +318,8 @@ export const TruckNoticeIndicator = styled.i`
 	transition: color 0.3s ease-in-out;
 	color: var(--context-orange-light);
 	position: absolute;
-	bottom: 3px;
-	left: 3px;
+	top: 3px;
+	right: 3px;
 
 	${({ disabled }) =>
 		disabled &&
@@ -362,12 +373,6 @@ export const TruckNumberDiv = styled.div`
 		background: var(--context-grey-light);
 	`}
 	
-	:hover {
-		${BrixButton} {
-			display: block;
-			opacity: 1;
-		}	
-	}
 `;
 
 /**

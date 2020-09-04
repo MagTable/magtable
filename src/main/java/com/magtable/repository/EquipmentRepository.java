@@ -19,20 +19,21 @@ public interface EquipmentRepository extends JpaRepository<Equipment, Integer>, 
             nativeQuery = true)
     List<Equipment> findAllTrucks();
 
-    @Query(value = "SELECT distinct brixrecord.equipmentID AS 'Good', employee " +
-            "FROM equipment, brixrecord " +
-            "WHERE brixrecord.equipmentID = equipment.equipmentID " +
-            "and DATE_ADD(brixrecord.timeMeasured, INTERVAL 24 HOUR) > NOW() " +
-            "and DATE_ADD(brixrecord.timeMeasured, INTERVAL 3 HOUR) > NOW();",
+    @Query(value =
+        "SELECT distinct latest_brix.equipmentID AS 'Good', latest_brix.timeMEasured " +
+            "FROM equipment, latest_brix " +
+            "WHERE latest_brix.equipmentID = equipment.equipmentID " +
+            "and DATE_ADD(latest_brix.timeMeasured, INTERVAL 21 HOUR) > NOW() " +
+            "and DATE_ADD(latest_brix.timeMeasured, INTERVAL 24 HOUR) > NOW();",
             nativeQuery = true)
     List<Integer> getTrucksWithRecentBrix();
 
     @Query(value =
-    "SELECT distinct brixrecord.equipmentID AS 'Warning', employee " +
-            "FROM equipment, brixrecord " +
-            "WHERE brixrecord.equipmentID = equipment.equipmentID " +
-            "and DATE_ADD(brixrecord.timeMeasured, INTERVAL 24 HOUR) > NOW() " +
-            "and DATE_ADD(brixrecord.timeMeasured, INTERVAL 3 HOUR) < NOW();"
+        "SELECT distinct latest_brix.equipmentID AS 'Warning', latest_brix.timeMEasured " +
+            "FROM equipment, latest_brix " +
+            "WHERE latest_brix.equipmentID = equipment.equipmentID " +
+            "and DATE_ADD(latest_brix.timeMeasured, INTERVAL 21 HOUR) < NOW() " +
+            "and DATE_ADD(latest_brix.timeMeasured, INTERVAL 24 HOUR) > NOW();"
             ,
             nativeQuery = true)
     List<Integer> getTrucksWithBrixWarning();

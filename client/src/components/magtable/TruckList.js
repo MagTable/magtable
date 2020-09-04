@@ -42,8 +42,7 @@ function TruckList() {
 	const assignments = useSelector(state =>
 		state.magtable.assignments.filter(assignment => assignment.equipment.active)
 	);
-	const truckStatuses = useSelector(state => state.magtable.truckBrixStatus);
-	const { upToDate, warning } = truckStatuses;
+	const truckBrixStatus = useSelector(state => state.magtable.truckBrixStatus);
 
 	const showAM = useSelector(state => state.magtable.showAM);
 	const loading = useSelector(state => state.magtable.loading);
@@ -192,7 +191,6 @@ function TruckList() {
 						<TruckListItem
 							noticeOpen={noticesOpen}
 							key={assignment.equipment.id}
-							openBrixModal={() => setShowBrixModal(true)}
 							assignment={assignment}
 							showAM={showAM}
 							shift
@@ -246,6 +244,12 @@ function TruckList() {
 							key={assignment.equipment.id}
 							assignment={assignment}
 							showAM={showAM}
+							brixWarning={truckBrixStatus.warning.includes(
+								assignment.equipment.id
+							)}
+							brixUpToDate={truckBrixStatus.upToDate.includes(
+								assignment.equipment.id
+							)}
 							shift
 						/>
 					))}
