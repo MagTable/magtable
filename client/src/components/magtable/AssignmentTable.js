@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { AssignmentContainer, MapsDiv } from "../../styled/magtable/Maps";
 import { DndProvider } from "react-dnd";
 import Backend from "react-dnd-html5-backend";
@@ -6,6 +6,8 @@ import TowerMap from "./TowerList";
 import ParkingLocationMap from "./ParkingLocationMap";
 import EmployeeList from "./EmployeeList";
 import TruckList from "./TruckList";
+import Modal from "../common/Modal";
+import BrixManagement from "../brix/BrixManagement";
 
 /**
  * Placeholder component to assist in displaying routing
@@ -15,16 +17,24 @@ import TruckList from "./TruckList";
  * @constructor
  */
 const AssignmentTable = () => {
+	const [showBrixModal, setShowBrixModal] = useState(false);
+
+	const openBrixModal = () => setShowBrixModal(true);
+
 	return (
 		<DndProvider backend={Backend}>
 			<AssignmentContainer>
 				<EmployeeList />
-				<TruckList />
+				<TruckList openBrixModal={openBrixModal} />
 				<MapsDiv>
-					<ParkingLocationMap />
+					<ParkingLocationMap openBrixModal={openBrixModal} />
 					<TowerMap />
 				</MapsDiv>
 			</AssignmentContainer>
+
+			<Modal handleClose={() => setShowBrixModal(false)} show={showBrixModal}>
+				<BrixManagement />
+			</Modal>
 		</DndProvider>
 	);
 };

@@ -20,8 +20,6 @@ import {
 	OOS,
 	SERVICE_VEHICLE
 } from "../../actions/constants";
-import Modal from "../common/Modal";
-import BrixManagement from "../brix/BrixManagement";
 import ReactTooltip from "react-tooltip";
 
 /**
@@ -35,7 +33,7 @@ import ReactTooltip from "react-tooltip";
  * @returns {*} The TruckList component
  * @constructor
  */
-function TruckList() {
+function TruckList({ openBrixModal }) {
 	const [noticesOpen, setNoticesOpen] = useState(false);
 	const dispatch = useDispatch();
 
@@ -46,11 +44,6 @@ function TruckList() {
 
 	const showAM = useSelector(state => state.magtable.showAM);
 	const loading = useSelector(state => state.magtable.loading);
-
-	const [showBrixModal, setShowBrixModal] = useState(false);
-
-	const handleClose = () => setShowBrixModal(false);
-	const handleShow = () => setShowBrixModal(true);
 
 	const listItemSeparator = "|";
 
@@ -240,7 +233,7 @@ function TruckList() {
 					{truckAssignments.map(assignment => (
 						<TruckListItem
 							noticeOpen={noticesOpen}
-							openBrixModal={handleShow}
+							openBrixModal={openBrixModal}
 							key={assignment.equipment.id}
 							assignment={assignment}
 							showAM={showAM}
@@ -259,9 +252,6 @@ function TruckList() {
 					<LoadingImg className="fas fa-circle-notch" />
 				</SpinnerWrap>
 			)}
-			<Modal handleClose={handleClose} show={showBrixModal}>
-				<BrixManagement />
-			</Modal>
 		</TruckListDivWrapper>
 	);
 }

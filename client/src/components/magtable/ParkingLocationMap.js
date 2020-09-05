@@ -59,6 +59,7 @@ function ParkingLocationMap(props) {
 									<NumberTop>{location.composite}</NumberTop>
 									{location.east && (
 										<ParkingLocation
+											openBrixModal={props.openBrixModal}
 											parkingLocation={location}
 											position={EAST}
 											assignments={assignmentsWithLocation.filter(
@@ -70,6 +71,7 @@ function ParkingLocationMap(props) {
 									)}
 									{location.center && (
 										<ParkingLocation
+											openBrixModal={props.openBrixModal}
 											parkingLocation={location}
 											position={CENTER}
 											assignments={assignmentsWithLocation.filter(
@@ -81,6 +83,7 @@ function ParkingLocationMap(props) {
 									)}
 									{location.west && (
 										<ParkingLocation
+											openBrixModal={props.openBrixModal}
 											parkingLocation={location}
 											position={WEST}
 											assignments={assignmentsWithLocation.filter(
