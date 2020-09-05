@@ -156,6 +156,17 @@ export const CenterAssigned = styled(LocationAssignment)`
 	border-bottom-right-radius: 18px;
 	border-bottom-left-radius: 18px;
 `;
+
+export const AssignedTruck = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	i {
+		font-size: 10px;
+	}
+`;
+
 /**
  *  LeftAssigned
  */

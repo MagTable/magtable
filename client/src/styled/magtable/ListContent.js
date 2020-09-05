@@ -270,41 +270,24 @@ export const TruckProblemsText = styled.p`
  *  BrixButton
  */
 export const BrixButton = styled.i`
-	font-size: 15px;
-	transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+	transition: background 0.2s ease-in-out;
 	color: var(--context-red);
+	background: var(--context-grey-light);
 
 	position: absolute;
-	top: 3px;
-	left: 3px;
+	top: 0;
+	left: 0;
+	font-size: 12px;
 
-	opacity: 0.5;
+	opacity: 1;
 
 	:hover {
 		opacity: 1;
-		transform: scale(1.15);
-
-		// :after {
-		// 	content: "Expired";
-		// }
-		// ${({ upToDate }) => upToDate && `:after { content: "Valid"; }`}
-		// ${({ warning }) => warning && `:after { content: "Expiring Soon"; }`}
+		background: #3e3c42;
 	}
 
-	//:after {
-	//	opacity: 1;
-	//	z-index: 10;
-	//	position: absolute;
-	//	//left: calc(100% + 5px);
-	//	right: 0px;
-	//	bottom: 50%;
-	//	transform: translateY(50%);
-    //
-	//	background: white;
-	//	padding: 5px;
-	//	border-radius: 5px;
-	//	font-family: "Noto Sans KR", sans-serif;
-	//}
+	border-bottom-right-radius: 10px;
+	padding: 2px 4px 4px 2px;
 
 	${({ upToDate }) => upToDate && `color: var(--context-blue);`}
 	${({ warning }) => warning && `color: var(--context-orange);`}

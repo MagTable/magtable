@@ -2,6 +2,7 @@ import React from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { AM, BAY_LEAD, PM, SET_TRUCK_LOCATION } from "../../actions/constants";
 import {
+	AssignedTruck,
 	CenterAssigned,
 	FullPadDropDiv,
 	HalfPadDropDiv,
@@ -10,9 +11,10 @@ import {
 	PadDivHeader,
 	RightAssigned
 } from "../../styled/magtable/TruckMapMedia";
-import { UnassignBtn } from "../../styled/magtable/ListContent";
+import { BrixButton, UnassignBtn } from "../../styled/magtable/ListContent";
 import { removeTruckLocation, setTruckLocation } from "../../actions/magtable";
 import { useDispatch, useSelector } from "react-redux";
+import { getBrixRecords } from "../../actions/brix";
 
 /**
  * Lists the parking locations available for trucks to be assigned to.
@@ -25,18 +27,31 @@ import { useDispatch, useSelector } from "react-redux";
  * @param parkingLocation The Parking Location
  * @param position The Position
  * @param assignments The Assigned Equipment
+ * @param openBrixModal
  * @returns Returns the Parking Location Component
  * @constructor
  */
-function ParkingLocation({ parkingLocation, position, assignments }) {
+function ParkingLocation({
+	parkingLocation,
+	position,
+	assignments,
+	openBrixModal
+}) {
 	const dispatch = useDispatch();
 	const showAM = useSelector(state => state.magtable.showAM);
+	const truckBrixStatus = useSelector(state => state.magtable.truckBrixStatus);
 	const [{ isOver }, drop] = useDrop({
 		accept: SET_TRUCK_LOCATION,
 		collect: monitor => ({
 			isOver: monitor.isOver()
 		})
 	});
+
+	const handleBrixClick = (id, primary) => {
+		dispatch(getBrixRecords(id, primary));
+
+		openBrixModal();
+	};
 
 	const handleClear = equipmentID => {
 		dispatch(removeTruckLocation(equipmentID));
@@ -89,6 +104,8 @@ function ParkingLocation({ parkingLocation, position, assignments }) {
 				position={position}
 				handleClear={handleClear}
 				showAM={showAM}
+				handleBrixClick={handleBrixClick}
+				truckBrixStatus={truckBrixStatus}
 			/>
 			{leftAssignment && (
 				<LeftDragDiv
@@ -99,6 +116,8 @@ function ParkingLocation({ parkingLocation, position, assignments }) {
 					defaultEquipmentID={defaultAssignment?.equipment.id}
 					handleClear={handleClear}
 					showAM={showAM}
+					handleBrixClick={handleBrixClick}
+					truckBrixStatus={truckBrixStatus}
 				/>
 			)}
 			{rightAssignment && (
@@ -110,6 +129,8 @@ function ParkingLocation({ parkingLocation, position, assignments }) {
 					defaultEquipmentID={defaultAssignment?.equipment.id}
 					handleClear={handleClear}
 					showAM={showAM}
+					handleBrixClick={handleBrixClick}
+					truckBrixStatus={truckBrixStatus}
 				/>
 			)}
 			{/* if anything is assigned and the parking location has left or right bays
@@ -148,6 +169,8 @@ function ParkingLocation({ parkingLocation, position, assignments }) {
  * @param handleClear Clearing of the equipment.
  * @param defaultEquipmentID Default EquipmentID
  * @param showAM ShowAM State
+ * @param handleBrixClick
+ * @param truckBrixStatus
  * @returns {*}
  * @constructor
  */
@@ -158,7 +181,9 @@ function LeftDragDiv({
 	bay,
 	handleClear,
 	defaultEquipmentID,
-	showAM
+	showAM,
+	handleBrixClick,
+	truckBrixStatus
 }) {
 	const leftAssignment = assignments[1];
 	const rightAssignment = assignments[2];
@@ -250,6 +275,14 @@ function LeftDragDiv({
 		})
 	});
 
+	const amPrimary = leftAssignment?.employeeShifts.find(
+		shift => shift.timeOfDay === AM && shift.isPrimary
+	);
+	const pmPrimary = leftAssignment?.employeeShifts.find(
+		shift => shift.timeOfDay === PM && shift.isPrimary
+	);
+	const currentPrimary = showAM ? amPrimary : pmPrimary;
+
 	const amBaylead =
 		leftAssignment?.employeeShifts.filter(
 			shift => shift.description === BAY_LEAD && shift.timeOfDay === AM
@@ -273,7 +306,20 @@ function LeftDragDiv({
 			<UnassignBtn onClick={() => handleClear(leftAssignment.equipment.id)}>
 				<i className="fas fa-times" />
 			</UnassignBtn>
-			<div ref={drag}>{leftAssignment.equipment.id}</div>
+			<AssignedTruck ref={drag}>
+				<span>{leftAssignment.equipment.id}</span>
+			</AssignedTruck>
+			{!truckBrixStatus.upToDate.includes(leftAssignment.equipment.id) && (
+				<BrixButton
+					onClick={() =>
+						handleBrixClick(leftAssignment.equipment.id, currentPrimary?.name)
+					}
+					className={"fas fa-eye-dropper"}
+					warning={truckBrixStatus.warning.includes(
+						leftAssignment.equipment.id
+					)}
+				/>
+			)}
 		</LeftAssigned>
 	);
 }
@@ -288,6 +334,8 @@ function LeftDragDiv({
  * @param handleClear Clearing of the equipment.
  * @param defaultEquipmentID Default EquipmentID
  * @param showAM ShowAM State
+ * @param handleBrixClick
+ * @param truckBrixStatus
  * @returns {*}
  * @constructor
  */
@@ -298,7 +346,9 @@ function RightDragDiv({
 	assignments,
 	bay,
 	defaultEquipmentID,
-	showAM
+	showAM,
+	handleBrixClick,
+	truckBrixStatus
 }) {
 	const leftAssignment = assignments[1];
 	const rightAssignment = assignments[2];
@@ -390,6 +440,14 @@ function RightDragDiv({
 		})
 	});
 
+	const amPrimary = rightAssignment?.employeeShifts.find(
+		shift => shift.timeOfDay === AM && shift.isPrimary
+	);
+	const pmPrimary = rightAssignment?.employeeShifts.find(
+		shift => shift.timeOfDay === PM && shift.isPrimary
+	);
+	const currentPrimary = showAM ? amPrimary : pmPrimary;
+
 	const amBaylead =
 		rightAssignment?.employeeShifts.filter(
 			shift => shift.description === BAY_LEAD && shift.timeOfDay === AM
@@ -413,7 +471,20 @@ function RightDragDiv({
 			<UnassignBtn onClick={() => handleClear(rightAssignment.equipment.id)}>
 				<i className="fas fa-times" />
 			</UnassignBtn>
-			<div ref={drag}>{rightAssignment.equipment.id}</div>
+			<AssignedTruck ref={drag}>
+				<span>{rightAssignment.equipment.id}</span>
+			</AssignedTruck>
+			{!truckBrixStatus.upToDate.includes(rightAssignment.equipment.id) && (
+				<BrixButton
+					onClick={() =>
+						handleBrixClick(rightAssignment.equipment.id, currentPrimary?.name)
+					}
+					className={"fas fa-eye-dropper"}
+					warning={truckBrixStatus.warning.includes(
+						rightAssignment.equipment.id
+					)}
+				/>
+			)}
 		</RightAssigned>
 	);
 }
@@ -427,6 +498,8 @@ function RightDragDiv({
  * @param assignments The Assigned Equipment.
  * @param handleClear Clearing of the equipment.
  * @param showAM ShowAM State
+ * @param handleBrixClick
+ * @param truckBrixStatus
  * @returns {*} The full drop div.
  * @constructor
  */
@@ -436,7 +509,9 @@ function FullDropDropDiv({
 	position,
 	assignments,
 	handleClear,
-	showAM
+	showAM,
+	handleBrixClick,
+	truckBrixStatus
 }) {
 	const dispatch = useDispatch();
 	const defaultAssignment = assignments[0];
@@ -500,6 +575,14 @@ function FullDropDropDiv({
 		})
 	});
 
+	const amPrimary = defaultAssignment?.employeeShifts.find(
+		shift => shift.timeOfDay === AM && shift.isPrimary
+	);
+	const pmPrimary = defaultAssignment?.employeeShifts.find(
+		shift => shift.timeOfDay === PM && shift.isPrimary
+	);
+	const currentPrimary = showAM ? amPrimary : pmPrimary;
+
 	const amBaylead =
 		defaultAssignment?.employeeShifts.filter(
 			shift => shift.description === BAY_LEAD && shift.timeOfDay === AM
@@ -526,7 +609,25 @@ function FullDropDropDiv({
 						<i className="fas fa-times" />
 					</UnassignBtn>
 					{defaultAssignment && (
-						<div ref={drag}>{defaultAssignment.equipment.id}</div>
+						<AssignedTruck ref={drag}>
+							<span>{defaultAssignment.equipment.id}</span>
+						</AssignedTruck>
+					)}
+					{!truckBrixStatus.upToDate.includes(
+						defaultAssignment.equipment.id
+					) && (
+						<BrixButton
+							onClick={() =>
+								handleBrixClick(
+									defaultAssignment.equipment.id,
+									currentPrimary?.name
+								)
+							}
+							className={"fas fa-eye-dropper"}
+							warning={truckBrixStatus.warning.includes(
+								defaultAssignment.equipment.id
+							)}
+						/>
 					)}
 				</CenterAssigned>
 			)}
