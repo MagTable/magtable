@@ -11,7 +11,7 @@ Technologies Used : MySQL, SpringBoot, Gradle, React, Redux.
 
 Final Casptone Presentation : https://www.youtube.com/watch?v=QSV3H2-GhEs&feature=youtu.be
 
-Live Site: https://magtable.herokuapp.com
+Live Site: https://sait-capstone2020.herokuapp.com/
 
 Login credentials
 Username: guest
